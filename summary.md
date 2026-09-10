@@ -30,9 +30,7 @@ This is a rank-one tensor. Instead of storing $p^3$ numbers, we store three vect
 A tensor train, or **TT**, permits a richer structure by connecting several small arrays, called cores. For three indices,
 
 $$
-A_{ijk}
-=
-\sum_{a=1}^{r_1}\sum_{b=1}^{r_2}
+A_{ijk}=\sum_{a=1}^{r_1}\sum_{b=1}^{r_2}
 G_1(i,a)\,G_2(a,j,b)\,G_3(b,k).
 $$
 
@@ -55,9 +53,7 @@ Suppose a large teacher model produces response probabilities $q_0(y\mid x)$, an
 The project measures their discrepancy using
 
 $$
-D(W)
-=
-\mathbb E_X\!\left[
+D(W)=\mathbb E_X \left[
 \sum_y q_0(y\mid X)
 \log\frac{q_0(y\mid X)}{p_W(y\mid X)}
 \right].
@@ -118,9 +114,7 @@ This resembles a diagonal average; the normalization $1/\sqrt p$ is chosen to ma
 Simply applying the same rule to $Z$ gives
 
 $$
-\widehat\psi_{\mathrm{direct}}
-=
-\psi(A)+\tau\xi,
+\widehat\psi_{\mathrm{direct}}=\psi(A)+\tau\xi,
 \qquad \xi\sim N(0,1).
 $$
 
@@ -153,18 +147,14 @@ The key mathematical insight is that **low tensor rank constrains how large many
 Consider a rank-one three-way tensor $A=u\otimes v\otimes w$, and write $a_i=A_{iii}$. If its total size satisfies
 
 $$
-\|A\|_F
-=
-\sqrt{\sum_{ijk}A_{ijk}^{2}}
+\|A\|_F = \sqrt{\sum_{ijk}A_{ijk}^{2}}
 \le M,
 $$
 
 then Hölder's inequality gives
 
 $$
-\sum_i |a_i|^{2/3}
-=
-\sum_i |u_i v_i w_i|^{2/3}
+\sum_i |a_i|^{2/3} = \sum_i |u_i v_i w_i|^{2/3}
 \le
 \bigl(\|u\|_2\|v\|_2\|w\|_2\bigr)^{2/3}
 \le M^{2/3}.
@@ -197,8 +187,7 @@ The latest development goes further by using **off-diagonal observations too**. 
 Its conceptual construction is to retain every allowed tensor consistent with the observed noise, then report the smallest and largest target values among those possibilities:
 
 $$
-C(Z)=
-\left[
+C(Z)= \left[
 \min_{B\text{ consistent with the data}}\psi(B),
 \quad
 \max_{B\text{ consistent with the data}}\psi(B)
