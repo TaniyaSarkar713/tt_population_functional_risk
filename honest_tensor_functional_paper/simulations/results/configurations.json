@@ -1,0 +1,1760 @@
+[
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 0.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 128,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 128,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 3,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 128,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 512,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 512,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 5,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 512,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 2048,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 2,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 2048,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 10,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 2048,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 8192,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 4,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 8192,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 18,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 2,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 8192,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 0.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 128,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 128,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 2,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 128,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 512,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 512,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 3,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 512,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 2048,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 2,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 2048,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 4,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 2048,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 8192,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 2,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 8192,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 7,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 3,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 8192,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 0.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 128,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 128,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 2,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 128,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 512,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 512,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 2,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 512,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 2048,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 2048,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 3,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 2048,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 8192,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 2,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 8192,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 4,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 4,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 8192,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 0.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 128,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 128,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 128,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 512,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 512,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 2,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 512,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 2048,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 2048,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 2,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 2048,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.02,
+    "support": 8192,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 2,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 8192,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 3,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "core",
+    "K": 6,
+    "p": 8192,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 8192,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 512,
+    "n": 512,
+    "cap": 2,
+    "epsilon": 0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 512,
+    "n": 512,
+    "cap": 2,
+    "epsilon": 0.001,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 512,
+    "n": 512,
+    "cap": 2,
+    "epsilon": 0.01,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 512,
+    "n": 512,
+    "cap": 2,
+    "epsilon": 0.1,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 512,
+    "n": 512,
+    "cap": 2,
+    "epsilon": 0.5,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 512,
+    "n": 512,
+    "cap": 2,
+    "epsilon": 0,
+    "support": 3,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 512,
+    "n": 512,
+    "cap": 2,
+    "epsilon": 0.001,
+    "support": 3,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 512,
+    "n": 512,
+    "cap": 2,
+    "epsilon": 0.01,
+    "support": 3,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 512,
+    "n": 512,
+    "cap": 2,
+    "epsilon": 0.1,
+    "support": 3,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 512,
+    "n": 512,
+    "cap": 2,
+    "epsilon": 0.5,
+    "support": 3,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 2048,
+    "n": 2048,
+    "cap": 2,
+    "epsilon": 0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 2048,
+    "n": 2048,
+    "cap": 2,
+    "epsilon": 0.001,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 2048,
+    "n": 2048,
+    "cap": 2,
+    "epsilon": 0.01,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 2048,
+    "n": 2048,
+    "cap": 2,
+    "epsilon": 0.1,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 2048,
+    "n": 2048,
+    "cap": 2,
+    "epsilon": 0.5,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 2048,
+    "n": 2048,
+    "cap": 2,
+    "epsilon": 0,
+    "support": 4,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 2048,
+    "n": 2048,
+    "cap": 2,
+    "epsilon": 0.001,
+    "support": 4,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 2048,
+    "n": 2048,
+    "cap": 2,
+    "epsilon": 0.01,
+    "support": 4,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 2048,
+    "n": 2048,
+    "cap": 2,
+    "epsilon": 0.1,
+    "support": 4,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 2048,
+    "n": 2048,
+    "cap": 2,
+    "epsilon": 0.5,
+    "support": 4,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 8192,
+    "n": 8192,
+    "cap": 2,
+    "epsilon": 0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 8192,
+    "n": 8192,
+    "cap": 2,
+    "epsilon": 0.001,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 8192,
+    "n": 8192,
+    "cap": 2,
+    "epsilon": 0.01,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 8192,
+    "n": 8192,
+    "cap": 2,
+    "epsilon": 0.1,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 8192,
+    "n": 8192,
+    "cap": 2,
+    "epsilon": 0.5,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 8192,
+    "n": 8192,
+    "cap": 2,
+    "epsilon": 0,
+    "support": 7,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 8192,
+    "n": 8192,
+    "cap": 2,
+    "epsilon": 0.001,
+    "support": 7,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 8192,
+    "n": 8192,
+    "cap": 2,
+    "epsilon": 0.01,
+    "support": 7,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 8192,
+    "n": 8192,
+    "cap": 2,
+    "epsilon": 0.1,
+    "support": 7,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "weak_rank",
+    "K": 3,
+    "p": 8192,
+    "n": 8192,
+    "cap": 2,
+    "epsilon": 0.5,
+    "support": 7,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "noise_level",
+    "K": 3,
+    "p": 2048,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 3,
+    "multiplier": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "noise_level",
+    "K": 3,
+    "p": 2048,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 3,
+    "multiplier": 1.5,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "noise_level",
+    "K": 3,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 3,
+    "multiplier": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "noise_level",
+    "K": 3,
+    "p": 2048,
+    "n": 2048,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 3,
+    "multiplier": 1.5,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "noise_level",
+    "K": 3,
+    "p": 2048,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 3,
+    "multiplier": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "noise_level",
+    "K": 3,
+    "p": 2048,
+    "n": 8192,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 3,
+    "multiplier": 1.5,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "noise_level",
+    "K": 3,
+    "p": 2048,
+    "n": 32768,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 3,
+    "multiplier": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "noise_level",
+    "K": 3,
+    "p": 2048,
+    "n": 32768,
+    "cap": 1,
+    "amplitude": 0.2,
+    "support": 3,
+    "multiplier": 1.5,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "assumption_stress",
+    "K": 3,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  {
+    "experiment": "assumption_stress",
+    "K": 3,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.0,
+    "support": 1,
+    "noise": "student_t3"
+  },
+  {
+    "experiment": "assumption_stress",
+    "K": 3,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.0,
+    "support": 1,
+    "noise": "variance_contamination"
+  },
+  {
+    "experiment": "assumption_stress",
+    "K": 3,
+    "p": 512,
+    "n": 512,
+    "cap": 1,
+    "amplitude": 0.0,
+    "support": 1,
+    "noise": "correlated"
+  }
+]

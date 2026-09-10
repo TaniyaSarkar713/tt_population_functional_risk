@@ -1,0 +1,1118 @@
+[
+  {
+    "URL": "https://arxiv.org/abs/2501.16223",
+    "author": [
+      {
+        "family": "Xu",
+        "given": "Ke"
+      },
+      {
+        "family": "Chen",
+        "given": "Elynn"
+      },
+      {
+        "family": "Han",
+        "given": "Yuefeng"
+      }
+    ],
+    "id": "xu2025",
+    "issued": {
+      "date-parts": [
+        [
+          2025
+        ]
+      ]
+    },
+    "title": "Statistical Inference for Low-Rank Tensor Models",
+    "type": ""
+  },
+  {
+    "URL": "https://arxiv.org/abs/1910.10382",
+    "author": [
+      {
+        "family": "Zhu",
+        "given": "Yinchu"
+      }
+    ],
+    "id": "zhu2019",
+    "issued": {
+      "date-parts": [
+        [
+          2019
+        ]
+      ]
+    },
+    "title": "How well can we learn large factor models without assuming strong factors?",
+    "type": ""
+  },
+  {
+    "DOI": "10.1080/01621459.2025.2538272",
+    "URL": "https://arxiv.org/abs/2311.16440",
+    "author": [
+      {
+        "family": "Choi",
+        "given": "Jungjun"
+      },
+      {
+        "family": "Kwon",
+        "given": "Hyukjun"
+      },
+      {
+        "family": "Liao",
+        "given": "Yuan"
+      }
+    ],
+    "container-title": "Journal of the American Statistical Association",
+    "id": "choi2026",
+    "issue": "553",
+    "issued": {
+      "date-parts": [
+        [
+          2026
+        ]
+      ]
+    },
+    "page": "655-666",
+    "title": "Inference for Low-Rank Models Without Estimating the Rank",
+    "type": "article-journal",
+    "volume": "121"
+  },
+  {
+    "DOI": "10.1086/741623",
+    "URL": "https://arxiv.org/abs/2210.06639",
+    "author": [
+      {
+        "family": "Armstrong",
+        "given": "Timothy B."
+      },
+      {
+        "family": "Weidner",
+        "given": "Martin"
+      },
+      {
+        "family": "Zeleneev",
+        "given": "Andrei"
+      }
+    ],
+    "container-title": "Journal of Political Economy",
+    "id": "armstrong2026",
+    "issued": {
+      "date-parts": [
+        [
+          2026
+        ]
+      ]
+    },
+    "note": "In press; accepted-paper record verified. Full text examined: arXiv v3, December 2024.",
+    "title": "Robust Estimation and Inference in Panels with Interactive Fixed Effects",
+    "type": "article-journal"
+  },
+  {
+    "DOI": "10.1214/009053604000000049",
+    "URL": "https://arxiv.org/abs/math/0503662",
+    "author": [
+      {
+        "family": "Cai",
+        "given": "T. Tony"
+      },
+      {
+        "family": "Low",
+        "given": "Mark G."
+      }
+    ],
+    "container-title": "The Annals of Statistics",
+    "id": "cailow2004",
+    "issue": "5",
+    "issued": {
+      "date-parts": [
+        [
+          2004
+        ]
+      ]
+    },
+    "page": "1805-1840",
+    "title": "An adaptation theory for nonparametric confidence intervals",
+    "type": "article-journal",
+    "volume": "32"
+  },
+  {
+    "DOI": "10.5705/ss.202026.0222",
+    "URL": "https://www3.stat.sinica.edu.tw/statistica/fp/SS-2026-0222.html",
+    "author": [
+      {
+        "family": "Ke",
+        "given": "Baofang"
+      },
+      {
+        "family": "Song",
+        "given": "Zihao"
+      },
+      {
+        "family": "Zhao",
+        "given": "Weihua"
+      },
+      {
+        "family": "Wang",
+        "given": "Lei"
+      }
+    ],
+    "container-title": "Statistica Sinica",
+    "id": "ke2026",
+    "issued": {
+      "date-parts": [
+        [
+          2026
+        ]
+      ]
+    },
+    "note": "Newly accepted preprint SS-2026-0222; updated September 8, 2026. No volume or pages assigned in inspected record.",
+    "title": "Efficient Inference for Low-rank Regression via Covariance-Weighted Projection",
+    "type": "article-journal"
+  },
+  {
+    "DOI": "10.1214/15-AOS1426",
+    "URL": "https://arxiv.org/abs/1404.4408",
+    "author": [
+      {
+        "family": "Cai",
+        "given": "T. Tony"
+      },
+      {
+        "family": "Liang",
+        "given": "Tengyuan"
+      },
+      {
+        "family": "Rakhlin",
+        "given": "Alexander"
+      }
+    ],
+    "container-title": "The Annals of Statistics",
+    "id": "cailiangrakhlin2016",
+    "issue": "4",
+    "issued": {
+      "date-parts": [
+        [
+          2016
+        ]
+      ]
+    },
+    "page": "1536-1563",
+    "title": "Geometric inference for general high-dimensional linear inverse problems",
+    "type": "article-journal",
+    "volume": "44"
+  },
+  {
+    "DOI": "10.5705/ss.202016.0103",
+    "URL": "https://arxiv.org/abs/1502.04654",
+    "author": [
+      {
+        "family": "Carpentier",
+        "given": "Alexandra"
+      },
+      {
+        "family": "Kim",
+        "given": "Arlene K. H."
+      }
+    ],
+    "container-title": "Statistica Sinica",
+    "id": "carpentierkim2018",
+    "issued": {
+      "date-parts": [
+        [
+          2018
+        ]
+      ]
+    },
+    "page": "1371-1393",
+    "title": "An iterative hard thresholding estimator for low rank matrix recovery with explicit limiting distribution",
+    "type": "article-journal",
+    "volume": "28"
+  },
+  {
+    "DOI": "10.3150/17-BEJ933",
+    "URL": "https://arxiv.org/abs/1608.04861",
+    "author": [
+      {
+        "family": "Carpentier",
+        "given": "Alexandra"
+      },
+      {
+        "family": "Klopp",
+        "given": "Olga"
+      },
+      {
+        "family": "Löffler",
+        "given": "Matthias"
+      },
+      {
+        "family": "Nickl",
+        "given": "Richard"
+      }
+    ],
+    "container-title": "Bernoulli",
+    "id": "carpentieretal2018",
+    "issue": "4A",
+    "issued": {
+      "date-parts": [
+        [
+          2018
+        ]
+      ]
+    },
+    "page": "2429-2460",
+    "title": "Adaptive confidence sets for matrix completion",
+    "type": "article-journal",
+    "volume": "24"
+  },
+  {
+    "DOI": "10.1111/rssb.12400",
+    "URL": "https://arxiv.org/abs/1909.00116",
+    "author": [
+      {
+        "family": "Xia",
+        "given": "Dong"
+      },
+      {
+        "family": "Yuan",
+        "given": "Ming"
+      }
+    ],
+    "container-title": "Journal of the Royal Statistical Society Series B: Statistical Methodology",
+    "id": "xiayuan2021",
+    "issue": "1",
+    "issued": {
+      "date-parts": [
+        [
+          2021
+        ]
+      ]
+    },
+    "page": "58-77",
+    "title": "Statistical inferences of linear forms for noisy matrix completion",
+    "type": "article-journal",
+    "volume": "83"
+  },
+  {
+    "URL": "https://arxiv.org/abs/2410.06381",
+    "author": [
+      {
+        "family": "Agterberg",
+        "given": "Joshua"
+      },
+      {
+        "family": "Zhang",
+        "given": "Anru R."
+      }
+    ],
+    "id": "agterberg2024",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "title": "Statistical Inference for Low-Rank Tensors: Heteroskedasticity, Subgaussianity, and Applications",
+    "type": ""
+  },
+  {
+    "DOI": "10.1214/21-AOS2146",
+    "URL": "https://arxiv.org/abs/2012.14844",
+    "author": [
+      {
+        "family": "Xia",
+        "given": "Dong"
+      },
+      {
+        "family": "Zhang",
+        "given": "Anru"
+      },
+      {
+        "family": "Zhou",
+        "given": "Yuchen"
+      }
+    ],
+    "container-title": "The Annals of Statistics",
+    "id": "xiazhangzhou2022",
+    "issue": "2",
+    "issued": {
+      "date-parts": [
+        [
+          2022
+        ]
+      ]
+    },
+    "page": "1220-1245",
+    "title": "Inference for Low-rank Tensors—No Need to Debias",
+    "type": "article-journal",
+    "volume": "50"
+  },
+  {
+    "DOI": "10.1214/15-EJS1087",
+    "URL": "https://arxiv.org/abs/1507.03829",
+    "author": [
+      {
+        "family": "Carpentier",
+        "given": "Alexandra"
+      },
+      {
+        "family": "Nickl",
+        "given": "Richard"
+      }
+    ],
+    "container-title": "Electronic Journal of Statistics",
+    "id": "carpentiernickl2015",
+    "issue": "2",
+    "issued": {
+      "date-parts": [
+        [
+          2015
+        ]
+      ]
+    },
+    "page": "2675-2688",
+    "title": "On signal detection and confidence sets for low rank inference problems",
+    "type": "article-journal",
+    "volume": "9"
+  },
+  {
+    "DOI": "10.1073/pnas.1922664117",
+    "URL": "https://arxiv.org/abs/1912.11436",
+    "author": [
+      {
+        "family": "Wasserman",
+        "given": "Larry"
+      },
+      {
+        "family": "Ramdas",
+        "given": "Aaditya"
+      },
+      {
+        "family": "Balakrishnan",
+        "given": "Sivaraman"
+      }
+    ],
+    "container-title": "Proceedings of the National Academy of Sciences",
+    "id": "wasserman2020",
+    "issue": "29",
+    "issued": {
+      "date-parts": [
+        [
+          2020
+        ]
+      ]
+    },
+    "page": "16880-16890",
+    "title": "Universal inference",
+    "type": "article-journal",
+    "volume": "117"
+  },
+  {
+    "DOI": "10.1007/s10107-024-02186-w",
+    "URL": "https://arxiv.org/abs/2311.18324",
+    "author": [
+      {
+        "family": "Gao",
+        "given": "Bin"
+      },
+      {
+        "family": "Peng",
+        "given": "Renfeng"
+      },
+      {
+        "family": "Yuan",
+        "given": "Ya-xiang"
+      }
+    ],
+    "container-title": "Mathematical Programming",
+    "id": "gao2025",
+    "issue": "1",
+    "issued": {
+      "date-parts": [
+        [
+          2025
+        ]
+      ]
+    },
+    "page": "357-407",
+    "title": "Low-rank optimization on Tucker tensor varieties",
+    "type": "article-journal",
+    "volume": "214"
+  },
+  {
+    "DOI": "10.1016/j.laa.2018.01.012",
+    "URL": "https://arxiv.org/abs/1705.10152",
+    "author": [
+      {
+        "family": "Kutschan",
+        "given": "Benjamin"
+      }
+    ],
+    "container-title": "Linear Algebra and its Applications",
+    "id": "kutschan2018",
+    "issued": {
+      "date-parts": [
+        [
+          2018
+        ]
+      ]
+    },
+    "page": "370-390",
+    "title": "Tangent cones to tensor train varieties",
+    "type": "article-journal",
+    "volume": "544"
+  },
+  {
+    "DOI": "10.1214/07-AOS571",
+    "URL": "https://arxiv.org/abs/math/0703360",
+    "author": [
+      {
+        "family": "Drton",
+        "given": "Mathias"
+      }
+    ],
+    "container-title": "The Annals of Statistics",
+    "id": "drton2009",
+    "issue": "2",
+    "issued": {
+      "date-parts": [
+        [
+          2009
+        ]
+      ]
+    },
+    "page": "979-1012",
+    "title": "Likelihood ratio tests and singularities",
+    "type": "article-journal",
+    "volume": "37"
+  },
+  {
+    "URL": "https://arxiv.org/abs/2507.18554",
+    "author": [
+      {
+        "family": "Bykhovskaya",
+        "given": "Anna"
+      },
+      {
+        "family": "Gorin",
+        "given": "Vadim"
+      },
+      {
+        "family": "Sodin",
+        "given": "Sasha"
+      }
+    ],
+    "id": "bykhovskaya2025",
+    "issued": {
+      "date-parts": [
+        [
+          2025
+        ]
+      ]
+    },
+    "title": "How weak are weak factors? Uniform inference for signal strength in signal plus noise models",
+    "type": ""
+  },
+  {
+    "DOI": "10.1109/TIT.2022.3205781",
+    "URL": "https://arxiv.org/abs/2006.08580",
+    "author": [
+      {
+        "family": "Cai",
+        "given": "Changxiao"
+      },
+      {
+        "family": "Poor",
+        "given": "H. Vincent"
+      },
+      {
+        "family": "Chen",
+        "given": "Yuxin"
+      }
+    ],
+    "container-title": "IEEE Transactions on Information Theory",
+    "id": "caipoorchen2023",
+    "issue": "1",
+    "issued": {
+      "date-parts": [
+        [
+          2023
+        ]
+      ]
+    },
+    "page": "407-452",
+    "title": "Uncertainty Quantification for Nonconvex Tensor Completion: Confidence Intervals, Heteroscedasticity and Optimality",
+    "type": "article-journal",
+    "volume": "69"
+  },
+  {
+    "DOI": "10.1214/23-AOAS1835",
+    "URL": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11046526/",
+    "author": [
+      {
+        "family": "Liu",
+        "given": "Zihuan"
+      },
+      {
+        "family": "Lee",
+        "given": "Cheuk Yin"
+      },
+      {
+        "family": "Zhang",
+        "given": "Heping"
+      }
+    ],
+    "container-title": "The Annals of Applied Statistics",
+    "id": "liuleezhang2024",
+    "issue": "2",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "page": "1294-1318",
+    "title": "Tensor quantile regression with low-rank tensor train estimation",
+    "type": "article-journal",
+    "volume": "18"
+  },
+  {
+    "URL": "https://arxiv.org/abs/1504.03234",
+    "author": [
+      {
+        "family": "Carpentier",
+        "given": "Alexandra"
+      },
+      {
+        "family": "Eisert",
+        "given": "Jens"
+      },
+      {
+        "family": "Gross",
+        "given": "David"
+      },
+      {
+        "family": "Nickl",
+        "given": "Richard"
+      }
+    ],
+    "id": "carpentieretal2015",
+    "issued": {
+      "date-parts": [
+        [
+          2015
+        ]
+      ]
+    },
+    "note": "Cited as the verified 2015 arXiv version; a 2019 published version is recorded in the Freie Universitaet Berlin repository.",
+    "title": "Uncertainty Quantification for Matrix Compressed Sensing and Quantum Tomography Problems",
+    "type": ""
+  },
+  {
+    "DOI": "10.1093/biomet/asaf070",
+    "URL": "https://doi.org/10.1093/biomet/asaf070",
+    "author": [
+      {
+        "family": "Park",
+        "given": "Beomjo"
+      },
+      {
+        "family": "Balakrishnan",
+        "given": "Sivaraman"
+      },
+      {
+        "family": "Wasserman",
+        "given": "Larry"
+      }
+    ],
+    "container-title": "Biometrika",
+    "id": "park2026",
+    "issue": "2",
+    "issued": {
+      "date-parts": [
+        [
+          2026
+        ]
+      ]
+    },
+    "page": "asaf070",
+    "title": "Robust universal inference for misspecified models",
+    "type": "article-journal",
+    "volume": "113"
+  },
+  {
+    "DOI": "10.1214/16-AOS1461",
+    "URL": "https://arxiv.org/abs/1506.05539",
+    "author": [
+      {
+        "family": "Cai",
+        "given": "T. Tony"
+      },
+      {
+        "family": "Guo",
+        "given": "Zijian"
+      }
+    ],
+    "container-title": "The Annals of Statistics",
+    "id": "caiguo2017",
+    "issue": "2",
+    "issued": {
+      "date-parts": [
+        [
+          2017
+        ]
+      ]
+    },
+    "page": "615-646",
+    "title": "Confidence intervals for high-dimensional linear regression: Minimax rates and adaptivity",
+    "type": "article-journal",
+    "volume": "45"
+  },
+  {
+    "URL": "https://arxiv.org/abs/1502.00665",
+    "author": [
+      {
+        "family": "Collier",
+        "given": "Olivier"
+      },
+      {
+        "family": "Comminges",
+        "given": "Laëtitia"
+      },
+      {
+        "family": "Tsybakov",
+        "given": "Alexandre B."
+      }
+    ],
+    "container-title": "The Annals of Statistics",
+    "id": "collier2017",
+    "issue": "3",
+    "issued": {
+      "date-parts": [
+        [
+          2017
+        ]
+      ]
+    },
+    "page": "923-958",
+    "title": "Minimax estimation of linear and quadratic functionals on sparsity classes",
+    "type": "article-journal",
+    "volume": "45"
+  },
+  {
+    "DOI": "10.1214/24-AOS2374",
+    "URL": "https://arxiv.org/abs/2111.13551",
+    "author": [
+      {
+        "family": "Thépaut",
+        "given": "Solène"
+      },
+      {
+        "family": "Verzelen",
+        "given": "Nicolas"
+      }
+    ],
+    "container-title": "The Annals of Statistics",
+    "id": "thepaut2024",
+    "issue": "4",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "page": "1334-1359",
+    "title": "Optimal estimation of Schatten norms of a rectangular matrix",
+    "type": "article-journal",
+    "volume": "52"
+  },
+  {
+    "DOI": "10.3150/21-BEJ1371",
+    "URL": "https://arxiv.org/abs/2007.01165",
+    "author": [
+      {
+        "family": "Michel",
+        "given": "Bertrand"
+      },
+      {
+        "family": "Nouy",
+        "given": "Anthony"
+      }
+    ],
+    "container-title": "Bernoulli",
+    "id": "michelnouy2022",
+    "issue": "2",
+    "issued": {
+      "date-parts": [
+        [
+          2022
+        ]
+      ]
+    },
+    "page": "910-936",
+    "title": "Learning with tree tensor networks: complexity estimates and model selection",
+    "type": "article-journal",
+    "volume": "28"
+  },
+  {
+    "DOI": "10.1080/10618600.2025.2554671",
+    "URL": "https://arxiv.org/abs/2405.00581",
+    "author": [
+      {
+        "family": "Sun",
+        "given": "Hu"
+      },
+      {
+        "family": "Chen",
+        "given": "Yang"
+      }
+    ],
+    "container-title": "Journal of Computational and Graphical Statistics",
+    "id": "sunchen2026",
+    "issue": "2",
+    "issued": {
+      "date-parts": [
+        [
+          2026
+        ]
+      ]
+    },
+    "page": "594-605",
+    "title": "Conformalized Tensor Completion with Riemannian Optimization",
+    "type": "article-journal",
+    "volume": "35"
+  },
+  {
+    "URL": "https://arxiv.org/abs/2607.20205",
+    "author": [
+      {
+        "family": "Gao",
+        "given": "Yihang"
+      },
+      {
+        "family": "Tan",
+        "given": "Vincent Y. F."
+      }
+    ],
+    "id": "gaotan2026",
+    "issued": {
+      "date-parts": [
+        [
+          2026
+        ]
+      ]
+    },
+    "title": "StatLoRA: Statistical Inference for Rank Allocation in Low-Rank Adaptation",
+    "type": ""
+  },
+  {
+    "URL": "https://arxiv.org/abs/2603.26048",
+    "author": [
+      {
+        "family": "Shi",
+        "given": "Haoming"
+      },
+      {
+        "family": "Chi",
+        "given": "Eric C."
+      },
+      {
+        "family": "Luo",
+        "given": "Hengrui"
+      }
+    ],
+    "id": "shichiluo2026",
+    "issued": {
+      "date-parts": [
+        [
+          2026
+        ]
+      ]
+    },
+    "title": "Asymptotic Optimism for Tensor Regression Models with Applications to Neural Network Compression",
+    "type": ""
+  },
+  {
+    "URL": "https://www.jmlr.org/papers/v21/20-383.html",
+    "author": [
+      {
+        "family": "Lu",
+        "given": "Wenqi"
+      },
+      {
+        "family": "Zhu",
+        "given": "Zhongyi"
+      },
+      {
+        "family": "Lian",
+        "given": "Heng"
+      }
+    ],
+    "container-title": "Journal of Machine Learning Research",
+    "id": "luzhulian2020",
+    "issue": "250",
+    "issued": {
+      "date-parts": [
+        [
+          2020
+        ]
+      ]
+    },
+    "page": "1-31",
+    "title": "High-dimensional quantile tensor regression",
+    "type": "article-journal",
+    "volume": "21"
+  },
+  {
+    "DOI": "10.1214/aos/1176325367",
+    "URL": "https://web.stanford.edu/dept/statistics/cgi-bin/donoho/wp-content/uploads/2018/08/SEOR.pdf",
+    "author": [
+      {
+        "family": "Donoho",
+        "given": "David L."
+      }
+    ],
+    "container-title": "The Annals of Statistics",
+    "id": "donoho1994",
+    "issue": "1",
+    "issued": {
+      "date-parts": [
+        [
+          1994
+        ]
+      ]
+    },
+    "page": "238-270",
+    "title": "Statistical Estimation and Optimal Recovery",
+    "type": "article-journal",
+    "volume": "22"
+  },
+  {
+    "DOI": "10.1214/aos/1030741084",
+    "URL": "https://doi.org/10.1214/aos/1030741084",
+    "author": [
+      {
+        "family": "Low",
+        "given": "Mark G."
+      }
+    ],
+    "container-title": "The Annals of Statistics",
+    "id": "low1997",
+    "issue": "6",
+    "issued": {
+      "date-parts": [
+        [
+          1997
+        ]
+      ]
+    },
+    "page": "2547-2554",
+    "title": "On nonparametric confidence intervals",
+    "type": "article-journal",
+    "volume": "25"
+  },
+  {
+    "DOI": "10.2307/2171740",
+    "URL": "https://jeanmariedufour.github.io/Dufour_1994_ImpossibilityTheorems_W.pdf",
+    "author": [
+      {
+        "family": "Dufour",
+        "given": "Jean-Marie"
+      }
+    ],
+    "container-title": "Econometrica",
+    "id": "dufour1997",
+    "issue": "6",
+    "issued": {
+      "date-parts": [
+        [
+          1997
+        ]
+      ]
+    },
+    "page": "1365-1388",
+    "title": "Some Impossibility Theorems in Econometrics with Applications to Structural and Dynamic Models",
+    "type": "article-journal",
+    "volume": "65"
+  },
+  {
+    "DOI": "10.1017/S0266466605050036",
+    "URL": "https://doi.org/10.1017/S0266466605050036",
+    "author": [
+      {
+        "family": "Leeb",
+        "given": "Hannes"
+      },
+      {
+        "family": "Pötscher",
+        "given": "Benedikt M."
+      }
+    ],
+    "container-title": "Econometric Theory",
+    "id": "leebpotscher2005",
+    "issue": "1",
+    "issued": {
+      "date-parts": [
+        [
+          2005
+        ]
+      ]
+    },
+    "page": "21-59",
+    "title": "Model Selection and Inference: Facts and Fiction",
+    "type": "article-journal",
+    "volume": "21"
+  },
+  {
+    "DOI": "10.1214/009053604000000094",
+    "URL": "https://arxiv.org/abs/math/0406427",
+    "author": [
+      {
+        "family": "Cai",
+        "given": "T. Tony"
+      },
+      {
+        "family": "Low",
+        "given": "Mark G."
+      }
+    ],
+    "container-title": "The Annals of Statistics",
+    "id": "cailownonconvex2004",
+    "issue": "2",
+    "issued": {
+      "date-parts": [
+        [
+          2004
+        ]
+      ]
+    },
+    "page": "552-576",
+    "title": "Minimax estimation of linear functionals over nonconvex parameter spaces",
+    "type": "article-journal",
+    "volume": "32"
+  },
+  {
+    "DOI": "10.1093/imaiai/iaz011",
+    "URL": "https://arxiv.org/abs/1804.00355",
+    "author": [
+      {
+        "family": "Juditsky",
+        "given": "Anatoli"
+      },
+      {
+        "family": "Nemirovski",
+        "given": "Arkadi"
+      }
+    ],
+    "container-title": "Information and Inference: A Journal of the IMA",
+    "id": "juditskynemirovski2020",
+    "issue": "2",
+    "issued": {
+      "date-parts": [
+        [
+          2020
+        ]
+      ]
+    },
+    "page": "423-453",
+    "title": "Near-optimal recovery of linear and N-convex functions on unions of convex sets",
+    "type": "article-journal",
+    "volume": "9"
+  },
+  {
+    "DOI": "10.4171/MSL/30",
+    "URL": "https://arxiv.org/abs/2107.07836",
+    "author": [
+      {
+        "family": "Juditsky",
+        "given": "Anatoli"
+      },
+      {
+        "family": "Nemirovski",
+        "given": "Arkadi"
+      }
+    ],
+    "container-title": "Mathematical Statistics and Learning",
+    "id": "juditskynemirovski2022",
+    "issue": "1/2",
+    "issued": {
+      "date-parts": [
+        [
+          2022
+        ]
+      ]
+    },
+    "page": "55-116",
+    "title": "Aggregating estimates by convex optimization",
+    "type": "article-journal",
+    "volume": "5"
+  },
+  {
+    "DOI": "10.1214/22-BA1317",
+    "URL": "https://arxiv.org/abs/2101.01299",
+    "author": [
+      {
+        "family": "Yuchi",
+        "given": "Henry Shaowu"
+      },
+      {
+        "family": "Mak",
+        "given": "Simon"
+      },
+      {
+        "family": "Xie",
+        "given": "Yao"
+      }
+    ],
+    "container-title": "Bayesian Analysis",
+    "id": "yuchi2023",
+    "issue": "2",
+    "issued": {
+      "date-parts": [
+        [
+          2023
+        ]
+      ]
+    },
+    "page": "491-518",
+    "title": "Bayesian Uncertainty Quantification for Low-Rank Matrix Completion",
+    "type": "article-journal",
+    "volume": "18"
+  },
+  {
+    "DOI": "10.1214/14-AOS1270",
+    "URL": "https://arxiv.org/abs/1310.4489",
+    "author": [
+      {
+        "family": "Szabó",
+        "given": "Botond"
+      },
+      {
+        "dropping-particle": "van der",
+        "family": "Vaart",
+        "given": "A. W."
+      },
+      {
+        "dropping-particle": "van",
+        "family": "Zanten",
+        "given": "J. H."
+      }
+    ],
+    "container-title": "The Annals of Statistics",
+    "id": "szabo2015",
+    "issue": "4",
+    "issued": {
+      "date-parts": [
+        [
+          2015
+        ]
+      ]
+    },
+    "page": "1391-1428",
+    "title": "Frequentist coverage of adaptive nonparametric Bayesian credible sets",
+    "type": "article-journal",
+    "volume": "43"
+  }
+]

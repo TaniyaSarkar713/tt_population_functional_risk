@@ -1,0 +1,4 @@
+order,mode_size,tt_rank,ambient_dimension,raw_core_count,gauge_dimension,theoretical_quotient_dimension,numerical_jacobian_rank,smallest_nonzero_jacobian_sv
+4,4,1,256,16,3,13,13,0.36984548777832377
+4,4,2,256,48,12,36,36,0.06916928874823873
+4,4,3,256,96,27,69,69,0.027353040650664948

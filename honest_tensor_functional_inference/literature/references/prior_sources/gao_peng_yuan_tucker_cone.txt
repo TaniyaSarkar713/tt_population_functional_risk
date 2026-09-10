@@ -1,0 +1,3493 @@
+
+[PDF PAGE 1]
+manuscript No.
+(will be inserted by the editor)
+Low-rank optimization on Tucker tensor varieties
+Bin Gao · Renfeng Peng · Y a-xiang Y uan
+Received: date / Accepted: date
+Abstract In the realm of tensor optimization, the low-rank Tucker decomposition
+is crucial for reducing the number of parameters and for saving storage. We explore
+the geometry of Tucker tensor varieties—the set of tensors with bounded Tucker
+rank—which is notably more intricate than the well-explored matrix varieties. We
+give an explicit parametrization of the tangent cone of Tucker tensor varieties and
+leverage its geometry to develop provable gradient-related line-search methods for
+optimization on Tucker tensor varieties. To the best of our knowledge, this is the
+first work concerning geometry and optimization on Tucker tensor varieties. In
+practice, low-rank tensor optimization suffers from the difficulty of choosing a
+reliable rank parameter. To this end, we incorporate the established geometry and
+propose a Tucker rank-adaptive method that aims to identify an appropriate rank
+with guaranteed convergence. Numerical experiments on tensor completion reveal
+that the proposed methods are in favor of recovering performance over other state-
+of-the-art methods. The rank-adaptive method performs the best across various
+rank parameter selections and is indeed able to find an appropriate rank.
+Keywords Low-rank optimization · Tucker decomposition · algebraic variety ·
+tangent cone · rank-adaptive strategy
+P ACS15A69 · 65K05 · 65F30 · 90C30
+BG was supported by the Young Elite Scientist Sponsorship Program by CAST. YY was
+supported by the National Natural Science Foundation of China (grant No. 12288201).
+Bin Gao · Ya-xiang Yuan
+State Key Laboratory of Scientific and Engineering Computing, Academy of Mathematics and
+Systems Science, Chinese Academy of Sciences, Beijing, China
+E-mail: {gaobin,yyx}@lsec.cc.ac.cn;
+Renfeng Peng
+State Key Laboratory of Scientific and Engineering Computing, Academy of Mathematics
+and Systems Science, Chinese Academy of Sciences, and University of Chinese Academy of
+Sciences, Beijing, China
+E-mail: pengrenfeng@lsec.cc.ac.cn
+arXiv:2311.18324v2  [math.OC]  13 Jul 2024
+
+[PDF PAGE 2]
+2 Bin Gao et al.
+1 Introduction
+Tensors are powerful tools for representing multi-dimensional data, yet they are of-
+ten encumbered by high storage and computational costs. Adopting a low-rank as-
+sumption mitigates these challenges by extracting the most significant information
+from tensors, thereby substantially reducing storage requirements. Low-rank opti-
+mization has demonstrated its effectiveness across various applications, including
+image processing [VT03; Pen+14], matrix and tensor completion [KSV14; KM16;
+GPY23; GPY24], tensor equations [KSV16], mathematical finance [GKS20], and
+high-dimensional partial differential equations [BEU23; Wan+23]; see [GKT13;
+UV20] for an overview.
+In contrast with the matrix rank, different tensor decomposition formats can
+lead to various definitions of the rank of a tensor. The canonical polyadic decompo-
+sition [Hit28], Tucker decomposition [Tuc+64], tensor train decomposition [Ose11],
+and tensor ring decomposition [Zha+16] are among the most typical decomposi-
+tion formats; see [KB09] for an overview. Specifically, Tucker decomposition, also
+referred to as higher-order principal component analysis [KNW86] or multilinear
+singular value decomposition [DDV00], allows us to explore the low-rank structure
+along each mode of a tensor. Moreover, Tucker decomposition boils down to the
+ubiquitous singular value decomposition (SVD) in the matrix case. In this paper,
+we are concerned with the following low-rank Tucker tensor optimization problem
+in which the search space consists of tensors with bounded Tucker rank, i.e.,
+min
+X
+f (X )
+s. t. X ∈ M≤r := {X ∈Rn1×n2×···×nd : ranktc(X ) ≤ r},
+(1.1)
+where f : Rn1×n2×···×nd → R is a smooth function, r = ( r1, r2, . . . , rd) is an ar-
+ray of d positive integers, and rank tc(X ) denotes the Tucker rank of X . The set
+M≤r can be constructed through the determinants of minors with size ( rk + 1)
+being zero from the mode- k unfolding matrix of a tensor for k = 1, 2, . . . , d, which
+renders M≤r a real-algebraic variety. Hence, we refer to M≤r as the Tucker ten-
+sor varieties . Note that there is another type of tensor varieties in tensor train
+format. Kutschan [Kut18] provided the parametrization of the tangent cone for
+tensor train varieties. More recently, Vermeylen et al. [Ver+23] adopted the geo-
+metric tools in tensor train varieties and proposed a rank-estimation method for
+third-order tensor train completion.
+Related work and motivation Since low-rank Tucker tensor optimization is closely
+related to low-rank matrix optimization, we start with an overview of the existing
+research in the field of low-rank matrix optimization. Recall that Rm×nr := {X ∈
+Rm×n : rank(X) = r} is a smooth manifold (see, e.g., [HS95; BV06]), one can ben-
+efit from the geometric tools and design geometric methods for minimizing f over
+Rm×nr . For instance, Shalit et al. [SWC12] proposed an online-learning procedure
+on Rm×nr and applied the procedure to a multi-label image classification task. Van-
+dereycken [Van13] derived geometric tools on the manifoldRm×nr and proposed the
+Riemannian conjugate gradient method for low-rank matrix completion. Mishra
+et al. [Mis+14] studied the quotient geometry of product manifolds generated by
+fixed-rank matrix factorizations and proposed Riemannian methods for low-rank
+matrix optimization. Based on the fact that Rm×nr is not closed, Schneider and
+
+[PDF PAGE 3]
+Tucker tensor variety 3
+Uschmajew [SU15] considered minimizing f over the closure of Rm×nr , i.e., the
+matrix varieties Rm×n
+≤r := {X ∈ Rm×n : rank(X) ≤ r}, and proposed the projected
+gradient descent method (P2GD) in which the t-th iterate is updated with stepsize
+s(t) by
+X(t+1) = P≤r
+
+X(t) + s(t) PTX(t) Rm×n
+≤r
+(−∇f (X(t)))
+
+that involves two metric projections onto the varieties and the tangent cone. The
+convergence of P 2GD was proved by means of the assumption on f satisfying
+ Lojasiewicz inequality. Zhou et al. [Zho+16] designed a Riemannian rank-adaptive
+method on Rm×n
+≤r where the convergence is guaranteed. Recently, Hosseini and
+Uschmajew [HU19] proposed a gradient sampling method for optimization on gen-
+eral real algebraic varieties. Gao and Absil [GA22] employed the geometric illustra-
+tion of tangent cone to develop a Riemannian rank-adaptive method for low-rank
+matrix completion, which also appears to be favorable in low-rank semidefinite pro-
+gramming [TT23]. More recently, Olikier and Absil [OA23] proposed a first-order
+algorithm by equipping P2GD with a number of rank decrease attempts and proved
+that every accumulation point is stationary. Furthermore, Olikier et al. [OGA23]
+developed a framework for first-order optimization on general stratified sets of ma-
+trices. Levin et al. [LKB23] proposed a formulation in which the feasible set Rm×n
+≤r
+was parametrized by a (product) manifold M (e.g., M = Rm×r ×Rn×r) along with
+a lift φ : M →Rm×n
+≤r satisfying φ(M) = Rm×n
+≤r . Subsequently, the low-rank matrix
+optimization problem was reformulated as minimizing f ◦ φ on the manifold M,
+which can be solved by Riemannian optimization methods (see, e.g., [AMS09;
+Bou23] for an overview). Olikier et al. [OUV23] proposed Gauss–Southwell type
+descent methods on matrix varieties.
+The low-rank Tucker tensor optimization problems are much more challenging
+than the matrix case, due to the intricate geometry of Tucker tensors. In the light
+of low-rank matrix problems, the low-rank Tucker tensor optimization has several
+different formulations. One type is minimizing f on a smooth manifold Mr of
+tensors with fixed Tucker rank, i.e.,
+min
+X
+f (X )
+s. t. X ∈ Mr := {X ∈Rn1×n2×···×nd : ranktc(X ) = r}.
+(1.2)
+Uschmajew and Vandereycken [UV13] showed that the set of tensors with fixed
+Tucker rank is a submanifold of Rn1×···×nd and provided explicit characterizations
+of the tangent space. Kressner et al. [KSV14] proposed the Riemannian conjugate
+gradient method for low-rank Tucker tensor completion. Kasai and Mishra [KM16]
+considered the quotient geometry of the product manifold from Tucker decompo-
+sition and proposed the Riemannian conjugate gradient method for tensor com-
+pletion under a preconditioned metric. Interested readers are referred to [UV20]
+for an overview of geometric methods on fixed-rank matrix and tensor manifolds.
+Nevertheless, it is worth noting that the fixed-rank Tucker manifold Mr is not
+a closed set in Rn1×n2×···×nd . As a consequence, the classical convergence results
+established in Riemannian optimization (e.g., [BAC19]) do not hold for accumu-
+lation points located on the boundary M≤r \ Mr.
+Instead of solving the fixed-rank optimization problem (1.2), we consider mini-
+mizing f on the closure of Mr, i.e., solving the optimization problem (1.1). On the
+
+[PDF PAGE 4]
+4 Bin Gao et al.
+one hand, unlike the well-explored geometric properties of matrix varieties [SU15]
+or fixed-rank Tucker tensor manifold [UV13], the geometric counterpart for Tucker
+tensor varieties (e.g., the tangent cone at rank-deficient points in M≤r \ Mr) is
+unknown. On the other hand, M≤r can be constructed by the intersection of d
+tensorized matrix varieties of all unfolding matrices along different modes. How-
+ever, the relationship between the tangent cone of M≤r and the tangent cones
+of matrix varieties along different modes is unclear. Therefore, the geometry of
+Tucker tensor varieties can not be easily generalized from matrix varieties. The
+existing work in geometry and optimization on Tucker tensor varieties is quite
+sparse. Luo and Qi [LQ23] studied the optimality conditions of (1.1) by exploiting
+a subset of the normal cone while the formulation of tangent cone remains unclear.
+The unknown geometry of Tucker tensor varieties hampers one from designing op-
+timization methods on Tucker tensor varieties. In summary, we are motivated to
+seek an explicit parametrization of the tangent cone and to employ the established
+results to design geometric methods for (1.1).
+In addition, the question “how to choose an appropriate rank parameter r in
+low-rank optimization” is appealing in practice. We observe that the numerical
+performance of optimization methods in low-rank optimization can be sensitive
+to the choice of rank parameter r; see, e.g., [Zho+16; GA22; Don+22]. Opting
+for a larger rank parameter r is able to enlarge the search space and potentially
+leads to a better optimum. However, if r is too large, it triggers more storage and
+computational costs. Moreover, the optimization methods may converge to rank-
+deficient points due to the non-closed nature of Mr. In view of these obstacles,
+we are motivated to design rank-adaptive strategies, tailored for optimization on
+Tucker tensor varieties, that are able to find an appropriate rank parameter during
+iterations.
+Contributions In this paper, we delve into the geometry of Tucker tensor vari-
+eties M≤r and propose geometric and rank-adaptive methods for optimization on
+Tucker tensor varieties. Specifically, we first provide new equivalent reformulations
+for both the tangent cone of matrix varieties and the tangent space of Tucker ten-
+sor manifold. Then, an explicit characterization of the tangent cone of M≤r is
+constructed, paving the way for developing optimization methods on M≤r. In or-
+der to bypass the computationally intractable metric projection onto the tangent
+cone, we propose an approximate projection by choosing bases from d orthogonal
+complements of the corresponding d factor matrices of a Tucker tensor. To the
+best of our knowledge, this is the first work investigating the geometry of Tucker
+tensor varieties.
+Taking advantage of the derived geometric properties, we propose the gradient-
+related approximate projection (GRAP) method in which the iterate is given by
+X (t+1) = PHO
+≤r
+
+X (t) + s(t) ˜PTX (t) M≤r (−∇f (X (t)))
+
+,
+where PHO
+≤r projects a tensor onto the Tucker tensor varieties M≤r by the higher-
+order singular value decomposition and ˜P is the proposed approximate projection.
+The GRAP method can be viewed as a generalization of the Riemannian gradient
+method for optimization on Mr, while it is capable of dealing with rank-deficient
+points, and the convergence can still be guaranteed via  Lojasiewicz inequality.
+Additionally, we propose a new approximate projection operator ˆP by leveraging
+
+[PDF PAGE 5]
+Tucker tensor variety 5
+partial information of the tangent cone. Surprisingly, the operator ˆP is apt to
+develop a method without projection onto M≤r, namely, retraction-free, which
+iterates as
+X (t+1) = X (t) + s(t) ˆPTX (t) M≤r (−∇f (X (t)))
+while preserving feasibility, i.e., X (t+1) ∈ M≤r, and thus saves computational
+costs. This method is called the retraction-free gradient-related approximate pro-
+jection (rfGRAP) method and its convergence is also proved.
+In order to identify an appropriate Tucker rank during iterations, we resort to
+the geometric illustration of the tangent cone and propose a provable Tucker rank-
+adaptive method (TRAM), which consists of line search on a fixed-rank manifold,
+rank-decreasing, and rank-increasing procedures. Specifically, a rank-decreasing
+procedure is aimed to save storage and eliminate singularity if an iterate is nearly
+rank-deficient. If an iterate appears to be nearly stationary on the fixed-rank man-
+ifold, we increase the rank in pursuit of a better optimum.
+We compare the proposed GRAP, rfGRAP, and TRAM methods with existing
+methods in tensor completion on synthetic datasets, hyperspectral images, and
+movie ratings. The numerical results suggest that the proposed methods perform
+better than the state-of-the-art methods under different rank parameter selections.
+Specifically, the proposed TRAM method demonstrates its capability to find an
+appropriate rank in practice.
+Organization We introduce the geometric tools of matrix varieties and notation
+for tensor operations in section 2. In section 3, an explicit parametrization of the
+tangent cone of Tucker tensor varieties is provided along with an approximate
+projection onto the tangent cone. We propose the geometric methods, GRAP and
+rfGRAP, in sections 4 and 5, and we design the Tucker rank-adaptive method in
+section 6. Section 7 reports the numerical performance of proposed methods in
+tensor completion. Finally, we draw the conclusion in section 8.
+2 Low-rank manifolds and matrix varieties
+In this section, the required geometry of matrix manifold and matrix varieties,
+which is closely related to the Tucker tensor varieties, is introduced first. Then, we
+describe the notation for tensor operations, the definition of Tucker decomposition,
+and the geometry of the fixed-rank Tucker manifold.
+Given a nonempty subset C of Rn1×n2×···×nd , the (Bouligand) tangent cone of
+C at X ∈C is defined by
+TX C := {V ∈Rn1×n2×···×nd : ∃t(i) → 0, X (i) → Xin C, s. t. X (i) − X
+t(i) → V}.
+The set N X C = (TX C)◦ := {N ∈Rn1×n2×···×nd : ⟨N , V⟩ ≤0 for all V ∈TX C} is
+called the normal cone of C at X . Note that if C is a manifold, the tangent cone
+TX C (normal cone N X C) is referred to as the tangent space (normal space) of C
+at X . A mapping R : S
+X ∈C {X } ×TX C → C is called a retraction [HU19, §3.1.2] if
+for all X ∈C and V ∈TX C it holds that lim t→0+ (RX (tV) − X −tV)/t = 0.
+Definition 1 A point X ∈C is called stationary for the optimization problem (1.1)
+if ⟨∇f (X ), V⟩ ≥0 holds for all V ∈TX C, which is equivalent to −∇f (X ) ∈ NX C
+or the projected anti-gradient satisfies ∥ PTX C (−∇f (X ))∥F = 0.
+
+[PDF PAGE 6]
+6 Bin Gao et al.
+2.1 Low-rank matrix manifold and varieties
+Let m, n, rbe positive integers satisfying r ≤ min{m, n}. Given a matrix X ∈
+Rm×n, the image of X and its orthogonal complement are defined by span( X) :=
+{Xy : y ∈ Rn} ⊆Rm and span(X)⊥ := {y ∈ Rm : ⟨x, y⟩ = 0 for all x ∈ span(X)}
+respectively. The fixed-rank matrix manifold and matrix varieties are denoted by
+Rm×nr and Rm×n
+≤r respectively. The set St( r, n) := {X ∈ Rn×r : XTX = Ir} is the
+Stiefel manifold , where Ir is the r × r identity matrix. The orthogonal group is
+denoted by O(n) := {Q ∈ Rn×n : QTQ = QQT = In}.
+Geometry of matrix manifold and varieties The tangent and normal cones play im-
+portant roles in optimization on matrix varieties Rm×n
+≤r . Therefore, we introduce
+the explicit formulae of tangent and normal cones of matrix varieties (see [Van13,
+Proposition 2.1] and [SU15, Theorem 3.2]) as follows.
+Proposition 1 Given X ∈ Rm×nr with r ≤ r. A thin SVD of X is X = UΣVT, where
+U ∈ St(r, m), V ∈ St(r, n) and Σ = diag(σ1, σ2, . . . , σr) with σ1 ≥ σ2 ≥ · · · ≥σr > 0.
+It holds that
+TXRm×n
+r =
+
+
+
+h
+U U⊥
+i "
+Rr×r Rr×(n−r)
+R(m−r)×r 0
+# h
+V V⊥
+iT
+
+
+ ,
+NXRm×n
+r =
+
+
+
+h
+U U⊥
+i "
+0 0
+0 R(m−r)×(n−r)
+# h
+V V⊥
+iT
+
+
+ ,
+TXRm×n
+≤r =
+
+
+
+h
+U U⊥
+i "
+Rr×r Rr×(n−r)
+R(m−r)×r R(m−r)×(n−r)
+≤(r−r)
+# h
+V V⊥
+iT
+
+
+ ,
+NXRm×n
+≤r =
+(
+NXRm×nr , if r = r;
+{0}, if r < r,
+for any U⊥ ∈ St(m − r, m) with span(U⊥) = span(U)⊥ and V⊥ ∈ St(n − r, n) with
+span(V⊥) = span(V)⊥.
+Note that ( U⊥)TU = 0 and ( V⊥)TV = 0. The choice of U⊥ and V⊥ is not
+unique, but the results in Proposition 1 are independent of a specific choice of U⊥
+and V⊥. Actually, the tangent space and normal space can be uniquely represented
+in the sense of tensor product by
+TXRm×n
+r = span(U) ⊗ span(V) + span(U)⊥ ⊗ span(V) + span(U) ⊗ span(V)⊥,
+NXRm×n
+r = span(U)⊥ ⊗ span(V)⊥.
+The direct sum of tangent and normal spaces forms the Euclidean space Rm×n,
+i.e.,
+Rm×n = TXRm×n
+r + NXRm×n
+r
+=
+(h
+U U⊥
+i
+ h
+V V⊥
+iT
+)
++
+(h
+U U⊥
+i
+ h
+V V⊥
+iT
+)
+,
+where a shaded square represents an arbitrary matrix and the blank represents
+the matrix with zero elements.
+
+[PDF PAGE 7]
+Tucker tensor variety 7
+New parametrization of the tangent cone We propose a new reduced parametriza-
+tion of the tangent cone of matrix varieties. For any element Ξ in the tangent
+cone T XRm×n
+≤r , there exists C ∈ Rr×r, D ∈ R(m−r)×r, E ∈ Rr×(n−r) and F ∈
+R(m−r)×(n−r)
+≤(r−r) , such that
+Ξ = UCVT + U⊥DVT + UE(V⊥)T + U⊥F(V⊥)T. (2.1)
+Subsequently, we decompose Ξ by using the decomposition F = ˜US ˜VT, where
+˜U ∈ St(r − r, m− r), ˜V ∈ St(r − r, n− r), and S ∈ R(r−r)×(r−r). Note that S is
+not necessarily of full rank. Since r − r ≤ min{m − r, n− r}, there exist matrices
+˜U2 ∈ St(m − r, m− r) and ˜V2 ∈ St(n − r, n− r), such that [ ˜U ˜U2] ∈ O(m − r) and
+[ ˜V ˜V2] ∈ O(n − r). In fact, it holds that span( ˜U2) = span( ˜U)⊥ and span( ˜V2) =
+span( ˜V)⊥. As a result, we yield a new equivalent (reduced) parametrization of Ξ
+as follows
+Ξ = UCVT + U⊥DVT + UE(V⊥)T + U⊥ ˜US ˜VT(V⊥)T
+= UCVT + U⊥DVT + UE(V⊥)T + U1SVT
+1
+= UCVT + U⊥[ ˜U ˜U2][ ˜U ˜U2]TDVT + UE[ ˜V ˜V2][ ˜V ˜V2]T(V⊥)T + U1SVT
+1
+=
+h
+U U1 U2
+i
+
+
+C E ˜V E ˜V2
+˜UTD S 0
+˜UT
+2 D 0 0
+
+
+h
+V V1 V2
+iT
+,
+where U1 := U⊥ ˜U, U2 := U⊥ ˜U2, V1 := V⊥ ˜V, and V2 := V⊥ ˜V2. Figure 1
+provides an equivalent illustration of an element in T XRm×n
+≤r , where a dashed
+square represents an arbitrary matrix in Rr×r. The illustration is vital to the
+development of the tangent cone of Tucker tensor varieties; see Theorem 1 for
+details.
+r
+r
+U U1 U2
+ V V1 V2
+T
+Fig. 1 Illustration of an element in TXRm×n
+≤r with parameters U1 ∈ St(r − r, m), V1 ∈ St(r −
+r, n), U2 ∈ St(m−r, m), V2 ∈ St(n−r, n) satisfying [U U1 U2] ∈ O(m) and [V V1 V2] ∈ O(n)
+It is worth noting that we can further develop a compact parametrization in
+the way of full rank decomposition for F in (2.1). Specifically, we consider the
+decomposition F = ˆUˆS ˆVT, where ˆU ∈ St(ℓ, m− r), ˆV ∈ St(ℓ, n− r), ˆS ∈ Rℓ×ℓ
+ℓ is a
+full rank matrix, and ℓ = rank(F). Then, we obtain the compact parametrization
+Ξ = UCVT + U⊥DVT + UE(V⊥)T + ˆU1 ˆS ˆVT
+1 , (2.2)
+where ˆU1 := U⊥ ˆU and ˆV1 := V⊥ ˆV. Since ˆS is of full rank, the representation (2.2)
+is unique in the sense of right orthogonal group actions on ˆU1 and ˆV1. In fact,
+
+[PDF PAGE 8]
+8 Bin Gao et al.
+we observe that P ⊥
+U Ξ P⊥
+V = ˆU1 ˆS ˆVT
+1 , where P U := UUT, P⊥
+U := Im − PU, PV :=
+VVT, and P ⊥
+V := In − PV. Therefore, it follows that
+span( ˆU1) = span(P⊥
+U Ξ P⊥
+V) and span( ˆV1) = span((P⊥
+U Ξ P⊥
+V)T),
+which implies that the spaces are unique.
+Remark 1 We observe that the tangent cone can be alternatively decomposed as
+TXRm×n
+≤r = TXRm×n
+r + N≤(r−r)(X),
+where N≤(r−r)(X) :=
+n
+N ∈ NXRm×nr : rank(N) ≤ (r − r)
+o
+. As suggested in [GA22],
+given a matrix X ∈ Rm×nr with r < rand a vector in the coneV ∈ N≤(r−r)(X)\{0},
+it holds that
+rank(X + sV) ∈ (r, r]
+for s > 0. The principle can be applied to increase the rank of X. A similar
+observation can be found in tensor cases; see section 6.3 for details.
+Metric projections Given a matrix A = PI
+k=1 σkukvT
+k ∈ Rm×n
+I , where σ1 ≥ · · · ≥
+σI > 0, uk ∈ Rm and vk ∈ Rn are singular vectors of A. The metric projection of
+A onto the matrix varieties Rm×n
+≤r is defined by
+P≤r(A) := arg min
+X∈Rm×n
+≤r
+∥A − X∥2
+F.
+By using the Eckart–Young theorem, the metric projection exists and is given by
+P≤r(A) =
+(
+A, if I ≤ r,Pr
+k=1 σkukvT
+k , if I > r.
+Note that P ≤r(A) is not unique when the singular value σr is equal to σr+1, but
+we can always choose Pr
+k=1 σkukvT
+k in practice. When rank( A) ≥ r, the metric
+projection P r(A) onto the fixed-rank manifold Rm×nr equals to P≤r(A). However,
+when rank( A) < r, the matrix A can be approximated arbitrarily closely by a
+rank-r matrix and thus P r(A) does not exist.
+Moreover, in view of Proposition 1, given a matrix A ∈ Rm×n, the orthogonal
+projections onto the tangent space and tangent cone are given by
+PTXRm×n
+r
+A = PUAPV + P⊥
+UAPV + PUAP⊥
+V,
+PTXRm×n
+≤r
+A = PTXRm×n
+r
+A + P≤(r−r)
+
+P⊥
+UAP⊥
+V
+
+.
+(2.3)
+In practice, P ⊥
+UAP⊥
+V can be efficiently computed by P ⊥
+UAP⊥
+V = A − U(UTA) −
+(A V)VT + U(UTA V)VT.
+
+[PDF PAGE 9]
+Tucker tensor variety 9
+2.2 Tucker decomposition: definition and geometry
+We introduce notation for tensor operations. Denote the index set {1, 2, . . . , n}
+by [ n]. The inner product between two tensors X , Y ∈Rn1×n2×···×nd is defined
+by ⟨X , Y⟩ := Pn1
+i1=1 · · ·Pnd
+id=1 X (i1, . . . , id)Y(i1, . . . , id). The Frobenius norm of
+a tensor X is defined by ∥X ∥F :=
+p
+⟨X , X ⟩. The mode- k unfolding of a tensor
+X ∈Rn1×···×nd is denoted by a matrix X(k) ∈ Rnk×n−k for k = 1 , . . . , d, where
+n−k := Q
+i̸=k ni. The ( i1, i2, . . . , id)-th entry of X corresponds to the ( ik, j)-th
+entry of X(k), where j = 1 + Pd
+ℓ̸=k,ℓ=1(iℓ − 1)Jℓ with Jℓ = Qℓ−1
+m=1,m̸=k nm. The
+tensorization operator maps a matrix Xk ∈ Rnk×n−k to a tensor ten (k)(Xk) ∈
+Rn1×···×nd defined by ten (k)(Xk)(i1, . . . , id) = Xk(ik, 1 + Pd
+ℓ̸=k,ℓ=1(iℓ − 1)Jℓ) for
+(i1, . . . , id) ∈ [n1] × · · · ×[nd]. Note that ten(k)(X(k)) = X holds for fixed n1, . . . , nd.
+Therefore, the tensorization operator is invertible. The k-mode product of a ten-
+sor X and a matrix A ∈ Rnk×M is denoted by X ×k A ∈ Rn1×···×M ×···×nd , where
+the ( i1, . . . , ik−1, j, ik+1, . . . , id)-th entry of X ×k A is Pnk
+ik=1 xi1...id ajik . It holds
+that ( X ×k A)(k) = AX(k). Given u1 ∈ Rn1 \ {0}, . . . ,ud ∈ Rnd \ {0}, a rank-1
+tensor of size n1 × · · · ×nd is defined by the outer product V := u1 ◦ · · · ◦ud,
+or vi1,...,id := u1,i1 · · ·ud,id equivalently. The Kronecker product of two matri-
+ces A ∈ Rm1×n1 and B ∈ Rm2×n2 is an ( m1m2)-by-(n1n2) matrix defined by
+A ⊗ B := ( aij B)ij. The vector ei ∈ Rn is defined by the i-th column of n-by-n
+identity matrix In. Given two vectors x, y ∈ Rd, we denote x ≤ y (x < y) if xi ≤ yi
+(xi < yi) for all i ∈ [d].
+Definition 2 (T ucker decomposition) Given a tensor X ∈Rn1×n2×···×nd , the
+Tucker decomposition is
+X = G ×1 U1 ×2 U2 · · · ×d Ud = G ×d
+k=1 Uk,
+where G ∈Rr1×r2×···×rd is a core tensor, Uk ∈ St(rk, nk) are factor matrices with
+orthogonal columns and rk = rank(X(k)).
+The Tucker rank of a tensor X is defined by
+ranktc(X ) := r = (r1, r2, . . . , rd) = (rank(X(1)), rank(X(2)), . . . ,rank(X(d))).
+Figure 2 depicts the Tucker decomposition of a third-order tensor. Note that the
+mode-k unfolding of a tensor X = G ×1 U1 ×2 U2 · · · ×d Ud satisfies
+X(k) = UkG(k)
+
+Ud ⊗ · · · ⊗Uk+1 ⊗ Uk−1 ⊗ · · · ⊗U1
+T = UkG(k)((Uj)⊗j̸=k)T,
+where (Uj)⊗j̸=k := Ud ⊗ · · · ⊗Uk+1 ⊗ Uk−1 ⊗ · · · ⊗U1 for k ∈ [d]. Notably, for a
+d-th order tensor A, it holds that
+A ∈
+dO
+k=1
+span(Uk) ⇐ ⇒ A= C ×d
+k=1 Uk (2.4)
+with C ∈Rr1×r2×···×rd .
+
+[PDF PAGE 10]
+10 Bin Gao et al.
+X =
+U1
+G U2
+U3
+Fig. 2 Tucker decomposition of a third-order tensor
+Fixed-rank Tucker manifold Since Mr = {X ∈ Rn1×n2×···×nd : ranktc(X ) = r}
+forms a smooth manifold with dimension dim( Mr) = r1r2 · · ·rd + Pd
+k=1(nkrk −
+r2
+k), Koch and Lubich [KL10] provided that the tangent space of Mr at X is
+characterized by
+TX Mr =
+
+
+
+˙G ×1 U1 · · · ×d Ud + Pd
+k=1 G ×k ˙Uk ×j̸=k Uj :
+˙G ∈Rr1×r2×···×rd , ˙Uk ∈ Rnk×rk , ˙UT
+k Uk = 0
+
+
+ , (2.5)
+where G ×k ˙Uk ×j̸=k Uj = G ×1 U1 · · · ×k−1 Uk−1 ×k ˙Uk ×k+1 Uk+1 · · · ×d Ud.
+Though the Tucker decomposition of a tensor is not unique [KB09, §4.3], the
+parametrization of T X Mr does not depend on a specific Tucker decomposition.
+Specifically, consider another Tucker decomposition of X = ˘G ×d
+k=1 ˘Uk and the
+associated tangent space ˘TXMr via (2.5) with parameters ˘G ∈Rr1×r2×···×rd and
+˘Uk ∈ St(rk, nk) for k ∈ [d]. It suffices to show that T X Mr = ˘TXMr. In view of
+the fact that span( Uk) = span( X(k)) = span( ˘Uk), there exists Qk ∈ O(rk) such
+that ˘Uk = UkQk and ˘G = G ×d
+i=1 QT
+i for k ∈ [d]. For all V ∈TX Mr, it holds that
+V = ˙G ×d
+k=1 Uk +
+dX
+k=1
+G ×k ˙Uk ×j̸=k Uj
+= ( ˙G ×d
+k=1 QT
+k ) ×d
+k=1 (UkQk) +
+dX
+k=1
+(G ×d
+i=1 QT
+i ) ×k ( ˙UkQk) ×j̸=k (Uj Qj)
+= ( ˙G ×d
+k=1 QT
+k ) ×d
+k=1 ˘Uk +
+dX
+k=1
+˘G ×k ( ˙UkQk) ×j̸=k ˘Uj .
+Since ˙G ×d
+k=1 QT
+k ∈ Rr1×r2×···×rd , ˙UkQk ∈ Rnk×rk , and
+( ˙UkQk)T ˘Uk = QT
+k ˙UT
+k UkQk = 0,
+we conclude that V ∈ ˘TXMr as in (2.5). Therefore, T X Mr ⊆ ˘TXMr and the
+converse is also true.
+Metric projections Given a tensor A ∈Rn1×n2×···×nd , the metric projection of A
+onto the Tucker tensor varieties M≤r = {X ∈Rn1×n2×···×nd : ranktc(X ) ≤ r} is
+defined by
+P≤r(A) := arg min
+X ∈M≤r
+∥A − X ∥2
+F. (2.6)
+
+[PDF PAGE 11]
+Tucker tensor variety 11
+In contrast with the matrix case in section 2.1, P≤r(A) does not have a closed-form
+expression in general [DDV00]. Nevertheless, one can apply higher-order singular
+value decomposition (HOSVD) to yield a quasi-optimal solution. Specifically, the
+HOSVD procedure sequentially applies the best rank- rk approximation operator
+Pk
+≤rk to each mode of A for k = 1, 2, . . . , d, i.e,
+PHO
+≤r (A) := Pd
+≤rd (Pd−1
+≤rd−1
+· · ·(P1
+≤r1 (A))), (2.7)
+where Pk
+≤rk (A) := ten(k)( ¯Uk ¯UT
+k A(k)), ¯Uk is the leading rk singular vectors of A(k),
+and PHO
+≤r does not depend on the order of {Pk
+≤rk }d
+k=1 [VVM12, §3]. Since the quasi-
+optimality
+∥A −PHO
+≤r (A)∥F ≤
+√
+d∥A −P≤r(A)∥F (2.8)
+holds [Gra10, Lemma 2.6], HOSVD can be served as an approximate projection
+onto M≤r. Moreover, we can prove that HOSVD is also a retraction on M≤r
+around X .
+Proposition 2 The mapping RHO
+X : TX M≤r → M≤r : V 7→ PHO
+≤r (X + V) is a
+retraction on M≤r.
+Proof See Appendix A. ⊓ ⊔
+In addition, the metric projection of a tensor A ∈Rn1×n2×···×nd onto TX Mr
+is given by [KL10, §2.3]
+PTX Mr A = A ×d
+k=1 PUk +
+dX
+k=1
+G ×k
+
+P⊥
+Uk
+
+A ×j̸=k UT
+j
+
+(k)
+G†
+(k)
+
+×j̸=k Uj , (2.9)
+where G†
+(k) = GT
+(k)(G(k)GT
+(k))−1 is the Moore–Penrose pseudoinverse of G(k), the
+mode-k unfolding matrix of G.
+3 Geometry of T ucker tensor varieties
+We first revisit the tangent space of the fixed-rank Tucker manifold from a new
+geometric perspective. Then, an explicit parametrization of the tangent cone of
+Tucker varieties is developed. In the end, we propose an approximate projection
+onto the tangent cone.
+3.1 A new formulation of the tangent space of fixed-rank Tucker manifold
+In this subsection, we give an equivalent formulation for the tangent space to fixed-
+rank Tucker manifold Mr. Given a tensor X ∈Rn1×n2×···×nd with ranktc(X ) = r
+and Tucker decomposition X = G ×d
+k=1 Uk, it follows from (2.5) that span( ˙Uk) ⊆
+span(Uk)⊥, i.e., the set { ˙Uk ∈ Rnk×rk : ˙UT
+k Uk = 0} can be presented as { ˙Uk =
+
+[PDF PAGE 12]
+12 Bin Gao et al.
+U⊥
+k ˙Rk : ˙Rk ∈ R(nk−rk)×rk }, where U⊥
+k is defined in a same fashion as Proposi-
+tion 1 for k ∈ [d]. Subsequently, for any tangent vector V ∈TX Mr, we have
+V = ˙G ×1 U1 · · · ×d Ud +
+dX
+k=1
+G ×k ˙Uk ×j̸=k Uj
+= ˙G ×1 U1 · · · ×d Ud +
+dX
+k=1
+G ×k (U⊥
+k ˙Rk) ×j̸=k Uj
+= ˙G ×1 U1 · · · ×d Ud +
+dX
+k=1
+(G ×k ˙Rk) ×k U⊥
+k ×j̸=k Uj .
+Therefore, the tangent space T X Mr can also be parametrized by
+TX Mr =
+
+
+
+˙G ×1 U1 · · · ×d Ud + Pd
+k=1(G ×k ˙Rk) ×k U⊥
+k ×j̸=k Uj :
+˙G ∈Rr1×r2×···×rd , ˙Rk ∈ R(nk−rk)×rk
+
+
+ . (3.1)
+Specifically, a tangent vector in T X Mr for d = 3 is illustrated in Fig. 3, where
+a shaded cube represents an arbitrary tensor ˙G ∈Rr1×r2×···×rd and the blank
+represents the tensor with zero elements. For the sake of brevity, we adopt these
+symbols to represent a tensor.
+G1
+G2
+G3
+r1
+r2
+r 3
+×3
+k=1
+[
+Uk U⊥
+k
+]
+Fig. 3 Illustration of a tangent vector in TX Mr at X = G ×d
+k=1 Uk for d = 3. Gk := G ×k ˙Rk
+with arbitrary ˙Rk ∈ R(nk−rk)×rk
+3.2 Tangent cone of Tucker tensor varieties
+In this subsection, we study the tangent cone of M≤r. Since M≤r can be con-
+structed through d matrix varieties Rnk×n−k
+≤rk
+of unfolding matrices, i.e.,
+M≤r =
+d\
+k=1
+ten(k)
+
+Rnk×n−k
+≤rk
+
+,
+it is straightforward to have the following lemma.
+Lemma 1 Given a tensor X ∈ M≤r, the tangent cone of M≤r is a subset of the
+intersection of tensorized tangent cones of unfolding matrices along different modes,
+i.e.,
+TX M≤r ⊆
+d\
+k=1
+ten(k)
+
+TX(k) Rnk×n−k
+≤rk
+
+.
+
+[PDF PAGE 13]
+Tucker tensor variety 13
+Then, we give an explicit parametrization of the tangent cone of Tucker tensor
+varieties as follows.
+Theorem 1 Given a Tucker tensor X = G ×1 U1 · · · ×d Ud ∈ Rn1×n2×···×nd with
+ranktc(X ) = r ≤ r, any V in the tangent cone of M≤r at X can be expressed by
+V = C ×d
+k=1
+h
+Uk Uk,1
+i
++
+dX
+k=1
+G ×k (Uk,2Rk,2) ×j̸=k Uj , (3.2)
+where C ∈Rr1×r2×···×rd , Rk,2 ∈ R(nk−rk)×rk , Uk,1 ∈ St(rk − rk, nk) and Uk,2 ∈
+St(nk − rk, nk) are arbitrary that satisfy [Uk Uk,1 Uk,2] ∈ O(nk) for k ∈ [d].
+Proof For all V = C ×d
+k=1
+h
+Uk Uk,1
+i
++ Pd
+k=1 G ×k (Uk,2Rk,2) ×j̸=k Uj, t(i) = 1/i
+for i ∈ N, we consider a sequence
+X (i) = tiC ×d
+k=1
+h
+Uk + tiUk,2Rk,2 Uk,1
+i
++ G ×d
+k=1 (Uk + tiUk,2Rk,2)
+∈
+dO
+k=1
+span
+h
+Uk + tiUk,2Rk,2 Uk,1
+i
+⊆ M≤r,
+where we use the facts (2.4) and rank([ Uk + tiUk,2Rk,2 Uk,1]) ≤ rk. By direct
+calculations, we yield that lim i→∞(X (i) − X)/t(i) = V and thus V ∈TX M≤r.
+Then, we prove that any V ∈TX M≤r can be represented by (3.2). Denote
+the mode- k unfolding matrix of V by Ξk := V(k). It follows from Lemma 1 that
+Ξk ∈ TX(k) Rnk×n−k
+≤rk
+for k ∈ [d]. Since the k-th unfolding matrix X(k) of X admits
+the decomposition
+X(k) = UkG(k)VT
+k = Uk ˜Uk ˜Σk ˜VT
+k VT
+k ,
+where G(k) = ˜Uk ˜Σk ˜VT
+k is the SVD of the unfolding matrix G(k) of G with
+˜Uk ∈ O(rk), and Vk := (Uj)⊗j̸=k, it follows from Ξk ∈ TX(k) Rnk×n−k
+≤rk
+and Fig. 1
+that there exists Ck ∈ Rrk×rk , Dk,1 ∈ R(rk−rk)×rk , Dk,2 ∈ R(nk−rk)×rk , Ek,1 ∈
+Rrk×(rk−rk), Ek,2 ∈ Rrk×(n−k−rk), Sk ∈ R(rk−rk)×(rk−rk), Uk,1 ∈ St(rk − rk, nk),
+Uk,2 ∈ St(nk − rk, nk), Vk,1 ∈ St(rk − rk, n−k), Vk,2 ∈ St(n−k − rk, n−k) that
+satisfy [Uk ˜Uk Uk,1 Uk,2] ∈ O(nk) and [ Vk ˜Vk Vk,1 Vk,2] ∈ O(n−k), such that
+Ξk =
+h
+Uk ˜Uk Uk,1 Uk,2
+i
+
+
+Ck Ek,1 Ek,2
+Dk,1 Sk 0
+Dk,2 0 0
+
+
+h
+Vk ˜Vk Vk,1 Vk,2
+iT
+.
+We aim to find the unknowns C and Rk,2 in (3.2) by leveraging the structure
+of Ξk. To this end, we first validate the claim that
+W := V −
+dX
+k=1
+G ×k (Uk,2Rk,2) ×j̸=k Uj ∈
+dO
+k=1
+span([Uk Uk,1])
+
+[PDF PAGE 14]
+14 Bin Gao et al.
+with Rk,2 = Dk,2 ˜Σ−1
+k ˜UT
+k . In fact, we observe that
+PUk,2 W(k) = PUk,2
+
+V −
+dX
+i=1
+G ×i (Ui,2Ri,2) ×j̸=i Uj
+
+
+(k)
+= PUk,2 Ξk − Uk,2Rk,2G(k)VT
+k
+= Uk,2Dk,2 ˜VT
+k VT
+k − Uk,2Rk,2G(k)VT
+k
+= Uk,2Dk,2 ˜Σ−1
+k ˜UT
+k ˜Uk ˜Σk ˜VT
+k VT
+k − Uk,2Rk,2G(k)VT
+k
+= Uk,2Dk,2 ˜Σ−1
+k ˜UT
+k G(k)VT
+k − Uk,2Rk,2G(k)VT
+k
+= Uk,2
+
+Dk,2 ˜Σ−1
+k ˜UT
+k − Rk,2
+
+G(k)VT
+k
+= 0
+holds for all k ∈ [d]. The equalities come from V(k) = Ξk, P Uk,2 Uk = 0, Vk =
+(Uj)⊗j̸=k, G(k) = ˜Uk ˜Σk ˜VT
+k , and Rk,2 = Dk,2 ˜Σ−1
+k ˜UT
+k . We obtain that
+W(k) ∈ span(Uk,2)⊥ = span([Uk ˜Uk Uk,1]) = span([Uk Uk,1])
+and thus W ∈Nd
+k=1 span([Uk Uk,1]).
+Consequently, it follows from (2.4) and the claim that there exists a tensor
+C ∈Rr1×r2×···×rd such that
+C ×d
+k=1
+h
+Uk Uk,1
+i
+= W = V −
+dX
+k=1
+G ×k (Uk,2Rk,2) ×j̸=k Uj .
+Hence, V can be interpreted by (3.2). ⊓ ⊔
+Remarkably, in the proof of Theorem 1, we employ the low-rank structure
+in Fig. 1 of unfolding matrices in the tangent cone of Tucker tensor varieties.
+In other words, the new reformulation in Fig. 1 of the tangent cone of matrix
+varieties is crucial to develop (3.2) in tensor case. We give a geometric illustration
+of the tangent cone T X M≤r for d = 3 in Fig. 4, where the shaded cube represents
+an arbitrary tensor C ∈Rr1×···×rd . Note that (3.2) boils down to the tangent
+space (3.1) for r = r in the sense of Uk,2 = U⊥
+k , Rk,2 = Rk, C = ˙G, and removing
+Uk,1. Moreover, the results are reduced to the tangent space and tangent cone of
+the matrix case for d = 2. In fact, the tangent cone of matrix varieties in Fig. 1
+can be informally interpreted by compressing the cube from back to front in Fig. 4
+akin to “playing the accordion”.
+Uniqueness of the representation The representation of the tangent cone vectors in
+Theorem 1 can be non-unique. Specifically, we observe that
+V = ˘C ×d
+k=1 [Uk ˘Uk,1] +
+dX
+k=1
+G ×k ( ˘Uk,2 ˘Rk,2) ×j̸=k Uj
+is a different parametrization of V ∈ TX M≤r for any Qk,1 ∈ O(rk − rk) and
+Qk,2 ∈ O(nk − rk), where
+˘C = C ×d
+k=1 [Irk QT
+k,1], ˘Uk,1 = Uk,1Qk,1, ˘Uk,2 = Uk,2Qk,2, ˘Rk,2 = QT
+k,2Rk,2
+
+[PDF PAGE 15]
+Tucker tensor variety 15
+G1
+G2
+G3
+r1
+r2
+r3
+×3
+k=1
+[Uk Uk,1 Uk,2
+]
+Fig. 4 Illustration of an element in T X M≤r at X = G ×d
+k=1 Uk for d = 3. Gk := G ×k Rk,2
+with parameters Rk,2 ∈ R(nk−rk)×rk , Uk,1 ∈ St(rk − rk, nk) and Uk,2 ∈ St(nk − rk, nk)
+satisfying [Uk Uk,1 Uk,2] ∈ O(nk) for k ∈ [d]
+with k ∈ [d]. Therefore, the representation (3.2) is non-unique. Similar to the
+matrix case, the representation (3.2) is unique in the sense of the right orthogonal
+group actions on Uk,1 and Uk,2 with k ∈ [d] if
+ranktc(V ×d
+k=1 P⊥
+Uk ) = ranktc(C ×d
+k=1 [0 Uk,1]) = r − r.
+Note that the above restriction boils down to rank(P ⊥
+UΞ P⊥
+V) = r − r for matrix
+case (2.2). Moreover, we can provide a compact parametrization of an element
+in T X M≤r; see Appendix B for details. Though the representation (3.2) is not a
+compact form since we do not impose the rank restriction on C, (3.2) is able to
+facilitate the computation of projections in the following sections.
+We observe from the proof of Theorem 1 that the tangent cone inclusion in
+Lemma 1 is actually an equality, which is claimed in the following corollary. Pre-
+cisely, for any tensor V ∈Rn1×n2×···×nd that satisfies V(k) ∈ TX(k) Rnk×n−k
+≤rk
+, it
+holds that V can be represented by (3.2), i.e., V ∈TX M≤r.
+Corollary 1 The tangent cone of Tucker tensor varieties equals the intersection of
+tensorized tangent cones of unfolding matrices along different modes, i.e.,
+TX M≤r =
+d\
+k=1
+ten(k)
+
+TX(k) Rnk×n−k
+≤rk
+
+.
+In general, the optimality condition (Definition 1) of (1.1) is hard to verify
+in practice (see §3.3). The following proposition gives an equivalent way to verify
+those stationary points X ∗ ∈ M<r := {X ∈Rn1×n2×···×nd : ranktc(X ) < r} where
+all the modes of X ∗ are rank-deficient.
+Proposition 3 Let X ∗ be a stationary point of (1.1) with r∗ := rank tc(X ∗) < r.
+Then, it holds that
+∇f (X ∗) = 0.
+Proof Since any tensor A ∈Rn1×n2×···×nd can be represented by
+A =
+n1X
+i1=1
+· · ·
+ndX
+id=1
+yi1,...,id ei1 ◦ · · · ◦eid
+with rank-1 tensors ei1 ◦ · · · ◦eid and ( i1, . . . , id) ∈ [n1] × · · · ×[nd], it suffices to
+prove that ⟨ei1 ◦ · · · ◦eid , ∇f (X ∗)⟩ = 0.
+
+[PDF PAGE 16]
+16 Bin Gao et al.
+It follows from r∗ < r that X ∗ + tei1 ◦ · · · ◦eid ∈ M≤r holds for all t and
+ik ∈ [nk] with k ∈ [d]. Therefore, it yields ±ei1 ◦ · · · ◦eid ∈ TX ∗ M≤r. According to
+Definition 1 and the stationarity of X ∗, we have ⟨ei1 ◦ · · · ◦eid , ∇f (X ∗)⟩ = 0 and
+∇f (X ∗) = 0. ⊓ ⊔
+In contrast with the matrix case where Rm×n
+≤r = Rm×n
+<r ∪ Rm×nr , the Tucker
+tensor varieties M≤r consist of not only points in M<r and Mr, but also points
+where some but not all of the modes are rank-deficient. Note that Proposition 3
+is restricted on the stationary points in M<r.
+The explicit form of the tangent cone in Theorem 1 allows us to obtain several
+attractive results. Recall the parametrization (3.2) that
+V = V0 +
+dX
+k=1
+Vk := C ×d
+k=1
+h
+Uk Uk,1
+i
++
+dX
+k=1
+G ×k (Uk,2Rk,2) ×j̸=k Uj . (3.3)
+Note that ⟨Vi, Vj ⟩ = 0 for i ̸= j and thus ∥V∥ 2
+F = Pd
+k=0 ∥Vk∥2
+F. Surprisingly,
+searching along the two types of directions in V does not leave the Tucker tensor
+varieties: 1) it follows from (2.4) and Tucker decomposition X = G ×d
+k=1 Uk that
+X + V0 = G ×d
+k=1 Uk + C ×d
+k=1
+h
+Uk Uk,1
+i
+∈
+dO
+k=1
+span([Uk Uk,1]) ⊆ M≤r; (3.4)
+2) for all k ∈ [d], we observe from rank( Uk + Uk,2Rk,2) ≤ rk that
+X + Vk = G ×d
+i=1 Ui + G ×k (Uk,2Rk,2) ×j̸=k Uj
+= G ×k (Uk + Uk,2Rk,2) ×j̸=k Uj
+∈ M≤r. (3.5)
+It is worth noting that (3.4) and (3.5) provide (d+1) retraction-free search directions
+V0, V1, . . . ,Vd in T X M≤r, which can be adopted to develop line-search methods
+on M≤r without retractions; see section 5 for details. Additionally, the following
+corollary gives a bound for the retraction RHO
+X and is of great importance to prove
+the convergence for line-search methods on M≤r.
+Corollary 2 The HOSVD retraction satisfies that
+∥X −PHO
+≤r (X + V)∥F ≤ (1 + d√
+d + 1)∥V∥ F
+for all X ∈ M≤r and V ∈TX M≤r.
+Proof It follows from (2.6) and X + Vk ∈ M≤r by (3.4)–(3.5) that
+∥X + V −P≤r(X + V)∥2
+F = min
+Y∈M ≤r
+∥X + V − Y∥2
+F ≤ ∥X+ V −(X + Vk)∥2
+F
+for all k = 0, 1, . . . , d, and thus
+(d + 1)∥X + V −P≤r(X + V)∥2
+F ≤
+dX
+k=0
+∥X + V −(X + Vk)∥2
+F.
+
+[PDF PAGE 17]
+Tucker tensor variety 17
+It follows from the quasi-optimality (2.8) and ∥V∥ 2
+F = Pd
+k=0 ∥Vk∥2
+F that
+X + V −PHO
+≤r (X + V)
+
+2
+F
+≤ d ∥X + V −P≤r(X + V)∥2
+F
+≤ d
+d + 1
+dX
+k=0
+∥X + V −(X + Vk)∥2
+F
+= d
+d + 1
+dX
+k=0
+dX
+j=0,j̸=k
+∥Vj ∥2
+F
+= d2
+d + 1∥V∥ 2
+F.
+Therefore, it holds that
+∥X −PHO
+≤r (X + V)∥F ≤ ∥X+ V −PHO
+≤r (X + V)∥F + ∥V∥ F ≤ (1 + d√
+d + 1)∥V∥ F.
+⊓ ⊔
+3.3 Metric projection onto the tangent cone
+For the sake of fulfilling the basic requirement of projected gradient methods on
+M≤r, we consider the metric projection of a tensor A ∈Rn1×n2×···×nd onto the
+tangent cone T X M≤r at X = G ×d
+k=1 Uk, which is determined by the following
+optimization problem
+PTX M≤r A := arg min
+V∈TX M≤r
+∥A − V∥2
+F. (3.6)
+Since the tangent cone T X M≤r is closed, the metric projection exists. Note
+that the metric projection can be non-unique, but we can always choose a spe-
+cific one to facilitate projected gradient methods on M≤r. We explore the metric
+projection by taking the parametrization (3.2) and (3.3) into (3.6), and it yields
+∥A − V∥2
+F = ∥A −
+dX
+k=0
+Vk∥2
+F
+= ∥A∥2
+F + ∥V0∥2
+F +
+dX
+k=1
+∥Vk∥2
+F − 2 ⟨A, V0⟩ −2
+dX
+k=1
+⟨A, Vk⟩
+= ∥A∥2
+F + ∥C∥2
+F − 2
+
+A ×d
+k=1
+h
+Uk Uk,1
+iT
+, C
+
++
+dX
+k=1
+G ×k Rk,2
+2
+F − 2
+D
+A ×k UT
+k,2 ×j̸=k UT
+j , G ×k Rk,2
+E
+. (3.7)
+In order to solve (3.6), we aim to find the unknowns C, Uk,1, Uk,2 and Rk,2 for
+k ∈ [d] in (3.7). Generally speaking, the computation of P TX M≤r A is divided into
+two steps: 1) by fixing Uk,1 and Uk,2, we yield closed-form solutions of C and
+Rk,2; 2) we take the solutions into (3.7) and determine Uk,1 by an optimization
+problem, then Uk,2 is naturally obtained from [ Uk Uk,1 Uk,2] ∈ O(nk).
+
+[PDF PAGE 18]
+18 Bin Gao et al.
+Step 1: representing C and Rk,2 by Uk,1 and Uk,2 By fixing Uk,1 and Uk,2 for
+k ∈ [d], we observe that (3.7) is a separable quadradic function with respect to C
+and Rk,2. Therefore, C and Rk,2 in the metric projection (3.6) can be uniquely
+expressed by
+C = A ×d
+k=1
+h
+Uk Uk,1
+iT
+,
+Rk,2 =
+
+A ×k UT
+k,2 ×j̸=k UT
+j
+
+(k)
+G†
+(k).
+(3.8)
+Step 2: determining Uk,1 We determine Uk,1 by taking (3.8) into (3.7) and obtain
+∥A − V∥2
+F
+= ∥A∥2
+F − ∥C∥2
+F −
+dX
+k=1
+G ×k Rk,2
+2
+F
+= ∥A∥2
+F − ∥C∥2
+F −
+dX
+k=1
+
+
+A ×k UT
+k,2 ×j̸=k UT
+j
+
+(k)
+G†
+(k)G(k)
+
+2
+F
+= ∥A∥2
+F − ∥C∥2
+F −
+dX
+k=1
+
+A̸=k PGT
+(k)
+, Uk,2UT
+k,2A̸=k PGT
+(k)
+
+= ∥A∥2
+F − ∥C∥2
+F −
+dX
+k=1
+
+A̸=k PGT
+(k)
+, (Ink − UkUT
+k − Uk,1UT
+k,1)A̸=k PGT
+(k)
+
+= ∥A∥2
+F −
+A ×d
+k=1
+h
+Uk Uk,1
+iT
+2
+F
+−
+dX
+k=1
+A̸=k PGT
+(k)
+
+2
+F
++
+dX
+k=1
+UT
+k A̸=k PGT
+(k)
+
+2
+F
++
+dX
+k=1
+UT
+k,1A̸=k PGT
+(k)
+
+2
+F
+,
+where A̸=k := (A ×j̸=k UT
+j )(k) ∈ Rnk×r−k and PGT
+(k)
+:= G†
+(k)G(k). Note that Uk,2
+is eliminated by Uk and Uk,1. Alternatively, one can also eliminate Uk,1 by Uk
+and Uk,2. Nevertheless, the number of parameters ofUk,1 ∈ Rnk×(rk−rk) is smaller
+than Uk,2 ∈ Rnk×(nk−rk) when rk ≪ nk. Therefore, it is computationally favorable
+to formulate (3.6) as
+min
+U1,1,U2,1,...,Ud,1
+−
+A ×d
+k=1
+h
+Uk Uk,1
+iT
+2
+F
++
+dX
+k=1
+UT
+k,1A̸=k PGT
+(k)
+
+2
+F
+s. t.
+h
+Uk Uk,1
+iT h
+Uk Uk,1
+i
+= Irk for k ∈ [d].
+(3.9)
+Since the feasible set of (3.9) is compact, a global minimizer of (3.9) exists.
+Let ( U∗
+1,1, . . . ,U∗
+d,1) be a global minimizer of (3.9). By using (3.2) and (3.8),
+the projection onto the tangent cone T X M≤r is given by
+PTX M≤r A = A× d
+k=1 PS∗
+k
++
+dX
+k=1
+G ×k
+
+P⊥
+S∗
+k
+
+A ×j̸=k UT
+j
+
+(k)
+G†
+(k)
+
+×j̸=k Uj , (3.10)
+
+[PDF PAGE 19]
+Tucker tensor variety 19
+where S∗
+k := [ Uk U∗
+k,1]. We observe that the metric projection (3.10) relies on
+the projection P S∗
+k
+but not a specific U∗
+k,1. Additionally, (3.10) boils down to the
+projection onto the tangent space (2.9) when r = r.
+Connection to matrix varieties It is worth noting that the projection (3.10) also
+coincides with (2.3) in matrix case. Specifically, given a matrix X ∈ Rm×nr and the
+SVD of X = UΣVT, by following the steps in tensor case, (3.9) boils down to
+max
+U1,1,V2,1
+∥UT
+1,1A V2,1∥2
+F, s. t.
+h
+U U1,1
+iT h
+U U1,1
+i
+=
+h
+V V2,1
+iT h
+V V2,1
+i
+= Ir.
+(3.11)
+In fact, (3.11) has a closed-form solution ( U∗, V∗), which is the leading ( r −
+r) singular vectors of the matrix P ⊥
+UAP⊥
+V. Specifically, since UTU∗ = 0 and
+VTV∗ = 0, ( U∗, V∗) is a feasible point of (3.11). Furthermore, for all feasible
+points ( U1,1, V2,1), it follows from P ⊥
+UU1,1 = U1,1, P ⊥
+VV2,1 = V2,1, and the
+Eckart–Young theorem that
+∥UT
+1,1A V2,1∥2
+F = ∥UT
+1,1P⊥
+UAP⊥
+VV2,1∥2
+F ≤ ∥(U∗)TP⊥
+UAP⊥
+VV∗∥2
+F = ∥(U∗)TA V∗∥2
+F.
+Therefore, the optimality of ( U∗, V∗) of (3.11) is verified.
+We yield from (3.10) that
+PTXRm×n
+≤r
+A = P[U U∗]AP[V V∗] + P⊥
+[U U∗]APV + PUAP⊥
+[V V∗]
+= PTXRm×n
+r
+A + P≤(r−r)
+
+P⊥
+UAP⊥
+V
+
+,
+which coincides with the known results in (2.3).
+In contrast with the matrix case, the global minimizer of (3.9) for d ≥ 3 is com-
+putationally intractable. Therefore, pursuing an approximate projection emerges
+as a more practical way to approach the metric projection.
+3.4 An approximate projection
+The projection in (3.6) is unavailable in general, and hence it is natural to consider
+an approximation. To this end, givenX = G ×d
+k=1 Uk and any ˜Uk,1 ∈ St(rk −rk, nk)
+that satisfies P Uk
+˜Uk,1 = 0 for k ∈ [d], we construct an approximate projection
+via (3.10) by substituting ˜Uk,1 for U∗
+k,1 as follows.
+Proposition 4 Given ˜Uk,1 ∈ St(rk − rk, nk) that satisfies PUk
+˜Uk,1 = 0 for k ∈ [d],
+the approximate projection, defined by
+˜PTX M≤r A := A×d
+k=1P˜Sk
++
+dX
+k=1
+G ×k
+
+P⊥
+˜Sk
+
+A ×j̸=k UT
+j
+
+(k)
+G†
+(k)
+
+×j̸=k Uj , (3.12)
+satisfies ˜PTX M≤r A ∈TX M≤r and ⟨A, ˜PTX M≤r A⟩ = ∥ ˜PTX M≤r A∥2
+F, where ˜Sk :=
+[Uk ˜Uk,1].
+
+[PDF PAGE 20]
+20 Bin Gao et al.
+Proof For the sake of brevity, we introduce the notation˜PTX M≤r A = ˜V0+Pd
+k=1 ˜Vk
+in a similar fashion as (3.3) for (3.12). It is direct to verify that
+˜V0 =
+
+A ×d
+j=1 [Uj ˜Uj,1]T
+
+×d
+i=1 [Ui ˜Ui,1],
+˜Vk = G ×k
+
+˜Uk,2 ˜UT
+k,2
+
+A ×j̸=k UT
+j
+
+(k)
+G†
+(k)
+
+×j̸=k Uj ,
+where ˜Uk,2 ∈ St(nk − rk, nk) satisfies [ Uk ˜Uk,1 ˜Uk,2] ∈ O(nk). Hence, ˜PTX M≤r A
+is of the form (3.2) in the tangent cone T X M≤r.
+Note that ⟨ ˜Vi, ˜Vj ⟩ = 0 for i ̸= j and thus ∥ ˜PTX M≤r A∥2
+F = Pd
+k=0 ∥ ˜Vk∥2
+F. By
+using P 2
+˜Sk
+= P ˜Sk
+= P T
+˜Sk
+, (P ⊥
+˜Sk
+)2 = P ⊥
+˜Sk
+= (P ⊥
+˜Sk
+)T, ( G†
+(k)G(k))2 = G†
+(k)G(k) =
+(G†
+(k)G(k))T, and VT
+k Vk = Ir−k with Vk = (Uj)⊗j̸=k, we yield that
+D
+A, ˜PTX M≤r A
+E
+=
+*
+A, ˜V0 +
+dX
+k=1
+˜Vk
++
+= ⟨A, A ×d
+k=1 P˜Sk
+⟩ +
+dX
+k=1
+⟨A, ˜Vk⟩
+=
+ ˜V0
+
+2
+F
++
+dX
+k=1
+
+A(k),
+
+P⊥
+˜Sk
+A(k)VkG†
+(k)
+
+G(k)VT
+k
+
+=
+ ˜V0
+
+2
+F
++
+dX
+k=1
+
+
+P⊥
+˜Sk
+A(k)VkG†
+(k)
+
+G(k)VT
+k
+
+2
+F
+=
+ ˜V0
+
+2
+F
++
+dX
+k=1
+G ×k
+
+P⊥
+˜Sk
+
+A ×j̸=k UT
+j
+
+(k)
+G†
+(k)
+
+×j̸=k Uj
+
+2
+F
+= ∥ ˜V0∥2
+F +
+dX
+k=1
+∥ ˜Vk∥2
+F
+=
+˜PTX M≤r A
+
+2
+F
+.
+⊓ ⊔
+A direct consequence of Proposition 4 is that ⟨A, PTX M≤r A⟩ = ∥ PTX M≤r A∥2
+F
+and ∥A −˜PTX M≤r A∥2
+F = ∥A∥2
+F − ∥˜PTX M≤r A∥2
+F. Therefore, it follows from (3.6)
+that
+∥ ˜PTX M≤r A∥2
+F = ∥A∥2
+F − ∥A −˜PTX M≤r A∥2
+F
+≤ ∥A∥2
+F − ∥A −PTX M≤r A∥2
+F = ∥ PTX M≤r A∥2
+F. (3.13)
+The approximate projection can be explicitly computed by Algorithm 1. Specif-
+ically, since it is not straightforward to access the global minimizer of (3.9), we
+consider randomly choosing matrices ˜Uk,1 ∈ St(rk − rk, nk) such that U⊥
+k ˜Uk,1 = 0
+for k ∈ [d]. For instance, one can resort to QR factorization of the matrix [ Uk Ink ]
+and randomly choose ( rk − rk) columns from the last ( nk − rk) columns of the
+Q-factor. Even though ˜Uk,1 is chosen randomly, ˜PTX M≤r (−∇f (X )) ∈ TX M≤r is
+still a descent direction for f since
+⟨−∇f (X ), ˜PTX M≤r (−∇f (X ))⟩ = ∥ ˜PTX M≤r (−∇f (X ))∥2
+F ≥ 0
+by letting A = −∇f (X ) in Proposition 4.
+
+[PDF PAGE 21]
+Tucker tensor variety 21
+Algorithm 1 The approximate projection onto T X M≤r
+Input: X = G ×1 U1 · · · ×d Ud with ranktc(X ) = r ≤ r, and a tensor A ∈Rn1×···×nd .
+1: Choose ˜U1,1, . . . ,˜Ud,1 randomly such that U⊥
+k
+˜Uk,1 = 0.
+2: Compute the approximate projection by (3.12).
+Output: ˜PTX M≤r A.
+4 Gradient-related approximate projection method
+In this section, we aim to design line search methods by taking advantage of the
+tangent cone in Theorem 1. One instinctive approach is the projected gradient
+descent method
+X (t+1) = P≤r
+
+X (t) + s(t) PTX (t) M≤r (−∇f (X (t)))
+
+,
+which is a generalization of the Riemannian gradient descent for minimizing f on
+Mr; see, e.g., [SU15; OGA23] for matrix varieties. However, the metric projections
+PTX (t) M≤r and P ≤r do not enjoy closed-form expressions. Therefore, we propose
+the gradient-related approximate projection method by exploiting the approximate
+projection (3.12) and HOSVD.
+4.1 Algorithm
+Algorithm 2 lists the proposed gradient-related approximate projection method
+(GRAP) for solving (1.1).
+Algorithm 2 gradient-related approximate projection method (GRAP)
+Input: Initial guess X (0) ∈ M≤r, ω = (0, 1], backtracking parameters ρ, a∈ (0, 1), smin > 0.
+1: while the stopping criteria are not satisfied do
+2: Compute g(t) = ˜PTX (t) M≤r (−∇f (X (t))) by Algorithm 1 until the angle condition (4.1)
+is satisfied.
+3: Choose stepsize s(t) by Armijo backtracking line search (4.2).
+4: Update X (t+1) = PHO
+≤r
+
+X (t) + s(t)g(t)
+
+and t = t + 1.
+5: end while
+Output: X (t).
+Instead of solving (3.10) for exact metric projection, the GRAP method sub-
+stitutes (3.10) by the approximate projection (3.12). Additionally, the metric pro-
+jection P ≤r is replaced by P HO
+≤r . In summary, the update of iterates in GRAP
+is
+X (t+1) = PHO
+≤r
+
+X (t) + s(t) ˜PTX (t) M≤r (−∇f (X (t)))
+
+.
+Moreover, to ensure that a search directiong(t) ∈ TX (t) M≤r is sufficiently gradient-
+related, the angle condition
+⟨−∇f (X (t)), g(t)⟩ ≥ω ∥ PTX (t) M≤r (−∇f (X (t)))∥F∥g(t)∥F (4.1)
+is imposed with ω ∈ (0, 1].
+
+[PDF PAGE 22]
+22 Bin Gao et al.
+Specifically, if g(t) = ˜PTX (t) M≤r (−∇f (X (t))) is rejected by the angle condi-
+tion, we repeat Algorithm 1 with other ˜Uk,1 until the angle condition is satisfied.
+The rationale behind this is that the approximate projection (3.12) depends on
+span([Uk ˜Uk,1]) but not a specific ˜Uk,1, and going through all choices of span(˜Uk,1)
+is able to find the exact projection (3.10) of −∇f (X (t)), which satisfies the angle
+condition. In practice, the angle condition can be ignored if X (t) ∈ Mr since the
+search direction g(t) boils down to the exact projection.
+For the selection of stepsize, we consider the Armijo backtracking line search.
+Specifically, given an initial stepsize s(t)
+0 > 0, find the smallest integer l, such that
+for s(t) = ρls(t)
+0 > smin, the inequality
+f (X (t)) − f (PHO
+≤r (X (t) + s(t)g(t))) ≥ s(t)a⟨−∇f (X (t)), g(t)⟩ (4.2)
+holds, where ρ, a ∈ (0, 1), smin > 0 are backtracking parameters. The Armijo
+condition (4.2) is always achievable if ∥g(t)∥F ̸= 0. Denote X (s) = P HO
+≤r (X (t) +
+sg(t)). It follows from the Taylor expansion and Proposition 2 that
+f (X (s)) = f (X (t)) + ⟨∇f (X (t)), PHO
+≤r (X (t) + sg(t)) − X(t)⟩ + o(∥X (s) − X(t)∥F)
+= f (X (t)) + ⟨∇f (X (t)), sg(t) + o(s)⟩ + o(∥X (s) − X(t)∥F)
+= f (X (t)) + sa⟨∇f (X (t)), g(t)⟩ + s(1 − a)⟨∇f (X (t)), g(t)⟩ + o(s).
+Since ⟨−∇f (X (t)), g(t)⟩ = ∥g(t)∥2
+F > 0 from Proposition 4, it holds that
+f (X (t)) − f (X (s)) = sa⟨−∇f (X (t)), g(t)⟩ + s(1 − a)∥g(t)∥2
+F + o(s)
+≥ sa⟨−∇f (X (t)), g(t)⟩
+for sufficiently small s >0.
+It is worth noting that the proposed GRAP method is a line search method on
+M≤r that is able to deal with rank-deficient points in M≤r \ Mr, although GRAP
+method will not generate a rank-deficient point in the most likely cases. Similar
+observations can be found in the matrix case [SU15].
+4.2 Global convergence
+Let {X (t)}t≥0 be an infinite sequence generated by Algorithm 2. We prove that
+the stationary measure ∥ PTX (t) M≤r (−∇f (X (t)))∥F converges to 0.
+Theorem 2 Let {X (t)}t≥0 be an infinite sequence generated by Algorithm 2. Assume
+f is bounded below by f ∗, it holds that
+lim
+t→∞
+∥ PTX (t) M≤r (−∇f (X (t)))∥F = 0.
+Moreover, Algorithm 2 returns X (t) ∈ M≤r satisfying ∥PTX (t) M≤r (−∇f (X (t)))∥F < ϵ
+after
+l
+f (X (0))/(smina ω2ϵ2)
+m
+iterations at most.
+
+[PDF PAGE 23]
+Tucker tensor variety 23
+Proof It follows from (4.1)–(4.2) and Proposition 4 that
+f (X (t)) − f (X (t+1)) ≥ s(t)a⟨−∇f (X (t)), g(t)⟩
+≥ smina∥g(t)∥2
+F
+≥ smina ω2∥ PTX (t) M≤r (−∇f (X (t)))∥2
+F.
+Therefore, it yields
+f (X (0)) − f ∗ ≥
+∞X
+t=0
+smina ω2∥ PTX (t) M≤r (−∇f (X (t)))∥2
+F,
+and thus ∥ PTX (t) M≤r (−∇f (X (t)))∥F converges to 0.
+Moreover, assume that ∥ PTX (t) M≤r (−∇f (X (t)))∥F ≥ ϵ holds for t = 0, 1, . . . , T.
+We have
+f (X (0)) − f (X (T )) ≥ smina ω2ϵ2T,
+and thus T ≤ f (X (0))/(smina ω2ϵ2). ⊓ ⊔
+It is worth noting that it requires O(ε−2) steps to achieve an ε-stationary
+point, which coincides with the classical results in Riemannian optimization; see,
+e.g., [BAC19, Theorem 2.5].
+4.3 Local convergence
+Given an infinite sequence {X (t)}t≥0 generated by Algorithm 2, we analyze the
+local convergence by exploiting the  Lojasiewicz gradient inequality[SU15, Definition
+2.1]. A point X ∈ M≤r is said to satisfy the  Lojasiewicz gradient inequality if there
+exists δ, L >0 and θ ∈ (0, 1/2] such that
+|f (X ) − f (Y)|1−θ ≤ L∥ PTX M≤r (−∇f (Y))∥F (4.3)
+holds for all Y ∈ M≤r with ∥Y − X ∥F ≤ δ. Under the assumption that f satis-
+fies (4.3), we can prove the local convergence of Algorithm 2 is as follows.
+Theorem 3 Let {X (t)}t≥0 be an infinite sequence generated by Algorithm 2. As-
+sume that f is bounded below by f ∗ and satisfies the  Lojasiewicz gradient inequal-
+ity. If {X (t)}t≥0 has an accumulation point X ∗, then X (t) converges to X ∗. Further-
+more, if ranktc(X ∗) = r, then the stationary measure ∥ PTX ∗ M≤r (−∇f (X ∗))∥F =
+∥gradf (X ∗)∥F = 0 and
+∥X (t) − X∗∥F ≤ C
+(
+e−ct, if θ = 1
+2 ,
+t− θ
+1−2θ , if 0 < θ <1
+2
+hold for some C, c >0.
+
+[PDF PAGE 24]
+24 Bin Gao et al.
+Proof Using [SU15, Theorem 2.3, Corollary 2.11], it suffices to prove the following
+three claims: 1) there exists c >0, such that
+f (X (t)) − f (X (t+1)) ≥ c ∥ PTX (t) M≤r (−∇f (X (t)))∥F∥X (t) − X(t+1)∥F;
+2) the stationary measure ∥ PTX (t) M≤r (−∇f (X (t)))∥F = 0 implies X (t+1) = X (t)
+for sufficiently large t; 3) if rank tc(X ∗) = r, X (t) ∈ Mr for sufficiently large t.
+For the first claim, it follows from (4.1)–(4.2) and Corollary 2 that
+f (X (t)) − f (X (t+1)) ≥ aω ∥ PTX (t) M≤r (−∇f (X (t)))∥F∥s(t)g(t)∥F
+≥ aω
+M ∥ PTX (t) M≤r (−∇f (X (t)))∥F∥X (t) − X(t+1)∥F,
+where M := 1 + d/
+√
+d + 1 > 0.
+Moreover, assume that ∥ PTX (t) M≤r (−∇f (X (t)))∥F = 0, holds for some large t.
+It follows from (3.13) that
+∥g(t)∥F = ∥ ˜PTX (t) M≤r (−∇f (X (t)))∥F ≤ ∥PTX (t) M≤r (−∇f (X (t)))∥F = 0,
+and thus g(t) = 0 and X (t+1) = X (t).
+The third claim is straightforward since Mr is open in M≤r. ⊓ ⊔
+4.4 Discussion: apocalyptic points
+Observe that even though {X (t)}t≥0 has an accumulation point X ∗, the condition
+limt→∞ ∥ PTX (t) M≤r (−∇f (X (t)))∥F = 0 does not necessarily guarantee that X ∗
+is a stationary point of f , i.e., ∥ PTX ∗ M≤r (−∇f (X ∗))∥F can be nonzero; see the
+following example.
+Example 1 Given A = e1◦e1◦e1+e3◦e3◦e3 ∈ Rn×n×n and r = (2, 2, 2), consider the
+objective function f (X ) = ∥X −A∥2
+F, and initial guess X (0) = e1 ◦e1 ◦e1+e2 ◦e2 ◦e2.
+Then, the sequence generated by Algorithm 2 with a constant stepsize s(t) = α ∈
+(0, 1) is explicitly
+X (t) = e1 ◦ e1 ◦ e1 + (1 − α)te2 ◦ e2 ◦ e2,
+which converges to X ∗ = e1 ◦e1 ◦e1. According to Theorem 2, the sequence satisfies
+that lim t→∞ ∥ PTX (t) M≤r (−∇f (X (t)))∥F = 0. However, since ∇f (X ∗) ̸= 0, X ∗ is
+not a stationary point of f by using Proposition 3.
+More recently, such a phenomenon has been investigated and named by apoc-
+alypse [LKB23]. Specifically, a point X ∗ ∈ M≤r is called apocalyptic if there exists
+a sequence {X (t)} ⊆ M≤r converging to X ∗ and a smooth function f , such that
+lim
+t→∞
+∥ PTX (t) M≤r (−∇f (X (t)))∥F = 0 but ∥ PTX ∗ M≤r (−∇f (X ∗))∥F > 0.
+The triplet (X ∗, {X (t)}, f) is called an apocalypse. Similar to the matrix varieties,
+we observe that the Tucker tensor varieties suffer from apocalypse at rank-deficient
+points in M≤r.
+Proposition 5 If X ∗ ∈ M≤r has ranktc(X ∗) = r < r, then X ∗ is apocalyptic.
+Proof See Appendix C. ⊓ ⊔
+Circumventing apocalypse for Tucker tensor varieties is far beyond the main
+purpose of this paper. Hence, we leave it for future research.
+
+[PDF PAGE 25]
+Tucker tensor variety 25
+5 A retraction-free gradient-related approximate projection method
+In Algorithm 2, the retraction R HO
+X , which requires computation of HOSVD to a
+d-dimensional tensor with size (r1 +r1)×· · ·×(rd +rd), is inevitable to preserve the
+constraint, Tucker tensor varieties. One is curious about exploiting information of
+the tangent cone T X M≤r to construct search directions and facilitate line search
+without retraction to save computational cost. In this section, we propose partial
+projections to develop retraction-free line search method on M≤r.
+5.1 New partial projections
+Recall that any V in the tangent cone TX M≤r at X = G ×d
+k=1 Uk with ranktc(X ) =
+r can be parametrized in terms of ( C, {Uk,1}d
+k=1, {Uk,2}d
+k=1, {Rk,2}d
+k=1) by (3.2),
+i.e.,
+V = V0 +
+dX
+k=1
+Vk = C ×d
+k=1
+h
+Uk Uk,1
+i
++
+dX
+k=1
+G ×k (Uk,2Rk,2) ×j̸=k Uj .
+In view of (3.4)–(3.5), searching along such ( d + 1) directions {Vk} is able to get
+rid of retractions. In the light of this, we consider partial projections that are of
+the form in {Vk}.
+Given A ∈Rn1×n2×···×nd , the partial projections are defined as follows.
+P0(A) := arg min
+V0
+
+∥V0 − A∥: V0 = C ×d
+k=1
+h
+Uk Uk,1
+i
+∈ TX M≤r
+
+, (5.1)
+Pk(A) := arg min
+Vk
+
+∥Vk − A∥: Vk = G ×k (Uk,2Rk,2) ×j̸=k Uj ∈ TX M≤r
+	
+. (5.2)
+Since (5.1) does not enjoy a closed-form solution, we consider its approximation
+˜P0(A) := A ×d
+k=1 P˜Sk
+, (5.3)
+which is exactly the first term of the approximate projection ˜PTX M≤r (A) in (3.12)
+for given ˜Uk,1 ∈ St(rk −rk, nk) with ˜UT
+k,1Uk = 0, where ˜Sk := [Uk ˜Uk,1] for k ∈ [d].
+It is worth noting that ˜P0(A) requires the parameters { ˜Uk,1}d
+k=1 a prior. Moreover,
+by fixing Uk,2 in (5.2) and using [ Uk Uk,1 Uk,2] ∈ O(nk) and (3.10), P k(A) is in
+the form of
+Pk(A) = G ×k
+
+PUk,2
+
+A ×j̸=k UT
+j
+
+(k)
+G†
+(k)
+
+×j̸=k Uj .
+Similarly, since Uk,2 is unknown, we consider substituting the projection P Uk,2 by
+P⊥
+Uk and yield an approximation
+˜Pk(A) = G ×k
+
+P⊥
+Uk
+
+A ×j̸=k UT
+j
+
+(k)
+G†
+(k)
+
+×j̸=k Uj , (5.4)
+which is different from ˜Vk for the approximate projection (3.12) in Proposition 4
+since P⊥
+Uk ̸= P⊥
+˜Sk
+.
+
+[PDF PAGE 26]
+26 Bin Gao et al.
+The partial projections in (5.3) and (5.4) satisfy that ˜Pk(A) ∈ TX M≤r and
+⟨A, ˜Pk(A)⟩ = ∥˜Pk(A)∥2
+F, which can be proved in a similar fashion as Proposition 4.
+Additionally, we can prove ranktc(X + ˜Pk(A)) ≤ r, i.e.,
+X + ˜Pk(A) ∈ M≤r,
+in a similar fashion as (3.4)–(3.5). However, this property does not necessarily hold
+for two different partial projections ˜Pj(A) and ˜Pk(A) with j ̸= k, i.e., rank tc(X +
+˜Pj(A) + ˜Pk(A)) can be larger than r.
+5.2 Algorithm and convergence results
+To sum up, we propose the partial projection operator defined by
+ˆPTX M≤r (A) := arg max
+V∈{ ˜P0(A),..., ˜Pd(A)}
+∥V∥ F. (5.5)
+By using the partial projection (5.5), we propose a retraction-free gradient-related
+approximate projection method (rfGRAP) in Algorithm 3. The iteration of the
+proposed rfGRAP method is
+X (t+1) = X (t) + s(t) ˆPTX (t) M≤r (−∇f (X (t))),
+where s(t) is also computed by Armijo backtracking line search (4.2). In contrast
+with the proposed GRAP method (Algorithm 2), there is no retraction in Algo-
+rithm 3.
+Algorithm 3 Retraction-free gradient-related approximate projection method (rf-
+GRAP)
+Input: Initial guess X (0) ∈ M≤r, ω ∈ (0, 1/
+√
+d + 1), backtracking parameters ρ, a ∈
+(0, 1), smin > 0.
+1: while the stopping criteria are not satisfied do
+2: Compute g(t) = ˆPTX (t) M≤r (−∇f (X (t))) by (5.5) with random ˜U1,1, ˜U2,1, . . . ,˜Ud,1
+until the angle condition (4.1) is satisfied.
+3: Choose stepsize s(t) by Armijo backtracking line search (4.2).
+4: Update X (t+1) = X (t) + s(t)g(t) and t = t + 1.
+5: end while
+Output: X (t)
+Similar to Algorithm 2, if g(t) = ˆPTX (t) M≤r (−∇f (X (t))) does not satisfy the
+angle condition (4.1), we repeat the projection with other ˜Uk,1 until the angle
+condition is satisfied. Since the partial projection (5.5) adopts partial information
+of the tangent cone, we choose the parameter ω ∈ (0, 1/
+√
+d + 1). Let ˜Uk,1 in (5.3)
+
+[PDF PAGE 27]
+Tucker tensor variety 27
+be the global minimizer U∗
+k,1 of (3.9), it follows from (5.3)–(5.5) that
+∥ˆPTX M≤r (A)∥2
+F = max
+k=0,1,...,d
+{∥ ˜Pk(A)∥2
+F} ≥ 1
+d + 1
+dX
+k=0
+∥ ˜Pk(A)∥2
+F
+= 1
+d + 1
+
+∥A ×d
+k=1 PS∗
+k
+∥2
+F +
+dX
+k=1
+∥G ×k (P⊥
+Uk(A ×j̸=k UT
+j )(k)G†
+(k)) ×j̸=k Uj ∥2
+F
+
+≥ 1
+d + 1
+
+∥A ×d
+k=1 PS∗
+k
+∥2
+F +
+dX
+k=1
+∥G ×k (P⊥
+S∗
+k
+(A ×j̸=k UT
+j )(k)G†
+(k)) ×j̸=k Uj ∥2
+F
+
+= 1
+d + 1∥ PTX M≤r (A)∥2
+F,
+where S∗
+k = [Uk U∗
+k,1] and span( S∗
+k)⊥ ⊆ span(Uk)⊥. Therefore, we obtain that
+⟨A, ˆPTX M≤r (A)⟩ = ∥ˆPTX M≤r (A)∥2
+F ≥ 1√
+d + 1∥ PTX M≤r (A)∥F∥ˆPTX M≤r (A)∥F.
+Consequently, it is reasonable to set the parameter ω in (4.1) of Algorithm 3
+by ω ∈ (0, 1/
+√
+d + 1). Note that by using⟨A, ˜Pk(A)⟩ = ∥˜Pk(A)∥2
+F for k = 0, 1, . . . , d,
+we obtain that ∥ˆPTX M≤r (A)∥F ≤ ∥PTX M≤r (A)∥F similar to (3.13).
+The global and local convergence of the rfGRAP method can be proved in a
+similar fashion as Theorem 2 and Theorem 3.
+Theorem 4 Let {X (t)}t≥0 be an infinite sequence generated by Algorithm 3. Assume
+f is bounded below by f ∗ and satisfies the  Lojasiewicz gradient inequality. It holds that
+lim
+t→∞
+∥ PTX (t) M≤r (−∇f (X (t)))∥F = 0.
+The method returns X (t) ∈ M≤r satisfying ∥ PTX (t) M≤r (−∇f (X (t)))∥F < ϵ afterl
+f (X (0))/(smina ω2ϵ2)
+m
+iterations at most. If {X (t)}t≥0 has an accumulation point
+X ∗, then X (t) converges to X ∗. Furthermore, if ranktc(X ∗) = r, then the stationary
+measure ∥ PTX ∗ M≤r (−∇f (X ∗))∥F = ∥gradf (X ∗)∥F = 0 and
+∥X (t) − X∗∥F ≤ C
+(
+e−ct, if θ = 1
+2 ,
+t− θ
+1−2θ , if 0 < θ <1
+2
+hold for some C, c >0.
+5.3 Connection to matrix varieties
+We investigate the connection between the proposed rfGRAP method and other
+existing methods in the matrix case.
+Specifically, given a matrix A ∈ Rm×n and the SVD X = UΣVT of X ∈ Rm×nr ,
+the proposed partial projections {˜Pk(A)}d
+k=0 in (5.3)–(5.4) boils down to
+˜P0(A) = Ph
+U U1
+iAPh
+V V1
+i,
+˜P1(A) = P⊥
+UAPV,
+˜P2(A) = PUAP⊥
+V
+
+[PDF PAGE 28]
+28 Bin Gao et al.
+when d = 2, where U1 ∈ St(r − r, m), V1 ∈ St(r − r, n), i.e., ˜U1,1 and ˜U2,1 in (5.3),
+are selected by the leading ( r − r) left and right singular vectors of P ⊥
+UAP⊥
+V.
+Given U2 ∈ St(m − r, m) with [ U U 1 U2] ∈ O(m) and V2 ∈ St(n − r, n) with
+[V V1 V2] ∈ O(n). Subsequently, the partial projections can be illustrated by
+˜P0(A) =
+h
+U U1 U2
+i
+ h
+V V1 V2
+iT
+,
+˜P1(A) =
+h
+U U1 U2
+i
+ h
+V V1 V2
+iT
+,
+˜P2(A) =
+h
+U U1 U2
+i
+ h
+V V1 V2
+iT
+in the sense of Fig. 1, which is different from the “partial projections”
+˘P1(A) =
+h
+U U1 U2
+i
+ h
+V V1 V2
+iT
+,
+˘P2(A) =
+h
+U U1 U2
+i
+ h
+V V1 V2
+iT
+in [SU15, §3.4]. Therefore, the proposed partial projection ˆPTXRm×n
+≤r
+is also able to
+serve as a new retraction-free search direction in optimization on matrix varieties.
+6 A T ucker rank-adaptive method
+In practice, choosing an appropriate rank parameter r appears to be a challeng-
+ing task. A larger r can expand the search space and potentially yield a bet-
+ter optimum while simultaneously increasing computational costs. In addition, as
+shown in Example 1, even though a sequence generated by GRAP satisfies that
+∥ PTX (t) M≤r (−∇f (X (t)))∥F converges to 0, the rank deficiency at an accumulation
+point can hamper it to be a stationary point. A similar challenge arises in Rieman-
+nian optimization methods applied on the fixed-rank Tucker tensor manifold Mr;
+see, e.g., [Don+22, Section 5.1]. Therefore, in this section, we are motivated to pro-
+pose a rank-adaptive method to adjust the rank of an iterate X (t) = G(t) ×d
+k=1 U(t)
+k
+by designing new rank-adaptive strategies with the search directions in
+TX (t) Mr(t) + N≤ℓ(t) (X (t)) ⊆ TX (t) M≤r, (6.1)
+where N≤ℓ(t) (X (t)) := M≤ℓ(t) ∩
+Nd
+k=1 span(U(t)
+k )⊥
+
+⊆ NX (t) Mr(t) and ℓ(t) ∈ Nd
++
+satisfies ℓ(t) ≤ r − r(t).
+Generally speaking, we first apply Riemannian optimization on Mr(t) in sec-
+tion 6.1. Then, rank-decreasing and rank-increasing procedures are developed to
+automatically adjust the rank of an iterate X (t) in sections 6.2 and 6.3. In sum-
+mary, a new Tucker rank-adaptive method (TRAM) is proposed and analyzed
+in sections 6.4 and 6.5. The implementation details of TRAM are provided in
+section 6.6.
+
+[PDF PAGE 29]
+Tucker tensor variety 29
+6.1 Line search on fixed-rank manifold
+Given a point ˜X (t) ∈ Mr(t) , we observe from (3.2) that T ˜X (t) Mr(t) ⊆ T ˜X (t) M≤r.
+Therefore, the negative Riemannian gradient of f at ˜X (t) on Mr(t) provides a
+convincing search direction that enjoys a closed-form expression (2.9). The Rie-
+mannian gradient descent method (RGD) on Mr(t) is shown in Algorithm 4.
+Algorithm 4 Riemannian gradient descent method (RGD) on Mr(t)
+Input: Initial guess Y (0) = ˜X (t) ∈ Mr(t) ; backtracking parameters ρ, a∈ (0, 1), smin > 0.
+1: while the stopping criteria are not satisfied do
+2: Compute g(i) = −gradf (Y (i)) = PTY(i) Mr(t) (−∇f (Y (i))) by (2.9).
+3: Choose stepsize s(i) by Armijo backtracking line search (4.2).
+4: Update Y (i+1) = PHO
+r(t)
+
+Y (i) + s(i)g(i)
+
+and i = i + 1.
+5: end while
+Output: The last iterate X (t) = Y (i).
+Let {Y (i)}i≥0 be the sequence generated by RGD with Y (0) = ˜X (t). The RGD
+method updates Y (i) by
+Y (i+1) = PHO
+r(t)
+
+Y (i) − s(i)gradf (Y (i))
+
+.
+For the selection of stepsize, we apply the Armijo backtracking line search (4.2)
+to ensure the convergence. The algorithm terminates if: 1) rank deficiency is
+detected, namely, at least one of the mode- k unfolding matrices of Y satisfies
+σmin(Y(i)
+(k))/σmax(Y(i)
+(k)) ≤ ∆; 2) the Riemannian gradient satisfies∥gradf (Y (i))∥F ≤
+ε(t)
+R with threshold ε(t)
+R > 0. Note that we always check the rank deficiency in prior
+to the stationarity.
+6.2 Rank-decreasing procedure
+Given X (t) = G(t) ×d
+k=1 U(t)
+k returned by Algorithm 4, if the RGD method ter-
+minates upon detecting rank deficiency, we proceed by implementing a rank-
+decreasing procedure, which is able to reduce the number of parameters and thus
+save storage. Specifically, we produce a rank-ˆr truncation of X (t) with
+ˆrk := min{i : σi+1,k < ∆σ1,k} or ˆ rk := r(t)
+k if σr(t)
+k ,k ≥ ∆σ1,k,
+where σ1,k ≥ · · · ≥σr(t)
+k ,k are the singular values of X(t)
+(k) and ∆ ∈ (0, 1) is a thresh-
+old. Subsequently, we yield a truncated low-rank tensor P HO
+≤ˆr (X (t)). To ensure the
+convergence, we adaptively shrink ∆ by ρ1∆ with ρ1 ∈ (0, 1) until it holds that
+f (X (t)) ≥ f (PHO
+≤ˆr (X (t))). Then, we set
+˜X (t+1) = PHO
+≤ˆr (X (t)) ∈ M≤r with rank tc( ˜X (t+1)) ≤ r(t).
+Figure 5 depicts the rank-decreasing procedure for d = 3. The detailed rank-
+decreasing procedure is illustrated in Algorithm 5.
+
+[PDF PAGE 30]
+30 Bin Gao et al.
+r1
+r2
+r3
+Rank decreasing ˆr1
+ˆr2
+ˆr3
+Fig. 5 Illustration of rank-decreasing procedure for d = 3
+Algorithm 5 Rank-decreasing procedure
+Input: X (t) = G(t) ×d
+k=1 U(t)
+k , ∆ >0, ρ1 ∈ (0, 1).
+1: for k = 1, . . . , ddo
+2: Compute the singular values σ1,k ≥ · · · ≥σr(t)
+k ,k > 0 of G(t)
+(k).
+3: end for
+4: repeat
+5: Find ˆ rk = min{i : σi+1,k < ∆σ1,k} for k = 1, . . . , d.
+6: Compute ˆX = PHO
+≤ˆr (X (t)).
+7: Set ∆ = ρ1∆.
+8: until f ( ˆX ) ≤ f (X (t))
+Output: ˜X (t+1) = ˆX and Tucker rank r(t+1) = ˆr.
+6.3 Rank-increasing procedure
+Given X (t) = G(t) ×d
+k=1 U(t)
+k returned by Algorithm 4 with initial guess ˜X (t), if X (t)
+is an ε(t)
+R -stationary point and r(t) < r, it is reasonable to consider increasing the
+rank of X (t) in pursuit of higher accuracy. As Remark 1 suggests, given a matrix
+X ∈ Rm×nr , adding a matrix in normal part N ≤ℓ(X) can increase the rank of X.
+For Tucker tensors, similarly, we observe that
+r(t) < ranktc(X (t) + N (t)
+≤ℓ(t) ) ≤ r
+holds for all N (t)
+≤ℓ(t) ∈ N≤ℓ(t) (X (t)) defined in (6.1) and 0 < ℓ(t) ≤ r−r(t). Therefore,
+we can implement line search alongN (t)
+≤ℓ(t) with ⟨N (t)
+≤ℓ(t) , −∇f (X (t))⟩ ≥0 to increase
+the rank of X (t) and decrease the function value at the same time. Specifically, for
+any U(t)
+k,1 ∈ St(ℓ(t)
+k , nk) with ( U(t)
+k,1)TU(t)
+k = 0, the direction
+N (t)
+≤ℓ(t) := −∇f (X (t)) ×d
+k=1 PU(t)
+k,1
+∈ N≤ℓ(t) (X (t))
+is always a descent direction. To ensure the convergence, we apply the Armijo
+backtracking line search (4.2). Subsequently, we yield a new tensor
+˜X (t+1) = X (t) + sN (t)
+≤ℓ(t) ∈ M≤r with rank tc( ˜X (t+1)) > r(t).
+In the sense of tensor space, the rank-increasing procedure updates the tensor X (t)
+to the tensor ˜X (t+1) in a larger tensor space,
+dO
+k=1
+span(U(t)
+k ) − →
+dO
+k=1
+
+span(U(t)
+k ) + span(U(t)
+k,1)
+
+.
+
+[PDF PAGE 31]
+Tucker tensor variety 31
+A geometric illustration of the rank-increasing procedure for d = 3 is depicted
+in Fig. 6. Algorithm 6 summarizes the proposed rank-increasing procedure.
+r1
+r2
+r3
++
+ℓ1
+ℓ2
+ℓ3
+=
+r1 + ℓ1
+r2 + ℓ2
+r3 + ℓ3
+Fig. 6 Illustration of rank-increasing procedure for d = 3
+Algorithm 6 Rank-increasing procedure
+Input: X (t) = G(t) ×d
+k=1 U(t)
+k , ℓ(t).
+1: Select U(t)
+1,1, U(t)
+2,1, . . . ,U(t)
+d,1 with U(t)
+k,1 ∈ St(ℓ(t)
+k , nk) and ( U(t)
+k,1)TU(t)
+k = 0 randomly.
+2: Compute ˆG(t) = −∇f (X (t)) ×d
+k=1 (U(t)
+k,1)T.
+3: Choose stepsize s by Armijo backtracking line search (4.2).
+4: Merge the cores ¯G(t) = diag(G(t), sˆG(t)), and the factor matrices ¯U(t)
+k =
+h
+U(t)
+k U(t)
+k,1
+i
+.
+Output: Rank-increased tensor ˜X (t+1) = ¯G(t) ×d
+k=1
+¯U(t)
+k with Tucker rank r(t) + ℓ(t).
+6.4 Tucker rank-adaptive method
+We propose the Tucker rank-adaptive method (TRAM) to solve the optimization
+problem (1.1), as listed in Algorithm 7.
+The method begins with the execution of Algorithm 4 using an initial guess
+of ˜X (t) and returns a result X (t). Depending on different properties of X (t), the
+rank adjustment proceeds as follows. If X (t) is found to be rank-deficient, then the
+rank-decreasing procedure in Algorithm 5 is activated to prevent the potential rank
+degeneracy. If not, one can consider increasing the rank to improve the accuracy.
+To this end, we first check
+∥N (t)
+≤ℓ(t) ∥F ≥ ε1∥T (t)∥F and ε2∥∇f (X (t))∥F ≤ ∥T(t)∥F (6.2)
+with T (t) := gradf (X (t)), which implies that rank increasing does work. We imple-
+ment the rank-increasing procedure in Algorithm 6 to increase the rank. Otherwise,
+in view of (3.2) and Fig. 4, we observe that
+TX (t) Mr(t) + N≤ℓ(t) (X (t)) ⊊ TX (t) M≤r.
+Therefore, we check the restart criterion
+ε2∥∇f (X (t))∥F ≥ ∥T(t)∥F. (6.3)
+If the criterion holds, we resort to line search along ˜PTX (t) M≤r(t) (−∇f (X (t))) by
+lines 2–4 in Algorithm 2.
+
+[PDF PAGE 32]
+32 Bin Gao et al.
+Algorithm 7 Tucker rank-adaptive method for (1.1) (TRAM)
+Input: Initial guess X (0) = ˜X (0) ∈ M≤r with rank tc(X (0)) = rank tc( ˜X (0)) = r(0); parame-
+ters ε(0)
+R > 0, ρR ∈ (0, 1); rank-decreasing parameters ∆ >0, ρ1 ∈ (0, 1); rank-increasing
+parameter {ℓ(t)}t≥0; backtracking parameters ρ, a∈ (0, 1), smin > 0.
+1: while the stopping criteria are not satisfied do
+2: Compute X (t) by Algorithm 4 with initial guess ˜X (t) and threshold ε(t)
+R . Obtain the
+Riemannian gradient T (t) = gradf (X (t)).
+3: if Algorithm 4 is terminated by detecting rank deficiency then
+4: Apply rank-decreasing procedure (Algorithm 5) to X (t) and yield ˜X (t+1).
+5: if ranktc( ˜X (t+1)) = r(t) then
+6: Break.
+7: end if
+8: else
+9: if r(t) = r then
+10: Set ˜X (t+1) = X (t) and ε(t+1)
+R = ρRε(t)
+R .
+11: else
+12: Compute N (t)
+≤ℓ(t) = ˆG(t) ×d
+k=1 U(t)
+k,1 by lines 1–2 in Algorithm 6.
+13: if ∥N (t)
+≤ℓ(t) ∥F ≥ ε1∥T (t)∥F and ε2∥∇f (X (t))∥F ≤ ∥T(t)∥F then
+14: Apply rank-increasing procedure (Algorithm 6) and yield ˜X (t+1).
+15: else if ε2∥∇f (X (t))∥F > ∥T (t)∥F then
+16: Update ˜X (t+1) = P HO
+≤r (X (t) + s(t) ˜PTX (t) M≤r (−∇f (X (t)))) by lines 2–4 in
+Algorithm 2.
+17: else
+18: Set ˜X (t+1) = X (t) and ε(t+1)
+R = ρRε(t)
+R .
+19: end if
+20: end if
+21: end if
+22: t = t + 1.
+23: end while
+Output: X (t)
+Remark 2 In practice, one can always improve the approximation error by increas-
+ing rank since the search space is enlarged (e.g., [Ste16, §4.9]). However, applying
+GRAP, rfGRAP or Riemannian conjugate gradient method with a fixed (large)
+rank parameter r can result in severe overfitting (see., e.g., section 7.2 and [KSV14,
+§4.3]). The proposed rank-increasing procedure increases the rank of an iterate only
+when the search direction N (t)
+≤ℓ(t) is dominant in the sense of (6.2). Additionally,
+the rank-increasing procedure enjoys theoretical guarantees; see Theorem 5.
+6.5 Convergence results
+Let {X (t)}t≥0 be an infinite sequences generated by Algorithm 7. Note that in
+view of Algorithms 4–5, X (t+1) satisfies
+f (X (t+1)) ≤ f ( ˜X (t+1)) ≤ f (X (t)),
+i.e., {f (X (t))}t≥0 is nonincreasing. Subsequently, we prove the following global
+convergence of TRAM.
+
+[PDF PAGE 33]
+Tucker tensor variety 33
+Lemma 2 Let {X (t)}t≥0 be an infinite sequence generated by Algorithm 7. Assume
+that f is bounded below by f ∗. Then, it holds that
+lim inf
+t→∞
+∥gradf (X (t))∥F = lim inf
+t→∞
+∥ PTX (t) Mr(t) (∇f (X (t)))∥F = 0.
+Proof See Appendix D. ⊓ ⊔
+By using Lemma 2, we can prove a stronger result as follows.
+Theorem 5 Let {X (t)}t≥0 be an infinite sequence generated by Algorithm 7. Assume
+that f is bounded below by f ∗. Then, it holds that
+lim inf
+t→∞
+∥ PTX (t) M≤r (−∇f (X (t)))∥F = 0.
+Proof Let { ˜X (t)}t≥0 be an infinite sequence generated by Algorithm 7. Recall
+T (t) = grad f (X (t)). It follows from Lemma 2 that there exists a subsequence
+{X (tj )}j≥0, such that ∥T (tj )∥F ≤ ε(tj )
+R and lim j→∞ ∥T (tj )∥F = 0. Assume that
+∥∇f (X (tj ))∥F ≥ ε0 holds for all j ≥ 0 and some ε0 > 0. Otherwise, the result is
+straightforward.
+If line 10 in Algorithm 7 is executed infinitely, there exists a subsequence
+{X (tjl )}l≥0 of {X (tj )}j≥0, such that rank tc(X (tjl )) = r. Therefore,
+lim
+l→∞
+∥ PT
+X
+(tjl ) M≤r (−∇f (X (tjl )))∥F = lim
+l→∞
+∥T (tjl )∥F = 0.
+Otherwise, since ∥T (tj )∥F converges to 0 and ∥∇f (X (tj ))∥F ≥ ε0, it follows
+from (6.3) that the restart in line 16 will be continuously executed for sufficiently
+large j, it follows from the backtracking line search in line 16 that
+f (X (tj )) − f ( ˜X (tj +1)) ≥ smina ∥˜PT
+X (tj ) M≤r(−∇f (X (tj )))∥2
+F
+≥ smina ω2∥ PT
+X (tj ) M≤r(−∇f (X (tj )))∥2
+F.
+Consequently,
+lim
+j→∞
+∥ PT
+X (tj ) M≤r (−∇f (X (tj )))∥F = 0.
+⊓ ⊔
+6.6 Practical implementation details of TRAM
+In practice, the TRAM method is implemented by following the flowchart in Fig. 7.
+For the rank-increasing procedure, we notice that applying restart in Algorithm 7
+can be computationally disadvantageous, as it increases the rank to r in the most
+likely cases. This scenario arises when N (t)
+≤ℓ(t) is rejected by (6.2). Instead, we opt
+to tighten the stopping criteria by setting ε(t+1)
+R = ρRε(t)
+R and proceed with the
+RGD method again. For the rank-decreasing procedure, let{Y (i)}i≥0 be a sequence
+generated by RGD with Y (0) = ˜X (t). In practice, the ratio σmin(Y(i)
+(k))/σmax(Y(i)
+(k))
+
+[PDF PAGE 34]
+34 Bin Gao et al.
+Initial guess
+(X (0), r(0))
+Line search on Mr(t)
+(X (t), r(t))
+Rank deficiency?
+Rank increase?
+∥N (t)
+≤ℓ(t) ∥F ≥ ε1∥T (t)∥F
+No
+Parameters update
+ε(t+1)
+R = ρRε(t)
+R
+(X (t), r(t)) → ( ˜X (t+1), r(t+1))
+No
+Rank increasing
+X (t) + s(t)N (t)
+≤ℓ(t) = ˜X (t+1)
+r1
+r2
+r3
++
+ℓ1
+ℓ2
+ℓ3
+=
+r1 + ℓ1
+r2 + ℓ2
+r3 + ℓ3
+Yes
+Rank decreasing
+(X (t), ∆) → ( ˜X (t+1), r(t+1))
+Yes
+Fig. 7 A flowchart of the practical Tucker rank-adaptive method
+is computed for every point Y (i) = G(i) ×d
+k=1 U(i)
+k ∈ Mr(t) in Algorithm 4 to detect
+the rank deficiency. We observe that
+Y(i)
+(k) = U(i)
+k G(i)
+(k)(V(i)
+k )T = U(i)
+k ˘U(i)
+k ˘Σ( ˘V(i)
+k )T(V(i)
+k )T
+is a SVD of Y(i)
+(k), where ˘U(i)
+k ˘Σ( ˘V(i)
+k )T is the SVD of G(i)
+(k). Therefore, it holds that
+σmin(Y(i)
+(k))
+σmax(Y(i)
+(k))
+=
+σmin(G(i)
+(k))
+σmax(G(i)
+(k))
+.
+We can benefit from it and avoid the explicit large-size construction ofY (i) to carry
+out the rank detection by employing a small-size G(i). Additionally, the condition
+f (X (t)) ≥ f (PHO
+≤ˆr (X (t))) in Algorithm 4 will never be checked and thus the rank is
+indeed decreased.
+7 Numerical experiments
+In this section, we test the performance of the proposed GRAP (Algorithm 2),
+rfGRAP (Algorithm 3), TRAM (Algorithm 7) and other existing methods on the
+tensor completion problem. Specifically, given a partially observed tensor A ∈
+Rn1×n2×···×nd on an index set Ω ⊆ [n1] × [n2] × · · · ×[nd]. The goal of Tucker
+
+[PDF PAGE 35]
+Tucker tensor variety 35
+tensor completion is to recover the tensor A from its entries on Ω based on the
+low-rank Tucker decomposition. The optimization problem can be formulated on
+the Tucker tensor variety M≤r, i.e.,
+min 1
+2 ∥ PΩ(X ) − PΩ(A)∥2
+F
+s. t. X ∈ M≤r,
+where PΩ is the projection operator onto Ω, i.e, P Ω(X )(i1, . . . , id) = X (i1, . . . , id)
+if ( i1, . . . , id) ∈ Ω, otherwise P Ω(X )(i1, . . . , id) = 0 for X ∈Rn1×···×nd . The sam-
+pling rate is denoted by p := |Ω|/(n1n2 · · ·nd).
+7.1 Implementation details
+First, we introduce all the default settings and implementation details. In general,
+the tensor-related implementation of proposed methods is based on the Tensor-
+Toolbox v3.41. All experiments are performed on a workstation with two Intel(R)
+Xeon(R) Processors Gold 6330 (at 2.00GHz ×28, 42M Cache) and 512GB of RAM
+running Matlab R2019b under Ubuntu 22.04.3. The codes of proposed methods
+are available at https://github.com/JimmyPeng1998.
+Computing projections Given a tensor T ∈ Rn1×n2×···×nd and X = G ×d
+k=1 Uk
+with rank tc(X ) = r, the proposed methods involve the projections onto the tan-
+gent cone TX M≤r and Tucker tensor varieties Mr. We provide the computational
+details of two projections, ˜PTX M≤r (T ) and PHO
+≤r (T ). In practice, we never manip-
+ulate a large full tensor X with n1n2 · · ·nd number of parameters in ˜PTX M≤r (T )
+and PHO
+≤r (T ) but core tensor and unfolding matrices.
+The approximate projection ˜PTX M≤r (T ) in (3.12) involves choosing appropri-
+ate matrices ˜Uk,1 ∈ St(rk − rk, nk) with ˜UT
+k,1Uk = 0 for k ∈ [d]. We generate a
+random matrix Mk,1 ∈ Rnk×(rk−rk) whose elements are i.i.d. samples from the
+normal distribution N (0, 1), and ˜Uk,1 is chosen by the last ( rk − rk) columns of
+the Q-factor of the matrix [ Uk Mk,1] ∈ Rnk×rk . Subsequently, the approximate
+projection onto TX M≤r can be computed by Algorithm 1. The approach of choos-
+ing ˜Uk,1 is also adopted to selecting {Uk,1}d
+k=1 in Algorithm 6. Since the angle
+condition is computationally intractable, we do not verify the angle condition in
+practice. Additionally, the orthogonal projection onto the tangent space is com-
+puted by GeomCG toolbox 2. Note that if rank tc(X (t)) = r in GRAP method, the
+projection onto the tangent cone is also computed by GeomCG toolbox for fair
+comparison since T X (t) M≤r = TX (t) Mr.
+For the projection P HO
+≤r (T ) in (2.7), in view of Algorithm 2, we consider T
+being in the form of T = X + V with V ∈TX M≤r. We observe from (3.2) that
+T = X + V ∈
+dO
+k=1
+span(Uk) + span(Uk,1) + span(Uk,2Rk,2)
+⊆ M≤(r+r).
+1 Tensor-Toolbox v3.4: http://www.tensortoolbox.org/
+2 GeomCG toolbox: https://www.epfl.ch/labs/anchp/index-html/software/geomcg/.
+
+[PDF PAGE 36]
+36 Bin Gao et al.
+Therefore, the tensor T admits a Tucker decomposition T = ˜G ×d
+k=1 ˜Uk ∈ M˜r
+with some ˜r ≤ r + r. Instead of implementing HOSVD directly to the full ten-
+sor T ∈Rn1×···×nd , we exploit its low-rank structure and apply HOSVD to the
+core tensor ˜G ∈R˜r1×···×˜rd of T , which is much smaller. Specifically, denote the
+rank-r HOSVD of ˜G by ( ˜G ×d
+k=1 ˆUT
+k ) ×d
+k=1 ˆUk, where ˆUk ∈ St(rk, ˜rk) is the lead-
+ing rk singular vectors of ˜G(k). Therefore, it holds that
+PHO
+≤r (T ) = (( ˜G ×d
+k=1 ˆUT
+k ) ×d
+k=1 ˆUk) ×d
+k=1 ˜Uk = ( ˜G ×d
+k=1 ˆUT
+k ) ×d
+k=1 ( ˜Uk ˆUk).
+Note that ˜Uk ˆUk ∈ St(rk, nk) since ( ˜Uk ˆUk)T( ˜Uk ˆUk) = Irk . This technique is also
+adopted to the rank-decreasing procedure and the retraction in the Riemannian
+gradient descent method (Algorithm 4) on Mr.
+Exact line search on tangent cone Similar to the optimization on fixed-rank manifold
+of Tucker tensors [KSV14], given a point X (t) and a descent direction V (t) ∈
+TX (t) M≤r, the solution of the optimization problem
+s(t)
+0 = arg min
+s≥0
+∥ PΩ(X (t) + sV (t)) − PΩA∥2
+F
+enjoys a closed-form
+s(t)
+0 = ⟨PΩV (t), PΩ(A − X(t))⟩
+⟨PΩV (t), PΩV (t)⟩ ≥ 0.
+The computation of P ΩV (t) is implemented in a MEX function. We adopt s(t)
+0 as an
+initial stepsize of Armijo backtracking line search in (4.2).
+Compared methods For Tucker-based methods, we compare the proposed methods
+with a Riemannian conjugate gradient method (GeomCG) [KSV14], and a Rie-
+mannian conjugate gradient method on quotient manifold under a preconditioned
+metric3 (Tucker-RCG) [KM16] for optimization on fixed-rank manifold.
+We also compare the proposed methods with other candidates based on dif-
+ferent tensor formats. For CP decomposition, we choose the graph-based alternat-
+ing minimization method 4 by Guan et al. [Gua+20], denoted by CP-AltMin. We
+consider the Riemannian conjugate gradient method 5 in [Ste16] for tensor train
+completion, denoted by TT-RCG. For tensor completion in tensor ring decompo-
+sition, we consider the Riemannian gradient descent method (TR-RGD) 6 under a
+preconditioned metric proposed by Gao et al. [GPY24].
+Stopping criteria The performance of all methods is evaluated by the training and
+test errors
+εΩ(X ) := ∥ PΩ(X ) − PΩ(A)∥F
+∥ PΩ(A)∥F
+and εΓ (X ) := ∥ PΓ (X ) − PΓ (A)∥F
+∥ PΓ (A)∥F
+,
+where Γ is a test set different from the training set Ω. We terminate the methods
+if: 1) the training error εΩ(X (t)) < 10−12; 2) the relative change of the training
+error (εΩ(X (t)) − εΩ(X (t−1)))/εΩ(X (t−1)) < 10−8; 3) maximum iteration number
+is reached; 4) time budget is exceeded.
+3 Available at: https://bamdevmishra.in/codes/tensorcompletion/.
+4 Available at: https://gitlab.com/ricky7guanyu/tensor-completion-with-regularization-term .
+5 TTeMPS toolbox: https://www.epfl.ch/labs/anchp/index-html/software/ttemps/.
+6 LRTCTR toolbox: https://github.com/JimmyPeng1998/LRTCTR
+
+[PDF PAGE 37]
+Tucker tensor variety 37
+Default settings of proposed methods The default settings of the proposed methods
+are reported below. We set ρR = 0 .5, ε(0)
+R = 0 .1, rank-decreasing parameters
+∆ = 0 .01 and ρ1 = 0 .5, and rank-increasing parameters ℓ = (1 , 1, . . . ,1) and
+ε1 = 0.01 in TRAM. The backtracking parameters are set to be ρ = 0.5, a = 10−4
+and smin = 10−10. Additionally, the maximum iteration number of fixed-rank line
+search in the TRAM method is set to be 5.
+7.2 Experiments on synthetic data
+We test the recovery performance of Tucker-based methods on synthetic data.
+Given r∗ = (r∗
+1, r∗
+2, . . . , r∗
+d), we consider a synthetic low-rank tensor A generated
+by
+A = G∗ ×d
+k=1 U∗
+k,
+where the entries of G∗ ∈ Rr∗
+1 ×r∗
+2 ×···×r∗
+d and U∗
+k ∈ Rnk×r∗
+k are sampled from the
+normal distribution N (0, 1). Then, U∗
+k is orthogonalized by the QR decomposition.
+We set d = 3, n1 = n2 = n3 = 400, the size of test set |Γ | = pn1n2n3, and
+r∗
+1 = r∗
+2 = r∗
+3 = 6. The initial guess X (0) is generated in a same fashion with given
+rank r(0). A method is terminated if the training error εΩ(X (t)) ≤ 10−12 or it
+exceeds the time budget 200s.
+Test with true rank First, we examine the performance of Tucker-based methods
+with true rank, i.e., r = r∗ = (6, 6, 6). To ensure a fair comparison, we compare
+the proposed methods with GeomCG and Tucker-RCG with initial guess X (0) ∈
+Mr. Figure 8 reports the test error of Tucker-based methods with sampling rate
+p = 0.01, 0.05. First, we observe that GRAP and TRAM methods are comparable
+to GeomCG and Tucker-RCG. Second, rfGRAP method requires more iterations
+than other candidates, since it only adopts partial information about the tangent
+cone to avoid retraction.
+0 10 20 30 40 50
+Time (s)
+10-15
+10-10
+10-5
+100
+Test error
+GRAP
+rfGRAP
+TRAM
+GeomCG
+Tucker-RCG
+0 50 100 150
+Time (s)
+10-15
+10-10
+10-5
+100
+Test error
+GRAP
+rfGRAP
+TRAM
+GeomCG
+Tucker-RCG
+Fig. 8 The recovery performance under sampling rate p = 0.01, 0.05
+
+[PDF PAGE 38]
+38 Bin Gao et al.
+Test with under-estimated initial rank In contrast with the Riemannian methods on
+Mr, the proposed methods can adopt any initial guess X (0) ∈ M≤r. Therefore, we
+compare the proposed methods under different initial ranks r(0) = (r(0), r(0), r(0))
+for r(0) = 1 and 5. The sampling rate is chosen as p = 0.05. Note that we still run
+GeomCG and Tucker-RCG on Mr(0) . The test error is reported in Fig. 9. We ob-
+serve from Fig. 9 that the proposed GRAP and rfGRAP methods have favorably
+comparable performance than TRAM. A rank-increasing procedure is required to
+find the true rank r∗ in the TRAM method. In addition, the proposed TRAM
+method can successfully find the true rank r∗. However, since r(0) < r∗, the Ge-
+omCG and Tucker-RCG methods can only obtain a poor low-rank approximation
+of the data tensor A. Therefore, the rank-increasing procedure does allow us to
+search in a larger space with higher accuracy.
+0 50 100 150 200
+Time (s)
+10-15
+10-10
+10-5
+100
+Test error
+GRAP rfGRAP TRAM GeomCG Tucker-RCG
+Rank increase
+0 50 100 150 200
+Time (s)
+10-15
+10-10
+10-5
+100
+Test error
+Rank increase
+Fig. 9 Test error under different initial ranks r(0) = (1, 1, 1) and r(0) = (5, 5, 5)
+Test with over-estimated rank We test the performance of Tucker-based methods
+under a set of over-estimated ranks r = (r, r, r) with r = 7, 8, 9, 10, 11, 12 > r∗ = 6.
+We set the sampling rate p = 0 .01. To ensure a fair comparision to GeomCG
+and Tucker-RCG(Q), the initial guess X (0) is generated from Mr. The numerical
+results are reported in Figs. 10 and 11. First, we observe from Fig. 10 that the
+proposed TRAM method converges while other candidates fail to recover the data
+tensor due to the over-estimated rank parameter. Second, the right figure in Fig. 10
+suggests that TRAM successfully recovers the true Tucker rank of the data tensor
+A under all selections of rank parameter. Therefore, the TRAM performs better
+than the other candidates. Additionally, Figure 11 provides history of the singular
+values of the unfolding matrices X(t)
+(1), X(t)
+(2), and X(t)
+(3) in TRAM for r = (8, 8, 8).
+The proposed TRAM method indeed detects the disparity between the leading
+six singular values and the subsequent two singular values. The rank-decreasing
+procedure is activated to reduce the rank parameter to the true rank r∗.
+Additionally, in order to verify the effect of the rank-increasing procedure, we
+compare the proposed methods under initial rank r(0) = (1, 1, 1) and a set of over-
+estimated ranks r = (r, r, r) with r = 7, 8, 9, 10, 11, 12 > r∗ = 6. Figure 12 reports
+
+[PDF PAGE 39]
+Tucker tensor variety 39
+0 50 100 150 200
+Time (s)
+10-15
+10-10
+10-5
+100
+Test error
+GRAP
+rfGRAP
+TRAM
+GeomCG
+Tucker-RCG
+0 10 20 30 40 50
+Iteration
+6
+7
+8
+9
+10
+11
+12Rank
+Fig. 10 Numerical results on synthetic dataset under over-estimated rank parameter of
+Tucker-based methods. Left: test error. Right: rank update of TRAM
+0 5 10 15 20
+Iteration
+0
+2
+4
+6
+8
+10Singular value
+Rank decrease
+0 5 10 15 20
+Iteration
+0
+2
+4
+6
+8
+10Singular value
+Rank decrease
+0 5 10 15 20
+Iteration
+0
+2
+4
+6
+8
+10Singular value
+Rank decrease
+Fig. 11 The history of singular values of unfolding matrices X(t)
+(1), X(t)
+(2), and X(t)
+(3) for r =
+(8, 8, 8) in TRAM
+the test error and the history of rank update in TRAM method. We observe
+that only the TRAM method can find the true rank due to the rank-increasing
+procedure.
+In summary, both the rank-decreasing and rank-increasing procedure are vital
+for finding an appropriate rank parameter if the true rank is not available.
+7.3 Experiments on hyperspectral images
+In this experiment, we test the performance of proposed methods and other can-
+didates on hyperspectral images, which is formulated as a third order tensor A ∈
+Rn1×n2×n3 . Mode three of A represents the reflectance level under n3 wavelength
+values of light. Mode one and two represents the reflectance level of light under dif-
+ferent wavelengths. We select the “Ribeira Hotel Image” (Ribeira7) with size 249×
+329×33 from “50 reduced hyperspectral reflectance images” by Foster [FR22], and
+“220 Band A VIRIS Hyperspectral Image” (A VIRIS8) with size 145 × 145 × 220.
+Figure 13 shows the twenty-fourth frame of two hyperspectral images.
+7 Image source: hsi 32.mat from https://figshare.manchester.ac.uk/articles/dataset/
+Fifty_hyperspectral_reflectance_images_of_outdoor_scenes/14877285.
+8 Available at https://purr.purdue.edu/publications/1947/1.
+
+[PDF PAGE 40]
+40 Bin Gao et al.
+0 50 100 150 200
+Time (s)
+10-15
+10-10
+10-5
+100
+Test error
+GRAP
+rfGRAP
+TRAM
+0 100 200 300 400
+Iteration
+1
+2
+3
+4
+5
+6
+7Rank
+Fig. 12 Numerical results on synthetic dataset under over-estimated rank parameters and
+under-estimated initial rank r(0) = (1, 1, 1). Left: test error. Right: rank update of TRAM
+Fig. 13 The twenty-fourth frame of two images. Left: “Ribeira”. Right: “A VIRIS”
+We evaluate the recovery performance of image completion by the peak signal-
+to-noise ratio (PSNR) defined by
+PSNR := 10 log10
+ 
+n1n2n3
+max(A)
+∥X − A∥2
+F
+!
+,
+where max(A) denotes the largest element of A. Additionally, the relative error
+relerr := ∥X − A∥F
+∥A∥F
+is also reported. The sampling rate is p = 0 .1. We test the Tucker-based meth-
+ods under the rank parameter r = ( r, r, r) with r = 5 , 10, 15, . . . ,30. To ensure
+a fair comparison, a method is terminated if it reaches the maximum iteration
+number 250, which is the same as [KM16, §5].
+Figure 14 and Table 1 illustrate the recovery results of Tucker-based methods.
+We observe from Fig. 14 that the low-rank structure along mode three is detected
+by TRAM, i.e., there exists similarity among different wavelength values of light
+in the image tensor A. It is worth noting that the last rank obtained from TRAM
+under r = (15 , 15, 15) in “Ribeira” image is (15 , 15, 6), which coincides with the
+rank selection in [KSV14, §4.3.1]. Moreover, Table 1 reports a quantified recovery
+
+[PDF PAGE 41]
+Tucker tensor variety 41
+5 10 15 20 25 30
+5
+10
+15
+20
+25
+30Last rank
+Ribeira
+5 10 15 20 25 30
+5
+10
+15
+20
+25
+30Last rank
+AVIRIS
+Fig. 14 The last rank obtained from TRAM for “Ribeira” and “A VIRIS” images under dif-
+ferent parameters r = (r, r, r)
+T able 1Relative error and PSNR on “Ribeira” and “A VIRIS” image
+Tucker rank r Results GRAP rfGRAP TRAM GeomCG Tucker-RCG
+(r1, r2, r3) “Ribeira”
+(5, 5, 5) PSNR 24.9351 24.9325 24.9351 24.9351 24.9350
+relerr 0.2984 0.2985 0.2984 0.2984 0.2984
+(10, 10, 10) PSNR 26.8481 26.8482 26.8648 26.8483 26.8482
+relerr 0.2394 0.2394 0.2389 0.2394 0.2394
+(15, 15, 15) PSNR 28.3451 28.3450 28.4127 28.3451 28.3451
+relerr 0.2015 0.2015 0.1999 0.2015 0.2015
+(20, 20, 20) PSNR 29.3908 29.3934 29.5197 29.3917 29.3924
+relerr 0.1786 0.1786 0.1760 0.1786 0.1786
+(25, 25, 25) PSNR 30.2324 30.1852 30.3897 30.2315 30.2332
+relerr 0.1621 0.1630 0.1592 0.1622 0.1621
+(30, 30, 30) PSNR 30.7088 30.7182 30.9921 30.7579 30.7566
+relerr 0.1535 0.1533 0.1486 0.1526 0.1527
+“A VIRIS”
+(5, 5, 5) PSNR 31.7181 31.7181 31.6955 31.7181 31.7181
+relerr 0.0835 0.0835 0.0837 0.0835 0.0835
+(10, 10, 10) PSNR 33.7393 33.7393 33.7517 33.7393 33.7394
+relerr 0.0661 0.0661 0.0660 0.0661 0.0661
+(15, 15, 15) PSNR 35.1308 35.1157 35.1427 35.1144 35.1251
+relerr 0.0564 0.0564 0.0563 0.0565 0.0564
+(20, 20, 20) PSNR 36.1776 36.1777 36.5438 36.1781 36.1780
+relerr 0.0500 0.0500 0.0479 0.0500 0.0500
+(25, 25, 25) PSNR 36.6010 36.6430 37.5433 36.6142 36.6002
+relerr 0.0476 0.0473 0.0427 0.0475 0.0476
+(30, 30, 30) PSNR 36.3106 36.4263 37.4879 36.1278 36.1505
+relerr 0.0492 0.0485 0.0430 0.0502 0.0501
+result. The proposed GRAP and rfGRAP are comparable to GeomCG and Tucker-
+RCG. Specifically, the proposed TRAM method reaches the highest PSNR and the
+lowest relative error under most rank parameters.
+
+[PDF PAGE 42]
+42 Bin Gao et al.
+7.4 Experiments on “MovieLens 1M” dataset
+We consider tensor completion on the real-world dataset “MovieLens 1M”9, which
+consists of 1000209 movie ratings from 6040 users on 3952 movies from September
+19th, 1997 to April 22nd, 1998. By choosing one week as a period, these movie
+ratings are formulated as a third-order tensor A of size 6040 × 3952 × 150. We ran-
+domly select 80% of the known ratings as a training set Ω and the rest 20% ratings
+are test set Γ . The rank parameter is set to be r = (r, r, r) with r = 1, 2, . . . ,15.
+In addition, we not only compare the performance of the proposed methods to
+other Tucker-based methods, but also to other methods including CP-AltMin,
+TT-RCG, and TR-RGD. To ensure a close number of parameters in different ten-
+sor decompositions, we choose the CP rank 9, tensor train rank (1 , 4, 4, 1), and
+(3, 3, 3) in tensor ring completion. The initial guess X (0) for the proposed methods
+is generated in the same fashion as section 7.2 by Tucker decomposition. Then,
+the initial guesses for other methods are transformed by CP-ALS [KB09, Fig. 3.3],
+TT-SVD [Ose11, Theorem 2.1], and TR-SVD [Zha+16, Algorithm 1] from X (0).
+Note that initial guesses under different tensor formats have a comparable number
+of parameters. A method is terminated if it exceeds the time budget of 3000s.
+Figure 15 demonstrates the numerical results on the “MovieLens 1M” dataset.
+We observe that: 1) the proposed methods are favorably comparable to GeomCG
+and Tucker-RCG with lower test error under different rank parameters r; 2) The
+test error of the TRAM method is less sensitive when r increases, while the test
+error of the other candidates begins increasing; 3) Figure 15(right) presents the
+last rank obtained from TRAM. The proposed TRAM method indeed adaptively
+finds an appropriate rank r(t) and reveals the low-rank structure of the categories
+of movies in mode two of the “MovieLens 1M” data tensor A.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+0.25
+0.3
+0.35
+0.4
+Test error
+TRAM
+GeomCG
+rfGRAP
+GRAP
+Tucker-RCG
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15Last rank
+Fig. 15 Test error and the last rank obtained from TRAM under different rank parameters
+r = (r, r, r). Left: test error. Right: last rank of TRAM
+Morevover, we compare the Tucker-based methods with other methods un-
+der rank parameter r = (9, 9, 9). We observe from Fig. 16(left) that the proposed
+methods are favorably comparable to other candidates, and the TRAM method
+9 Available at https://grouplens.org/datasets/movielens/1m/.
+
+[PDF PAGE 43]
+Tucker tensor variety 43
+performs better than the other candidates. Figure 16(right) demonstrates that un-
+der the rank parameter r = (9, 9, 9), the parameter r(t) is reduced to (9, 4, 9). This
+reduction signifies the identification of four distinct categories of movies within
+the “MovieLens 1M” by TRAM.
+0 500 1000 1500 2000 2500 3000
+Time (s)
+0.25
+0.3
+0.35
+0.4
+0.45
+0.5
+Test error
+TRAM
+GeomCG
+rfGRAP
+GRAP
+Tucker-RCG
+CP-AltMin
+TT-RCG
+TR-RGD
+0.23
+0.24
+0.25
+0.26
+0.27
+0.28
+0.29
+100 101 102 103
+Iteration
+3
+4
+5
+6
+7
+8
+9Rank
+Fig. 16 Numerical results on “MovieLens 1M” dataset under rank parameter r = (9 , 9, 9).
+Left: test error. Right: rank update in iterations
+8 Conclusion and perspectives
+In this paper, we have conducted a thorough investigation of the geometry of
+Tucker tensor varieties and have developed novel geometric and rank-adaptive
+methods for optimization on Tucker tensor varieties. We observe that the geome-
+try of Tucker tensor varieties is closely connected but much more intricate to the
+matrix varieties. All of the results can elegantly boil down to the known ones in
+matrix varieties via geometric illustration figures. Furthermore, the heart of op-
+timization on Tucker tensor varieties is the metric projection. By leveraging the
+established geometry, we have proposed approximate projections to circumvent
+the explicit computation of metric projections. Surprisingly, we have observed the
+retraction-free search directions by using partial information of the tangent cone.
+Numerical experiments on tensor completion suggest that the proposed methods
+perform better than existing state-of-the-art methods across various rank param-
+eter selections. In general, when a reliable rank parameter estimation is available,
+we recommend the GRAP and rfGRAP methods to bypass the lengthy process
+of rank parameter selection. Conversely, in scenarios where the rank parameter is
+uncertain, the TRAM method is advised since it adaptively identifies an appro-
+priate rank. To the best of our knowledge, this study represents the first endeavor
+to explore optimization on Tucker tensor varieties.
+In the future, we intend to adopt the proposed methods for optimization on
+Tucker tensor varieties to other applications, e.g., dynamic low-rank tensor approx-
+imation and low-rank solution of high-dimensional partial differential equations.
+In addition, it is interesting but challenging to design apocalypse-free methods on
+tensor varieties that is guaranteed to converge to a stationary point.
+
+[PDF PAGE 44]
+44 Bin Gao et al.
+Acknowledgements
+We would like to thank the editor and two anonymous reviewers for insightful com-
+ments. We acknowledge Guillaume Olikier for helpful discussions on the retraction
+and GRAP method.
+Declaration
+The authors declare that the data supporting the findings of this study are avail-
+able within the paper. The authors have no competing interests to declare that
+are relevant to the content of this article.
+A Proof of Proposition 2
+Proof It suffices to prove lim t→0+ (RHO
+X (tV) − X −tV)/t = 0. Since V ∈TX M≤r, it follows
+from [OW04, Proposition 2] that there exists an analytic arc γ : [0, ϵ) → M≤r such that
+γ(0) = X and ˙γ(0) = V.
+Moreover, since P≤r(X + tV) is the metric projection of X + tV onto M≤r, it holds that
+∥X + tV −P≤r(X + tV)∥F ≤ ∥X+ tV −γ(t)∥F.
+By using the quasi-optimality (2.8), we have
+∥X + tV −RHO
+X (tV)∥F ≤
+√
+d∥X + tV −P≤r(X + tV)∥F ≤
+√
+d∥X + tV −γ(t)∥F = o(t),
+and thus R HO
+X is a retraction mapping. ⊓ ⊔
+B A compact parametrization of the T ucker tangent cone
+We provide a compact parametrization of an element in T X M≤r by taking advantage of the
+compact parametrization (2.2) and the singular value decomposition X(k) = UkG(k)VT
+k =
+Uk
+˜Uk
+˜Σk
+˜VT
+k VT
+k in the proof of Theorem 1. Note that the parameters C and Uk,1 in (B.1)
+have smaller sizes than those in (3.2).
+Corollary 3 Given a Tucker tensor X = G ×1 U1 · · · ×d Ud ∈ Rn1×···×nd with ranktc(X ) =
+r ≤ r, any V in the tangent cone of M≤r at X can be expressed by
+V = C ×d
+k=1
+Uk Uk,1
+
++
+dX
+k=1
+G ×k (Uk,2Rk,2) ×j̸=k Uj , (B.1)
+where C ∈R(r1+ℓ1)×···×(rd+ℓd), Rk,2 ∈ R(nk−rk−ℓk)×rk , Uk,1 ∈ St(ℓk, nk) and Uk,2 ∈
+St(nk − rk − ℓk, nk) are arbitrary that satisfy [Uk Uk,1 Uk,2] ∈ O(nk) for k ∈ [d], and
+ℓ = (ℓ1, ℓ2, . . . , ℓd) satisfies
+ℓk = rank(P⊥
+Uk V(k)P⊥
+Vk ˜Vk
+) = rank([0 Uk,1]C(k)([Uj Uj,1]⊗j̸=k)⊤ P⊥
+Vk ˜Vk
+)
+with Vk = (Uj )⊗j̸=k and the right singular vectors ˜Vk ∈ St(rk, r−k) of G(k). Furthermore,
+the representation (B.1) is unique in the sense of the right orthogonal group actions on Uk,1
+and Uk,2 with k ∈ [d].
+
+[PDF PAGE 45]
+Tucker tensor variety 45
+Proof We can obtain the parametrization (B.1) in a same fashion by substituting the parametriza-
+tion in Fig. 1 by the compact surrogate (2.2) with ℓk = rank(P⊥
+Uk V(k)P⊥
+Vk ˜Vk
+) in the proof of
+Theorem 1.
+Furthermore, we aim to show that span( Uk,1) = span(P⊥
+Uk V(k)P⊥
+Vk ˜Vk
+). To this end, we
+have
+P⊥
+Uk V(k)P⊥
+Vk ˜Vk
+= P⊥
+Uk
+
+[Uk Uk,1]C(k)([Uj Uj,1]⊗j̸=k)⊤ + Uk,2Rk,2G(k)VT
+k
+
+P⊥
+Vk ˜Vk
+= [0 Uk,1]C(k)([Uj Uj,1]⊗j̸=k)⊤ P⊥
+Vk ˜Vk
++Uk,2Rk,2 ˜Uk ˜Σk ˜VT
+k VT
+k P⊥
+Vk ˜Vk
+= Uk,1C(k)([Uj Uj,1]⊗j̸=k)⊤ P⊥
+Vk ˜Vk
+,
+where G(k) = ˜Uk
+˜Σk
+˜VT
+k is the SVD of the unfolding matrixG(k), and C(k) ∈ Rℓk×(Q
+j̸=k(rj +ℓj ))
+consists of the last ℓk rows of C(k). Since Uk,1 ∈ St(ℓk, nk) and ℓk = rank(P⊥
+Uk V(k)P⊥
+Vk ˜Vk
+),
+we obtain that span( Uk,1) = span(P⊥
+Uk V(k)P⊥
+Vk ˜Vk
+).
+Consequently, the representation (B.1) is unique in the sense of the right orthogonal group
+actions on Uk,1 and Uk,2 with k ∈ [d]. ⊓ ⊔
+It is worth noting that since r−k = r for d = 2 and k = 1 , 2, it holds that ˜Vk ∈ O(r)
+and thus P ⊥
+Vk ˜Vk
+= P ⊥
+Vk . Therefore, the compact parametrization (B.1) coincides with the
+compact one in matrix case (2.2).
+C Proof of Proposition 5
+Proof X ∗ admits the Tucker decomposition G∗ ×1 U∗
+1 · · · ×d U∗
+d, where G∗ ∈ Rr1×r2×···×rd ,
+U∗
+k ∈ St(rk, nk) for k ∈ [d]. Consider the k0-th unfolding X∗
+(k0) = U∗
+k0 G∗
+(k0)(V∗
+k0 )T ∈
+Rnk0 ×n−k0 , where V∗
+k0
+:= (U∗
+j )⊗j̸=k0 . Since rk0 < nk0 and r−k0 < n−k0 , there exist matri-
+ces u ∈ Rnk0 \ {0} and v ∈ Rn−k0 \ {0}, such that ( U∗
+k0 )Tu = 0 and ( V∗
+k0 )Tv = 0. We aim
+to construct a sequence {X (t)} ⊆ M≤r and a function f such that X (t) converges to X ∗ and
+∥ PTX (t) M≤r (−∇f (X (t)))∥F converges to 0, but X ∗ is not a stationary point of f .
+First, we consider the sequenceX (t) ∈ M≤r defined by X (t) = G(t)×d
+k=1
+h
+U∗
+k Uk,1
+i
+, where
+Uk,1 ∈ St(rk − rk, nk) with UT
+k,1U∗
+k = 0, G(t)(i1, . . . , id) := G∗(i1, . . . , id) if ( i1, . . . , id) ≤ r,
+G(t)(i1, . . . , id) := 1
+t
+¯G(i1 − r1, . . . , id − rd) if ( i1, . . . , id) > r, G(t)(i1, . . . , id) := 0 other-
+wise; and ¯G ∈R(r1−r1)×(r2−r2)×···×(rd−rd) satisfying ranktc( ¯G) = r − r. Then, it holds that
+ranktc(X (t)) = r and X (t) converges to X ∗.
+Subsequently, we construct the function f (X ) = uTX∗
+(k0)v. Since X ∗ is rank-deficient
+but the gradient ∇f (X ) = ten (k0)(uvT) ̸= 0, it follows from Proposition 3 that X ∗ is not a
+stationary point. Moreover, for all X (t) ∈ Mr, we have
+PTX (t) M≤r (−∇f (X (t))) = PTX (t) Mr (−∇f (X (t)))
+= −
+
+ten(k0)(uvT) ×d
+k=1 (U∗
+k)T
+
+×d
+k=1 U∗
+k
+−
+dX
+k=1
+G(t) ×k
+
+P⊥
+U∗
+k
+(ten(k0)(uvT) ×j̸=k (U∗
+j )T)(k)(G(t)
+(k))†
+
+×j̸=k U∗
+j
+= − G(t) ×k0
+
+P⊥
+U∗
+k0
+uvTV∗
+k0 (G(t)
+(k0))†
+
+×j̸=k0 U∗
+j
+= 0,
+where we use (2.9) and ten (k0)(uvT) ×j̸=k (U∗
+j )T = 0 for k ̸= k0.
+Hence, the triplet ( X ∗, {X (t)}, f) is an apocalypse. ⊓ ⊔
+
+[PDF PAGE 46]
+46 Bin Gao et al.
+D Proof of Lemma 2
+Proof Let { ˜X (t)}t≥0 be an infinite sequence generated by Algorithm 7. First, we claim that
+there are infinite many t such that ∥T (t)∥F ≤ ε(t)
+R , where T (t) = grad f (X (t)). Otherwise,
+according to the stopping criteria of Algorithm 4, it always returns rank-deficient points for
+sufficiently large t. Hence, the rank-decreasing procedure will be executed continuously, which
+leads to a contradiction to the fact that rank is finite. Additionally, we assume that the update
+of parameters in lines 10 and 18 is executed finitely. If not, ε(t+1)
+R = ρRε(t)
+R will be executed
+infinitely and thus lim t→∞ ε(t)
+R = 0, implying lim inf t→∞ ∥ PTX (t) Mr(t) (−∇f (X (t)))∥F = 0.
+Consequently, there exists a subsequence {X (tj )}j≥0 satisfying ∥T (tj )∥F ≤ ε
+(tj )
+R . We aim
+to prove that ∥T (tj )∥F converges to 0. Since f is bounded from below, it holds that
+0 ≤ lim
+j→∞
+f (X (tj )) − f ( ˜X (tj +1)) ≤ lim
+j→∞
+f (X (tj )) − f (X (tj +1)) = 0.
+Subsequently, we proceed to discuss two scenarios (rank-increasing procedure and restart)
+regarding the update of X (tj ) for sufficiently large j: 1) if the rank-increasing procedure in
+line 14 is executed, it follows from the backtracking line search in Algorithm 6 and (6.2) that
+f (X (tj )) − f ( ˜X (tj +1)) ≥ smina
+
+N
+(tj )
+≤ℓ(tj ) , −∇f (X (tj ))
+
+= smina ∥N
+(tj )
+≤ℓ(tj ) ∥2
+F
+≥ smina ε2
+1∥T (tj )∥2
+F;
+2) if the restart in line 16 is executed, the search direction ˜PT
+X (tj ) M≤r (−∇f (X (tj ))) is
+adopted. Therefore, it holds that
+f (X (tj )) − f ( ˜X (tj +1)) ≥ smina ∥˜PT
+X (tj ) M≤r (−∇f (X (tj )))∥2
+F ≥ smina ∥T (tj )∥2
+F.
+Note that the last inequality comes from T X (tj ) Mr(tj ) ⊆ TX (tj ) M≤r.
+In summary, we have
+∥T (tj )∥2
+F ≤ f (X (tj )) − f ( ˜X (tj +1))
+smina min{ε2
+1, 1}
+for sufficiently large j and thus it converges to 0. ⊓ ⊔
+References
+[AMS09] P-A Absil, Robert Mahony, and Rodolphe Sepulchre. “Optimization
+algorithms on matrix manifolds”. In: Optimization Algorithms on Ma-
+trix Manifolds. Princeton University Press, 2009.doi: 10.1515/9781400830244.
+[BAC19] Nicolas Boumal, Pierre-Antoine Absil, and Coralia Cartis. “Global
+rates of convergence for nonconvex optimization on manifolds”. In:
+IMA Journal of Numerical Analysis 39.1 (2019), pp. 1–33. doi: 10 .
+1093/imanum/drx080.
+[BEU23] Markus Bachmayr, Henrik Eisenmann, and Andr´ e Uschmajew. “Dy-
+namical low-rank tensor approximations to high-dimensional parabolic
+problems: existence and convergence of spatial discretizations”. In:
+arXiv preprint arXiv:2308.16720 (2023).
+
+[PDF PAGE 47]
+Tucker tensor variety 47
+[Bou23] Nicolas Boumal. An introduction to optimization on smooth manifolds .
+Cambridge University Press, 2023. doi: 10.1017/9781009166164. url:
+https://www.nicolasboumal.net/book.
+[BV06] Winfried Bruns and Udo Vetter. Determinantal rings. Vol. 1327. Springer,
+2006. url: https : / / link . springer . com / content / pdf / 10 . 1007 /
+BFb0080378.pdf.
+[DDV00] Lieven De Lathauwer, Bart De Moor, and Joos Vandewalle. “A multi-
+linear singular value decomposition”. In: SIAM journal on Matrix Anal-
+ysis and Applications 21.4 (2000), pp. 1253–1278.
+[Don+22] Shuyu Dong et al. “New Riemannian preconditioned algorithms for
+tensor completion via polyadic decomposition”. In: SIAM Journal on
+Matrix Analysis and Applications 43.2 (2022), pp. 840–866. doi: 10 .
+1137/21M1394734.
+[FR22] David H Foster and Adam Reeves. “Colour constancy failures ex-
+pected in colourful environments”. In: Proceedings of the Royal Society
+B 289.1967 (2022), p. 20212483. doi: 10.1098/rspb.2021.2483.
+[GA22] Bin Gao and P-A Absil. “A Riemannian rank-adaptive method for
+low-rank matrix completion”. In: Computational Optimization and Ap-
+plications 81 (2022), pp. 67–90. doi: 10.1007/s10589-021-00328-w .
+[GKS20] Kathrin Glau, Daniel Kressner, and Francesco Statti. “Low-rank ten-
+sor approximation for Chebyshev interpolation in parametric option
+pricing”. In: SIAM Journal on Financial Mathematics 11.3 (2020), pp. 897–
+927. doi: 10.1137/19M1244172.
+[GKT13] Lars Grasedyck, Daniel Kressner, and Christine Tobler. “A litera-
+ture survey of low-rank tensor approximation techniques”. In:GAMM-
+Mitteilungen 36.1 (2013), pp. 53–78. doi: 10.1002/gamm.201310004.
+[GPY23] Bin Gao, Renfeng Peng, and Ya-xiang Yuan. “Optimization on prod-
+uct manifolds under a preconditioned metric”. In:arXiv preprint arXiv:2306.08873
+(2023).
+[GPY24] Bin Gao, Renfeng Peng, and Ya-xiang Yuan. “Riemannian precon-
+ditioned algorithms for tensor completion via tensor ring decompo-
+sition”. In: Computational Optimization and Applications 88 (2024),
+pp. 443–468. doi: 10.1007/s10589-024-00559-7 .
+[Gra10] Lars Grasedyck. “Hierarchical singular value decomposition of ten-
+sors”. In: SIAM journal on matrix analysis and applications 31.4 (2010),
+pp. 2029–2054. doi: 10.1137/090764189.
+[Gua+20] Yu Guan et al. “Alternating minimization algorithms for graph regu-
+larized tensor completion”. In: arXiv preprint arXiv:2008.12876 (2020).
+[Hit28] Frank L Hitchcock. “Multiple invariants and generalized rank of a p-
+way matrix or tensor”. In: Journal of Mathematics and Physics 7.1-4
+(1928), pp. 39–79.
+[HS95] Uwe Helmke and Mark A Shayman. “Critical points of matrix least
+squares distance functions”. In: Linear Algebra and its Applications 215
+(1995), pp. 1–19. doi: 10.1016/0024-3795(93)00070-G .
+[HU19] Seyedehsomayeh Hosseini and Andr´ e Uschmajew. “A gradient sam-
+pling method on algebraic varieties and application to nonsmooth
+low-rank optimization”. In: SIAM Journal on Optimization 29.4 (2019),
+pp. 2853–2880. doi: 10.1137/17M1153571.
+
+[PDF PAGE 48]
+48 Bin Gao et al.
+[KB09] Tamara G Kolda and Brett W Bader. “Tensor decompositions and
+applications”. In: SIAM review 51.3 (2009), pp. 455–500. doi: 10.1137/
+07070111X.
+[KL10] Othmar Koch and Christian Lubich. “Dynamical tensor approxima-
+tion”. In: SIAM Journal on Matrix Analysis and Applications 31.5 (2010),
+pp. 2360–2375. doi: 10.1137/09076578X.
+[KM16] Hiroyuki Kasai and Bamdev Mishra. “Low-rank tensor completion:
+a Riemannian manifold preconditioning approach”. In: Proceedings of
+The 33rd International Conference on Machine Learning . Ed. by Maria
+Florina Balcan and Kilian Q. Weinberger. Vol. 48. Proceedings of
+Machine Learning Research. New York, New York, USA: PMLR, June
+2016, pp. 1012–1021. url: https : / / proceedings . mlr . press / v48 /
+kasai16.html.
+[KNW86] Arie Kapteyn, Heinz Neudecker, and Tom Wansbeek. “An approach to
+n-mode components analysis”. In: Psychometrika 51.2 (1986), pp. 269–
+275. doi: 10.1007/BF02293984.
+[KSV14] Daniel Kressner, Michael Steinlechner, and Bart Vandereycken. “Low-
+rank tensor completion by Riemannian optimization”. In: BIT Numer-
+ical Mathematics 54.2 (2014), pp. 447–468. doi: 10.1007/s10543-013-
+0455-z.
+[KSV16] Daniel Kressner, Michael Steinlechner, and Bart Vandereycken. “Pre-
+conditioned low-rank Riemannian optimization for linear systems with
+tensor product structure”. In: SIAM Journal on Scientific Computing
+38.4 (2016), A2018–A2044. doi: 10.1137/15M1032909.
+[Kut18] Benjamin Kutschan. “Tangent cones to tensor train varieties”. In:
+Linear Algebra and its Applications 544 (2018), pp. 370–390. doi: https:
+//doi.org/10.1016/j.laa.2018.01.012.
+[LKB23] Eitan Levin, Joe Kileel, and Nicolas Boumal. “Finding stationary
+points on bounded-rank matrices: A geometric hurdle and a smooth
+remedy”. In: Mathematical Programming 199.1-2 (2023), pp. 831–864.
+doi: 10.1007/s10107-022-01851-2 .
+[LQ23] Ziyan Luo and Liqun Qi. “Optimality conditions for Tucker low-rank
+tensor optimization”. In: Computational Optimization and Applications
+(2023), pp. 1–24. doi: 10.1007/s10589-023-00465-4 .
+[Mis+14] Bamdev Mishra et al. “Fixed-rank matrix factorizations and Rieman-
+nian low-rank optimization”. In: Computational Statistics 29 (2014),
+pp. 591–621. doi: 10.1007/s00180-013-0464-z .
+[OA23] Guillaume Olikier and P-A Absil. “An apocalypse-free first-order low-
+rank optimization algorithm with at most one rank reduction attempt
+per iteration”. In: SIAM Journal on Matrix Analysis and Applications
+44.3 (2023), pp. 1421–1435. doi: 10.1137/22M1518256.
+[OGA23] Guillaume Olikier, Kyle A Gallivan, and P-A Absil. “First-order opti-
+mization on stratified sets”. In:arXiv preprint arXiv:2303.16040 (2023).
+[Ose11] Ivan V Oseledets. “Tensor-train decomposition”. In: SIAM Journal
+on Scientific Computing 33.5 (2011), pp. 2295–2317. doi: 10 . 1137 /
+090752286.
+[OUV23] Guillaume Olikier, Andr´ e Uschmajew, and Bart Vandereycken. “Gauss-
+Southwell type descent methods for low-rank matrix optimization”. In:
+arXiv preprint arXiv:2306.00897 (2023).
+
+[PDF PAGE 49]
+Tucker tensor variety 49
+[OW04] Donal B O’Shea and Leslie C Wilson. “Limits of tangent spaces to real
+surfaces”. In: American journal of mathematics 126.5 (2004), pp. 951–
+980. doi: 10.1353/ajm.2004.0040.
+[Pen+14] Y. Peng et al. “Decomposable nonlocal tensor dictionary learning for
+multispectral image denoising”. In: 2014 IEEE Conference on Computer
+Vision and Pattern Recognition . 2014, pp. 2949–2956.
+[Ste16] Michael Steinlechner. “Riemannian optimization for high-dimensional
+tensor completion”. In: SIAM Journal on Scientific Computing 38.5
+(2016), S461–S484. doi: 10.1137/15M1010506.
+[SU15] Reinhold Schneider and Andr´ e Uschmajew. “Convergence results for
+projected line-search methods on varieties of low-rank matrices Via
+ Lojasiewicz Inequality”. In:SIAM Journal on Optimization 25.1 (2015),
+pp. 622–646. doi: 10.1137/140957822.
+[SWC12] Uri Shalit, Daphna Weinshall, and Gal Chechik. “Online learning in
+the embedded manifold of low-rank matrices”. In: Journal of Machine
+Learning Research 13.2 (2012). url: https://www.jmlr.org/papers/
+volume13/shalit12a/shalit12a.pdf.
+[TT23] Tianyun Tang and Kim-Chuan Toh. “Solving graph equipartition SDPs
+on an algebraic variety”. In: Mathematical Programming (2023), pp. 1–
+49. doi: 10.1007/s10107-023-01952-6 .
+[Tuc+64] Ledyard R Tucker et al. “The extension of factor analysis to three-
+dimensional matrices”. In: Contributions to mathematical psychology
+110119 (1964).
+[UV13] Andr´ e Uschmajew and Bart Vandereycken. “The geometry of algo-
+rithms using hierarchical tensors”. In: Linear Algebra and its Applica-
+tions 439.1 (2013), pp. 133–166.
+[UV20] Andr´ e Uschmajew and Bart Vandereycken. “Geometric methods on
+low-rank matrix and tensor manifolds”. In: Handbook of variational
+methods for nonlinear geometric data. Springer, 2020, pp. 261–313. url:
+https://link.springer.com/chapter/10.1007/978-3-030-31351-7_9 .
+[Van13] Bart Vandereycken. “Low-rank matrix completion by Riemannian op-
+timization”. In: SIAM Journal on Optimization 23.2 (2013), pp. 1214–
+1236. doi: 10.1137/110845768.
+[Ver+23] Charlotte Vermeylen et al. “Rank estimation for third-order tensor
+completion in the tensor-train format”. In: 2023 31st European Signal
+Processing Conference (EUSIPCO). IEEE. 2023, pp. 965–969.
+[VT03] M Alex O Vasilescu and Demetri Terzopoulos. “Multilinear subspace
+analysis of image ensembles”. In: 2003 IEEE Computer Society Con-
+ference on Computer Vision and Pattern Recognition, 2003. Proceedings.
+Vol. 2. IEEE. 2003, pp. II–93. doi: 10.1109/CVPR.2003.1211457.
+[VVM12] Nick Vannieuwenhoven, Raf Vandebril, and Karl Meerbergen. “A new
+truncation strategy for the higher-order singular value decomposi-
+tion”. In: SIAM Journal on Scientific Computing 34.2 (2012), A1027–
+A1052. doi: 10.1137/110836067.
+[Wan+23] Yifan Wang et al. “Solving high dimensional partial differential equa-
+tions using tensor neural network and a posteriori error estimators”.
+In: arXiv preprint arXiv:2311.02732 (2023).
+[Zha+16] Qibin Zhao et al. “Tensor ring decomposition”. In: arXiv preprint
+arXiv:1606.05535 (2016). url: https://arxiv.org/abs/1606.05535.
+
+[PDF PAGE 50]
+50 Bin Gao et al.
+[Zho+16] Guifang Zhou et al. “A Riemannian rank-adaptive method for low-
+rank optimization”. In: Neurocomputing 192 (2016), pp. 72–80. doi:
+10.1016/j.neucom.2016.02.030.

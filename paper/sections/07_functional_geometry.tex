@@ -1,0 +1,79 @@
+\section{Functional selection, metric misordering, and the role of Fisher}
+\label{sec:misordering}
+
+The oracle result is useful only if functional risk can select differently from cheaper algebraic surrogates. We now give a local result that quantifies when this happens.
+
+Let \(Q\succ0\) be the quadratic metric used by a reconstruction rule on a feasible compression-error span \(\mathcal C\); Frobenius error corresponds to \(Q=I\). Fix a regular limiting teacher \(W_*\), let \(G_w(W_*)\succ0\) be the conditional-KL pullback on the same span, and denote the smallest and largest generalized eigenvalues of \((G_w(W_*),Q)\) by \(\lambda_L<\lambda_H\), with \(Q\)-orthonormal generalized eigenvectors \(v_L,v_H\).
+
+\begin{theorem}[Strict local metric misordering]
+\label{thm:misordering}
+Suppose \(W^0(t)\to W_*\) is a teacher family and two equal-resource compression paths have errors
+\[
+\delta_A(t)=W_A(t)-W^0(t)=ta v_H+O(t^2),\qquad
+\delta_B(t)=W_B(t)-W^0(t)=tb v_L+O(t^2),
+\]
+where \(0<a<b\) and \(\lambda_Ha^2>\lambda_Lb^2\). If conditional KL is three times continuously differentiable on the paths, then for all sufficiently small \(t>0\),
+\begin{align*}
+\delta_A(t)^\top Q\delta_A(t)&<\delta_B(t)^\top Q\delta_B(t),\\
+\cD_w\{W_A(t);W^0(t)\}&>
+\cD_w\{W_B(t);W^0(t)\}.
+\end{align*}
+Thus the \(Q\)-reconstruction rule selects \(A\), whereas population functional risk selects \(B\). The ratio of the two selected risks can approach the metric condition number \(\lambda_H/\lambda_L\).
+\end{theorem}
+
+The path premise is essential: anisotropy somewhere in parameter space does not imply that a particular set of feasible decompositions contains the required directions.  The following construction verifies feasibility rather than assuming it.
+
+\begin{proposition}[Equal-budget rank-one TT realization]
+\label{prop:tt-misordering-paths}
+Let \(T_H,T_L\) be Frobenius-orthonormal rank-one TT tensors of the same mode
+shape.  In the binary conditional model
+\[
+ p_W(1\mid X)=\sigma\{\langle W,X\rangle\},\qquad
+ \Pp(X=T_j)=\rho_j>0,\quad j\in\{H,L\},\qquad \rho_H+\rho_L=1,
+\]
+take a dense teacher
+\(W^0(t)=t(aT_H+bT_L)\) and two equal-budget rank-one students
+\(W_A(t)=tbT_L\) and \(W_B(t)=taT_H\).  If \(0<a<b\) and
+\(\rho_Ha^2>\rho_Lb^2\), then for all sufficiently small \(t>0\),
+\[
+ \norm{W_A(t)-W^0(t)}_F^2<\norm{W_B(t)-W^0(t)}_F^2,
+ \qquad
+ \cD_w\{W_A(t);W^0(t)\}>\cD_w\{W_B(t);W^0(t)\}.
+\]
+If the left and right factors of \(T_H,T_L\) are linearly independent across
+at least one TT cut, then \(W^0(t)\) has TT rank two for \(t>0\), whereas both
+students have TT rank one. Thus this moving-teacher local family instantiates
+\cref{thm:misordering} inside an explicit TT compression problem with the same
+student storage budget.
+\end{proposition}
+
+\begin{corollary}[Finite-query selection advantage]
+\label{cor:selection-gap}
+Let \(W_A,W_B\) be fixed before validation, either prespecified or fitted on an independent first split. Let \(\gamma=\cD_w(W_A,W^0)-\cD_w(W_B,W^0)>0\), and suppose \(|\log(q_0/p_{W_j})|\le B\) for \(j=A,B\). Validation likelihood selects \(B\) with probability at least
+\[
+1-\exp\{-n_2\gamma^2/(8B^2)\}.
+\]
+For the class in \cref{thm:misordering}, the Frobenius rule selects \(A\) deterministically. Hence functional validation gives a strict population-risk improvement on this class and identifies the better candidate exponentially fast in the squared risk gap.
+\end{corollary}
+
+\subsection{Conditional KL has a local Fisher pullback}
+
+At a correctly specified regular point with horizontal coordinate \(\theta\), the score identity gives
+\begin{equation}
+\cD_e(\theta+u,\theta)
+=\tfrac12u^\top I_e(\theta)u+O(\norm{u}^3),
+\qquad
+I_e(\theta)=\E_{p_\theta}(s_\theta s_\theta^\top).
+\label{eq:fisher-local}
+\end{equation}
+This classical identity explains Fisher-weighted compression locally. It does not turn the global divergence in \cref{eq:functional-risk} into a quadratic form, and we do not treat the identity itself as a new contribution.
+
+For an ordinary population task loss \(R_e\),
+\begin{equation}
+R_e(W^0+\delta)-R_e(W^0)
+=\nabla R_e(W^0)^\top\delta
++\tfrac12\delta^\top H_e(W^0)\delta
++O(\norm{\delta}^3).
+\label{eq:task-expansion}
+\end{equation}
+The first-order term disappears only under an explicit stationarity condition. Moreover, \(H_e\) need not equal an information matrix. We therefore reserve ``Fisher'' for \cref{eq:fisher-local}, use ``conditional-KL pullback'' for \cref{eq:functional-metric}, and call the general matrix in \cref{eq:task-expansion} a task-risk Hessian.

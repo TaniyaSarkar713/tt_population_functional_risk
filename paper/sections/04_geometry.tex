@@ -1,0 +1,155 @@
+\section{TT quotient geometry and functional identifiability}
+\label{sec:geometry}
+
+\subsection{Gauge-adjusted dimension}
+
+For compressed layer \(\ell\), let the prescribed tensorization have mode sizes \(m_{\ell1},\ldots,m_{\ell q_\ell}\) and exact minimal TT ranks
+\[
+1=r_{\ell0},r_{\ell1},\ldots,r_{\ell,q_\ell-1},r_{\ell q_\ell}=1.
+\]
+Its cores \(G_{\ell j}\) have shape
+\(r_{\ell,j-1}\times m_{\ell j}\times r_{\ell j}\). The gauge group
+\[
+\mathcal G_\lambda=
+\prod_\ell\prod_{j=1}^{q_\ell-1}\mathrm{GL}(r_{\ell j})
+\]
+acts through
+\[
+G_{\ell1}\mapsto G_{\ell1}S_{\ell1},\quad
+G_{\ell j}\mapsto S_{\ell,j-1}^{-1}G_{\ell j}S_{\ell j},\quad
+G_{\ell q_\ell}\mapsto S_{\ell,q_\ell-1}^{-1}G_{\ell q_\ell}.
+\]
+The contracted tensor is unchanged.
+
+\begin{lemma}[TT quotient dimension]
+\label{lem:tt-dimension}
+On the exact-minimal-rank stratum, the gauge action is free and the quotient for independent, untied compressed layers is a smooth manifold of dimension
+\begin{equation}
+d_\lambda=
+\sum_\ell\left\{
+\sum_{j=1}^{q_\ell}r_{\ell,j-1}m_{\ell j}r_{\ell j}
+-\sum_{j=1}^{q_\ell-1}r_{\ell j}^2
+\right\}+d_{\lambda,\mathrm{free}},
+\label{eq:tt-dim}
+\end{equation}
+where \(d_{\lambda,\mathrm{free}}\) counts other identifiable free parameters. With tied or shared cores, \cref{eq:tt-dim} must be replaced by the rank of the constrained quotient map.
+\end{lemma}
+
+The next result makes the atlas in the oracle theorem concrete. For layer
+\(\ell\), put \(N_{\ell j}=\prod_{k\le j}m_{\ell k}\). Let
+\(U_{\ell j}(W)\in\R^{N_{\ell j}\times r_{\ell j}}\) be any orthonormal
+basis for the column space of the \(j\)th unfolding, put
+\(P_{\ell j}(W)=U_{\ell j}(W)U_{\ell j}(W)^\top\), and define
+\(c_{\ell j}=\binom{N_{\ell j}}{r_{\ell j}}^{-1/2}\).
+
+\begin{proposition}[Thresholded pivot cover and finite TT atlas]
+\label{prop:tt-atlas}
+Fix the mode sizes and exact minimal ranks. On the set of tensors satisfying
+\(\norm{W}_F\le R\) and
+\(\sigma_{r_{\ell j}}\{\operatorname{unfold}_j(W_\ell)\}\ge\eta>0\)
+at every internal bond, define for each collection of row sets
+\(I=(I_{\ell j})\), \(|I_{\ell j}|=r_{\ell j}\), the basis-invariant patch
+\begin{equation}
+ \mathcal P_I=\left\{W:
+ \lambda_{\min}\{P_{\ell j}(W)[I_{\ell j},I_{\ell j}]\}
+ >c_{\ell j}^2/4\ \text{at every internal bond}\right\}.
+ \label{eq:pivot-patch}
+\end{equation}
+These patches cover the separated quotient, and their number is at most
+\begin{equation}
+ M_\lambda=H_{\lambda,\mathrm{free}}
+ \prod_\ell\prod_{j<q_\ell}
+ \binom{N_{\ell j}}{r_{\ell j}},
+ \label{eq:pivot-count}
+\end{equation}
+where \(H_{\lambda,\mathrm{free}}=1\) for identifiable free coordinates in a
+single compact Euclidean domain. On \(\mathcal P_I\), the normalized interface
+\[
+ \bar L_{\ell j}^{I}(W)=P_{\ell j}(W)[:,I_{\ell j}]
+ \{P_{\ell j}(W)[I_{\ell j},I_{\ell j}]\}^{-1}
+\]
+is a smooth, basis-independent normalization and satisfies
+\(\bar L_{\ell j}^{I}[I_{\ell j},:]=I_{r_{\ell j}}\).
+
+The separated compact quotient has a finite gauge-fixed Euclidean atlas of
+dimension \(d_\lambda\) subordinate to these thresholded pivot patches; let
+its total size be \(H_\lambda<\infty\). The chart and inverse-chart
+derivatives through order two are bounded by
+\begin{equation}
+ C_{\mathrm{atlas},\lambda}
+ =C\bigl((m_{\ell j}),(r_{\ell j}),q_\ell,R,\eta^{-1},
+ (c_{\ell j}^{-1})\bigr)<\infty.
+ \label{eq:atlas-constant}
+\end{equation}
+In particular, if \(B_d(a,t)\) lies in one subchart, then
+\[
+ \log N\{\epsilon,\psi_I(B_d(a,t)),\norm{\cdot}_F\}
+ \le d_\lambda\log\left(1+\frac{2C_{\mathrm{atlas},\lambda}t}{\epsilon}\right).
+\]
+The finite-subatlas extraction does not imply \(H_\lambda\le M_\lambda\): a
+pivot patch need not be one global Euclidean chart. Neither \(H_\lambda\) nor
+\cref{eq:atlas-constant} is claimed optimal, and both can deteriorate as
+\(\eta\downarrow0\).
+\end{proposition}
+
+For uniform results, let \(\Theta_\lambda(\eta,R)\) be a compact portion of the quotient on which tensor norms are at most \(R\), every required TT unfolding has smallest nonzero singular value at least \(\eta>0\), and a finite horizontal atlas has condition number at most \(C_{\mathrm{chart}}\). We suppress \((\eta,R)\) below. Lower-rank models are included as separate candidates; we do not silently close an exact-rank stratum by adding its singular boundary.
+
+\subsection{Functional rather than merely tensor identifiability}
+
+Let \(\Phi([W])=p_W(\cdot\mid X,E)\) be the conditional-law map after contraction and frozen-network propagation. At a regular \(W\), write \(T_W^H\Theta_\lambda\) for a horizontal quotient tangent. The conditional-KL pullback is
+\begin{equation}
+G_w(W)[H,H']
+=\sum_e w_e\E_{X\sim P_e,Y\sim p_W}
+\{D_W\log p_W(Y\mid X,e)[H]\,
+  D_W\log p_W(Y\mid X,e)[H']\}.
+\label{eq:functional-metric}
+\end{equation}
+The \emph{functional dimension} is
+\[
+d_{\mathrm{fun}}(W)=\rank\{G_w(W)|_{T_W^H\Theta_\lambda}\}\le d_\lambda.
+\]
+Our gauge-dimensional results require constants \(0<\underline\kappa\le\overline\kappa<\infty\) such that
+\begin{equation}
+ \underline\kappa\norm{H}_F^2
+ \le G_w(W)[H,H]
+ \le\overline\kappa\norm{H}_F^2,
+ \qquad H\in T_W^H\Theta_\lambda,
+\label{eq:restricted-info}
+\end{equation}
+uniformly on the chart used by the theorem. Without \cref{eq:restricted-info}, \(d_\lambda\) is only an algebraic entropy upper bound; a sharp local rate uses the rank or spectrum of the functional operator.
+
+\subsection{A verifiable nonlinear frozen-network block}
+
+To make \cref{eq:restricted-info} more than an abstract assumption, consider
+\begin{equation}
+h=h(X,E)\in\R^p,\qquad
+z_W=b(X,E)+C\phi(Wh),\qquad
+p_W=\operatorname{softmax}(z_W),
+\label{eq:nonlinear-block}
+\end{equation}
+where the prefix \(h\), residual logits \(b\), and head \(C\in\R^{V\times k}\) are frozen, \(\phi\) acts elementwise, and the tensorization of \(W\in\R^{k\times p}\) lies in a TT stratum.
+
+\begin{proposition}[Restricted curvature for a nonlinear block]
+\label{prop:block-curvature}
+Suppose on the permitted activation range that \(\phi\in C^3\), \(|\phi'|\ge\kappa_\phi>0\), and derivatives up to order three are bounded. Suppose
+\[
+\E(hh^\top)\succeq\kappa_h I,
+\quad \bm 1^\top C=0,
+\quad
+C^\top\{\operatorname{diag}(p_W)-p_Wp_W^\top\}C\succeq\kappa_C I
+\]
+uniformly on the model. Then for every ambient perturbation \(H\),
+\[
+G_w(W)[H,H]\ge
+\kappa_C\kappa_\phi^2\kappa_h\norm{H}_F^2.
+\]
+Consequently the conditional-law map is locally injective on every well-conditioned horizontal TT chart.
+\end{proposition}
+
+Local injectivity in this proposition is a property of the student family and
+does not depend on the teacher.  Under misspecification, it is instead the
+quadratic margin of the teacher-relative cross-entropy that additionally
+requires its residual-Hessian perturbation to be smaller than the displayed
+model curvature.
+
+The proposition covers a nonlinear compressed block between a frozen prefix and head, not an unrestricted transformer. It also removes the common-softmax-logit direction through the condition on \(C\). Dead prefix directions, unexcited prompts, or additional network symmetries violate its assumptions and reduce functional dimension.

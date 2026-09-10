@@ -1,0 +1,110 @@
+[
+  {
+    "id": "xu_chen_han_2025",
+    "url": "https://arxiv.org/pdf/2501.16223",
+    "pages": 118,
+    "status": "downloaded and extracted"
+  },
+  {
+    "id": "choi_kwon_liao_rank",
+    "url": "https://arxiv.org/pdf/2311.16440",
+    "pages": 35,
+    "status": "downloaded and extracted"
+  },
+  {
+    "id": "armstrong_weidner_zeleneev",
+    "url": "https://arxiv.org/pdf/2210.06639",
+    "pages": 64,
+    "status": "downloaded and extracted"
+  },
+  {
+    "id": "ke_song_zhao_wang_2026",
+    "url": "https://www3.stat.sinica.edu.tw/ss_newpaper/SS-2026-0222_na.pdf",
+    "status": "failed",
+    "error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Missing Subject Key Identifier (_ssl.c:1032)>"
+  },
+  {
+    "id": "carpentier_klopp_loffler_nickl",
+    "url": "https://arxiv.org/pdf/1608.04861",
+    "pages": 25,
+    "status": "downloaded and extracted"
+  },
+  {
+    "id": "carpentier_nickl_detection",
+    "url": "https://arxiv.org/pdf/1507.03829",
+    "pages": 12,
+    "status": "downloaded and extracted"
+  },
+  {
+    "id": "xia_zhang_zhou",
+    "url": "https://arxiv.org/pdf/2012.14844",
+    "pages": 99,
+    "status": "downloaded and extracted"
+  },
+  {
+    "id": "cai_low_adaptation",
+    "url": "https://arxiv.org/pdf/math/0503662",
+    "pages": 37,
+    "status": "downloaded and extracted"
+  },
+  {
+    "id": "zhu_weak_factors",
+    "url": "https://arxiv.org/pdf/1910.10382",
+    "pages": 45,
+    "status": "downloaded and extracted"
+  },
+  {
+    "id": "xia_yuan_linear_forms",
+    "url": "https://arxiv.org/pdf/1909.00116",
+    "pages": 76,
+    "status": "downloaded and extracted"
+  },
+  {
+    "id": "cai_liang_rakhlin",
+    "url": "https://arxiv.org/pdf/1404.4408",
+    "pages": 39,
+    "status": "downloaded and extracted"
+  },
+  {
+    "id": "carpentier_eisert_gross_nickl",
+    "url": "https://arxiv.org/pdf/1504.03234",
+    "pages": 37,
+    "status": "downloaded and extracted"
+  },
+  {
+    "id": "carpentier_kim",
+    "url": "https://arxiv.org/pdf/1502.04654",
+    "pages": 40,
+    "status": "downloaded and extracted"
+  },
+  {
+    "id": "agterberg_zhang",
+    "url": "https://arxiv.org/pdf/2410.06381",
+    "pages": 113,
+    "status": "downloaded and extracted"
+  },
+  {
+    "id": "bykhovskaya_gorin_sodin",
+    "url": "https://arxiv.org/pdf/2507.18554",
+    "pages": 76,
+    "status": "downloaded and extracted"
+  },
+  {
+    "id": "drton_singularities",
+    "url": "https://arxiv.org/pdf/math/0703360",
+    "pages": 35,
+    "status": "downloaded and extracted"
+  },
+  {
+    "id": "kutschan_tt_cone",
+    "url": "https://arxiv.org/pdf/1705.10152",
+    "pages": 15,
+    "status": "downloaded and extracted"
+  },
+  {
+    "id": "gao_peng_yuan_tucker_cone",
+    "url": "https://arxiv.org/pdf/2311.18324",
+    "pages": 50,
+    "status": "downloaded and extracted"
+  }
+]

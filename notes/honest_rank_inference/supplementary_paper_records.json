@@ -1,0 +1,16 @@
+[
+  {
+    "rank": 20,
+    "reference": "R20",
+    "problem": "Conditional quantile Q_tau(Y|z,X)=z^T beta+<X,A>, A in a TT model.",
+    "method": "Alternating quantile estimation; optional fused/total-variation penalty.",
+    "assumptions": "Bounded parameter space; moments; positive-definite design matrix; conditional error density bounded below near zero (A1\u2013A4).",
+    "asymptotic_regime": "Main CLT uses fixed model dimension/ranks as n grows; penalized bound separately adds assumptions.",
+    "main_theorem": "Thms 3.1, 3.3, 3.4; Section 3.",
+    "rate_or_guarantee": "sqrt(n)(xi_hat-xi_0) -> N(0,P Sigma P^T); consistency and regularized error bound.",
+    "limitation_and_mathematical_difference": "Regular TT regression CLT already exists. No uniform claim over unknown rank and weak triangular sequences is established there.",
+    "classification": "Same TT structure; regular inference already known.",
+    "novelty_threat": "Medium",
+    "evidence": "Full indexed primary article Section 3 inspected; some math rendering incomplete, so no detailed penalized rate copied."
+  }
+]

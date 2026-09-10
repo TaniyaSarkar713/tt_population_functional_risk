@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "scope": "Visual inspection of selected paper pages and all report pages; no clipping or equation/table collisions observed.",
+  "paper_pages_inspected": [
+    11,
+    12,
+    13,
+    32,
+    33,
+    34,
+    35
+  ],
+  "report_pages_inspected": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "final_rechecks": "Paper status page 35 after paragraph-spacing repair; report page 1 after explicit confidence-level qualification.",
+  "pdf_sha256": {
+    "paper/main.pdf": "f9465a4120655b4c8d2a2e6b55b8fc9d8dbc5dc22fec4b9897572a77855313d4",
+    "progress_report.pdf": "e125daf554adf82b8e249db3237c901bcd843fdffdfcaa32dbac5eb011aa5afa"
+  }
+}

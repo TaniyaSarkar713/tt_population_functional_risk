@@ -1,0 +1,361 @@
+\section{Matching lower bounds, sharp constants, and rank boundaries}
+\label{sec:lower}
+
+\subsection{A horizontal Assouad construction}
+
+Let \(h_w\) denote Hellinger distance between the joint laws with the common environment--prompt marginal and the indicated conditional response laws. Fix a regular point in a separated TT stratum and a \(C^2\) horizontal chart
+\(\psi:B_d(0,\rho)\to\Theta_\lambda\), where \(d=d_\lambda\).
+
+\begin{assumption}[Local experimental and target metrics]
+\label{ass:lower-metric}
+For constants \(c_h,C_K>0\) and all \(u,v\in B_d(0,\rho)\),
+\begin{align}
+h_w^2\{p_{\psi(u)},p_{\psi(v)}\}&\ge c_h\norm{u-v}_2^2,\label{eq:hell-lower}\\
+\KL\{Q_{\psi(u)}^w\|Q_{\psi(v)}^w\}&\le C_K\norm{u-v}_2^2.\label{eq:kl-upper}
+\end{align}
+\end{assumption}
+
+These inequalities follow on a sufficiently small chart from a uniformly nondegenerate conditional information matrix. Their dimension is \(d_\lambda\) because the chart is horizontal; a packing of raw cores would incorrectly count gauge copies.
+
+\begin{theorem}[Gauge-dimensional minimax lower bound]
+\label{thm:lower}
+Under Assumption~\ref{ass:lower-metric}, for a constant \(c>0\) depending only on \(c_h,C_K\),
+\begin{equation}
+\inf_{\wt p=\wt p(Z_1,\ldots,Z_n)}\sup_{u\in B_d(0,\rho)}
+\E_u\Kw{p_{\psi(u)}}{\wt p}
+\ge c\left(\rho^2\wedge\frac{d_\lambda}{n}\right).
+\label{eq:lower-dn}
+\end{equation}
+The infimum is over all conditional-distribution estimators measurable with
+respect to the displayed \(n\)-query experiment and not to any additional
+teacher information.  Thus the result also holds for estimators constrained
+to TT networks.
+\end{theorem}
+
+The modelwise rate in \cref{eq:lower-dn} concerns the stochastic-query
+experiment and does not apply after the teacher observation channel is changed.
+
+\subsection{Adding irreducible compression error}
+
+A fixed-stratum result does not by itself lower-bound an arbitrary oracle over
+a union: a larger unpenalized class could contain the teacher.  The
+appropriate approximation statement fixes a resource class and constructs a
+dense teacher normal to it.  We next give conditions under which that
+construction actually exists.
+
+Let \(\mathcal U\subset\R^D\) be an open dense-block parameter chart and let
+\(p_\zeta\), \(\zeta\in\mathcal U\), be its conditional laws.  A separated TT
+chart is represented by a \(C^3\) embedding
+\[
+ \iota:B_d(0,2\rho_0)\longrightarrow\mathcal U,
+ \qquad d=d_\lambda<D,
+\]
+whose image is the local part of \(\Theta_\lambda\).  Write
+\[
+ J_w(\zeta)=\sum_e w_e\E_{P_e,p_\zeta}
+ \{s_\zeta s_\zeta^\top\},
+ \qquad s_\zeta=\nabla_\zeta\log p_\zeta(Y\mid X,e).
+\]
+For an arbitrary teacher conditional \(q\), use the notation
+\[
+A_w^2(\lambda;q)=\inf_{W\in\Theta_\lambda}\Kw{q}{p_W}.
+\]
+
+\begin{proposition}[Smooth Fisher-normal TT tube]
+\label{prop:normal-tube}
+Suppose \(\rho_0\) has been chosen sufficiently small that the closed chart
+below lies in one regular neighborhood. Suppose the dense-block model has common conditional support, its log
+densities have three derivatives dominated uniformly on a neighborhood of
+\(\iota\{B_d(0,2\rho_0)\}\), and
+\[
+ \underline\kappa I_D\preceq J_w(\zeta)
+ \preceq\overline\kappa I_D
+\]
+there.  Suppose the singular values of \(D\iota(u)\) are bounded above and
+away from zero and the first three derivatives of \(\iota\) are bounded.
+Let \(N(u)\) be a \(C^2\) normal field satisfying
+\begin{equation}
+ D\iota(u)^\top J_w\{\iota(u)\}N(u)=0,
+ \qquad
+ N(u)^\top J_w\{\iota(u)\}N(u)=1,
+ \label{eq:fisher-normal}
+\end{equation}
+with bounded first two derivatives.  Such a field exists after shrinking a
+ball whenever the functional codimension is positive; equivalently, the
+profiled normal Hessian is the positive Schur complement of the tangent
+information block.  For
+\[
+ \zeta_{u,a}=\iota(u)+aN(u),\qquad P_{u,a}=p_{\zeta_{u,a}},
+\]
+assume additionally that the rest of the compact resource class is separated:
+there is \(g_0>0\) such that, for all sufficiently small \(a\),
+\begin{equation}
+ \inf_{u\in B_d(0,\rho_0)}
+ \inf_{W\in\Theta_\lambda\setminus
+ \iota\{B_d(0,2\rho_0)\}}
+ \Kw{P_{u,a}}{p_W}\ge g_0.
+ \label{eq:off-chart-gap}
+\end{equation}
+Put \(\rho=\rho_0/4\). Then there are \(a_0>0\) and constants
+\(0<c_T<C_T<\infty\) such that, for
+\(u\in B_d(0,\rho)\), \(v\in B_d(0,2\rho_0)\), and
+\(0\le a\le a_0\),
+\begin{align}
+ c_T\{a^2+\norm{u-v}_2^2\}
+ &\le \Kw{P_{u,a}}{p_{\iota(v)}}
+ \le C_T\{a^2+\norm{u-v}_2^2\},
+ \label{eq:tube-loss}\\
+ \KL\{(Q_{u,a}^w)^{\otimes n}\|(Q_{v,a}^w)^{\otimes n}\}
+ &\le nC_T\norm{u-v}_2^2,
+ \label{eq:tube-kl}\\
+ c_Ta^2\le A_w^2(\lambda;P_{u,a})&\le C_Ta^2.
+ \label{eq:tube-approx}
+\end{align}
+Here \(Q_{u,a}^w\) has the fixed environment--prompt marginal and conditional
+law \(P_{u,a}\).  The off-chart condition is indispensable: local reach alone
+does not rule out a second, distant TT representation with smaller functional
+risk.
+\end{proposition}
+
+The curvature conditions of Proposition~\ref{prop:block-curvature}, applied in
+the ambient dense block, verify the information assumption in
+Proposition~\ref{prop:normal-tube}.  The codimension condition excludes a TT
+class that already fills the dense parameter chart.
+
+\begin{theorem}[Approximation plus estimation under a fixed budget]
+\label{thm:tube-lower}
+Under Proposition~\ref{prop:normal-tube}, for every fixed
+\(0\le a\le a_0\), let \(\mathfrak E_n(\Theta_\lambda)\) denote the measurable
+maps from the \(n\)-query sample into \(\Theta_\lambda\). Then
+\begin{equation}
+\inf_{\wt W\in\mathfrak E_n(\Theta_\lambda)}
+\sup_{u\in B_d(0,\rho)}
+\E_{u,a}\Kw{P_{u,a}}{p_{\wt W}}
+\ge c\left\{a^2+
+\left(\rho^2\wedge\frac{d_\lambda}{n}\right)\right\}.
+\label{eq:tube-lower-result}
+\end{equation}
+In view of \cref{eq:tube-approx}, this is equivalent up to constants to
+approximation error plus \(d_\lambda/n\) in the local regime for the fixed
+resource class \(\Theta_\lambda\). More precisely, it establishes sharpness,
+up to constants, of the irreducible approximation term and the within-class
+gauge-dimensional estimation term for this teacher family. It neither
+lower-bounds the atlas or coding penalties \(\log H_\lambda\) and
+\(\log(1/\pi_\lambda)\), nor gives an oracle lower bound over a union that may
+contain larger free models.
+\end{theorem}
+
+\subsection{A Gaussian-sequence approximation benchmark}
+
+The preceding fixed-budget theorem is the compression lower bound used in the
+paper.  For comparison with the final synthetic experiment, consider the
+separate Gaussian sequence experiment
+\begin{equation}
+ Z_j=\theta_j+n^{-1/2}\xi_j,\qquad
+ \xi_j\stackrel{\mathrm{iid}}\sim N(0,1),\qquad j\ge1,
+ \label{eq:gaussian-sequence}
+\end{equation}
+under squared \(\ell_2\) loss, and define the approximation class
+\[
+ \mathcal H_s(L)=\left\{\theta\in\ell_2:
+ \sum_{j>D}\theta_j^2\le L^2D^{-2s}
+ \text{ for every integer }D\ge1\right\}.
+\]
+
+\begin{proposition}[Matching-rate Gaussian-sequence benchmark]
+\label{cor:scale}
+For every \(s,L>0\), constants \(0<c_s<C_s<\infty\) satisfy
+\[
+ c_s\inf_{D\ge1}\left\{L^2D^{-2s}+\frac Dn\right\}
+ \le
+ \inf_{\wt\theta}\sup_{\theta\in\mathcal H_s(L)}
+ \E_\theta\norm{\wt\theta-\theta}_2^2
+ \le
+ C_s\inf_{D\ge1}\left\{L^2D^{-2s}+\frac Dn\right\}.
+\]
+The upper bound is attained, up to constants, by truncation at the optimizing
+\(D\).  An unbounded candidate grid \(1=d_1<d_2<\cdots\) with uniformly
+bounded adjacent ratios yields the same rate, up to a grid-dependent constant,
+with the infimum restricted to that grid. This proposition is a
+matching-rate benchmark for \cref{eq:gaussian-sequence}; transferring it to a growing
+conditional-generator experiment requires a separate uniform LAN or
+nonasymptotic embedding argument and is not claimed here.
+\end{proposition}
+
+\subsection{Local asymptotic minimax constant}
+
+Allow the query environment mixture \(\pi\) to differ from deployment weights \(w\). Let \(I_\pi\) be the information in one query in horizontal coordinates. Let a twice differentiable target divergence satisfy
+\[
+\cL_w\{p_{\psi(\theta)},p_{\psi(\theta+t)}\}
+=\tfrac12t^\top G_wt+o(\norm{t}^2).
+\]
+
+\begin{theorem}[Sharp local constant]
+\label{thm:lan}
+Suppose the horizontal experiment at \(\psi(0)\) is differentiable in
+quadratic mean and locally asymptotically normal, \(I_\pi\succ0\) and
+\(G_w\succ0\), and the loss expansion is locally uniform.  Assume also local
+coercivity: outside every sufficiently small coordinate neighborhood the
+target loss is bounded away from zero, uniformly for true parameters in a
+smaller neighborhood.  More explicitly, require that for every
+\(M,R<\infty\),
+\[
+\sup_{\norm{h}\vee\norm{b}\le R}
+\left|\min\left[M,n\cL_w
+ \{p_{\psi(h/\sqrt n)},p_{\psi(b/\sqrt n)}\}\right]
+-\min\left[M,\tfrac12(b-h)^\top G_w(b-h)\right]\right|
+\longrightarrow0,
+\]
+and estimators leaving the local chart cannot have smaller limiting truncated
+risk.  Then
+\begin{equation}
+\lim_{R\to\infty}\liminf_{n\to\infty}
+\inf_{\wt W_n}\sup_{\norm{h}\le R}
+n\E_{\psi(h/\sqrt n)}
+\cL_w\{\psi(h/\sqrt n),\wt W_n\}
+\ge\frac12\tr(G_wI_\pi^{-1}).
+\label{eq:lan-constant}
+\end{equation}
+An efficient quotient estimator attains equality if it is asymptotically
+linear uniformly on compact local alternatives and its rescaled quadratic
+losses are uniformly integrable. For correctly specified conditional KL,
+\(G_w=I_w\). If \(w=\pi\), the constant is \(d_\lambda/2\); otherwise it is
+\(\tfrac12\tr(I_wI_\pi^{-1})\), not \(d_\lambda/2\).
+\end{theorem}
+
+Thus \cref{eq:lan-constant} is a lower bound for the local quotient experiment;
+equality additionally requires the stated efficiency and uniform-integrability
+conditions.
+
+\begin{proposition}[Misspecified excess-target constant]
+\label{prop:misspecified-constant}
+Let
+\[
+R_w(\theta)=\Kw{q_0}{p_{\psi(\theta)}}
+\]
+have an interior stationary minimizer \(\theta^*\) and Hessian
+\(G_w=\nabla^2R_w(\theta^*)\succ0\). Suppose an estimator based on queries
+from mixture \(\pi\) is asymptotically linear for an estimating function
+\(\varphi_\pi\) satisfying
+\[
+\E_\pi\varphi_\pi(Z,\theta^*)=0,\qquad
+H_\pi=\E_\pi\nabla_\theta\varphi_\pi(Z,\theta^*)
+=H_\pi^\top\succ0,\qquad
+V_\pi=\operatorname{Var}_\pi\{\varphi_\pi(Z,\theta^*)\},
+\]
+so that
+\[
+\sqrt n(\wh\theta-\theta^*)\rightsquigarrow
+N(0,H_\pi^{-1}V_\pi H_\pi^{-1}).
+\]
+If the target-risk Taylor remainder and the rescaled losses are uniformly
+integrable, then
+\begin{equation}
+n\E\{R_w(\wh\theta)-R_w(\theta^*)\}
+\longrightarrow
+\tfrac12\tr\{G_wH_\pi^{-1}V_\pi H_\pi^{-1}\}.
+\label{eq:misspecified-constant}
+\end{equation}
+The ordinary-likelihood projection under \(\pi\) need not minimize the target
+risk under \(w\); the proposition therefore requires the displayed
+common centering. Importance-weighted likelihood is one way to enforce it.
+At correct conditional specification under matched sampling,
+\(G_w=H_\pi=V_\pi=I_w\), recovering \(d_\lambda/2\).
+\end{proposition}
+
+Thus at a misspecified projection the estimating Hessian and score covariance
+generally differ, and the constant in \cref{eq:misspecified-constant} is
+sandwich-shaped. This is
+another reason not to label every functional matrix ``Fisher.''
+
+\subsection{The lower-rank boundary}
+
+For this subsection take the query and target environment mixtures to agree,
+\(\pi=w\), so that the Hellinger and conditional-KL separations below use the
+same population mixture.
+
+Let \(\mathcal B_{\bm r}\) be the union of strata strictly below \(\bm r\), and define the gauge-invariant functional separation
+\[
+\delta_{\bm r}(W)=\inf_{V\in\mathcal B_{\bm r}}
+h_\pi(Q_W,Q_V).
+\]
+
+\begin{theorem}[No uniform rank recovery at the boundary]
+\label{thm:rank-impossibility}
+Suppose \(W_0\in\mathcal B_{\bm r}\) has minimal TT rank \(\bm r_0\), and
+\(W_t\) lies in the exact-rank \(\bm r\) stratum with \(W_t\to W_0\) and
+\[
+\KL(Q_{W_0}^\pi\|Q_{W_t}^\pi)\le C\delta_t^2,
+\qquad \delta_t=h_\pi(Q_{W_0},Q_{W_t}).
+\]
+For every rank selector \(\wh{\bm r}\),
+\[
+\max\left\{
+\Pp_{W_0}(\wh{\bm r}\ne\bm r_0),
+\Pp_{W_t}(\wh{\bm r}\ne\bm r)
+\right\}
+\ge\frac{1-\sqrt{Cn\delta_t^2/2}}{2}.
+\]
+Therefore rank recovery is not uniformly consistent when \(\delta_t=o(n^{-1/2})\), and its error stays bounded away from zero at a sufficiently small constant multiple of \(n^{-1/2}\).
+\end{theorem}
+
+Prediction-risk adaptation does not require exact rank recovery. Conversely,
+exact recovery requires separation. A natural separated class on which to
+seek recovery is
+\[
+\Theta(\bm r,\eta)=\{W:\operatorname{rank}_{TT}(W)=\bm r,
+\ \delta_{\bm r}(W)\ge\eta,\ \text{bounded regularity constants}\}.
+\]
+Under uniform likelihood-gap deviations of order
+\(\{d_{\bm r}+\log(|\Lambda|/\alpha)\}/n\), a transparent sufficient
+underfit condition is
+\[
+\inf_{V\in\mathcal B_{\bm r}}\Kw{p_W}{p_V}
+\ge C\frac{d_{\bm r}+\log(|\Lambda|/\alpha)}{n}.
+\]
+The next elementary proposition records exactly what is additionally needed
+for a consistency claim.
+
+\begin{proposition}[Conditional sufficient rank-selection conditions]
+\label{prop:rank-sufficiency}
+Let \(\Lambda\) be finite, let the teacher \(W\) have minimal candidate rank
+\(\bm r\), and define
+\[
+ \wh{\bm r}\in\argmin_{\bm s\in\Lambda}
+ \left\{\inf_{V\in\Theta_{\bm s}}P_n\ell_V
+       +\frac{\operatorname{pen}_{\bm s}}n\right\}.
+\]
+Partition the other candidates into underfit models \(\mathcal U_{\bm r}\)
+that do not contain the teacher law and overfit models
+\(\mathcal O_{\bm r}\) that do.  Suppose that, on events whose probabilities
+tend to one,
+\begin{align*}
+ \inf_{V\in\Theta_{\bm s}}P_n(\ell_V-\ell_W)&\ge g_n/2,
+ &&\bm s\in\mathcal U_{\bm r},\\
+ P_n\ell_W-\inf_{V\in\Theta_{\bm s}}P_n\ell_V&\le b_{\bm s,n}/n,
+ &&\bm s\in\mathcal O_{\bm r}.
+\end{align*}
+If eventually
+\begin{align*}
+ ng_n/2+\operatorname{pen}_{\bm s}-
+ \operatorname{pen}_{\bm r}&>0,
+ &&\bm s\in\mathcal U_{\bm r},\\
+ \operatorname{pen}_{\bm s}-\operatorname{pen}_{\bm r}
+ &>b_{\bm s,n},
+ &&\bm s\in\mathcal O_{\bm r},
+\end{align*}
+then \(\Pp_W(\wh{\bm r}=\bm r)\to1\).
+\end{proposition}
+
+A population underfit gap
+\(g_n\le\inf_{\bm s\in\mathcal U_{\bm r}}
+\inf_{V\in\Theta_{\bm s}}\Kw{p_W}{p_V}\), together with uniform deviations
+that are \(o(g_n)\), verifies the first event.  Because
+\(\Kw{p_W}{p_V}\ge h_\pi^2(Q_W,Q_V)\), the regime
+\(\eta_n\sqrt{n/(d_{\bm r}+\log|\Lambda|)}\to\infty\) is a transparent
+underfit-separation condition under the displayed deviation scale.  It is not
+by itself sufficient for rank consistency: the overfit-gain bounds must also
+be proved.  In regular nested models a BIC-type penalty can dominate those
+gains, whereas a fixed AIC-type penalty generally does not; near singular TT
+strata this domination requires a separate analysis.  We do not claim that
+the displayed separation is a universal necessary boundary.

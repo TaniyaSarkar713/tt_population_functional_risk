@@ -1,0 +1,246 @@
+\section{Proofs of lower and adaptation results}
+\label{app:lower-proofs}
+
+\begin{proof}[Proof of Theorem~\ref{thm:lower}]
+Let \(\omega\in\{-1,1\}^d\) and set \(u_\omega=a\omega\), where
+\[
+a^2=c_0\left(\frac1n\wedge\frac{\rho^2}{d}\right)
+\]
+and \(c_0\) is sufficiently small. Then \(u_\omega\in B_d(0,\rho)\). If \(\omega\) and \(\omega^{(j)}\) differ only in coordinate \(j\), \cref{eq:kl-upper} gives
+\[
+\KL\{(Q_{u_\omega}^w)^{\otimes n}\|
+        (Q_{u_{\omega^{(j)}}}^w)^{\otimes n}\}
+\le 4C_Kna^2\le4C_Kc_0.
+\]
+Choose \(c_0\) so that Pinsker's inequality bounds the total variation between every neighboring product experiment by at most \(1/2\). Assouad's lemma then forces expected Hamming error at least \(d/4\) for any decoder of \(\omega\).
+
+Given an arbitrary estimated conditional distribution \(\wt p\), let
+\(\wh\omega\) be a Hellinger-nearest vertex, with measurable tie breaking.
+Because \(p_{u_\omega}\) is one of the vertices, the triangle inequality gives
+\[
+h_w(p_{u_\omega},p_{u_{\wh\omega}})
+\le 2h_w(p_{u_\omega},\wt p).
+\]
+Together with \cref{eq:hell-lower}, this implies
+\[
+h_w^2(p_{u_\omega},\wt p)
+\ge c_h a^2d_H(\omega,\wh\omega),
+\]
+where \(d_H\) is Hamming distance. Therefore
+\[
+\sup_\omega\E_\omega h_w^2(p_{u_\omega},\wt p)
+\ge c d a^2
+=c\left(\rho^2\wedge\frac dn\right).
+\]
+Finally \(\Kw{q}{p}\ge h_w^2(q,p)\) under the convention
+\(h^2=\int(\sqrt q-\sqrt p)^2\), which proves the claim. See~\citet{tsybakov2009} for the metric form of Assouad's lemma.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:normal-tube}]
+To verify the asserted local existence of the normal field, choose a nonzero
+vector \(v_0\) in the \(J_w\{\iota(0)\}\)-orthogonal complement of
+\(D\iota(0)\). The matrices
+\[
+\Pi_u=I_D-D\iota(u)
+\{D\iota(u)^\top J_w(\iota(u))D\iota(u)\}^{-1}
+D\iota(u)^\top J_w(\iota(u))
+\]
+project onto the corresponding information-normal spaces. For the sufficiently
+small \(\rho_0\) fixed in the proposition, \(\Pi_uv_0\) stays nonzero;
+normalizing it in the \(J_w\)-metric
+produces a \(C^2\) field satisfying \cref{eq:fisher-normal}. Compactness of
+the smaller closed ball supplies the derivative bounds, and openness of
+\(\mathcal U\) ensures \(\iota(u)+aN(u)\in\mathcal U\) for small \(a\).
+
+The common-support and dominated-derivative assumptions give the uniform
+two-parameter KL expansion
+\begin{equation}
+\Kw{p_\zeta}{p_{\zeta'}}
+=\tfrac12(\zeta'-\zeta)^\top
+J_w(\zeta_0)(\zeta'-\zeta)
++R(\zeta,\zeta';\zeta_0),
+\qquad
+|R|\le C(\norm{\zeta-\zeta_0}+\norm{\zeta'-\zeta_0})^3,
+\label{eq:two-parameter-kl-expansion}
+\end{equation}
+whenever all three parameters lie in a sufficiently small common
+neighborhood. This follows by differentiating KL in both arguments at
+\((\zeta_0,\zeta_0)\): both first derivatives vanish and the second-order
+quadratic form is the information applied to the parameter difference.
+
+Take \(\zeta_0=\iota(u)\), \(\zeta=\zeta_{u,a}\), and
+\(\zeta'=\iota(v)\). Taylor expansion of the embedding gives
+\[
+\zeta'-\zeta
+=D\iota(u)(v-u)-aN(u)+O(\norm{v-u}^2).
+\]
+The cross term in the leading quadratic vanishes by
+\cref{eq:fisher-normal}; information nondegeneracy and the singular-value
+bounds for \(D\iota\) make the remaining quadratic uniformly equivalent to
+\(a^2+\norm{u-v}^2\). The initial choice of \(\rho_0\), followed by shrinking
+\(a_0\), absorbs the cubic
+remainder and proves both sides of \cref{eq:tube-loss}.
+
+The map \(u\mapsto\zeta_{u,a}\) has a uniformly bounded derivative. Applying
+the upper side of \cref{eq:two-parameter-kl-expansion} to
+\(p_{\zeta_{u,a}}\) and \(p_{\zeta_{v,a}}\) therefore gives
+\[
+\Kw{P_{u,a}}{P_{v,a}}\le C_T\norm{u-v}^2.
+\]
+The environment--prompt marginal is common, so this conditional KL equals
+the one-observation joint KL; product additivity proves
+\cref{eq:tube-kl}.
+
+For the approximation statement, the candidate \(p_{\iota(u)}\) and the
+upper side of \cref{eq:tube-loss} give
+\(A_w^2(\lambda;P_{u,a})\le C_Ta^2\). The lower side gives
+\(c_Ta^2\) for every candidate in the local chart. Shrink \(a_0\) further so
+that \(c_Ta_0^2\le g_0\);
+\cref{eq:off-chart-gap} excludes every remaining candidate and proves the
+lower side of \cref{eq:tube-approx}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:tube-lower}]
+Put a hypercube \(u_\omega=\delta\omega\) in \(B_d(0,\rho)\), where
+\[
+\delta^2=c_0\left(\frac1n\wedge\frac{\rho^2}{d}\right).
+\]
+By \cref{eq:tube-kl}, neighboring product experiments have KL at most a
+fixed constant when \(c_0\) is sufficiently small. Hence Assouad's lemma
+forces Hamming error of order \(d\).
+
+If \(\wt W\) lies in the local chart, write
+\(\wt W=\iota(\wh v)\). If it lies outside, set \(\wh v=0\). In the first
+case \cref{eq:tube-loss} gives
+\[
+\Kw{P_{u_\omega,a}}{p_{\wt W}}
+\ge c_Ta^2+c_T\norm{u_\omega-\wh v}^2.
+\]
+In the second case, \cref{eq:off-chart-gap}, together with the choice of the
+small local radii, bounds the same loss below by a sufficiently small constant
+multiple of \(a^2+\norm{u_\omega-\wh v}^2\). Decode a nearest hypercube
+vertex from \(\wh v\). The Euclidean version of the nearest-vertex argument
+in the proof of Theorem~\ref{thm:lower} and Assouad's lemma give
+\[
+\sup_\omega\E_{u_\omega,a}
+\Kw{P_{u_\omega,a}}{p_{\wt W}}
+\ge ca^2+cd\delta^2.
+\]
+Since the hypercube is a subset of the ball, this is
+\cref{eq:tube-lower-result}.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{cor:scale}]
+For a fixed integer \(D\), the truncation estimator
+\(\wh\theta_j=Z_j\mathbf 1\{j\le D\}\) has risk
+\[
+\frac Dn+\sum_{j>D}\theta_j^2
+\le \frac Dn+L^2D^{-2s}.
+\]
+Taking the best \(D\) proves the upper bound.
+
+For the lower bound, first suppose the variance--bias crossing occurs at an
+integer \(D\ge1\), up to a constant factor depending only on \(s\):
+\[
+D/n\asymp L^2D^{-2s}.
+\]
+Place a hypercube on the shell \(j=D+1,\ldots,2D\), with each active
+coordinate equal to \(\pm\delta\), where
+\[
+\delta^2=c_s\min\left\{\frac1n,
+L^2D^{-(2s+1)}\right\}.
+\]
+For sufficiently small \(c_s\), every vertex belongs to
+\(\mathcal H_s(L)\): if \(m\le D\), its tail energy is at most
+\(D\delta^2\le L^2D^{-2s}\le L^2m^{-2s}\); if
+\(D<m<2D\), use \(m^{-2s}\ge(2D)^{-2s}\) and decrease \(c_s\); for
+\(m\ge2D\) the tail is zero. Neighboring Gaussian experiments have KL
+\(2n\delta^2\), which is bounded by a sufficiently small constant.
+Assouad's lemma therefore yields risk at least
+\[
+cD\delta^2
+\asymp c_s\left\{D/n+L^2D^{-2s}\right\},
+\]
+where the final equivalence uses the crossing relation. Monotonicity of the
+two terms shows that this is within a constant factor of their infimum.
+
+If the continuous crossing lies below one, then \(L^2<1/n\) and the displayed
+infimum is comparable to \(1/n\). A two-point experiment in the unconstrained
+first coordinate, at separation \(c/\sqrt n\), gives this lower bound.
+Rounding the crossing to an integer changes constants only. The bounded-ratio
+grid statement follows by rounding \(D\) upward to the next grid point.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:lan}]
+Differentiability in quadratic mean and nonsingular \(I_\pi\) imply convergence of the local experiments to the Gaussian shift
+\[
+Z=h+I_\pi^{-1/2}\xi,\qquad \xi\sim N(0,I_d).
+\]
+For every \(M<\infty\), apply the local asymptotic minimax theorem to the
+bounded bowl-shaped loss
+\[
+\ell_M(a,h)=\min\{M,\tfrac12(a-h)^\top G_w(a-h)\}.
+\]
+The assumed uniform truncated-loss convergence and coercivity justify the
+transfer from the original estimator range to the local Gaussian experiment
+\citep{vandervaart1998}. Letting the local ball expand and then
+\(M\to\infty\), monotone convergence gives the minimax risk of the untruncated
+Gaussian shift. The equivariant estimator \(\wh h=Z\) has risk
+\[
+\tfrac12\E\xi^\top I_\pi^{-1/2}G_wI_\pi^{-1/2}\xi
+=\tfrac12\tr(G_wI_\pi^{-1}),
+\]
+and is minimax in the expanding-ball limit. An asymptotically linear efficient
+estimator, uniformly on compact local alternatives, attains the same constant
+when its rescaled losses are uniformly integrable. At correct conditional
+specification, the target Hessian is \(I_w\); setting \(w=\pi\) gives
+\(\tr(I_d)/2=d/2\).
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:misspecified-constant}]
+The asserted asymptotic linearity and central limit theorem give covariance
+\[
+\Sigma_\pi=H_\pi^{-1}V_\pi H_\pi^{-1}
+\]
+for \(\sqrt n(\wh\theta-\theta^*)\). Because \(\theta^*\) is stationary, a
+second-order expansion of the target risk gives
+\[
+R_w(\wh\theta)-R_w(\theta^*)
+=\tfrac12(\wh\theta-\theta^*)^\top
+G_w(\wh\theta-\theta^*)+o_p(n^{-1}).
+\]
+Uniform integrability permits expectations to pass through this expansion.
+The Gaussian quadratic-form identity and cyclicity of trace then yield
+\[
+\lim_{n\to\infty}n\E\{R_w(\wh\theta)-R_w(\theta^*)\}
+=\tfrac12\tr(G_w\Sigma_\pi)
+=\tfrac12\tr\{G_wH_\pi^{-1}V_\pi H_\pi^{-1}\}.
+\]
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:rank-impossibility}]
+Any rank selector induces a test between \(W_0\) and \(W_t\): accept the higher-rank alternative when it returns \(\bm r\). The larger of its two rank errors is at least half the sum of the two testing errors. The optimal sum is
+\(1-\TV\{(Q_{W_0}^\pi)^{\otimes n},(Q_{W_t}^\pi)^{\otimes n}\}\). By product additivity of KL and Pinsker's inequality,
+\[
+\TV\{(Q_{W_0}^\pi)^{\otimes n},(Q_{W_t}^\pi)^{\otimes n}\}
+\le\sqrt{\frac n2\KL(Q_{W_0}^\pi\|Q_{W_t}^\pi)}
+\le\sqrt{Cn\delta_t^2/2}.
+\]
+Substitution proves the result.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:rank-sufficiency}]
+The criterion of the true rank is at most
+\(P_n\ell_W+\operatorname{pen}_{\bm r}/n\). On the asserted event, every
+underfit criterion exceeds this upper bound by at least
+\[
+g_n/2+(\operatorname{pen}_{\bm s}-
+\operatorname{pen}_{\bm r})/n>0,
+\]
+and every overfit criterion exceeds it by at least
+\[
+(\operatorname{pen}_{\bm s}-\operatorname{pen}_{\bm r}
+-b_{\bm s,n})/n>0.
+\]
+Thus \(\wh{\bm r}=\bm r\) on events whose probabilities tend to one.
+\end{proof}

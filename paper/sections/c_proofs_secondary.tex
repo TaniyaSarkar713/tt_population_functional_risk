@@ -1,0 +1,66 @@
+\section{Proofs for functional selection and certification}
+\label{app:secondary-proofs}
+
+\begin{proof}[Proof of Theorem~\ref{thm:misordering}]
+Generalized eigenvector normalization gives
+\[
+v_H^\top Qv_H=v_L^\top Qv_L=1,
+\quad v_H^\top G_w(W_*)v_H=\lambda_H,
+\quad v_L^\top G_w(W_*)v_L=\lambda_L.
+\]
+Therefore the two reconstruction errors are \(t^2a^2+O(t^3)\) and \(t^2b^2+O(t^3)\), respectively. Since \(a<b\), the first is smaller for sufficiently small \(t\). Continuity of the pullback as \(W^0(t)\to W_*\) and a uniform Taylor expansion about the moving teacher give functional risks
+\(t^2\lambda_Ha^2/2+o(t^2)\) and
+\(t^2\lambda_Lb^2/2+o(t^2)\). Their assumed strict inequality survives for small \(t\). Taking \(a^2/b^2\uparrow1\) makes the risk ratio approach \(\lambda_H/\lambda_L\).
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:tt-misordering-paths}]
+Both students are scalar multiples of rank-one TT tensors and hence have the
+same TT ranks and parameter count.  Their squared Frobenius errors are
+\(t^2a^2\) and \(t^2b^2\).  At \(W=0\), the Bernoulli logistic information
+quadratic form restricted to \(\operatorname{span}(T_H,T_L)\) is
+\[
+ G_0[U,U]=\tfrac14\E\langle U,X\rangle^2,
+\]
+so its eigenvalues in these two orthonormal directions are
+\(\rho_H/4\) and \(\rho_L/4\).  A third-order Taylor expansion of
+teacher-relative conditional KL, uniformly along the two finite-dimensional
+paths, therefore gives
+\[
+ \cD_w\{W_A(t);W^0(t)\}=\frac{t^2\rho_Ha^2}{8}+O(t^3),\qquad
+ \cD_w\{W_B(t);W^0(t)\}=\frac{t^2\rho_Lb^2}{8}+O(t^3).
+\]
+The two strict inequalities follow from \(a<b\) and
+\(\rho_Ha^2>\rho_Lb^2\).
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:selection-gap}]
+Let \(V_i=\ell_{W_A}(Z_i)-\ell_{W_B}(Z_i)\). Then \(\E V_i=\gamma\), and the likelihood-ratio bound implies \(V_i\in[-2B,2B]\). Functional validation makes an error only if \(n_2^{-1}\sum_iV_i\le0\). Hoeffding's inequality gives probability at most
+\(\exp\{-2n_2\gamma^2/(4B)^2\}=\exp\{-n_2\gamma^2/(8B^2)\}\).
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:certificate}]
+Fix \((e,\lambda)\) and abbreviate \(A=\mathsf A_\lambda\), \(H=H_e\), \(\beta=\beta_{e\lambda}\), and \(M=M_e\). Define the generalization gap
+\[
+F(S)=\E_C H\{A(S);C\}-G^{-1}\sum_{g=1}^G H\{A(S);C_g\}.
+\]
+The replace-one argument for uniform stability gives \(|\E F(S)|\le\beta\). If one cluster in \(S\) is replaced, the population term changes by at most \(\beta\). In the empirical term, the \(G-1\) unchanged evaluations each change by at most \(\beta\), and the replaced evaluation changes by at most \(M\). Hence the bounded-difference constant is at most
+\[
+\beta+\frac{(G-1)\beta+M}{G}\le2\beta+M/G.
+\]
+Two applications of McDiarmid's inequality therefore give, with probability at least \(1-\delta\),
+\[
+|F(S)|\le\beta+(2G\beta+M)
+\sqrt{\frac{\log(2/\delta)}{2G}}.
+\]
+Set \(\delta=\alpha\pi_\lambda/K\) and union-bound over \(e\) and \(\lambda\). Since \(\sum_\lambda\pi_\lambda\le1\), the total failure probability is at most \(\alpha\), proving \cref{eq:sim-band}.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:strong-convex-stability}]
+Let \(\wh\theta_S,\wh\theta_{S'}\) minimize the two objectives. Add their strong-convexity optimality inequalities. All common empirical summands cancel, and Lipschitzness of the one replaced summand yields
+\[
+\mu\norm{\wh\theta_S-\wh\theta_{S'}}^2
+\le\frac{2L}{G}\norm{\wh\theta_S-\wh\theta_{S'}},
+\]
+so their distance is at most \(2L/(\mu G)\). Evaluation-loss Lipschitzness then gives
+\(\beta\le2L^2/(\mu G)\), the standard regularized-ERM stability calculation~\citep{bousquet2002stability}.
+\end{proof}

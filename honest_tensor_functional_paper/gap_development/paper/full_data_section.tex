@@ -1,0 +1,65 @@
+
+\subsection{Using the full tensor at the zero mean}\label{sec:full_scan}
+
+The diagonal rate is a constraint on procedures using the diagonal. A finite scan over product directions of coordinate subtensors can give shorter expected length at zero while preserving the original uniform length bound. The scan is an existence construction with exponential complexity; no efficient implementation is asserted.
+
+For a tensor $B$, define its injective norm
+\[
+ \rho(B)=\sup_{\norm{u_k}_2=1}
+       |\ip B{u_1\otimes\cdots\otimes u_K}|.
+\]
+For every nonempty subset $S\subseteq\{1,\ldots,p\}$ of size $s$, choose fixed $1/(2K)$-nets of the unit sphere in $\R^s$, one per mode, each with at most $(1+4K)^s$ points. Let $N_S(Z)$ be the largest absolute contraction of $Z_{S,\ldots,S}$ over their product. Define
+\begin{align}
+ \lambda_s^{\rm scan}
+ &=\tau\left[2\{s\log(ep/s)+Ks\log(1+4K)+\log(2p/\gamma)\}\right]^{1/2},
+ \label{eq:scan_threshold}\\
+ R_\gamma
+ &=\frac{4J^{K/2}}{\sqrt p}
+       \sum_{s=1}^p\lambda_s^{\rm scan}s^{-K/2}.
+ \label{eq:scan_radius}
+\end{align}
+Accept the zero test if $N_S(Z)\le\lambda_{|S|}^{\rm scan}$ for every nonempty $S$. On acceptance, let $C_{\rm scan}=[-h_{\rm scan},h_{\rm scan}]$, where $h_{\rm scan}=\min(h_0,R_\gamma)$; on rejection let $C_{\rm scan}=[-h_0,h_0]$. Here $h_0=M\sqrt{s_{\rm cap}/p}$ and $s_{\rm cap}$ is the smallest cap, truncated at $p$. For $0<\alpha_0,\gamma<1$ with $\alpha_0+\gamma\le\alpha$, intersect this interval with $C_*(\alpha_0)$ and call the result $C_\dagger$; replace an empty intersection by $\{0\}$. Write $\ell_*=|C_*(\alpha_0)|$.
+
+\begin{theorem}[A full-data interval with short expected length at zero]\label{thm:scan}
+Under \eqref{eq:model}, \eqref{eq:equalL} and either cap class, $C_{\rm scan}$ is honest at level $1-\gamma$, and $C_\dagger$ is honest at level $1-\alpha$. Moreover,
+\begin{equation}\label{eq:scan_expectation}
+ \sup_{A\in\Theta}\E_A|C_\dagger|\le\ell_*,
+ \qquad
+ \E_0|C_\dagger|\le
+ \min\{\ell_*,\,2R_\gamma+\ell_*\gamma\}.
+\end{equation}
+For fixed $0<\alpha<1/4$, fixed $K\ge3$, fixed positive caps and $M=\tau\sqrt p$, choose $\alpha_0=\alpha/2$ and $\gamma=\alpha/(2p)$. Then
+\begin{equation}\label{eq:scan_rate}
+ \E_0|C_\dagger|
+ \le C_{K,J,\alpha}\frac{\tau\sqrt{\log p}}{\sqrt p}
+       \sum_{s=1}^p s^{-(K-1)/2}
+\end{equation}
+for sufficiently large $p$. Consequently,
+\begin{equation}\label{eq:zero_sharp}
+ \calL_0(\Theta)\asymp\tau\sqrt{\frac{\log p}{p}},
+ \qquad K\ge4.
+\end{equation}
+\end{theorem}
+
+The matching lower bound in \eqref{eq:zero_sharp} is Theorem~\ref{thm:jointlower}, applied to the same full-data experiment and honesty class. The sum in \eqref{eq:scan_rate} is bounded for $K\ge4$ and harmonic for $K=3$. The number of scanned product directions is bounded by $(1+(1+4K)^K)^p-1$. Thus the result establishes attainable statistical precision, without a polynomial-time guarantee. The worst-case bound in \eqref{eq:scan_expectation} is the initial diagonal upper order. The residual projection in Theorem~\ref{thm:full_minimax} strengthens it to the sharp full-data rate.
+
+\begin{theorem}[A harmonic obstruction in order three]\label{thm:harmonic}
+Under \eqref{eq:model} and \eqref{eq:equalL}, let $K=3$, $M=\tau\sqrt p$ and $0<\alpha<1/4$. Every interval honest on a class containing the rank-one tensor Frobenius ball satisfies
+\begin{equation}\label{eq:harmonic_lower}
+ \E_0|C|\ge
+ (3/4-2\alpha)\frac{\tau H_p}{200\sqrt p},
+ \qquad H_p=\sum_{i=1}^p i^{-1}.
+\end{equation}
+\end{theorem}
+
+Theorem~\ref{thm:harmonic} uses a full-data mixture of rank-one tensors with sign-coupled factors and a common harmonic diagonal. It refutes the earlier conjecture that $\calL_0$ always has order $\tau\sqrt{\log p/p}$ at rank one. Combining \eqref{eq:harmonic_lower} and \eqref{eq:scan_rate} gives the intermediate cubic bracket
+\begin{equation}\label{eq:cubic_gap}
+ c_\alpha^{\rm cub}\frac{\tau\log p}{\sqrt p}
+ \le\calL_0(\Theta)
+ \le C_{J,\alpha}\frac{\tau(\log p)^{3/2}}{\sqrt p}.
+\end{equation}
+Here $c_\alpha^{\rm cub}=(3/4-2\alpha)/200>0$. The intermediate bracket \eqref{eq:cubic_gap} has a factor $\sqrt{\log p}$ gap. Theorem~\ref{thm:sparse_harmonic} closes it from below. The constant $1/200$ is conservative and is not an optimal finite-sample constant.
+
+\paragraph{Further verified refinements.}
+The accompanying theory review proves a smaller rank coefficient in the diagonal bound, an exact one-dimensional characterization of the optimal fixed affine radius, and a noise-envelope version with an additive approximation term. It also records finite-variance and unknown-Gaussian-variance extensions requiring retained replicates. These supporting results are collected in Appendix~\ref{app:refinements}; the simulations retain the original Gaussian threshold procedure.
+

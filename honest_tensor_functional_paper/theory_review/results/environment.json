@@ -1,0 +1,25 @@
+{
+  "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:11:29) [Clang 20.1.8 ]",
+  "platform": "macOS-15.6-arm64-arm-64bit-Mach-O",
+  "numpy": "2.3.5",
+  "scipy": "1.16.3",
+  "pypdf": "6.14.2",
+  "pdflatex": [
+    "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)",
+    "kpathsea version 6.4.2",
+    "Copyright 2026 Han The Thanh (pdfTeX) et al."
+  ],
+  "xelatex": [
+    "XeTeX 3.141592653-2.6-0.999998 (TeX Live 2026)",
+    "kpathsea version 6.4.2",
+    "Copyright 2026 SIL International, Jonathan Kew and Khaled Hosny."
+  ],
+  "pandoc": [
+    "pandoc 3.8",
+    "Features: +server +lua",
+    "Scripting engine: Lua 5.4"
+  ],
+  "latexmk": [
+    "Latexmk, John Collins, 9 March 2026. Version 4.88"
+  ]
+}

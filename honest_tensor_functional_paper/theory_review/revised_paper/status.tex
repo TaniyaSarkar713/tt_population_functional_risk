@@ -1,0 +1,27 @@
+
+\section{Result status and remaining questions}\label{sec:status}
+Here \textbf{PROVED} denotes a complete supplied derivation, with finite numerical checks where useful. It does not denote independent peer review or machine-checked verification. Classical results used as methodological background are credited explicitly.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lYl@{}}
+\toprule
+Item & Scope & Status\\
+\midrule
+Theorems 1--6 & Original geometry, coverage and comparison bounds; confidence-level domain corrected in Theorem 5 & PROVED\\
+Proposition 1 & Classical diagonal-information minimax rate & PROVED\\
+Theorem~\ref{thm:scan} & Full-data scan; optimal expected length at zero for fixed $K\ge4$ & PROVED\\
+Theorem~\ref{thm:harmonic} & Cubic harmonic lower bound & PROVED\\
+Appendix~\ref{app:refinements} & Improved geometry, affine optimum, calibrated noise and approximation extensions & PROVED\\
+Q1a & Full-data expected length at zero for $K=3$: logarithmic gap & PARTIAL\\
+Q1b & Full-data worst-case expected length & PARTIAL\\
+Original Q2 & Coordinate lower-scale attainment for all $K\ge3$ & REFUTED\\
+Q3 & Actual-rank adaptation and arbitrary loading geometry & OPEN\\
+Q4 & Efficient computation attaining the scan guarantee & OPEN\\
+\bottomrule
+\end{tabularx}
+\caption{Revised ledger. Original Q2 is false for $K=3$ and its rate is attained for fixed $K\ge4$. None of the remaining open statements is used by a proved result.}
+\label{tab:status}
+\end{table}
+
+At $M=\tau\sqrt p$, fixed positive caps and fixed confidence, the unresolved cubic zero-point rate lies between $\tau\log p/\sqrt p$ and $\tau(\log p)^{3/2}/\sqrt p$. For the worst-case criterion, the present upper bound remains the diagonal order $\tau(\log p/p)^{(K-2)/(2K)}$, and the zero-point lower bounds need not be sharp for that larger criterion. The noise extensions require the observations and calibration explicitly stated in their propositions. No real-data or LLM validation is asserted. The priority of the new full-data constructions requires further independent literature and mathematical review.

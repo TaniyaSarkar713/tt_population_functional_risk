@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "original_files_unchanged": {
+    "main.pdf": true,
+    "main.tex": true,
+    "appendix.tex": true,
+    "references.bib": true
+  },
+  "named_result_counts": {
+    "theorem": 8,
+    "proposition": 7,
+    "lemma": 7,
+    "proof": 22
+  },
+  "proof_roadmaps": 22,
+  "pdf_pages": {
+    "input_snapshot/main.pdf": 22,
+    "revised_paper/main.pdf": 31,
+    "report.pdf": 8
+  },
+  "duplicate_labels": [],
+  "missing_source_labels": [],
+  "final_latex_warnings": [],
+  "banned_substrings": {},
+  "unicode_em_dashes": 0,
+  "markdown_table_errors": [],
+  "broken_local_links": [],
+  "numeric_checks": "PASS"
+}

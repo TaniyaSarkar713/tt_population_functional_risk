@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "check_scope": "Document integrity; not mathematical proof verification",
+  "preserved_baseline_files": 11,
+  "statement_counts": {
+    "theorem": 11,
+    "proposition": 10,
+    "lemma": 7,
+    "proof": 28
+  },
+  "proof_roadmaps": 28,
+  "distinct_labels": 93,
+  "checked_local_links": 16,
+  "pdf_pages": {
+    "paper/main.pdf": 37,
+    "progress_report.pdf": 4
+  },
+  "latex_diagnostics": [],
+  "environment": {
+    "python": "3.13.9",
+    "platform": "macOS-15.6-arm64-arm-64bit-Mach-O",
+    "numpy": "2.3.5",
+    "scipy": "1.16.3",
+    "pypdf": "6.14.2"
+  }
+}

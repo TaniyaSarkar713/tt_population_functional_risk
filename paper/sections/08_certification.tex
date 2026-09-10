@@ -1,0 +1,83 @@
+\section{Secondary result: same-data multi-capability certification}
+\label{sec:certification}
+
+The oracle theorem chooses a network by conditional log-score risk, equivalently conditional KL\@. Deployment may additionally require simultaneous capability constraints. We permit reuse of the fitting data, but pay for it through algorithmic stability.
+
+Let \(C_1,\ldots,C_G\) be identically distributed independent prompt clusters; dependence within a cluster is unrestricted. Each cluster contains enough prespecified randomness or paired teacher/student evaluations to form a cluster-level statistic
+\(H_e(W;C_g)\) for capability \(e\in\{1,\ldots,K\}\).  Uniformly over \(W\) and \(c\), \(H_e(W;c)\) lies in one common interval of length \(M_e\), and
+\[
+\Delta_e(W)=\E H_e(W;C).
+\]
+For every member of a fixed coded family, let \(\mathsf A_\lambda(S)\) be the complete deterministic core-fitting algorithm applied to \(S=(C_1,\ldots,C_G)\). A randomized algorithm is permitted if the stability condition below holds uniformly conditional on one external random seed. Define
+\[
+\wh\Delta_e(\lambda)=\frac1G\sum_{g=1}^G
+H_e\{\mathsf A_\lambda(S);C_g\}.
+\]
+
+\begin{assumption}[Replace-one-cluster stability]
+\label{ass:stability}
+If \(S,S'\) differ in one cluster, then for every evaluation cluster \(c\),
+\[
+\left|H_e\{\mathsf A_\lambda(S);c\}
+-H_e\{\mathsf A_\lambda(S');c\}\right|
+\le\beta_{e\lambda}.
+\]
+\end{assumption}
+
+\begin{theorem}[Simultaneous same-data capability band]
+\label{thm:certificate}
+Under Assumption~\ref{ass:stability}, assign candidate codes \(\pi_\lambda\) with \(\sum_\lambda\pi_\lambda\le1\), and let
+\begin{equation}
+ r_{e\lambda}(\alpha)=
+ \beta_{e\lambda}+
+ (2G\beta_{e\lambda}+M_e)
+ \sqrt{\frac{\log\{2K/(\alpha\pi_\lambda)\}}{2G}}.
+ \label{eq:stability-radius}
+\end{equation}
+Then, with probability at least \(1-\alpha\), simultaneously for every \(e\) and \(\lambda\),
+\begin{equation}
+\left|\Delta_e\{\mathsf A_\lambda(S)\}
+-\wh\Delta_e(\lambda)\right|
+\le r_{e\lambda}(\alpha).
+\label{eq:sim-band}
+\end{equation}
+Consequently \(U_e(\lambda)=\wh\Delta_e(\lambda)+r_{e\lambda}(\alpha)\) remains a valid upper bound after any data-dependent selection from the fixed coded family.
+\end{theorem}
+
+Given tolerances \(\epsilon_e\), define the empirically certified set
+\[
+ \wh\Lambda_{\mathrm{safe}}
+ =\{\lambda:U_e(\lambda)\le\epsilon_e\ \text{for every }e\}.
+\]
+When \(\wh\Lambda_{\mathrm{safe}}\ne\varnothing\), define the least-cost
+certified choice
+\begin{equation}
+ \wh\lambda_{\mathrm{safe}}
+ \in\argmin_{\lambda\in\wh\Lambda_{\mathrm{safe}}}
+ \operatorname{Cost}(\lambda).
+\label{eq:safe-selector}
+\end{equation}
+If this set is empty, deploy a prespecified fallback \(W_{\mathrm{fb}}\) whose
+population capabilities are known deterministically to satisfy
+\(\Delta_e(W_{\mathrm{fb}})\le\epsilon_e\) for every \(e\) (an abstention action
+may serve as the fallback only when it has this stated property). On the event
+in \cref{thm:certificate}, the selector in \cref{eq:safe-selector}, or the
+fallback when the certified set is empty, satisfies every population
+constraint. If a comparator \(\lambda^*\) obeys
+\[
+\Delta_e\{\mathsf A_{\lambda^*}(S)\}
+\le\epsilon_e-2r_{e\lambda^*}(\alpha)
+\quad\text{for all }e,
+\]
+then \(\lambda^*\) is empirically certifiable and
+\(\wh\Lambda_{\mathrm{safe}}\ne\varnothing\), so
+\(\operatorname{Cost}(\wh\lambda_{\mathrm{safe}})
+\le\operatorname{Cost}(\lambda^*)\).
+
+\begin{corollary}[A sufficient stability mechanism]
+\label{cor:strong-convex-stability}
+Suppose fitting computes an exact minimizer over a convex coordinate domain in a fixed horizontal chart, the regularized empirical objective is \(\mu\)-strongly convex there, and each cluster loss is \(L\)-Lipschitz in that coordinate. Then standard regularized-ERM stability gives \(\beta_{e\lambda}\le 2L^2/(\mu G)\) when the evaluation loss has the same Lipschitz bound. Thus \cref{eq:stability-radius} is of order
+\(G^{-1/2}\sqrt{x_\lambda+\log(K/\alpha)}\), plus a lower-order stability term.
+\end{corollary}
+
+The theorem covers a data-dependent subset of predeclared algorithms because it is uniform over the full coded family. It does not cover a genuinely new path invented from the same clusters without charging its entropy or stability. Nor does generic nonconvex TT training automatically satisfy Assumption~\ref{ass:stability}; in that case protected-holdout Learn-then-Test remains the safe default.

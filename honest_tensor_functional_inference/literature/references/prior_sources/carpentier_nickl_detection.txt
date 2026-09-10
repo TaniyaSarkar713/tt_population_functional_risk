@@ -1,0 +1,982 @@
+
+[PDF PAGE 1]
+arXiv:1507.03829v2  [math.ST]  9 Nov 2015
+Electronic Journal of Statistics
+ISSN: 1935-7524
+arXiv:
+math.PR/0000000
+On signal detection and conﬁdence sets for low
+rank inference problems
+Alexandra Carpentier ∗
+Institut f¨ ur Mathematik
+Universit¨ at Potsdam
+Am Neuen Palais 10
+14469 Potsdam
+Germany
+e-mail: carpentier@maths.uni-potsdam.de
+and
+Richard Nickl
+Statistical Laboratory
+Center for Mathematical Sciences
+University of Cambridge
+Wilberforce Road
+CB3 0WB Cambridge
+United Kingdom
+e-mail: r.nickl@statslab.cam.ac.uk
+Abstract: W e consider the signal detection problem in the Gaussian des ign trace re-
+gression model with low rank alternative hypotheses. W e der ive the precise (Ingster-type)
+detection boundary for the Frobenius and the nuclear norm. W e then apply these results to
+show that honest conﬁdence sets for the unknown matrix param eter that adapt to all low
+rank sub-models in nuclear norm do not exist. This shows that recently obtained positive
+results in [ 5] for conﬁdence sets in low rank recovery problems are essent ially optimal.
+Primary 62G15; secondary 62G10.
+Keywords and phrases: Low Rank Matrices, Conﬁdence Sets, Signal Detection, Nucle ar
+Norm.
+1. Introduction
+Consider the Gaussian design trace regression model
+Yi = tr(X iθ) +ǫi, i = 1,...,n, (1)
+where ǫ ∼ N (0,I n) is an i.i.d. vector of Gaussian noise. Here the matrices X i are d ×d square
+matrices with i.i.d. entries X i
+mk ∼ N (0, 1), and θ is the unknown d ×d matrix we want to
+make inference on. We are interested in the case where the model d imension d2 is possibly large
+compared to sample size n, but where θ has low rank k, in which case we write θ ∈R(k), 1 ≤k ≤
+d. This setting serves as a prototype for various matrix inference p roblems such as those occurring
+in compressed sensing [
+4] or in quantum tomography [ 7]. We consider here a high-dimensional
+regime where min(d,n ) → ∞, reﬂecting contemporary statistical challenges.
+The ﬁrst problem we study in this paper is the signal detection problem with low-rank alter-
+natives: We want to test the hypothesis
+H0 :θ = 0 vs. H1 :θ ̸= 0,θ ∈R(k), ∥θ∥ ≥ ρ,
+∗ This work was carried out when this author was a research asso ciate in the University of Cambridge.
+1
+imsart-ejs ver. 2011/11/15 file: LowBoundrevision.tex da te: November 8, 2021
+
+[PDF PAGE 2]
+A. Carpentier, R. Nickl/Low rank inference 2
+where ∥ · ∥ equals either the Frobenius norm ∥ · ∥ F or the nuclear norm ∥ · ∥ ∗ (deﬁned in detail
+below), and where ρ should be the minimal ‘signal strength’ condition for the above hypo thesis
+testing problem to have a consistent solution (in the sense of Ingst er, see [ 10]). We will show that
+the minimax optimal detection boundary in Frobenius norm is of the fo rm
+ρ ≈ min
+(√
+d
+n,n −1/4
+)
+whereas in nuclear norm it is
+ρ ≈ min
+(√
+kd
+n ,
+√
+k
+n1/2
+)
+.
+A remarkable feature is that for the Frobenius norm the detection rate does not depend at all on
+the complexity of the alternative hypothesis (the rank k), whereas for the nuclear norm it does.
+The phase transition between the two regimes in these rates depen ds precisely on whether the
+sample size n exceeds the dimension d2 of the maximal parameter space R(d) or not. The upper
+bounds in our proofs are related to the papers [ 9, 1] about the detection boundary in the sparse
+regression setting, and our main contribution consists in deriving th e matching lower bounds for
+low rank alternatives.
+Our interest in the detection boundary is triggered by the second p roblem we investigate here:
+the question of existence and non-existence of adaptive conﬁden ce sets for low rank parameters.
+It follows from general decision-theoretic principles (see Chapter 8.3 in [ 6] and also [ 8, 2]) that the
+answer to this question is closely related to a ‘composite version’ of t he detection problem (see
+(15) below). This approach was employed in [ 14] to prove that adaptive and honest conﬁdence
+sets for the parameter θ do not exist in sparse regression models if an ℓ2-risk performance beyond
+O(n−1/4) is desired. In contrast in the recent paper [ 5] it was shown that if sparsity constraints
+are replaced by low rank conditions, then adaptive and fully honest c onﬁdence sets exist over the
+entire parameter space R(d). Adaptation means here that the expected Frobenius norm diame ter
+of the conﬁdence set reﬂects the minimax risk over arbitrary low ra nk sub-modelsR(k), 1 ≤k ≤d.
+The fact that the detection rates obtained here in Frobenius norm are independent of the rank
+constraintθ ∈R(k) provides another heuristic explanation of the result in [ 5].
+Moreover [5] constructed another conﬁdence set whose diameter adapts to low rank sub-models
+in the stronger nuclear norm distance, and that is honest for all θ’s that are non-negative deﬁnite
+and have trace equal to one , that is, whenever θ is the density matrix of a quantum state . Such
+a constraint on θ is natural in a quantum physics context considered in [ 5], but not in general.
+The question arises whether it is essentially necessary or not. In th e present paper we show that
+indeed the existence results of [ 5] are speciﬁc to the geometry induced by the Frobenius norm
+or to the quantum state constraint, and that nuclear-norm adap tive and honest conﬁdence sets
+over general low rank parameter spaces do not exist in the model ( 1). For example, our results
+imply that if one requires coverage of a conﬁdence set over all of R(d) then the worst case nuclear
+norm diameter for rank-one parameters can be oﬀ the minimax estim ation rate over R(1) by as
+much as
+√
+d. Our results thus further illustrate the subtleties involved in the th eory of conﬁdence
+sets for high-dimensional parameters, and that the positive resu lts in [ 5] are of a rather speciﬁc
+nature.
+Our proofs are given in the simplest model where both the design and the noise are Gaussian,
+and the matrices involved are of square type. As usual, our results extend without major diﬃculty
+to sub-Gaussian design and noise, to certain correlated random de signs, and also to non-square
+matrices, at the expense of slightly more technical proofs. Gener alisations of our results to the
+matrix completion problem are currently under investigation.
+imsart-ejs ver. 2011/11/15 file: LowBoundrevision.tex da te: November 8, 2021
+
+[PDF PAGE 3]
+A. Carpentier, R. Nickl/Low rank inference 3
+2. Main results
+2.1. Notation
+We write Md for the set of d ×d matrices with real elements. If X : Md → Rn denotes the
+‘sampling operator’
+θ ↦→ Xθ =
+(
+tr(X 1θ),..., tr(X nθ)
+) T
+,
+then the model (
+1) can be written as
+Y = Xθ +ǫ,
+where Y = (Y1,...,Y n)T and ǫ = (ǫ1,...,ǫ n)T . We write EX for the expectation over the
+distribution of X only, and Eθ for the expectation conditional on X . The full expectation is
+denoted by Eθ =EXEθ. The corresponding probability laws are denoted by P X,P θ, Pθ and we
+employ the usual o/O/oP/OP -notation with min(n,d ) → ∞.
+We denote the standard norm on Euclidean space by ∥ · ∥2, and the associated inner product
+by ⟨·, ·⟩2. Let ∥.∥F be the Frobenius norm over Md, i.e.
+∥M ∥F =
+√
+tr(M TM ) =
+√ ∑
+j≤d
+λ2
+j,
+where λ2
+i are the eigenvalues of M TM . The associated inner product is
+⟨U,V ⟩F = tr(U TV ).
+We also deﬁne the nuclear norm of M as
+∥M ∥∗ =
+∑
+j≤d
+|λj|.
+These two norms are in fact deﬁned also for matrices that are not o f square type. Finally we
+recall that for any matrix M ∈R(k), we have
+∥M ∥F ≤ ∥M ∥∗ ≤
+√
+k∥M ∥F.
+2.2. Signal detection for low rank alternatives
+We consider ﬁrst the following hypothesis testing problem, also know n as the signal detection
+problem:
+H0 :θ = 0 vs. H1 :θ ∈R(k), ∥θ∥ ≥ ρ. (2)
+Here the alternative space is restricted to a ‘low rank’ hypothesis θ ∈R(k) for some 1 ≤k ≤d.
+Moreover, for a separation constant ρ > 0, the detection boundary is described by a ‘signal
+strength’ condition measured in terms of the size ∥θ∥ ≥ ρ of the Frobenius-, or of the nuclear
+norm of θ. In the high-dimensional regime where min( n,d ) → ∞ , we want to ﬁnd the minimal
+sequence ρ ≡ρn,d such that for any α> 0 a level α-test Ψ = Ψ( Y, X,α ) exists:
+[
+E0[Ψ] + sup
+θ∈H1
+Eθ[1 − Ψ]
+]
+= P0(reject H0) + sup
+θ∈H1
+Pθ(accept H0) ≤α. (3)
+Recall that a test is simply a random indicator function ψ = 1 A where the rejection event A
+depends only on Y, X,α , and we require the sum of the type-one and the type-two error o f the
+test to be controlled at any ﬁxed level α> 0.
+imsart-ejs ver. 2011/11/15 file: LowBoundrevision.tex da te: November 8, 2021
+
+[PDF PAGE 4]
+A. Carpentier, R. Nickl/Low rank inference 4
+Theorem 1 Consider the testing problem ( 2) with norm ∥ · ∥. Deﬁne
+rn,d =
+{
+min(
+√
+d/n,n −1/4) if ∥ · ∥ = ∥ · ∥F
+min(
+√
+kd/n,
+√
+k/n1/4) if ∥ · ∥ = ∥ · ∥∗.
+1) Suppose ρ ≥ Drn,d. Then for every α > 0 there exists a test Ψ = Ψ( Y, X,α ) and ﬁnite
+constantsD =Dα> 0,n α ∈ N such that ( 3) holds for every n ≥nα.
+2) Conversely, suppose ρ = o(rn,d) and k = o(d) as min(n,d ) → ∞ . Then no test satisfying
+(3) for every α> 0 exists. In fact
+lim inf
+n,d
+inf
+Ψ
+[
+E0[Ψ] + sup
+θ∈H1
+Eθ[1 − Ψ]
+]
+≥ 1 (4)
+where the inﬁmum extends over all test functions Ψ = Ψ( Y, X ).
+The tests Ψ constructed in the proof are given in ( 9) below and straightforward to implement.
+Note also that the ∥ · ∥ ∗-separated alternatives are a subset of the ∥ · ∥ F -separated alternatives
+(see (10) below), and our results imply that an optimal test for the case ∥ · ∥ = ∥ · ∥F is essentially
+optimal also for ∥ · ∥∗.
+2.3. Conﬁdence sets for low rank recovery
+Low rank recovery algorithms are well-studied in compressed sensin g and high-dimensional statis-
+tics, see e.g., [
+4, 7, 11, 12, 13, 3] and the references therein. In the setting of model ( 1) they provide
+minimax optimal estimators ˜θ of θ ∈R(k) with (high probability) performance guarantees
+∥˜θ −θ∥2
+F ≲ kd
+n , ∥˜θ −θ∥∗ ≲ k
+√
+d
+n. (5)
+The question we study here is whether associated uncertainty qua ntiﬁcation methodology exists,
+that is, whether we can ﬁnd conﬁdence sets Cn ⊂ Md such that
+inf
+θ∈Md
+Pθ(θ ∈Cn) ≥ 1 −α, (6)
+at least for min( n,d ) large enough, and such that the diameter |Cn| of Cn reﬂects the accuracy
+of adaptive estimation in the sense that |Cn| shrinks, with high probability, at the optimal rates
+from ( 5) whenever θ ∈R(k). We insist here on an adaptive conﬁdence set that does not require
+knowledge of the unknown rank k of θ.
+A ﬁrst result that is proved in the paper [ 5] is that such adaptive conﬁdence sets do exist in
+the model ( 1) if the diameter is measured in Frobenius distance. The constructio n of this set is
+straightforward, see [ 5] for details.
+Theorem 2 (Theorem 2 in [ 5]) For everyα> 0 there exists a conﬁdence set Cn =Cn(Y, X,α )
+such that for all n ∈ N, ( 6) holds, and such that uniformly in θ ∈R(k0) for any 1 ≤k0 ≤k, with
+high Pθ-probability the Frobenius-norm diameter |Cn|F of Cn satisﬁes
+|Cn|F ≲
+√
+k0
+d
+n.
+imsart-ejs ver. 2011/11/15 file: LowBoundrevision.tex da te: November 8, 2021
+
+[PDF PAGE 5]
+A. Carpentier, R. Nickl/Low rank inference 5
+A second result that is proved in the paper [ 5] is that an (asymptotic) adaptive conﬁdence
+set exists also in nuclear norm provided that the “quantum state co nstraint” is satisﬁed, namely,
+provided it is known a priori that θ is non-negative deﬁnite and has nuclear norm one, and
+provided the coverage requirement in ( 6) is relaxed to hold only over a maximal model R(k) in
+which asymptotically consistent estimation of θ is possible (i.e., k
+√
+d/n =o(1)). Deﬁne
+R+(k) = R(k) ∩ {θ is non-negative deﬁnite, tr(θ) = 1 },
+the set of quantum state density matrices of rank at most k.
+Theorem 3 (Theorem 4 in [ 5]) Assume k
+√
+d/n =o(1) for some 1 ≤k ≤d, and let α> 0 be
+given. Then there exists a conﬁdence set Cn =Cn(Y, X,α ) such that
+lim inf
+min(n,d)→∞
+inf
+θ∈R+(k)
+Pθ(θ ∈Cn) ≥ 1 −α,
+and such that uniformly in θ ∈R+(k0) for any 1 ≤k0 ≤k, with high Pθ-probability the nuclear
+norm diameter |Cn|∗ of Cn satisﬁes
+|Cn|∗ ≲ k0
+√
+d
+n.
+In fact it is not diﬃcult to generalise the above theorem to the case w here the condition
+tr(θ) = 1 is relaxed to ∥θ∥∗ ≤ 1.
+The next theorem, which is the main result of this subsection, implies t hat no analogue of
+Theorem 2 can hold true if the Frobenius norm there is replaced by th e nuclear norm, and it also
+shows that Theorem 3 cannot hold true if R+(k) is replaced by R(k), that is, if the ‘quantum
+state constraint’ is relaxed. More precisely, we show that if a conﬁ dence setCn is required to have
+coverage over the maximal model R(k1), then the worst case expected nuclear norm diameter of
+Cn over arbitrary sub-models R(k0),k 0 = o(k1), depends on the maximal model dimension k1
+and does not improve as k0 ↓ 1. The proof of Theorem 4 is based on Part 2) of Theorem 1 and
+lower bound techniques for adaptive conﬁdence sets from [ 8, 2].
+Theorem 4 Letk1 → ∞ such that k1 =o(d) as min(n,d ) → ∞. Suppose that for any 0<α<
+1/3 the conﬁdence set Cn =Cn(Y, X,α ) is asymptotically honest over the maximal model R(k1),
+that is, it satisﬁes
+lim inf
+min(n,d)→∞
+inf
+θ∈R(k1)
+Pθ(θ ∈Cn) ≥ 1 −α. (7)
+Then for every k0 =o(k1) and some constant c> 0 depending on α, we have
+sup
+θ∈R(k0)
+Eθ|Cn|∗ ≥c
+√
+k1d
+n (8)
+for every min(n,d ) large enough. In particular no conﬁdence set exists that is h onest over all of
+Md and that adapts in nuclear norm to any model R(k0),k 0 =o(
+√
+d).
+For notational simplicity we have lower bounded the expected diameter |Cn|∗ in ( 8), but the
+proof actually contains a stronger ‘in probability version’ of this lowe r bound.
+imsart-ejs ver. 2011/11/15 file: LowBoundrevision.tex da te: November 8, 2021
+
+[PDF PAGE 6]
+A. Carpentier, R. Nickl/Low rank inference 6
+Remark 1 A few remarks on Theorem 4 are in order:
+i) In the least favourable case where one wants coverage over the entire R(d) = Md while still
+adapting to rank-one matrices (i.e., k0 = 1), the performance of any honest conﬁdence set is oﬀ
+the minimax optimal adaptive estimation rate
+√
+d/n over R(1) by a diverging factor that can be
+as close to
+√
+d as desired.
+ii) Even if one restricts coverage to hold only for ‘consiste ntly estimable models’ R(k1) with
+k1
+√
+d/n → 0 (as in Theorem 3), the diameter |Cn|∗ can be oﬀ the minimax rate of estimation
+over R(1) by a factor of
+√
+k1.
+iii) We also note that the above result does not disprove the e xistence of adaptive conﬁdence
+sets for sub-models R(k0) of ‘moderate rank’ where k0 ≥
+√
+d. While more of technical interest
+– note that this rules out n < d2 for consistent recovery to be possible – this regime current ly
+remains open (it is related to the apparently hard problem of ﬁnding optimal separation rates in
+the composite testing problem ( 15) below).
+3. Proofs
+3.1. Proof of Theorem
+1, upper bounds
+When n<d 2 then deﬁne
+ˆrn = 1
+n ∥Y ∥2
+2 − 1, τ n =n−1/2
+but when n ≥d2 set
+ˆrn = 2
+n(n − 1)
+∑
+i<j
+∑
+1≤m≤d,1≤k≤d
+YiX i
+mkYjX j
+mk, τ n =d/n.
+The test statistic is
+Ψ n = 1 {ˆrn ≥zατn} (9)
+where zα are quantile constants chosen below.
+These tests work for Frobenius norm separation, by eﬀectively th e same proofs as in [ 9], using
+that we can embed the matrix regression model into a vector regre ssion model with p = d2
+parameters, and since the separation rates only depend on the mo del dimension (and not on low
+rank or sparsity degrees). However, to provide intuition, we give s ome details, ﬁrst for the case
+n<d 2: Under H0 we have Y =ǫ and so
+E0Ψ n = Pr
+(
+1√n
+n∑
+i=1
+(ε2
+i −Eε2
+i )>z α
+)
+≤α/2
+for every n ∈ N and zα large enough (using either Chebyshev’s inequality and Eε4
+i = 3, or
+Theorem 4.1.9 in [
+6] for a more precise non-asymptotic bound). Now for the alternat ivesθ ∈H1
+we use the basic concentration result Lemma 1a) in [ 5] which implies that for any ﬁxed θ the
+event
+E =
+{⏐
+⏐(1/n)∥Xθ∥2
+2 − ∥θ∥2
+F
+⏐
+⏐ ≤ ∥θ∥2
+F/2
+}
+imsart-ejs ver. 2011/11/15 file: LowBoundrevision.tex da te: November 8, 2021
+
+[PDF PAGE 7]
+A. Carpentier, R. Nickl/Low rank inference 7
+hasP X -probability at least 1 − 2 exp(−n/24), and so, for n ≥nα such that 2 exp( −n/24)<α/ 6,
+Eθ(1 − Ψ n) = Pθ (ˆrn <z ατn)
+= Pr
+(1
+n ∥Xθ +ǫ∥2
+2 − 1< zα
+√n
+)
+= Pr
+(
+1
+n ∥Xθ∥2
+2 − zα
+√n < − 2
+nǫT Xθ − 1
+n
+n∑
+i=1
+(ε2
+i − 1)
+)
+≤ Pr
+(
+∥θ∥2
+F
+2 − zα√n < − 2
+nǫT Xθ − 1
+n
+n∑
+i=1
+(ε2
+i − 1), E
+)
++ 2 exp(−n/24)
+≤ Pr
+(⏐
+⏐
+⏐
+⏐
+2
+nǫT Xθ
+⏐
+⏐
+⏐
+⏐> ∥θ∥2
+F/8, E
+)
++ Pr
+(
+1
+√n
+n∑
+i=1
+(ε2
+i −Eε2
+i )>z α/3
+)
++α/6
+since, by the hypothesis on ρ, we have for D large enough that
+∥θ∥2
+F
+2 − zα√n ≥ ∥θ∥2
+F
+4 ≥ 2zα/3
+n1/2 .
+The last probability is bounded by α/6 as under H0 and the last but one probability is also
+bounded by α/6 by a direct (conditional on X ) Gaussian tail inequality (restricting to the event
+E: just as in term II of the proof of Theorem [ 5] with ˜θ = 0 there), so that in total we have
+bounded the testing errors in ( 3) by α/2 + (3/6)α =α, as desired. The case n ≥d2 follows from
+similar but slightly more technical arguments, adapting the argumen ts from proof of Theorem 3
+in [ 5], or arguing directly as in Theorem 4.3 in [ 9] with p =d2.
+The test ( 9) also works for nuclear-norm separation since
+H ∗
+1 =θ ∈R(k) : ∥θ∥∗ ≥c
+√
+kρ
+is a subset of
+H F
+1 =θ ∈R(k) : ∥θ∥F ≥cρ
+in view of the inequality
+∥θ∥F ≥ (1/
+√
+k)∥θ∥∗ ∀θ ∈R(k), (10)
+so that
+E0Ψ n + sup
+θ∈H∗
+1
+Eθ(1 − Ψ n) ≤ E0Ψ n + sup
+θ∈HF
+1
+Eθ(1 − Ψ n) ≤α.
+We now turn to the more diﬃcult lower bounds.
+3.2. Proof of Theorem
+1, lower bounds
+Let Ψ be any test – any measurable function of Y, X that takes values in {0, 1}. Assume ρ =
+o(rn,d) as min(n,d ) → ∞ and let H1 =H1(ρ) be the corresponding alternative hypothesis.
+Step I: Reduction to averaged likelihood ratios : Letπ =πn,d be a sequence of ﬁnitely supported
+probability distributions on Md such that πn,d(H1) → 1, and denote by π|H1 that measure
+restricted to H1 and re-normalised to unit mass. Deﬁne
+Z = Eθ∼π
+∏
+i≤n
+dP (θ)
+i
+dP (0)
+i
+≡
+∫ ∏
+i≤n
+dP (θ)
+i
+dP (0)
+i
+dπ(θ),
+imsart-ejs ver. 2011/11/15 file: LowBoundrevision.tex da te: November 8, 2021
+
+[PDF PAGE 8]
+A. Carpentier, R. Nickl/Low rank inference 8
+where dP (θ)
+i is the distribution of Yi|X when the parameter generating the data is θ, and dP (0)
+i
+is the distribution of Yi|X when the parameter generating the data is 0. Then, by a standard
+testing lower bound (e.g., (6.23) in [ 6]), for any η >0,
+E0Ψ + sup
+θ∈H1
+Eθ(1 − Ψ) ≥ E0Ψ + Eθ∼π|H1Eθ(1 − Ψ)
+≥ E0Ψ + Eθ∼πEθ(1 − Ψ) −o(1)
+=EX [E0Ψ + Eθ∼πEθ(1 − Ψ)] −o(1)
+≥ (1 −η)
+[
+1 −
+[ √
+E0(Z − 1)2
+η
+]]
+−o(1).
+Now since
+E0[Z − 1]2 = E0[Z 2] − 1,
+if we show that E0[Z 2] ≤ 1 +o(1) as min( n,d ) → ∞ for a suitable choice of π, then the lower
+bound ( 4) will follow by letting η → 0. Recall the notation Eθ =EXEθ.
+Step II: Computation of E0[Z 2]: The (Yi) are independent with distribution N ((Xθ)i, 1) con-
+ditional on the design X , hence
+Z = Eθ∼π
+[ ∏
+i≤n
+exp(− 1
+2 (yi − (Xθ)i)2)
+exp(− 1
+2y2
+i )
+]
+= Eθ∼π
+[ ∏
+i≤n
+exp(yi(Xθ)i) exp(− 1
+2 ((Xθ)i)2)
+]
+and can hence write
+E0
+[
+Z2]
+=
+∫
+Rn
+(
+Eθ ∼ π
+[ ∏
+i≤ n
+exp(yi(X θ)i) exp(− 1
+2 ((X θ)i)2)
+] ) 2∏
+i≤ n
+1√
+2π
+exp(− y2
+i
+2 )dy1...dy n
+=
+∫
+Rn
+(
+Eθ ∼ π
+[
+exp(− 1
+2 ∥X θ∥2
+2)
+∏
+i≤ n
+exp(yi(X θ)i
+] ) 2
+∏
+i≤ n
+1
+√
+2π
+exp(− y2
+i
+2 )dy1...dy n.
+Thus, if θ,θ ′ are independent copies of joint law π2, then we have
+E0
+[
+Z 2]
+=
+∫
+Rn
+Eπ2
+[
+exp(− 1
+2 (∥Xθ∥2
+2 − 1
+2 (∥Xθ′∥2
+2)
+∏
+i≤n
+1
+√
+2π exp
+(
+yi(X (θ +θ′))i − y2
+i
+2
+) ]
+dy1...dyn
+= Eπ2
+[
+exp(− 1
+2 ∥Xθ∥2
+2 − 1
+2 ∥Xθ′∥2
+2)
+×
+∏
+i≤n
+∫
+yi
+( 1
+√
+2π
+exp
+(
+− 1
+2
+(
+yi − (X (θ +θ′))i)2
+)
+dyi exp
+(1
+2 (X (θ +θ′))2
+i
+) ]
+= Eπ2
+[
+exp
+(1
+2 ∥X (θ +θ′)∥2
+2 − 1
+2 ∥Xθ∥2
+2 − 1
+2 ∥Xθ′∥2
+2
+)]
+Step III: Integrating over X : The EX -expectation of the last expression can be bounded by
+Eπ2
+[
+exp
+(n
+2 (∥θ +θ′∥2
+F − ∥θ∥2
+F − ∥θ′∥2
+F )
+)
+EX exp
+(1
+2 (Z1 −Z2 −Z3)
+)]
+imsart-ejs ver. 2011/11/15 file: LowBoundrevision.tex da te: November 8, 2021
+
+[PDF PAGE 9]
+A. Carpentier, R. Nickl/Low rank inference 9
+where
+Zℓ = ∥Xϑℓ∥2
+2 −n∥ϑℓ∥2
+F, with ϑ1 =θ +θ′,ϑ 2 =θ,ϑ 3 =θ′.
+The last factor can be bounded, by applying the Cauchy-Schwarz in equality twice, by
+(EX exp(Z1))1/2(EX exp(2Z2))1/4(EX exp(2Z3))1/4. (11)
+Since Xϑℓ ∼N (0, ∥ϑℓ∥2
+FIn) the distribution of Zℓ is the one of ∥ϑℓ∥2
+F
+∑ n
+i=1(g2
+i − 1) where the gi
+are i.i.d. N (0, 1). Applying Theorem 3.1.9 in [
+6] with τi ≡ 1 and λ = ∥ϑ1∥2
+F or λ = 2 ∥ϑℓ∥2
+F,ℓ =
+2, 3, (and hence setting ∥A∥ = 1, ∥A∥HS =n in that theorem) we see that if max ℓ ∥ϑℓ∥2
+F ≤ 1/4
+then
+EX exp(Z1) ≤ exp
+( n∥ϑ1∥4
+F
+1 − 2∥ϑ1∥2
+F
+)
+, and EX exp(2Zℓ) ≤ exp
+( 2n∥ϑℓ∥4
+F
+1 − 4∥ϑℓ∥2
+F
+)
+, ℓ = 2, 3.
+As a consequence if
+max
+ℓ=1,2,3
+∥ϑℓ∥F =o(n−1/4) (12)
+then the the product (
+11) is bounded above by 1 + o(1). We conclude that if the prior π satisﬁes
+(12) almost surely then
+E0[Z 2] = EXE0[Z 2] ≤ (1 +o(1)) ×Eπ2 exp
+(n
+2 (∥θ +θ′∥2
+F − ∥θ∥2
+F − ∥θ′∥2
+F )
+)
+= (1 + o(1)) ×Eπ2 exp (n⟨θ,θ ′⟩F ).
+Step IV: Construction of π and bounds for E0[Z 2]: Assume for notational simplicity that
+d is an integer multiple of k, the general case needs only minor notational adjustment. Pick
+independent random d × 1 vectors vℓ : ℓ = 1,...,k each of which consists of i.i.d. Rademacher
+entries (i.e., taking values ±1 with probability 1 /2). Create a matrix W as follows: In the ﬁrst
+d/k columns insert v1 times a random sign B1,j,j = 1,...,d/k . Then, in the ℓ-th block repeat
+the same with v1 replaced by vℓ, and random signs Bℓ,j,j = 1,...,d/k . If ∥ · ∥ = ∥ · ∥ F let
+γn =ρn/d and if ∥ · ∥ = ∥ · ∥∗ set γn = 2ρn/(
+√
+kd), so that in either case
+γn =o
+(
+min(
+√
+1/dn,d −1n−1/4)
+)
+.
+Deﬁne the random matrix θ =γnW and let θ′ be an independent copy of it. Thus
+n⟨θ,θ ′⟩F =nγ2
+n
+k∑
+ℓ=1
+d∑
+m=1
+d/k∑
+j=1
+vℓ,mBℓ,jv′
+ℓ,mB′
+ℓ,j =nγ2
+n
+∑
+ℓ
+∑
+m
+vℓ,mv′
+ℓ,m
+∑
+j
+Bℓ,jB′
+ℓ,j.
+As products of Rademacher variables are again Rademacher variab les we have, for ǫℓ,m, ˜ǫℓ,j
+i.i.d. Rademacher variables (all deﬁned on a suitable product probabilit y space),
+Eπ2 exp (n⟨θ,θ ′⟩F ) = EǫE˜ǫ exp
+
+nγ2
+n
+∑
+ℓ
+∑
+m
+ǫℓ,m
+∑
+j
+˜ǫℓ,j
+
+
+=
+
+EǫE˜ǫ exp
+
+nγ2
+n
+∑
+m
+ǫℓ,m
+∑
+j
+˜ǫℓ,j
+
+
+
+
+k
+. (13)
+imsart-ejs ver. 2011/11/15 file: LowBoundrevision.tex da te: November 8, 2021
+
+[PDF PAGE 10]
+A. Carpentier, R. Nickl/Low rank inference 10
+Conditional on the values of ǫ we set λ =nγ2
+n
+∑ d
+m=1ǫℓ,m and note that
+|λ| ≤ ndγ2
+n =o(1).
+By Taylor expansion or standard properties of the hyperbolic cosin e (as, e.g., in the proof of
+Theorem 6.2.9 in [
+6])
+E˜ǫ exp
+
+λ
+d/k∑
+j=1
+˜ǫℓ,j
+
+ = cosh(λ2)d/k ≤ exp
+(
+λ2d/k
+)
+and thus, since [ EU ]k ≤E[U k] for any non-negative random variable U , the right hand side in
+(
+13) is bounded above by
+(
+Eǫ exp
+(
+λ2d/k
+)) k
+≤Eǫ exp
+(
+λ2d
+)
+=Eǫ exp
+
+n2γ4
+nd
+( d∑
+m=1
+ǫm
+) 2
+ ≡E exp
+(
+Z 2/c2)
+where the Rademacher sum Z = ∑ d
+m=1ǫm is a sub-Gaussian random variable with variance
+proxyσ2 =d (cf. Section 2.3 in [
+6]). Thus by (2.24) in [ 6] we have
+E exp
+(
+Z 2/c2)
+≤ 1 + 2
+c2/2σ2 − 1 = 1 + o(1)
+since
+c2
+σ2 = 1
+d2n2γ4n
+→ ∞
+as n,d → ∞. Summarising all steps so far we conclude
+0 ≤EXE0[Z − 1]2 = E[Z 2] − 1 ≤ 1 − 1 +o(1) = o(1)
+noting that ( 12) holds π-almost surely in view of
+∥θ∥2
+F =γ2
+n∥W ∥2
+F =γ2
+nd2 =o(n−1/2).
+Step V: Asymptotic concentration of π on H1: Finally we show that for the above prior we
+have indeed Π( H1) → 1. First since θ consists of columns that are linear combinations of at
+most k distinct vectors vℓ we immediately have θ ∈ R(k) almost surely. Moreover, for the case
+∥ · ∥ = ∥ · ∥F we have from the last display and by deﬁnition of γn that ∥θ∥2
+F =ρ2
+n, so Π( H1) = 1
+follows.
+For the case ∥ · ∥ = ∥ · ∥∗ we have to show that
+πn,d(∥θ∥∗ ≥ρn) → 1
+as min(n,d ) → ∞. We can transform θ into the d ×k matrix θU consisting of k column vectors
+γn
+√
+d/kvℓ,ℓ = 1,...,k . The corresponding d ×k matrixU consists of k column vectors, the ℓ-th
+of which has zero entries except for the indices m ∈ [ℓd/k,..., −1 + (ℓ + 1)d/k], where it equals√
+k/dBℓ,m. Thus, U is an orthonormal projection matrix and we deduce that
+∥θ∥∗ ≥ ∥θU ∥∗.
+imsart-ejs ver. 2011/11/15 file: LowBoundrevision.tex da te: November 8, 2021
+
+[PDF PAGE 11]
+A. Carpentier, R. Nickl/Low rank inference 11
+We can renormalise the column vectors of θU so that
+θU =γn
+d√
+k
+(
+... 1√
+d
+vℓ...
+)
+≡γn
+d√
+k
+V.
+Thed ×k matrixV consists of scaled i.i.d. Rademacher entries, and hence the proof of Lemma 1
+in [ 14] (with n =d,k =k1 =p in the ﬁrst display on p.2868 there) implies that, if k/d → 0, then
+with probability as close to one as desired, the smallest singular value o fV is bounded below by
+1/2 for d large enough. As a consequence ∥V ∥∗ ≥k/2 and so, with probability approaching one,
+∥θ∥∗ ≥γnd
+√
+k/2 = ρn.
+Note that the same lower bound holds for
+∥θ −R(k0)∥∗ = inf
+θ′∈R(k0)
+∥θ −θ′∥∗ ≥
+k∑
+j=k0+1
+|λj| ≥ (k −k0)/2 (14)
+for any k0 < k, if the absolute eigenvalues in the last display are assumed to be in dec reasing
+order.
+3.3. Proof of Theorem
+4
+Consider the composite testing problem
+H0 :θ ∈R(k0) vs Hc
+1 :θ ∈R(k1), ∥θ −R(k0)∥∗ = inf
+θ′∈R(k0)
+∥θ −θ′∥∗ ≥ρ. (15)
+From ( 14) with k = k1 and k0 = o(k1) we see that for min( n,d ) large enough such that
+(k1 −k0)/2 ≥ k1/4, the prior π from the previous proof with γn = 4 ρn/(
+√
+kd) asymptoti-
+cally concentrates on H c
+1. As a consequence testing ( 15) is no easier than when H0 = {0}, so
+that when ρ =o(
+√
+k1d/n) then the proof of Part 2 of Theorem 1 implies
+lim inf
+n,d
+inf
+Ψ
+[
+sup
+θ∈H0
+EθΨ + sup
+θ∈Hc
+1
+Eθ(1 − Ψ)
+]
+≥ 1. (16)
+Now assume by way of contradiction that there exists Cn that satisﬁes ( 7) with α < 1/3 and
+such that for every c> 0 there exist inﬁnitely many n,d such that
+sup
+θ∈H0
+Eθ|Cn|∗<c
+√
+k1d/n.
+Passing to the inﬁnite subsequence min( n,d ) → ∞ along which the last inequalities hold, we
+deduce from Markov’s inequality that
+sup
+θ∈R(k0)
+Pθ(|Cn|∗ ≥α
+√
+k1d/n) ≤c/α<α
+for c small enough depending only on α. Then, by Proposition 8.6.3 in [ 6] we can construct a
+test for ( 15) for which the testing errors in ( 16) are no more than 3 α < 1 along the chosen
+subsequence, a contradiction that completes the proof.
+Acknowledgement. RN’s research was supported by the European Research Council ( ERC)
+under grant agreement No.647812. This paper was written while AC w as a research associate in
+the University of Cambridge. The authors are grateful to two ref erees whose comments improved
+the exposition of this article.
+imsart-ejs ver. 2011/11/15 file: LowBoundrevision.tex da te: November 8, 2021
+
+[PDF PAGE 12]
+A. Carpentier, R. Nickl/Low rank inference 12
+References
+[1] E. Arias-Castro, E.J. Cand` es, and Y. Plan. Global testing unde r sparse alternatives:
+ANOV A, multiple comparisons and the higher criticism. Ann. Statist. , 39:2533–2556, 2011.
+[2] A.D. Bull and R. Nickl. Adaptive conﬁdence sets in L2. Probability Theory and Related
+Fields, 156:889–919, 2013.
+[3] T. T. Cai and A. Zhang. ROP: matrix recovery via rank-one proj ections. Ann. Statist. ,
+43(1):102–138, 2015.
+[4] E. J. Cand` es and Y. Plan. Tight oracle inequalities for low-rank ma trix recovery from a
+minimal number of noisy random measurements. IEEE Trans. Inform. Theory , 57(4):2342–
+2359, 2011.
+[5] A. Carpentier, J. Eisert, D. Gross, and R. Nickl. Uncertainty Qu antiﬁcation for Matrix
+Compressed Sensing and Quantum Tomography Problems. arXiv:1504.03234, 2015.
+[6] E. Gin´ e and R. Nickl. Mathematical foundations of inﬁnite-dimensional statist ical models.
+to appear, Cambridge University Press, 2015.
+[7] D. Gross, Y.-K. Liu, S. T Flammia, S. Becker, and J. Eisert. Quant um state tomography
+via compressed sensing. Phys. Rev. Lett. , 105(15):150401, 2010.
+[8] M. Hoﬀmann and R. Nickl. On adaptive inference and conﬁdence ba nds. Ann. Statist. ,
+39:2382–2409, 2011.
+[9] Y. I. Ingster, Tsybakov A. B., and N. Verzelen. Detection boun dary in sparse regression.
+Elec. J. Stat. , 4:1476–1526, 2010.
+[10] Y. I. Ingster and I. A. Suslina. Nonparametric goodness-of-ﬁt testing under Gaussian mode ls,
+volume 169 of Lecture Notes in Statistics . Springer-Verlag, New York, 2003.
+[11] V. Koltchinskii. Von Neumann entropy penalization and low-rank m atrix estimation. Ann.
+Statist., 39(6):2936–2973, 2011.
+[12] V. Koltchinskii, K. Lounici, and A. B. Tsybakov. Nuclear-norm pe nalization and optimal
+rates for noisy low-rank matrix completion. Ann. Statist. , 39(5):2302–2329, 2011.
+[13] S. Negahban and M. J. Wainwright. Estimation of (near) low-ran k matrices with noise and
+high-dimensional scaling. The Annals of Statistics , 39:1069–1097, 2011.
+[14] R. Nickl and S. van de Geer. Conﬁdence sets in sparse regress ion. Ann. Statist., 41(6):2852–
+2876, 2013.
+imsart-ejs ver. 2011/11/15 file: LowBoundrevision.tex da te: November 8, 2021

@@ -1,0 +1,77 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{booktabs,tabularx,array,multirow}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,citecolor=blue!55!black,linkcolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
+\usepackage[nameinlink,capitalise,noabbrev]{cleveref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\E}{\mathbb E}
+\newcommand{\Pp}{\mathbb P}
+\newcommand{\R}{\mathbb R}
+\newcommand{\KL}{\operatorname{KL}}
+\newcommand{\TV}{\operatorname{TV}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\argmin}{\operatorname*{arg\,min}}
+\newcommand{\cD}{\mathcal D}
+\newcommand{\cM}{\mathcal M}
+\newcommand{\cP}{\mathcal P}
+\newcommand{\cL}{\mathcal L}
+\newcommand{\cA}{\mathcal A}
+\newcommand{\Kw}[2]{\mathfrak K_w\!\left(#1\,\middle\|\,#2\right)}
+\newcommand{\wh}{\widehat}
+\newcommand{\wt}{\widetilde}
+\newcommand{\ip}[2]{\left\langle #1,#2\right\rangle}
+\newcommand{\norm}[1]{\left\lVert #1\right\rVert}
+\newcommand{\given}{\,\middle|\,}
+
+\title{Population Functional Risk for Tensor--Train Compression\\
+of Conditional Generators}
+\author{Anonymous authors}
+\date{September 2026 working paper}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Tensor decompositions reduce the storage and arithmetic cost of large conditional generators, but weight-reconstruction error can misrank compressed networks on deployment prompts. We study finite-query estimation of one deployable tensor--train (TT) student under population teacher-relative conditional log-score risk, equivalently conditional KL, with tensorizations and ranks selected by penalized likelihood. On compact, rank-separated, functionally identifiable TT strata, a finite pivot-gauge atlas yields a nonasymptotic oracle bound with approximation error plus \(\{d_\lambda+\log H_\lambda+\log(1/\pi_\lambda)\}/n\), where \(d_\lambda\) is the raw core count minus the TT gauge dimension. A horizontal Assouad construction matches the modelwise \(d_\lambda/n\) term. Under local information-normal and off-chart separation conditions, a dense-teacher construction makes approximation and estimation jointly unavoidable for a fixed resource class. The classical local asymptotic minimax constant on the quotient is \(\tfrac12\tr(G_w I_\pi^{-1})\); it reduces to \(d_\lambda/2\) only for matched query and deployment mixtures under conditional KL\@. Identifiable logistic soft labels and direct access to a feasible teacher give exact-recovery counterexamples, so the black-box lower rate does not transfer universally across access models. We also give a rank-boundary result, an explicit equal-budget TT misordering example, and stability-based same-data capability bands. Synthetic TT-tangent experiments recovered the gauge dimension and the predicted \(d_\lambda/(2n)\) law.
+\end{abstract}
+
+\noindent\textbf{Keywords:} conditional density estimation; knowledge distillation; large language models; model selection; quotient manifold; tensor train.
+
+\input{sections/01_introduction}
+\input{sections/02_related_work}
+\input{sections/03_experiment}
+\input{sections/04_geometry}
+\input{sections/05_oracle}
+\input{sections/06_lower_bounds}
+\input{sections/07_functional_geometry}
+\input{sections/08_certification}
+\input{sections/09_experiments}
+\input{sections/10_discussion}
+
+\appendix
+\input{sections/a_proofs_oracle}
+\input{sections/b_proofs_lower}
+\input{sections/c_proofs_secondary}
+\input{sections/d_additional_experiments}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}

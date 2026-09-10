@@ -1,0 +1,903 @@
+Joint Tensor Rank Constraints Can Shorten
+Honest Functional Confidence Intervals
+Research working draft
+September 9, 2026
+Status.The six numbered theorems have complete derivations in the appendix and supplementary
+numerical checks. This is a working research note, without independent proof review or a claim of
+certified priority. Sharp minimax length, general loading geometry and adaptation to the actual
+rank remain open. No conjecture is stated as a theorem.
+Abstract
+We study confidence intervals for a prescribed linear functional of a fully observed Gaussian
+tensor mean, under a known Frobenius bound and upper bounds on its Tucker or tensor-train
+ranks. Actual ranks may be smaller than the supplied caps, and nonzero singular values may
+be arbitrarily small. For an orthogonal tensor contrast, canonical decompositions imply an
+ℓ2/K bound on the relevant diagonal, whereK is the tensor order. Classical soft thresholding
+then gives an explicit finite-sample honest interval. For equal mode sizep, fixed rank caps,
+normalized diagonal loading and norm boundM =τ√p, its length isO{τ (logp/p )(K−2)/(2K)},
+where τ is the coordinate noise standard deviation. WhenK≥ 3, this is smaller in order
+than every fixed-radius affine interval on the same class, and than the expected length at zero
+of every interval required to cover the larger class defined by one unfolding constraint. A
+within-class lower bound leaves a polynomial minimax gap. In 172 Gaussian configurations with
+2,000 replications each, the selected interval has empirical coverage between 99.75% and 100%,
+indicating substantial conservatism. The results establish two specific length comparisons; they
+do not establish unrestricted optimality or adaptation to the actual rank.
+Keywords:honest confidence intervals; linear functionals; Gaussian sequence model; tensor train;
+Tucker rank; nonconvex parameter space.
+1 Introduction
+Low-rank tensor models impose several rank restrictions simultaneously. Whether these restrictions
+help estimation is different from whether they permit shorter confidence intervals that remain
+valid when components vanish. Consider a third-orderp×p×p tensor meanA, observed through
+n =p independent full tensors with independent standard Gaussian errors. Its sample mean has
+coordinate noise levelτ = p−1/2. Suppose∥A∥F≤ 1and the tensor has rank at most one. Our
+running estimand is the normalized diagonal sump−1/2∑p
+i=1Aiii. The direct Gaussian interval
+is valid regardless of rank. The question is whether the tensor restriction permits a substantially
+shorter interval while retaining coverage at every admissible signal, including zero.
+Several parts of this question have established precedents. Tensor functional inference on regular
+low-rank strata is developed by Xu et al. [2025]; matrix inference without estimating the exact
+rank is available under quantitative conditions [Choi et al., 2026]. Honest adaptation and nonlinear
+functional estimation on nonconvex classes have a much older theory [Cai and Low, 2004a,b].
+1
+
+Consequently, neither unknown rank nor nonlinear inference is a sufficient novelty claim. A more
+specific question is whether the simultaneous tensor restrictions produce an inferential advantage
+that disappears when the honesty class retains only one unfolding rank constraint.
+We answer this restricted comparison for a class of prescribed orthogonal loadings. The
+observation model is a Gaussian location experiment with known noise variance, and the norm and
+rank caps are supplied. We require finite-sample coverage over the entire cap class, with no lower
+bound on any nonzero singular value. For fixed orderK≥ 3, equal mode sizep and M =τ√p, we
+construct an interval of lengtho(τ). We then show that an honest fixed-radius affine interval on the
+same class must have length of order at leastτ, and that every interval honest over a single-unfolding
+relaxation must have expected length of order at leastτ at zero. Matricization itself preserves all
+the data; the comparison concerns enlarging the parameter space.
+Three issues govern the argument. First, a bound valid at rank boundaries must avoid inversion
+of small singular values. Second, a comparison with the relaxed model must cover all interval
+procedures on that model, rather than one chosen estimator. Third, a constructive upper bound
+must be distinguished from a sharp minimax result. The last distinction matters here: the lower
+bound inside the joint tensor class does not match the thresholding upper bound.
+Canonical Tucker and tensor-train expansions provide a controlled sum of squared component
+weights. Applied to an orthogonal diagonal, this yields anℓ2/K envelope. The exponent is familiar
+from tensor factor quasi-norm geometry [Fan et al., 2023]; the estimator uses classical thresholding
+[Donoho and Johnstone, 1994]. A simultaneous Gaussian noise bound converts that envelope into an
+honest scalar interval. Gaussian mixtures with a common functional value supply the relaxed-class
+and within-class lower bounds. In the running third-order example, the resulting radius is at most
+τ{8 log(2p/α)/p}1/6, despite the absence of an identifiable nonzero factor at the origin.
+The note makes three concrete contributions to this restricted formulation:
+1. An explicit diagonal bound for Tucker and TT cap classes, and a finite-sample interval valid
+across their lower-rank strata (Sections 4–5).
+2. Two quantitative separations: from fixed-radius affine intervals under the same honesty class,
+and from all intervals under a one-unfolding relaxation (Section 5).
+3. A within-class lower bracket and reproducible experiments that expose the remaining lack of
+sharpness and actual-rank adaptation (Sections 5.3–6).
+The precise separation appears distinct from the inspected literature, but its elementary ingredients
+make a reduction to existing general theory a serious remaining novelty question.
+2 Related work
+Functional inference and nonconvex classes.Optimal recovery connects confidence and
+estimation problems to parameter-set geometry [Donoho, 1994]. Nonlinear improvements on
+nonconvex classes and the limits of honest adaptation are established themes [Cai and Low, 2004b,a,
+Low, 1997]. Finite unions of convex classes admit general aggregation and functional-inference
+constructions [Juditsky and Nemirovski, 2020]. These results supply both tools and a substantial
+novelty threat: the thresholding step below is not a new general inference principle. The particular
+comparison requires an upper bound exploiting joint tensor restrictions and a lower bound over the
+enlarged unfolding class.
+Matrix and tensor uncertainty quantification.Low-rank matrix linear forms, geometric
+inverse problems and rank-cap confidence sets already have extensive theory [Xia and Yuan, 2021,
+Cai et al., 2016, Carpentier and Kim, 2018, Carpentier et al., 2018]. Tensor inference includes
+2
+
+subspace and functional results in strong-signal regimes [Xia et al., 2022, Agterberg and Zhang,
+2024], as well as uncertainty quantification for tensor completion [Cai et al., 2023]. Our fully
+observed experiment is simpler than completion or random-design regression. Our loading is also
+narrower than an arbitrary functional. What changes is the uniformity class: every tensor below the
+supplied caps is covered, without a minimum-signal condition. The resulting interval is not asserted
+to retain regular-stratum efficiency.
+Weak factors and singularity.Weak-factor inference, rank uncertainty and adaptation obstruc-
+tions are studied in econometrics [Zhu, 2019, Armstrong et al., 2026, Choi et al., 2026]; uniform
+inference near critical matrix signal strengths is also under active development [Bykhovskaya et al.,
+2025]. Singular likelihood asymptotics [Drton, 2009] and universal inference [Wasserman et al.,
+2020] further show why validity at a singularity is not itself a new objective. Here the target is a
+tensor contrast, and the claim is a specific length separation.
+Tensor geometry.Orthonormal Tucker representations and TT canonicalization are standard
+[De Lathauwer et al., 2000, Oseledets, 2011]. Tensor norm geometry and factor penalties are
+developed by Friedland and Lim [2018], Fan et al. [2023], while rank-variety tangent cones are
+studied by Gao et al. [2025], Kutschan [2018]. Our proof uses canonical expansions rather than
+estimating tangent spaces. The explicit rank constants below are sufficient bounds; their optimality
+is unknown. A companion literature dossier records 20 closest competitors, theorem assumptions
+and source-inspection depth, with a bibliography covering relevant work available by September 9,
+2026.
+3 Experiment and parameter classes
+LetK≥2,p k≥1, andD= ∏K
+k=1pk. We observe
+Z=A+τG∈R p1×···×pK,vec(G)∼N(0,I D), τ >0.(1)
+The noise level is known. Equivalently, Z is the sufficient sample mean of independent full
+observationsWj =A +σGj, j = 1,...,n , with knownσ and τ =σ/√n. This is an exact Gaussian
+mean equivalence, not an equivalence to scalar-response tensor regression. The observed variables
+are the tensorsWj, orZ; A is a fixed unknown parameter. Factor and core representations are
+nonunique coordinates, not additional latent random variables.
+WriteA(k) for the mode-k unfolding andA⟨k⟩ for the matrix joining modes1,...,k against
+k+ 1,...,K. For supplied positive integer caps, define
+ΘTu(M,¯r) ={A:∥A∥ F≤M,rank(A (k))≤¯rk, k= 1,...,K},(2)
+ΘTT(M,¯r) ={A:∥A∥ F≤M,rank(A ⟨k⟩)≤¯rk, k= 1,...,K−1}.(3)
+The known boundM is positive. Actual ranks may be smaller, including zero; nonzero singular
+values may be arbitrarily small. No incoherence or coordinate sparsity condition is imposed. Noise
+contamination, unknown covariance, missing observations and model misspecification are outside
+these parameterized experiments.
+The prescribed loading has the form
+L=
+m∑
+i=1
+wiVi, V i =
+K⨂
+k=1
+vki, v ⊤
+kivkj =1{i=j},∥w∥ 2 = 1.(4)
+3
+
+Here m≤min kpk, and each loading family is supplied independently of the data. Thus∥L∥F = 1.
+Although this is restrictive,L need not be sparse in the observation basis: known orthogonal mode
+rotations can make it dense. The estimand and relevant observations are
+ψ(A) =⟨L,A⟩=
+∑
+i
+wiai, a i =⟨A,V i⟩, d i =⟨Z,V i⟩=a i +τg i,(5)
+where thegi are independent standard normals.
+An intervalC(Z)is honest at level1−αonΘif
+inf
+A∈Θ
+PA{ψ(A)∈C(Z)}≥1−α.(6)
+This is a finite-sample requirement, not a pointwise limit along a fixed-rank stratum. Length and
+expected length are the primary criteria. For example,
+L0(Θ) = inf
+C:(6)
+E0|C|,L max(Θ) = inf
+C:(6)
+sup
+A∈Θ
+EA|C|.(7)
+The infima range over all measurable intervals, allowing independent randomization. The usual
+squared Frobenius estimation loss has population riskRA(B) =∥B−A∥ 2
+F +Dσ2 and empirical
+risk Rn(B) =n−1∑
+j∥Wj−B∥ 2
+F. We do not minimize these risks or require a full-tensor estimator.
+The principal asymptotic comparison in experiment(1) uses pk =m =p, fixedK≥ 3, fixed
+rank caps, andM =τ√p. A concrete sequence isM =σ = 1, n =p, soD =nK. All finite-sample
+results below also apply away from that sequence.
+4 Interval construction
+Define
+q= 2
+K, J Tu = min
+k
+∏
+ℓ̸=k
+¯rℓ, J TT =
+K−1∏
+k=1
+¯rk, B=J 1−q/2Mq,(8)
+whereJis chosen for the applicable class. Set
+λ=τ
+√
+2 log(2m/α), ˆψNL =
+∑
+i
+wi softλ(di),soft λ(x) = sign(x)(|x|−λ) +.(9)
+The three candidate intervals have radii
+hNL =∥w∥∞B(2λ)1−q, I NL = [ˆψNL−h NL, ˆψNL +h NL],(10)
+hG =z 1−α/2τ, I G = [⟨L,Z⟩−h G,⟨L,Z⟩+h G],(11)
+h0 =M
+( s∑
+i=1
+w2
+(i)
+)1/2
+, I 0 = [−h0,h 0],(12)
+where|w (1)|≥···≥|w (m)|andsis the smaller ofmand the smallest supplied rank cap. Choose
+C∗ =I j∗, j ∗∈arg min
+j∈{NL,G,0}
+hj,(13)
+with a fixed rule for ties. This choice depends only on known quantities. Choosing an interval after
+examining its center or an estimated rank is a different procedure and is not justified by the proof.
+The constants in(8) calibrate the threshold procedure(9); the direct alternative(11) supplies
+a valid fallback. Onlym contractions are used. For coordinate loadings, computation readsm
+tensor entries and takesO(m)operations. Obtaining contractions for a dense rotated loading has
+additional cost, which can be large. The procedure does not estimate a Tucker core, TT cores,
+factors or actual ranks.
+4
+
+5 Statistical theory
+All six numbered results have complete proofs in the appendix; the project ledger labels them
+PROVED. The label denotes the supplied derivation, not independent peer review. The results
+use the experiment and classes of Section 3. Lower-bound constants are stated for0< α <1/4
+when this simplifies positivity.
+5.1 Diagonal geometry and honest coverage
+Theorem 1(Orthogonal diagonal compressibility).For either class in(2)–(3), under loading(4),
+m∑
+i=1
+|⟨A,Vi⟩|2/K≤J 1−1/KM 2/K.(14)
+No minimum singular value is required.
+The proof expands a canonical tensor representation into at mostJ product terms whose
+squared component weights sum to∥A∥2
+F. For TT tensors, these terms need not be orthogonal. A
+prefix-weight identity establishes the sum exactly; assuming termwise orthogonality would be an
+incorrect shortcut. Hölder’s inequality and Bessel’s inequality then give(14). The rank factor may
+be loose, particularly for growing caps.
+For rank cap one the diagonal image is exactly the ball{a :∑
+i|ai|2/K≤M 2/K}, as shown in
+Lemma 2. Thus the diagonal-only statistical experiment is precisely a classical Gaussian sequence
+problem on anℓq ball. The full tensor experiment contains additional off-diagonal information. This
+reduction limits the novelty of the method and identifies where a stronger result would need to go
+beyond it.
+Theorem 2(Finite-sample honest interval).For every0 < α <1, each interval in(10)–(12) is
+honest on the applicable cap class. Consequently,C∗ is honest and has deterministic length
+|C∗|= 2 min{h NL,hG,h 0}.(15)
+The eventmaxi|τgi|≤λ has probability at least1−α. On this event soft thresholding satisfies
+|softλ(ai +τg i)−a i|≤min(|a i|,2λ)≤|a i|q(2λ)1−q.
+Summing proves the nonlinear interval bound. No central limit theorem, rank recovery or pilot
+remainder is needed. This simplicity also limits the contribution: once the diagonal envelope is
+known, the coverage argument is classical. KnownMis essential to the stated calibration.
+5.2 Two lower-bound comparisons
+For the remainder of this subsection let all dimensions equalp, letEi =e⊗K
+i , and put
+L=p −1/2
+p∑
+i=1
+Ei, z=z 1−α/2.(16)
+Theorem 3(Fixed-radius affine intervals).Suppose the honesty class contains0and all ±MEi. If
+0<α<1/2and
+C(Z) = [⟨W,Z⟩+b−h,⟨W,Z⟩+b+h]
+5
+
+is honest, with deterministicW,b,h, then
+h≥ (M/√p)zτ
+M/√p+zτ .(17)
+On the rank-one tensor Frobenius ball, the best radius in this affine class is therefore of order
+min(M/√p,τ), up to constants depending onα.
+The theorem allowsW to use the entire tensor. It does not cover affine centers with data-
+dependent radii. The matching upper order follows by choosing betweenIG and I0 for rank cap
+one.
+For a nonempty proper subsetS of modes, writeA[S] for the corresponding bipartition unfolding
+and define
+ΘS ={A: rank(A [S])≤1,∥A∥ F≤M}.(18)
+Theorem 4(Cost of a single unfolding honesty class).If0<α< 1/4, every interval honest onΘS
+satisfies
+E0|C|≥c α min
+{
+M√p,τ
+4
+}
+, c α = 1−2α− 1
+2
+√√
+8/7−1>0.(19)
+The lower order min(M/√p,τ )is attained up to α-dependent constants by the direct/structural
+choice onΘS.
+The alternatives in the proof are rank one in the chosen matrix unfolding. They generally violate
+the other tensor rank constraints. This is necessary for the comparison: the theorem measures the
+cost of requiring coverage on the larger class. For Tucker caps, a mode unfolding is a permissible
+relaxation; for TT caps, a contiguous cut is permissible. With all tensor rank caps one, every
+bipartition in(18) contains the original tensor class. Increasing an unfolding cap further preserves
+the lower bound.
+Theorem 5(Strict length separations).Let K≥ 3and the rank caps be fixed. Under(16) and
+M=τ √p,C∗ is honest on the Tucker or TT class and
+|C∗|≤2τJ 1−1/K
+{8 log(2p/α)
+p
+}(K−2)/(2K)
+=o(τ).(20)
+In contrast, every fixed-radius affine interval honest on the same class has length at least2zτ/ (1 +z).
+Every interval honest on a class retaining only one constrained unfolding has expected length at zero
+at leastcατ/4.
+For growing caps, the same conclusion follows ifJ1−1/K(logp/p )(K−2)/(2K)→ 0. This condition
+may be restrictive. AtK = 2the exponent in (20) is zero, so the argument gives no polynomial
+separation. Theorem 5 neither asserts that the displayed exponent is optimal nor compares favorably
+at every strong signal with an efficient oracle projection interval. Figure 1 displays the explicit
+comparisons and the within-class bracket established next.
+5.3 What remains unknown inside the tensor class
+Theorem 6(Within-class lower bound).For0 < α <1/4, every interval honest on a class
+containing the rank-one tensor Frobenius ball of radiusMsatisfies
+E0|C|≥(3/4−2α) min{M,τ
+√
+log(1 +p/4)}√p .(21)
+6
+
+103 105 107 109 1011
+Mode dimension p (log scale)
+10−3
+10−2
+10−1
+100
+Interval length / τ (log scale)
+Joint, K=3
+Joint, K=4
+Joint, K=6
+Affine lower bound
+One-unfolding lower bound
+103 105 107 109 1011
+Mode dimension p (log scale)
+10−5
+10−4
+10−3
+10−2
+10−1
+100
+Length / τ (log scale)
+K=3: uniform upper bound
+K=3: lower bound at zero
+Figure 1: Joint constraints permit a vanishing normalized length, while the within-class optimal
+rate remains unresolved. Left: analytic evaluations of the cap-one selected length and the affine
+and one-unfolding lower bounds, withM =τ√p and α = 0.05. Right: the proved upper and lower
+bounds forK = 3; the shaded region is an unresolved bracket, not an uncertainty band. These are
+formulas evaluated up top= 1012; Monte Carlo experiments stop atp= 8192.
+This is a sparse-coordinate mixture bound. AtM =τ√p, for fixed caps and fixedK≥ 3, the
+results imply
+cτ
+√
+logp
+p ≤L 0(Θ)≤L max(Θ)≤Cτ
+(logp
+p
+)(K−2)/(2K)
+(22)
+for sufficiently largep, with constants depending onK, the caps andα. The ratio of the displayed
+scales grows as(p/logp )1/K. Thussharp minimax length is PARTIAL, with both sides
+established but unmatched. A possible improvement using off-diagonal observations isCONJEC-
+TURED; no asserted result relies on it. In particular, the coordinate mixture is not proved least
+favorable, and the two criteria in (7) may differ.
+Assumption audit.Gaussian isotropy gives the exact diagonal sequence and the likelihood-ratio
+identities. The threshold interval alone extends whenever a valid simultaneous coordinate noise
+envelope is supplied, but the direct alternative and lower bounds require their own calibration.
+Orthonormal loading families produce Bessel bounds and equal noise variances; arbitrary loadings
+are untreated. Canonical tensor expansions avoid a spectral gap but yield potentially large rank
+constants. Supplied caps andM identify the outer honesty class; replacing them with unvalidated
+estimates is not covered. None of these assumptions should be described as a routine approximation
+for dependent LLM representations.
+7
+
+6 Simulation study
+6.1 Protocol and baselines
+The simulation protocol was written after the theorem derivations and before implementation. It
+uses seed 20260909, 2,000 replications per configuration, and exact marginal observations of the
+diagonal coordinates needed by the procedures. Unused independent Gaussian coordinates of the
+full tensor need not be generated. This does not simulate a regression design or a tensor completion
+experiment.
+The main grid takesK∈{ 2, 3, 4, 6}, p =n∈{ 128, 512, 2048, 8192}, M =σ = 1, and rank cap
+one. Signals have the formA = au⊗K, witha∈{ 0, 0.02, 0.2, 1} and u uniform on a coordinate
+support. For nonzero signals, support sizes include one,p, and a value near(a/λ)2/K, with duplicates
+removed. The latter places diagonal means near the threshold. Additional configurations varyn/p
+and the valid threshold multiplier, and use cap two with a second component tending to zero. There
+are 175 configurations, of which three deliberately violate the iid Gaussian model.
+We compareIG, I0, INL and C∗. For nonzero rank-one signals, a known-direction oracle is also
+included. IfU =u⊗K were supplied, thenc⟨U,Z⟩±zτ|c| , wherec =⟨L,U⟩ , is exact forA =aU. Its
+joint Gaussian noise with the diagonal is simulated exactly. This oracle has unavailable structural
+information and a smaller honesty class; it is not an implementation of an estimated-subspace
+method. Published strong-signal methods are compared through their assumptions rather than
+advertised as uniform baselines without a matching implementation.
+Each output row reports coverage, binomial Monte Carlo standard error, an exact 95% Clopper–
+Pearson interval, deterministic length, center bias and its standard error, and root mean squared
+center error. Width standard errors are zero because the radii are deterministic. Numerical proof
+checks separately examine 101,101 scalar soft-threshold cases, 120 random Tucker and 120 random
+TT tensors, and exact finite-binomial mixture second moments. They supplement rather than
+replace the proofs.
+6.2 Gaussian coverage and interval length
+Table 1 summarizes the 172 in-model configurations. The selected interval is substantially conserva-
+tive. Across configurations, direct Gaussian coverage ranges from 0.9365 to 0.9625, and selected
+coverage ranges from 0.9975 to 1. These extrema are descriptive, not simultaneous confidence limits
+for uniform coverage. At coverage 0.95, the Monte Carlo standard error with 2,000 replications is
+approximately 0.00487. When all replications cover, the exact binomial interval is approximately
+[0.99816,1], despite a zero plug-in standard error.
+Method Configurations Min. coverage Max. coverage
+Direct Gaussian 172 0.9365 0.9625
+Structural 172 1.0000 1.0000
+Threshold 172 0.9975 1.0000
+Selected 172 0.9975 1.0000
+Known-direction oracle 117 0.9370 0.9615
+Table 1: Coverage extrema over the stated Gaussian configurations. The oracle is evaluated only
+for nonzero rank-one signals, giving fewer configurations and a different information set. Each
+configuration has 2,000 replications; configuration-level uncertainty is retained in the accompanying
+CSV.
+8
+
+Atp =n = 8192and cap one, the selected lengths divided byτ are2 .0000,0 .9622,0 .6674and
+0.4629for K = 2, 3, 4, 6, respectively. The direct length is3.9199τ. These width values are exact
+evaluations of the formulas, not fitted empirical convergence rates. They agree with the order-
+dependent prediction, while theK = 2control shows no vanishing length ratio. A known-direction
+oracle can be much shorter for diffuse signals; there is no claim of pointwise oracle dominance.
+6.3 Weak rank and noise assumptions
+For the boundary experiment, setK= 3and cap two, and generate
+Aϵ =
+√
+1−ϵ 2U1 +ϵU 2, ϵ∈{0,0.001,0.01,0.1,0.5},
+where U1,U 2 are unit product tensors with disjoint mode supports. Each constrained unfolding has
+nonzero singular values
+√
+1−ϵ 2 andϵ forϵ> 0; the actual rank becomes one at zero. Figure 2 shows
+coverage and length for concentrated supports atp = 8192. The selected radius remains constant as
+ϵ vanishes. This demonstrates validity across the tested boundary and explicitly demonstrates the
+absence of actual-rank adaptation.
+0 0.001 0.01 0.1 0.5
+0.90
+0.92
+0.94
+0.96
+0.98
+1.00Coverage probability
+Nominal coverage Direct Gaussian Selected, cap 2
+0 0.001 0.01 0.1 0.5
+Second singular value ε (categorical spacing)
+0
+1
+2
+3
+4Interval length / τ
+Figure 2: Coverage persists in the tested weak-component sequence, but the cap-based radius does
+not adapt to the actual rank. The setting isK = 3,p =n = 8192,M =σ = 1and cap two, with
+disjoint single-coordinate product factors. Top: empirical coverage and exact 95% binomial intervals
+from 2,000 replications per value. Bottom: deterministic length divided byτ. The horizontal spacing
+inϵis categorical.
+9
+
+Three additional zero-mean stress configurations use independent variance-one Studentt3 errors,
+a Gaussian mixture with 5% of noise standard deviations multiplied by ten, and equicorrelated
+Gaussian coordinates with correlation 0.2. Table 2 reports the results. Variance contamination
+causes severe undercoverage for both procedures. Correlated Gaussian coordinates invalidate the
+direct iid variance but preserve the marginal Gaussian union bound used for the nonlinear interval.
+The Student result at zero is not a robustness theorem or evidence of coverage elsewhere.
+Noise Direct Selected
+gaussian 0.9540 1.0000
+student t3 0.9585 0.9670
+variance contamination 0.5740 0.3830
+correlated 0.1430 1.0000
+Table 2: Noise-assumption stress atA = 0, K = 3, p =n = 512, cap one and nominal level 0.95.
+Only the first row belongs to the stated iid Gaussian model. These results delimit the calibration;
+they do not support a robustness claim.
+7 Practical relevance and limits of an AI application
+The theory describes repeated, calibrated tensor measurements and a predetermined orthogonal
+contrast. A scientifically justified application would need a sampling model supporting the noise
+envelope, a credible outer norm/rank class, and a loading fixed independently of the observations. We
+do not supply a real-data experiment because no such dataset and calibration have been established
+in this project.
+In particular, indexing an array by model, layer and prompt does not make iid Gaussian tensor
+location an adequate model for LLM representations. Repeated prompts, dependent tokens, layer
+coupling, heterogeneous measurement noise and data-selected contrasts materially change the
+experiment. An LLM example would currently add application terminology without additional
+statistical theory. A separate dependence and calibration analysis is required before such an
+experiment could substantiate this note.
+8 Discussion
+The central result is a concrete comparison of honesty classes. Under a special loading and bounded
+tensor ranks, a nonlinear interval can be smaller in order than every fixed-radius affine interval
+on the same class, and than every interval honest on a one-unfolding relaxation. The underlying
+tensor data need not be compressed or factor-estimated to obtain this comparison. Conversely, an
+algorithm using a matricized tensor can still exploit all original constraints; Theorem 4 does not
+rule out such an algorithm.
+The current upper bound is not minimax sharp. The polynomial gap in(22) is the most
+important theoretical limitation, followed by the restricted loading, loose growing-rank constants,
+known norm and noise bounds, and lack of actual-rank adaptation. The experiments also show
+that the interval is conservative on the tested Gaussian grid. Strong-signal procedures or additional
+known-direction information may provide substantially better pointwise precision.
+The most valuable next theorem would determineL0 orLmax for the rank-one class, or character-
+ize which loadings admit a joint-constraint advantage. A rank-adaptive procedure would additionally
+10
+
+need honest calibration over the larger cap class and a theorem identifying the spectra or geometries
+on which shorter intervals are possible. A naive plug-in rank or variance estimate would not resolve
+these questions.
+This draft is therefore a constructive research note and a basis for further theory, rather than a
+completed general solution to honest inference across unknown tensor ranks. The explicit separation
+was not found in the inspected literature, but the proof combines familiar ingredients. Its suitability
+for a strong statistics journal depends on resolving a substantial part of the remaining theory and
+confirming that the tensor specialization is not a direct consequence already established elsewhere.
+Reproducibility.The accompanying project contains the prespecified simulation protocol, modu-
+lar Python code, fixed seeds, 817 result rows, exact binomial uncertainty, source and result hashes,
+literature matrices, a theorem-status ledger and complete proof notes. All displayed numerical
+values are generated from the saved output or exact formulas. No real-data findings, robustness
+guarantees or conjectured rates are reported as established results.
+A Complete proofs
+The proofs apply in finite dimensions. Constants used in the main text are explicit. All tensors and
+Gaussian variables are real.
+A.1 Canonical product expansions
+Lemma 1(Controlled squared component weights).For a tensor in either cap class there is a
+finite representation
+A=
+JA∑
+j=1
+x1j⊗···⊗x Kj, a cp
+j =
+K∏
+k=1
+∥xkj∥2,
+such thatJA≤Jand ∑
+j(acp
+j )2 =∥A∥ 2
+F.
+Proof. The zero tensor has a zero-term representation. For a nonzero Tucker tensor, choose
+orthonormal basesUk for the column spaces of its mode unfoldings. Orthogonal projection onto each
+such space leavesA unchanged. Contracting these bases gives a coreG withA =G× 1U1···× KUK
+and∥G∥ F =∥A∥ F. The actual mode ranks satisfyrk≤¯rk.
+Fix a modek. Expand all core indices other thank. Each tuplej−k gives unit factorsUℓ[:,jℓ]in
+modes ℓ̸ =k and factorUkG[:,j−k]in mode k. Its squared product weight is∥G[:,j−k]∥2
+2. These slice
+squares sum to∥G∥2
+F. The number of terms is∏
+ℓ̸=krℓ. Choosingk to minimize the corresponding
+cap product proves the Tucker assertion.
+For a TT tensor, sequential matrix factorizations yield coresGk∈R rk−1×pk×rk, withr0 =rK = 1
+andrk≤¯rk. At each cut, factor the relevant matrix through a basis of its column space. Equivalently,
+left-orthogonalize the cores by QR and absorb the triangular factors into the next core. Thus the
+(rk−1pk)×rk matrix associated withGk has orthonormal columns fork<K , and∥GK∥F =∥A∥F.
+These steps use no inverse lower bound on a singular value.
+Expand the contraction over all internal paths(a1,...,a K−1). A path contributes the product
+tensor with physical vectorsGk[ak−1, :,ak]. There are at most∏
+k<Krk≤J paths. To sum their
+squared weights, let
+tk(b) =
+∑
+a1,...,ak−1
+k∏
+ℓ=1
+∥Gℓ[aℓ−1,:,a ℓ]∥2
+2, a k =b.
+11
+
+Column normalization givest1(b) = 1. Ift k−1(a) = 1for alla, then
+tk(b) =
+∑
+a
+tk−1(a)∥Gk[a,:,b]∥ 2
+2 = 1
+fork <K. Hence the sum of all squared path weights is
+∑
+a
+tK−1(a)∥GK[a,:,1]∥ 2
+2 =∥G K∥2
+F =∥A∥ 2
+F.
+The individual path terms need not be orthogonal; the prefix identity is what proves the required
+equality.
+A.2 Proof of Theorem 1
+Proof.Letq= 2/K≤1and use Lemma 1. Subadditivity of theqth power of absolute value gives
+∑
+i
+|⟨A,Vi⟩|q≤
+∑
+j
+∑
+i
+K∏
+k=1
+|⟨xkj,vki⟩|2/K.
+Hölder’s inequality withK equal exponents, followed by Bessel’s inequality for each orthonormal
+family, yields
+∑
+i
+∏
+k
+|⟨xkj,vki⟩|2/K≤
+∏
+k
+(∑
+i
+|⟨xkj,vki⟩|2
+)1/K
+≤
+∏
+k
+∥xkj∥2/K
+2 = (acp
+j )q.
+Finally, the power-mean inequality (or Hölder with exponents2/qand2/(2−q)) gives
+∑
+j
+(acp
+j )q≤J 1−q/2
+A
+
+
+
+∑
+j
+(acp
+j )2
+
+
+
+q/2
+≤J 1−q/2Mq.
+This is (14). ForJA = 0both sides of the first inequality are zero.
+A.3 Exact rank-one diagonal image
+Lemma 2(Exact diagonal reduction).Under (4), the image of the rank-one tensor Frobenius ball
+of radiusMunderA↦→(⟨A,Vi⟩)m
+i=1 is exactly
+{
+a∈R m :
+∑
+i
+|ai|2/K≤M 2/K
+}
+.
+Proof. One inclusion follows from Theorem 1 withJ = 1. Conversely, for any vector in the displayed
+ball, put
+x1 =
+∑
+i
+sign(ai)|ai|1/Kv1i, x k =
+∑
+i
+|ai|1/Kvki, k≥2,
+and setA=x 1⊗···⊗x K. Orthonormality gives⟨A,Vi⟩=a i and
+∥A∥F =
+∏
+k
+∥xk∥2 =
+(∑
+i
+|ai|2/K
+)K/2
+≤M.
+The tensor has every Tucker and TT rank at most one. The zero vector is handled by the zero
+tensor.
+12
+
+A.4 Threshold error and structural radius
+Lemma 3(Scalar threshold envelope).If |e|≤λ and s = softλ(x +e), thens lies between zero and
+xand
+|s−x|≤min(|x|,2λ).
+Forq∈(0,1],t,u≥0, one also hasmin(t,u)≤t qu1−q, with the continuous interpretation at zero.
+Proof. Forx≥ 0,x+e≥−λ , so thresholding cannot produce a negative value. Alsox+e−λ≤x , so
+0≤s≤x . Ifx> 2λ, thenx+e>λ andx−s =λ−e≤ 2λ. Otherwisex−s≤x≤ 2λ. The negative
+case follows by oddness. Ift≤u , thent =tqt1−q≤t qu1−q; ifu≤t , thenu =uqu1−q≤t qu1−q.
+Lemma 4(Matrix functional bound).If rank(B)≤r and H has singular valuess1(H)≥s 2(H)≥
+···, then
+|⟨H,B⟩|≤∥B∥ F
+
+∑
+i≤r
+si(H)2
+
+
+1/2
+.
+Proof. Let P project onto the column space ofB. Then PB = B and Cauchy–Schwarz gives
+|⟨H,B⟩| =|⟨PH,B⟩|≤∥PH∥ F∥B∥F. Write HH⊤ = ∑
+iλiuiu⊤
+i , with decreasing nonnegative
+eigenvalues. The numbers bi = u⊤
+i Pui satisfy0 ≤b i ≤ 1and ∑
+ibi = tr(P )≤r . Therefore
+∥PH∥ 2
+F =∑
+iλibi≤∑
+i≤rλi: moving any weight from a smaller eigenvalue to an unfilled larger one
+cannot reduce this sum. Sinceλi =s i(H)2, the result follows.
+A.5 Proof of Theorem 2
+Proof.The product atoms are orthonormal because
+⟨Vi,Vj⟩=
+∏
+k
+⟨vki,vkj⟩=1{i=j}.
+Gaussian isotropy then gives the independent normals in(5). For a standard normalg, Chernoff’s
+inequality gives P(g >t)≤exp (−t2/2)by minimizing exp(−ut +u2/2)at u =t. Apply the same
+inequality to−gand take a union bound to obtain
+P{max
+i
+|τgi|>λ}≤2mexp{−λ 2/(2τ 2)}=α.
+On the complementary event, Lemma 3 and Theorem 1 give
+|ˆψNL−ψ(A)|≤∥w∥ ∞
+∑
+i
+min(|ai|,2λ)
+≤∥w∥∞(2λ)1−q∑
+i
+|ai|q≤h NL.
+This proves the uniform coverage ofINL.
+Because∥L∥F = 1,⟨L,Z⟩−ψ (A)∼N (0,τ 2), soIG has exact coverage. For any constrained
+unfolding, the loading matrix has singular values|wi|: the product vectors on each side form
+orthonormal families. Lemma 4 thus gives|ψ(A)|≤M (∑
+i≤rw2
+(i))1/2. Choosing the smallest cap
+proves|ψ(A)|≤h 0, soI0 has coverage one. The selected index in(13) is deterministic, hence the
+selected interval retains its individual coverage without a multiple-selection correction. Its length is
+exactly (15).
+13
+
+A.6 Proof of Theorem 3
+Proof. Set t =⟨W,L⟩. AtA = 0the center error is normal with meanb and standard deviation
+v =τ∥W∥F. For fixedh andv >0, the probability that this variable belongs to[−h,h ]is maximized
+atb= 0. Indeed, forb≥0its derivative is
+v−1{ϕ((h+b)/v)−ϕ((h−b)/v)}≤0,
+since|h+b|≥|h−b| ; the function is even inb. Honesty at zero therefore impliesh≥zτ∥W∥ F≥zτ|t| .
+Ifv= 0, the same last inequality is automatic.
+AtA=±ME i, the mean center error is
+b±M(⟨W,E i⟩−p −1/2).
+At least one sign has absolute mean at leastM|⟨W,Ei⟩−p−1/2|. A symmetric interval whose radius
+is strictly smaller than this mean magnitude has probability below1/2under a nondegenerate
+normal distribution: it lies strictly to one side of the median. In the degenerate case the coverage is
+zero. Since1−α>1/2, honesty forces
+h≥Mmax
+i
+|⟨W,Ei⟩−p −1/2|≥ M√p|1−t|.
+The last inequality follows fromt− 1 = p−1/2∑
+i(⟨W,Ei⟩−p −1/2). Put a = M/√p and b′ = zτ.
+The two bounds imply
+1≤|1−t|+|t|≤h/a+h/b ′,
+which rearranges to(17). On the rank-one tensor ball,h0 =M/√p, and the direct/structural choice
+gives the matching order. No result about arbitrary data-dependent widths is invoked.
+A.7 A mixture inequality for confidence intervals
+Lemma 5(Common-target alternatives).Let P0 have target zero and letQ be a mixture of
+alternatives whose targets all equalδ >0. IfC covers zero underP0 and covers the target at every
+alternative with probability at least1−α, then
+E0|C|≥δ{1−2α−TV(P 0,Q)}.(23)
+IfQ≪P 0, thenTV(P 0,Q)≤ 1
+2
+√
+χ2(Q,P 0).
+Proof. Mixture coverage givesQ(δ∈C )≥ 1−α. By the definition of total variation,P0(δ∈C )≥
+1−α−TV (P0,Q ). Intersecting with{0∈C} gives probability at least1− 2α−TV . An interval
+containing both points has length at leastδ, proving (23). The divergence bound follows from
+Cauchy–Schwarz applied to1
+2 E0|dQ/dP0− 1|. Appending an independent random seed leaves total
+variation unchanged, so randomized intervals are covered as well.
+For Gaussian shiftsPB =N(vec(B),τ 2ID), direct integration of their likelihood ratios gives
+E0
+[dPB
+dP0
+dPC
+dP0
+]
+= exp{⟨B,C⟩/τ 2}.(24)
+To verify this, each ratio isexp{⟨Z,B⟩/τ 2−∥B∥ 2
+F/(2τ 2)}. Multiply the ratios and use the moment
+generating function of⟨Z,B +C⟩, whose variance underP0 isτ 2∥B +C∥2
+F. The exponent simplifies
+to (24).
+14
+
+A.8 Proof of Theorem 4
+Proof. For the given bipartition, letfi =⨂
+k∈Sei and gi =⨂
+k/∈Sei. Both families are orthonormal.
+Letu=p −1/2(s1,...,s p)with independent uniform signs, and define
+θ= min(M,τ √p/4), A u =θ
+(∑
+i
+uifi
+)
+⊗
+
+∑
+j
+ujgj
+
+.
+Every alternative has rank one in this unfolding, normθ, and functional valueδ =θ/√p. LetQ
+average their Gaussian laws. Ifvis an independent copy ofu, then (24) gives
+1 +χ 2(Q,P 0) =E u,v exp{θ2(u⊤v)2/τ 2}=Eexp{aS 2
+p/p},
+whereS p is a sum ofpindependent signs anda=θ 2/(τ 2p)≤1/16.
+Introduce an independent standard normalH. Its moment generating function yields
+Eexp(aS 2
+p/p) =E H
+{
+cosh(
+√
+2a/pH)
+}p
+≤E H exp(aH2) = (1−2a) −1/2≤
+√
+8/7.
+The inequality useslog cosh(x)≤x 2/2: for x≥ 0, its derivativetanh(x)is at most x, and both
+functions are even. The Gaussian-square expectation follows by integratingexp{−(1−2a)h2/2}/
+√
+2π;
+it is finite sincea<1/2. Nonnegative integrands justify exchanging the expectations.
+Lemma 5 now gives(19). The constant is positive forα< 1/4. OnΘ S, Lemma 4 with loading
+singular values all equal top−1/2 gives|ψ(A)|≤M/ √p. Choosing between this structural interval
+and the direct interval attains the lower order. All calculations use the entire Gaussian experiment;
+the result does not arise from hiding off-diagonal observations.
+A.9 Proof of Theorem 5
+Proof.SubstituteM=τ √p,q= 2/Kand∥w∥ ∞ =p−1/2 into (10). This gives
+hNL =τJ 1−1/Kp1/K−1/2{8 log(2p/α)}(K−2)/(2K),
+which is the radius in(20). For fixed K≥ 3, its exponentβ = (K− 2)/(2K)is positive and
+(logp/p )β→ 0. The cap classes contain all±MEi and zero, so Theorem 3 gives radius at least
+zτ/ (1+z). For any retained constrained unfolding, the corresponding matrix-rank cap class contains
+ΘS, and Theorem 4 gives expected length at zero at leastcατ/4. The same comparisons under the
+stated growing-cap condition follow by retaining the factorJ1−1/K.
+A.10 Proof of Theorem 6
+Proof. Let a = min{M,τ
+√
+log(1 +p/4)} and mix uniformly overAj =aEj, j = 1,...,p . Each is
+in the rank-one tensor class and has targetδ=a/√p. Orthogonality of theEj and (24) imply
+1 +χ 2(Q,P 0) =p−2{pexp(a 2/τ 2) +p(p−1)}.
+Thus χ2(Q,P 0) ={exp(a2/τ 2)− 1}/p≤ 1/4and TV(P0,Q )≤ 1/4. Lemma 5 gives (21). This
+construction does not establish that these alternatives are least favorable.
+15
+
+B Result status and unresolved claims
+Theorem 1 (diagonal envelope), Theorem 2 (honest interval), Theorem 3 (affine radius), Theorem 4
+(relaxed-class lower bound), Theorem 5 (two separations), and Theorem 6 (within-class lower bound)
+are labeledPROVEDin the project ledger on the basis of these derivations. None asserts a
+previously unknown general inference principle.
+Sharp minimax length and actual-rank/spectrum adaptation arePARTIAL: the current
+upper/lower bracket and valid cap-based procedure establish components but do not solve either
+target. The possibility of attaining the coordinate-mixture lower scale at zero using off-diagonal
+information isCONJECTURED; a more difficult mixture could invalidate that conjecture. General
+loadings, unknown norm/variance bounds, dependence, contamination and an LLM application
+require additional formulation and theory. They are not results of this manuscript.
+References
+Joshua Agterberg and Anru R. Zhang. Statistical Inference for Low-Rank Tensors: Heteroskedasticity,
+Subgaussianity, and Applications, 2024. URLhttps://arxiv.org/abs/2410.06381.
+Timothy B. Armstrong, Martin Weidner, and Andrei Zeleneev. Robust Estimation and Inference in
+Panels with Interactive Fixed Effects.Journal of Political Economy, 2026. doi: 10.1086/741623.
+URL https://arxiv.org/abs/2210.06639. In press; accepted-paper record verified. Full text
+examined: arXiv v3, December 2024.
+Anna Bykhovskaya, Vadim Gorin, and Sasha Sodin. How weak are weak factors? Uniform inference
+for signal strength in signal plus noise models, 2025. URLhttps://arxiv.org/abs/2507.18554.
+Changxiao Cai, H. Vincent Poor, and Yuxin Chen. Uncertainty Quantification for Nonconvex
+Tensor Completion: Confidence Intervals, Heteroscedasticity and Optimality.IEEE Transactions
+on Information Theory, 69(1):407–452, 2023. doi: 10.1109/TIT.2022.3205781. URL https:
+//arxiv.org/abs/2006.08580.
+T. Tony Cai and Mark G. Low. An adaptation theory for nonparametric confidence intervals.
+The Annals of Statistics, 32(5):1805–1840, 2004a. doi: 10.1214/009053604000000049. URL
+https://arxiv.org/abs/math/0503662.
+T. Tony Cai and Mark G. Low. Minimax estimation of linear functionals over nonconvex parameter
+spaces.The Annals of Statistics, 32(2):552–576, 2004b. doi: 10.1214/009053604000000094. URL
+https://arxiv.org/abs/math/0406427.
+T. Tony Cai, Tengyuan Liang, and Alexander Rakhlin. Geometric inference for general high-
+dimensional linear inverse problems.The Annals of Statistics, 44(4):1536–1563, 2016. doi:
+10.1214/15-AOS1426. URLhttps://arxiv.org/abs/1404.4408.
+Alexandra Carpentier and Arlene K. H. Kim. An iterative hard thresholding estimator for low rank
+matrix recovery with explicit limiting distribution.Statistica Sinica, 28:1371–1393, 2018. doi:
+10.5705/ss.202016.0103. URLhttps://arxiv.org/abs/1502.04654.
+Alexandra Carpentier, Olga Klopp, Matthias Löffler, and Richard Nickl. Adaptive confidence
+sets for matrix completion.Bernoulli, 24(4A):2429–2460, 2018. doi: 10.3150/17-BEJ933. URL
+https://arxiv.org/abs/1608.04861.
+16
+
+Jungjun Choi, Hyukjun Kwon, and Yuan Liao. Inference for Low-Rank Models Without Estimating
+the Rank.Journal of the American Statistical Association, 121(553):655–666, 2026. doi: 10.1080/
+01621459.2025.2538272. URLhttps://arxiv.org/abs/2311.16440.
+Lieven De Lathauwer, Bart De Moor, and Joos Vandewalle. A multilinear singular value de-
+composition.SIAM Journal on Matrix Analysis and Applications, 21(4):1253–1278, 2000. doi:
+10.1137/S0895479896305696. URLhttps://doi.org/10.1137/S0895479896305696.
+David L. Donoho. Statistical Estimation and Optimal Recovery.The Annals of Statistics, 22(1):238–
+270, 1994. doi: 10.1214/aos/1176325367. URLhttps://web.stanford.edu/dept/statistics/
+cgi-bin/donoho/wp-content/uploads/2018/08/SEOR.pdf.
+David L. Donoho and Iain M. Johnstone. Ideal spatial adaptation by wavelet shrinkage.Biometrika,
+81(3):425–455, 1994. doi: 10.1093/biomet/81.3.425. URLhttps://doi.org/10.1093/biomet/
+81.3.425.
+Mathias Drton. Likelihood ratio tests and singularities.The Annals of Statistics, 37(2):979–1012,
+2009. doi: 10.1214/07-AOS571. URLhttps://arxiv.org/abs/math/0703360.
+Jicong Fan, Lijun Ding, Chengrun Yang, Zhao Zhang, and Madeleine Udell. Euclidean-norm-
+induced schatten-p quasi-norm regularization for low-rank tensor completion and tensor robust
+principal component analysis.Transactions on Machine Learning Research, 2023. URLhttps:
+//arxiv.org/abs/2012.03436.
+Shmuel Friedland and Lek-Heng Lim. Nuclear norm of higher-order tensors.Mathematics of
+Computation, 87(311):1255–1281, 2018. doi: 10.1090/mcom/3239. URL https://arxiv.org/
+abs/1410.6072.
+Bin Gao, Renfeng Peng, and Ya-xiang Yuan. Low-rank optimization on Tucker tensor varieties.
+Mathematical Programming, 214(1):357–407, 2025. doi: 10.1007/s10107-024-02186-w. URL
+https://arxiv.org/abs/2311.18324.
+Anatoli Juditsky and Arkadi Nemirovski. Near-optimal recovery of linear and N-convex functions
+on unions of convex sets.Information and Inference: A Journal of the IMA, 9(2):423–453, 2020.
+doi: 10.1093/imaiai/iaz011. URLhttps://arxiv.org/abs/1804.00355.
+Benjamin Kutschan. Tangent cones to tensor train varieties.Linear Algebra and its Applications,
+544:370–390, 2018. doi: 10.1016/j.laa.2018.01.012. URLhttps://arxiv.org/abs/1705.10152.
+Mark G. Low. On nonparametric confidence intervals.The Annals of Statistics, 25(6):2547–2554,
+1997. doi: 10.1214/aos/1030741084. URLhttps://doi.org/10.1214/aos/1030741084.
+Ivan V. Oseledets. Tensor-train decomposition.SIAM Journal on Scientific Computing, 33(5):
+2295–2317, 2011. doi: 10.1137/090752286. URLhttps://doi.org/10.1137/090752286.
+Larry Wasserman, Aaditya Ramdas, and Sivaraman Balakrishnan. Universal inference.Proceedings
+of the National Academy of Sciences, 117(29):16880–16890, 2020. doi: 10.1073/pnas.1922664117.
+URLhttps://arxiv.org/abs/1912.11436.
+Dong Xia and Ming Yuan. Statistical inferences of linear forms for noisy matrix completion.
+Journal of the Royal Statistical Society Series B: Statistical Methodology, 83(1):58–77, 2021. doi:
+10.1111/rssb.12400. URLhttps://arxiv.org/abs/1909.00116.
+17
+
+Dong Xia, Anru Zhang, and Yuchen Zhou. Inference for Low-rank Tensors—No Need to Debias.
+The Annals of Statistics, 50(2):1220–1245, 2022. doi: 10.1214/21-AOS2146. URLhttps://arxiv.
+org/abs/2012.14844.
+Ke Xu, Elynn Chen, and Yuefeng Han. Statistical Inference for Low-Rank Tensor Models, 2025.
+URLhttps://arxiv.org/abs/2501.16223.
+Yinchu Zhu. How well can we learn large factor models without assuming strong factors?, 2019.
+URLhttps://arxiv.org/abs/1910.10382.
+18

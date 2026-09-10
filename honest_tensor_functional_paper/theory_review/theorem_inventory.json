@@ -1,0 +1,232 @@
+[
+  {
+    "ID": "L1",
+    "Result": "Controlled squared component weights",
+    "Conclusion": "Expansion into <=J product terms; squared weights sum to ||A||_F^2",
+    "Assumptions": "Finite tensor; Tucker/TT caps",
+    "Depends on": "Exact mode bases; sequential orthogonal factorizations",
+    "Input status": "VERIFIED",
+    "PDF page": "13\u201314",
+    "Audit action": "Foundational for all tensor-specific bounds"
+  },
+  {
+    "ID": "L2",
+    "Result": "Exact rank-one diagonal image",
+    "Conclusion": "Image equals the ell_(2/K) ball",
+    "Assumptions": "Orthonormal mode loading; norm bound",
+    "Depends on": "T1; signed product construction",
+    "Input status": "VERIFIED",
+    "PDF page": "15",
+    "Audit action": "Exact statement; not a full-experiment equivalence"
+  },
+  {
+    "ID": "L3",
+    "Result": "Scalar threshold envelope",
+    "Conclusion": "Error <=min(|x|,2lambda); q interpolation",
+    "Assumptions": "|e|<=lambda; lambda>=0; 0<q<=1",
+    "Depends on": "Scalar sign cases",
+    "Input status": "VERIFIED",
+    "PDF page": "15",
+    "Audit action": "Pointwise sharp; residual Lipschitz extension in S3"
+  },
+  {
+    "ID": "L4",
+    "Result": "Matrix functional bound",
+    "Conclusion": "|<H,B>|<=||B||_F sqrt(sum_top_r sigma_i(H)^2)",
+    "Assumptions": "Rank(B)<=r; matching matrix dimensions",
+    "Depends on": "Cauchy\u2013Schwarz; spectral projection",
+    "Input status": "VERIFIED",
+    "PDF page": "15",
+    "Audit action": "Sharp; tensor range equality is S2"
+  },
+  {
+    "ID": "L5",
+    "Result": "Common-target mixture interval bound",
+    "Conclusion": "E0 length>=delta(1-2alpha-TV)",
+    "Assumptions": "Measurable interval; target zero and common delta; coverage at each alternative",
+    "Depends on": "Probability union bound; total variation",
+    "Input status": "VERIFIED",
+    "PDF page": "17",
+    "Audit action": "Applies to full data and independent randomization"
+  },
+  {
+    "ID": "T1",
+    "Result": "Diagonal compressibility",
+    "Conclusion": "sum_i|a_i|^(2/K)<=J^(1-1/K)M^(2/K)",
+    "Assumptions": "Norm/caps; orthonormal loading",
+    "Depends on": "L1; Holder; Bessel; q-subadditivity",
+    "Input status": "CORRECT BUT NOT SHARP",
+    "PDF page": "6",
+    "Audit action": "S1 improves rank coefficient; rank-one exponent is sharp"
+  },
+  {
+    "ID": "T2",
+    "Result": "Finite-sample honest interval",
+    "Conclusion": "Coverage >=1-alpha; deterministic minimum length",
+    "Assumptions": "Valid noise scale; supplied class/loading; deterministic selection",
+    "Depends on": "T1; L3; L4; Gaussian tails",
+    "Input status": "CORRECT BUT NOT SHARP",
+    "PDF page": "6",
+    "Audit action": "S3 weakens noise assumptions; S4/S5 require retained replicates"
+  },
+  {
+    "ID": "T3",
+    "Result": "Fixed affine lower bound",
+    "Conclusion": "h>=(M/sqrt(p))z tau/(M/sqrt(p)+z tau)",
+    "Assumptions": "0<alpha<1/2; equal loading; class contains 0 and +/-M E_i",
+    "Depends on": "Normal median and variance bound",
+    "Input status": "CORRECT BUT NOT SHARP",
+    "PDF page": "6",
+    "Audit action": "S2 gives exact optimum for full cap classes"
+  },
+  {
+    "ID": "T4",
+    "Result": "Single-unfolding class lower bound",
+    "Conclusion": "E0 length>=c_alpha min(M/sqrt(p),tau/4)",
+    "Assumptions": "0<alpha<1/4; equal loading; Gaussian full experiment",
+    "Depends on": "L5; Gaussian LR; cosh/Gaussian-square calculation",
+    "Input status": "VERIFIED",
+    "PDF page": "7",
+    "Audit action": "Order sharp for its enlarged class; S6 improves confidence-level range"
+  },
+  {
+    "ID": "T5",
+    "Result": "Strict separations",
+    "Conclusion": "Joint length o(tau); affine/relaxed class length of order tau",
+    "Assumptions": "Fixed K>=3/caps; M=tau sqrt(p); requires alpha<1/4",
+    "Depends on": "T2; T3; T4",
+    "Input status": "REQUIRES REVISION",
+    "PDF page": "7",
+    "Audit action": "Insert missing alpha range; C1 refutes the literal unrestricted assertion"
+  },
+  {
+    "ID": "T6",
+    "Result": "Within-class coordinate lower bound",
+    "Conclusion": "E0 length>=(3/4-2alpha)min(M,tau sqrt(log(1+p/4)))/sqrt(p)",
+    "Assumptions": "0<alpha<1/4; Gaussian; equal diagonal loading; rank-one class inclusion",
+    "Depends on": "L5; orthogonal Gaussian shifts",
+    "Input status": "CORRECT BUT NOT SHARP",
+    "PDF page": "7",
+    "Audit action": "Explicitly repeat equal-loading condition; sharp at zero for K>=4 after S7, loose for K=3 by S8"
+  },
+  {
+    "ID": "D1",
+    "Result": "Diagonal-only minimax benchmark",
+    "Conclusion": "Matching tau(log p/p)^((K-2)/(2K)) rate at zero and worst case",
+    "Assumptions": "Only diagonal observed; K>=3; M=tau sqrt(p); fixed caps",
+    "Depends on": "L2; L5; hypergeometric factorial moments; T2",
+    "Input status": "VERIFIED",
+    "PDF page": "8",
+    "Audit action": "Sharp in the restricted experiment; classical rate"
+  },
+  {
+    "ID": "Q1",
+    "Result": "Sharp full-data minimax lengths",
+    "Conclusion": "Original nonmatching bracket",
+    "Assumptions": "Same full-data class and loss",
+    "Depends on": "T2; T6",
+    "Input status": "INCOMPLETE",
+    "PDF page": "7\u20138,19",
+    "Audit action": "L0 resolved for K>=4 by S7; cubic logarithmic gap and Lmax remain open"
+  },
+  {
+    "ID": "Q2",
+    "Result": "Coordinate lower-scale attainment at zero",
+    "Conclusion": "Conjectured tau sqrt(log p/p)",
+    "Assumptions": "Rank one; full data; M=tau sqrt(p)",
+    "Depends on": "No input proof",
+    "Input status": "FALSE AS STATED",
+    "PDF page": "19",
+    "Audit action": "S8 refutes it for K=3; S7 verifies it for fixed K>=4"
+  },
+  {
+    "ID": "Q3",
+    "Result": "Actual-rank adaptation/general loadings",
+    "Conclusion": "No completed theorem",
+    "Assumptions": "Supplied outer cap; broader loading targets",
+    "Depends on": "No matching subclass length theory",
+    "Input status": "INCOMPLETE",
+    "PDF page": "19",
+    "Audit action": "Remains open; pathwise oracle bound is not an adaptive radius"
+  },
+  {
+    "ID": "C13",
+    "Result": "Gaussian sufficiency/identifiability",
+    "Conclusion": "Mean sufficient for known noise; A identified",
+    "Assumptions": "Independent Gaussian replicates; known sigma",
+    "Depends on": "Orthogonal transformation; equality of expectations",
+    "Input status": "VERIFIED",
+    "PDF page": "3\u20134",
+    "Audit action": "Unknown sigma requires residuals"
+  },
+  {
+    "ID": "C14",
+    "Result": "Structural radius attainable",
+    "Conclusion": "sup_Theta |psi|=h0",
+    "Assumptions": "Positive caps; prescribed orthogonal loading",
+    "Depends on": "L4; sparse diagonal witness",
+    "Input status": "VERIFIED",
+    "PDF page": "5,15",
+    "Audit action": "Attainment supplied in S2"
+  },
+  {
+    "ID": "C15",
+    "Result": "Gaussian likelihood identity",
+    "Conclusion": "E0 LR_B LR_C=exp(<B,C>/tau^2)",
+    "Assumptions": "Gaussian isotropic noise tau>0",
+    "Depends on": "Gaussian mgf",
+    "Input status": "VERIFIED",
+    "PDF page": "17",
+    "Audit action": "Cross inner product need not be nonnegative in S8"
+  },
+  {
+    "ID": "C16",
+    "Result": "Rademacher square mgf",
+    "Conclusion": "E exp(a S_p^2/p)<=(1-2a)^(-1/2)",
+    "Assumptions": "Independent signs; 0<=a<1/2",
+    "Depends on": "Auxiliary Gaussian; cosh inequality; Tonelli",
+    "Input status": "VERIFIED",
+    "PDF page": "17\u201318",
+    "Audit action": "Only an upper bound; no CLT used"
+  },
+  {
+    "ID": "C17",
+    "Result": "Hypergeometric factorial moment",
+    "Conclusion": "E binom(H,j)=binom(s,j)(s)_j/(p)_j",
+    "Assumptions": "Uniform independent size-s supports; 0<=j<=s<=p",
+    "Depends on": "Counting subsets",
+    "Input status": "VERIFIED",
+    "PDF page": "18",
+    "Audit action": "j=0 convention and s=p boundary valid"
+  },
+  {
+    "ID": "C18",
+    "Result": "Growing-cap separation",
+    "Conclusion": "J^(1-1/K)(log p/p)^beta ->0 sufficient",
+    "Assumptions": "Fixed K>=3; specified cap growth",
+    "Depends on": "Algebra in T5",
+    "Input status": "CORRECT BUT NOT SHARP",
+    "PDF page": "7",
+    "Audit action": "S1 replaces coefficient by smaller D where useful"
+  },
+  {
+    "ID": "C19",
+    "Result": "K=2 comparison",
+    "Conclusion": "No polynomial joint/unfolding separation by this result",
+    "Assumptions": "Matrix experiment; rank class",
+    "Depends on": "T4 and beta=0",
+    "Input status": "VERIFIED",
+    "PDF page": "7,10",
+    "Audit action": "Structural boundary, not a gap in the proof"
+  },
+  {
+    "ID": "C20",
+    "Result": "Unknown optimality with full tensor",
+    "Conclusion": "Diagonal LR uses overlap H; full LR uses H^K",
+    "Assumptions": "D1 support construction",
+    "Depends on": "Direct tensor inner product",
+    "Input status": "VERIFIED",
+    "PDF page": "8,19",
+    "Audit action": "S7/S8 respect the full likelihood"
+  }
+]

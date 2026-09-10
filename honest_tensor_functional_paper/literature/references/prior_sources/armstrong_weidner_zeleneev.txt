@@ -1,0 +1,4250 @@
+
+[PDF PAGE 1]
+Robust Estimation and Inference
+in Panels with Interactive Fixed Effects ∗
+Timothy B. Armstrong‡ Martin Weidner§ Andrei Zeleneev¶
+May 2025
+Abstract
+We consider estimation and inference for a regression coefficient in panels with interactive
+fixed effects (i.e., with a factor structure). We demonstrate that existing estimators and
+confidence intervals (CIs) can be heavily biased and size-distorted when some of the factors
+are weak. We propose estimators with improved rates of convergence and bias-aware CIs
+that remain valid uniformly, regardless of factor strength. Our approach applies the theory
+of minimax linear estimation to form a debiased estimate, using a nuclear norm bound on
+the error of an initial estimate of the interactive fixed effects. Our resulting bias-aware CIs
+take into account the remaining bias caused by weak factors. Monte Carlo experiments
+show substantial improvements over conventional methods when factors are weak, with
+minimal costs to estimation accuracy when factors are strong.
+∗We thank the participants of the numerous seminars and conferences for helpful comments and sugges-
+tions. We also thank Riccardo D’Adamo and Chen-Wei Hsiang for their excellent research assistance. Any
+remaining errors are our own. Armstrong gratefully acknowledges support by the National Science Founda-
+tion Grant SES-2049765. Weidner gratefully acknowledges support through the European Research Council
+grant ERC-2018-CoG-819086-PANEDA. Zeleneev gratefully acknowledges the generous funding from the UK
+Research and Innovation (UKRI) under the UK government’s Horizon Europe funding guarantee (Grant Ref:
+EP/X02931X/1).
+‡University of Southern California. Email: timothy.armstrong@usc.edu
+§University of Oxford. Email: martin.weidner@economics.ox.ac.uk
+¶University College London. Email: a.zeleneev@ucl.ac.uk
+arXiv:2210.06639v4  [econ.EM]  11 May 2025
+
+[PDF PAGE 2]
+1 Introduction
+In this paper, we consider a linear panel regression model of the form
+Yit = Xitβ +
+KX
+k=1
+Zk,itδk + Γit + Uit, (1)
+where Yit, Xit, Z1,it, . . . , ZK,it ∈ R are the observed outcome variable and covariates for units
+i = 1, . . . , Nand time periods t = 1, . . . , T. The error components Γ it ∈ R and Uit ∈ R are
+unobserved, and the regression coefficients β, δ1, . . . , δK ∈ R are unknown. The parameter of
+interest is β ∈ R, the coefficient on Xit. We are interested in “large panels”, where both N
+and T are relatively large.
+The error component Uit is modelled as a mean-zero random shock that is uncorrelated
+with the regressors Xit and Zk,it and that is at most weakly autocorrelated across i and over
+t. By contrast, the error component Γ it can be correlated with Xit and Zk,it and can also be
+strongly autocorrelated across i and over t. Of course, further restrictions on Γ it are required
+to allow estimation and inference on β. For example, the additive fixed effect model imposes
+that Γit = αi + γt, where αi accounts for any omitted variable that is constant over time, and
+γt for any omitted variable that is constant across units. Instead of this additive fixed effect
+model we consider the so-called interactive fixed effect model, where
+Γit =
+RX
+r=1
+λir ftr . (2)
+Here, the λir and ftr can either be interpreted as unknown parameters or as unobserved
+shocks. This model for Γ it is also known as a factor model, with factor loadings λir and
+factors ftr. We will use the terms factor and interactive fixed effect interchangeably. The
+number of factors R is unknown, but is assumed to be small relative to N and T . The
+interactive fixed effect model is attractive because it introduces enough restrictions to allow
+estimation and inference on β while still incorporating or approximating a large class of data
+generating processes (DGPs) for Γ it.
+The existing econometrics literature on panel regressions with interactive fixed effects is
+quite large. Since the seminal work of Pesaran (2006) and Bai (2009), developing tools for
+estimation and inference on β in model (1)-(2) under large N and large T asymptotics has
+been a primary focus of this literature. Specifically, Pesaran (2006) introduces the common
+correlated effects (CCE) estimator, which uses cross-sectional averages of the observed vari-
+ables as proxies for the unobserved factors. Bai (2009) derives the large N , T properties of
+the least-squares (LS) estimator that jointly minimizes the sum of squared residuals over the
+regression coefficients, factors, and factor loadings. 1
+Bai (2009) shows that, under appropriate assumptions, the LS estimator for the regression
+1This estimator was first introduced by Kiefer (1980).
+1
+
+[PDF PAGE 3]
+-0.05 -0.04 -0.03 -0.02 -0.01 0 0.01 0.02 0.03 0.04 0.05
+0
+5
+10
+15
+20
+25
+30
+35
+40
+LS
+Debiased
+(a) No ID ( κ = 0.00)
+-0.04 -0.02 0 0.02 0.04 0.06 0.08
+0
+5
+10
+15
+20
+25
+30
+35
+LS
+Debiased (b) Weak ID (κ = 0.10)
+-0.06 -0.04 -0.02 0 0.02 0.04 0.06 0.08 0.1 0.12 0.14
+0
+5
+10
+15
+20
+25
+LS
+Debiased
+(c) Weak ID (κ = 0.20)
+-0.04 -0.02 0 0.02 0.04 0.06
+0
+5
+10
+15
+20
+25
+30
+LS
+Debiased (d) Strong ID ( κ = 1.00)
+Figure 1: Finite sample distributions of the LS and the debiased estimators, N = 100, T = 50, R = 1
+coefficients is
+√
+N T-consistent and asymptotically normally distributed as both N and T
+grow to infinity. One of the key assumptions imposed for this result is the so-called “strong
+factor assumption”, which requires all the factor loadings λir and factors ftr to have sufficient
+variation across i and over t, respectively. If the strong factor assumption is violated, then the
+LS estimator for λir and ftr may be unable to pick up the true loadings and factors correctly,
+because the “weak factors” 2 in Γ it cannot be distinguished from the noise in Uit. This can
+lead to substantial bias and misleading inference, due to omitted variables bias from Γ it that
+is not picked up by the estimator.
+To illustrate how this can lead to problems with conventional estimates and CIs for β,
+Figure 1 presents a subset of the results of our Monte Carlo study. 3 When the factors are
+nonexistent (panel a) or strongly identified (panel d), the distribution of the LS estimator (in
+blue) is centered at the true parameter value β (equal to 0 in this case). However, when the
+2See, for example, Onatski (2010, 2012) for a discussion and formalization of the notion of weak factors.
+3A detailed description of the numerical experiment is provided in Section 5.1.
+2
+
+[PDF PAGE 4]
+factors are present but weak enough that they are difficult to estimate (panels b and c), the
+LS estimator is heavily biased and non-normally distributed. In our Monte Carlo study in
+Section 5, we show that this indeed leads to severe coverage distortion, with conventional CIs
+based on the LS estimator having almost zero coverage.
+In this paper, we address this issue by developing new tools for estimation and inference
+on β in the model (1). We develop a debiased estimator along with a bound on the remaining
+bias, which we use to construct a bias-aware confidence interval. As illustrated in Figure 1, our
+debiased estimator (shown in red) substantially decreases the bias of the LS estimator when
+factors are weak, leading to a large improvement in overall estimation error. In addition, this
+improved performance under weak factors does not come at a substantial cost to performance
+when factors are strong or nonexistent: our debiased estimator performs similarly to the LS
+estimator in these cases. Importantly, our CI requires only an upper bound on the number
+of factors: we show that it is valid uniformly over a large class of DGPs that allows for weak,
+strong or nonexistent factors up to a specified upper bound on the number of factors. We
+derive rates of convergence that hold uniformly over this class of DGPs, and we show that our
+estimator achieves a faster uniform rate of convergence than existing approaches when weak
+factors are allowed. In the case where N and T grow at the same rate, our estimator achieves
+the parametric
+√
+N Trate.
+Our debiasing approach uses a preliminary estimate ˆΓpre of the individual effect matrix
+Γ along with a bound ˆC on the nuclear norm ∥Γ − ˆΓpre∥∗ of its estimation error. Letting
+˜Γ := Γ − ˆΓpre, we then consider the augmented outcomes
+˜Yit := Yit − ˆΓpre,it = Xitβ +
+KX
+k=1
+Zk,itδk + ˜Γit + Uit.
+Treating ˜Γit as nuisance parameters satisfying a convex constraint ∥˜Γ∥∗ ≤ ˆC, we derive linear
+weights Ait such that the estimator PN
+i=1
+PT
+t=1 Ait ˜Yit for β optimally uses this constraint,
+using the theory of minimax linear estimators (see Ibragimov and Khas’minskii, 1985; Donoho,
+1994; Armstrong and Koles´ ar, 2018). In particular, the resulting weights Ait control the
+remaining omitted variables biasPN
+i=1
+PT
+t=1 Ait ˜Γit due to possible weak factors in ˜Γ = Γ−ˆΓpre
+not picked up by the initial estimate ˆΓpre.
+A key step in deriving our CI is the construction of the preliminary estimator ˆΓpre and
+bound ˆC on the nuclear norm of its estimation error. Our CI is bias-aware: it uses the bound
+ˆC to explicitly take into account any remaining bias in the debiased estimator. Our bound is
+feasible once an upper bound on the number of factors is specified. In our Monte Carlo study,
+we find that, while our CIs are often conservative, they are about as wide as an “oracle” CI
+that uses an infeasible critical value to correct the coverage of a CI based on the standard LS
+estimator.
+While our results allow for arbitrary sequences of weak factors, our conditions on other
+aspects of the model are similar to Bai (2009) and Moon and Weidner (2015). An important
+3
+
+[PDF PAGE 5]
+condition is that the covariate of interest Xit must not itself be entirely explained by a low
+dimensional factor model. For example, in a panel where Xit is the minimum hourly wage in
+state i and year t, we would require that states change their minimum wage laws in different
+years, and that this is done sufficiently often to generate variation in Xit that cannot be
+explained by a small number of factors ft. This rules out settings where Xit is an indicator
+variable for a policy that affects a subset of the units and occurs only during a single time
+period: in this case, Xit = λi · ft where λi is an indicator variable for unit i undergoing the
+policy change and ft is an indicator variable for periods after the policy change. See Section
+4 for formal conditions and further discussion.
+A special case of the factor model is the grouped unobserved heterogeneity model con-
+sidered by Bonhomme and Manresa (2015). In this model, Γ it = αg(i),t, where g(·) is an
+unknown function mapping individuals i to a group index g(i) ∈ {1, . . . , R}. This takes the
+form of the factor model (2) with λir = 1 if g(i) = r and 0 otherwise, and with ftr = αr,t. The
+strong factor assumption corresponds to the strong group separation assumption imposed in
+this literature (e.g., Assumption 2(b) in Bonhomme and Manresa, 2015) which imposes that
+the group means αr,· = (αr,1, . . . , αr,T )′ are sufficiently far away for different groups r. Our
+results apply in this setting and allow for this assumption to be relaxed. An interesting ques-
+tion for future research is whether it is possible to modify our approach to take advantage of
+the additional structure in the grouped unobserved heterogeneity model.
+Related literature
+The papers by Pesaran (2006) and Bai (2009) mentioned previously have motivated a large
+follow up literature on large N and T analysis of panel models with interactive effects. Bai
+and Wang (2016) provides a review with further references. Another literature has proposed
+alternative estimation methods along with asymptotic analysis in the regime with T fixed and
+N increasing. This includes the quasi-difference approach of Holtz-Eakin, Newey and Rosen
+(1988) and generalized method of moments approaches of Ahn, Lee and Schmidt (2001, 2013).
+More recent papers analyzing the fixed T large N regime include Robertson and Sarafidis
+(2015), Juodis and Sarafidis (2018), Westerlund, Petrova and Norkute (2019), Higgins (2021),
+Juodis and Sarafidis (2022). None of these papers provide inference methods that remain valid
+when factors are weak or rank-deficient (e.g. f = 0). Chamberlain and Moreira (2009) derive
+estimators that satisfy a Bayes-minimax property over a certain class of priors in a finite
+sample setting that includes a version of the model (2). This Bayes-minimax property does
+not, however, translate to a guarantee on coverage or estimation error under weak factors.
+A special case of the violation of the strong factor assumption is when some factor are
+equal to zero, while all other factors are strong; the inference results of Bai (2009) are usually
+robust towards this specific violation of the strong factor assumption (Moon and Weidner,
+2015). This robustness, however, does not carry over to more general weak factors in the
+DGP of Γ it, as illustrated by Figure 1.
+The problem of weak factors is related to the problem of omitted variable bias of LASSO
+4
+
+[PDF PAGE 6]
+estimators in high dimensional regression that is the focus of debiased LASSO estimators
+(see Belloni, Chernozhukov and Hansen, 2014; Javanmard and Montanari, 2014; van de Geer,
+B¨ uhlmann, Ritov and Dezeure, 2014; Zhang and Zhang, 2014). Just as LASSO estimators
+omit variables with coefficients that are large enough to cause omitted variables bias but too
+small to distinguish from zero, weak factors in Γ can be difficult to estimate, leading to omitted
+variables bias in conventional estimates ofβ. Our approach to using minimax linear estimation
+to debias an initial estimate mirrors the approach of Javanmard and Montanari (2014) to
+debiasing the LASSO. We discuss this connection further in Section 4.4. Hirshberg and
+Wager (2020) provide a general discussion and further references for minimax linear debiasing;
+we refer to this general approach as augmented linear estimation following their terminology.
+Minimax linear estimation itself goes back at least to Ibragimov and Khas’minskii (1985), with
+further results on this approach and its optimality properties in Donoho (1994), Armstrong
+and Koles´ ar (2018) and Yata (2021), among others. The particular form of the minimax
+estimator used for debiasing in our setup follows from a formula given in Armstrong, Koles´ ar
+and Kwon (2020).
+Requiring Γit to have the factor structure (2) is equivalent to requiring the matrix of un-
+observed effects Γ to have rank at most R, i.e., having rank(Γ) ≤ R. Bounding the nuclear
+norm of ˜Γ or Γ instead can also be seen as a convex relaxation of this requirement. Simi-
+lar convexifications of the rank constraint have been widely used in the matrix completion
+literature (e.g., Recht, Fazel and Parrilo 2010 and Hastie, Tibshirani and Wainwright 2015
+for recent surveys), and for reduced rank regression estimation (e.g., Rohde and Tsybakov
+2011). In the econometrics literature, the numerous applications of this idea include, for ex-
+ample, estimation of pure factor models (Bai and Ng, 2017), estimation of panel regression
+models with homogeneous (Moon and Weidner, 2018; Beyhum and Gautier, 2019) and het-
+erogeneous coefficients (Chernozhukov, Hansen, Liao and Zhu, 2019), estimation of treatment
+effects (Athey, Bayati, Doudchenko, Imbens and Khosravi, 2021; Fern´ andez-Val, Freeman and
+Weidner, 2021), and many others.4 However, none of these papers obtain asymptotically valid
+CIs or improved rates of convergence under weak factors.
+In recent work, Chetverikov and Manresa (2022) propose an estimator that, like ours,
+achieves a faster rate of convergence than conventional approaches under weak factors.5 While
+Chetverikov and Manresa (2022) allow for weak factors in some of their estimation results,
+they assume strong factors when constructing CIs. The estimation approach in Chetverikov
+and Manresa (2022) also differs from our approach by using modelling assumptions that place
+a factor structure on the covariate matrix X.
+4For example, recent economic applications of nuclear norm and related penalization methods also include
+latent community detection (Alidaee, Auerbach and Leung, 2020; Ma, Su and Zhang, 2022), quantile regression
+(Belloni, Chen, Madrid Padilla and Wang, 2023; Wang, Su and Zhang, 2022; Feng, 2023), and estimation of
+panel threshold models and high-dimensional V ARs (Miao, Li and Su, 2020 and Miao, Phillips and Su, 2023).
+5The main focus of Chetverikov and Manresa (2022) is the grouped effects model of Bonhomme and Manresa
+(2015), which is a special case of the interactive fixed effects setting we consider here. However, the authors
+extend their results to the general interactive fixed effects setting.
+5
+
+[PDF PAGE 7]
+Our focus is on allowing for weak factors without imposing additional assumptions on
+the error term U , such as homoskedasticity or full independence from the individual effects
+Γ and regressor X. Such additional structure allows for further identifying information by
+making it easier to distinguish between the error term U and the individual effects Γ, leading
+to a fundamentally different analysis. Zhu (2019) derives asymptotic upper and lower bounds
+for estimators and CIs in a setting with possible weak factors under homoskedastic and fully
+independent errors. The estimators and CIs constructed by Zhu (2019) take advantage of
+the additional structure of Zhu’s setting, making them inapplicable in ours. However, the
+lower bounds derived by Zhu (2019) are immediately relevant: they show that no CI can be
+asymptotically valid under weak factors while mimicking the performance of the CI of Bai
+(2009) when factors are strong.
+As discussed above, our assumptions rule out the case where Xit is an indicator variable
+for a policy that affects a subset of units starting in the same time period. Recent papers that
+analyze such settings include Ferman and Pinto (2021) and Arkhangelsky, Athey, Hirshberg,
+Imbens and Wager (2021). The fact that Xit is collinear with the confounding factor model
+in this setting presents a fundamental identification issue that requires placing additional
+conditions on the model. In contrast to this literature, our goal is to leverage variation in Xit
+that cannot be explained by a low dimensional factor model in settings where such variation
+exists.
+Beyhum and Gautier (2022), Fan and Liao (2022), and Bai and Ng (2023) consider estima-
+tion and inference in various settings under a regime in which a lower bound on the strength
+of the factors can decrease with N and T , but is large enough that factors can be consistently
+estimated. This is analogous to the “semi-strong” regime in weak instrument and related
+settings; see Andrews and Cheng (2012). While the semi-strong regime requires careful the-
+oretical analysis, the fact that factors can be consistently estimated leads to asymptotically
+unbiased and normal estimators for the main effect β. Our results apply to semi-strong and
+strong regimes as well, while also allowing for weak factor regimes in which factors cannot be
+consistently estimated.
+Finally, Cox (2024) develops tools for inference in low-dimensional factor models with weak
+identification. In Cox (2024), the primary objects of interests are the covariance of the factors
+and the loadings. The baseline model in Cox (2024) does not include observed covariates,
+whereas we focus on estimation and inference on β, the coefficient on Xit, exclusively.6
+The rest of this paper is organized as follows. Section 2 introduces the framework and
+describes construction of the debiased estimator and bias-aware CI. Section 3 provides im-
+plementation details. Section 4 provides formal statistical guarantees. Section 5 considers
+numerical and empirical illustrations. A supplementary appendix contains all proofs and
+additional results for the numerical and empirical illustrations.
+6Cox (2024) mentions that observed covariates could, in principle, be incorporated in his framework as long
+as they are uncorrelated with the unobserved effects, which is a primary worry in the panel literature.
+6
+
+[PDF PAGE 8]
+2 Construction of robust estimates and confidence intervals
+2.1 Setup
+We consider a panel setting in which we observe a scalar outcome Yit, a scalar covariate Xit
+of interest and additional control covariates {Zk,it}K
+k=1 for i = 1, . . . , N, t = 1, . . . , T, which
+follow the regression model (1). The error term Uit is assumed to be mean zero conditional
+on X, {Zk,it}K
+k=1 and Γ, 7 but we allow for heteroskedasticity, which may depend on Xit and
+Γit, as well as some weak dependence. We write the model in matrix notation as
+Y = Xβ + Z · δ + Γ + U , E[U |X, Z,Γ] = 0 , (3)
+where Z denotes the three dimensional array {Zk,it} and we define Z · δ = PK
+k=1 Zkδk where
+Zk denotes the matrix with i, t-th element Zk,it. We use λ to denote the N × R matrix of
+loadings λir and f to denote the T × R matrix of factors ftr, so that (2) can be written in
+matrix form as Γ = λf ′.
+We are interested in the coefficient β of Xit, which can be interpreted as the effect of
+a treatment variable Xit in a constant treatment effects model (we discuss extensions to
+heterogeneous treatment effects in Remark 2.2). For concreteness, we use panel notation, and
+we refer to i and t as individuals and time periods respectively. However, we allow for other
+settings such as network data in which i and t both index individuals in a network. While
+we will assume a low rank structure on Γ, we allow for arbitrary dependence between the
+covariate Xit and the individual effect Γ it.
+A key ingredient in our approach is an initial estimate ˆΓ of Γ and a bound on its estimator
+in the nuclear norm, which holds with probability approaching one:
+eΓ
+
+∗ ≤ ˆC , where eΓ := Γ − ˆΓ . (4)
+Here, ∥ · ∥∗ denotes the nuclear norm of the argument matrix, and ˆC ≥ 0 is a known or
+estimated constant. We describe our estimate ˆΓ and bound ˆC in Section 3, and we state a
+formal result giving conditions under which the bound holds with probability approaching
+one in Section 4. This bound depends on an upper bound for the number of factors R, which
+must be specified a priori. Importantly, our approach does not require specifying the exact
+number of factors: some of the factors may be zero, in addition to the possibility of being
+“weak” in the sense of being close to zero. We emphasize that obtaining an computable upper
+bound ˆC that enables construction of our CI is itself one of the main technical contributions
+of this paper. 8
+7We note that this requires strict exogeneity and in particular rules out using lagged outcomes as covariates.
+We leave extensions to models with lagged outcomes as a topic for future research.
+8As we discuss further in Section 4, a tighter CI can be constructed by bounding the difference between
+the estimate ˆΓ and Γ + PλU , where Pλ = λ(λ′λ)+λ, with M + denoting the Moore–Penrose inverse of a matrix
+M . The implementation in Section 3 is for the tighter CI that uses these arguments. For ease of exposition,
+however, we focus on using the bound (4) directly in the remainder of this section.
+7
+
+[PDF PAGE 9]
+Remark 2.1. Although the main focus of this paper is on models with the linear factor
+structure (2), the methodology presented in this section applies to general interactive fixed
+effects models as long as it is possible to construct a preliminary estimator ˆΓ and a bound ˆC
+satisfying (4). For example, we conjecture that our method can also be extended to nonlinear
+factor models with Γ it = g(λi, ft), where g(·, ·) is some unknown function (e.g., Zeleneev,
+2019; Freeman and Weidner, 2023). As noted, for example, in Fern´ andez-Val, Freeman and
+Weidner (2021), such Γ can be approximated by a low-rank matrix with a (slowly) growing
+rank R. Hence, we expect that our method can be applied in this setting with ˆΓ constructed
+using a growing R and ˆC adjusted for the low-rank approximation error (if needed), in the
+same spirit as sieve approximations are used in nonparametric estimation.
+2.2 Augmented linear estimators and CIs
+We first define a class of estimators and CIs, indexed by an N × T matrix A. We then provide
+a choice of the matrix A, based on finite sample optimality in an idealized setting. Our class
+of estimators is given in the following definition.
+Definition 2.1. Let A = A(X, Z) be an N × T matrix of weights Ait ∈ R that can depend
+on the matrix X and array Z. Let ˆΓ be an initial estimate of Γ, and let eY = Y − ˆΓ. The
+augmented linear estimator with weight matrix A and initial estimate ˆΓ is given by
+ˆβA :=
+NX
+i=1
+TX
+t=1
+Ait eYit = ⟨A, eY ⟩F . (5)
+Here, ⟨·, ·⟩F denotes the entry-wise inner product between the argument matrices.
+The estimator ˆβA = ⟨A, eY ⟩F applies a linear estimator after an initial estimation step in
+which the initial estimate ˆΓ is subtracted from the outcome Y . This mirrors applications
+of this idea in other settings going back to Javanmard and Montanari (2014); see Hirshberg
+and Wager (2020) for references (the term “augmented linear estimation” is used in the latter
+paper).
+To analyze this class of estimators, note that subtracting the initial estimate from both
+sides of the equation (3) gives
+eY = Xβ + Z · δ + eΓ + U (6)
+(recall that eY = Y − ˆΓ and eΓ = Γ − ˆΓ). Our choice of the matrix A will be motivated by a
+heuristic in which we consider the model (6) with eY as the observed outcome and eΓ a nuisance
+parameter such that U is mean zero conditional on X, Zand ˜Γ, with the bound (4) interpreted
+as a deterministic bound that holds with ˆC nonrandom. This heuristic is not literally true,
+since eΓ depends on U through the estimation error in the initial estimate ˆΓ. Nonetheless, the
+CIs and estimators we obtain will be asymptotically valid and consistent respectively, under
+conditions that we give in Section 4.
+8
+
+[PDF PAGE 10]
+Following this heuristic, we consider the decomposition
+ˆβA − β = biasβ,δ,eΓ( ˆβA) + ⟨A, U⟩F (7)
+where
+biasβ,δ,eΓ( ˆβA) := (⟨A, X⟩F − 1) β + ⟨A, Z· δ⟩F + ⟨A, eΓ⟩F . (8)
+Under the heuristic where ˜Γ is nuisance parameter in the model (6), bias β,δ,eΓ gives the bias
+of the estimator ˆβA conditional on X, Zand ˜Γ. In reality, bias β,δ,eΓ does not literally give the
+bias or conditional bias of ˆβA, since conditioning on eΓ = Γ − ˆΓ means conditioning on an
+information set that depends on Y through the preliminary estimate ˆΓ. We nonetheless refer
+to biasβ,δ,Γ( ˆβA) as a bias term, following our heuristic.
+Let bse be an estimate of the standard deviation of ⟨A, U⟩F = PN
+i=1
+PT
+t=1 AitUit. For
+example, to allow for arbitrary heteroskedasticity in Uit while imposing independence across
+i and t, we can use bse =
+qPN
+i=1
+PT
+t=1 A2
+it ˆU 2
+it where ˆUit denotes residuals from an initial
+regression. If bias β,δ,Γ( ˆβA) were zero, then we could form a CI by adding and subtracting a
+normal critical value times bse. To take into account the possibility that bias β,δ,Γ( ˆβA) will in
+general be nonnegligible in our setting, we use the bound (4) to obtain an upper bound on
+the bias term. In particular, when (4) holds, we have
+biasβ,δ,eΓ( ˆβA)
+ ≤ bias ˆC( ˆβA), where for
+general C ≥ 0 we define
+biasC( ˆβA) := sup
+β,δ,eΓ:∥eΓ∥∗≤C
+biasβ,δ,eΓ( ˆβA)
+=
+
+
+
+sup
+eΓ:∥eΓ∥∗≤C
+⟨A, eΓ⟩F if ⟨A, X⟩F = 1, and ⟨A, Zk⟩F = 0, for k = 1, . . . K,
+∞ otherwise
+=
+
+
+
+Cs1(A) if ⟨A, X⟩F = 1, and ⟨A, Zk⟩F = 0, for k = 1, . . . K,
+∞ otherwise.
+(9)
+Here, for the second equality we used that the supremum over β and δ is unbounded unless
+⟨A, X⟩F = 1 and ⟨A, Zk⟩F = 0, and for the final step we used that the nuclear norm ∥ · ∥∗ is
+dual to the spectral norm, which we denote by s1(·) since it is equal to the largest singular
+value of the argument matrix. We refer to bias ˆC( ˆβA) as the worst-case bias of the estimator
+ˆβA (again, this terminology reflects the heuristic in which ˜Γ is treated as a nuisance parameter
+in (6) rather than estimation error from the initial estimate ˆΓ).
+Note that, whereas bias β,δ,eΓ( ˆβA) depends on the unknown matrix of individual effects Γ
+through the matrix eΓ = Γ − ˆΓ, bias ˆC( ˆβA) is feasible to compute once a bound ˆC is given.
+9
+
+[PDF PAGE 11]
+Taking into account the possible bias leads to a bias-aware CI:
+n
+ˆβA ±
+h
+bias ˆC( ˆβA) + z1−α/2 bse
+io
+. (10)
+To motivate this CI, note that the probability that the lower endpoint is greater than β is
+P
+
+ˆβA − bias ˆC( ˆβA) − z1−α/2 bse > β
+
+= P
+ NX
+i=1
+TX
+t=1
+AitUit + biasβ,δ,eΓ( ˆβA) > bias ˆC( ˆβA) + z1−α/2 bse
+!
+≤ P
+ NX
+i=1
+TX
+t=1
+AitUit > z1−α/2 bse
+!
+≈ α/2,
+where the last step assumes thatPN
+i=1
+PT
+t=1 AitUit is approximately normally distributed with
+zero mean and standard deviation close to bse. We provide formal justifications for this later.
+By a similar argument, the probability that the upper endpoint is less than β can be bounded
+by α/2, and these calculations together imply that the coverage of our CI is approximately
+at least 1 − α.
+Remark 2.2. In principle, our approach can be extended to a heterogeneous treatment
+effect model where the constant coefficient β is replaced by an individual specific coefficient
+βit that is allowed to vary with i and t. In particular, if a bound on the nuclear norm of
+the matrix of coefficients βit or on the error of preliminary estimates of these coefficients is
+available in addition to such a bound for Γ, we can use minimax linear debiasing to estimate
+a linear functional of the individual specific effects βit. For example, the linear functional
+1
+N T
+PN
+i=1
+PT
+t=1 βit gives the average treatment effect of a one-unit change in Xit over the N T
+units in a setting where βit is interpreted as the causal effect of a change in the variable
+Xit. Deriving a computable bound on the nuclear norm error of an initial estimate of the
+coefficients βit in this case is nontrivial, however, and we leave this question for future research.
+2.3 Choice of weights A = (Ait)
+As described in the last subsection, one can construct valid confidence intervals for β of
+the form (10) for any choice of weight matrix A, subject to weak regularity conditions. To
+get a simple baseline procedure, we compute weights that are optimal in an idealized set-
+ting where Uit
+iid∼ N (0, σ2) independently of X, Zand ˜Γ (again, this involves invoking the
+heuristic of treating ˜Γ as a nuisance parameter in (6) rather than estimation error from a
+preliminary estimate). In this idealized setting, ˆβA is then normally distributed with variance
+σ2 PN
+i=1
+PT
+t=1 A2
+it = σ2∥A∥2
+F (where ∥·∥ F denotes the Frobenius norm), and with bias ranging
+from −bias ˆC( ˆβA) to bias ˆC( ˆβA). Thus, if we choose worst-case MSE under i.i.d. normal errors
+as our criterion function for the weights, then the optimal weights are obtained by minimizing
+bias ˆC( ˆβA)
+2
++ σ2∥A∥2
+F . By substituting the formula for bias ˆC( ˆβA) from (9), we obtain the
+following baseline choice of weights, indexed by a tuning parameterb that corresponds to ˆC/σ .
+10
+
+[PDF PAGE 12]
+Definition 2.2. For b >0, define the “optimal” N × T weight matrix by
+A∗
+b := argmin
+A∈RN ×T
+b2s1(A)2 + ∥A∥2
+F s.t. ⟨A, X⟩F = 1 and ⟨A, Zk · δ⟩F = 0,
+Here, the constraint ⟨A, Zk · δ⟩F = 0 is imposed for all k ∈ {1, . . . , K}.
+Heuristically, we expect that a good choice of b will correspond to ˆC/σ such that the
+bound ˆC on the nuclear norm holds with high probability. Conveniently, our nuclear norm
+bound in the exact factor model in Section 3 scales with the standard deviation σ in the
+homoskedastic case, which gives us a simple and feasible choice of the tuning parameter b.
+We emphasize again that while the definition of A∗
+b is motivated by the idealized setting
+Uit
+iid∼ N (0, σ2), we do not assume that the error terms Uit satisfy this strong assumption.
+Choosing A = A∗
+b to construct the estimator ˆβA and the confidence intervals (10) under more
+general error distributions just means that the resulting estimates and confidence intervals
+will not be optimal (in finite samples), but we will nevertheless show them to be consistent
+and valid, respectively.
+Remark 2.3. While we have used MSE to motivate our baseline choice of weights A∗
+b , one
+could use other criteria corresponding to different weights on bias and variance. For example,
+optimizing CI length when ˆC/σ = b would give the criterion bs1(A) + z1−α∥A∥F . If β gives
+the net welfare gain of an all-or-nothing policy change, then one can target minimax welfare
+regret as in Ishihara and Kitagawa (2021) and Yata (2021). In our Monte Carlo simulations
+however, we find that the exact choice of criterion has little effect on performance.
+2.4 Practical implementation
+The definition of A∗
+b is a convex optimization problem that can easily be solved numerically for
+any given input X, Z, b. Using results from Armstrong, Koles´ ar and Kwon (2020), it follows
+that A∗
+b can also be computed using the residuals of a nuclear norm regularized regression ofX
+on Z1, . . . , ZK and a matrix of individual effects. When there are no additional covariates Z,
+this nuclear norm regularized regression simplifies further: it can be solved by computing the
+singular value decomposition of X, and then performing soft thresholding on the singular
+values. The resulting weights A∗
+b obtained from the residuals of this regression replace the
+largest singular values of X with a constant. We provide details in Appendix B.
+In addition to giving alternative methods for computing the weights A∗
+b , these results
+provide some intuition for these weights. The residuals from this nuclear norm regularized
+regression of X on Z1, . . . , ZK and the individual effects “partial out” potential correlation of
+X with the estimation error eΓ, similar to the estimator of Robinson (1988) in the partially
+linear model. When there are no additional covariates Z, this amounts to removing the largest
+singular values of X and replacing them with a constant.
+To summarize, we can compute an estimator ˆβA using Definition 2.1 using any matrix of
+weights A. We can also compute a CI
+n
+ˆβA ±
+h
+bias ˆC( ˆβA) + z1−α/2 bse
+io
+as in (10), once we
+11
+
+[PDF PAGE 13]
+have a standard error bse and an upper bound ˆC for the nuclear norm of the error in the initial
+estimate of Γ. Definition 2.2 gives us a heuristic for computing a reasonable choice of the
+matrix A, once we have an initial choice of b for the ratio ˆC/σ of the nuclear norm bound to
+variance of Uit.
+Thus, to apply our approach, we need an initial choice b to compute the weights A∗
+b using
+Definition 2.2. We also need a robust upper bound ˆC such that the bound (4) holds with high
+probability. Finally, we need a robust standard error bse. Our CI then takes the form in (10)
+with A = A∗
+b and the given bound ˆC and standard error bse. In Section 3, we give details of
+these choices, as well as how to compute the initial estimate of Γ.
+3 Implementation
+In this section, we describe the implementation of our approach. Our approach relies on
+bounds for the nuclear norm of the initial estimate of Γ, derived formally in Section 4. As
+explained in Section 4, a tighter CI can be derived using a more nuanced argument that
+bounds the difference between ˆΓ and Γ + PλU , where Pλ = λ(λ′λ)+λ, and M + denotes the
+Moore–Penrose inverse of a matrix M . In particular, we show that the bound ˆC ≈ 2Rs1(U )
+can be used. The bound R on the number of factors must be specified by the researcher, similar
+to other methods in this literature (e.g. Bai, 2009). Furthermore, the weights A∗
+b are designed
+to be optimal when Uit
+iid∼ N (0, σ2), which leads to the approximation s1(U )/σ ≈
+√
+N +
+√
+T
+(Geman, 1980). We therefore use b = b∗ := 2R(
+√
+N +
+√
+T ) as our default choice to calibrate
+ˆC/σ when computing the weights in Definition 2.2. We then use an upper bound ˆC that is
+valid under heteroskedasticity when computing bias ˆC( ˆβA∗
+b∗ ) in the construction of the CI.
+Our initial estimate is formed in two steps. First, we form the least squares estimate ˆΓLS.
+We then apply our debiasing approach to get an estimate of the coefficients β and δ and form
+an ˆΓpre by applying least squares to estimate Γ, with β and δ fixed at this initial debiased
+estimate. This estimate ˆΓpre is then used as the initial estimate in our procedure. Thus, our
+procedure involves applying our debiasing approach twice. This appears to be necessary to
+get an initial estimate ˆΓpre the best possible nuclear norm bounds on the estimation error.
+Below we provide the details of our implementation algorithm. 9
+Algorithm 3.1 (Implementation for the factor model) .
+Input Data Y, X, Zand R pre-specified by the user, along with tuning parameter ε.
+Output Estimator and CI for β.
+9Implementation of this algorithm in R is also available athttps://github.com/chenweihsiang/PanelIFE/
+tree/main. We thank Chen-Wei Hsiang for his excellent assistance in preparing this R package.
+12
+
+[PDF PAGE 14]
+1. Compute the least squares (LS) estimator
+
+ˆβLS, ˆδLS, ˆΓLS
+
+= argmin
+{β∈R,δ∈RK ,G∈RN ×T : rank(G)≤R}
+NX
+i=1
+TX
+t=1
+
+Yit − Xitβ − Z′
+itδ − Git
+2 .
+(11)
+2. Compute eYpre = Y − ˆΓLS and let b∗ = 2R(
+√
+N +
+√
+T ). Let
+ˆβpre = ⟨A∗
+b∗, eYpre⟩F .
+Construct ˆδpre with the j-th element ˆδpre,j computed in the same way as ˆβpre, but with
+X and Zj switched.
+3. Compute ˆΓpre as
+ˆΓpre = argmin
+{G∈RN ×T : rank(G)≤R}
+NX
+i=1
+TX
+t=1
+
+Yit − Xit ˆβpre − Z′
+itˆδpre − Git
+2
+.
+The solution ˆΓpre to this least squares problem is simply given by the leading R principal
+components of the residuals Yit − Xit ˆβpre − Z′
+itˆδpre. Compute eY = Y − ˆΓpre.
+4. Compute the final estimate
+ˆβ = ˆβA∗
+b∗ = ⟨A∗
+b∗, eY ⟩F .
+To compute the CI, let ˆC = (2 + ε)Rs1( ˆUpre) and bse2 = PN
+i=1
+PT
+t=1 A∗2
+b∗,it ˆU 2
+pre,it, where
+ˆUpre = Y − X ˆβpre − Z · ˆδpre − ˆΓpre.
+Compute the CI
+ˆβA∗
+b∗ ±
+h
+bias ˆC( ˆβA∗
+b∗ ) + z1−α/2 bse
+i
+(12)
+where bias ˆC( ˆβA∗
+b∗ ) = ˆCs1(A∗
+b∗).
+Remark 3.1 (Behavior of estimator under strong factors) . In Section 4.3, we show that, in
+the absence of weak factors, bias ˆC( ˆβA∗
+b∗ ) becomes negligible relative to bse in the construction
+of the CI in (12). Thus, the CI
+ˆβA∗
+b∗ ± z1−α/2 bse, (13)
+which uses our bias-corrected estimator but ignores bias when computing the critical value,
+will have correct asymptotic coverage in the strong factor case. In our Monte Carlos provided
+13
+
+[PDF PAGE 15]
+in Section C.3, we find that this CI is (i) comparable to alternative non-robust CIs in terms
+of the length and (ii) despite its non-robustness, substantially less size-distorted if there is a
+weak factor(s) since it is based on the debiased estimator. In settings where the bias-aware
+CI (12) is too wide to yield precise inference, we recommend reporting the CI (13) alongside
+the bias-aware CI (12) as a compromise between ignoring weak factors and a fully robust
+approach.
+Remark 3.2 (Choice of R and ε). The quantity ε is used in the bound ˆC = (2 +ε)Rs1( ˆUpre)
+on ∥eΓ∥∗ needed to compute the CI in the final step. While ε >0 is necessary for theoretical
+guarantees, in our Monte Carlos, we find that we get good coverage when choosing ε = 0.
+In contrast, the choice of R has a substantive effect on the CI, both through the bound
+ˆC = (2 + ε)Rs1( ˆUpre) and through the point estimate. Since the number of weak factors
+cannot be determined from the data, the researcher must specify an a priori bound on the
+total number of factors R. Nonetheless, the data can be informative about the number of
+strong or semi-strong factors, which provides a lower bound for R. We recommend forming
+an estimate ˆRs of the number of strong factors using one of the standard methods (e.g., Bai
+and Ng, 2002; Onatski, 2010; Ahn and Horenstein, 2013) and using this as a starting point for
+examining the sensitivity of the results to the choice of R. For example, by taking R = ˆRs + 1,
+the researcher allows for the potential presence of an additional weak factor (or R − ˆRs weak
+factors in general for a bigger R).
+Remark 3.3 (Lindeberg condition). The asymptotic validity of the CI depends on asymptotic
+normality of the stochastic term ⟨A, U⟩F where A = A∗
+b∗ is a non-random matrix of weights.
+This, in turn, depends on a Lindeberg condition on the weights A. To ensure that this holds,
+we can modify our optimization procedure for computing the weights A = A∗
+b∗ by imposing a
+bound on the Lindeberg weights
+Lind(A) = max1≤i≤N,1≤t≤T A2
+itPN
+i=1
+PT
+t=1 A2
+it
+. (14)
+A similar approach to showing asymptotic validity is taken in Javanmard and Montanari
+(2014) in a different setting.
+To make this approach practical, we need guidance on what makes Lind(A) “small enough
+to use the central limit theorem” in a given sample size. A formal answer to this question
+is elusive, due to the difficulty of obtaining finite sample bounds on approximation error in
+the central limit theorem that are practically useful. As a heuristic, we can use comparisons
+to other settings where the central limit theorem is used. For example, the sample mean
+¯W = 1
+n
+Pn
+i=1 Wi with n observations corresponds to an estimator with Lindeberg constant
+(1/n)2/[n · (1/n)2] = 1 /n. If we are comfortable using the normal approximation in such a
+setting with, say, n = 50, then we can impose a bound Lind( A) ≤ 1/50. Noack and Rothe
+(2024) provide some discussion of these issues in a related setting involving inference in fuzzy
+regression discontinuity.
+14
+
+[PDF PAGE 16]
+In our Monte Carlos, we find that Lind(A) is very small for the weights used in Algorithm
+3.1 once N and T are larger than, say, 20. Thus, imposing a bound on these weights does not
+appear to be necessary in practice in the data generating processes we have examined.
+Remark 3.4 (Standard error). The standard error bse2 = PN
+i=1
+PT
+t=1 A2
+it ˆU 2
+pre,it assumes that
+Uit is uncorrelated across i and t, but allows for heteroskedasticity. Such an assumption
+will be reasonable if Γ it captures all of the dependence in errors for the outcome. However,
+incorporating all dependence in Γ it may lead to an unnecessarily conservative choice of the
+upper bound R on the number of factors, leading to a wider CI. To avoid such conservative
+bounds on Γ, one can incorporate any dependence that is not directly correlated with Xit into
+the error term Uit, and allow for such dependence when constructing the standard error. For
+example, to allow for (arbitrary) time dependence of Uit (while maintaining uncorrelatedness
+across i), one could simply use clustered standard errors (see, e.g., Arellano, 1987; Hansen,
+2007)
+bse2 =
+NX
+i=1
+ TX
+t=1
+Ait ˆUpre,it
+!2
+.
+4 Asymptotic results
+This section gives formal asymptotic results for the estimators and CIs given in Sections 2
+and 3. We consider the following decomposition of our regression model:
+eY := Y − ˆΓpre = Xβ + Z · δ + Γ − ˆΓpre + U = Xβ + Z · δ + eΓ + eU . (15)
+Here, eΓ and eU an be any N × T matrices chosen compatibly so that eΓ + eU = Γ − ˆΓpre + U .
+While our discussion so far has focused on the case where eΓ = Γ − ˆΓpre and eU = U , it turns
+out that allowing for other choices of eΓ and eU allows for an improvement in the width of our
+CI.
+To formally state asymptotic results that allow for weak factors and an unknown error
+distribution, we introduce some additional notation. We consider uniform-in-the-underlying
+distribution asymptotics over a set P of distributions P for Γ and X, Z1, . . . , ZK, U and
+a set Θ of parameters θ = ( β, δ′)′. While we treat Γ , X, Z1, . . . , Zk as random variables
+determined by the unknown probability distribution P for notational purposes, we note that
+a fixed design setting in which Γ , X, Z1, . . . , Zk are non-random (sequences of) matrices can
+be incorporated by considering a set P that places a probability one mass on a given value
+of Γ , X, Z1, . . . , Zk. We use PP,θ to denote probability under the given distribution P and
+parameters θ. Formally, we consider large N , large T asymptotics in which N = Nn → ∞
+and T = Tn → ∞, and we consider sequences of distributions P = Pn and parameter spaces
+Θ = Θn. Asymptotic statements are then taken in the sequence n. However, we suppress the
+dependence on an index sequence n in order to save on notation. For a sequence of vectors
+15
+
+[PDF PAGE 17]
+or matrices AN,T = AN,T (θ, P) of fixed dimension (which may depend on θ, P), we use the
+notation AN,T = OΘ,P (rN,T ) when, for every ε >0, there exists Cε such that
+lim sup sup
+P ∈P,θ∈Θ
+PP,θ
+
+r−1
+N,T ∥AN,T ∥ ≥Cε
+
+≤ ε,
+and we use the notation AN,T = oΘ,P (rN,T ) when, for every ε >0, we have
+lim sup sup
+P ∈P,θ∈Θ
+PP,θ
+
+r−1
+N,T ∥AN,T ∥ ≥ε
+
+→ 0.
+We use the notation AN,T ≍Θ,P rN,T when AN,T = OΘ,P (rN,T ) and A−1
+N,T = OΘ,P (r−1
+N,T ). We
+use the notation AN,T
+d→
+Θ,P
+L to denote the statement
+lim sup sup
+θ∈Θ,P ∈P
+Pθ,P (AN,T ≤ t) − FL(t)
+ → 1 for all t
+where FL denotes the cdf of the probability law L.
+4.1 General results
+We first show asymptotic validity of the CI (10) under the following high level assumption
+imposed on the augmented model (15) and the weights Ait.
+Assumption 1.
+(i) inf θ∈Θ,P ∈P Pθ,P
+
+∥eΓ∥∗ ≤ ˆC
+
+→ 1;
+(ii) ⟨A, eU ⟩F
+bse
+d→
+Θ,P
+N (0, 1).
+Theorem 1. Suppose that Assumption 1 holds. Then
+lim inf inf
+θ∈Θ,P ∈P
+Pθ,P
+
+β ∈
+n
+ˆβA ±
+h
+bias ˆC( ˆβA) + z1−α/2 bse
+io
+≥ 1 − α.
+4.2 Primitive conditions
+We now apply these results to the initial estimate and bound given in Section 3, under the
+assumption of a linear factor model for Γ. We allow for a side condition on the Lindeberg
+weights Lind(A) defined in (14), as described in Remark 3.3. Let A∗
+b,c be defined in the same
+way as A∗
+b , with the modification that we impose the constraint Lind( A) ≤ c:
+min
+A
+∥A∥2
+F + b2s1(A)2,
+s.t. Lind( A) ≤ c, ⟨A, X⟩F = 1, ⟨A, Zk⟩F = 0 for k = 1, . . . , K. (16)
+16
+
+[PDF PAGE 18]
+In particular, the weights used in Algorithm 3.1 are given by A∗
+b∗,∞ = A∗
+b∗, and the weights
+A∗
+b∗,c with c <∞ correspond to the modification described in Remark 3.3. In our asymptotic
+theory we will require c = cN Tto converge to zero as N, T→ ∞.
+We impose the following conditions.
+Assumption 2 (Factor Model). Suppose that rank (Γ) ≤ R, i.e., Γ = λf ′ for some N × R
+matrix λ and some T × R matrix f , with probability one for all P ∈ Pand the following
+conditions hold:
+(i) Write W for X, Z1, . . . , ZK and W ·γ = Xβ +PK
+k=1 Zkδk where γ = (β, δ′)′. We assume
+that there exists s2 > 0 such that
+min
+γ∈RK+1:∥γ∥=1
+1
+N T
+min{N,T }X
+r=2R+1
+s2
+r(W · γ) ≥ s2
+with probability approaching 1 uniformly over P ∈ P;
+(ii) s1(X) = OΘ,P
+√
+N T
+
+, s1(Zk) = OΘ,P
+√
+N T
+
+for k ∈ {1, . . . , K}, and s1(U ) ≍Θ,P
+max{
+√
+N ,
+√
+T };
+(iii) ⟨X, U⟩F = OΘ,P (
+√
+N T) and ⟨Zk, U⟩F = OΘ,P (
+√
+N T) for k ∈ {1, . . . , K};
+(iv) (s1(U ) − sr(U )) /s1(U ) = oΘ,P (1) for any fixed positive integer r;
+(v) For any sequence of matrices A = AN,T (X, Z) that is a function of X, Z1, . . . , Zk, we
+have ⟨A, U⟩F = OΘ,P (∥A∥F ).
+Assumption 2(i) is a generalized non-collinearity condition, which requires that there is
+enough variation in the regressors after concentrating out 2 R arbitrary factors. It is closely
+related to Assumption A of Bai (2009), but our version here avoids mentioning the unobserved
+factor loadings. The same generalized non-collinearity assumption is imposed in Moon and
+Weidner (2015). The assumption would be violated if some linear combination W · γ of the
+covariates were to have rank smaller or equal to 2 R. In particular, “low-rank regressors” are
+ruled out by this condition. Intuitively, Assumption 2(i) holds provided that Xit and Zit
+have non-collinear idiosyncratic components. This intuition is formalized in Appendix A.7,
+where we also show that, when X is the only regressor in the model (i.e., K = 0), then
+Assumption 3(i) and (ii) below already guarantee that Assumption 2(i) holds.
+Assumption 2(ii) places mild bounds on X and Zk. For example, if the second moments of
+Xit are (uniformly) bounded, then E[s1(X)2] ≤ E[∥X∥2
+F ] = PN
+i=1
+PT
+t=1 E[X 2
+it] = OΘ,P (N T),
+which, by Markov’s inequality, implies s1(X) = OΘ,P (
+√
+N T). In addition Assumption 2(ii)
+also places a rate restriction on s1(U ) that will hold as long as Uit does not exhibit too much
+dependence over i and t. This rate for s1(U ) is closely related to Assumption 2(iv), which
+is discussed below. Assumption 2(iii) again holds as long as Uit does not exhibit too much
+17
+
+[PDF PAGE 19]
+dependence over i and t, and is uncorrelated with Xit and Zit. Finally, Assumption 2(v) holds
+as long as U is mean zero given X and Z and satisfies bounds on dependence and second
+moments.
+Assumption 2(iv) is a high level assumption on the first few singular values ofU (note that
+r is fixed as N and T converge to infinity). The singular values of U are the square roots of the
+eigenvalues of U U′. The random matrix theory literature shows that, if U is an appropriate
+noise matrix, the largest few eigenvalues of U U′ converge to the Tracy-Widom law, after
+appropriate rescaling: if N and T grow at the same rate, then each of the largest eigenvalues
+of U U′ grows at rate N , while the gaps between them grow at rate N 1/3. Johnstone (2001)
+establish the Tracy-Widom law for the largest eigenvalues of U U′, for the case of i.i.d. normal
+error Uit. The subsequent literature has shown the universality of this result for more general
+error distributions, see e.g. Soshnikov (2002), Pillai and Yin (2012) and Yang (2019).
+We also place conditions on the matrix X requiring that there is sufficient variation after
+controlling for individual effects and the additional covariates Z. The constant c = cN,T in
+the following assumption is the one that appears in our construction of A∗
+b,c.
+Assumption 3. For all P ∈ P, there exists uniformly bounded π = πP and random matrices
+H and V such that X = Z · π + H + V and the following conditions hold:
+(i) ∥V ∥F ≍Θ,P
+√
+N T, s1(V ) = OΘ,P (max{
+√
+N ,
+√
+T });
+(ii) ∥H∥F = OΘ,P (
+√
+N T) and ⟨H, V⟩F = OΘ,P (
+√
+N T);
+(iii) ∥Zk∥F = OΘ,P (
+√
+N T) and ⟨Zk, V⟩F = OΘ,P (
+√
+N T) for k ∈ {1, . . . , K};
+(iv) (Z′Z)−1 = OΘ,P
+ 1
+N T
+
+where Z = [vec(Z1), . . . ,vec(ZK)];
+(v) maxi,t V 2
+it = oΘ,P (N T cN,T ) and maxi,t Z2
+k,it = oΘ,P
+
+(N T)2cN,T
+
+for k ∈ {1, . . . , K}.
+Assumption 3 uses a decomposition of Xit that depends on an individual effect Hit and a
+random variable Vit that is approximately independent and uncorrelated with Z1,it . . . , Zk,it
+as well as being approximately uncorrelated with the individual effect Hit. Importantly, the
+individual effect Hit can be arbitrarily correlated with Γ it and with the variables Zk,it. Note
+also that we do not place any assumptions on the rank or nuclear norm of the matrix Hit.
+Part (v) holds under a tail bound on Vit and Zk,it. For example, if Vit are (uniformly) sub-
+Gaussian then max i,t V 2
+it = OΘ,P (log(N + T )), and the condition max i,t V 2
+it = oΘ,P (N T cN,T )
+is satisfied provided that N T cN,T / log(N + T ) → ∞. The only other requirement on cN,T is
+the requirement that cN,T max{N, T} →0 in Theorem 4 below. Thus, our results allow for a
+range of choices of cN,T .
+Define Pλ = λ(λ′λ)+λ where M + denotes the Moore–Penrose inverse of a matrix M .
+Theorem 2. Let ˆΓpre be defined in Algorithm 3.1, with the modification described in Remark
+3.3. Suppose that Assumption 2 holds, and that Assumption 3 holds as stated and with Zk
+18
+
+[PDF PAGE 20]
+and X interchanged for each k = 1, . . . , K, for the given sequence c = cN,T . Then, for any
+ε >0, Assumption 1 (i) holds with
+(i) eΓ = Γ − ˆΓpre and ˆC = 3Rs1( ˆUpre)(1 + ε) = OΘ,P (max{
+√
+N ,
+√
+T });
+(ii) eΓ = Γ + PλU − ˆΓpre and ˆC = 2Rs1( ˆUpre)(1 + ε) = OΘ,P (max{
+√
+N ,
+√
+T }).
+Theorem 2 is the main novel technical result that allows us to construct a feasible CI.
+It provides an explicit bound on the nuclear norm error of our initial estimate. As we show
+in the proof of Theorem 4 below, the term ⟨A, PλU ⟩F is asymptotically negligible under our
+assumptions. Thus, redefining the target parameter to be Γ + PλU instead of Γ and using
+the bound in part (ii) of the theorem does not affect the construction of the CI. This leads to
+a shorter CI using the bound in part (ii) compared to using the bound in part (i). For this
+reason, we use the bound in part (ii) in the implementation described in Section 3 and in our
+formal coverage results below.
+We now turn to the rate of convergence of the debiased estimator and the coverage of the
+CI. The proofs of these theorems use the nuclear norm bounds in Theorem 2.
+Theorem 3. Let ˆβ = ˆβA∗
+b∗,c
+be defined in Algorithm 3.1, with the modification described in
+Remark 3.3. Suppose that Assumption 2 holds, and that Assumption 3 holds as stated and
+with Zk and X interchanged for each k = 1, . . . , K, for the given sequence c = cN,T . Then
+ˆβ − β = OΘ,P (1/ min{N, T}).
+To obtain primitive conditions for a central limit theorem and asymptotic validity of the
+confidence interval, we impose that the errors are independent, but not necessarily identically
+distributed, conditional on X, Z and Γ.
+Assumption 4. There exist constants σ > 0 and η > 0 such that, for all P ∈ P, Uit is
+independent over i, tconditional on W, Γ and, for all i, t,
+EP [Uit|W, Γ] = 0, EP [U 2
+it|W, Γ] > σ2, EP [U 4
+it|W, Γ] < 1/η.
+Theorem 4. Let ˆβ = ˆβA∗
+b∗,c
+and ˆC = 2 Rs1( ˆUpre)(1 + ε) be defined in Algorithm 3.1, with
+the modification described in Remark 3.3 for c = cN,T with cN,T max{N, T} →0. Suppose
+that Assumptions 2(i)-(iv) hold, and that Assumption 3 holds as stated and with Zk and X
+interchanged for each k = 1 , . . . , K, for the given sequence c = cN,T , and that Assumption
+4 holds. Let bse2 = PN
+i=1
+PT
+t=1 A2
+it ˆU 2
+it where A = A∗
+b∗,c and ˆUit is the residual from the least
+squares estimator. Then
+ˆβ − β = OΘ,P (1/ min{N, T})
+19
+
+[PDF PAGE 21]
+and
+lim inf inf
+θ∈Θ,P ∈P
+Pθ,P
+
+β ∈
+n
+ˆβ ±
+h
+bias ˆC( ˆβ) + z1−α/2 bse
+io
+≥ 1 − α.
+4.3 Strong factor case
+Numerous studies on the estimation of panel regressions with unobserved factors assume that
+these factors are “strong” or “semi-strong”. This assumption implies that the unobserved
+error structure, Γ it + Uit in model (1), viewed as an N × T matrix, contains an R = rank(Γ)
+factor component Γ = λf ′ with singular values that asymptotically diverge faster than the
+largest singular value, s1(U ), of the idiosyncratic error part U . Specifically, as N, T→ ∞, the
+ratio s1(U )/sR(Γ) approaches zero (at a certain rate) under the semi-strong (strong) factor
+assumptions. Both Pesaran (2006) and Bai (2009) impose conditions that imply strong factors
+in this sense, as do many subsequent papers.
+A key motivation for the estimation approach in this paper is to avoid assuming strong
+factors, instead providing an inference method that remains uniformly valid regardless of
+factor strength. Nevertheless, it is natural to consider how our approach behaves when factors
+are, in fact, strong, if only to facilitate comparison with much of the existing literature. The
+following theorem, therefore, extends Theorem 2 to accommodate the case of strong factors.
+Theorem 5. Let ˆΓpre be defined in Algorithm 3.1, with the modification described in Re-
+mark 3.3. Suppose that the hypotheses of Theorem 4 hold, and furthermore, assume that
+s1(U )/sR(Γ) = oΘ,P (1). Then Assumption 1 (i) holds with eΓ = Γ + MλU Pf + PλU Mf − ˆΓpre
+and ˆC = oΘ,P (s1(U )) = oΘ,P (max{
+√
+N ,
+√
+T }), where Pf = f (f ′f )+f ′, Mλ = IN − Pλ, and
+Mf = IT − Pf .
+Theorem 5 additionally requires s1(U )/sR(Γ) = oP (1), i.e., that the factors are semi-strong
+or strong, and also thatR = rank(Γ). This implies that ˆΓpre converges to Γ+MλU Pf +PλU Mf
+in second leading order (see e.g. Lemma S.3 in the supplement to Moon and Weidner, 2015).
+Theorem 5 states that with this change of target matrix, the nuclear norm bound ˆC is smaller
+than s1(U ) ≍Θ,P (max{
+√
+N ,
+√
+T }). This implies that, when N and T grow at the same
+rate, the worst-case bias bias ˆC( ˆβ) used in the construction of the CI in Theorem 4 becomes
+negligible relative to the standard error bse. At the same time, the extra term ⟨A, MλU Pf +
+PλU Mf ⟩F is asymptotically negligible by exactly the same arguments given in the proof
+of Theorem 4 for the negligibility of the term ⟨A, PλU ⟩F . As a result, in the considered
+regime, the debiased estimator is asymptotically unbiased and the (non-bias) aware CI (13)
+is asymptotically valid.
+Remark 4.1. Theorem 5 shows that the bias term is asymptotically negligible when N and
+T grow at the same rate and all R factors are strong. This justifies the CI (13) discussed in
+Remark 3.1 in the strong factor setting. More generally, in the case where Rw factors are
+weak and Rs = R − Rw factors are strong, we conjecture that Theorem 5 could be extended
+20
+
+[PDF PAGE 22]
+to show that the bias-aware CI (12) is valid with ˆC = 2Rws1( ˆUpre)(1 + ε). In other words,
+we conjecture that the worst-case bias of our estimator only depends on the number of weak
+factors.
+4.4 Comparison to other results in the literature
+Our debiasing approach leads to the faster rate min{N, T} compared to the rate min{
+√
+N ,
+√
+T }
+for ˆβLS (see, e.g., Moon and Weidner, 2015). While our results appear to be the first to
+demonstrate a min{N, T} rate of convergence under the conditions above, recent papers have
+proposed estimators that use additional structure to construct estimators that achieve the
+same or better rates. Chetverikov and Manresa (2022) impose a factor structure on X, which
+corresponds to imposing a low-rank assumption on the matrix H in our Assumption 3. They
+use this assumption to construct an estimator that, like ours, achieves a min {N, T} rate un-
+der weak factors. Zhu (2019) imposes homoskedastic and independent errors in addition to a
+factor structure on X, and shows that this allows for a faster
+√
+N Trate of convergence, even
+under weak factors.
+While robust to weak factors, our CI will be wider than a CI based on the strong factor
+asymptotics in Bai (2009). Ideally, one would like to form a CI that is adaptive to the strength
+of factors. Such a CI would be robust to weak factors, while being asymptotically equivalent
+to the CI in Bai (2009) when factors are strong. However, as shown by Zhu (2019), such
+an adaptive CI cannot be obtained, even if one imposes homoskedastic errors and additional
+structure on the covariate matrix X. Thus, while there may be some room for efficiency gains
+over our CI, one must allow for some increase in CI length relative to the CI in Bai (2009) in
+order to allow for weak factors.
+As discussed in the introduction, our debiasing approach is analogous to the approach to
+debiasing the LASSO taken in Javanmard and Montanari (2014) and, more broadly, other
+papers in the debiased LASSO literature such as Belloni, Chernozhukov and Hansen (2014),
+van de Geer, B¨ uhlmann, Ritov and Dezeure (2014) and Zhang and Zhang (2014). Interestingly,
+this analogy extends to the rates of convergence in our asymptotic results. The debiased lasso
+applies to a high dimensional regression model with s nonzero coefficients and n observations.
+The resulting estimator has bias of order s/n, up to log terms, and variance 1 /n. Note that s
+is the dimension of the constraint set for the unknown parameter, while n is the total number
+of observations. In our setting, the debiased estimator has bias of order max {N, T}/(N T)
+and variance 1 /(N T). The set of matrices Γ with rank at most R has dimension of order
+max{N, T} so, just as with the debiased lasso, the bias term is of the same order of magnitude
+as the ratio of the dimension of the constraint set to the total number of observations. In
+the debiased lasso setting, one can justify a CI that ignores bias by assuming that s increases
+slowly enough relative to n for the order s/n bias term to be asymptotically negligible relative
+to the order 1 /√n standard deviation term. Unfortunately, this cannot occur in our setting
+even if R = 1, since the bias term is of order max {N, T}/(N T) which is always of at least the
+21
+
+[PDF PAGE 23]
+same order of magnitude as the standard deviation 1 /
+√
+N T. This necessitates our bias-aware
+approach.
+5 Numerical Evidence
+5.1 Simulation Study
+We consider the following design:
+Yit = Xitβ +
+RX
+r=1
+κrλirftr + Uit,
+Xit =
+RX
+r=1
+λirftr + Vit,
+where κr controls the strength of factor ftr, and R stands for the number of factors. In
+addition, λi, ft, Uit and Vit are all mutually independent across both i, t, and ( i, t), and
+λi ∼ N (0, IR) ⊥ ft ∼ N (0, IR) ⊥
+ 
+Uit
+Vit
+!
+∼ N
+  
+0
+0
+!
+,
+ 
+σ2
+U 0
+0 σ2
+V
+!!
+.
+In the designs considered below, we fix ( β, σ2
+U , σ2
+V ) = (0, 1, 1) and vary N , T , the number
+of factors R, and their strengths controlled by κr. The number of simulations in all of the
+considered designs is 5000. As before, we are interested in estimation of and inference on β.
+In Tables 1-3, we report the bias, standard deviation, and rmse for the benchmark LS
+estimator of Bai (2009) and for the proposed debiased estimator in various designs with 1 and
+2 factors.10 We also report the size of the corresponding tests (with 5% nominal size) and the
+average length of the CIs (with 95% nominal coverage). For simplicity and for brevity of the
+reported results, we assume that the number of factors is known. We consider a case when
+the number of factors is overspecified in Appendix C.2.
+The LS estimator is heavily biased and the associated tests and CIs are heavily size
+distorted unless all the factors are strong. At the same time, the proposed estimator effectively
+reduces the “weak factors” bias without inflating the variance. As a result, the potential
+efficiency gains from using the debiased estimator can be very large when there is a weak
+factor, especially for larger sample sizes (see Appendix C.1 for additional simulation results).
+Importantly, even if all the factors are strong, the debiased estimator performs comparably
+to the LS estimator.
+When weak factors are present, the LS CIs can have zero coverage because they are (i)
+centered around the biased LS estimator and (ii) too short. Hence, the average length of
+the LS CIs is not a proper benchmark to compare the average length of the bias-aware CIs.
+10Note that the CCE estimator of Pesaran (2006) would not work in these designs, regardless of whether the
+factors are strong or not, because the cross-sectional averages of λir equal zero.
+22
+
+[PDF PAGE 24]
+To provide a relevant comparison, we also construct identification robust CIs by inverting
+the (absolute value of the) LS based t-statistic using appropriate identification robust critical
+values (instead of z1−α/2). Specifically, for a given design (here, for fixed N , T , and R),
+we (numerically) compute the least favorable (over κ) critical value for the absolute value of
+the t-statistic based on the LS estimator. We also construct analogous CIs by inverting the
+(absolute value of the) t-statistic based on the debiased estimator using the corresponding least
+favorable critical values. We refer to such CIs as the LS and debiased oracle CIs (because they
+are based on unknown design-specific least favorable critical values) and report their average
+length denoted by “length*” in the tables below.
+Notice that the average length of the LS oracle CIs (the “length*” column under the LS
+heading) is at least comparable to but mostly significantly greater than the actual length of
+the bias-aware CIs (the “length” column under the debiased heading), especially for larger
+sample sizes (again, see Appendix C.1 for additional simulation results). Thus, the bias-
+aware CI outperforms the LS CI once one corrects the LS CI to compensate for its severe
+undercoverage.
+Another important comparison is between the actual length and oracle length of the bias-
+aware CI. Throughout most of the designs, the oracle length of the bias-aware CI is slightly
+less than half the length of the actual bias-aware CI that we compute. This gives a bound on
+how conservative our CI is: our bias-aware critical value cannot be decreased by more than a
+factor of about two without sacrificing coverage in these Monte Carlos. There are two possible
+sources of this conservativeness: (1) the bound in Theorem 2 may be conservative or (2) there
+may be some additional structure in the initial error or its correlation with the data that our
+nuclear norm debiasing method does not exploit. While further improving the CI using the
+proof techniques in this paper appears difficult, we cannot rule out these possibilities. On
+the other hand, it is possible that these Monte Carlos overstate the conservativeness of our
+bias-aware CI: there may be other DGPs for which our bias-aware critical value cannot be
+decreased without sacrificing coverage.
+Despite the simplicity of the design considered in this section, the presented findings
+seem to be characteristic of more complicated and settings. Specifically, in Appendix C.2, we
+consider a design with an additional covariate and non-Gaussian, heteroskedastic, and serially
+correlated errors and establish qualitatively similar results regardless of whether the correct
+number of factors is known or overspecified.
+5.2 Empirical Illustration
+In this section, we illustrate the finite sample properties of the proposed estimator and con-
+fidence intervals in a numerical experiment calibrated to imitate an actual empirical setting.
+Specifically, we calibrate our experiment based on the seminal studies of the effects of uni-
+lateral divorce law reforms on the US divorce rates by Friedberg (1998) and Wolfers (2006),
+subsequently revisited by Kim and Oka (2014) and Moon and Weidner (2015) in the context
+23
+
+[PDF PAGE 25]
+of interactive fixed effects models.
+For simplicity of the experiment, as a benchmark, we use the following static specification
+also considered in Friedberg (1998) and Wolfers (2006)
+Yit = Xitβ + αi + ζit + νit2 + ϕt + Uit,
+where Yit denotes the annual divorce rate (per 1,000 persons) in state i in year t, and Xit
+is a dummy variable indicating if state i had a unilateral divorce law in year t. Following
+Friedberg (1998) and Wolfers (2006), we also control for state-specific quadratic time trends
+and time effects.
+We follow Kim and Oka (2014) and use their data to construct a balanced panel with
+N = 48 states and T = 33 years. As in Moon and Weidner (2015), first we profile out the
+individual trends and time effects from Yit and Xit to form the projected model
+Y ⊥
+it = X ⊥
+it β + U ⊥
+it
+and obtain the estimates ˆβ and ˆσ2
+U ⊥. We also extract the first principal component of the
+matrix of regressors X ⊥ denoted by Γ X ⊥
+= λX ⊥
+i f X ⊥
+t .
+In our numerical experiment, we fix X ⊥, {λX ⊥
+i }N
+i=1, and {f X ⊥
+t }T
+t=1, and consider the
+following DGP
+Y ⊥
+it = X ⊥
+it ˆβ + κλX ⊥
+i f X ⊥
+t + U ⊥
+it ,
+where we introduce an additional factor f X ⊥
+t and a parameter κ controlling the strength of
+f X ⊥
+t . For every repetition, we draw U ⊥
+it as iid N (0, ˆσ2
+U ) and treat all the other parts of the
+DGP as fixed.
+As before, we compare the LS estimator and inference performance with the proposed
+approach for various values of κ. Both approaches use the correctly specified number of
+factors R = 1. The results are based on 5,000 simulations and provided in Table 4. We report
+the same statistics as in Section 5.1.
+The results are qualitatively similar to the results in Section 5.1. The LS estimator
+is heavily biased when the factor is weak, and the standard tests and confidence intervals
+are severely size distorted. Compared to the LS estimator, the debiased estimator has a
+substantially smaller bias, standard deviation, and rmse when the factor is weak. It also
+performs competitively if the factor is strong. The LS CIs are much shorter than the bias-
+aware CIs but have very poor coverage. The oracle CIs based on the LS estimator have the
+correct coverage and are also considerably wider than the naive CIs and comparable with
+the bias-aware CIs. Again, the oracle CIs based on the debiased estimator are considerably
+shorter than the bias-aware CIs and LS oracle CIs, indicating that there is a potential scope
+for improvement.
+Overall, our empirically calibrated simulation study shows that the presence of a weak
+24
+
+[PDF PAGE 26]
+factor can lead to poor performance of conventional estimators and inference procedures in
+an actual empirical setting. It also demonstrates that in such settings, the gains from using
+the debiased estimator could be substantial.
+Finally, we also report estimation and inference results for the actual data set. For con-
+sistency with the numerical experiment above, we focus on the same single covariate Xit. In
+Appendix D, we also consider a specification with dynamic treatment effects as in Wolfers
+(2006). Similarly to Kim and Oka (2014) and Moon and Weidner (2015), we estimate
+Yit = Xitβ + αi + ζit + νit2 + ϕt +
+RX
+r=1
+λirftr + Uit
+for various values of R using the LS and the debiased approaches and construct 95% CIs for
+β. As before, we first profile out the individual trends and time effects, and then use the
+residual outcomes and regressors as inputs for the LS and debiased estimators.
+The results are provided in Table 5. We construct three types of CIs based on the debiased
+estimator using ˆC as in Remark 4.1 with different values of Rw. The first one is constructed
+assuming that there are no weak factors among R factors ( Rw = 0), i.e., under the same
+assumption under which the standard LS CI is valid. This is the same CI as introduced
+in Remark 3.1. In this application, these CIs are as short as or even shorter than the LS
+CIs. Thus, if the researcher wants to obtain shorter CIs at the cost of non-robustness to the
+potential presence of weak factors, they can still do that using our debiased estimator. As
+pointed out in Remark 3.1 and documented in Section C.3, such CIs are still likely to have
+much better coverage than the LS ones when there is a weak factors since they are based on
+the debiased estimator.
+The second type of CIs is constructed assuming that among R factors there is up to one
+weak factor ( Rw = 1). The corresponding bias-aware CIs are substantially wider than the
+non-robust ones. However, as the numerical experiment considered earlier in this sections
+suggests, this is how wide identification robust CIs appear to have to be in this setting. In
+the considered application, we find that the potential presence of one weak factor is likely to
+be sufficient to nullify the significance of the previously obtained non-robust estimates.
+Finally, we also report our bias-aware CIs as in (12) corresponding to Rw = R. These CIs
+are uniformly valid regardless of the strength of identification of the factors.
+The results for a specification with dynamic treatment effects are qualitatively similar and
+provided in Appendix D.
+25
+
+[PDF PAGE 27]
+Table 1: Simulation results for the experiment in Section 5.1, N = 100, R = 1
+LS Debiased
+κ bias std rmse size length length* bias std rmse size length length*
+T = 20
+0.00 -0.0000 0.0171 0.0171 7.1 0.061 0.299 0.0002 0.0206 0.0206 0.0 0.304 0.137
+0.05 0.0242 0.0178 0.0300 37.3 0.062 0.300 0.0095 0.0207 0.0228 0.0 0.304 0.137
+0.10 0.0478 0.0200 0.0518 79.3 0.062 0.302 0.0181 0.0215 0.0281 0.0 0.305 0.137
+0.15 0.0690 0.0249 0.0734 91.6 0.063 0.308 0.0244 0.0235 0.0339 0.0 0.306 0.138
+0.20 0.0792 0.0382 0.0879 85.7 0.067 0.324 0.0250 0.0276 0.0372 0.0 0.309 0.138
+0.25 0.0670 0.0531 0.0855 64.8 0.074 0.358 0.0189 0.0306 0.0360 0.0 0.311 0.139
+0.50 0.0049 0.0244 0.0248 8.2 0.087 0.425 0.0013 0.0239 0.0240 0.0 0.314 0.139
+1.00 0.0004 0.0232 0.0232 5.9 0.088 0.427 0.0001 0.0237 0.0237 0.0 0.315 0.140
+T = 50
+0.00 -0.0002 0.0103 0.0103 5.9 0.039 0.228 -0.0001 0.0136 0.0136 0.0 0.173 0.079
+0.05 0.0244 0.0108 0.0267 67.5 0.039 0.228 0.0064 0.0137 0.0151 0.0 0.173 0.080
+0.10 0.0484 0.0124 0.0500 98.2 0.039 0.230 0.0121 0.0143 0.0187 0.0 0.174 0.080
+0.15 0.0683 0.0189 0.0709 96.8 0.040 0.237 0.0135 0.0164 0.0213 0.0 0.175 0.080
+0.20 0.0580 0.0390 0.0699 72.4 0.046 0.269 0.0084 0.0180 0.0198 0.0 0.177 0.080
+0.25 0.0229 0.0306 0.0382 33.5 0.053 0.308 0.0032 0.0164 0.0167 0.0 0.177 0.080
+0.50 0.0016 0.0144 0.0145 5.7 0.055 0.324 0.0002 0.0151 0.0151 0.0 0.177 0.080
+1.00 0.0001 0.0142 0.0142 5.1 0.055 0.324 -0.0001 0.0151 0.0151 0.0 0.178 0.080
+T = 100
+0.00 -0.0001 0.0073 0.0073 6.1 0.028 0.183 -0.0001 0.0108 0.0108 0.0 0.122 0.057
+0.05 0.0246 0.0077 0.0258 91.0 0.028 0.183 0.0051 0.0108 0.0120 0.0 0.122 0.057
+0.10 0.0486 0.0093 0.0495 99.9 0.028 0.185 0.0089 0.0117 0.0147 0.0 0.123 0.057
+0.15 0.0619 0.0224 0.0658 92.9 0.030 0.197 0.0068 0.0132 0.0149 0.0 0.124 0.058
+0.20 0.0239 0.0267 0.0358 47.4 0.037 0.243 0.0023 0.0124 0.0127 0.0 0.124 0.058
+0.25 0.0077 0.0120 0.0143 17.9 0.039 0.256 0.0009 0.0119 0.0120 0.0 0.124 0.058
+0.50 0.0009 0.0103 0.0103 5.9 0.039 0.260 0.0001 0.0118 0.0118 0.0 0.124 0.058
+1.00 0.0001 0.0102 0.0102 5.4 0.039 0.260 -0.0000 0.0118 0.0118 0.0 0.124 0.058
+T = 300
+0.00 -0.0000 0.0042 0.0042 5.3 0.016 0.121 0.0000 0.0056 0.0056 0.0 0.080 0.033
+0.05 0.0247 0.0046 0.0252 100.0 0.016 0.122 0.0047 0.0056 0.0073 0.0 0.080 0.033
+0.10 0.0482 0.0070 0.0487 99.8 0.016 0.123 0.0057 0.0067 0.0088 0.0 0.080 0.033
+0.15 0.0178 0.0173 0.0248 60.5 0.021 0.161 0.0015 0.0063 0.0065 0.0 0.081 0.033
+0.20 0.0047 0.0064 0.0080 16.4 0.022 0.170 0.0005 0.0061 0.0061 0.0 0.081 0.033
+0.25 0.0023 0.0060 0.0064 7.6 0.023 0.171 0.0003 0.0061 0.0061 0.0 0.081 0.033
+0.50 0.0003 0.0057 0.0058 4.9 0.023 0.172 0.0001 0.0060 0.0060 0.0 0.081 0.033
+1.00 0.0001 0.0057 0.0057 4.9 0.023 0.172 0.0000 0.0060 0.0060 0.0 0.081 0.033
+Lind(A) ∈ {0.0063,0.0028,0.0015,0.0006} forT ∈ {20,50,100,300}.
+26
+
+[PDF PAGE 28]
+Table 2: Simulation results for the experiment in Section 5.1, N = 100, T = 50, R = 2
+LS Debiased
+κ1
+κ2 0.00 0.05 0.10 0.15 0.20 0.25 0.30 0.40 0.50 1.00 0.00 0.05 0.10 0.15 0.20 0.25 0.30 0.40 0.50 1.00
+bias
+0.00 -0.000 0.016 0.031 0.035 0.018 0.008 0.004 0.002 0.001 0.000 -0.000 0.006 0.010 0.010 0.005 0.002 0.001 0.000 0.000 -0.000
+0.05 0.016 0.033 0.049 0.060 0.052 0.036 0.030 0.027 0.026 0.025 0.006 0.012 0.017 0.018 0.014 0.010 0.009 0.008 0.007 0.007
+0.10 0.031 0.049 0.066 0.080 0.083 0.067 0.057 0.051 0.050 0.049 0.010 0.017 0.022 0.025 0.022 0.018 0.015 0.014 0.014 0.013
+0.15 0.035 0.060 0.080 0.097 0.108 0.099 0.082 0.072 0.070 0.068 0.010 0.018 0.025 0.029 0.028 0.024 0.020 0.018 0.017 0.017
+0.20 0.018 0.052 0.083 0.108 0.123 0.114 0.089 0.068 0.064 0.060 0.005 0.014 0.022 0.028 0.029 0.024 0.018 0.014 0.013 0.012
+0.25 0.008 0.036 0.067 0.099 0.114 0.088 0.054 0.032 0.028 0.025 0.002 0.010 0.018 0.024 0.024 0.017 0.010 0.006 0.005 0.005
+0.30 0.004 0.030 0.057 0.082 0.089 0.054 0.027 0.015 0.012 0.010 0.001 0.009 0.015 0.020 0.018 0.010 0.005 0.003 0.002 0.002
+0.40 0.002 0.027 0.051 0.072 0.068 0.032 0.015 0.007 0.005 0.004 0.000 0.008 0.014 0.018 0.014 0.006 0.003 0.001 0.001 0.001
+0.50 0.001 0.026 0.050 0.070 0.064 0.028 0.012 0.005 0.004 0.002 0.000 0.007 0.014 0.017 0.013 0.005 0.002 0.001 0.001 0.000
+1.00 0.000 0.025 0.049 0.068 0.060 0.025 0.010 0.004 0.002 0.000 -0.000 0.007 0.013 0.017 0.012 0.005 0.002 0.001 0.000 -0.000
+std
+0.00 0.009 0.009 0.012 0.019 0.019 0.013 0.011 0.011 0.010 0.010 0.013 0.013 0.014 0.015 0.015 0.014 0.014 0.014 0.014 0.014
+0.05 0.009 0.009 0.010 0.014 0.021 0.015 0.012 0.011 0.011 0.011 0.013 0.013 0.013 0.015 0.015 0.014 0.014 0.014 0.014 0.014
+0.10 0.012 0.010 0.010 0.012 0.019 0.020 0.014 0.013 0.013 0.013 0.014 0.013 0.014 0.015 0.016 0.015 0.015 0.014 0.014 0.014
+0.15 0.019 0.014 0.012 0.012 0.017 0.025 0.021 0.019 0.019 0.020 0.015 0.015 0.015 0.016 0.016 0.017 0.016 0.016 0.016 0.016
+0.20 0.019 0.021 0.019 0.017 0.025 0.043 0.045 0.040 0.039 0.039 0.015 0.015 0.016 0.016 0.018 0.020 0.020 0.019 0.019 0.019
+0.25 0.013 0.015 0.020 0.025 0.043 0.064 0.055 0.037 0.034 0.032 0.014 0.014 0.015 0.017 0.020 0.023 0.021 0.018 0.018 0.017
+0.30 0.011 0.012 0.014 0.021 0.045 0.055 0.036 0.021 0.019 0.019 0.014 0.014 0.015 0.016 0.020 0.021 0.018 0.016 0.016 0.016
+0.40 0.011 0.011 0.013 0.019 0.040 0.037 0.021 0.016 0.015 0.015 0.014 0.014 0.014 0.016 0.019 0.018 0.016 0.016 0.016 0.016
+0.50 0.010 0.011 0.013 0.019 0.039 0.034 0.019 0.015 0.015 0.015 0.014 0.014 0.014 0.016 0.019 0.018 0.016 0.016 0.015 0.015
+1.00 0.010 0.011 0.013 0.020 0.039 0.032 0.019 0.015 0.015 0.015 0.014 0.014 0.014 0.016 0.019 0.017 0.016 0.016 0.015 0.015
+rmse
+0.00 0.009 0.019 0.033 0.039 0.026 0.015 0.012 0.011 0.010 0.010 0.013 0.014 0.017 0.018 0.016 0.014 0.014 0.014 0.014 0.014
+0.05 0.019 0.034 0.050 0.061 0.056 0.039 0.032 0.029 0.028 0.027 0.014 0.017 0.021 0.023 0.021 0.017 0.016 0.016 0.016 0.016
+0.10 0.033 0.050 0.066 0.081 0.085 0.070 0.058 0.053 0.051 0.050 0.017 0.021 0.026 0.029 0.027 0.023 0.021 0.020 0.020 0.020
+0.15 0.039 0.061 0.081 0.098 0.109 0.102 0.085 0.075 0.073 0.071 0.018 0.023 0.029 0.033 0.033 0.029 0.026 0.024 0.024 0.023
+0.20 0.026 0.056 0.085 0.109 0.125 0.122 0.099 0.079 0.075 0.071 0.016 0.021 0.027 0.033 0.034 0.032 0.027 0.024 0.023 0.022
+0.25 0.015 0.039 0.070 0.102 0.122 0.109 0.077 0.049 0.044 0.041 0.014 0.017 0.023 0.029 0.032 0.028 0.023 0.019 0.018 0.018
+0.30 0.012 0.032 0.058 0.085 0.099 0.077 0.045 0.026 0.023 0.021 0.014 0.016 0.021 0.026 0.027 0.023 0.018 0.016 0.016 0.016
+0.40 0.011 0.029 0.053 0.075 0.079 0.049 0.026 0.017 0.016 0.016 0.014 0.016 0.020 0.024 0.024 0.019 0.016 0.016 0.016 0.016
+0.50 0.010 0.028 0.051 0.073 0.075 0.044 0.023 0.016 0.015 0.015 0.014 0.016 0.020 0.024 0.023 0.018 0.016 0.016 0.016 0.015
+1.00 0.010 0.027 0.050 0.071 0.071 0.041 0.021 0.016 0.015 0.015 0.014 0.016 0.020 0.023 0.022 0.018 0.016 0.016 0.015 0.015
+27
+
+[PDF PAGE 29]
+Table 3: Simulation results for the experiment in Section 5.1, N = 100, T = 50, R = 2
+LS Debiased
+κ1
+κ2 0.00 0.05 0.10 0.15 0.20 0.25 0.30 0.40 0.50 1.00 0.00 0.05 0.10 0.15 0.20 0.25 0.30 0.40 0.50 1.00
+size
+0.00 7.6 52.3 88.3 80.0 42.8 17.9 10.6 6.7 6.3 5.9 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+0.05 52.3 96.2 99.8 99.6 95.9 88.3 81.6 73.7 70.8 68.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+0.10 88.3 99.8 100.0 100.0 100.0 99.7 99.2 98.6 98.4 98.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+0.15 80.0 99.6 100.0 100.0 99.8 99.5 98.7 97.9 97.4 96.6 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+0.20 42.8 95.9 100.0 99.8 98.3 93.1 87.3 80.0 76.9 73.8 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+0.25 17.9 88.3 99.7 99.5 93.1 76.1 60.5 45.2 39.9 36.2 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+0.30 10.6 81.6 99.2 98.7 87.3 60.5 38.9 23.3 18.9 16.2 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+0.40 6.7 73.7 98.6 97.9 80.0 45.2 23.3 11.3 9.2 7.9 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+0.50 6.3 70.8 98.4 97.4 76.9 39.9 18.9 9.2 7.4 6.4 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+1.00 5.9 68.0 98.0 96.6 73.8 36.2 16.2 7.9 6.4 5.7 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+length
+0.00 0.031 0.031 0.032 0.034 0.037 0.038 0.039 0.039 0.039 0.039 0.257 0.257 0.258 0.260 0.261 0.262 0.262 0.262 0.262 0.262
+0.05 0.031 0.031 0.032 0.033 0.036 0.038 0.038 0.039 0.039 0.039 0.257 0.257 0.258 0.259 0.261 0.262 0.262 0.262 0.262 0.262
+0.10 0.032 0.032 0.032 0.032 0.034 0.037 0.039 0.039 0.039 0.039 0.258 0.258 0.258 0.260 0.261 0.262 0.263 0.263 0.263 0.263
+0.15 0.034 0.033 0.032 0.032 0.033 0.036 0.039 0.040 0.040 0.040 0.260 0.259 0.260 0.261 0.263 0.264 0.265 0.265 0.265 0.265
+0.20 0.037 0.036 0.034 0.033 0.034 0.037 0.042 0.045 0.045 0.046 0.261 0.261 0.261 0.263 0.265 0.266 0.267 0.267 0.268 0.268
+0.25 0.038 0.038 0.037 0.036 0.037 0.043 0.049 0.052 0.052 0.052 0.262 0.262 0.262 0.264 0.266 0.268 0.268 0.269 0.269 0.269
+0.30 0.039 0.038 0.039 0.039 0.042 0.049 0.053 0.054 0.054 0.054 0.262 0.262 0.263 0.265 0.267 0.268 0.269 0.269 0.269 0.269
+0.40 0.039 0.039 0.039 0.040 0.045 0.052 0.054 0.055 0.055 0.055 0.262 0.262 0.263 0.265 0.267 0.269 0.269 0.269 0.269 0.270
+0.50 0.039 0.039 0.039 0.040 0.045 0.052 0.054 0.055 0.055 0.055 0.262 0.262 0.263 0.265 0.268 0.269 0.269 0.269 0.270 0.270
+1.00 0.039 0.039 0.039 0.040 0.046 0.052 0.054 0.055 0.055 0.055 0.262 0.262 0.263 0.265 0.268 0.269 0.269 0.270 0.270 0.270
+length*
+0.00 0.345 0.346 0.353 0.373 0.406 0.420 0.424 0.427 0.427 0.428 0.114 0.114 0.114 0.115 0.115 0.115 0.115 0.115 0.115 0.115
+0.05 0.346 0.346 0.349 0.360 0.391 0.416 0.424 0.427 0.428 0.429 0.114 0.114 0.114 0.115 0.115 0.115 0.115 0.115 0.115 0.115
+0.10 0.353 0.349 0.348 0.354 0.375 0.409 0.424 0.430 0.432 0.432 0.114 0.114 0.114 0.115 0.115 0.115 0.115 0.115 0.115 0.116
+0.15 0.373 0.360 0.354 0.354 0.365 0.399 0.428 0.441 0.443 0.445 0.115 0.115 0.115 0.115 0.115 0.116 0.116 0.116 0.116 0.116
+0.20 0.406 0.391 0.375 0.365 0.371 0.410 0.459 0.491 0.497 0.503 0.115 0.115 0.115 0.115 0.116 0.116 0.116 0.116 0.116 0.116
+0.25 0.420 0.416 0.409 0.399 0.410 0.475 0.536 0.568 0.573 0.576 0.115 0.115 0.115 0.116 0.116 0.116 0.116 0.116 0.116 0.116
+0.30 0.424 0.424 0.424 0.428 0.459 0.536 0.579 0.595 0.598 0.599 0.115 0.115 0.115 0.116 0.116 0.116 0.116 0.116 0.116 0.117
+0.40 0.427 0.427 0.430 0.441 0.491 0.568 0.595 0.604 0.606 0.607 0.115 0.115 0.115 0.116 0.116 0.116 0.116 0.117 0.117 0.117
+0.50 0.427 0.428 0.432 0.443 0.497 0.573 0.598 0.606 0.608 0.609 0.115 0.115 0.115 0.116 0.116 0.116 0.116 0.117 0.117 0.117
+1.00 0.428 0.429 0.432 0.445 0.503 0.576 0.599 0.607 0.609 0.610 0.115 0.115 0.116 0.116 0.116 0.116 0.117 0.117 0.117 0.117
+28
+
+[PDF PAGE 30]
+Table 4: Simulation results for the empirically calibrated experiment, N = 48, T = 33, R = 1
+LS Debiased
+κ bias std rmse size length length* bias std rmse size length length*
+0.00 -0.0007 0.0647 0.0647 6.9 0.236 1.062 -0.0010 0.0797 0.0797 0.0 1.374 0.683
+0.20 0.0920 0.0656 0.1130 35.0 0.237 1.067 0.0517 0.0805 0.0957 0.0 1.376 0.685
+0.40 0.1822 0.0703 0.1953 81.9 0.240 1.083 0.1013 0.0842 0.1317 0.0 1.381 0.690
+0.60 0.2620 0.0890 0.2767 93.4 0.248 1.116 0.1392 0.0966 0.1694 0.0 1.392 0.698
+0.80 0.2999 0.1467 0.3339 84.6 0.262 1.180 0.1428 0.1267 0.1910 0.0 1.406 0.703
+1.00 0.2356 0.2168 0.3202 57.5 0.286 1.288 0.0972 0.1470 0.1762 0.0 1.418 0.700
+1.20 0.1134 0.1955 0.2260 26.8 0.307 1.381 0.0420 0.1258 0.1326 0.0 1.424 0.693
+1.40 0.0427 0.1168 0.1243 12.6 0.315 1.419 0.0177 0.1042 0.1057 0.0 1.426 0.690
+1.60 0.0235 0.0921 0.0950 8.8 0.317 1.428 0.0104 0.0992 0.0997 0.0 1.427 0.690
+1.80 0.0157 0.0879 0.0893 7.3 0.318 1.431 0.0070 0.0981 0.0984 0.0 1.428 0.689
+2.00 0.0112 0.0867 0.0875 6.8 0.318 1.432 0.0050 0.0977 0.0978 0.0 1.428 0.689
+Table 5: LS and debiased estimates and 95% CIs for β
+R = 1 R = 2 R = 3 R = 4 R = 5 R = 6
+LS
+0.047 0 .160 0 .101 0 .043 0 .028 0 .091
+[−0.06, 0.15] [0 .04, 0.28] [ −0.02, 0.22] [ −0.07, 0.16] [ −0.10, 0.16] [ −0.04, 0.22]
+Debiased
+0.089 0 .162 0 .130 0 .084 0 .071 0 .106
+Rw = 0 [ −0.01, 0.19] [0 .07, 0.26] [0 .05, 0.21] [0 .01, 0.16] [ −0.01, 0.15] [0 .04, 0.18]
+Rw = 1 [ −0.77, 0.95] [ −0.56, 0.88] [ −0.45, 0.71] [ −0.40, 0.57] [ −0.34, 0.48] [ −0.24, 0.45]
+Rw = R [−0.77, 0.95] [ −1.18, 1.50] [ −1.43, 1.69] [ −1.62, 1.79] [ −1.67, 1.81] [ −1.61, 1.82]
+References
+Ahn, S. C. and A. R. Horenstein (2013). Eigenvalue ratio test for the number of factors.
+Econometrica 81 (3), 1203–1227.
+Ahn, S. C., Y. H. Lee, and P. Schmidt (2001). GMM estimation of linear panel data models
+with time-varying individual effects. Journal of Econometrics 101 (2), 219–255.
+Ahn, S. C., Y. H. Lee, and P. Schmidt (2013). Panel data models with multiple time-varying
+individual effects. Journal of Econometrics 174 (1), 1–14.
+Alidaee, H., E. Auerbach, and M. P. Leung (2020). Recovering network structure from ag-
+gregated relational data using penalized regression. arXiv preprint arXiv:2001.06052 .
+29
+
+[PDF PAGE 31]
+Andrews, D. W. and X. Cheng (2012). Estimation and inference with weak, semi-strong, and
+strong identification. Econometrica 80 (5), 2153–2211.
+Arellano, M. (1987). Computing robust standard errors for within-groups estimators. Oxford
+Bulletin of Economics & Statistics 49 (4).
+Arkhangelsky, D., S. Athey, D. A. Hirshberg, G. W. Imbens, and S. Wager (2021, December).
+Synthetic Difference-in-Differences. American Economic Review 111 (12), 4088–4118.
+Armstrong, T. B. and M. Koles´ ar (2018). Optimal inference in a class of regression models.
+Econometrica 86 (2), 655–683.
+Armstrong, T. B., M. Koles´ ar, and S. Kwon (2020). Bias-Aware Inference in Regularized
+Regression Models. arXiv:2012.14823 [econ, stat] .
+Athey, S., M. Bayati, N. Doudchenko, G. Imbens, and K. Khosravi (2021). Matrix Comple-
+tion Methods for Causal Panel Data Models. Journal of the American Statistical Associa-
+tion 0 (0), 1–15.
+Bai, J. (2009). Panel data models with interactive fixed effects. Econometrica 77 (4), 1229–
+1279.
+Bai, J. and S. Ng (2002, January). Determining the number of factors in approximate factor
+models. Econometrica 70 (1), 191–221.
+Bai, J. and S. Ng (2017). Principal components and regularized estimation of factor models.
+arXiv preprint arXiv:1708.08137 .
+Bai, J. and S. Ng (2023). Approximate factor models with weaker loadings. Journal of
+Econometrics 235 (2), 1893–1916.
+Bai, J. and P. Wang (2016). Econometric analysis of large factor models. Annual Review of
+Economics 8 , 53–80.
+Belloni, A., M. Chen, O. H. Madrid Padilla, and Z. Wang (2023). High-dimensional la-
+tent panel quantile regression with an application to asset pricing. The Annals of Statis-
+tics 51 (1), 96–121.
+Belloni, A., V. Chernozhukov, and C. Hansen (2014). Inference on Treatment Effects after
+Selection among High-Dimensional Controls. The Review of Economic Studies 81 (2), 608–
+650.
+Beyhum, J. and E. Gautier (2019). Square-root nuclear norm penalized estimator for
+panel data models with approximately low-rank unobserved heterogeneity. arXiv preprint
+arXiv:1904.09192.
+Beyhum, J. and E. Gautier (2022). Factor and factor loading augmented estimators for panel
+regression with possibly nonstrong factors. Journal of Business & Economic Statistics ,
+1–12.
+Billingsley, P. (1995). Probability and measure (3rd ed.). A Wiley-Interscience publication.
+John Wiley and Sons.
+30
+
+[PDF PAGE 32]
+Bonhomme, S. and E. Manresa (2015). Grouped patterns of heterogeneity in panel data.
+Econometrica 83 (3), 1147–1184.
+Chamberlain, G. and M. J. Moreira (2009). Decision theory applied to a linear panel data
+model. Econometrica 77 (1), 107–133.
+Chernozhukov, V., C. Hansen, Y. Liao, and Y. Zhu (2019). Inference for heterogeneous effects
+using low-rank estimation of factor slopes.
+Chetverikov, D. and E. Manresa (2022). Spectral and post-spectral estimators for grouped
+panel data models. arXiv preprint arXiv:2212.13324 .
+Cox, G. F. (2024). Weak identification in low-dimensional factor models with one or two
+factors. The Review of Economics and Statistics 03 , 1–45.
+Donoho, D. L. (1994). Statistical estimation and optimal recovery. The Annals of Statistics ,
+238–270.
+Fan, J. and Y. Liao (2022). Learning latent factors from diversified projections and its ap-
+plications to over-estimated and weak factors. Journal of the American Statistical Associ-
+ation 117 (538), 909–924.
+Fan, K. (1951). Maximum properties and inequalities for the eigenvalues of completely con-
+tinuous operators. Proceedings of the National Academy of Sciences 37 (11), 760–766.
+Feng, J. (2023). Nuclear norm regularized quantile regression with interactive fixed effects.
+Econometric Theory, 1–31.
+Ferman, B. and C. Pinto (2021). Synthetic controls with imperfect pretreatment fit. Quanti-
+tative Economics 12 (4), 1197–1221.
+Fern´ andez-Val, I., H. Freeman, and M. Weidner (2021). Low-rank approximations of nonsep-
+arable panel models. The Econometrics Journal 24 (2), C40–C77.
+Freeman, H. and M. Weidner (2023). Linear panel regressions with two-way unobserved
+heterogeneity. Journal of Econometrics 237 (1), 105498.
+Friedberg, L. (1998). Did unilateral divorce raise divorce rates? Evidence from panel data.
+American Economic Review , 608–627.
+Geman, S. (1980). A limit theorem for the norm of random matrices. The Annals of Proba-
+bility 8 (2), 252–261.
+Hansen, C. B. (2007). Asymptotic properties of a robust variance matrix estimator for panel
+data when t is large. Journal of Econometrics 141 (2), 597–620.
+Hastie, T., R. Tibshirani, and M. Wainwright (2015). Statistical learning with sparsity: the
+lasso and generalizations . CRC press.
+Higgins, A. (2021). Fixed T estimation of linear panel data models with interactive fixed
+effects. arXiv preprint arXiv:2110.05579 .
+Hirshberg, D. A. and S. Wager (2020). Augmented minimax linear estimation. arXiv:
+1712.00038.
+31
+
+[PDF PAGE 33]
+Holtz-Eakin, D., W. Newey, and H. S. Rosen (1988). Estimating vector autoregressions with
+panel data. Econometrica 56 (6), 1371–95.
+Horn, R. A. and C. R. Johnson (2013). Matrix Analysis (2 ed.). Cambridge University Press.
+Ibragimov, I. and R. Khas’minskii (1985). On Nonparametric Estimation of the Value of a
+Linear Functional in Gaussian White Noise. Theory of Probability & Its Applications 29 (1),
+18–32.
+Ishihara, T. and T. Kitagawa (2021). Evidence Aggregation for Treatment Choice. arXiv
+preprint arXiv:2108.06473.
+Javanmard, A. and A. Montanari (2014). Confidence Intervals and Hypothesis Testing for
+High-Dimensional Regression. Journal of Machine Learning Research 15 (82), 2869–2909.
+Johnstone, I. (2001). On the distribution of the largest eigenvalue in principal components
+analysis. Annals of Statistics 29 (2), 295–327.
+Juodis, A. and V. Sarafidis (2018). Fixed T dynamic panel data estimators with multifactor
+errors. Econometric Reviews 37 (8), 893–929.
+Juodis, A. and V. Sarafidis (2022). A linear estimator for factor-augmented fixed- T panels
+with endogenous regressors. Journal of Business & Economic Statistics 40 (1), 1–15.
+Kiefer, N. (1980). A time series-cross section model with fixed effects with an intertemporal
+factor structure. Unpublished manuscript, Department of Economics, Cornell University .
+Kim, D. and T. Oka (2014). Divorce law reforms and divorce rates in the usa: An interactive
+fixed-effects approach. Journal of Applied Econometrics .
+Ma, S., L. Su, and Y. Zhang (2022). Detecting latent communities in network formation
+models. The Journal of Machine Learning Research 23 (1), 13971–14031.
+Miao, K., K. Li, and L. Su (2020). Panel threshold models with interactive fixed effects.
+Journal of Econometrics 219 (1), 137–170.
+Miao, K., P. C. Phillips, and L. Su (2023). High-dimensional vars with common factors.
+Journal of Econometrics 233 (1), 155–183.
+Moon, H. R. and M. Weidner (2015). Linear regression for panel with unknown number of
+factors as interactive fixed effects. Econometrica 83 (4), 1543–1579.
+Moon, H. R. and M. Weidner (2018). Nuclear norm regularized estimation of panel regression
+models. arXiv preprint arXiv:1810.10987 .
+Noack, C. and C. Rothe (2024). Bias-Aware Inference in Fuzzy Regression Discontinuity
+Designs. Econometrica 92 (3), 687–711.
+Onatski, A. (2010). Determining the number of factors from empirical distribution of eigen-
+values. The Review of Economics and Statistics 92 (4), 1004–1016.
+Onatski, A. (2012). Asymptotics of the principal components estimator of large factor models
+with weakly influential factors. Journal of Econometrics 168 (2), 244–258.
+Pesaran, M. H. (2006). Estimation and inference in large heterogeneous panels with a multi-
+32
+
+[PDF PAGE 34]
+factor error structure. Econometrica 74 (4), 967–1012.
+Pillai, N. S. and J. Yin (2012). Edge universality of correlation matrices. The Annals of
+Statistics, 1737–1763.
+Recht, B., M. Fazel, and P. A. Parrilo (2010). Guaranteed minimum-rank solutions of linear
+matrix equations via nuclear norm minimization. SIAM review 52 (3), 471–501.
+Robertson, D. and V. Sarafidis (2015). IV estimation of panels with factor residuals. Journal
+of Econometrics 185 (2), 526–541.
+Robinson, P. M. (1988). Root-N-Consistent Semiparametric Regression. Econometrica 56 (4),
+931–954.
+Rohde, A. and A. B. Tsybakov (2011). Estimation of high-dimensional low-rank matrices.
+The Annals of Statistics 39 (2), 887–930.
+Soshnikov, A. (2002). A note on universality of the distribution of the largest eigenvalues in
+certain sample covariance matrices. Journal of Statistical Physics 108 (5), 1033–1056.
+van de Geer, S., P. B¨ uhlmann, Y. Ritov, and R. Dezeure (2014). On asymptotically optimal
+confidence regions and tests for high-dimensional models. The Annals of Statistics 42 (3),
+1166–1202.
+Wang, Y., L. Su, and Y. Zhang (2022). Low-rank panel quantile regression: Estimation and
+inference. arXiv preprint arXiv:2210.11062 .
+Westerlund, J., Y. Petrova, and M. Norkute (2019). CCE in fixed-T panels. Journal of Applied
+Econometrics 34 (5), 746–761.
+Wolfers, J. (2006). Did unilateral divorce laws raise divorce rates? a reconciliation and new
+results. American Economic Review 96 , 1802–1820.
+Yang, F. (2019). Edge universality of separable covariance matrices. Electron. J.
+Probab 24 (123), 1–57.
+Yata, K. (2021). Optimal decision rules under partial identification. arXiv preprint
+arXiv:2111.04926.
+Zeleneev, A. (2019). Identification and estimation of network models with nonparametric
+unobserved heterogeneity. Department of Economics, Princeton University .
+Zhang, C.-H. and S. S. Zhang (2014). Confidence intervals for low dimensional parameters in
+high dimensional linear models. Journal of the Royal Statistical Society: Series B (Statistical
+Methodology) 76 (1), 217–242.
+Zhu, Y. (2019). How well can we learn large factor models without assuming strong factors?
+arXiv preprint arXiv:1910.10382 .
+33
+
+[PDF PAGE 35]
+Supplementary Appendix to “Robust Estimation and Inference
+in Panels with Interactive Fixed Effects”
+Timothy B. Armstrong, Martin Weidner and Andrei Zeleneev
+May 2025
+A Proofs
+This section contains proofs of the results in the main text. Section A.1 states and proves a
+general result on rates of convergence using high level conditions on the covariates X and Z
+and the bound ˆC on ∥Γ − ˆΓ∥∗. The proofs of Theorems 1-4 are provided in Sections A.2-A.5,
+respectively.
+Notation In this section, mirroring the notation used in Assumption 2(i), we write W for
+X, Z1, . . . , ZK and W · γ = Xβ + PK
+k=1 Zkδk for a generic γ = (β, δ′)′. In particular, we also
+use ˆγ = ( ˆβ, ˆδ′)′, ˆγLS = ( ˆβLS, ˆδ′
+LS)′, and ˆγpre = ( ˆβpre, ˆδ′
+pre)′.
+A.1 General result for rates of convergence
+We first prove a result giving rates of convergence for estimators ˆβ = ⟨A∗
+b,c, eY ⟩F given in
+Definition 2.1 with weights A∗
+b,c given in (16) under a high level condition on the bound ˆC
+on the initial estimation error in (4). Lemma 9(ii) and Theorem 2(i) verify this condition for
+ˆΓ = ˆΓLS and ˆΓ = ˆΓpre (and provide appropriate bounds ˆC), respectively.
+We make the following assumption on the class of distributions of X, Z1, . . . , Zk and U
+and the sequence c = cN,T used in the Lindeberg constraint. After we prove the main result
+of this section, we will also verify this assumption under a set of primitive conditions.
+Assumption 5. There exists a sequence of N × T random matrices Ξ such that
+∥Ξ∥F = OΘ,P (
+√
+N T), |⟨Ξ, X⟩F |−1 = OΘ,P ((N T)−1),
+s1(Ξ) = OΘ,P (max{
+√
+N ,
+√
+T }),
+and, with probability approaching one,
+Lind(Ξ) ≤ cN,T and ⟨Ξ, Zk⟩F = 0 for k = 1, . . . , K.
+Theorem 6. Let ˆβ = ⟨A∗
+b,c, eY ⟩F for eY = Γ − ˆΓ and some sequences c = cN,T and b = bN,T .
+Suppose Assumption 5 and Assumption 2(v) hold and that Assumption 1 (i) holds with eΓ =
+Γ − ˆΓ and ˆC = OΘ,P (CN,T ) for some sequence CN,T . Then
+| ˆβ − β| = OΘ,P
+
+max
+
+CN,T /bN,T , 1
+	
+· max
+n
+(N T)−1/2, bN,T · max{
+√
+N ,
+√
+T }/(N T)
+o
+.
+A.1
+
+[PDF PAGE 36]
+Proof. We have
+| ˆβ − β| ≤
+⟨A∗
+b,c, U⟩F
+ + bias ˜C(A∗
+b,c) =
+⟨A∗
+b,c, U⟩F
+ + ˜Cs1(A∗
+b,c)
+where ˜C = ∥Γ − ˆΓ∥∗. Thus,
+| ˆβ − β|2 ≤ 2
+⟨A∗
+b,c, U⟩F
+2 + 2 ˜C2s1(A∗
+b,c)2
+≤ 2 max
+
+
+
+⟨A∗
+b,c, U⟩F
+
+2
+∥A∗
+b,c∥2
+F
+,
+˜C2
+b2
+
+
+
+·
+
+∥A∗
+b,c∥2
+F + b2s1(A∗
+b,c)2
+. (17)
+Consider the oracle weights ˜A = Ξ /⟨Ξ, X⟩F . With probability approaching one uniformly
+over θ, P, the weights ˜A are feasible for (16), so that
+∥A∗
+b,c∥2
+F + b2s1(A∗
+b,c)2 ≤ ∥˜A∥2
+F + b2s1( ˜A)2 = ∥Ξ∥2
+F + b2s1(Ξ)2
+|⟨Ξ, X⟩F |2
+= OΘ,P ((N T)−1) + b2 · OΘ,P (max{N, T}/(N T)2). (18)
+Plugging this into (17) gives the result.
+Next, we verify that Assumption 5 holds under low level conditions provided in Assumption
+3.
+Lemma 7. Suppose that Assumption 3 holds. Then Assumption 5 holds with Ξit given by
+the residual in the regression of Vit on Zit, i.e., vec(Ξ) = MZvec(V ) where MZ = IN T−
+Z(Z′Z)−1Z′.
+Proof. First, notice that Ξ = V − Z · ˆφ = V − PK
+k=1 Zk ˆφk where ˆφ = (Z′Z)−1Z′vec(V ). Also,
+it follows from Assumption 3(iii) and (iv) that ∥ ˆφ∥ = OΘ,P
+
+1√
+N T
+
+.
+Next we verify all the conditions required by Assumption 5.
+Verification of ⟨Ξ, Zk⟩F = 0 for k = 1, . . . , K. By construction.
+Verification of ∥Ξ∥F = OΘ,P (
+√
+N T). ∥Ξ∥F = ∥vec(Ξ)∥ ≤ ∥vec(V )∥ = ∥V ∥F = OΘ,P (
+√
+N T).
+Verification of s1(Ξ) = OΘ,P (max{
+√
+N ,
+√
+T }). Notice that
+s1(Ξ) = s1
+ 
+V −
+KX
+k=1
+Zk ˆφk
+!
+≤ s1(V ) +
+KX
+k=1
+| ˆφk| s1(Zk) = OΘ,P (max{
+√
+N ,
+√
+T }),
+using the fact that | ˆφk| s1(Zk) = OΘ,P (1) since ˆφk = OΘ,P (1/
+√
+N T) and s1(Zk) ≤ ∥Zk∥F =
+OΘ,P (
+√
+N T).
+Verification of |⟨Ξ, X⟩F |−1 = OΘ,P ((N T)−1). Using the fact that ⟨Ξ, Zk⟩F = 0 for each k, we
+A.2
+
+[PDF PAGE 37]
+have
+⟨Ξ, X⟩F = ⟨Ξ, H⟩F + ⟨Ξ, V⟩F , = ⟨V, H⟩F −
+KX
+k=1
+ˆφk⟨Zk, H⟩F + ∥V ∥2
+F −
+KX
+k=1
+ˆφk⟨Zk, V⟩F .
+The first term isOΘ,P (
+√
+N T) = oΘ,P (N T) by Assumption 3(ii). The second term isOΘ,P (
+√
+N T) =
+oΘ,P (N T) since ˆφk = OΘ,P (1/
+√
+N T) and ⟨Zk, H⟩F ≤ ∥H∥F · ∥Zk∥F = OΘ,P (N T) under
+these assumptions. Similarly, the fourth term is OΘ,P (1) = oΘ,P (N T). Thus, ⟨Ξ, X⟩F =
+∥V ∥2
+F + oΘ,P (N T) and the result follows since ∥V ∥2
+F ≍Θ,P N Tby Assumption 3(i).
+Verification of Lind(Ξ) ≤ cN,T with probability approaching one.
+Lind(Ξ) = maxi,t Ξ2
+it
+∥Ξ∥2
+F
+,
+where
+∥Ξ∥2
+F = ∥V ∥2
+F − 2
+KX
+k=1
+ˆφk⟨V, Zk⟩F +
+
+KX
+k=1
+Zk ˆφk
+
+2
+F
+,
+where PK
+k=1 ˆφk⟨V, Zk⟩F = OΘ,P (1) and
+
+PK
+k=1 Zk ˆφk
+
+2
+F
+= OΘ,P (1), so ∥Ξ∥2
+F ≍Θ,P N T. Next,
+max
+i,t
+Ξ2
+it = max
+i,t
+ 
+Vit −
+KX
+k=1
+ˆφkZk,it
+!2
+≤ (K + 1)2
+ 
+max
+i,t
+V 2
+it +
+KX
+k=1
+ˆφ2
+k max
+i,t
+Z2
+k,it
+!
+= oΘ,P (N T cN,T ).
+Hence, Lind(Ξ) = oΘ,P (cN,T ), which completes the proof.
+A.2 Proof of Theorem 1
+The probability that the upper endpoint of the CI is less than β is
+Pθ,P
+
+ˆβ + bias ˆC( ˆβ) + z1−α/2 bse < β
+
+= Pθ,P
+
+⟨A, Xβ+ Z · δ + eΓ⟩F − β + bias ˆC( ˆβ) + ⟨A, eU ⟩F < −z1−α/2 bse
+
+≤ Pθ,P
+
+⟨A, Xβ+ Z · δ + eΓ⟩F − β <−bias ˆC( ˆβ)
+
++ Pθ,P
+
+⟨A, eU ⟩F < −z1−α/2 bse
+
+.
+The first term is, by definition, bounded byPθ,P (∥eΓ∥∗ > ˆC), which converges to zero uniformly
+over θ ∈ Θ, P∈ Pby Assumption 1(i). The second term converges to α/2 uniformly over
+θ ∈ Θ, P∈ Pby Assumption 1(ii). Applying a symmetric argument to the probability that
+the lower endpoint of the CI is greater than β gives the result.
+A.3
+
+[PDF PAGE 38]
+A.3 Proof of Theorem 2
+To prove Theorem 2, we first state and prove a series of auxiliary lemmas in Section A.3.1
+below. In Section A.3.2, we then prove the final results.
+A.3.1 Auxiliary Lemmas
+Lemma 8. Consider
+bΓ = argmin
+{G : rank(G)≤R}
+∥Y − W · ˆγ − G∥2
+F
+for some ˆγ. Suppose that Γ = λf ′ for some N × R matrix λ and T × R matrix f . Then, we
+have
+(i) ∥bΓ − Γ∥∗ ≤ 3Rs1( ˆU );
+(ii) ∥bΓ − Γ − Pλ ˆU ∥∗ ≤ 2Rs1( ˆU );
+where ˆU := U − W · (ˆγ − γ).
+Proof. Let
+Q(G) := ∥Y − W · ˆγ − G∥2
+F ,
+ˆY := Y − W · ˆγ = Γ + ˆU , and Γ† := Γ +Pλ ˆU , where Mλ = IN − Pλ and IN stands for a N × N
+identity matrix. Notice that we have MλΓ† = 0, and therefore rank
+
+Γ†
+≤ R.
+Next, note that
+Q(G) =
+ ˆY − G
+
+2
+F
+=
+Γ + ˆU − G
+
+2
+F
+=
+Pλ(Γ† − G) + Mλ( ˆU − G)
+
+2
+F
+,
+so we also have
+Q(bΓ) =
+Pλ
+
+bΓ − Γ†
+
+2
+F
++
+Mλ
+
+bΓ − ˆU
+
+2
+F
+=
+bΓ − Γ†
+
+2
+F
+−
+MλbΓ
+
+2
+F
++
+Mλ
+
+bΓ − ˆU
+
+2
+F
+=
+bΓ − Γ†
+
+2
+F
++
+Mλ ˆU
+
+2
+F
+− 2Tr
+
+ˆU ′MλbΓ
+
+≥
+bΓ − Γ†
+
+2
+F
++
+Mλ ˆU
+
+2
+F
+− 2 s1( ˆU )
+MλbΓ
+
+∗
+.
+Combining this with
+Q(bΓ) ≤ Q(Γ†) =
+Mλ ˆU
+
+2
+F
+,
+A.4
+
+[PDF PAGE 39]
+we obtain that
+bΓ − Γ†
+
+2
+∗
+≤ 2R
+bΓ − Γ†
+
+2
+F
+,
+≤ 4R s1( ˆU )
+MλbΓ
+
+∗
+≤ 4R2 s1( ˆU ) s1(MλbΓ),
+and therefore
+bΓ − Γ†
+
+∗
+≤ 2 R
+q
+s1( ˆU ) s1(MλbΓ). (19)
+Next, since bΓ is given by the R leading principal components of ˆY , we know that ˆY ˆY ′ ≥
+(bΓ)(bΓ)′, that is the difference ˆY ˆY ′ − bΓbΓ′ is positive-definitive, which implies that
+[s1(MλbΓ)]2 = µ1
+
+MλbΓbΓ′Mλ
+
+= max
+{v∈RN : ∥v∥=1}
+v′MλbΓbΓ′Mλv = ˆv′MλbΓbΓ′Mλˆv
+≤ ˆv′Mλ ˆY ˆY ′Mλˆv ≤ max
+{v∈RN : ∥v∥=1}
+v′Mλ ˆY ˆY ′Mλv = µ1(Mλ ˆY ˆY ′Mλ) = [s1(Mλ ˆY )]2
+= [s1(Mλ ˆU )]2 ≤ [s1( ˆU )]2.
+We have thus shown that s1(MλbΓ) ≤ s1(U ), and, combining this with (19), we obtain
+bΓ − Γ†
+
+∗
+≤ 2 R s1( ˆU ),
+which proofs the second statement of the lemma. To prove the first, notice that
+bΓ − Γ
+
+∗
+≤
+bΓ − Γ†
+
+∗
++
+Pλ ˆU
+
+∗
+≤ 3Rs1( ˆU ),
+where the last inequality uses
+Pλ ˆU
+
+∗
+≤ Rs1( ˆU ).
+Lemma 9. Under Assumptions 2 (i)-(iii),
+(i) ˆγLS − γ = OΘ,P (1/ min{
+√
+N ,
+√
+T });
+(ii)
+ˆΓLS − Γ
+
+∗
+≤ ˆC for some ˆC = OΘ,P (max{
+√
+N ,
+√
+T }).
+Proof. The first statement follows from the proof of Theorem 4.1 in Moon and Weidner (2015).
+Assumptions 2 (i)-(iii) are uniform analogues of Assumptions NC, SN, and EX in Moon and
+Weidner (2015). The derived rate of convergence is immediately uniform over θ ∈ Θ, P∈ P
+because the proof of Theorem 4.1 in Moon and Weidner (2015) explicitly bounds ∥ˆγLS − γ0∥.
+A.5
+
+[PDF PAGE 40]
+Next, we combine this result with Lemma 8(i) to obtain
+ˆΓLS − Γ
+
+∗
+≤ 3Rs1(U − W · (ˆγLS − γ))
+≤ 3R (s1(U ) + s1(W · (ˆγLS − γ)))
+= OΘ,P (max{
+√
+N ,
+√
+T }), (20)
+where the last equality follows from Assumption 2(ii) and ˆγLS − γ = OΘ,P (1/ min{
+√
+N ,
+√
+T }).
+Lemma 10. Suppose that Assumption 2 holds, and that Assumption 5 holds as stated and
+with Zk and X interchanged for each k = 1, . . . , K. Then
+ˆγpre − γ = OΘ,P (1/ min{N, T}) .
+Proof. The result is immediate from Lemma 9(ii) and Theorem 6, using the fact that b∗ is
+bounded from above and below by a constant times max {
+√
+N ,
+√
+T }.
+Lemma 11. Suppose that Assumption 2 holds, and that Assumption 5 holds as stated and
+with Zk and X interchanged for each k = 1, . . . , K. Then, s1( ˆUpre) ≍Θ,P max{
+√
+N ,
+√
+T } and
+s1(U ) ≤ s1( ˆUpre)(1 + oΘ,P (1)).
+Proof. First note that, letting ∆ Γ = ˆΓpre − Γ, we have
+s1( ˆUpre) − s1(U − ∆Γ)
+ ≤ s1(W · (ˆγpre − γ)) = oΘ,P (max{
+√
+N ,
+√
+T }) (21)
+the equality follows from Assumption 2(ii) and Lemma 10. Also, notice that
+s1(U − ∆Γ) ≤ s1(U ) + s1(∆Γ) = OΘ,P (max{
+√
+N ,
+√
+T }),
+where the equality follows from Assumption 2(ii) ands1(∆Γ) ≤ ∥∆Γ∥∗ = OΘ,P (max{
+√
+N ,
+√
+T }),
+which can be verified analogously to (20) plugging ˆγpre instead of ˆγLS and using the result of
+Lemma 10. Combining this with (21), we conclude
+s1( ˆUpre) = OΘ,P (max{
+√
+N ,
+√
+T }). (22)
+Next, using the fact that rank (∆ Γ) ≤ 2R and the general singular value inequality
+si+j−1(A + B) ≤ si(A) + sj(B) (see equation (7.3.13) in Problem 7.3.P16 of Horn and John-
+son 2013, or alternatively Fan 1951) with A = U − ∆Γ, B = ∆ Γ, i = 1, j = 2 R + 1 gives
+s2R+1(U ) ≤ s1(U − ∆Γ). Thus,
+s1(U ) ≤ s2R+1(U ) + oΘ,P (max{
+√
+N ,
+√
+T }) ≤ s1( ˆUpre) + oΘ,P (max{
+√
+N ,
+√
+T }), (23)
+A.6
+
+[PDF PAGE 41]
+where we apply Assumption 2(iv) for the first inequality and (21) for the second inequality. No-
+tice that this, together with Assumption 2(ii) and (22), implies s1( ˆUpre) ≍Θ,P max{
+√
+N ,
+√
+T }.
+Together with (23), this completes the proof.
+A.3.2 Proof of Theorem 2
+First, notice that Assumption 5 holds according to Lemma 7, so we can apply Lemmas 10
+and 11.
+We prove the second statement of the theorem. The proof of the first statement is analo-
+gous.
+Applying the second result of Lemma 8 with ˆ γ = γpre and ˆU = U − W · (ˆγpre − γ), we
+obtain
+2Rs1( ˆU ) ≥
+ˆΓpre − Γ − Pλ ˆU
+
+∗
+≥
+ˆΓpre − Γ − PλU
+
+∗
+− ∥PλW · (ˆγpre − γ)∥∗ .
+Note that
+∥PλW · (ˆγpre − γ)∥∗ ≤ Rs1 (W · (ˆγpre − γ)) = oΘ,P (max{
+√
+N ,
+√
+T }),
+where the equality follows from Assumption 2(ii) and Lemma 10. Similarly,
+s1( ˆU ) ≤ s1(U ) + s1(W · (ˆγpre − γ)) = s1(U ) + oΘ,P (max{
+√
+N ,
+√
+T }).
+Hence,
+ˆΓpre − Γ − PλU
+
+∗
+≤ 2Rs1(U ) + oΘ,P (max{
+√
+N ,
+√
+T }).
+Combining this with Lemma 11 proves the second statement of the theorem.
+A.4 Proof of Theorem 3
+The result follows from the first result of Theorem 2 and Theorem 6, along with Lemma 7
+verifying Assumption 5.
+A.5 Proof of Theorem 4
+The first statement of the theorem follows from Theorem 3 once we verify Assumption 2(v).
+Notice that Assumption 2(v) is immediate from Assumption 4 and Chebyshev’s inequality.
+Similarly, later in the proof, we will also invoke some of the previously derived results which
+rely on Assumption 2(v).
+To prove the second statement of the theorem, we verify Assumption 1 with ˜Γ = Γ +
+PλU − ˆΓpre and ˜U = U − PλU . Part (i) of Assumption 1 holds by construction, so we just
+A.7
+
+[PDF PAGE 42]
+need to verify part (ii) with this choice of ˜U . This will follow if we can show
+⟨A, U⟩F / bse d→
+Θ,P
+N (0, 1) (24)
+and
+⟨A, PλU ⟩F / bse = oΘ,P (1) (25)
+where A = A∗
+b,c. Section A.5.1 verifies (24) and Section A.5.2 verifies (25).
+A.5.1 V erification of (24)
+In this section, we verify that (24) holds under the hypotheses of Theorem 4. Specifically, we
+show that ⟨A, U⟩F / bse d→
+Θ,P
+N (0, 1) for bse2 = PN
+i=1
+PT
+t=1 A2
+it ˆU 2
+it with any sequence of matrices
+A satisfying Lind(A) ≤ cN,T with cN,T satisfying the condition cN,T max{N, T} →0 given in
+the statement of the theorem.
+To this end, we first prove a bound on ∥ ˆU − U ∥F (Lemma 12), and then use this to
+show consistency of the standard error (Lemma 13, using a condition verified in Lemma 14).
+Lemma 15 completes the proof. We note that the conditions of Lemma 12 hold under the
+conditions of Theorem 4 by Lemma 9.
+Lemma 12. Let ˆU = Y − W · ˆγ − ˆΓ, where
+ˆΓ = argmin
+{G∈RN ×T : rank(G)≤R}
+NX
+i=1
+TX
+t=1
+
+Yit − W ′
+itˆγ − Git
+2 .
+Suppose that
+(i) ˆγ − γ = OΘ,P
+
+1
+min{
+√
+N ,
+√
+T }
+
+;
+(ii) ∥X∥F = OΘ,P (
+√
+N T) and ∥Zk∥F = OΘ,P (
+√
+N T) for k ∈ {1, . . . , K};
+(iii) s1(X) = OΘ,P
+√
+N T
+
+, s1(Zk) = OΘ,P
+√
+N T
+
+for k ∈ {1, . . . , K}, and s1(U ) =
+OΘ,P (max{
+√
+N ,
+√
+T }).
+Then,
+ ˆU − U
+
+2
+F
+= OΘ,P (max{N, T}).
+Proof. Using ˆU = W · (γ − ˆγ) + Γ − ˆΓ + U ,
+ ˆU − U
+
+2
+F
+= ∥W · (ˆγ − γ)∥2
+F +
+ˆΓ − Γ
+
+2
+F
++ 2⟨W · (ˆγ − γ), ˆΓ − Γ⟩F .
+To prove the result, we show that all the terms on the right hand side of the equation above
+are OΘ,P (max{N, T}).
+A.8
+
+[PDF PAGE 43]
+First,
+∥W · (ˆγ − γ)∥F ≤ ∥X∥F
+ ˆβ − β
+ +
+KX
+k=1
+∥Zk∥F
+ˆδk − δk
+ = OΘ,P
+
+max{
+√
+N ,
+√
+T }
+
+.
+where we used conditions (i) and (ii).
+Second,
+ˆΓ − Γ
+
+F
+≤
+ˆΓ − Γ
+
+∗
+= OΘ,P (max{
+√
+N ,
+√
+T })
+where the equality holds analogously to the previously derived result (20) with ˆΓ and ˆγ
+replacing ˆΓLS and ˆγLS correspondingly.
+Third,
+⟨W · (ˆγ − γ), ˆΓ − Γ⟩F
+ ≤
+⟨X( ˆβ − β), ˆΓ − Γ⟩F
+ +
+KX
+k=1
+⟨Zk(ˆδk − δk), ˆΓ − Γ⟩F
+ ,
+where
+⟨X( ˆβ − β), ˆΓ − Γ⟩F
+ ≤ ∥X∥F
+ˆΓ − Γ
+
+F
+ ˆβ − β
+ = OΘ,P (max{N, T}) .
+Similarly,
+KX
+k=1
+⟨Zk(ˆδk − δk), ˆΓ − Γ⟩F
+ = OΘ,P (max{N, T}) ,
+which implies
+⟨W · (ˆγ − γ), ˆΓ − Γ⟩F
+ = OΘ,P (max{N, T})
+and completes the proof.
+Lemma 13. Suppose that the hypotheses of Lemma 12 are satisfied. Suppose, in addition,
+that the following conditions hold:
+(i) for any collections of weights {ωit}1≤i≤N,1≤t≤T , which are non-random conditional on
+W and Γ, such that |ωit| ≤ω a.s. for all W and Γ and for all i, t, N , and T , we have
+1
+N T
+NX
+i=1
+TX
+t=1
+ωitU 2
+it − 1
+N T
+NX
+i=1
+TX
+t=1
+ωitE
+
+U 2
+it|W, Γ
+
+= OΘ,P
+ 1√
+N T
+
+;
+(ii) for some σ2 > 0, E
+
+U 2
+it|W, Γ
+
+≥ σ2 a.s. for all i, t, N , and T ;
+(iii) Lind(A) ≤ cN,T and max{N, T} cN,T → 0.
+A.9
+
+[PDF PAGE 44]
+Then,
+PN
+i=1
+PT
+t=1 A2
+it ˆU 2
+itPN
+i=1
+PT
+t=1 A2
+itU 2
+it
+− 1 = oΘ,P (1),
+where ˆU is defined in Lemma 12.
+Proof. For simplicity of notation, we use P
+i,t ≡ PN
+i=1
+PT
+t=1 and max i,t ≡ max1≤i≤N,1≤t≤T
+throughout the proof.
+Notice that
+P
+i,t A2
+it ˆU 2
+itP
+i,t A2
+itU 2
+it
+− 1 =
+P
+i,t A2
+it
+
+ˆU 2
+it − U 2
+it
+
+P
+i,t A2
+itU 2
+it
+=
+P
+i,t A2
+it
+
+ˆUit − Uit
+ 
+ˆUit − Uit + 2Uit
+
+P
+i,t A2
+itU 2
+it
+=
+P
+i,t A2
+it
+
+ˆUit − Uit
+2
+P
+i,t A2
+itU 2
+it
++
+2 P
+i,t A2
+itUit
+
+ˆUit − Uit
+
+P
+i,t A2
+itU 2
+it
+. (26)
+The first term in (26) can be bounded as
+P
+i,t A2
+it
+
+ˆUit − Uit
+2
+P
+i,t A2
+itU 2
+it
+≤
+maxi,t A2
+it
+ ˆU − U
+
+2
+FP
+i,t A2
+itU 2
+it
+,
+and and the second term in (26) can be bounded as
+P
+i,t A2
+itUit
+
+ˆUit − Uit
+
+P
+i,t A2
+itU 2
+it
+≤
+P
+i,t A4
+itU 2
+it
+1/2 P
+i,t
+
+ˆUit − Uit
+21/2
+P
+i,t A2
+itU 2
+it
+≤
+vuuut maxi,t A2
+it
+ ˆU − U
+
+2
+FP
+i,t A2
+itU 2
+it
+,
+where the first inequality follows from the Cauchy-Schwarz inequality.
+Hence, to complete the proof, it is sufficient to demonstrate
+maxi,t A2
+it
+ ˆU − U
+
+2
+FP
+i,t A2
+itU 2
+it
+= oΘ,P (1).
+Next, notice that
+1
+N T
+X
+i,t
+A2
+it
+maxi,t A2
+it
+U 2
+it = 1
+N T
+X
+i,t
+A2
+it
+maxi,t A2
+it
+E
+
+U 2
+it|W, Γ
+
++ OΘ,P
+ 1√
+N T
+
+A.10
+
+[PDF PAGE 45]
+≥ σ2
+N TLind(A) + OΘ,P
+ 1√
+N T
+
+≥ σ2
+N T cN,T
++ OΘ,P
+ 1√
+N T
+
+>Θ,P 0,
+where we used condition (i), (ii), and (iii) consequently, and the last inequality (which holds
+holds wpa1 uniformly) is ensured by condition (iii).
+Then
+maxi,t A2
+it
+ ˆU − U
+
+2
+FP
+i,t A2
+itU 2
+it
+=
+1
+N T
+ ˆU − U
+
+2
+F
+1
+N T
+P
+i,t
+A2
+it
+maxi,t A2
+it
+U 2
+it
+≤
+cN,T
+ ˆU − U
+
+2
+F
+σ2 + OΘ,P
+√
+N T cN,T
+
+≤
+cN,T
+ ˆU − U
+
+2
+F
+σ2 + oΘ,P (1)
+= oΘ,P (1),
+where the last inequality uses condition (iii), and the last equality follows from
+ ˆU − U
+
+2
+F
+=
+OΘ,P (max{N, T}) (the result of Lemma 12) and condition (iii). This completes the proof.
+Lemma 14. Condition (i) of Lemma 13 holds under Assumption 4.
+Proof. The quantity in condition (i) of Lemma 13 has mean zero and variance conditional on
+W, Γ bounded by
+ω2
+(N T)2
+NX
+i=1
+TX
+t=1
+EP [U 4
+i |W, Γ] ≤ ω2/η
+N T.
+This gives the OΘ,P (1/
+√
+N T) rate as claimed.
+Lemma 15. Suppose that the hypotheses of Lemma 13 are satisfied, and that Assumption 4
+holds. Then ⟨A, U⟩F / bse d→
+Θ,P
+N (0, 1).
+Proof of Lemma 15. First, we verify
+P
+i,t A2
+itU 2
+itP
+i,t A2
+itσ2
+it
+− 1 = oΘ,P (1).
+Here σ2
+it ≡ σ2
+it(W, Γ) = E[U 2
+it|W, Γ], where we drop the dependence of σ2
+it(W, Γ) on W and Γ
+A.11
+
+[PDF PAGE 46]
+for brevity of notation. Notice that
+P
+i,t A2
+itU 2
+itP
+i,t A2
+itσ2
+it
+− 1 =
+√
+N Tmaxi,t A2
+itP
+i,t A2
+itσ2
+it| {z }
+→
+Θ,P
+0
+1√
+N T
+X
+i,t
+A2
+it
+maxi,t A2
+it
+(U 2
+it − σ2
+it)
+| {z }
+OΘ,P (1)
+= oΘ,P (1),
+where the first factor (uniformly) converges to zero due to conditions (ii) and (iii) of Lemma
+13, and the second factor is (uniformly) bounded in probability due to condition (i) of Lemma
+13. Combining this result with the result of Lemma 13, we obtain
+s P
+it A2
+it ˆU 2
+itP
+it A2
+itσ2
+it
+− 1 = oΘ,P (1). (27)
+Second, we demonstrate
+P
+i,t AitUit
+qP
+i,t A2
+itσ2
+it
+d→
+Θ,P
+N (0, 1). (28)
+Let Qit = AitUit/
+qP
+i,t A2
+itσ2
+it and SN,T = P
+i,t Qit. Following the lines of the proof of Lemma
+F.1 in Armstrong and Koles´ ar (2018) (and using Assumption 4 and conditions (ii) and (iii) of
+Lemma 13), we conclude that for all sequences of W = WN,T and Γ = Γ N,T we have for any
+fixed ε >0
+X
+i,t
+E
+
+Q2
+it1 {|Qit| > ε}|W, Γ
+
+→
+Θ,P
+0. (29)
+Note that (29) is a uniform version of the Lindeberg condition (applied conditional on W and
+Γ). Hence, following the lines of the proof of the Lindeberg CLT (see, for example, Theorem
+27.2 and its proof in Billingsley, 1995), we establish that, for any fixed t ∈ R,
+E
+
+eiSN,T t|W, Γ
+
+− e−t2/2
+ ⩽
+Θ,P
+rN,T a.s.
+for some rN,T ↓ 0. Hence, we also have
+E
+
+eiSN,T t
+− e−t2/2
+ →
+Θ,P
+0,
+which implies SN,T
+d→
+Θ,P
+N (0, 1) and verifies (28). (27) and (28) together deliver the result.
+A.12
+
+[PDF PAGE 47]
+A.5.2 V erification of (25)
+Using (27), we have
+⟨A, PλU ⟩F
+bse = ⟨A, PλU ⟩FqP
+i,t A2
+itσ2
+it
+(1 + oΘ,P (1)),
+so it is sufficient to show that
+⟨A, PλU ⟩FqP
+i,t A2
+itσ2
+it
+= oΘ,P (1). (30)
+Before we proceed notice that since the low rank representation Γ = λ′f is arbitrary (even
+though it is not unique), we can proceed with any compatible mapping λ = λ(Γ) and make λ
+non-random conditional on Γ.
+First, we bound var P (⟨A, PλU ⟩F |W, Γ). Note that
+varP (⟨A, PλU ⟩F |W, Γ) = varP (⟨PλA, U⟩F |W, Γ)
+=
+NX
+i=1
+TX
+t=1
+EP [(PλA)2
+itU 2
+it|W, Γ]
+≤ σ2 ∥PλA∥2
+F ,
+where σ2 is a uniform upper bound on EP [U 2
+it|W, Γ]. Thus,
+varP
+
+ ⟨A, PλU ⟩FqP
+i,t A2
+itσ2
+it
+W, Γ
+
+ ≤ σ2
+σ2
+∥PλA∥2
+F
+∥A∥2
+F
+.
+Note that to complete the proof it is sufficient to show that
+∥PλA∥2
+F
+∥A∥2
+F
+→
+Θ,P
+0
+because then (30) will follow Chebyshev’s inequality.
+Since rank (Pλ) ≤ R, we have
+∥PλA∥2
+F
+∥A∥2
+F
+≤ Rs1(PλA)2
+∥A∥2
+F
+≤ Rs1(A)2
+∥A∥2
+F
+. (31)
+Since A = A∗
+b∗,c, according to (18), we also have
+s1(A)2 ≤ OΘ,P (max{N, T}/(N T)2), (32)
+where we also used b∗2 ∝ max{N, T}.
+A.13
+
+[PDF PAGE 48]
+Next, we also want to bound ∥A∥2
+F from below. Consider the following minimization
+problem
+min
+A
+∥A∥2
+F s.t. ⟨A, X⟩F = 1.
+Notice that by the Gauss-Markov theorem the solution is given by AGM = X/ ∥X∥2
+F . Since
+the constructed A = A∗
+b∗,c also needs to satisfy the constraint ⟨A, X⟩F = 1, we also have
+∥A∥2
+F ≥ ∥AGM∥2
+F = 1/ ∥X∥2
+F . Combining this with (31) and (32), we obtain
+∥PλA∥2
+F
+∥A∥2
+F
+≤ Rs1(A) ∥X∥2
+F = OΘ,P (1/ min{N, T}),
+where we used ∥X∥2
+F = OΘ,P (N T), which follows from Assumptions 3(i)-(iii). This completes
+the proof.
+A.6 Proof of Theorem 5
+To prove Theorem 5, we first state and prove an auxiliary lemma in Section A.6.1 below. In
+Section A.6.2, we then prove the final results.
+A.6.1 Auxiliary Lemma
+Lemma 16. Let A, λ, f be N × T , N × R, and T × R matrices, respectively. Assume that
+the matrices PλAPf , λ, and f all have rank equal to R. Then we have
+rank(A) = R ⇐ ⇒ MλAMf = (MλAPf ) (PλAPf )+ (PλAMf ).
+Notice that (MλAPf ) (PλAPf )+ (PλAMf ) in the statement of the lemma can equivalently
+be written as MλA (PλAPf )+ AMf , because ( PλAPf )+ = Pf (PλAPf )+ Pλ.
+Proof. First, consider the special case
+λ =
+ IR
+0(N −R)×R
+
+, f =
+ IR
+0(T −R)×R
+
+. (33)
+In that case, let [PλAPf ]# = λ′Af be the non-zero R×R block of the N ×T matrix PλAPf , and
+analogously, let [MλAPf ]#, [PλAMf ]#, [MλAMf ]# be the non-zero (N − R) × R, R × (T − R),
+(N − R) × (T − R) blocks of the N × T matrices MλAPf , PλAMf , MλAMf , respectively.
+With those definitions we have
+A =
+ 
+[PλAPf ]# [PλAMf ]#
+[MλAPf ]# [MλAMf ]#
+!
+A.14
+
+[PDF PAGE 49]
+For any i = 1 , . . . , N− R and t = 1 , . . . , T− R, we now construct an ( R + 1) × (R + 1)
+submatrix of this matrix as follows
+ 
+[PλAPf ]# [PλAMf ]# et
+e′
+i [MλAPf ]# e′
+i [MλAMf ]# et
+!
+where ek refers to the k’th standard basis vector of appropriate dimension. The determinant
+of this submatrix is given by
+det([PλAPf ]#)
+h
+e′
+i [MλAMf ]# et − e′
+i [MλAPf ]# ([PλAPf ]#)−1 [PλAMf ]# et
+i
+= 0.
+If this determinant is zero for any such ( R + 1) × (R + 1) submatrix, then we can conclude
+that rank( A) ≤ R, which together with our assumption rank( PλAPf ) = R implies that
+rank(A) = R. Conversely, if rank(A) = R, then the determinant of any such (R + 1)× (R + 1)
+submatrix needs to be zero.
+The assumption rank( PλAPf ) = R guarantees that det([ PλAPf ]#) ̸= 0. Thus, we have
+rank(A) = R if and only if
+e′
+i
+h
+[MλAMf ]# − [MλAPf ]# ([PλAPf ]#)−1 [PλAMf ]#
+i
+et = 0.
+for all i = 1, . . . , N− R and t = 1, . . . , T− R. This can equivalently be written as
+[MλAMf ]# = [MλAPf ]# ([PλAPf ]#)−1 [PλAMf ]#,
+or equivalently
+MλAMf = MλAPf (PλAPf )+ PλAMf .
+We have thus shown the lemma for the special case that λ and f are of the form (33).
+For any other λ and f that have full rank R (as assumed in the lemma) we can choose an
+orthogonal N × N matrix O1 and an orthogonal T × T matrix O2 such that O1λ =
+ IR
+0(N −R)×R
+
+and O2f =
+ IR
+0(T −R)×R
+
+. By applying the result already proven to the transformed data O1AO′
+2,
+O1λ, O2f we then obtain the result of the lemma more generally, because the statement of
+the lemma is invariant under such orthogonal transformations.
+A.6.2 Proof of Theorem 5
+First, let ˆU := U − W · (ˆγpre − γ) and notice that we have
+s1( ˆU ) = s1(U ) + oΘ,P (max{
+√
+N ,
+√
+T }) = s1(U )(1 + oΘ,P (1)) ≍Θ,P max{
+√
+N ,
+√
+T }, (34)
+A.15
+
+[PDF PAGE 50]
+where we used Assumption 2(ii) and Lemma 10. Together with the hypothesis of the theorem
+it implies that
+s1( ˆU )
+sR(Γ) = oΘ,P (1). (35)
+This condition implies that sR(Γ) ̸= 0, which together with our assumption rank(Γ) ≤ R
+implies that rank(Γ) = R. Since Γ = λf ′, this also implies that the rank of both λ and f is
+equal to R as well.
+Next, define
+Γ† := Γ + Mλ ˆU Pf + Pλ ˆU Mf + Mλ ˆU Γ+ ˆU Mf .
+Using Lemma 16 and that Γ = PλΓPf , we conclude that
+rank
+
+Γ†
+
+= R.
+Our first goal in the following is to derive a bound on ∥bΓpre − Γ†∥∗. Denote
+Q(G) := ∥Y − W · ˆγpre − G∥2
+F =
+ ˆU + Γ − G
+
+2
+F
+.
+Then
+Q(Γ†) =
+ ˆU + Γ − Γ†
+
+2
+F
+=
+ ˆU − Mλ ˆU Pf − Pλ ˆU Mf − Mλ ˆU Γ+U Mf
+
+2
+F
+=
+Pλ ˆU Pf + Mλ ˆU Mf − Mλ ˆU Γ+ ˆU Mf
+
+2
+F
+=
+Mλ ˆU Mf − Mλ ˆU Γ+ ˆU Mf
+
+2
+F
++
+Pλ ˆU Pf
+
+2
+F
+=
+Mλ ˆU Mf
+
+2
+F
+− 2Tr
+
+Mf ˆU ′Mλ ˆU Γ+ ˆU Mλ
+
++
+Mλ ˆU Γ+U Mf
+
+2
+F
++
+Pλ ˆU Pf
+
+2
+F
+,
+where in the last step we used that ∥A + B∥2
+F = Tr((A + B)′(A + B)) = ∥A∥2
+F + 2Tr(A′B) +
+∥B∥2
+F . Furthermore, using
+Mλ ˆU Γ+ ˆU Mf
+
+F
+≤ R s1(Mλ ˆU Γ+ ˆU Mf ) ≤ R [s1( ˆU )]2s1(Γ+) = R [s1( ˆU )]2
+sR(Γ) , (36)
+and11
+Tr
+
+Mf ˆU ′Mλ ˆU Γ+ ˆU
+ ≤ R s1(Mf ˆU ′Mλ ˆU Γ+ ˆU )
+11Here, we applied the general inequality |Tr(A)| ≤rank(A) s1(A), which is an immediate consequence of
+von Neumann’s trace inequality, with A = Mf ˆU ′Mλ ˆU Γ+ ˆU , where rank( A) ≤ rank(Γ+) = R.
+A.16
+
+[PDF PAGE 51]
+≤ R [s1( ˆU )]3 s1(Γ+) = R [s1( ˆU )]3
+sR(Γ) , (37)
+we thus obtain
+Q(Γ†) ≤
+Mλ ˆU Mf
+
+2
+F
++
+Pλ ˆU Pf
+
+2
+F
++ OΘ,P
+(
+[s1( ˆU )]4
+[sR(Γ)]2 + [s1( ˆU )]3
+sR(Γ)
+)
+=
+Mλ ˆU Mf
+
+2
+F
++
+Pλ ˆU Pf
+
+2
+F
++ oΘ,P
+h
+(s1( ˆU ))2
+i
+. (38)
+where in the last step we used (35).
+Next, for any N × T matrix G we have
+Q(G) =
+G − Γ − ˆU
+
+2
+F
+=
+Pλ
+
+G − Γ − ˆU
+
+Pf
+
+2
+F
++
+Pλ
+
+G − ˆU
+
+Mf
+
+2
+F
++
+Mλ
+
+G − ˆU
+
+Pf
+
+2
+F
++
+Mλ
+
+G − ˆU
+
+Mf
+
+2
+F
+,
+where we used that MλΓ = 0 and Γ Mf = 0. In particular, we have
+Q(bΓpre) =
+Pλ
+
+bΓpre − Γ − ˆU
+
+Pf
+
+2
+F
++
+Pλ
+
+bΓpre − ˆU
+
+Mf
+
+2
+F
++
+Mλ
+
+bΓpre − ˆU
+
+Pf
+
+2
+F
++
+Mλ
+
+bΓpre − ˆU
+
+Mf
+
+2
+F
+.
+We have
+Mλ
+
+bΓpre − ˆU
+
+Mf
+
+2
+F
+=
+Mλ ˆU Mf − MλbΓpreMf
+
+2
+F
+≥ argmin
+{G : rank(G)≤R}
+Mλ ˆU Mf − G
+
+2
+F
+=
+Mλ ˆU Mf
+
+2
+F
+−
+RX
+r=1
+[sr(Mλ ˆU Mf )]2
+≥
+Mλ ˆU Mf
+
+2
+F
+− R[s1( ˆU )]2,
+where for the first inequality we used that MλbΓpreMf is a matrix of rank at most R, that is,
+minimizing over all such matrices can only make the expression smaller, and in the next step
+we used that the solution to this least squares minimization problem over {G : rank( G) ≤ R}
+is given by the principal components of Mλ ˆU Mf . We thus obtain that
+Q(bΓpre) ≥
+Pλ
+
+bΓpre − Γ
+
+Pf − Pλ ˆU Pf
+
+2
+F
++
+Pλ
+
+bΓpre − ˆU
+
+Mf
+
+2
+F
++
+Mλ
+
+bΓpre − ˆU
+
+Pf
+
+2
+F
++
+Mλ ˆU Mf
+
+2
+F
+− R[sr( ˆU )]2. (39)
+A.17
+
+[PDF PAGE 52]
+Since bΓpre minimizes Q(G) over all rank ≤ R matrices, and rank
+
+Γ†
+= R, we know that
+Q(bΓpre) ≤ Q(Γ†). Combining (38) and (39) we thus obtain that
+Pλ
+
+bΓpre − Γ
+
+Pf − Pλ ˆU Pf
+
+2
+F
++
+Pλ
+
+bΓpre − ˆU
+
+Mf
+
+2
+F
++
+Mλ
+
+bΓpre − ˆU
+
+Pf
+
+2
+F
+≤ R[s1( ˆU )]2 + oΘ,P
+h
+(s1( ˆU ))2
+i
++
+Pλ ˆU Pf
+
+2
+F
+= OΘ,P ([s1( ˆU )]2).
+Since all three terms on the lhs are positive, this implies separately for each of them
+Pλ
+
+bΓpre − Γ
+
+Pf
+
+F
+≤
+Pλ
+
+bΓpre − Γ
+
+Pf − Pλ ˆU Pf
+
+F
++
+Pλ ˆU Pf
+
+F
+= OΘ,P (s1( ˆU )),
+PλbΓpreMf
+
+F
+= OΘ,P (s1( ˆU )),
+MλbΓprePf
+
+F
+= OΘ,P (s1( ˆU )). (40)
+The first result in the last display implies
+s1
+
+PλbΓprePf − Γ
+
+≤
+Pλ
+
+bΓpre − Γ
+
+Pf
+
+F
+= OΘ,P (s1( ˆU )),
+and by Weyl inequality for singular values we thus find that
+sR
+
+PλbΓprePf
+
+≥ sR (Γ) − s1
+
+PλbΓprePf − Γ
+
+≥ sR (Γ) − OΘ,P (s1( ˆU ))
+≥ 0, wpa1, (41)
+where in the last step we used (35) again. We thus have, wpa1, that PλbΓprePf has rank equal
+to R, and by applying Lemma 16 we thus find
+MλbΓpreMf = (MλbΓprePf )
+
+PλbΓprePf
++
+(PλbΓpreMf ).
+Together with the bounds in (40) and (41) and (35) this implies that
+MλbΓpreMf
+
+F
+≤ R s1(MλbΓpreMf )
+≤ R s1(MλbΓprePf ) s1(PλbΓpreMf )
+sR(PλbΓprePf )
+= OΘ,P
+ 
+[s1( ˆU )]2
+sR(Γ)
+!
+. (42)
+A.18
+
+[PDF PAGE 53]
+We can now improve on the lower bound in Q(bΓpre) in (39). As before, we have
+Q(bΓpre) =
+Pλ
+
+bΓpre − Γ − ˆU
+
+Pf
+
+2
+F
++
+Pλ
+
+bΓpre − ˆU
+
+Mf
+
+2
+F
++
+Mλ
+
+bΓpre − ˆU
+
+Pf
+
+2
+F
++
+Mλ
+
+bΓpre − ˆU
+
+Mf
+
+2
+F
+.
+Similarly, using the definition of Γ † we obtain
+bΓpre − Γ† − Pλ ˆU Pf
+
+2
+F
+=
+Pλ
+
+bΓpre − Γ − ˆU
+
+Pf
+
+2
+F
++
+Pλ
+
+bΓpre − ˆU
+
+Mf
+
+2
+F
++
+Mλ
+
+bΓpre − ˆU
+
+Pf
+
+2
+F
++
+Mλ
+
+bΓpre − Mλ ˆU Γ+ ˆU Mf
+
+Mf
+
+2
+F
+.
+Taking the difference of the equalities in the last two displays we obtain
+Q(bΓpre)−
+bΓpre − Γ† − Pλ ˆU Pf
+
+2
+F
+=
+Mλ
+
+bΓpre − ˆU
+
+Mf
+
+2
+F
+−
+Mλ
+
+bΓpre − Mλ ˆU Γ† ˆU Mf
+
+Mf
+
+2
+F
+=
+Mλ
+
+bΓpre − ˆU
+
+Mf
+
+2
+F
++ OΘ,P
+ 
+[s1( ˆU )]4
+[sR(Γ)]2
+!
+=
+Mλ ˆU Mf
+
+2
+F
+− 2Tr(ˆU ′MλbΓpreMf ) + OΘ,P
+ 
+[s1( ˆU )]4
+[sR(Γ)]2
+!
+≥
+Mλ ˆU Mf
+
+2
+F
+− 2Rs1( ˆU )s1(MλbΓpreMf ) + OΘ,P
+ 
+[s1( ˆU )]4
+[sR(Γ)]2
+!
+=
+Mλ ˆU Mf
+
+2
+F
++ OΘ,P
+ 
+[s1( ˆU )]3
+sR(Γ)
+!
++ OΘ,P
+ 
+[s1( ˆU )]4
+[sR(Γ)]2
+!
+=
+Mλ ˆU Mf
+
+2
+F
++ oΘ,P
+h
+s1( ˆU )
+i2
+,
+where we used (42) and (36), the trace term was bounded analogously to (37), and in the
+final step we also used (35). Again using that Q(bΓpre) ≤ Q(Γ†) and (38) we now obtain
+bΓpre − Γ† − Pλ ˆU Pf
+
+2
+F
+≤ oΘ,P
+h
+s1( ˆU )
+i2
++
+Pλ ˆU Pf
+
+2
+F
+. (43)
+Our next step is to bound ∥Pλ ˆU Pf ∥F . Note that, using Assumption 4,
+E
+h
+∥PλU Pf ∥2
+F |Γ
+i
+= E
+
+vec(PλU Pf )′vec(PλU Pf )|Γ
+
+= E
+
+Tr
+
+vec(PλU Pf )vec(PλU Pf )′
+|Γ
+
+= Tr
+h
+(Pf ⊗ Pλ) E
+
+vec(U )vec(U )′|Γ
+
+| {z }
+≤σ2IN T
+(Pf ⊗ Pλ)
+i
+≤ σ2Tr [Pf ⊗ Pλ]
+A.19
+
+[PDF PAGE 54]
+= σ2Tr(Pf )Tr(Pλ)
+= σ2R2
+for some σ2 > 0 for all Γ. Hence, we also have
+E
+h
+∥PλU Pf ∥2
+F
+i
+≤ σ2R2,
+and, using Markov’s inequality we conclude ∥PλU Pf ∥2
+F = OΘ,P (1). Finally, using Assump-
+tion 3 and Lemma 10, we obtain
+∥Pλ ˆU Pf ∥F ≤ ∥PλU Pf ∥F + ∥W · (ˆγpre − γ)∥F = oΘ,P (max{
+√
+N ,
+√
+T }).
+Combining this result with (43), we obtain
+bΓpre − Γ†
+
+F
+≤
+bΓpre − Γ† − Pλ ˆU Pf
+
+F
++
+Pλ ˆU Pf
+
+= oΘ,P (s1(U )) ,
+where the last equality also uses (34).
+Since ∥A∥∗ ≤
+p
+rank(A) ∥A∥F , this also implies that
+bΓpre − Γ†
+
+∗
+= oΘ,P (s1(U )) = oΘ,P (max{
+√
+N ,
+√
+T }).
+We have thus shown that
+eΓ − Mλ ˆU Γ+ ˆU Mf
+
+∗
+= oΘ,P (max{
+√
+N ,
+√
+T }),
+which implies
+eΓ
+
+∗
+=
+Mλ ˆU Γ+ ˆU Mf
+
+∗
++ oΘ,P (max{
+√
+N ,
+√
+T })
+=
+√
+R
+Mλ ˆU Γ+ ˆU Mf
+
+F
++ oΘ,P (max{
+√
+N ,
+√
+T })
+= oΘ,P (max{
+√
+N ,
+√
+T }),
+where in the last step we used (36), (35), and (34) again. This completes the proof.
+A.7 Verification of Assumption 2 (i)
+In this section, we verify that, in the absence of Z, Assumption 3(i) and (ii) imply Assump-
+tion 2(i). Thus, our goal in this section is to prove that
+1
+N T
+min{N,T }X
+r=2R+1
+s2
+r(X) ≥ s2 > 0, (44)
+A.20
+
+[PDF PAGE 55]
+with probability approaching one.
+By the variational principle for eigenvalues, we have
+2RX
+r=1
+s2
+r(X) =
+2RX
+r=1
+λr(X ′X) = max
+Q∈RT ×2R
+Tr(X ′X PQ),
+where PQ is the projection matrix onto the subspace spanned by the columns of Q. Using
+this and Tr(X ′X) = Pmin{N,T }
+r=1 s2
+r(X), we obtain
+1
+N T
+min{N,T }X
+r=2R+1
+s2
+r(X) = 1
+N TTr(X ′X) − 1
+N T max
+Q∈RT ×2R
+Tr(X ′X PQ).
+Using X = H + V , where H and V are as defined in Assumption 3, and substituting into the
+above, we obtain:
+1
+N T
+min{N,T }X
+r=2R+1
+s2
+r(X) ≥ 1
+N TTr(H ′H) − 1
+N T max
+Q∈RT ×2R
+Tr(H PQ H ′)
++ 1
+N TTr(V ′V ) − 1
+N T max
+Q∈RT ×2R
+Tr(V PQ V ′)
++ 2 Tr(V ′H)
+N T − 2
+N T max
+Q∈RT ×2R
+Tr(V PQ H ′).
+For the three lines on the right-hand side we have
+1
+N TTr(H ′H) − 1
+N T max
+Q∈RT ×2R
+Tr(H PQ H ′) = 1
+N T
+min{N,T }X
+r=2R+1
+s2
+r(H) ≥ 0,
+1
+N TTr(V ′V ) − 1
+N T max
+Q∈RT ×2R
+Tr(V PQ V ′) ≥ 1
+N T∥V ∥2
+F − 2R [s1(V )]2
+N T ,
+2 Tr(V ′H)
+N T − 2
+N T max
+Q∈RT ×2R
+Tr(V PQ H ′) ≥ 2 Tr(V ′H)
+N T − 4R s1(H)s1(V )
+N T ,
+and therefore
+1
+N T
+min{N,T }X
+r=2R+1
+s2
+r(X) ≥ 1
+N T∥V ∥2
+F + 2 Tr(V ′H)
+N T − 4R s1(H)s1(V )
+N T − 2R [s1(V )]2
+N T
+= 1
+N T∥V ∥2
+F + oΘ,P (1)
+≍Θ,P 1,
+we in the last two steps we used Assumption 3(i) and (ii), as well as s1(H) ≤ ∥H∥F . This
+confirms that (44) holds.
+More generally, if in addition, each of the other regressors Zk, k = 1 , . . . , K, can be
+A.21
+
+[PDF PAGE 56]
+decomposed as Vk + Hk such that Assumption 3(i) and (ii) holds equally for Vk and Hk, and
+the K + 1 vector Vvec,it that combines Vit and Vk,it satisfies the standard non-collinearity
+condition
+plim
+N,T →∞
+1
+N T
+NX
+i=1
+TX
+t=1
+Vvec,itV ′
+vec,it > 0,
+then by the same arguments as for K = 0 above, the Assumption 2(i) holds for general K.
+B Computational details
+The optimal weights A∗
+b given in Definition 2.2 can be computed directly using convex pro-
+gramming. Alternatively, we can obtain these weights from a nuclear norm regularized “par-
+tialling out” regression of X on Z and a matrix of individual effects. This follows by applying
+a result from Armstrong, Koles´ ar and Kwon (2020) to our setting, as we now describe. We
+first consider the general case with covariates (Section B.1), and then obtain a further sim-
+plification by specializing to the case with no additional covariates Z.
+B.1 General case
+The weights A∗
+b minimize
+
+bias ˆC( ˆβA)
+2
++ σ2∥A∥2
+F when ˆC/σ = b. Equivalently, we can
+minimize σ2∥A∥2
+F subject to a bound on bias ˆC( ˆβA):
+min
+A
+σ2∥A∥2
+F s.t. bias ˆC( ˆβA) ≤ B. (45)
+We can then vary the bound B to optimize any increasing function of the variance σ2∥A∥2
+F
+and worst-case bias bias ˆC( ˆβA).
+Let Π∗
+µ, ψ∗
+µ solve the nuclear norm regularized regression
+min
+Π,ψ
+∥X − Z · ψ − Π∥2
+F /2 + µ∥Π∥∗ (46)
+where µ indexes the penalty on the nuclear norm. Let
+Ω∗
+µ = X − Z · ψ∗
+µ − Π∗
+µ (47)
+denote the matrix of residuals from this regression. Let
+ˆβ ˜A∗µ
+= ⟨ ˜A∗
+µ, eY ⟩F = ⟨Ω∗
+µ, eY ⟩F
+⟨Ω∗µ, X⟩F
+where ˜A∗
+µ = Ω∗
+µ
+⟨Ω∗µ, X⟩F
+(48)
+and let
+Bµ = 1
+∥Π∗µ∥ ∗
+⟨Ω∗
+µ, Π∗
+µ⟩F
+⟨Ω∗µ, X⟩F
+and Vµ = σ2 ∥Ω∗
+µ∥2
+F
+⟨Ω∗µ, X⟩2
+F
+. (49)
+A.22
+
+[PDF PAGE 57]
+The following theorem follows immediately from applying Theorem 2.1 in Armstrong,
+Koles´ ar and Kwon (2020) to our setup (in applying the formulas from this paper, we use the
+fact that ⟨Ω∗
+µ, Z· ψ∗
+µ⟩F = 0 by the first order conditions for ψ, since ψ is unconstrained).
+Theorem 17. Let Π∗
+µ, ψ∗
+µ be a solution to (46) and let Ω∗
+µ be the matrix of residuals in (47),
+and suppose ∥Ω∗
+µ∥ > 0. Then ˜A∗
+µ and the corresponding estimator ˆβ ˜A∗µ
+given in (48) solve
+(45) for B = ˆCBµ, with minimized value Vµ, where Bµ and Vµ are given in (49).
+Thus, to compute the MSE optimizing weights A∗
+b , it suffices to compute the weights ˜A∗
+µ
+for each µ >0, and then minimize ˆC2B
+2
+µ + Vµ over the one-dimensional parameter µ. We can
+also minimize other criteria, as in Remark 2.3 by choosing µ to minimize other functions of
+worst-case bias ˆCBµ and variance Vµ.
+B.2 No additional covariates
+In the case where there are no additional covariates, the nuclear norm regularized “partialling
+out” regression (46) reduces to
+min
+Π
+∥X − Π∥2
+F /2 + µ∥Π∥∗. (50)
+The solution Π∗
+µ can then be computed using soft thresholding on the singular values ofX. We
+describe the solution here, and refer to Moon and Weidner (2018, Lemma S.1) for a detailed
+derivation.
+Let the singular value decomposition of X be given by X = VX SX W ′
+X where VX is
+an N × N orthogonal matrix (i.e. V ′
+X VX = IN ), WX is a T × T orthogonal matrix (i.e.
+W ′
+X WX = IT ) and SX is a N × T rectangular diagonal matrix, with j-th diagonal element
+given by the j-th singular value sj(X) of X. Let ˜SX (µ) be the N × T diagonal matrix with
+j-th diagonal element given by max {sj(X) − µ, 0} (i.e. we perform soft thresholding on the
+j-th singular value).
+Then the solution Π ∗
+µ to (50) and residuals Ω ∗
+µ = X − Π∗
+µ are given by
+Π∗
+µ = VX ˜SX (µ)W ′
+X , Ω∗
+µ = VX (SX − ˜SX (µ))W ′
+X ,
+Note that SX − ˜SX (µ) is a N × T diagonal matrix with j-th diagonal element given by
+min{sj(X), µ}. Thus, the weights ˜A∗
+µ = Ω ∗
+µ/⟨Ω∗
+µ, X⟩F used in the estimator ˆβ = ⟨ ˜A∗
+µ, ˜Y ⟩F
+given in (48) can be obtained by replacing the singular values sj(X) that are larger than µ
+with the constant µ, and then dividing by the constant ⟨Ω∗
+µ, X⟩F = ⟨SX − ˜SX (µ), SX ⟩F =Pmin{N,T }
+j=1 min{sj(X), µ}sj(X).
+A.23
+
+[PDF PAGE 58]
+C Additional Numerical Results
+C.1 Additional simulation results for Section 5.1
+In this section, we provide additional simulation results for the numerical experiment described
+in Section 5.1. For brevity, here we only report results for R = 1. Tables 6 and 7 report the
+same statistics as Table 1 in the main text but for smaller and bigger samples sizes N = 50
+and N = 300, respectively. The results are similar to the ones presented in Section 5.1. We
+find that, when there is a weak factor, our method effectively reduces the bias and improves
+estimation precision in smaller sample sizes too, i.e., also for N = 50. The gains from using
+our method are even more considerable for N = 300, which is consistent with our estimator
+having a faster rate of convergence than the LS estimator.
+A.24
+
+[PDF PAGE 59]
+Table 6: Simulation results for the experiment in Section 5.1, N = 50, R = 1
+LS Debiased
+κ bias std rmse size length length* bias std rmse size length length*
+T = 20
+0.00 -0.0006 0.0242 0.0242 7.4 0.086 0.348 -0.0007 0.0300 0.0300 0.0 0.364 0.184
+0.05 0.0233 0.0249 0.0340 22.5 0.087 0.349 0.0088 0.0302 0.0314 0.0 0.364 0.184
+0.10 0.0466 0.0268 0.0538 56.5 0.087 0.351 0.0177 0.0310 0.0357 0.0 0.365 0.185
+0.15 0.0683 0.0309 0.0750 78.5 0.089 0.357 0.0252 0.0327 0.0413 0.0 0.367 0.186
+0.20 0.0847 0.0401 0.0937 83.8 0.091 0.368 0.0293 0.0361 0.0465 0.0 0.370 0.186
+0.25 0.0879 0.0555 0.1040 76.0 0.097 0.390 0.0281 0.0406 0.0494 0.0 0.372 0.187
+0.50 0.0115 0.0398 0.0414 12.1 0.122 0.493 0.0025 0.0359 0.0360 0.0 0.380 0.189
+1.00 0.0004 0.0330 0.0330 6.1 0.124 0.499 -0.0006 0.0346 0.0346 0.0 0.381 0.189
+T = 50
+0.00 0.0003 0.0147 0.0147 6.0 0.055 0.279 -0.0001 0.0211 0.0211 0.0 0.230 0.118
+0.05 0.0247 0.0152 0.0290 44.0 0.055 0.280 0.0070 0.0212 0.0223 0.0 0.230 0.118
+0.10 0.0487 0.0169 0.0515 87.9 0.055 0.282 0.0134 0.0218 0.0256 0.0 0.231 0.118
+0.15 0.0703 0.0214 0.0734 95.9 0.056 0.287 0.0173 0.0238 0.0294 0.0 0.232 0.119
+0.20 0.0784 0.0368 0.0866 86.3 0.060 0.306 0.0158 0.0267 0.0310 0.0 0.234 0.119
+0.25 0.0583 0.0510 0.0774 59.2 0.068 0.344 0.0097 0.0273 0.0290 0.0 0.236 0.119
+0.50 0.0035 0.0207 0.0210 6.5 0.078 0.398 0.0003 0.0236 0.0236 0.0 0.237 0.120
+1.00 0.0003 0.0201 0.0201 5.0 0.078 0.399 -0.0003 0.0234 0.0234 0.0 0.237 0.120
+T = 100
+0.00 0.0002 0.0105 0.0105 6.0 0.039 0.229 -0.0001 0.0137 0.0137 0.0 0.173 0.080
+0.05 0.0247 0.0109 0.0270 68.4 0.039 0.229 0.0064 0.0138 0.0152 0.0 0.173 0.080
+0.10 0.0487 0.0124 0.0502 98.1 0.039 0.231 0.0120 0.0143 0.0187 0.0 0.174 0.080
+0.15 0.0684 0.0188 0.0709 97.3 0.040 0.238 0.0134 0.0165 0.0212 0.0 0.175 0.080
+0.20 0.0577 0.0390 0.0697 72.5 0.046 0.271 0.0082 0.0179 0.0197 0.0 0.177 0.081
+0.25 0.0225 0.0300 0.0375 33.9 0.053 0.310 0.0031 0.0164 0.0167 0.0 0.177 0.081
+0.50 0.0016 0.0145 0.0146 5.6 0.055 0.325 0.0001 0.0153 0.0153 0.0 0.177 0.081
+1.00 0.0001 0.0143 0.0143 5.1 0.055 0.326 -0.0001 0.0152 0.0152 0.0 0.177 0.081
+T = 300
+0.00 -0.0001 0.0059 0.0059 5.8 0.023 0.170 -0.0002 0.0077 0.0077 0.0 0.127 0.049
+0.05 0.0245 0.0066 0.0254 96.7 0.023 0.171 0.0060 0.0078 0.0098 0.0 0.127 0.049
+0.10 0.0481 0.0088 0.0489 99.8 0.023 0.173 0.0100 0.0089 0.0134 0.0 0.128 0.049
+0.15 0.0482 0.0271 0.0553 83.6 0.026 0.196 0.0059 0.0103 0.0119 0.0 0.129 0.049
+0.20 0.0117 0.0143 0.0185 33.3 0.031 0.234 0.0015 0.0090 0.0091 0.0 0.129 0.049
+0.25 0.0047 0.0093 0.0104 12.6 0.032 0.239 0.0006 0.0087 0.0087 0.0 0.129 0.049
+0.50 0.0004 0.0084 0.0085 5.6 0.032 0.241 -0.0001 0.0086 0.0086 0.0 0.129 0.049
+1.00 -0.0001 0.0084 0.0084 5.5 0.032 0.241 -0.0002 0.0086 0.0086 0.0 0.129 0.049
+Lind(A) ∈ {0.0109,0.0049,0.0028,0.0011} forT ∈ {20,50,100,300}. The results are based on 5,000 simulations.
+A.25
+
+[PDF PAGE 60]
+Table 7: Simulation results for the experiment in Section 5.1, N = 300, R = 1
+LS Debiased
+κ bias std rmse size length length* bias std rmse size length length*
+T = 20
+0.00 0.0001 0.0096 0.0096 6.4 0.036 0.219 0.0001 0.0115 0.0115 0.0 0.246 0.088
+0.05 0.0242 0.0106 0.0264 72.7 0.036 0.220 0.0091 0.0117 0.0148 0.0 0.246 0.088
+0.10 0.0474 0.0136 0.0493 96.6 0.036 0.223 0.0169 0.0127 0.0211 0.0 0.247 0.088
+0.15 0.0633 0.0235 0.0675 93.0 0.038 0.233 0.0192 0.0159 0.0249 0.0 0.249 0.088
+0.20 0.0475 0.0382 0.0610 65.4 0.044 0.267 0.0120 0.0182 0.0218 0.0 0.250 0.088
+0.25 0.0192 0.0276 0.0336 31.4 0.049 0.297 0.0047 0.0155 0.0162 0.0 0.251 0.088
+0.50 0.0015 0.0134 0.0135 6.3 0.051 0.310 0.0004 0.0134 0.0134 0.0 0.252 0.089
+1.00 0.0002 0.0132 0.0132 5.6 0.051 0.310 0.0001 0.0133 0.0133 0.0 0.252 0.089
+T = 50
+0.00 -0.0001 0.0060 0.0060 5.8 0.023 0.173 -0.0002 0.0078 0.0078 0.0 0.127 0.048
+0.05 0.0246 0.0067 0.0254 96.8 0.023 0.173 0.0060 0.0079 0.0099 0.0 0.127 0.048
+0.10 0.0482 0.0090 0.0490 99.8 0.023 0.175 0.0100 0.0090 0.0134 0.0 0.128 0.049
+0.15 0.0478 0.0272 0.0550 83.6 0.026 0.199 0.0058 0.0103 0.0118 0.0 0.129 0.049
+0.20 0.0117 0.0144 0.0186 32.5 0.031 0.237 0.0014 0.0090 0.0091 0.0 0.129 0.049
+0.25 0.0047 0.0093 0.0105 12.8 0.032 0.243 0.0005 0.0088 0.0088 0.0 0.129 0.049
+0.50 0.0004 0.0085 0.0085 5.7 0.032 0.245 -0.0001 0.0087 0.0087 0.0 0.129 0.049
+1.00 -0.0001 0.0084 0.0084 5.6 0.032 0.245 -0.0002 0.0086 0.0086 0.0 0.129 0.049
+T = 100
+0.00 0.0001 0.0041 0.0041 5.0 0.016 0.123 0.0001 0.0055 0.0055 0.0 0.080 0.033
+0.05 0.0248 0.0046 0.0253 100.0 0.016 0.123 0.0047 0.0056 0.0073 0.0 0.080 0.033
+0.10 0.0482 0.0071 0.0488 99.9 0.016 0.125 0.0056 0.0067 0.0088 0.0 0.080 0.033
+0.15 0.0178 0.0172 0.0248 61.1 0.021 0.163 0.0015 0.0063 0.0065 0.0 0.081 0.033
+0.20 0.0048 0.0064 0.0080 16.3 0.022 0.172 0.0006 0.0060 0.0061 0.0 0.081 0.033
+0.25 0.0024 0.0059 0.0064 7.6 0.023 0.173 0.0003 0.0060 0.0060 0.0 0.081 0.033
+0.50 0.0004 0.0057 0.0057 4.8 0.023 0.174 0.0001 0.0060 0.0060 0.0 0.081 0.033
+1.00 0.0001 0.0057 0.0057 4.9 0.023 0.174 0.0001 0.0060 0.0060 0.0 0.081 0.033
+T = 300
+0.00 -0.0000 0.0024 0.0024 5.5 0.009 0.105 -0.0001 0.0036 0.0036 0.0 0.043 0.018
+0.05 0.0249 0.0028 0.0250 100.0 0.009 0.106 0.0030 0.0037 0.0048 0.0 0.043 0.018
+0.10 0.0310 0.0169 0.0352 95.9 0.011 0.123 0.0011 0.0040 0.0042 0.0 0.043 0.018
+0.15 0.0036 0.0037 0.0051 21.8 0.013 0.148 0.0002 0.0039 0.0039 0.0 0.044 0.018
+0.20 0.0014 0.0034 0.0037 7.5 0.013 0.149 0.0001 0.0039 0.0039 0.0 0.044 0.018
+0.25 0.0007 0.0033 0.0034 5.2 0.013 0.149 -0.0000 0.0039 0.0039 0.0 0.044 0.018
+0.50 0.0000 0.0033 0.0033 4.5 0.013 0.149 -0.0000 0.0039 0.0039 0.0 0.044 0.018
+1.00 -0.0000 0.0033 0.0033 4.5 0.013 0.149 -0.0001 0.0039 0.0039 0.0 0.044 0.018
+Lind(A) ∈ {0.0025,0.0011,0.0006,0.0002} forT ∈ {20,50,100,300}. The results are based on 5,000 simulations.
+A.26
+
+[PDF PAGE 61]
+C.2 A design with an additional covariate and heteroskedastic serially cor-
+related errors
+Similarly to Section 5.1, we consider
+Yit = Xitβ + Zitδ + κλift + Uit,
+Xit = λift + V X
+it ,
+Zit = λift + V Z
+it ,
+where λi, ft, and ( V X
+it , VZ
+it ) are all mutually independent across i, t, and ( i, t), and
+λi ∼ N (0, 1) ⊥ ft ∼ N (0, 1) ⊥
+ 
+V X
+it
+V Z
+it
+!
+∼ N
+  
+0
+0
+!
+,
+ 
+σ2
+V ρσ2
+V
+ρσ2
+V σ2
+V
+!!
+.
+Conditional on λi, ft, and ( V X
+it , VZ
+it ) for i ∈ {1, . . . , N} and t ∈ {0. . . . , T}, we construct
+serially correlated errors Uit as
+Uit = εit + θεεit−1,
+where εit = σε(Xi, Zi, λi, ft)eit and eit are independently drawn from a scaled Student’s t-
+distribution with 5 degrees of freedom and variance normalized to 1. The conditional variance
+of εit is given by
+σ2
+ε (Xi, Zi, λi, ft) = σ2
+U
+1 + θ2ε
+ 1
+2 + Λ
+ Xit + Zit + λift
+3
+
+,
+where Λ(·) stands for the logistic CDF.
+In this experiment, we fix ( β, δ, σ2
+U , σ2
+V , ρV , θε) = (0, 1, 1, 1, 1/
+√
+2, 1/
+√
+2). As in Section 5,
+we compare the performance of the standard LS based approach and our approach for various
+values of κ. Both approaches are implemented with R = 1 and R = 2, i.e., when the number
+of factors is correctly specified and when it is overspecified. To adjust for serial correlation of
+Uit, we compute HAC standard errors for the LS estimator accounting for up to two lags of
+serial correlation, and we compute clustered standard errors for our approach allowing for an
+arbitrary form of serial correlation.
+For brevity, we only report results for estimation and inference on β and for ( N, T) =
+(100, 50) in Table 8 below. The results are qualitatively similar to the ones presented in
+Section 5. Our findings suggest that the standard LS based approach might perform poorly
+when there is a weak factor, and our approach reduces the weak factors bias and improves
+the quality of point estimation in more complicated settings with additional covariates and
+non-Gaussian, heteroskedastic, and serially correlated errors. Importantly, when the number
+of factors is overspecified ( R = 2), the bias of the LS estimator does not vanish, so one
+cannot protect themselves from the weak factors bias by simply conservatively overspecifying
+A.27
+
+[PDF PAGE 62]
+R. At the same time, overspecifying the number of factors does not result in loss of efficiency
+for our estimator. Nonetheless, overspecifying R leads to wider confidence intervals. While
+this might seem as a disadvantage of our approach, the necessity of having wider confidence
+intervals when the true number of factors is unknown has been established in Zhu (2019).
+Specifically, Zhu (2019) shows that the uncertainty in the number of factors necessarily results
+in a dramatic loss of inference efficiency when robustness to weak factors is required.
+Table 8: Simulation results for the experiment in Section C.2
+LS Debiased
+κ bias std rmse size length length* bias std rmse size length length*
+R= 1
+0.00 -0.0001 0.0195 0.0195 6.2 0.073 0.189 -0.0003 0.0208 0.0209 0.0 0.295 0.145
+0.05 0.0132 0.0195 0.0236 12.3 0.073 0.189 0.0087 0.0209 0.0226 0.0 0.295 0.145
+0.10 0.0264 0.0197 0.0329 29.9 0.073 0.190 0.0176 0.0210 0.0274 0.0 0.295 0.146
+0.15 0.0393 0.0201 0.0442 55.1 0.073 0.191 0.0260 0.0212 0.0336 0.0 0.296 0.147
+0.20 0.0512 0.0213 0.0555 76.0 0.074 0.192 0.0332 0.0220 0.0398 0.0 0.298 0.147
+0.25 0.0543 0.0286 0.0614 75.9 0.075 0.194 0.0337 0.0255 0.0423 0.0 0.301 0.148
+0.50 0.0018 0.0218 0.0219 6.2 0.078 0.203 0.0015 0.0224 0.0224 0.0 0.309 0.149
+1.00 -0.0000 0.0204 0.0204 5.6 0.078 0.203 -0.0002 0.0218 0.0218 0.0 0.309 0.149
+R= 2
+0.00 -0.0001 0.0196 0.0196 6.9 0.071 0.184 -0.0003 0.0210 0.0210 0.0 0.490 0.140
+0.05 0.0131 0.0197 0.0237 13.7 0.071 0.185 0.0087 0.0210 0.0227 0.0 0.491 0.140
+0.10 0.0263 0.0199 0.0330 32.0 0.071 0.185 0.0174 0.0212 0.0274 0.0 0.491 0.140
+0.15 0.0389 0.0204 0.0439 55.8 0.072 0.186 0.0255 0.0215 0.0333 0.0 0.493 0.141
+0.20 0.0494 0.0221 0.0542 73.9 0.072 0.187 0.0314 0.0224 0.0386 0.0 0.495 0.142
+0.25 0.0476 0.0304 0.0565 67.4 0.073 0.190 0.0288 0.0262 0.0389 0.0 0.499 0.142
+0.50 0.0015 0.0207 0.0208 6.9 0.076 0.197 0.0011 0.0219 0.0220 0.0 0.506 0.143
+1.00 0.0000 0.0206 0.0206 6.4 0.076 0.197 -0.0002 0.0219 0.0219 0.0 0.507 0.143
+The results are based on 5,000 simulations.
+C.3 Coverage of non-robust CIs based on the debiased estimator
+In this section, we present additional simulation results for the numerical experiment consid-
+ered in Section 5.1.
+Specifically, in Table 9 below, we report the size of the t-test (with nominal size 5%) based
+on the non-robust CI provided in (13) (with 95% nominal coverage) and its average length.
+As before, we also report the same statistics for the LS CI.
+We find that the non-bias aware CIs based on the debiased estimator are comparable in
+terms of the length to the LS CIs and that their coverage is close to 95% in the absence of
+weak factors. This is in line with our asymptotic analysis provided in Section 4.3. At the
+same time, even if there is a weak factor, our non-robust CIs enjoy much better coverage
+A.28
+
+[PDF PAGE 63]
+than the LS ones. For example, for ( N, T) = (300, 300) and κ = 0.10, our non-robust CI has
+coverage 91.4% whereas the coverage of the LS CI is only 4.1%.
+Table 9: Simulation results for the non-robust CI (13)
+(N, T) = (100, 100) (N, T) = (300, 100) (N, T) = (300, 300)
+LS Debiased LS Debiased LS Debiased
+κ size length size length size length size length size length size length
+0.00 6.1 0.028 5.9 0.041 5.0 0.016 5.8 0.021 5.5 0.009 5.2 0.014
+0.05 91.0 0.028 8.9 0.041 100.0 0.016 13.7 0.021 100.0 0.009 13.1 0.014
+0.10 99.9 0.028 17.0 0.041 99.9 0.016 23.3 0.021 95.9 0.011 8.6 0.014
+0.15 92.9 0.030 17.5 0.041 61.1 0.021 10.0 0.021 21.8 0.013 6.8 0.014
+0.20 47.4 0.037 10.1 0.041 16.3 0.022 7.8 0.021 7.5 0.013 6.8 0.014
+0.25 17.9 0.039 8.5 0.041 7.6 0.023 7.7 0.021 5.2 0.013 6.8 0.014
+0.50 5.9 0.039 8.0 0.041 4.8 0.023 7.5 0.021 4.5 0.013 6.8 0.014
+1.00 5.4 0.039 8.0 0.041 4.9 0.023 7.6 0.022 4.5 0.013 6.8 0.014
+The results are based on 5,000 simulations.
+D Additional Results for Empirical Illustration
+In his section, we revisit the empirical application considered in Section 5.2 by considering an
+alternative specification with dynamic treatment effects. Specifically, in the spirit of Wolfers
+(2006), Kim and Oka (2014) and Moon and Weidner (2015), we consider
+Yit =
+4X
+k=1
+Xk,itβk + αi + ζit + νit2 + ϕt +
+RX
+r=1
+λirftr + Uit,
+where Xk,it are the treatment dummies defined as
+Xk,it = 1{Di + 4(k − 1) ≤ t ≤ Di + 4k − 1} for k ∈ {1, . . . ,3},
+X4,it = 1{Di + 12 ≤ t},
+where Di denotes the year in which state i adopted a unilateral divorce law. Here, instead
+of introducing bi-annual dummies as in Wolfers (2006), we consider a coarser dynamics of
+treatment effects to ensure that our regressors Xk,it have sufficient variation necessary for
+debiasing.
+As before, we estimate and construct 95% CIs for βk using the LS and our approaches.
+The results are provided in Table 10 below. They are qualitatively similar to the results
+reported in Section 5.2. While it is also possible to obtain shorter confidence intervals and
+establish significance of certain dynamic effects using our approach in the absence of weak
+A.29
+
+[PDF PAGE 64]
+factors, we again find that the potential presence of one weak factors is sufficient to render
+the estimated effects insignificant.
+Table 10: LS and debiased estimates and 95% CIs for dynamic effects of divorce law reform
+R = 1 R = 2 R = 3 R = 4 R = 5 R = 6
+LS
+years 1-4 0 .033 0 .084 0 .093 0 .040 0 .012 0 .085
+[−0.07, 0.14] [ −0.04, 0.21] [ −0.03, 0.21] [ −0.08, 0.16] [ −0.11, 0.14] [ −0.04, 0.21]
+years 5-8 −0.081 −0.026 0 .025 −0.028 −0.078 0 .088
+[−0.23, 0.07] [ −0.20, 0.15] [ −0.15, 0.20] [ −0.19, 0.14] [ −0.24, 0.09] [ −0.06, 0.24]
+years 9-12 −0.253 −0.247 −0.186 −0.244 −0.297 −0.065
+[−0.45, −0.05] [ −0.49, −0.00] [ −0.41, 0.04] [ −0.46, −0.03] [ −0.50, −0.09] [ −0.26, 0.13]
+years 13+ −0.198 −0.255 −0.234 −0.313 −0.365 −0.110
+[−0.46, 0.06] [ −0.54, 0.03] [ −0.50, 0.03] [ −0.57, −0.06] [ −0.61, −0.12] [ −0.35, 0.13]
+Debiased
+years 1-4 0 .081 0 .147 0 .137 0 .098 0 .079 0 .118
+Rw = 0 [ −0.03, 0.19] [0 .05, 0.25] [0 .05, 0.22] [0 .02, 0.18] [0 .00, 0.16] [0 .05, 0.19]
+Rw = 1 [ −0.80, 0.96] [ −0.58, 0.88] [ −0.45, 0.72] [ −0.39, 0.59] [ −0.33, 0.49] [ −0.23, 0.47]
+Rw = R [−0.80, 0.96] [ −1.21, 1.51] [ −1.45, 1.72] [ −1.63, 1.83] [ −1.64, 1.80] [ −1.63, 1.86]
+years 5-8 −0.008 0 .054 0 .099 0 .056 0 .031 0 .125
+Rw = 0 [ −0.17, 0.15] [ −0.08, 0.19] [ −0.01, 0.21] [ −0.05, 0.16] [ −0.07, 0.13] [0 .04, 0.22]
+Rw = 1 [ −1.34, 1.33] [ −1.04, 1.14] [ −0.77, 0.97] [ −0.67, 0.79] [ −0.57, 0.63] [ −0.39, 0.64]
+Rw = R [−1.34, 1.33] [ −2.00, 2.10] [ −2.30, 2.50] [ −2.56, 2.67] [ −2.57, 2.63] [ −2.51, 2.76]
+years 9-12 −0.147 −0.139 −0.098 −0.126 −0.157 0 .003
+Rw = 0 [ −0.36, 0.06] [ −0.33, 0.05] [ −0.25, 0.05] [ −0.27, 0.02] [ −0.29, −0.02] [ −0.12, 0.13]
+Rw = 1 [ −2.04, 1.75] [ −1.70, 1.43] [ −1.34, 1.15] [ −1.17, 0.92] [ −1.01, 0.70] [ −0.73, 0.74]
+Rw = R [−2.04, 1.75] [ −3.08, 2.81] [ −3.54, 3.34] [ −3.88, 3.63] [ −3.89, 3.58] [ −3.78, 3.79]
+years 13+ −0.178 −0.228 −0.196 −0.225 −0.262 −0.071
+Rw = 0 [ −0.45, 0.09] [ −0.46, 0.01] [ −0.38, −0.01] [ −0.40, −0.05] [ −0.44, −0.09] [ −0.23, 0.09]
+Rw = 1 [ −2.71, 2.35] [ −2.31, 1.86] [ −1.85, 1.46] [ −1.62, 1.17] [ −1.40, 0.88] [ −1.05, 0.90]
+Rw = R [−2.71, 2.35] [ −4.16, 3.71] [ −4.80, 4.40] [ −5.26, 4.80] [ −5.26, 4.74] [ −5.14, 4.99]
+A.30

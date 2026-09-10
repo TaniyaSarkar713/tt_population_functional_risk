@@ -1,0 +1,1155 @@
+
+[PDF PAGE 1]
+Inference for Low-rank Models without
+Estimating the Rank
+Jungjun Choi 1, Hyukjun Kwon 2, and Yuan Liao 3
+1Department of Statistics, Columbia University
+2Department of Operations Research and Financial Engineering, Princeton
+University
+3Department of Economics, Rutgers University
+Monday 21st October, 2024
+Abstract
+This paper studies the inference about linear functionals of high-dimensional low-
+rank matrices. While most existing inference methods would require consistent esti-
+mation of the true rank, our procedure is robust to rank misspecification, making it a
+promising approach in applications where rank estimation can be unreliable. We esti-
+mate the low-rank spaces using pre-specified weighting matrices, known as diversified
+projections. A novel statistical insight is that, unlike the usual statistical wisdom
+that overfitting mainly introduces additional variances, the over-estimated low-rank
+space also gives rise to a non-negligible bias due to an implicit ridge-type regulariza-
+tion. We develop a new inference procedure and show that the central limit theorem
+holds as long as the pre-specified rank is no smaller than the true rank. In one of
+our applications, we study multiple testing with incomplete data in the presence of
+confounding factors and show that our method remains valid as long as the number
+of controlled confounding factors is at least as large as the true number, even when
+no confounding factors are present.
+Keywords: High-dimensional models; low-rank matrix estimation; rank misspecification;
+weak factors
+1
+arXiv:2311.16440v2  [econ.EM]  17 Oct 2024
+
+[PDF PAGE 2]
+1 Introduction
+The objective of this paper is to make inference about a low rank matrix without consis-
+tently estimating its rank. We consider the following linear model:
+Y = X ◦ M⋆ + E (1.1)
+where Y, X, M⋆, and E are N × T matrices, with N and T approaching infinity, and ◦
+represents the matrix entry-wise product. The outcome matrix Y and the regressor matrix
+X are observed, and E is the matrix of noise. The target of interest is the matrix M⋆,
+whose rank (denoted by r) is unknown and low compared to its dimensions. Our model
+incorporates various models such as noisy matrix completion, heterogeneous treatment
+effects estimation, and varying coefficients models.
+The inferential theory for low rank matrices has been developed in the recent literature,
+as in Chernozhukov et al. (2018, 2023); Chen et al. (2019); Xia and Yuan (2021); Yan et al.
+(2024). Most of these methods utilize the estimated eigenvectors for rank reductions, so we
+call them principal components analysis (PCA)-based methods. A standard PCA-based
+inference procedure can be outlined as follows (Chen et al., 2019; Xia and Yuan, 2021):
+Step 0: Fix the true rank of M⋆ (or consistently estimate the true rank).
+Step 1: Obtain an initial estimator fMinit.
+Step 2: Subtract a bias correction term: fMnaive = fMinit − B1.
+Step 3: Project fMnaive onto low-rank spaces that are consistently estimated by using PCA
+with the “correct” knowledge of the true rank.
+2
+
+[PDF PAGE 3]
+Here B1 captures a shrinkage bias one often encounters from the initial estimator.
+Clearly, one needs to start by taking the true rank (or its consistent estimator), which
+however requires that the signal-to-noise ratio be sufficiently high. This assumption often
+breaks down in finite sample applications. In fact, the rank estimation is threatened by the
+presence of weak factors, raising severe concerns in applications. For instance, in financial
+applications it is often the case that the first eigenvalue is much larger than the remaining
+eigenvalues, so consistent rank estimators often identify only one factor, which however
+violates empirical practices in asset pricing. As another example in the forecast practice,
+empirical eigenvalues do not decay as fast as the theory requires, so it is often difficult to
+determine the cut-off value to separate “spiked eigenvalues” from the remaining ones.
+A simple solution is to over-estimate the rank. To avoid the risk of under-estimating
+the rank, one can select a sufficiently large rank, and use it throughout the inference
+procedure. However, when the PCA-based debiasing methods are employed with the over-
+estimated rank, they fail to exclude the eigenvectors that are generated from and thus
+strongly correlated with the noise. In addition, the over-estimated eigenvectors correspond
+to non-spiked eigenvalues, which are well known to be inconsistent in high dimensional
+settings (e.g., Johnstone and Lu, 2009).
+This paper makes a novel contribution to the low-rank inference literature by proposing
+a procedure robust to the rank over-estimation. In order to circumvent the aforementioned
+issues of the PCA-based method, we adopt a non-PCA based method, known as diversified
+projection (DP) which was recently proposed by Fan and Liao (2022) in the pure factor
+model. Similar to the PCA, the DP is a dimension reduction method that projects the
+original high-dimensional space to a low-rank space. But it is much simpler than the PCA:
+it does not require calculating the eigenvalue/eigenvectors, so demands much weaker con-
+3
+
+[PDF PAGE 4]
+ditions on the eigen-structures of the low-rank matrix. We employ the DP to estimate a
+“larger” low-rank space, which is inconsistent to the true singular vector spaces. Never-
+theless, the simple structure of the DP enables us to characterize the over-estimated rank
+spaces relatively easily. Importantly, we do not require correctly specifying (or consistently
+estimating) the true rank of the underlying matrix.
+Although our adoption of the DP approach is inspired by Fan and Liao (2022), the
+primary difference lies in our objective. Their underlying model is a pure factor model
+with no missing data, and the focus is exclusively on the extracted factors. In contrast,
+motivated by the study of treatment effects, our main goal is to make inferences about
+the low-rank matrix itself. When the objective shifts from focusing on factors to directly
+examining the low-rank matrix, a novel statistical insight emerges: a new source of bias from
+over-estimating the low-rank space when the rank exceeds its true value. Contrary to the
+conventional view that overfitting primarily introduces additional variance, we show that
+in the context of low-rank inference, an over-estimated low-rank space can be characterized
+by a Tikhonov-type function , leading to an implicit ridge-type regularization bias. Our
+statistical interpretation is that the over-estimated low-rank space is highly correlated with
+the model’s noise, and such correlation depends on a non-stochastic second moment of the
+noise, giving rise to the new bias. This issue would not arise if the objective were solely
+focused on the extracted factors for other types of inference. 1
+Our condition is more robust to the strength of the singular values than the PCA-
+based approach: we allow weak singular values of M⋆, which just need to be stronger than
+p
+T log2 N . This condition is only slightly stronger than the setting of “weak factors”
+1 For instance, Fan and Liao (2022) applied estimated factors to “factor-augmented regression” problems
+(e.g., forecasts and post-selection inference). In such cases, additional steps often involve regressing external
+time series on the extracted factors, which can “average out” the effect of over-estimating the low-rank
+space.
+4
+
+[PDF PAGE 5]
+in Onatski (2012) in the pure factor model, whose condition was
+√
+T . On the contrary,
+the usual PCA-based approaches would require the singular values be
+√
+T Nc for some
+c ∈ (1/2, 1] (see Bai and Ng, 2023).
+A practical reason for allowing the true rank to be over-estimated is to account for
+confounding factors (CF) in variable selection and multiple testing. Standard statistical
+inference can be significantly affected by strong correlations among variables due to hidden
+confounding factors, so needs to be adjusted. The key practical question is determining
+how many CF to account for, including the special case that there are none—though
+this is unknown in practice, so as a precaution, statisticians often account for some CF
+regardless. In one of our statistical applications, we address this issue within the context
+of multiple testing. We show that our method remains valid across all bounded numbers
+of CF, including the special case where none are present.
+We recommend a few specific choices for the weighting matrices in Section 6. One of
+the appealing recommended choices is to use transformations of initial observations, which
+does not require extra data. Moreover, we also note that the use of extra information is
+not uncommon in a wide range of literature.
+There is a large literature on estimation of high-dimensional low-rank matrices, such as
+Cand` es and Recht (2009); Keshavan et al. (2010); Negahban and Wainwright (2011); Klopp
+(2014); Cai and Zhang (2018); Cape et al. (2019); Abbe et al. (2020); Koltchinskii et al.
+(2020); Cai et al. (2021); Zhu et al. (2022) among many others. In this literature, profound
+theories on optimal rates of convergence have been developed, whereas as we commented
+earlier, the distributional theory has been studied in the more recent literature. Barigozzi
+and Cho (2020) proposed a PCA-based method to over-estimate the rank and achieved
+insightful rate results.
+5
+
+[PDF PAGE 6]
+We adopt the following notations. Let ∥·∥ and ∥·∥∗ denote the matrix operator norm
+and nuclear norm, respectively. Also, we use ∥·∥2,∞ to denote the largest l2 norm of all rows
+of a matrix. We write σmax(·) and σmin(·) to represent the largest and smallest singular
+values of a matrix, respectively, and σj(·) to represent the jth largest singular value of a
+matrix. For a matrix A, define span( A) as the linear space spanned by the columns of
+matrix A. When A′A is invertible, define PA = A(A′A)−1A′. For a vector v, diag( v)
+represents the diagonal matrix whose diagonal entries are v in order. For two sequences
+aN T and bN T, we denote aN T ≪ bN T (or bN T ≫ aN T) if aN T = o(bN T), aN T ≲ bN T (or
+bN T≳ aN T) if aN T= O(bN T), and aN T≍ bN Tif aN T≲ bN Tand aN T≳ bN T(almost surely
+if random). Finally, due to page limits, all proofs and some simulation studies are provided
+in the appendix.
+2 Model and Estimation
+In the linear model (1.1), we assume that the matrix M⋆ has a low-rank structure:
+Y = X ◦ M⋆ + E = X ◦ (βF′) + E (2.1)
+where β is an N × r matrix of rescaled left singular vectors, and F is a T × r matrix of the
+rescaled right singular vectors; rescaled by the singular values. Model (2.1) has numerous
+applications including varying coefficient models, heterogeneous treatment effects (Athey
+et al., 2021), and matrix completion problems.
+6
+
+[PDF PAGE 7]
+2.1 Diversified projection
+The diversified projection (DP) is a dimension reduction technique that projects a high-
+dimensional object onto a low-rank space. To illustrate the idea, consider the high-
+dimensional factor model:
+Y = M⋆ + E = βF′ + E.
+To estimate M⋆, one approach is to take advantage of the low-rank structure, by applying
+projections as follows:
+cM = P eβYPeF.
+Here, P eβ and PeF are the projection matrices that estimate the true projections Pβ and PF,
+respectively. So, cM reduces to the “intrinsic dimension” of the parameters by projecting the
+data matrix onto the low-dimensional subspaces, which are respectively spanned by eβ and
+eF. Usually, this is accomplished by employing PCA, where columns of eβ and eF respectively
+denote the top left and right singular vectors of Y. However, one major limitation of PCA-
+based low-rank projection is that it requires rank(eβ) and rank(eF) be either equal to the true
+rank or a consistent estimator for it, which is often a strong assumption. As we commented
+in the introduction, the consistent estimation of the true rank is threatened by the strength
+of factors, raising a severe concern in practical applications.
+In the context of pure factor model, Fan and Liao (2022) proposed diversified projec-
+tion (DP), as an alternative low-rank projection. This method begins by specifying two
+7
+
+[PDF PAGE 8]
+weighting matrices, an N × R matrix Wβ and a T × R matrix WF, and defining:
+eβ = 1
+T YWF and eF = 1
+N Y′Wβ
+where the weighting matrices consist of “diversified elements”, but not necessarily eigen-
+vectors. These weighting matrices should satisfy:
+(i) they are uncorrelated with the noise E.
+(ii) they are correlated with the actual β and F.
+Instead of the correct estimation of the number of factors, it is only required that the
+rank of the weighting matrix, R, be no smaller than the true number of factors, r.
+Section 6 will give specific recommendations for choosing the weighting matrices in
+applications. One of the appealing recommendations is to use transformations of initial
+observations, which does not require extra data. Moreover, we also note that the use of
+extra information is not uncommon in a wide range of literature. To name a few, Fan et al.
+(2016) and Kelly et al. (2020) use firms’ characteristics to study excess returns. In the
+matrix completion literature, the side information is widely used (e.g., Jain and Dhillon,
+2013; Xu et al., 2013; Chiang et al., 2015; Wang and Elhamifar, 2018).
+2.2 Formal procedure
+We utilize the diversified projections in the general form of low-rank inference problems.
+To begin with, we pre-determine weighting matrices, Wβ and WF, whose rank R is pre-
+determined, but not necessarily equal to the true rank r. The theory holds as long as
+R ≥ r. To account for heterogeneity, let bΠ = diag( bp1, . . . ,bpN ) where bpi = T −1 PT
+t=1 X 2
+it,
+and bΨ = N −1diag(PN
+j=1 X 2
+j1bp−2
+j , . . . ,PN
+j=1 X 2
+jT bp−2
+j ).
+Algorithm 1 Formal estimation procedure
+8
+
+[PDF PAGE 9]
+Step 1: Initialization. Obtain an initial estimator fMinit as to be described in Section 4,
+and pre-determine the weighting matrices Wβ and WF with rank R.
+Step 2: First bias correction. Let B1 = bΠ−1X ◦ (X ◦ fMinit − Y). Compute
+fMnaive = fMinit − B1.
+Step 3: Diversified projections. Let eβ = T −1fMnaiveWF and eF = N −1fMnaive′Wβ.
+fMproj = P eβ
+fMnaivePeF.
+Step 4: Second bias correction. Compute cM = fMproj − B2 where
+B2 = eσ2
+ T
+N P eβ
+bΠ−1Wβ(eF′ eF)−1 eF′ + N
+T
+eβ( eβ′ eβ)−1W′
+F bΨPeF
+
+with a variance estimator eσ2.2
+Our Steps 1-3 are in spirit similar to that of the existing procedure outlined in the
+introduction. In particular, the bias B1 in Step 2 is similar to the one derived by Chen
+et al. (2019) and Xia and Yuan (2021), who reach the following decomposition after the
+debias:
+fMnaive = M⋆ + Z = M⋆ + bΠ−1X ◦ E| {z }
+dominant noise term
++ (1N1′
+T − bΠ−1X ◦ X) ◦ (fMinit − M⋆)| {z }
+higher-order initial estimation error
+.
+But we also have three key differences: First, we do not need to specify the true rank
+or its consistent estimator. Secondly, the low-rank projections in Step 3, P eβ and PeF, are
+inconsistent. Due to the rank over-estimation, they are “larger” than the true low-rank
+projections, Pβ and PF (we will make this insight precise later). Finally, the inconsistency
+of the estimated projections gives rise to a new bias correction in Step 4, which is the main
+novel statistical insight of this paper. In the next subsection we explain the source of this
+2 For the variance estimation, we can use fMinit. Specifically, when X is a general regressor ma-
+trix, we define eσ2 = ( N T)−1 PN
+j=1
+PT
+s=1(Yjs − Xjs fM init
+js )2. When X is binary, we may use eσ2 =
+(PN
+j=1
+PT
+s=1 Xjs)−1 PN
+j=1
+PT
+s=1 Xjs(Yjs − fM init
+js )2 instead.
+9
+
+[PDF PAGE 10]
+new bias in details.
+2.3 A new source of bias and Tikhonov-type functions
+After Step 2, we end up with fMnaive. Write it as
+fMnaive = M⋆ + Z
+where Z is the estimation error. Therefore, we have
+P eβ
+fMnaivePeF − M⋆ = (P eβM⋆PeF − M⋆) + P eβZPeF.
+The first term on the right hand side yields the asymptotic normality of the estimator.
+For now we will focus on the second term P eβZPeF. Recall that R denotes the rank of
+P eβ and PeF. In the usual case R = r, this term is asymptotically negligible. But when
+R > r,span( eβ) and span( eF) would also encompass additional noise components that are
+orthogonal to span( β) and span( F), but are strongly correlated with the noise Z. This
+strong correlation renders the second term asymptotically non-stochastic, introducing a
+bias through an implicit regularization, as we explain in detail below.
+To understand the intuition, note that the diversified projection yields an R×r rotation
+matrix H such that
+1√
+T
+eF − FH′
+ = oP (1).
+In the usual setting when R = r, the rotation matrix is well invertible (all its singular
+values are bounded away from zero), but this is no longer the case when R > r. In this
+10
+
+[PDF PAGE 11]
+case, the following rank- r matrix becomes degenerate:
+SF := 1
+T HF′FH′, R × R.
+On the other hand, define
+SeF = 1
+T
+eF′ eF, R × R.
+We shall show that when R > r, SeF is still asymptotically invertible, but its eigenvalues
+may decay very fast. Nevertheless, the projection matrix PeF = eF(eF′ eF)−1 eF′ is still well
+defined with probability approaching one.
+The asymptotic property of the projection matrix critically depends on the following
+ridge-type projection function, also known as Tikhonov-regularization function:
+f (x) := (H 1
+T F′FH′ + xIR)−1.
+In fact, there is a rate xN T→ 0 such that, S−1
+eF ≈ f (xN T). The key challenge, however, is
+that f (x) is discontinuous at x = 0 and limx→0 f (x) does not exist. Therefore when R > r,
+the inverse matrix S−1
+eF does not converge in probability to the generalized inverse S+
+F , its
+population counterpart.
+The discontinuity challenge can be avoided in our context by considering the following
+rescaled Tikhonov-regularization function:
+ef (x) := H′(H 1
+T F′FH′ + xIR)−1H.
+Unlike f (x), the rescaled Tikhonov function is continuous in neighborhoods of zero and has
+( 1
+T F′F)−1 as its limit when x → 0. Fortunately, in the low-rank inference problem, it is
+11
+
+[PDF PAGE 12]
+sufficient to study the behavior of ef (x) instead of f (x) because the projection matrix PeF
+asymptotically depends on SeF through H′S−1
+eF H. Let S+
+F denote the generalized inverse of
+SF. We shall show that while ∥S−1
+eF − S+
+F ∥ ̸= oP (1), when rescaled by H, we have,
+H′S−1
+eF H −
+ 1
+T F′F
+−1
+ ≈ ∥ef (xN T) − ef (0)∥ = OP (x2
+N T)
+for some sequence xN T→ 0.
+Above all, when R > r, the correlation between the estimated low-rank projection ma-
+trices and Z can be characterized by a Tikhonov-type regularization function, akin to ridge
+regression, which acts as an implicit regularization. Therefore, a key new statistical insight
+of this paper is that, unlike the conventional understanding where overfitting primarily re-
+sults in additional variance, in the context of low-rank inference, over-estimating the rank
+introduces a novel source of asymptotic bias through P eβZPeF. We identify and address
+this bias and reach the final estimator:
+cM := fMproj − B2 = P eβM⋆PeF + P eβZPeF − B2
+| {z }
+entry-wise negligible
+.
+This is the motivation for introducing B2 in Step 4.
+3 Asymptotic Results
+The objective is to establish the asymptotic normality of our estimator for the group
+average, given by |G|−1 P
+(i,t)∈G
+cMit, where G ⊂ {1, . . . , N} × {1, . . . , T} represents the
+group we are interested in.
+The following assumption formalizes the data generating process (DGP) of the noise E.
+12
+
+[PDF PAGE 13]
+Assumption 3.1 (DGP for E). (i) Conditioning on (β, F, Wβ, WF), Eit is an i.i.d.
+(across i and t) sub-Gaussian random variable with zero mean, a finite variance, σ2,
+and sub-Gaussian norm at most Cσ for some C >0. Also, E is independent of X.
+(ii) When X is a binary matrix taking values in {0, 1}, then condition (i) may be replaced
+by: There is a noise matrix E⋆ that satisfies (i), and E can be written as E = X ◦ E⋆.
+We note that Assumption 3.1 (ii) accommodates the noisy matrix completion problem
+where Xit indicates if the entry ( i, t) is observed.
+The next assumption specifies the DGP of the regressor matrixX. We allow heterogene-
+ity in X across units. In the matrix completion application, it can accommodate the hetero-
+geneous missing probabilities across i. Also, we allow cross-sectional weak dependence in
+X through the cluster structure, where the size of the largest cluster is allowed to grow. Let
+C1, . . . ,Cρ ⊂ {1, . . . , N} be non-empty and disjoint clusters such that ∪ρ
+g=1Cg = {1, . . . , N}.
+We denote ϑ := maxg=1,...,ρ |Cg|.
+Assumption 3.2 (DGP for X). (i) Conditioning on (β, F, Wβ, WF), Xit is i.i.d. across
+t for each i. In addition, Xit are independent across clusters, and they are allowed to
+be dependent within clusters. Overall,
+maxt≤T maxj≤N
+PN
+i=1
+Cov(X 2
+it, X2
+jt|β, F, Wβ, WF)
+ ≤ C for some C >0.
+(ii) Let pi := E[X 2
+it|β, F, Wβ, WF] and pmin := min i≤N pi. We assume that pmin is
+bounded away from zero.
+(iii) maxi≤N maxt≤T X 2
+it < Cfor some C >0 almost surely.
+Next, the following assumption specifies the class of high-dimensional matrices we are
+interested in. We require M⋆ to be of low-rank and incoherent.
+13
+
+[PDF PAGE 14]
+Assumption 3.3 (Structure of M⋆). (i) Low-rank factor structure: We assume M⋆ =
+βF′ with an N × r loading matrix β and a T × r factor matrix F. We assume that
+r is bounded.
+(ii) Incoherence: The matrix M⋆ is incoherent in that:
+∥β∥2,∞ ≲ σmax(β)√
+N
+and ∥F∥2,∞ ≲ σmax(F)√
+T
+.
+(iii) T /N→ C for some C ∈ (0, ∞).
+The following assumption specifies conditions on the diversified weights and the strength
+of factors. Regarding the factor strength, without loss of generality, we fix σmin(F) ≍
+σmax(F) ≍
+√
+T and accommodate the weak factor by allowing the aggregated factor load-
+ings to be “small.”
+Assumption 3.4 (Diversified weights and weak factors). We define Hβ := N −1W′
+ββ and
+HF := T −1W′
+FF.
+(i) Wβ is an N × R matrix and WF is a T × R matrix, where R is bounded and R ≥ r.
+Wβ and WF are independent of E.3 Also, almost surely, max{∥Wβ∥2,∞ , ∥WF∥2,∞} <
+C, min{σR(N −1W′
+βWβ), σR(T −1W′
+FWF)} > cfor some c, C >0, and, the ranks of
+Hβ and HF are r.
+(ii) log N ≪ σmin(β) ≍ σmax(β) ≲
+√
+N and σmin(Hβ) ≍ σmax(Hβ) ≍ σmax(β)/
+√
+N .
+(iv) σmin(HF) ≍ σmax(HF) ≍ C for some constant C >0.
+Our condition on the factor strength is relatively weak. For example, suppose that
+there exist a bounded sequence aN = O(1), an N × r matrix β0, and diversified weights
+3 When Assumption 3.1 (ii) holds with E = X ◦ E⋆, we assume that Wβ and WF are independent of
+E⋆.
+14
+
+[PDF PAGE 15]
+Wβ such that:
+β = aN β0 and σmin
+ 1
+N W′
+ββ0
+
+≍ σmax
+ 1
+N W′
+ββ0
+
+≍ C
+for some constant C > 0. Here, we assume σmin(N −1β′
+0β0) ≍ σmax(N −1β′
+0β0) ≍ C for
+some constant C > 0, so that β0 can be regarded as the “standardized direction” of β.
+Therefore, the strength of β is governed by the sequence aN . Then, Assumption 3.4 (ii)
+and (iii) can be simplified to: log N ≪
+√
+N aN . This implies the condition on the factor
+strength as:
+σmin (β′β) ≍ N a2
+N ≫ log2 N,
+which is only slightly stronger than the definition of “weak factors” in Onatski (2012) in
+the pure factor model. In contrast, the usual requirement for inference in the PCA-based
+approaches (see Bai and Ng, 2023) corresponds to σmin (β′β) ≳ N c for some c ∈ (1/2, 1].
+We now introduce notations for groups and assumptions for them. This paper explores
+three distinct types of group averages of M⋆ for inference: i) block averages, ii) serial
+averages, and iii) cross-sectional averages. For the block, denoted as Gbl, we define Gbl =
+I × Twhere I ⊂ {1, . . . , N} and T ⊂ {1, . . . , T}. Similarly, for cross-sectional groups,
+denoted as Gcs, let Gcs = {1, . . . , N} × Twhere T ⊂ {1, . . . , T}, and for serial groups,
+denoted as Gserial, let Gserial = I × {1, . . . , T} where I ⊂ {1, . . . , N}. For brevity, we present
+our main results for the block average case only. The results for other cases, which are
+similar, are provided in the appendix.
+Assumption 3.5 (Block shape) . We assume i) max{|I| 2ϑ3 log3 N, |I|ϑ6 log6 N } = o(N ),
+ii) max{|T |2ϑ3 log3 T, |T |ϑ6 log6 T } = o(N ), and iii)
+p
+max{|I|, |T |}log N ≪ σmin(β).
+Finally, it is critical for the initial estimator fMinit to have desirable properties, such
+15
+
+[PDF PAGE 16]
+as reasonable convergence rates and weak correlation with the noise. We provide the
+construction of such fMinit, that is based on the nuclear norm penalized estimation, in
+Section 4.
+Define the covariance estimator:
+bVGbl := eσ2
+|T |2N 2
+X
+t∈T
+NX
+j=1
+(cMI,· eF(eF′ eF)−1Wβ,j bp−1
+j Xjt)2 + eσ2
+|I| 2T 2
+X
+i∈I
+TX
+s=1
+(cM′
+·,T eβ( eβ′ eβ)−1WF,sbp−1
+i Xis)2
+where cMI,· := |I| −1 P
+i∈I
+cMi,·, and cM·,T := |T |−1 P
+t∈T
+cM·,t.4
+Theorem 3.1 (Feasible CLT for block average) . Suppose R ≥ r and Assumption 3.1-3.5
+hold. In addition, the initial estimator fMinit is as constructed in Section 4. Assume that
+∥|I| −1 P
+i∈I βi∥ > Cσmin(β)/
+√
+N and ∥|T |−1 P
+t∈T Ft∥ > C for some C > 0. Then, we
+have
+bV
+− 1
+2
+Gbl
+1
+|Gbl|
+X
+(i,t)∈Gbl
+( cMit − M ⋆
+it)
+D
+− → N(0, 1).
+The asymptotic variance depends on the choice of the DP weighting matrices. In the
+special case that R is a consistent estimator of the true rank, these weights can be chosen
+optimally as the usual eigenvectors. Then the asymptotic variance attains the efficiency
+bound as achieved by Chernozhukov et al. (2023); Choi et al. (2023). But more general
+weighting matrices will lead to efficiency loss, which is the cost of being flexible of choosing
+these weighting matrices to be robust to over-estimating the rank.
+4 For a matrix A, let Aj,· and A·,j denote jth row and jth column of A, respectively.
+16
+
+[PDF PAGE 17]
+4 Construction of the Initial Estimator
+We now formally characterize the initial estimator fMinit in Step 1. The central limit
+theorem arises from the entries of P eβM⋆PeF − M⋆, which can be shown as weighted row
+and column sums of the noise matrix E. Not so surprisingly, however, the weights in these
+sums are correlated with ( eβ′ eβ)−1 and (eF′ eF)−1 which, by construction, depend on the initial
+estimator. To establish the CLT, a technical challenge arises from the correlation between
+fMinit and the rows and the columns of E. Hence the initial estimator should be constructed
+in a way such that the correlation can be well controlled.
+We adopt a standard approach that artificially creates independence that is inspired by
+the sample splitting idea. Specifically, fMinit is constructed through two steps, the first step
+with the full sample and the second step with restricted samples.
+Full sample. We define
+fMfull := arg min
+M∈RN ×T
+1
+2
+NX
+j=1
+TX
+s=1
+bp−1
+j (Yjs − XjsMjs)2 + λ ∥M∥∗ (4.1)
+where λ >0 is a tuning parameter. The objective function incorporates inverse weights,
+bp−1
+j = (T −1 PT
+t=1 X 2
+jt)−1 for j = 1, . . . , N, to accommodate the heterogeneity in X. Similar
+weighting techniques have been employed in previous works such as Ma and Chen (2019)
+and Choi et al. (2023).
+Restricted sample. Next, to remove the effect of correlations betweenfMfull and entries in
+E, we then replace the majority of entries in fMfull with the estimates that are independent
+of the noises appearing in the weighted sum. This section will focus on the block group Gbl,
+17
+
+[PDF PAGE 18]
+where we are interested in making inference for the group average over i ∈ Iand t ∈ T:
+1
+|T ||I|
+X
+i∈I
+X
+t∈T
+M ⋆
+it,
+under Assumption 3.5. 5 Compute the nuclear norm penalized estimation using the sample
+outside of the group : i /∈ Iand t /∈ T,
+fMrest := arg min
+M
+1
+2
+X
+i /∈I
+X
+t /∈T
+bp−1
+i (Yit − XitMit)2 + λrest ∥M∥∗ .
+Merging two estimates. Then, we define the initial estimator fMinit as
+fM init
+it =
+
+
+
+fM rest
+it if i /∈ Iand t /∈ T,
+fM full
+it otherwise.
+In the block group case, the weighted sum of noises, that leads to asymptotic normality,
+will consist of rows i ∈ Iand columns t ∈ Tof E. By construction, the majority of entries
+(i /∈ Iand t /∈ T) in fMinit are independent of these noises, as intended.
+5 Statistical Applications
+We present two specific statistical applications: treatment effect estimation and multiple
+testing. In both applications the true rank is typically unknown and it is critical to develop
+inferential methods that are robust to over-specifying the rank.
+5 The construction of fMinit slightly differs for other group types. Refer to the appendix for other types.
+18
+
+[PDF PAGE 19]
+5.1 Heterogeneous Treatment Effects Estimation
+This section elaborates on the application of our theory to heterogeneous treatment effect
+estimation and presents formal asymptotic results. Following the causal inference literature,
+e.g., Rubin (1974); Imbens and Rubin (2015), we assume that, for each ( i, t), there exist
+two potential outcomes, Z (0)
+it and Z (1)
+it , where Z (0)
+it represents the outcome that would be
+observed if ( i, t) is controlled and Z (1)
+it represents the outcome that would be observed
+when (i, t) is treated. We observe only one of the potential outcomes for each ( i, t), which
+basically defines two incomplete matrices.
+We assume that the two potential outcomes have the following structure:
+Z (ι)
+it = M (ι)
+it + E⋆
+it = β′
+iF(ι)
+t + E⋆
+it,
+for each ι ∈ {0, 1}. By defining Dit = 1{(i, t) is treated }, X(0) = [1 − Dit]i≤N,t≤T , and
+X(1) = [Dit]i≤N,t≤T , we can represent the two sets of observed data in the following way:
+Y(ι) = X(ι) ◦ Z(ι) = X(ι) ◦ M(ι) + X(ι) ◦ E⋆ = X(ι) ◦ (βF(ι)′) + X(ι) ◦ E⋆
+| {z }
+:=E(ι)
+, (5.1)
+for each ι ∈ {0, 1}. Therefore, by applying the matrix completion method to each of Y(0)
+and Y(1), we will obtain cM(0) and cM(1) that estimate M(0) and M(1) respectively.
+Our goal is to perform inference about group average treatment effects for group G. We
+denote the treatment effect for each ( i, t) as Γ it = M (1)
+it − M (0)
+it . Then, the group average
+treatment effect is defined as
+1
+|G|
+X
+(i,t)∈G
+Γit = 1
+|G|
+X
+(i,t)∈G
+(M (1)
+it − M (0)
+it ).
+19
+
+[PDF PAGE 20]
+Then, a natural choice for the estimator for the group treatment effect would be
+1
+|G|
+X
+(i,t)∈G
+bΓit = 1
+|G|
+X
+(i,t)∈G
+( cM (1)
+it − cM (0)
+it ).
+Assuming that the assumptions in Section 3 hold for each superscript (0) and (1), we can
+establish the asymptotic normality for |G|−1 P
+(i,t)∈G
+bΓit − |G|−1 P
+(i,t)∈G Γit. As in Section
+3, we provide the result for the block average (the heterogeneous treatment effect). The
+results for other group types are provided in the appendix.
+We define, for each ι = 0, 1,
+bV (ι)
+Gbl
+:= eσ2
+|T |2N 2
+X
+t∈T
+NX
+j=1
+(cM(ι)
+I,· eF(ι)(eF(ι)′ eF(ι))−1Wβ,j(bp(ι)
+j )−1X (ι)
+jt )2
++ eσ2
+|I| 2T 2
+X
+i∈I
+TX
+s=1
+(cM(ι)′
+·,T
+eβ(ι)( eβ(ι)′ eβ(ι))−1W(ι)
+F,s(bp(ι)
+i )−1X (ι)
+is )2
+with cM(ι)
+I,· := |I| −1 P
+i∈I
+cM(ι)
+i,· , and cM(ι)
+·,T := |T |−1 P
+t∈T
+cM(ι)
+·,t .
+Theorem 5.1 (Feasible CLT for heterogeneous treatment effect) . Suppose R ≥ r and the
+assumption in Theorem 3.1 hold for both (0) and (1). Also, the initial estimators fMinit,(ι),
+ι = 0, 1, are as constructed in Section 4. Then,
+(bV (0)
+Gbl + bV (1)
+Gbl)− 1
+2
+1
+|Gbl|
+X
+(i,t)∈Gbl
+(bΓit − Γit)
+D
+− → N(0, 1).
+5.2 Multiple testing with incomplete data
+In large-scale multiple testing, it is crucial to address the well-known confounding factors
+and the resulting strong correlations (e.g. Leek and Storey, 2008; Friguet et al., 2009; Wang
+20
+
+[PDF PAGE 21]
+et al., 2017; Fan et al., 2019). We consider the model, for t = 1, ..., T:
+Zt = µ + Ut, where Ut = βFt + E⋆
+t .
+Here µ = ( µ1, . . . , µN )′ is the mean vector and EUt = 0. The noise Ut consists of the
+independent part E⋆
+t and the confounding factor part βFt.
+We consider a practical situation where data is not fully observable. Let Xt be an
+N -dimensional vector, whose element Xit = 1{Zit is observed}. Then, the observed data
+is Yt := Xt ◦ Zt, satisfying:
+Yt = Xt ◦ (µ + Ut).
+The objective is to test N hypotheses:
+H i
+0 : µi = 0, i = 1, . . . , N.
+This model differs from the usual multiple testing model in two ways: (i) the noise in Ut
+are strongly dependent due to the presence of confounding factors βFt; and (ii) the “data”
+is observed subjected to missing values, indicated by the binary vector Xt.
+While the importance of addressing confounding correlations in multiple testing has
+been widely recognized (e.g., Wang et al., 2017), a critical yet unresolved question remains:
+How much confounding correlation should be accounted for? This question raises two
+concerns, both of which are highly relevant to practical applications.
+First, researchers have relied on consistent estimation of the rank inUt, though ensuring
+its accuracy has always been a concern. Secondly, methods that explicitly allow βFt
+inherently assume the presence of at least one confounding factor. But what happens if
+we account for confounding factors when, in reality, there are none? This corresponds to
+21
+
+[PDF PAGE 22]
+a very special case of over-estimating the rank, where r = 0 but R > 0. The fact that
+whether r equals zero is unknown in practice, As a precaution, statisticians often account
+for R >0 “factors” regardless. In this subsection, we prove that the results are uniformly
+valid for all cases where R ≥ r, even when r = 0. This finding is empirically significant:
+one should always account for potential confounding correlations, as doing so does no harm
+even when none exist, at least asymptotically. 6
+We define ¯Yi = |Ti|−1 P
+t∈Ti Yit where Ti is the set of observed indices in the ith row.
+We also define the demeaned data Y d
+it = Yit − ¯Yi if Xit = 1, and Y d
+it = 0 otherwise. Let
+(Yd, X, E⋆) be the matrices of ( Y d
+it , Xit, E⋆
+it). Then Yd ≈ X ◦ M⋆ + E, where M⋆ denotes
+the matrix of βFt and E := X ◦ E⋆. We implement Algorithm 1 on Yd to obtain cM.7 Our
+proposed estimator for µ is
+bµi = ¯Yi − 1
+|Ti|
+X
+t∈Ti
+cMit for i = 1, . . . , N .
+Theorem 5.2. Suppose Assumption 3.1 (ii), 3.2 hold. In addition, suppose that mini |Ti| >
+ϵT for some ϵ >0 almost surely. Assume the following:
+(i) When r > 0, in addition to Assumption 3.3, 3.4, we assume ϑ6 log7 N ≪ N , and
+log
+3
+2 N ≪ σmin(β) hold. Also, EFt = 0 and {Ft}t≤T is i.i.d.
+(ii) When r = 0, Wβ and WF are independent of E⋆, and max{∥Wβ∥2,∞ , ∥WF∥2,∞} <
+C, min{σR(N −1W′
+βWβ), σR(T −1W′
+FWF)} > c for some c, C >0 almost surely.
+Also, T /N→ C for some C ∈ (0, ∞).
+6 An alternative practice is to pretest whether βFt exists. But the power of such tests are inherently
+affected by the strength of the factors, which may not be detectable if factors are weak in finite sample.
+7 The initialization in Section 4, though necessary for the CLT for M⋆, is not required for testing µ.
+Instead, we simply implement the full-sample estimation (4.1) on Yd just once and use it as fMinit.
+22
+
+[PDF PAGE 23]
+Then, uniformly for i = 1, . . . , Nand all bounded R ≥ r ≥ 0, we have
+bµi − µi = 1
+|Ti|
+X
+t∈Ti
+Eit + oP
+ s
+1
+|Ti| log N
+!
+. (5.2)
+The above expansion (5.2) shows that the leading terms in the expansion of bµi − µi are
+cross-sectionally weakly correlated, e.g., the confounding correlations have been successfully
+removed, regardless of whether the confounding factors are present. From here, one can
+apply the standard multiple testing approach, such as Benjamini and Hochberg (1995)
+(B-H procedure). The standard B-H procedure implements the test as follows: let p(1) ≤
+... ≤ p(N ) denote the sorted p-values for each test. Then H i
+0 is rejected if pi ≤ p(k) where
+k = max{i ≤ N : p(i) ≤ τ i/N}. Building on (5.2), Liu and Shao (2014) showed that the
+false discovery rate of the B-H procedure can be controlled below τ asymptotically.
+6 Choices of Diversified Weights
+In this section, several choices of the diversified weighting matrices are proposed. We
+emphasize that the requirement for the constructed weights is quite mild: they do not need
+to consistently estimate the true parameters. Instead, it suffices that they are informative
+with respect to the underlying matrix parameter.
+6.1 Observed characteristics
+Suppose βik = gk(bi, ηik) where gk(·) are unknown functions, bi is a vector of observable
+characteristics, and ηik is noise. We define Wβ as the transformations of bi, i.e,. Wβ,ik =
+ϕk(bi) with transformation functions ϕk(·). Similarly, we assume that there are observable
+characteristics ft for factors. Namely, Ftk = hk(ft, ξtk), where ξtk is noise. We then define
+23
+
+[PDF PAGE 24]
+WF,tk = φk(ft) with a set of transformation functions φk(·).
+It is not uncommon to observe individual-specific characteristics, which bring additional
+information regarding the singular vectors. For example, the “Netflix Challenge” called for
+a matrix completion problem (Bennett et al., 2007), where bi denotes customers’ demo-
+graphic characteristics such as age and sex, which might be related to their preferences. In
+addition, films are classified according to their genres: action, romance, sci-fi, and drama,
+which are denoted by ft. For example, Harper and Konstan (2015) provide user ratings
+of movies along with characteristics of users and movies. 8 In financial applications such
+as asset pricing, bi may consist of firm characteristics as numerous studies (e.g., Connor
+et al., 2012; Fan et al., 2016). Also, observed macroeconomic factors or Fama-French factors
+(Fama and French, 1993) can be used as ft.
+6.2 Exploiting extra samples
+Suppose we have access to additional data ( Yit, Xit) for i ∈ I1 and t ∈ T1, where I1 and T1
+are the index sets for extra data.
+Consider the subsample on t ∈ T1. We can write the model as Yt = Xt ◦ (βFt) + noise,
+for t ∈ T1, where Yt and Xt are the vectors of the same subjects but observed at the extra
+time t ∈ T1. This provides extra information about the factor loading β, and the size of T1
+is sufficient as long as it is larger than R. The diversified weight Wβ can be constructed
+based on:
+¯bi =
+X
+t∈T1
+XitYit/
+X
+t∈T1
+X 2
+it.
+We then construct Wβ,ik = ϕk(¯bi) for i ≤ N and k ≤ R using the nonlinear transformations
+8 Additionally, Yale University’s library has documented over 40 film genres, styles, categories, and
+series in its Film Studies Research Guide. For further reference, see https://guides.library.yale.edu/
+c.php?g=295800&p=1975072.
+24
+
+[PDF PAGE 25]
+of ¯bi to span R-dimensional space. Similarly, we can construct WF using the additional
+sample i ∈ I1.
+6.3 Initial transformation
+If neither characteristics nor the extra sample are available, we can still implement DP via
+transformations of the initial observations. Appealingly, it does not require extra data.
+We suppose there are “initial observations” to satisfy the following conditions:
+(i) For t0 = 1, {Ei,t0 : ∀i} is independent of {Ei,t : ∀i} for all t ≥ 2; and
+(ii) There is a known individual i, say i = 1, so that the noise {E1,t : ∀t} is independent
+of {Ei,t : ∀t} for all other i ∈ {1, . . . , N}/{1}.
+These conditions state that the idiosyncratic noise of the initial period and of some
+individual are independent of the rest. Then we can use transformations of first observation
+and the observation of i = 1 as the diversified weights: let
+b = (Y1,t0, ..., YN,t0)′, N × 1; Y1 = (Y1,1, ..., Y1,T )′, T × 1, and
+Wβ = (ϕ1(b), ..., ϕR(b)); WF = (ψ1(Y1), ..., ψR(Y1))
+where {ϕk : k ≤ R} and {ψk : k ≤ R} are the sets of transformation functions. Then apply
+it to data except for t = t0 and i = 1. The cost would be the loss of N + T observations in
+the panel, which is mild.
+25
+
+[PDF PAGE 26]
+7 Simulation results
+We evaluate the finite sample performance of our estimator in matrix completion design.
+In Section B of the supplement, we also examine the performance in other two designs:
+varying coefficient model and heterogeneous treatment effect.
+The DGP for the matrix completion design is as follows:
+Y = X ◦ (βF′ + E⋆) = X ◦ (βF′) + X ◦ E⋆
+| {z }
+:=E
+where βik = (2 ∗ cosk(bi) + 0.5 ∗ uik) ∗ N −(1−α)/2, and Ftk = 2 ∗ cosk(ft) + 0.5 ∗ νtk with
+bi, ft, uik, and νtk drawn from N (0, 1) independently. The noise E⋆
+it is generated from
+N (0, 1) independently. We note that the constant α ∈ (0, 1] determines the strength of
+factors. A larger (smaller) α implies stronger (weaker) factors. X is the binary matrix
+where Xit ∼ Bernoulli(pi) with pi drawn from Unif[0 .5, 0.8]. Throughout simulations, we
+fix the true rank at r = 2 and conduct 1 , 000 replications.
+We construct the diversified weights, Wβ and WF with R = 4, following Section 6,
+which are (1) Observed characteristics, (2) Extra sample averages, and (3) Initial transfor-
+mation. See Section B in the supplement for detailed implementation of each choice, the
+choice of the tuning parameter, and experiments with other values of R. We are interested
+in estimating three types of averages of the low-rank matrix: (I) “Block,” where G = I × T
+and |I| = |T |= 5; (II) “CS,” where G = {1, . . . , N} × {T }, and (III) “Serial,” where
+G = {N } × {1, . . . , T}.
+Table 1 displays coverage probabilities of the confidence intervals, with the target prob-
+ability 0.95. The weak factor setting ( α = 0.5) is particularly relevant to our theory as the
+26
+
+[PDF PAGE 27]
+Sample size Factor strength Diversified weights Block CS Serial
+N = T = 200
+α = 1
+Observed 0.932 0.940 0.950
+Extra 0.913 0.940 0.946
+Initial 0.874 0.945 0.951
+α = 0.5
+Observed 0.906 0.940 0.947
+Extra 0.904 0.945 0.947
+Initial 0.915 0.949 0.950
+N = T = 400
+α = 1
+Observed 0.942 0.954 0.952
+Extra 0.921 0.943 0.948
+Initial 0.884 0.945 0.944
+α = 0.5
+Observed 0.894 0.937 0.935
+Extra 0.891 0.949 0.950
+Initial 0.901 0.945 0.945
+Table 1: Coverage probabilities of our debiased estimators in the matrix completion model. The
+target probability is 0.95. “Observed,” “Extra,” and “Initial” refer to our debiased estimators
+that use diversified weights of observed characteristics, the extra sample averages, and the initial
+transformation, respectively. Three averages are estimated: (I) “Block,” where G = I × T
+and |I| = |T |= 5; (II) “CS,” where G = {1, . . . , N} × {T }, and (III) “Serial,” where G =
+{N } × {1, . . . , T}. In all specifications, we set R = 4 while the true rank is r = 2.
+direct rank estimation fails in this DGP. 9 The coverage probabilities are reasonably good
+especially when estimating the “CS” and “Serial” averages, although we do observe size
+distortions when estimating the “Block” average.
+To compare among choices of the weighting matrices, we fix N = T = 200 and α = 0.5
+(weak factors) and present the histograms of the standardized estimates, with the standard
+normal density, in Figure 1. For comparison, we include the nuclear norm penalized esti-
+mator (“Nucl”) whose standard error is simulation-based. The standard error is estimated
+for all other methods. It is evident that “Nucl” suffers from bias, and our estimators ap-
+proximate the standard normal distribution well for all group types and diversified weights.
+In the supplement we also compare the MSE of these methods. Not surprisingly, “Ob-
+9 The rank of the nuclear norm penalized estimator depends on the tuning parameter λ. For the choice
+of λ, we follow the methods from Chernozhukov et al. (2018, 2023); Choi et al. (2023). The choice of λ in
+these studies involves a choice of a small constant c >0. Chernozhukov et al. (2018, 2023) set c = 1/10
+while Choi et al. (2023) set c = 1/7. With both values, the rank of the nuclear norm penalized estimator
+is almost always one, whereas the true rank r is 2.
+27
+
+[PDF PAGE 28]
+Figure 1: Histograms of the standardized estimates in the noisy matrix completion model when
+N = T = 200 and α = 0.5. “Nucl” in the first row presents the nuclear norm penalized estimators.
+The solid line represents the standard normal distribution. For our debiased estimators, we set
+R = 4 while the true rank is r = 2.
+served” and “Extra” yield smaller MSE as they use extra information to specify the DP
+weights. But appealingly, the initial transformation, which does not require extra informa-
+tion, performs reasonably well.
+8 Empirical Study: Impact of the U.S. Presidential
+Election on the Federal Grants Allocation
+We apply the inferential theory presented in Section 5.1 to investigate the influence of the
+U.S. presidential election on the federal grant allocation to states. Although the specific
+28
+
+[PDF PAGE 29]
+allocation of federal funds is carried out by Congress, the U.S. president also wields notable
+influence in the grant allocation process. The role of the president in the allocation involves
+proposing annual federal budget proposals to Congress, signing or vetoing bills, and super-
+vising the executive agencies. In the allocation process, the presidents may seek to allocate
+more federal funds to the states that supported them in the election, for political incen-
+tives. This practice is commonly referred to as “pork-barrel politics.” For decades, this
+practice has been investigated in numerous studies both theoretically and empirically (e.g.,
+Larcinese et al., 2006; Berry et al., 2010). By employing the treatment effect estimation
+application presented in Section 5.1, we aim to test whether the pork-barrel politics exist
+or not, in the history of the U.S. presidential elections.
+We use the data of the U.S. federal grants, which cover fiscal years from 1953 to 2021
+and include 50 U.S. states in addition to the District of Columbia. 10 These data are
+publicly accessible on the websites of the U.S. Census Bureau, the National Associate of
+State Budget Officers (NASBO), and the Social Security Administration (SSA).
+Following the notation in Section 5.1, we define state i is “treated” if it supported
+the incumbent president of year t in the preceding election. We note that the treatment
+assignments in this case could potentially be endogenous. Nevertheless, we presume that
+they are randomly assigned treatments and proceed to apply our approach. We calculate
+the per-capital federal grant, denoted as Zit, for each state-year pair ( i, t). In order to
+detrend the data, we define Y (ι)
+it = X (ι)
+it × (Zit/ PN
+i=1 Zit) × 100 for each ι = 0 , 1, and
+assume that Y(ι) follows the model (5.1).
+Before proceeding to tests, we present the singular values of the nuclear norm penalized
+estimators for the treated and control samples (Figure 2). The singular value plots do
+10 In these data sets, the years 1960, 1972, and 1977 to 1980 are missing. As a result, our analysis does
+not include the Carter administration.
+29
+
+[PDF PAGE 30]
+not provide a very definitive understanding of the true rank. While several data-driven
+methods choose r = 2 as presented in Section A.3, we find that it does not lead to optimal
+out-of-sample performance in Section A.2. This motivates our method which does not rely
+on estimating the rank.
+Figure 2: The singular values of the (full-sample) nuclear norm penalized estimators for the
+treated and control sample, i.e., fMfull,(1) and fMfull,(0), respectively, in descending order. The left
+corresponds to the treated sample, while the right corresponds to the control sample.
+We construct the diversified weighting matrices following the observed characteristics
+approach explained in Section 6.1. To be specific, the columns of WF and Wβ consist
+of polynomial transformations (up to the second power) of the annual data of U.S. GDP
+growth rates and unemployment rates, and the state-by-state data on the averages of the
+population and the annual per-capita personal income from 1953 to 2021.
+To begin with, we estimate individual state effects , i.e., the overall time average treat-
+ment effects for each state. The individual state effects and their t-statistics are presented
+in Figure 3. For each state, the null hypothesis is that there is no pork-barrel politics, i.e.,
+the average treatment effect is non-positive. We reject the null hypothesis in 30 states at
+the 5% significance level and in 20 states at the 1% significance level. Figure 4 depicts the
+distribution of the states where the null hypotheses are rejected. These test results suggest
+that the pork-barrel politics exist in a larger number of states. We now turn to a very
+natural question: Why are some states enjoying the “pork,” while others are not?
+30
+
+[PDF PAGE 31]
+Figure 3: Individual state effects and corresponding t-statistics
+We observe that many of the states colored in dark green in Figure 4 are known as “loyal”
+states in that they have supported one party over decades. For example, DC has exclusively
+supported the Democratic Party since 1964, while AK, ID, OK, SD, UT, and WY have
+consistently supported the Republican Party since 1968. Inspired by this observation, we
+classify all 51 states based on their “loyalty” to a particular party. Specifically, we count
+the number of times that a state switches the party it supports, referred to as a “swing,”
+since the 1952 U.S. presidential election, in Table 2.
+Based on Table 2, we estimate the overall time average treatment effects for the state
+groups. The first plot in Figure 5 indicates a positive relation between the loyalty and treat-
+ment effects: stronger loyalty leads to more substantial treatment effects. This “rewarding-
+loyalty” pattern is even clearer with t-statistics in the second plot. Also, these t-statistics
+show that the pork-barrel politics exist in almost all groups. Only the t-statistic of the
+swing states is slightly lower than 2.33, and all other t-statistics are much larger. 11
+11 In the appendix, we provide additional test results for other group averages: group averages for each
+Party governance and each presidential administration.
+31
+
+[PDF PAGE 32]
+Figure 4: The states in dark green indicate the rejection of the null hypothesis at a significance
+level of 1%, whereas the states in light green correspond to a significance level of 5%. In the
+gray-colored states, the null hypotheses are not rejected. This figure is created with MapChart.
+Group # of swings States
+Swing states 8 ∼ FL, GA, LA, OH
+Weak swing states 6 ∼7 AR, IA, KY, MS, MO, PA, TN, WV, WI
+Neutral states 5 AL, CO, DE, HI, MD, MI, NV, NH, NM, NY, NC, RI
+Weak loyal states 3 ∼4 AZ, CA, CT, IL, IN, ME, MA, MN, MT, NJ, OR,
+SC, TX, VT, V A, W A
+Loyal states 0 ∼2 AK, DC, ID, KS, NE, ND, OK, SD, UT, WY
+Table 2: The counts of swings
+Figure 5: Loyalty effects and corresponding t-statistics
+32
+
+[PDF PAGE 33]
+References
+Abbe, E., Fan, J., Wang, K., and Zhong, Y. (2020). Entrywise eigenvector analysis of random
+matrices with low expected rank. Annals of statistics , 48(3):1452.
+Athey, S., Bayati, M., Doudchenko, N., Imbens, G., and Khosravi, K. (2021). Matrix completion
+methods for causal panel data models. Journal of the American Statistical Association , pages
+1–15.
+Bai, J. and Ng, S. (2023). Approximate factor models with weaker loadings. Journal of Econo-
+metrics.
+Barigozzi, M. and Cho, H. (2020). Consistent estimation of high-dimensional factor models when
+the factor number is over-estimated. Electronic Journal of Statistics , 14(2):2892 – 2921.
+Benjamini, Y. and Hochberg, Y. (1995). Controlling the false discovery rate: a practical and pow-
+erful approach to multiple testing. Journal of the Royal statistical society: series B (Method-
+ological), 57(1):289–300.
+Bennett, J., Lanning, S., et al. (2007). The netflix prize. In Proceedings of KDD cup and workshop,
+volume 2007, page 35. New York.
+Berry, C. R., Burden, B. C., and Howell, W. G. (2010). The president and the distribution of
+federal spending. American Political Science Review, 104(4):783–799.
+Cai, C., Li, G., Chi, Y., Poor, H. V., and Chen, Y. (2021). Subspace estimation from unbalanced
+and incomplete data matrices: ℓ2,∞ statistical guarantees. Annals of Statistics , 49(2):944–967.
+Cai, T. T. and Zhang, A. (2018). Rate-optimal perturbation bounds for singular subspaces with
+applications to high-dimensional statistics. The Annals of Statistics , 46(1):60–89.
+Cand` es, E. J. and Recht, B. (2009). Exact matrix completion via convex optimization. Founda-
+tions of Computational mathematics , 9(6):717.
+Cape, J., Tang, M., and Priebe, C. E. (2019). The two-to-infinity norm and singular subspace
+geometry with applications to high-dimensional statistics. The Annals of Statistics, 47(5):2405–
+2439.
+Chen, Y., Fan, J., Ma, C., and Yan, Y. (2019). Inference and uncertainty quantification for noisy
+matrix completion. Proceedings of the National Academy of Sciences , 116(46):22931–22937.
+Chernozhukov, V., Hansen, C., Liao, Y., and Zhu, Y. (2018). arXiv preprint arXiv:1812.08089 .
+Chernozhukov, V., Hansen, C., Liao, Y., and Zhu, Y. (2023). Inference for low-rank models. The
+Annals of statistics , 51(3):1309–1330.
+33
+
+[PDF PAGE 34]
+Chiang, K.-Y., Hsieh, C.-J., and Dhillon, I. S. (2015). Matrix completion with noisy side infor-
+mation. Advances in neural information processing systems , 28.
+Choi, J., Kwon, H., and Liao, Y. (2023). Inference for low-rank completion without sample
+splitting with application to treatment effect estimation. arXiv preprint arXiv:2307.16370 .
+Connor, G., Hagmann, M., and Linton, O. (2012). Efficient semiparametric estimation of the
+fama–french model and extensions. Econometrica, 80(2):713–754.
+Fama, E. F. and French, K. R. (1993). Common risk factors in the returns on stocks and bonds.
+Journal of financial economics , 33(1):3–56.
+Fan, J., Ke, Y., Sun, Q., and Zhou, W.-X. (2019). Farmtest: Factor-adjusted robust multiple
+testing with approximate false discovery control. Journal of the American Statistical Associa-
+tion.
+Fan, J. and Liao, Y. (2022). Learning latent factors from diversified projections and its appli-
+cations to over-estimated and weak factors. Journal of the American Statistical Association ,
+117(538):909–924.
+Fan, J., Liao, Y., and Wang, W. (2016). Projected principal component analysis in factor models.
+Annals of statistics , 44(1):219.
+Friguet, C., Kloareg, M., and Causeur, D. (2009). A factor model approach to multiple testing
+under dependence. Journal of the American Statistical Association , 104(488):1406–1415.
+Harper, F. M. and Konstan, J. A. (2015). The movielens datasets: History and context. Acm
+transactions on interactive intelligent systems (tiis) , 5(4):1–19.
+Imbens, G. W. and Rubin, D. B. (2015). Causal inference in statistics, social, and biomedical
+sciences. Cambridge University Press.
+Jain, P. and Dhillon, I. S. (2013). Provable inductive matrix completion. arXiv preprint
+arXiv:1306.0626.
+Johnstone, I. M. and Lu, A. Y. (2009). On consistency and sparsity for principal components
+analysis in high dimensions. Journal of the American Statistical Association, 104(486):682–693.
+Kelly, B. T., Pruitt, S., and Su, Y. (2020). Instrumented principal component analysis. Available
+at SSRN 2983919 .
+Keshavan, R. H., Montanari, A., and Oh, S. (2010). Matrix completion from a few entries. IEEE
+transactions on information theory , 56(6):2980–2998.
+Klopp, O. (2014). Noisy low-rank matrix completion with general sampling distribution.
+Bernoulli, 20(1):282–303.
+34
+
+[PDF PAGE 35]
+Koltchinskii, V., L ¨OFFLER, M., and NICKL, R. (2020). Efficient estimation of linear functionals
+of principal components. The Annals of Statistics , 48(1):464–490.
+Larcinese, V., Rizzo, L., and Testa, C. (2006). Allocating the us federal budget to the states: The
+impact of the president. The Journal of Politics , 68(2):447–456.
+Leek, J. T. and Storey, J. D. (2008). A general framework for multiple testing dependence.
+Proceedings of the National Academy of Sciences , 105(48):18718–18723.
+Liu, W. and Shao, Q.-M. (2014). Phase transition and regularized bootstrap in large-scale t-tests
+with false discovery rate control. The Annals of Statistics , pages 2003–2025.
+Ma, W. and Chen, G. H. (2019). Missing not at random in matrix completion: The effectiveness
+of estimating missingness probabilities under a low nuclear norm assumption. Advances in
+Neural Information Processing Systems , 32.
+Negahban, S. and Wainwright, M. J. (2011). Estimation of (near) low-rank matrices with noise
+and high-dimensional scaling. The Annals of Statistics , 39(2):1069 – 1097.
+Onatski, A. (2012). Asymptotics of the principal components estimator of large factor models
+with weakly influential factors. Journal of Econometrics , 168(2):244–258.
+Rubin, D. B. (1974). Estimating causal effects of treatments in randomized and nonrandomized
+studies. Journal of educational Psychology , 66(5):688.
+Wang, J., Zhao, Q., Hastie, T., and Owen, A. B. (2017). Confounder adjustment in multiple
+hypothesis testing. Annals of statistics , 45(5):1863.
+Wang, Y. and Elhamifar, E. (2018). High rank matrix completion with side information. In
+Proceedings of the AAAI Conference on Artificial Intelligence , volume 32.
+Xia, D. and Yuan, M. (2021). Statistical inferences of linear forms for noisy matrix completion.
+Journal of the Royal Statistical Society: Series B (Statistical Methodology) , 83(1):58–77.
+Xu, M., Jin, R., and Zhou, Z.-H. (2013). Speedup matrix completion with side information:
+Application to multi-label learning. Advances in neural information processing systems , 26.
+Yan, Y., Chen, Y., and Fan, J. (2024). Inference for heteroskedastic pca with missing data. The
+Annals of Statistics , 52(2):729–756.
+Zhu, Z., Wang, T., and Samworth, R. J. (2022). High-dimensional principal component analysis
+with heterogeneous missingness. Journal of the Royal Statistical Society Series B: Statistical
+Methodology, 84(5):2000–2031.
+35

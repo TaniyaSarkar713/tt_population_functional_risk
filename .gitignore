@@ -1,0 +1,21 @@
+# macOS metadata
+.DS_Store
+
+# Python and plotting caches
+__pycache__/
+*.py[cod]
+.mplconfig/
+
+# LaTeX build files; keep manuscripts, PDFs, figures, and research results
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.out
+*.run.xml
+*.toc
+*.synctex.gz
+**/paper/*.log
+**/revised_paper/*.log

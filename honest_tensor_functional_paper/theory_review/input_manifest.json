@@ -1,0 +1,11 @@
+{
+  "started_utc": "2026-09-09T22:07:15.455951+00:00",
+  "target": "../paper/main.pdf",
+  "input_sha256": {
+    "main.pdf": "b5fe6a9cdc230f5fa5dd43b850739550688240b526eff9adb9d73ab793947c8f",
+    "main.tex": "b2802b4127e3cd9f3da0b51bbb8e9d48cad8298f39018aed882a5e0847108217",
+    "appendix.tex": "151d647b00d9cb7d08b41868e19d409dbcd5756b53a79dbe54b58fd44773a7a1",
+    "references.bib": "feabc4e46871e12244b31bcb979e21c24019425a4f7754d493046335b88d11bb"
+  },
+  "scope": "Mathematical audit under attached instructions; original manuscript preserved."
+}

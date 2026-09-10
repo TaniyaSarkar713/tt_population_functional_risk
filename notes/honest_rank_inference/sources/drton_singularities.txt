@@ -1,0 +1,1880 @@
+
+[PDF PAGE 1]
+arXiv:math/0703360v3  [math.ST]  2 Apr 2009
+The Annals of Statistics
+2009, Vol. 37, No. 2, 979–1012
+DOI:
+10.1214/07-AOS571
+c⃝ Institute of Mathematical Statistics , 2009
+LIKELIHOOD RATIO TESTS AND SINGULARITIES 1
+By Mathias Drton
+University of Chicago
+Many statistical hypotheses can be formulated in terms of po ly-
+nomial equalities and inequalities in the unknown paramete rs and
+thus correspond to semi-algebraic subsets of the parameter space.
+We consider large sample asymptotics for the likelihood rat io test of
+such hypotheses in models that satisfy standard probabilis tic regular-
+ity conditions. We show that the assumptions of Chernoﬀ’s th eorem
+hold for semi-algebraic sets such that the asymptotics are d etermined
+by the tangent cone at the true parameter point. At boundary p oints
+or singularities, the tangent cone need not be a linear space and
+limiting distributions other than chi-square distributio ns may arise.
+While boundary points often lead to mixtures of chi-square d istribu-
+tions, singularities give rise to nonstandard limits. We de monstrate
+that minima of chi-square random variables are important fo r locally
+identiﬁable models, and in a study of the factor analysis mod el with
+one factor, we reveal connections to eigenvalues of Wishart matrices.
+1. Introduction. Let PΘ = (Pθ |θ ∈ Θ) be a parametric family of prob-
+ability distributions on some measurable space. Suppose th at Θ is an open
+subset of Rk. For a hypothesis Θ 0 ⊆ Θ, consider testing
+H0 :θ ∈ Θ 0 vs. H1 :θ ∈ Θ \ Θ 0(1.1)
+based on a large sample taken from a distribution in PΘ . Under regularity
+conditions, the null distribution of the likelihood ratio s tatistic for the testing
+problem (
+1.1) can be approximated by the chi-square distribution χ2
+c with
+degrees of freedomc equal to the codimension of Θ 0, that is,c =k − dim(Θ 0).
+The necessary regularity conditions combine probabilisti c conditions on PΘ
+with geometric smoothness assumptions about Θ 0. For example, the asymp-
+totic approximation for the likelihood ratio test is valid w hen PΘ is a regular
+Received March 2007; revised September 2007.
+1Supported in part by NSF Grant DMS-05-05612 and the Institut e for Mathematics
+and its Applications.
+AMS 2000 subject classiﬁcations. 60E05, 62H10.
+Key words and phrases. Algebraic statistics, factor analysis, large sample asymp totics,
+semi-algebraic set, tangent cone.
+This is an electronic reprint of the original article publis hed by the
+Institute of Mathematical Statistics in The Annals of Statistics ,
+2009, Vol. 37, No. 2, 979–1012 . This reprint diﬀers from the original in pagination
+and typographic detail.
+1
+
+[PDF PAGE 2]
+2 M. DRTON
+exponential family and Θ 0 a smooth manifold, in which case the submodel
+PΘ 0 = (Pθ |θ ∈ Θ 0) is called a curved exponential family [18].
+In this paper we consider the situation where probabilistic regularity con-
+ditions about PΘ hold but the null hypothesis Θ 0 is a semi-algebraic set,
+that is, a set deﬁned by polynomial equalities and inequalit ies in θ. A semi-
+algebraic set has nice local geometric properties but it may have boundary
+points as well as singularities at which χ2-asymptotics are no longer valid.
+(For a rigorous deﬁnition of singularities of algebraic set s see, e.g., [3], Section
+3.2 or [ 7], Section 9.) The case of semi-algebraic sets is important b ecause
+many statistical hypotheses exhibit this special structur e [ 9, 13]. Moreover,
+tools from algebraic geometry help in studying semi-algebr aic sets and allow
+to make progress in the understanding of the likelihood rati o test.
+Boundary points of statistical hypotheses have been discus sed in the lit-
+erature and often lead to asymptotic distributions that are mixtures of χ2-
+distributions. Two classic examples where boundary issues arise are variance
+component models [ 20] and factor analysis [ 25]; see also [ 24]. Singularities,
+however, do not seem to have received as much attention. For e xample, the
+parameter spaces of factor analysis models, which we will ta ke up later in
+this paper, contain singularities at which the asymptotic d istribution of the
+likelihood ratio statistic is not a χ2-mixture.
+Issues with singularities can be illustrated nicely for hyp otheses about
+the mean vector of a bivariate normal distribution N2(µ,I ) with the covari-
+ance matrix equal to the identity matrix I. For a closed set Θ 0 ⊆ Θ := R2,
+the likelihood ratio statistic λn for testing ( 1.1) is equal to the product of
+the sample size n and the squared Euclidean distance between the sample
+mean vector and Θ 0. The following two examples demonstrate nonstandard
+asymptotics for λn; the connection to tangent cones is based on a result of
+Chernoﬀ [ 6] that we will revisit in this paper.
+Example 1.1 (Nodal cubic). Let Θ 0 = {µ ∈ R2 |µ2
+2 =µ3
+1 +µ2
+1} be the
+curve on the left in Figure
+1, which can be parametrized as f (t) = [t2 −
+1,t (t2 − 1)]. The curve has a singularity at the point of self-interse ctionµ = 0.
+Fig. 1. Nodal and cuspidal cubic.
+
+[PDF PAGE 3]
+LIKELIHOOD RATIO TESTS AND SINGULARITIES 3
+The lines µ2 = ±µ1 in the plot indicate the tangent cone at µ = 0. If µ = 0
+is the true parameter point and n → ∞, then the likelihood ratio statistic
+λn converges to the distribution of the squared Euclidean dist ance between
+a draw from N2(0,I ) and the lines µ2 = ±µ1, that is, the distribution of the
+minimum of two independent χ2
+1-random variables.
+Example 1.2 (Cuspidal cubic). Let Θ 0 = {µ ∈ R2 |µ2
+2 =µ3
+1} be the
+curve with parametrization f (t) = (t2,t 3) shown on the right in Figure
+1.
+If the true parameter point is the cusp µ = 0, then the asymptotic dis-
+tribution of λn is the mixture 1
+2χ2
+1 + 1
+2χ2
+2. This is the distribution of the
+squared Euclidean distance between a draw from N2(0,I ) and the tangent
+cone {µ |µ1 ≥ 0,µ 2 = 0}.
+In the above examples, points other than the origin are smoot h points
+at which the curves locally look like a line. Thus, away from t he origin
+the standard χ2-asymptotics, here χ2
+1, apply. However, while χ2-limits arise
+almost everywhere, the convergence is not uniform and a very large sample
+size may be required for the χ2-distribution to provide a good approximation
+to the distribution of λn if the true parameter is close to the singular locus.
+An important point is also that limiting distributions at si ngularities can be
+stochastically larger (Example
+1.2) as well as smaller (Example 1.1) than
+the χ2-distribution obtained at smooth points.
+The remainder of this paper begins with a review of the asympt otic theory
+for the likelihood ratio test (Section 2). We then show that the geometric
+regularity conditions in this theory are satisﬁed for semi- algebraic hypothe-
+ses (Section 3). In Section 4 we discuss algebraic methods that are helpful
+for determining tangent cones of semi-algebraic sets and ca n be used in par-
+ticular to bound the asymptotic p-value of the likelihood ratio test. These
+methods are applied to factor analysis in Sections 5 and 6. Concluding re-
+marks are given in Section 7.
+2. Likelihood ratio tests and tangent cones. Suppose we observe a sam-
+ple of independent and identically distributed random vectorsX (1),...,X (n) ∈
+Rm and that the distribution of X (i) belongs to the statistical model
+PΘ = (Pθ |θ ∈ Θ). We assume that the distributions in PΘ are dominated by
+a common σ-ﬁnite measure ν with respect to which they have probability
+density functions pθ : Rm → [0, ∞). For sample realizations x(1),...,x (n), let
+ℓn : Θ → R, θ ↦→
+n∑
+i=1
+logpθ(x(i))
+be the log-likelihood function of the model PΘ . For Θ 0 ⊆ Θ, a maximum
+likelihood estimator ˆθn,Θ 0 in the (sub-)model PΘ 0 = (Pθ |θ ∈ Θ 0) satisﬁes
+ℓn(ˆθn,Θ 0) = max
+θ∈Θ 0
+ℓn(θ).
+
+[PDF PAGE 4]
+4 M. DRTON
+The likelihood ratio statistic for testing the ﬁt of PΘ 0 , that is, for testing
+(1.1), is
+λn = 2
+(
+sup
+θ∈Θ
+ℓn(θ) − sup
+θ∈Θ 0
+ℓn(θ)
+)
+.(2.1)
+For our study of large sample asymptotics for λn, we base ourselves on van
+der Vaart [
+34], Chapter 16, and make the following probabilistic regular ity
+assumptions. Recall that the model PΘ is diﬀerentiable in quadratic mean
+at θ ∈ Θ if there exists a measurable map ˙ℓθ : Rm → Rk such that
+lim
+h→0
+1
+∥h∥2
+∫
+Rm
+( √
+pθ+h(x) −
+√
+pθ(x) − 1
+2ht ˙ℓθ(x)
+√
+pθ(x)
+) 2
+dν(x) = 0.
+Lemma 7.6 in [ 34] gives a simple suﬃcient condition for diﬀerentiability in
+quadratic mean.
+Definition 2.1. A statistical model PΘ is regular at θ ∈ Θ ⊆ Rk if the
+following conditions hold:
+(i) the point θ is in the interior of Θ, which is assumed to be nonempty;
+(ii) the model PΘ is diﬀerentiable in quadratic mean at θ with an invert-
+ible Fisher-information matrix I(θ) = Eθ[ ˙ℓθ(X) ˙ℓθ(X)t];
+(iii) there exists a neighborhood U (θ) ⊆ Θ of θ and a measurable function
+˙ℓ : Rm → R, square-integrable as
+∫
+Rm ˙ℓ(x)2dPθ(x)< ∞, such that
+| logpθ1(x) − logpθ2(x)| ≤ ˙ℓ(x)∥θ1 −θ2∥ ∀ θ1,θ 2 ∈U (θ).
+(iv) the maximum likelihood estimator ˆθn,Θ is consistent under Pθ.
+Example 2.2. Let Θ = Rm×m
+pd be the cone of symmetric positive deﬁnite
+m ×m-matrices. The centered multivariate normal distribution s (Nm(0, Σ) |
+Σ ∈ Θ) form a regular exponential family (the natural parameter space is
+an open set). Such a family is regular in the sense of Deﬁnitio n 2.1 at all of
+its parameter points. In subsequent examples we tacitly ide ntify the space
+of symmetric m ×m-matrices, denoted Rm×m
+sym , with R(m+1
+2 ) and index the
+vectors in the latter space by ordered pairs ij withi ≤j. The inverse I(Σ) −1
+of the Fisher-information for Σ = ( σij) is then the
+( m+1
+2
+)
+×
+( m+1
+2
+)
+-matrix with
+(ij,kℓ )-entry σikσjℓ +σiℓσjk .
+For well-behaved large sample asymptotics of the likelihoo d ratio statistic
+λn at a true parameter point θ0 in the null hypothesis Θ 0, the probabilistic
+assumptions made above need to be complemented with assumpt ions about
+the local geometry of Θ 0 at θ0. This local geometry expresses itself in the
+tangent cone.
+
+[PDF PAGE 5]
+LIKELIHOOD RATIO TESTS AND SINGULARITIES 5
+Definition 2.3. The tangent cone TΘ (θ) of the set Θ ⊆ Rk at the point
+θ ∈ Rk is the set of vectors in Rk that are limits of sequences αn(θn −θ),
+where αn are positive reals and θn ∈ Θ converge to θ.
+The tangent cone TΘ (θ) is a closed set that is a cone in the sense that
+if τ ∈TΘ (θ) then the half-ray {λτ |λ ≥ 0} is contained in TΘ (θ). We state
+some properties of tangent cones that can be found for exampl e in [ 23].
+Lemma 2.4. Letθ ∈ Rk and Θ , Θ 1,..., Θ m ⊆ Rk.
+(i) TΘ 1∪···∪Θ m(θ) =TΘ 1(θ) ∪ · · · ∪TΘ m(θ).
+(ii) TΘ 1∩···∩Θ m(θ) ⊆TΘ 1(θ) ∩ · · · ∩TΘ m(θ).
+(iii) If Θ −θ is a cone, then TΘ (θ) is the topological closure of Θ −θ.
+(iv) Let Θ = f (Γ) for some diﬀerentiable map f : Rd → Rk and some open
+set Γ ⊆ Rd. If θ = f (γ) for some γ ∈ Γ , then TΘ (θ) contains the linear space
+spanned by the columns of the Jacobian
+( ∂fi(γ)
+∂γj
+)
+∈ Rk×d.
+The next deﬁnition describes a regularity requirement on th e local geom-
+etry of a hypothesis Θ 0 at a point θ0; see [ 23], Proposition 6.2 and [ 14].
+Definition 2.5. The set Θ ⊆ Rk is Chernoﬀ-regular at θ if for every
+vectorτ in the tangent cone TΘ (θ) there exist ε> 0 and a map α : [0,ε ) → Θ
+with α(0) =θ such that τ = limt→0+[α(t) −α(0)]/t.
+Under Chernoﬀ-regularity, likelihood ratio statistics co nverge to Maha-
+lanobis distances between a random draw from a multivariate normal distri-
+bution and the tangent cone at the true parameter point θ0. This result ﬁrst
+appeared in [ 6]. The version given here is proven in [ 34], Theorem 16.7. Note
+that under Chernoﬀ-regularity the sets √n(Θ 0 −θ0) converge to TΘ 0(θ0) in
+the sense of [ 34]; compare [ 14].
+Theorem 2.6. Letθ0 ∈ Θ 0 ⊆ Θ ⊆ Rk be a true parameter point at which
+the model PΘ is regular with Fisher-information I(θ0). Let ¯Z ∼ Nk(0,I (θ0)−1).
+If Θ 0 is Chernoﬀ-regular at θ0 and the maximum likelihood estimator ˆθn,Θ 0
+is consistent, then as n tends to inﬁnity, the likelihood ratio statistic λn
+converges to the distribution of the squared Mahalanobis di stance
+min
+τ ∈TΘ 0 (θ0)
+( ¯Z −τ )tI(θ0)( ¯Z −τ ).
+If I(θ0) = I(θ0)t/2I(θ0)1/2 and Z ∼ N k(0,I ) is a standard normal vector,
+then the squared Mahalanobis distance has the same distribu tion as the
+
+[PDF PAGE 6]
+6 M. DRTON
+squared Euclidean distance
+min
+τ ∈TΘ 0 (θ0)
+∥Z −I(θ0)1/2τ ∥2
+betweenZ and the linearly transformed tangent cone I(θ0)1/2TΘ 0(θ0).
+We remark that changing the matrix square root I(θ0)1/2 corresponds to
+an orthogonal transformation under which Euclidean distan ces as well as
+the standard normal distribution are invariant.
+If the tangent cone TΘ 0(θ0) in Theorem 2.6 is a d-dimensional linear
+subspace of Rk, then we recover the standard χ2-asymptotics because the
+squared Euclidean distance between a d-dimensional subspace and a stan-
+dard normal vector follows a χ2
+k−d-distribution. Another well-known case
+arises if TΘ 0(θ0) is a convex cone. In this case the limiting distribution is
+a mixture of χ2-distributions with degrees of freedom larger than or equal
+to the codimension of TΘ 0(θ0); see [
+19, 25, 26, 28, 29, 31] and Example 1.2.
+These mixtures are also known as chi-bar-square distributi ons.
+The next example gives another important type of nonstandar d limiting
+distributions that we have already encountered in the artiﬁ cial Example 1.1.
+Example 2.7. Suppose we wish to test whether the marginal indepen-
+dence X1 ⊥ ⊥X2 and the conditional independence X1 ⊥ ⊥X2 |X3 hold si-
+multaneously in (X1,X 2,X 3)t ∼ N3(0, Σ). This is the case if and only if the
+unknown covariance matrix Σ = ( σij) satisﬁes that σ12 = 0 and σ13σ23 = 0.
+Deﬁne the linear space Li = {z ∈ R3×3
+sym |z12 =zi3 = 0} for i = 1, 2. The null
+hypothesis Θ 0 ⊆ R3×3
+sym comprises the positive deﬁnite matrices in L1 ∪L2.
+A true covariance matrix Σ 0 that is not diagonal belongs either to L1 or to
+L2 such that the tangent cone TΘ 0(Σ 0) is equal to L1 or L2, respectively.
+Since dim(Li) = 4, it follows that λn converges to a χ2
+6−4 =χ2
+2-distribution.
+If, however, Σ 0 is diagonal then Θ 0 − Σ 0 coincides with the closed cone
+L1 ∪L2 near the origin and, by Lemma
+2.4(iii), TΘ 0(Σ 0) = L1 ∪L2. The
+Fisher-informationI(Σ 0) and its symmetric square-root I(Σ 0)1/2 are now di-
+agonal. Diagonal transformations leave the cone L1 ∪L2 invariant such that
+by Theorem 2.6, λn converges in distribution to the minimum of Z 2
+12 +Z 2
+13
+and Z 2
+12 +Z 2
+23 for a standard normal random vector Z ∈ R3×3
+sym. This is the
+distribution of W12 + min(W13,W 23), where W12,W13 andW23 are indepen-
+dent χ2
+1-random variables. We note that this example can also be work ed
+out by elementary means [
+8].
+Examples in which Chernoﬀ-regularity fails and the likelih ood ratio statis-
+tic λn does not converge in distribution can be found in [ 9] and [ 14].
+
+[PDF PAGE 7]
+LIKELIHOOD RATIO TESTS AND SINGULARITIES 7
+Remark 2.8 (Comparing nested submodels). The above setup considers
+problem ( 1.1) that compares the ﬁt of the submodel PΘ 0 to the ﬁt of the
+saturated model PΘ . Instead, one may wish to compare to the ﬁt of another
+submodel PΘ 1 , that is, test H0 :θ ∈ Θ 0 versus H1 :θ ∈ Θ 1 \ Θ 0, where Θ 0 ⊆
+Θ 1 ⊆ Θ. However, if Theorem 2.6 applies to both ( 1.1) and the problem
+H0 :θ ∈ Θ 1 versus H1 :θ ∈ Θ \ Θ 1, then we can deduce that the asymptotic
+distribution of the likelihood ratio statistic
+λn = 2
+(
+sup
+θ∈Θ 1
+ℓn(θ) − sup
+θ∈Θ 0
+ℓn(θ)
+)
+is given by the diﬀerence of the squared Mahalanobis distanc es between the
+random vector Z ∼ Nk(0,I (θ0)−1) and the two tangent cones, namely
+λn
+n→∞− →d
+[
+min
+θ∈TΘ 0 (θ0)
+(Z −θ)tI(θ0)(Z −θ)
+]
+−
+[
+min
+θ∈TΘ 1 (θ0)
+(Z −θ)tI(θ0)(Z −θ)
+]
+.
+Remark 2.9 (Maximum likelihood estimators). Under the conditions
+of Theorem 2.6, the maximum likelihood estimator ˆθn,Θ 0 can be shown to
+be distributed like the projection of Z ∼ Nk(0,I (θ0)−1) on the tangent cone
+TΘ 0(θ0) [ 34], Theorem 7.12. Here, projection refers to the minimizer of the
+Mahalanobis distance (Z −θ)tI(θ0)(Z −θ) over θ ∈TΘ 0(θ0). This minimizer
+is almost surely unique [ 14], Proposition 4.2. For results on local maximizers
+of the likelihood function, see [ 27].
+3. Semi-algebraic hypotheses. In principle, Chernoﬀ regularity has to be
+veriﬁed in every application of Theorem 2.6. However, as we detail in this
+section, Chernoﬀ regularity is automatic if the hypothesis Θ 0 is given by a
+semi-algebraic set. The map α in Deﬁnition 2.5 can be chosen very smooth
+for semi-algebraic sets.
+3.1. Semi-algebraic sets. We begin by brieﬂy reviewing some of the prop-
+erties of semi-algebraic sets. In-depth treatments can be f ound in [ 2, 3, 5].
+Definition 3.1. Let R[t] = R[t1,...,t k] be the ring of polynomials in
+the indeterminates t1,...,t k with real coeﬃcients. A basic semi-algebraic set
+is a subset of Rk that is of the form
+Θ = {θ ∈ Rk |f (θ) = 0 ∀f ∈F,h (θ)> 0 ∀h ∈H},
+where F,H ⊂ R[t] are (possibly empty) collections of polynomials and H is
+ﬁnite. A semi-algebraic set is a ﬁnite union of basic semi-algebraic sets. If
+H = ∅ then Θ is called a real algebraic variety .
+
+[PDF PAGE 8]
+8 M. DRTON
+Complements, ﬁnite unions and ﬁnite intersections of semi- algebraic sets
+are again semi-algebraic. If Γ ⊆ Rd is semi-algebraic and f : Rd → Rk a poly-
+nomial map (or a rational map deﬁned everywhere on Γ), then th e image
+f (Γ) is a semi-algebraic set. The parameter spaces of many sta tistical models
+are such images; compare [ 22].
+A semi-algebraic set Θ can be written as a disjoint union of ﬁn itely many
+smooth manifolds Θ 1,..., Θ s such that if Θ i and the closure cl(Θ j) have
+a nonempty intersection then Θ i ⊆ cl(Θ j) and dim(Θ i)< dim(Θ j). Such a
+partition is known as a stratiﬁcation of Θ. The dimension of Θ can be deﬁned
+as the largest dimension of any manifold in the stratiﬁcatio n. If Θ = f (Γ) is
+the image of an open semi-algebraic set Γ under a polynomial m ap f , then
+dim(Θ) is equal to the maximal rank of any Jacobian of f (γ) for γ ∈ Γ. This
+maximal rank is achieved at almost every γ.
+Definition 3.2. For a point θ in the semi-algebraic set Θ, deﬁne dm to
+be the dimension of the semi-algebraic set Θ ∩B1/m(θ), whereB1/m(θ) is the
+open ball of radius 1 /m aroundθ. The sequence (dm)m∈N being nonincreas-
+ing, there exists m0 such that dm =dm0 for all m ≥m0. The local dimension
+of θ is deﬁned to be dim θ(Θ) := dm0 , which is no larger than dim(Θ).
+If there exists a ball Br(θ) such that the semi-algebraic set Θ ∩Br(θ)
+is a d-dimensional smooth manifold then θ is a smooth point and its local
+dimension is dim θ(Θ) = d. Almost all points θ of a semi-algebraic set Θ are
+smooth of local dimension dim θ(Θ) = dim(Θ). In other words, the set of
+points θ ∈ Θ with dim θ(Θ) < dim(Θ) is a subset of dimension smaller than
+dim(Θ).
+A semi-algebraic set, even a real algebraic variety, may have smooth points
+of diﬀerent local dimensions. For example, the so-called Wh itney umbrella
+deﬁned by x2z =y2 in R3 has two-dimensional smooth points, which arise
+if x ̸= 0 or y ̸= 0. The points with x =y = 0 and z ≥ 0 are not smooth, but
+the points x =y = 0 and z< 0 lie on a line and are thus one-dimensional
+smooth points. However, if Θ = f (Γ) for an open semi-algebraic set Γ and a
+polynomial map f , then Θ is pure-dimensional in the sense that dim θ(Θ) =
+dim(Θ) for all θ ∈ Θ [ 11].
+3.2. Tangent cones of semi-algebraic sets. If Θ is semi-algebraic, then
+the tangent cone TΘ (θ) at a point θ ∈ Θ is also a semi-algebraic set. The
+dimension of the tangent cone TΘ (θ) is at most dim(Θ) and may be strictly
+smaller even for polynomial images of open semi-algebraic s ets. For example,
+if f : (s,t ) ↦→(s2 +t2,s 3 +t3) then f (R2) is the two-dimensional set that
+includes all points that are on or to the right of the cuspidal cubic shown
+in Figure 1. At the origin, this two-dimensional set has the one-dimens ional
+dashed half-ray as tangent cone.
+
+[PDF PAGE 9]
+LIKELIHOOD RATIO TESTS AND SINGULARITIES 9
+Despite this possible diﬀerence between the dimension of th e tangent cone
+and the dimension of the set itself, the tangent cones to semi -algebraic sets
+are very well-behaved: the vectors in the tangent cone are ta ngent to very
+smooth curves in the semi-algebraic set. This has the follow ing important
+consequence that ensures the existence of limiting distrib utions in many
+examples.
+Lemma 3.3. A semi-algebraic set Θ ⊆ Rk is everywhere Chernoﬀ regu-
+lar.
+Proof. Proposition 2 of [ 21] shows that if Θ is a real algebraic vari-
+ety and τ ∈TΘ (θ) for some θ ∈ Θ, then there exists a real analytic curve
+α : [0,ε ) → Θ with α(0) =θ that for t ∈ [0,ε ) has a convergent Taylor series
+expansion as α(t) =τt r +O(tr+1) with r ≥ 1. The result for semi-algebraic
+sets can be proven in exactly the same fashion by altering Cla im 2 in [ 21] to
+make a requirement about inequalities hj(θ)> 0. By Lemma 2.4(i) it suﬃces
+to consider a basic semi-algebraic set. □
+Remark 3.4. Let (Pθ |θ ∈ Θ) be a regular exponential family. Drton
+and Sullivant [ 9] deﬁne a submodel ( Pθ |θ ∈ Θ 0) to be an algebraic expo-
+nential family if Θ 0 ⊂ Θ is diﬀeomorphic to a semi-algebraic set. By Lemma
+3.3, Θ 0 is everywhere Chernoﬀ-regular such that Theorem 2.6 applies at
+every point θ0 ∈ Θ 0 at which the maximum likelihood estimator ˆθn,Θ 0 is
+consistent. According to [ 4], Theorem 3.1, Corollary 3.3, ˆθn,Θ 0 is consistent
+if Θ 0 is locally compact at θ0. A semi-algebraic set need not be locally com-
+pact. However, the likelihood ratio statistic λn does not change if in ( 2.1)
+we replace Θ 0 by the union of Θ 0 and the closure of Bǫ(θ0) ∩ Θ 0. This clo-
+sure is meaningful for small ǫ because θ0 is in the interior of Θ. With this
+change Θ 0 is locally compact at θ0, and we can deduce that the ﬁrst-order
+asymptotics of the likelihood ratio test for testing the goo dness-of-ﬁt of an
+algebraic exponential family are always given by Mahalanob is distances from
+the tangent cone.
+3.3. Locally identiﬁable models. Suppose PΘ = (Pθ |θ ∈ Θ) is an identi-
+ﬁable model, that is, Pθ =P¯θ implies θ = ¯θ. Let Γ ⊆ Rd be an open semi-
+algebraic set and f : Γ → Rk a polynomial or rational map such that Θ 0 =
+f (Γ) ⊆ Θ. The submodel PΘ 0 that is parameterized by f is globally identi-
+ﬁable at γ0 ∈ Γ if γ0 is the unique point in Γ that is mapped to θ0 = f (γ0).
+The submodel PΘ 0 is locally identiﬁable atγ0 ∈ Γ if there exists a neighbor-
+hood U (γ0) ⊆ Γ of γ0 such that f −1(θ0) ∩U (γ0) = {γ0}. Local identiﬁability
+often arises as assumed in the following proposition, where J(γ) denotes the
+Jacobian of f at γ.
+
+[PDF PAGE 10]
+10 M. DRTON
+Proposition 3.5. Letθ0 be a true parameter point at which PΘ is regu-
+lar and the maximum likelihood estimator ˆθn,Θ 0 consistent. Suppose f −1(θ0)
+is a ﬁnite set such that the Jacobian J(γ) has full rank at all γ ∈ f −1(θ0).
+If f is proper at θ0, that is, there exists a compact neighborhood V ⊆ Rk of
+θ0 such that f −1(V ) ∩ Γ is compact in Rd, then the likelihood ratio statistic
+λn for ( 1.1) converges to the distribution of a minimum of at most |f −1(θ0)|
+random variables with χ2
+k−dim(Θ 0)-distribution.
+Proof. By the full rank assumption, there exist neighborhoods U (γ) ⊆
+Γ of γ ∈ f −1(θ0) such that Mγ = f (U (γ)) are smooth manifolds. Consider a
+sequence (θn) = (f (γn)) in Θ 0 that converges to θ0. Since θn ∈V for all large
+n, the sequence ( γn) is eventually contained in the compactum f −1(V ) ∩
+Γ. Since f is continuous, all accumulation points of ( γn) are in the ﬁnite
+preimage f −1(θ0). Therefore,
+γn ∈
+⋃
+γ∈f −1(θ0)
+U (γ)
+for all n larger than some n0 ∈ N. It follows that locally at θ0, the set Θ 0 is
+equal to a ﬁnite union of the smooth manifolds Mγ , γ ∈ f −1(θ0). According
+to Lemma
+2.4(i), the tangent cone TΘ 0(θ0) is the ﬁnite union of the tangent
+spaces of the manifolds Mγ , which are the linear spaces Lγ spanned by the
+columns of J(γ).
+Let Z ∼ Nk(0,I (θ0)). The limiting distribution of λn is the distribution
+of
+min
+γ∈f −1(θ0)
+(
+min
+τ ∈Lγ
+(Z −τ )tI(θ0)(Z −τ )
+)
+.
+Since theLγ are linear spaces of dimension dim(Θ 0), the displayed expression
+is a minimum ofχ2
+k−dim(Θ 0)-random variables. IfLγ =L¯γ forγ ̸= ¯γ ∈ f −1(θ0),
+then only one of two associated χ2-variables needs to be included in the
+minimum. □
+Proposition
+3.5 makes no statement about the dependence of the χ2-
+random variables in the minimum. In the artiﬁcial Example 1.1, the two
+χ2
+1-random variables were independent but, as illustrated nex t, this is not
+the case in general.
+Example 3.6. Suppose ε1,...,ε 4 are independent normal random vari-
+ables distributed as εi ∼ N (0,ω i) with ωi> 0. Consider the system of linear
+equations
+Y1 =ε1, Y 2 =β21Y1 +β24Y4 +ε2,
+Y3 =β31Y1 +β32Y2 +ε3, Y 4 =β43Y3 +ε4,
+
+[PDF PAGE 11]
+LIKELIHOOD RATIO TESTS AND SINGULARITIES 11
+Fig. 2. Graph with feedback loop.
+which has a feedback loop among Y2, Y3 and Y4; compare the graphical
+representation in Figure 2. In matrix form, the equations state that if Y =
+(Y1,...,Y 4)t and ε = (ε1,...,ε 4)t then BY =ε for
+B =
+
+
+
+
+1 0 0 0
+−β21 1 0 −β24
+−β31 −β32 1 0
+0 0 −β43 1
+
+
+
+.(3.1)
+Let
+D = {(β21,...,β 43)t ∈ R5 | det(B) = 1 −β32β24β43 ̸= 0}
+and Γ = D × (0, ∞)4. The map from (β,ω ) ∈ Γ to the covariance matrix of Y
+is rational; denote it by f . The set Θ 0 = f (Γ) is a semi-algebraic subset of the
+cone of positive deﬁnite matrices Θ = R4×4
+pd . It is the parameter space of the
+Gaussian model PΘ 0 = (N4(0, Σ) | Σ ∈ Θ 0) that is induced by the equation
+system.
+The Jacobian of f is of rank at least 8 for all ( β,ω ) ∈ Γ. It is of full rank
+9 unless
+β31 +β32β21 = 0 and β32β43β24 = −1.(3.2)
+Details of calculations that yield this and other facts empl oyed here are given
+in Appendix
+A.1. By Lemma A.1, the model PΘ 0 is globally identiﬁable at
+(β,ω ) unless
+β31 +β32β21 = 0, β 32β43β24 ̸= −1 and β32,β 43,β 24 ̸= 0.(3.3)
+If β satisﬁes (
+3.3), then PΘ 0 is locally identiﬁable with the preimage of
+Σ = f (β,ω ) always being of cardinality two. Moreover, by Lemma A.2, the
+map f is proper at Σ. Hence, in this locally identiﬁable case, the l ikelihood
+ratio statistic λn converges to the distribution of the minimum of two χ2
+1-
+random variables.
+Suppose the true parameter point is Σ 0 = f (β,ω ) with β as in (
+3.3). Using
+Lemma 2.4(iv), it can be shown that the tangent cone TΘ 0(Σ 0) is equal
+to the union of two hyperplanes whose normal vectors η and ¯η have zero
+components except at their 13- and 14-entries. The nontrivi al entries are
+η(13,14) = (β43, −1)t(3.4)
+
+[PDF PAGE 12]
+12 M. DRTON
+and
+¯η(13,14) =
+(
+1, −β43(ω3 +β2
+32ω2 +β2
+32β2
+24ω4)
+ω4 +β2
+43ω3 +β2
+32β2
+43ω2
+) t
+.(3.5)
+Equation (
+3.4) is readily obtained by computing the kernel of the transpos ed
+Jacobian of f at (β,ω ). Equation ( 3.5) follows from replacing β43 by the
+component ¯β43 of the second vector ( ¯β, ¯ω) with f ( ¯β, ¯ω) = Σ 0; compare ( A.2)
+where κi = 1/ωi.
+In order to describe the limiting distribution of the likeli hood ratio statis-
+tic more precisely, we need to consider the transformed tang ent cone
+I(Σ 0)1/2TΘ 0(θ0), which is the union of the two hyperplanes with normal
+vectors I(Σ 0)−t/2η and I(Σ 0)−t/2 ¯η. The cosine of the angle between these
+two normal vectors is equal to
+ρ = ηt
+1I(Σ 0)−1η2√
+ηt
+1I(Σ 0)−1η1 ·ηt
+2I(Σ 0)−1η2
+.
+This expression simpliﬁes to
+ρ = β43ω3 +β43β2
+32ω2 −β24β32ω4√
+(ω3 +β2
+32ω2 +β2
+24β2
+32ω4)(ω4 +β2
+43ω3 +β2
+32β2
+43ω2)
+; (3.6)
+recall the formula for the inverse Fisher-information matr ix I(Σ 0)−1 from
+Example 2.2. We may thus conclude that λn converges to the distribu-
+tion of the squared Euclidean distance between a standard no rmal point
+Z ∼ N2(0,I ) in R2 and two lines through the origin that intersect at angle
+cos−1(ρ).
+If β31 +β32β21 = 0 and at least one of the parameters β32, β43, β24 zero,
+then PΘ 0 is globally identiﬁable at ( β,ω ), the Jacobian of f of full rank, but
+Proposition 3.5 does not apply as explained at the end of Appendix A.1. It
+is interesting that in this case, the limiting distribution of λn is not a χ2-
+distribution, which is shown in Proposition A.4 in Appendix A.2. This fact
+as well as results on the remaining cases are obtained using t he algebraic
+techniques we present in the next section.
+4. Algebraic tangent cones and bounds on p-values. In this section, we
+explain how algebraic tools can help ﬁnd smooth and non-smoo th points of
+a semi-algebraic hypothesis. Algebraic methods also allow one to compute
+(asymptotic) bounds on p-values for the likelihood ratio test.
+4.1. Boundary points and singularities. For a semi-algebraic set Θ ⊆ Rk,
+deﬁne I(Θ) to be the ideal of polynomials f ∈ R[t] that vanish whenever
+evaluated at a point θ ∈ Θ. By Hilbert’s basis theorem, the ideal I(Θ) has
+
+[PDF PAGE 13]
+LIKELIHOOD RATIO TESTS AND SINGULARITIES 13
+a ﬁnite generating set {f1,...,f ℓ} ⊆ R[t]. In other words, there exist ﬁnitely
+many polynomialsf1,...,f ℓ such thatf ∈ I(Θ) if and only if f =h1f1 + · · ·+
+hℓfℓ for some hj ∈ R[t]. The real algebraic variety deﬁned by the vanishing
+of all polynomials in I(Θ), or equivalently the polynomials f1,...,f ℓ, is the
+Zariski closure ¯Θ of Θ. The Zariski closure is the smallest real algebraic
+variety containing Θ and in particular dim( ¯Θ) = dim(Θ).
+Definition 4.1. Let Θ ⊆ Rk be a semi-algebraic set with Zariski closure
+¯Θ. A subset of Θ is open in ¯Θ if it is equal to the intersection of an open set
+in Rk and ¯Θ. The interior int(Θ) is the union of all subsets of Θ that are
+open in ¯Θ. The boundary bd(Θ) is the complement Θ \ int(Θ).
+At a boundary point θ ∈ bd(Θ) the tangent cone need not be a linear space
+such that nonstandard limiting distributions may arise for the likelihood
+ratio statistic. However, this phenomenon may also occur at singularities.
+We recall the deﬁnition of singularities as given, for examp le, in [ 3], Section
+3.2.
+A real algebraic variety Θ is irreducible if it cannot be written as the
+union of two strict subsets that are also real algebraic vari eties. Any real
+algebraic variety Θ can be written as a ﬁnite union of irreduc ible varieties,
+Θ = Θ 1 ∪ · · · ∪Θ ℓ.(4.1)
+If no two varieties Θ i and Θ j in (
+4.1) are ordered by inclusion, then the
+decomposition in ( 4.1) is unique up to reordering and the irreducible vari-
+eties Θ i are called the irreducible components of Θ. Let {f1,...,f ℓ} ⊆ R[t]
+generate the ideal I(Θ), and let J(θ) ∈ Rℓ×k be the Jacobian with ijth entry
+∂fi(θ)/∂θj . Let r(Θ) be the maximum rank of any matrix J(θ),θ ∈ Θ. Then
+r(Θ) is independent of the choice of the generating set {f1,...,f ℓ} and it
+holds that r(Θ) = k − dim(Θ).
+Definition 4.2. Letθ be a point in the real algebraic variety Θ ⊆ Rk.
+(i) If Θ is irreducible and the rank of J(θ) is smaller than r(Θ) then θ
+is a singular point of Θ.
+(ii) If Θ 1,..., Θ ℓ are the irreducible components of Θ then θ is a singular
+point of Θ if it is a singular point of some Θ i or if it is in an intersection
+Θ i ∩ Θ j.
+If Θ is a semi-algebraic set then θ ∈ Θ is a singular point of Θ if it is a
+singular point of the Zariski closure ¯Θ.
+The software Singular [15] provides routines for computing all singular-
+ities of Θ from a generating set {f1,...,f ℓ} ⊆ R[t] for I(Θ).
+
+[PDF PAGE 14]
+14 M. DRTON
+A nonsingular interior point θ of a semi-algebraic set Θ is also a smooth
+point with tangent cone TΘ (θ) that is equal to the linear space given by the
+kernel of the Jacobian matrix J(θ). This fact translates into the following
+statistical result.
+Theorem 4.3. Letθ0 ∈ Θ 0 ⊆ Θ ⊆ Rk be a true parameter point at which
+the model PΘ is regular and the maximum likelihood estimator ˆθn,Θ 0 con-
+sistent. If Θ 0 is semi-algebraic and θ0 a nonsingular interior point of Θ 0,
+then the likelihood ratio statistic λn converges to the χ2
+c -distribution with
+c =k − dimθ0(Θ 0) degrees of freedom as n → ∞.
+The following is a useful condition for checking the assumpt ion of Theo-
+rem
+4.3; we use it in Proposition A.4(i) and Theorem 5.1.
+Lemma 4.4. Let Θ 0 = f (Γ) , where Γ ⊆ Rd is an open semi-algebraic set
+and f a polynomial or rational map. If θ0 = f (γ0) ∈ Θ 0 is nonsingular and
+the Jacobian of f at γ0 ∈ Γ of full rank, then θ0 is in the interior of Θ 0.
+Proof. The Jacobian being of full rank, there exists a neighborhood
+U of γ0 such that f (U ) is a d-dimensional smooth manifold. Since θ0 is
+nonsingular, there exists a neighborhood V ofθ0 such that the intersection of
+V and the Zariski closure ¯Θ 0 is also a d-dimensional smooth manifold. Since
+f (U ) ⊆ ¯Θ 0, these two manifolds are nested by inclusion. Hence, due to t heir
+equal dimension, they must coincide locally. Therefore, in a neighborhood
+of θ0, the three sets f (U ) ⊆ Θ 0 ⊆ ¯Θ 0 are equal. It follows that θ0 ∈ int(Θ 0).
+□
+Nonsingularity is not necessary for χ2-asymptotics. For example, suppose
+Θ 0 ∈ R2 is the union of the two parabolas y = ±x2 given by the equation
+y2 =x4. The origin is a singularity of Θ 0 with tangent cone equal to the
+x-axis. Hence, λn →dχ2
+1 at every point in Θ 0. Removing the part of the
+parabola passing through the positive orthant, we make the o rigin a singular
+boundary point at which λn →dχ2
+1.
+4.2. Algebraic tangent cones and bounds on p-values. For complicated
+statistical hypotheses it may be diﬃcult to work out the tang ent cone, in
+which case it is interesting to ﬁnd sub- and supersets of the t angent cone.
+The Mahalanobis distances from these sub-/supersets provi de distributions
+that are stochastically larger/smaller than the limiting d istribution of the
+likelihood ratio statistic λn and thus can be used to bound the asymptotic
+p-value
+p∞(t) = limn→∞P (λn>t ), t ≥ 0.
+
+[PDF PAGE 15]
+LIKELIHOOD RATIO TESTS AND SINGULARITIES 15
+If a parametrization is available, then the following upper bound is im-
+mediate from Lemma 2.4(iv).
+Lemma 4.5. Suppose θ0 ∈ Θ 0 ⊆ Θ ⊆ Rk is a true parameter point at
+which the model PΘ is regular and the maximum likelihood estimator ˆθn,Θ 0
+consistent. Let Θ 0 = f (Γ) be the image of an open semi-algebraic set Γ ⊆ Rd
+under a polynomial map f : Rd → Rk. Let J(γ) be the Jacobian of f at γ.
+If m is the maximum rank of any Jacobian J(γ) with γ ∈ f −1(θ0), then
+p∞(t) ≤P (χ2
+k−m>t ) for all t ≥ 0.
+For a lower bound based on a χ2-distribution one could employ the so-
+called Zariski tangent space given by the kernel of the Jacobian matrix J(θ0)
+that, as in Deﬁnition
+4.2, is derived from a generating set {f1,...,f ℓ} ⊆ R[t]
+of the ideal I(Θ 0). However, if the true parameter θ0 is a singularity of Θ 0
+then the Zariski tangent space is of larger dimension than Θ 0 and does not
+provide a good local approximation to Θ 0. For instance, the Zariski tangent
+space at the cusp singularity in Example 1.2 comprises all of R2 and thus the
+lower bound is trivially zero because it is computed from a χ2
+0-distribution,
+which is a point mass at zero.
+A better local approximation to Θ 0 is obtained from the algebraic tangent
+cone deﬁned in (
+4.3) below. The algebraic tangent cone is sometimes easier
+to compute than the tangent cone. Gr¨ obner basis methods to a utomate the
+computation [ 7], Section 9.7, are implemented, for example, in Singular
+[15]. We note that in Example 1.2, the algebraic tangent cone at the cusp
+is equal to the x-axis and thus provides a lower χ2
+1-bound for p∞(t). A
+similar phenomenon arises in the feedback model from Exampl e
+3.6; see
+Proposition A.4(iii) in the Appendix.
+Let θ be a point in a semi-algebraic set Θ ⊆ Rk. For a polynomial f ∈
+I(Θ) ⊆ R[t] deﬁne fθ to be the polynomial obtained from f by substituting
+ti +θi for each indeterminate ti appearing in f . Write
+fθ =
+j∑
+h=0
+fθ,h(4.2)
+with fθ,h being a homogeneous polynomial of degree h. Deﬁne fθ,min to be
+the term fθ,h that is of smallest degree among all nonzero terms in (
+4.2).
+The algebraic tangent cone is the real algebraic variety
+AΘ (θ) = {τ ∈ Rk |fθ,min(τ ) = 0 ∀f ∈ I(Θ) }.(4.3)
+According to the following fact the Mahalanobis distance fr om the alge-
+braic tangent cone yields a lower bound for p∞(t).
+Lemma 4.6. Letθ be a point in the semi-algebraic set Θ . Then TΘ (θ) ⊆
+AΘ (θ), that is, the algebraic tangent cone contains the tangent co ne.
+
+[PDF PAGE 16]
+16 M. DRTON
+The algebraic tangent cone AΘ (θ) is a subset of the Zariski tangent space
+and has dimension equal to the largest dimension of any irred ucible compo-
+nent of the Zariski closure ¯Θ that contains θ. For a polynomial image of an
+open semi-algebraic set, ¯Θ is irreducible and the dimension of AΘ (θ) equal
+to dim(Θ). However, the algebraic tangent cone can be of larg er dimension
+than the tangent cone.
+The bounds on p∞(t) that we discussed in this section are derived from
+sub- and supersets of the tangent cone. It is noteworthy that if the tangent
+cone is convex and the limiting distribution a χ2-mixture, then such bounds
+can be improved using properties of the mixture weights; com pare page 80
+in [ 29]. However, the tangent cones at singularities are generall y not convex
+as can be seen in the example of the feedback model as well as in the factor
+analysis model that we will study in the remainder of this pap er. When
+studying factor analysis we will employ the following lemma .
+Lemma 4.7. Forf ∈ R[t], deﬁne Θ to be the semi-algebraic set of points
+t ∈ Rk that satisfy f (t) ≥ 0. If θ ∈ Θ satisﬁes f (θ) = 0, then the tangent cone
+TΘ (θ) is contained in the set {τ ∈ Rk |fθ,min(τ ) ≥ 0}.
+Proof. Without loss of generality assume that θ = 0 such that fθ =f .
+Let τ ∈TΘ (0) be the limit of the sequence ( αnθn) with αn> 0 and θn ∈ Θ
+converging toθ = 0. Let fmin =fθ,min be of degree d. Expanding f as in ( 4.2)
+we see that the nonnegative numbers αd
+nf (θn) are equal to fmin(αnθn) plus a
+term that converges to zero asn → ∞. Thus,fmin(τ ) = limn→∞fmin(αnθn) ≥
+0. □
+5. Local geometry of the one-factor analysis model. Assuming zero means
+to avoid notational overhead, the factor analysis model wit hm observed vari-
+ables and ℓ hidden factors is the family of multivariate normal distrib utions
+Nm(0, Σ) with covariance matrix Σ in the set
+Fm,ℓ = {∆ + ΓΓ t | ∆ ∈ Rm×m
+pd diagonal, Γ ∈ Rm×ℓ}.(5.1)
+The set Fm,ℓ is a semi-algebraic subset of Rm×m
+sym ≃ R(m+1
+2 ) with dimension
+equal to the minimum of m(ℓ + 1) −
+( ℓ
+2
+)
+and
+( m+1
+2
+)
+; see, for example, [
+10].
+This set has singularities and to our knowledge there have be en no attempts
+in the literature to clarify the role these singularities pl ay for asymptotic
+distribution theory. (Aspects of nonsingular boundary poi nts created by al-
+lowing the matrix ∆ in ( 5.1) to be positive semi-deﬁnite have been discussed
+in [25] and we will not treat these so-called Heywood-cases here.) In this sec-
+tion we derive the tangent cones in factor analysis with ℓ = 1 factor. The
+distributional implications are discussed in Section 6.
+
+[PDF PAGE 17]
+LIKELIHOOD RATIO TESTS AND SINGULARITIES 17
+In the remainder of this section we assume that m ≥ 4 such that the set
+Fm,1 is of dimension 2m<
+( m+1
+2
+)
+. We begin by describing the ideal I(Fm,1).
+Let R[t] be the ring of polynomials in the indeterminates (tij | 1 ≤i ≤j ≤m).
+Deﬁne
+Tm = {tijtgh −tigtjh,t ihtjg −tigtjh | 1 ≤i<j<g<h ≤m} ⊂ R[t].
+The 2
+( m
+4
+)
+quadrics in Tm are referred to as tetrads in the statistical literature.
+According to Theorem 16 in [ 10], the set Tm generates the ideal I(Fm,1).
+Theorem 5.1. Let Σ = ( σij) ∈Fm,1 be the covariance matrix of a dis-
+tribution in the one-factor analysis model with m ≥ 4. If there exist at least
+two nonzero oﬀ-diagonal entries σij and σuv with i<j and u<v , then Σ
+is a nonsingular and smooth point of Fm,1. If at most one oﬀ-diagonal en-
+try σij with i<j is nonzero, then Σ is a singular point of Fm,1. All points
+Σ ∈Fm,1 are of local dimension dimΣ (Fm,1) = dim(Fm,1) = 2m.
+Proof. The claim about local dimension holds because Fm,1 is the im-
+age of a polynomial map; compare Section 3.1. Proposition 32 in [ 10] states
+that a matrix Σ = ( σij) ∈Fm,1 is a singularity if and only if at most one
+oﬀ-diagonal entry σij with i<j is nonzero. Let f : (0, ∞)m × Rm →Fm,1 be
+the parametrization map that sends ( δ, Γ) to the matrix ∆ + ΓΓ t ∈Fm,1,
+where ∆ is the diagonal matrix diag( δ). In order to show that a nonsingular
+point Σ = f (δ, Γ) is a smooth point, we check that the
+( m+1
+2
+)
+× 2m-Jacobian
+of f at (δ, Γ) is of full rank 2 m; recall Lemma 4.4.
+If Σ = f (δ, Γ) has entries σij ̸= 0 and σuv ̸= 0 for two distinct pairs ( i,j )
+and (u,v ) with i<j andu<v , then Γ = ( γi) ∈ Rm must have at least three
+nonzero entries. Without loss of generality, assume that γ1,γ 2,γ 3 ̸= 0. Parti-
+tion the Jacobian matrix of f by partitioning the columns according to the
+split between δ and γ, and by partitioning the rows into the diagonal and
+the oﬀ-diagonal entries of Σ. Since ∂σij/∂δk = 0 if i<j , the Jacobian matrix
+of f is block-triangular. One of the diagonal blocks, namely the submatrix
+ﬁlled with the partial derivatives ∂σii/∂δj , is the m ×m-identity matrix.
+Hence, the Jacobian is of full rank 2 m if and only if the matrix of partial
+derivatives ∂σij/∂γk = 0, i<j , is of rank m. To see that this rank is in-
+deedm, form the m ×m-submatrix of partial derivatives ∂σij/∂γk = 0 with
+(i,j ) ∈ {(1, 2),..., (1,m ), (2, 3)}. This submatrix has determinant equal to
+2γm−2
+1 γ2γ3 in absolute value. Since γ1,γ 2,γ 3 ̸= 0, the determinant is nonzero.
+□
+If Σ ∈Fm,1 is a nonsingular point, then the tangent cone TFm, 1(Σ) is a
+linear space. At the singularities of Fm,1 two types of tangent cones arise,
+which we derive in Lemmas 5.2 and 5.6.
+
+[PDF PAGE 18]
+18 M. DRTON
+Lemma 5.2. If Σ ∈Fm,1 is a diagonal matrix, then the tangent cone
+TFm, 1(Σ) is equal to the (topological) closure of the set
+Tm,1 = {∆ + ΓΓ t | ∆ ∈ Rm×m
+sym diagonal, Γ ∈ Rm}.
+Proof. In a neighborhood of the origin, the set Fm,1 − Σ is equal to
+Tm,1. The set Tm,1 is a cone such that the claim follows from Lemma 2.4(iii).
+□
+Remark 5.3. The cone Tm,1 is not closed. For example, let
+Γ n =
+( 1
+n,n, 1
+n, 0,..., 0
+) t
+∈ Rm,
+and deﬁne ∆ n to be the diagonal matrix with ith diagonal entry equal to
+the negated square of the ith entry of Γ n. Then the sequence (∆ n + Γ nΓ t
+n)
+converges to a matrix that is zero except for the (1 , 2)- and (2 , 3)-entries
+that are equal to 1. This limiting matrix is not in Tm,1.
+Remark 5.4. (i) The result in Lemma
+5.2 also carries over to the case of
+ℓ> 1 factors. (ii) The algebraic tangent cone AFm, 1(Σ) at a diagonal matrix
+Σ is simply the real algebraic variety deﬁned by the tetrads Tm.
+Lemma 5.5. Let Σ ∈Fm,1 have exactly one nonzero oﬀ-diagonal entry
+σij with i<j . Then the algebraic tangent cone AFm, 1(Σ) is equal to the
+set of matrices S ∈ Rm×m
+sym that satisfy the following two conditions: (i) the
+([m] \ {i,j }) × ([m] \ {i,j })-principal submatrix of S is diagonal, and (ii)
+the rank of the {i,j } × ([m] \ {i,j })-submatrix of S is at most one. Here,
+[m] := {1,...,m }.
+Proof. The set Fm,1 is the image of the set (0 , ∞)m × Rm under a
+polynomial map. Thus the dimension of AFm, 1(Σ) is equal to dim( Fm,1) =
+2m. Without loss of generality we assume that i = 1 and j = 2.
+LetT = (tgh) be the symmetric matrix of indeterminates. All 2 × 2-minors
+of the {1, 2} × { 3,...,m }-submatrix of T are in the ideal I(Fm,1). Since
+none of these minors involve the indeterminate t12, the {1, 2} × {3,...,m }-
+submatrix of a (symmetric) matrix S ∈AFm, 1(Σ) must have rank at most
+one.
+Let 3 ≤g<h ≤m. Then the quadric
+t12tgh −t1gt2h =σ12tgh + (t12 −σ12)tgh −t1gt2h(5.2)
+is a tetrad in Tm. After substituting t12 +σ12 fort12, the lowest degree term
+on the right-hand side in (
+5.2) is σ12tgh. Since σ12 ̸= 0, a matrix S = (sij) ∈
+AFm, 1(Σ) must have the (oﬀ-diagonal) entry sgh = 0.
+
+[PDF PAGE 19]
+LIKELIHOOD RATIO TESTS AND SINGULARITIES 19
+LetC be the set of symmetric matrices for which the {1, 2} × {3,...,m }-
+submatrix has rank at most one and all oﬀ-diagonal entries in the {3,...,m }×
+{3,...,m }-submatrix are zero. We have shown that AFm, 1(Σ) ⊆C. Matri-
+ces in C have the m diagonal entries as well as the (1 , 2)-entry uncon-
+strained. Since the set of 2 × (m − 2)-matrices of rank one has dimension
+(m − 2) + 1 =m − 1, the dimension of C is equal to 2 m = dim(AFm, 1(Σ)).
+The fact that C is an irreducible algebraic variety in Rm×m
+sym now implies
+AFm, 1(Σ) = C, which is the claim. □
+The algebraic tangent cone does not depend on the value of the nonzero
+oﬀ-diagonal entry σij. Unfortunately, this is no longer true for the tangent
+cone TFm, 1(Σ).
+Lemma 5.6. Let Σ ∈Fm,1 have exactly one nonzero oﬀ-diagonal entry
+σij withi<j . If σij> 0, then the tangent cone TFm, 1(Σ) is the set of matrices
+S = (sgh) ∈AFm, 1(Σ) such that sjg =η ·sig for all g /∈ {i,j } and some η ∈
+[σij/σii,σ jj/σij]. If σij< 0, then the analogue holds with negative multiplier
+η ∈ [σjj/σij,σ ij/σii].
+Proof. Without loss of generality, we assume that i = 1 and j = 2. Let
+σ12> 0 (the case σ12< 0 is analogous). Denote the set of symmetric matrices
+claimed to form the tangent cone by ¯TFm, 1(Σ).
+We will ﬁrst show that TFm, 1(Σ) ⊆ ¯TFm, 1(Σ). We do not change the tangent
+cone TFm, 1(Σ) if we restrict Fm,1 to a neighborhood of Σ. Hence, we can
+replaceFm,1 byF ε
+m,1 =F ε
+m,1(Σ), which we deﬁne to be a neighborhood of Σ
+in Fm,1 such that ψ12> 0 for all Ψ = ( ψij) ∈F ε
+m,1. Consider an index g ≥ 3
+and let Ψ = ( ψij) = ∆ + ΓΓ t ∈F ε
+m,1. If Γ = ( γ1,...,γ m)t, then ψ12ψ1gψ2g =
+γ2
+1γ2
+2γ2
+g ≥ 0. It follows that ψ1gψ2g ≥ 0 on F ε
+m,1. Consequently,F ε
+m,1 =F ε,+
+m,1 ∪
+F ε,−
+m,1 withF ε,+
+m,1 andF ε,−
+m,1 comprising the matrices Ψ = ( ψij) ∈F ε
+m,1 for which
+ψ1g,ψ 2g ≥ 0 and ψ1g,ψ 2g ≤ 0, respectively. According to Lemma 2.4(i), the
+tangent cone of Fm,1 at Σ is the union of the two tangent cones of F ε,+
+m,1 and
+F ε,−
+m,1.
+Let Ψ = ( ψij) = ∆ + ΓΓ t ∈F ε,+
+m,1 with Γ = ( γ1,...,γ m)t. Then
+ψ11ψ2g = (δ1 +γ2
+1)γ2γg ≥γ2
+1γ2γg =ψ12ψ1g.(5.3)
+Similarly,
+ψ22ψ1g ≥ψ12ψ2g.(5.4)
+LetS = (sij) ∈TF ε, +
+m, 1
+(Σ). By Lemma
+4.7, (5.3) and (5.4) it holds thats1g,s 2g ≥
+0, σ11s2g ≥σ12s1g and σ22s1g ≥σ12s2g. Thus,
+either s1g =s2g = 0 or
+(
+s1g> 0 ∧s2g
+s1g
+∈
+[σ12
+σ11
+,σ22
+σ12
+])
+,(5.5)
+
+[PDF PAGE 20]
+20 M. DRTON
+which implies that s2g =η ·s1g for some η as in the claim. Similar considera-
+tion of matrices in F ε,−
+m,1 yields that if S = (sgh) ∈TF ε, −
+m, 1
+(Σ) then s1g,s 2g ≤ 0,
+σ11s2g ≤σ12s1g and σ22s1g ≤σ12s2g. This implies an analogue to ( 5.5),
+namely,
+either s1g =s2g = 0 or
+(
+s1g< 0 ∧s2g
+s1g
+∈
+[σ12
+σ11
+,σ22
+σ12
+])
+,(5.6)
+which in turn also implies that s2g =η ·s1g for some η as in the claim. Since
+the considered index g ≥ 3 was arbitrary and TFm, 1(Σ) ⊆AFm, 1(Σ), we have
+proved the inclusion TFm, 1(Σ) ⊆ ¯TFm, 1(Σ).
+In order to show the reverse inclusion, that is, ¯TFm, 1(Σ) ⊆TFm, 1(Σ), we
+write Σ = ∆ 0 + Γ 0Γ t
+0, where ∆ 0 = diag(δ0) is a diagonal and positive deﬁnite
+matrix and Γ 0 = (γ01,γ 02, 0,..., 0)t ∈ Rm. The pairs ( γ01,γ 02) that can be
+used in such a representation of Σ satisfy
+γ01,γ 02 ̸= 0 and γ02
+γ01
+∈
+( σ12
+σ11
+,σ22
+σ12
+)
+,(5.7)
+and any value in the interval ( σ12/σ11,σ 22/σ12) is possible for their ratio.
+Let f : (0, ∞)m × Rm →Fm,1 be the parametrization map of Fm,1; compare
+the proof of Theorem
+5.1. Let J(δ, Γ) be the
+( m+1
+2
+)
+× 2m-Jacobian matrix of
+f at (δ, Γ). By Lemma 2.4(iv),
+Σ ′(d,c ) =J(δ0, Γ 0)
+( d
+c
+)
+∈ Rm×m
+sym , d,c ∈ Rm,
+is in the tangent cone TFm, 1(Σ). Let g,h be any two distinct indices in
+{3,...,m }. The diagonal entries of Σ ′(d,c ) are
+σ′
+11(d,c ) =d1 + 2γ01c1, σ ′
+22(d,c ) =d2 + 2γ02c2, σ ′
+gg(d,c ) =dg.
+Choosing the values di appropriately, these diagonal entries may be any real
+number. The oﬀ-diagonal entries of Σ ′(d,c ) are
+σ′
+12(d,c ) =c1γ02 +c2γ01, σ ′
+1g(d,c ) =γ01cg,
+σ′
+gh(d,c ) = 0, σ ′
+2g(d,c ) =γ02cg.
+By appropriate choice of c1 andc2,σ′
+12(d,c ) may take on any real value. The
+entriesσ′
+2g(d,c ) and σ′
+1g(d,c ) are either both zero or both nonzero with their
+ratio satisfying ( 5.7). This is equivalent to the existence of a multiplier η in
+the interval in ( 5.7) such that σ′
+2g(d,c ) =ησ′
+1g(d,c ) for all g ≥ 3. Therefore,
+we have shown that any vector in ¯TFm, 1(Σ) for which the multiplier η is
+in the open interval in ( 5.7) is in the tangent cone TFm, 1(Σ). However, the
+tangent cone is a closed set such that the same holds also if η is in the closure
+of the interval in ( 5.7), which was our claim. □
+
+[PDF PAGE 21]
+LIKELIHOOD RATIO TESTS AND SINGULARITIES 21
+Fig. 3. Histograms of 20, 000 simulated p-values for the likelihood ratio test of ( 6.1) with
+m = 4 and sample size n = 1000. The p-values are computed under χ 2
+2. The true covariance
+matrix is equal to ∆ + ΓΓ t, where ∆ = diag(1 / 3, 1/ 3, 1/ 3, 1/ 3) and Γ is varied as indicated
+in the histogram titles. Under these choices pairwise corre lations are either zero or equal
+to 3/ 4.
+We remark that the description of the tangent cone in Lemma
+5.6 yields a
+parametrization of the tangent cone. The multiplier η in this parametrization
+is unique unless sjg =sig = 0 for all g /∈ {i,j }.
+6. Likelihood ratio tests in one-factor analysis. In this section we discuss
+the limiting distributions for the likelihood ratio statis tic λn in diﬀerent
+testing problems involving the factor analysis model with ℓ = 1 factor.
+6.1. Saturated alternative. Consider testing the one-factor model against
+a saturated alternative, that is,
+H0 : Σ ∈Fm,1 vs. H1 : Σ /∈Fm,1,(6.1)
+where we assume that m ≥ 4 such that the set Fm,1 is of positive codimen-
+sion
+( m+1
+2
+)
+− 2m. Statistical software, such as R with command factanal,
+allows one to compute numerically the likelihood ratio stat istic λn for this
+problem. In such software, p-values are computed using the χ2-distribution
+with
+( m+1
+2
+)
+− 2m degrees of freedom. Figure
+3 shows histograms of simulated
+p-values computed with factanal. (Note that factanal employs a Bartlett
+correction.) While the two histograms on the left conﬁrm the expected uni-
+form distribution, this is not the case for the two histogram s to the right.
+It is interesting that the p-values for Γ = (1 , 1, 0, 0)t tend to be smaller than
+under a uniform distribution whereas the opposite is true fo r Γ = (1 , 0, 0, 0)t.
+Figure 3 suggests that there should be at least three diﬀerent types o f
+limiting distributions for λn. The next result conﬁrms this fact.
+Theorem 6.1. Let λn be the likelihood ratio statistic for testing ( 6.1).
+Assume the true covariance matrix Σ 0 = (σgh) is in Fm,1, and deﬁne Z ∼
+N(m+1
+2 )(0,I ) to be a standard multivariate normal random vector. When
+n → ∞ it holds that:
+
+[PDF PAGE 22]
+22 M. DRTON
+(i) If Σ 0 has at least two nonzero entries σij and σuv with i<j and
+u<v , then λn converges to the χ2-distribution with
+( m+1
+2
+)
+− 2m degrees of
+freedom.
+(ii) If Σ 0 has exactly one nonzero oﬀ-diagonal entry σij with i<j , then
+λn converges to the distribution of the squared Euclidean dist ance between
+Z and the (topological) closure of the set of S = (sgh) ∈AFm, 1(Σ 0) such
+that sjg =η ·sig for all g /∈ {i,j } and some η ≥ |ρij|/
+√
+1 −ρ2
+ij. Here, ρij =
+σij/√
+σiiσjj .
+(iii) If Σ 0 is diagonal, then λn converges to the distribution of the squared
+Euclidean distance between Z and the tangent cone TFm, 1(Σ 0) given in Lem-
+ma 5.2.
+Proof. (i) By Theorem 5.1, this is the smooth case and the tangent
+cone a linear space of the claimed codimension.
+(iii) Let Σ 0 be diagonal. Then the Fisher-information I(Σ 0) and its sym-
+metric square root I(Σ 0)1/2 are diagonal; compare Example 2.2. The diag-
+onal entries of I(Σ 0) that are associated with oﬀ-diagonal entries σij, i<j ,
+factor as
+I(Σ 0)ij,ij = 1
+σiiσjj
+.
+It follows that the tangent cone TFm, 1(Σ 0) given in Lemma 5.2 is invariant
+under transformation with I(Σ 0)1/2. Hence, the claim follows from Theo-
+rem 2.6 (recall Lemma 3.3 and Remark 3.4).
+(ii) In the remaining case, Σ 0 has exactly one oﬀ-diagonal element, which
+we assume to be σ12> 0 (the result for σ12< 0 is analogous). When listing
+its rows and columns in the order
+11< 12< 22< 13< 23< 14< 24< · · ·< 1m< 2m< 33< 34< · · ·<mm
+the Fisher-information I(Σ 0) is block-diagonal with blocks corresponding to
+indices that are underlined together. The block for a pair (1 g, 2g) with g ≥ 3
+is
+I(Σ 0){1g,2g}×{1g,2g} = 1
+σgg
+(Σ 12×12)−1.(6.2)
+Consider the following block-diagonal square root of I(Σ 0). For block
+11< 12< 22
+take any square root and for the entries 33 < · · ·<mm take the
+(univariate) square root. For the blocks 1g< 2g use the Choleski-decomposition
+of ( 6.2) to obtain the square root
+1√σgg
+
+
+
+
+
+1
+√σ11.2
+− σ12
+σ22
+√σ11.2
+0 1√σ22
+
+
+
+
+,
+
+[PDF PAGE 23]
+LIKELIHOOD RATIO TESTS AND SINGULARITIES 23
+whereσ11.2 =σ11 −σ2
+12/σ22. Suppose τ = (τgh) is an element of TFm, 1(Σ 0) for
+whichτ2g = ¯η ·τ1g for all g ≥ 3 and ¯η ∈ (σ12/σ11,σ 22/σ12). Under multiplica-
+tion with the constructed square root of I(Σ 0), τ is mapped to an element
+S = (sgh) of AFm, 1(Σ 0) for which s2g =η ·s1g for all g ≥ 3. The multiplier η
+is equal to
+(1/√σ22)¯η
+1/√σ11.2 − (σ12/(σ22
+√σ11.2))¯η =
+√
+σ11σ22 −σ2
+12
+σ22/¯η −σ12
+.(6.3)
+Therefore,
+η ∈
+( σ12
+√
+σ11σ22 −σ2
+12
+, ∞
+)
+=
+( ρ12√
+1 −ρ2
+12
+, ∞
+)
+.(6.4)
+We considered τ ∈ TFm, 1(Σ 0) with multiplier ¯ η in the open interval
+(σ12/σ11,σ 22/σ12). By taking the closure the remaining cases are covered.
+□
+Remark 6.2. Theorem 12.1 in the seminal paper by Anderson and Ru-
+bin [
+1] gives a suﬃcient condition for χ2-asymptotics for the likelihood ratio
+tests in factor analysis. For the one-factor testing proble m ( 6.1), this the-
+orem states the following. Suppose the true covariance matr ix Σ 0 ∈Fm,1
+is represented as Σ 0 = ∆ + ΓΓ t with ∆ diagonal and positive deﬁnite and
+Γ ∈ Rm. Then the χ2-asymptotics from Theorem 6.1(i) hold if the entry-wise
+(or Hadamard) square of the matrix
+∆ − Γ(Γ t∆ −1Γ) −1Γ t
+has nonzero determinant (Γ ̸= 0 is required for this condition to be well
+deﬁned). We checked that for m = 4, 5, 6 this condition is indeed equivalent
+to requiring two nonzero entries above the diagonal of Σ 0. However, in the
+present context, proving Theorem 6.1(i) via Theorem 5.1 seems easier than
+any attempt to simplify the condition of Anderson and Rubin [ 1] for the
+one-factor case.
+The distribution described in Theorem 6.1(ii) depends on unknown pa-
+rameters. This is not the case for the distributional bound o btained from
+the algebraic tangent cone, for which a nice connection to ei genvalues of
+Wishart matrices emerges.
+Theorem 6.3. LetV have a chi-square distribution with
+( m−2
+2
+)
+degrees
+of freedom and let W be distributed like the smaller of the two eigenvalues
+of a 2 × 2-Wishart matrix with m − 2 degrees of freedom and scale parameter
+the identity matrix I. If the true covariance matrix Σ 0 = (σgh) ∈Fm,1 has
+
+[PDF PAGE 24]
+24 M. DRTON
+exactly one nonzero oﬀ-diagonal entry σij with i<j , then the distribution
+of the squared Mahalanobis distance
+min
+Σ ∈AFm, 1 (Σ 0)
+(Z − Σ) tI(Σ 0)(Z − Σ) , Z ∼ N(m+1
+2 )(0,I (Σ 0)−1),
+is the distribution of V +W , where V and W are independent.
+Proof. Without loss of generality, assume σ12 ̸= 0. We can work with
+the square root of the Fisher-information I(Σ 0) that was used to prove
+Theorem 6.1(ii). Due to the special block-diagonal structure of I(Σ 0), it
+holds that AFm, 1 is invariant under transformation with I(Σ 0)1/2. Thus, the
+Mahalanobis distance has the same distribution as the Eucli dean distance
+between ¯Z ∼ N(m+1
+2 )(0,I ) andAFm, 1 . The squared Euclidean distance breaks
+into the sum of
+V =
+∑
+3≤g<h≤m
+¯Z 2
+gh ∼χ2
+(m−2
+2 ),
+and the squared Euclidean distance W between the submatrix ¯Z{1,2}×{3,...,m}
+and the set of rank one matrices. The latter distance is equal to the smaller
+singular value of ¯Z{1,2}×{3,...,m}. The square of this singular value is the
+smaller eigenvalue W of the 2 × 2-Wishart matrix obtained by multiplying
+¯Z{1,2}×{3,...,m} with its transpose. □
+Looking back to Theorem
+6.1, we see that the χ2-approximation to the
+distribution of λn appears to be valid at almost every covariance matrix in
+Fm,1. It is thus tempting to view the singularities as mere theore tical oddities
+and base inference purely on χ2-calculations. However, this is problematic
+because the presence of singularities destroys any possibl e uniformity of the
+convergence of λn to a χ2-distribution. This can be seen in Figure 4, which
+shows that the χ2-approximation becomes more and more inappropriate for
+smaller and smaller pairwise correlations. A comparison wi th Figure 3 sug-
+gests that this phenomenon is primarily due to the model geom etry: small
+correlations yield points too close to the singular locus of Fm,1. Indeed the
+distribution of λn exhibits features of the limiting distribution from Theo-
+rem 6.1(iii); compare the histogram on the far right-hand side in Fi gure 3.
+6.2. Testing submodels. In the goodness-of-ﬁt problem ( 6.1),χ2-approxi-
+mations are valid if the true parameter point is far enough aw ay from
+the singular locus. However, when testing submodels of a fac tor analysis
+model, χ2-approximations may become entirely invalid. We illustrat e this
+for testing the vanishing of some of the components of the par ameter vector
+Γ = (γ1,...,γ m)t deﬁning the covariance matrix Σ = ∆ + ΓΓ t ∈Fm,1.
+
+[PDF PAGE 25]
+LIKELIHOOD RATIO TESTS AND SINGULARITIES 25
+Fig. 4. Histograms of 20,000 simulated p-values for the likelihood ratio test of ( 6.1) with
+m = 4 and sample size n = 50. The p-values are computed under χ 2
+2. The true covariance
+matrix is a correlation matrix with all oﬀ-diagonal entries equal to ρ , which is varied as
+indicated in the histogram titles.
+LetFm,0k be the set of covariance matrices Σ = ∆ + ΓΓ t inFm,1 such that
+Γ = (γ1,...,γ m)t satisﬁes that γk =γk+1 = · · ·=γm = 0. Consider testing
+H0k : Σ ∈Fm,0k vs. H1 : Σ ∈Fm,1 \Fm,0k.(6.5)
+Such tests constitute edge exclusion tests in graphical mod els with one hid-
+den variable; compare, for example, [
+30]. A positive deﬁnite matrix Σ = ( σij)
+is in Fm,0k if and only if the submatrix Σ [k−1]×[k−1] is in Fk−1,1 and σij = 0
+for all pairs ( i,j ) /∈ [k − 1] × [k − 1] with i ̸=j. Here, [k − 1] = {1,...,k − 1}.
+Hence, the limiting distributions of the likelihood ratio s tatistic λn,k for
+testing ( 6.5) can be determined using Remark 2.8 and Theorems 5.1 and
+6.1.
+The case k ≥ 4 is similar to the tests considered in Section 6.1. If k ≥ 4
+and the true covariance matrix Σ 0 ∈Fm,0k cannot be transformed into a
+matrix in Fm,03 by permutations of rows and columns, then λn,k converges
+to a χ2
+m+k−1-distribution as n → ∞. At matrices in Fm,03 (and the possible
+permutations thereof) nonstandard limiting distribution s arise.
+The cases k ≤ 3 are diﬀerent. If k = 3, then there does not exist a true
+covariance matrix Σ 0 ∈Fm,0k for which λn,k converges to a χ2-distribution.
+Fork = 1, 2, the hypotheses H01 andH02 are equal because Fm,01 =Fm,02 is
+the set of diagonal covariance matrices. In this case the lim iting distribution
+ofλn,k does not depend on Σ 0 ∈Fm,01 =Fm,02. We were not able to connect
+these distributions to any well-studied distribution but s imulations can be
+used to determine the quantiles of this distribution for a va lid (asymptotic)
+test of H01 =H02.
+When testing H03 the limiting distribution of λn,k depends on the cor-
+relation ρ12. Nevertheless, we have the following corollary to Theorem
+6.3;
+recall Lemma 4.6.
+Corollary 6.4. If λn,k is the likelihood ratio statistic for ( 6.5) with
+k = 3 and the true covariance matrix Σ 0 = (σij) is in Fm,03 with σ12 ̸= 0,
+
+[PDF PAGE 26]
+26 M. DRTON
+Table 1
+Levels of the conservative test that rejects H03 if the likelihood ratio statistic exceeds the
+95%-quantile of a Wishart eigenvalue distribution. The tru e covariance matrices are
+correlation matrices in Fm, 03 with ρ 12 being varied. Each level was computed in 20,000
+simulations
+ρ 12
+0.8 0.7 0.6 0.5 0.4 0.3 0.2
+m = 4 n = 100 0.027 0.028 0.034 0.034 0.036 0.042 0.048
+n = 200 0.025 0.027 0.029 0.031 0.032 0.035 0.043
+n = 500 0.021 0.026 0.030 0.031 0.033 0.037 0.037
+m = 8 n = 100 0.026 0.029 0.032 0.035 0.040 0.057 0.084
+n = 200 0.026 0.029 0.030 0.033 0.035 0.041 0.061
+n = 500 0.023 0.027 0.027 0.031 0.032 0.035 0.040
+then
+limn→∞P (λn,k>t ) ≤P (W >t),
+where W is distributed like the larger of the two eigenvalues of a 2 × 2-
+Wishart matrix with m − 2 degrees of freedom and scale parameter the iden-
+tity matrix I.
+The algebraic tangent cone calculation that yields Corolla ry 6.4 thus leads
+to a simple and conservative test of H03: reject the null hypothesis if the
+observed likelihood ratio statistic is larger than the 1 −α quantile of the
+distribution of the eigenvalueW . The asymptotic level of this test is provably
+smaller than α if σ12 ̸= 0. Again we point out that there is no uniformity
+in the convergence to this level and large sample sizes may be required for
+smaller absolute values of σ12. Table 1 shows simulated levels for this test
+using the critical values given in [ 16]. The increase of the level with ρ12 is in
+agreement with Lemma 5.6 and Theorem 6.1(ii). We note that, if desired, a
+more powerful yet still asymptotically conservative test c an be obtained by
+relaxing the multiplier η in Theorem 6.1(ii) to be in [0 , ∞). Critical values
+for the resulting test of H03 could be computed using simulation.
+6.3. Comments on multi-factor analysis. Factor analysis forms a basic
+building block for graphical models with hidden variables. As such our study
+of the one-factor case is of interest for graphical models wi th one hidden
+variable. However, in many of its applications factor analy sis serves merely
+as a tool for dimension reduction and the number of factors wi ll typically be
+much larger than one. While the geometry of models with multi ple factors
+is still largely unknown, the presented theory can oﬀer insi ghts into some of
+the phenomena encountered by practitioners.
+
+[PDF PAGE 27]
+LIKELIHOOD RATIO TESTS AND SINGULARITIES 27
+In Section 6.2, we saw that testing the complete independence model,
+which can be viewed as the case of zero factors, against the on e-factor model
+is a problem for which χ2-approximations are inappropriate. The general-
+ization of this problem is to test the model with ℓ factors against the model
+with ℓ + 1 factors, that is,
+H0 : Σ ∈Fm,ℓ vs. H1 : Σ ∈Fm,ℓ+1 \Fm,ℓ.(6.6)
+Simulations such as those in [
+17] suggest that, regardless of where in the null
+hypothesis the true distribution is, the likelihood ratio s tatistic for (6.6) does
+not follow a χ2-distribution. Similarly, the limiting distribution when testing
+H0 : Σ ∈Fm,ℓ vs. H1 : Σ /∈Fm,ℓ(6.7)
+is not a χ2-distribution if in fact Σ ∈Fm,k for some k<ℓ . The algebraic ge-
+ometrical explanation for these phenomena is that the set Fm,ℓ+1 is singular
+along its subset Fm,ℓ ([
+10], page 491). Note, however, that the set Fm,ℓ+1
+has many other more subtle singularities outside Fm,ℓ. These singularities
+are poorly understood at present.
+In the case of ℓ = 1 factor, singularities arise from independence among
+observed variables. Consequently, issues with singularities of one-factor mod-
+els can be avoided if an investigator is free to select variab les with pairwise
+correlations that are large enough for the available sample size. However,
+problems with singularities are no longer this simple with m ore than one
+factor. If ℓ ≥ 2, then detecting whether an estimate of Σ is (close to) a sin-
+gularity of Fm,ℓ is not a matter of merely gauging whether correlations are
+diﬀerent from zero. In the Appendix we illustrate this for the model F5,2,
+which at present is the only model with more than one factor fo r which the
+singular locus is known. The details on the algebraic tangen t cones of F5,2
+given in this Appendix show just how complicated the geometry of seemingly
+simple hidden variable models is.
+7. Conclusion. We considered likelihood ratio tests of semi-algebraic hy-
+potheses. Using Chernoﬀ’s theorem, we showed that under mil d probabilistic
+regularity conditions the large sample limiting distribut ion of the likelihood
+ratio statistic always exists. If the true parameter point i s a model singular-
+ity, then the limiting distribution is determined by the tan gent cone. Tangent
+cones at singularities are generally nonconvex and lead to n onstandard lim-
+iting distributions that are diﬀerent from the mixtures of χ2-distributions
+that are often encountered in boundary problems. In fact, si ngularities can
+entail arbitrarily complex limiting distributions becaus e any closed semi-
+algebraic cone of codimension one or larger may occur as tang ent cone to a
+real algebraic variety [ 12].
+Minima of (possibly dependent) χ2-random variables were seen to be im-
+portant for locally identiﬁable models (recall Propositio n 3.5). It would be
+
+[PDF PAGE 28]
+28 M. DRTON
+interesting to ﬁnd good stochastic bounds on the distributi on of such min-
+ima, which could be used to bound p-values when the true parameter point
+is (close to) a singularity. It seems plausible that bounds c ould be derived
+from special constellations of the equi-dimensional tange nt spaces that in-
+duce the χ2-variables. Moreover, as pointed out by a referee, the “tube ” and
+“Euler characteristic” methods may be useful for approxima ting limiting
+distributions; see [ 32, 33] and the references therein.
+Factor analysis presents interesting examples of models wi th singularities.
+Despite its long history and widespread use in practice, the se models are
+far from fully understood. Practical assessment of statist ical signiﬁcance in
+factor analysis employs χ2-computations based on the suﬃcient condition
+in [ 1], Theorem 12.1. However, little is known about the structur e of the
+covariance matrices at which χ2-asymptotics fail and about the nature of
+the nonstandard limiting distributions. In Sections 5 and 6 we were able to
+address these problems for factor analysis with one factor.
+Factor analysis and all other examples considered in this pa per were mod-
+els for the multivariate normal distribution. Even in this r ealm there are
+many other models that could be studied in a similar fashion. For example,
+more general Gaussian hidden variable models as well as stru ctural equa-
+tion models could be considered in lieu of factor analysis. B ut there are also
+many models for the multinomial distribution that have sing ularities; see
+for example [ 13]. The algebraic geometric techniques presented in this pap er
+provide a uniﬁed approach for future work on the impacts of si ngularities
+on likelihood ratio tests in diﬀerent classes of nonsmooth m odels.
+A key feature of the χ2-theory for smooth models is that the limiting dis-
+tribution is pivotal, that is, does not depend on where in the null hypothesis
+the true parameter point is located. In some nonstandard pro blems, such
+as testing submodels of the one-factor model (Section 6.2) this pivotality is
+preserved (or at least stochastic bounds are pivotal). Howe ver, our compu-
+tations for the simplest nontrivial two-factor model sugge st that even for
+testing problems involving only slightly more general and s till seemingly
+simple hidden variable models, the limiting distribution w ill depend on un-
+known nuisance parameters. One possible approach to circum venting this
+problem is to design bootstrap procedures. While this is a to pic beyond the
+scope of this paper, we expect the algebraic framework layed out here will
+be helpful for investigating asymptotic correctness of boo tstrap tests in the
+presence of singularities.
+APPENDIX A: DETAILS ON THE FEEDBACK MODEL
+Here we provide details on the feedback model PΘ 0 from Example 3.6;
+the same notation is used.
+
+[PDF PAGE 29]
+LIKELIHOOD RATIO TESTS AND SINGULARITIES 29
+A.1. Parameter identiﬁability. Instead of studying the parameterization
+map f directly, we work with precision matrices Σ −1. For β ∈ R5 and κ ∈
+(0, ∞)4, let g be the map from ( β,κ ) to the inverse of the covariance matrix
+f (β,ω ) with ωi = 1/κi. The map g : Γ ⊊ R 5 × (0, ∞)4 → R4×4
+sym is polynomial
+with g(β,κ ) equal to
+
+
+
+
+κ1 +β2
+21κ2 +β2
+31κ3 β32β31κ3 −β21κ2 −β31κ3 β24β21κ2
+κ2 +β2
+32κ3 −β32κ3 −β24κ2
+κ3 +β2
+43κ4 −β43κ4
+κ4 +β2
+24κ2
+
+
+
+.
+(A.1)
+Computations in Maple and Singular [
+15] yield the following results.
+The Jacobian of g has an 8 × 8-minor equal to a product of powers of
+the κi. Hence, its rank is 8 or 9 for all ( β,κ ) ∈ Γ. Computing the radical
+of the ideal of 9 × 9-minors, we see that the rank is 9 unless ( 3.2) holds.
+In order to investigate identiﬁability of PΘ 0 we perform computations for
+solving the polynomial equations g( ¯β, ¯κ) = g(β,κ ) for ( ¯β, ¯κ). We ﬁnd the
+following structure:
+Lemma A.1. The model PΘ 0 is globally identiﬁable at (β,κ ) if and only
+if:
+(i) β31 +β32β21 ̸= 0, or
+(ii) β31 +β32β21 = 0 and at least one of the parameters β32, β43, β24 is
+zero, or
+(iii) β31 +β32β21 = 0 and β32β43β24 = −1.
+If PΘ 0 is not globally identiﬁable at (β,κ ) and Σ −1 = g(β,κ ), then g−1(Σ −1)
+= {(β,κ ), ( ¯β, ¯κ)} is of cardinality two; compare ( 3.3). The nontrivial element
+( ¯β, ¯κ) is a rational function of ( β,κ ). It holds that ¯β21 =β21 and ¯κ1 =κ1.
+Fori ∈ {2, 3, 4},
+¯βi i−1 = κi−1κi+1 +κiκi+1β2
+i i−1 +κiκi−1β2
+i i−1β2
+i−1 i+1
+βi i−1(κiκi+1 +κiκi−1β2
+i−1 i+1 +κi−1κi+1β2
+i−1 i+1β2
+i+1 i)(A.2)
+and
+¯κi =κiβi i−1/ ¯βi i−1.(A.3)
+The expressions in (
+A.2) and ( A.3) can be read literally for i = 3; for i = 2, 4
+the indices i ± 1 are to be read modulo 3 such that 4 + 1 ≡ 2 and 2 − 1 ≡ 4.
+Finally, the remaining component ¯β31 is equal to − ¯β32 ¯β21.
+Lemma A.2. If PΘ 0 is locally identiﬁable at (β,κ ) ∈ Γ , then the map g
+is proper at the precision matrix Σ −1 = (σij) = g(β,κ ).
+
+[PDF PAGE 30]
+30 M. DRTON
+Proof. Let V ⊆ R4×4
+sym be a compact neighborhood of Σ −1 in g(Γ). We
+assume in particular that V is bounded away from the boundary of the cone
+of positive deﬁnite matrices such that the closure of g−1(V ) is contained in
+Γ (recall that points in Γ satisfy β43β32β24 ̸= 1). By the local identiﬁability
+assumption, none of the values of β32, β43 and β24 are zero, which implies
+that the oﬀ-diagonal entries σij are nonzero if i,j ≥ 2. We may thus assume
+that for all precision matrices S = (sij) ∈V , the diagonal entries sii as well
+as the absolute values of oﬀ-diagonal entries sij with i,j ≥ 2 are in some
+ﬁnite interval [ m,M ] with 0 <m<M < ∞.
+Suppose S = (sij) = g(β,κ ) ∈V . Since κi ≤sii it follows that all the com-
+ponents of κ are in the interval [0,M ]. For the components of β we have the
+inequalities
+β2
+31m2 ≤β2
+31s2
+23 =β2
+31β2
+32κ2
+3 ≤s11s22 ≤M 2,
+β2
+21m2 ≤β2
+21s2
+24 =β2
+21β2
+24κ2
+2 ≤s11s44 ≤M 2
+and
+|βij|m ≤ |βijsij| =β2
+ijκi ≤sii ≤M, (i,j ) ∈ {(4, 3), (3, 2), (2, 4)}.
+The absolute values of the components of β are thus all contained in the
+interval [0,M/m ]. Hence, ( β,κ ) is in the compactum [ −M/m,M/m ]5 ×
+[0,M ]4. □
+Proposition
+3.5 does not apply to case (ii) in Lemma A.1 because if one
+of β32, β43, β24 is zero, then g is not proper at g(β,κ ). This can be seen in
+equation ( A.2) where | ¯βi i−1| → ∞ if βi i−1 → 0. In case (iii) of Lemma A.1,
+Proposition 3.5 does not apply because the rank of the Jacobian of g drops
+from 9 to 8.
+A.2. Applying algebraic techniques. Example 3.6 was concerned with
+local identiﬁability. In order to get an understanding of th e globally identi-
+ﬁable cases the techniques from Section 4 are useful.
+Lemma A.3. A covariance matrix Σ = f (β,ω ) ∈ Θ 0 is a singularity if
+and only if β31 +β32β21 = 0, in which case the algebraic tangent cone AΘ 0(Σ)
+is the union of the two hyperplanes with the normal vectors η and ¯η from
+(3.4) and ( 3.5).
+Proof. Employing the technique of implicitization ([ 7], Chapter 3) and
+the software Singular [15], we compute the Zariski closure ¯Θ 0 that is found
+to be given by the vanishing of the irreducible polynomial
+f =σ13σ3
+14σ2
+23 − 2σ2
+13σ2
+14σ23σ24
+
+[PDF PAGE 31]
+LIKELIHOOD RATIO TESTS AND SINGULARITIES 31
++σ3
+13σ14σ2
+24 −σ12σ3
+14σ23σ33 +σ12σ13σ2
+14σ24σ33
++σ11σ2
+14σ23σ24σ33 −σ11σ13σ14σ2
+24σ33
++σ2
+12σ2
+14σ33σ34 −σ11σ2
+14σ22σ33σ34
+−σ2
+12σ13σ14σ2
+34 +σ11σ13σ14σ22σ2
+34
++σ12σ2
+13σ14σ23σ44 −σ11σ13σ14σ2
+23σ44
+−σ12σ3
+13σ24σ44 +σ11σ2
+13σ23σ24σ44
+−σ2
+12σ13σ14σ33σ44 +σ11σ13σ14σ22σ33σ44
++σ2
+12σ2
+13σ34σ44 −σ11σ2
+13σ22σ34σ44.
+We can also compute the singularities of Θ 0, which are the matrices Σ = ( σij)
+withσ13 =σ14 = 0, or equivalently the matrices f (β,ω ) withβ31 +β32β21 = 0.
+Since the ideal I(Θ 0) is generated by f , the algebraic tangent cone at a
+singularity Σ = f (β,ω ) is determined by the polynomial fΣ ,min ∈ R[t], which
+factorizes as
+(β43 ·t13 −t14)[(β2
+32β2
+43ω2 +β2
+43ω3 +ω4) ·t13
+− (ω3 +β2
+32ω2 +β2
+32β2
+24ω4)β43 ·t14].
+The linear forms in the factorization correspond to the vect ors in ( 3.4) and
+(3.5). □
+The next proposition summarizes what we know about the globa lly iden-
+tiﬁable cases from Lemma A.1. Note that case (ii) is an example where the
+parametrization is globally identiﬁable with full rank Jac obian, but where a
+nonstandard limiting distribution arises for the likeliho od ratio statistic.
+Proposition A.4. Let λn be the likelihood ratio statistic for testing
+(1.1). Let Σ 0 = f (β,ω ) be the true covariance matrix. Suppose n → ∞.
+(i) If β31 +β32β21 ̸= 0, then λn →χ2
+1.
+(ii) Ifβ31 +β32β21 = 0 and at least one of the parameters β32,β43,β24 is
+zero, then λn converges to the distribution of a minimum of two χ2
+1-random
+variables, which as in Example
+3.6 is determined by the cosine ρ in ( 3.6).
+(iii) Ifβ31 +β32β21 = 0 andβ32β43β24 = −1, then the asymptotic p-values
+for the likelihood ratio test can be bounded as P (χ2
+1>t ) ≤p∞(t) ≤P (χ2
+2>t ).
+Proof. (i) This is the smooth case, which follows from (
+3.2), Lem-
+mas A.3 and 4.4, and Theorem 4.3.
+(ii) Under the assumed conditions on β, the algebraic tangent cone is the
+union of two distinct hyperplanes because η ̸= ¯η. The hyperplane given by
+η corresponds to the span of the columns of the Jacobian of f at (β,ω ).
+
+[PDF PAGE 32]
+32 M. DRTON
+The other hyperplane comprises tangent vectors obtained fr om diverging
+sequences ( ¯β, ¯ω) such that f ( ¯β, ¯ω) → Σ 0. This can be done by plugging the
+expressions in ( A.2) and ( A.3) into the Jacobian of f (note that ωi = 1/κi)
+and computing the column span. Hence, TΘ 0(Σ 0) =AΘ 0(Σ 0) is of the same
+form as for the locally identiﬁable case discussed in Exampl e 3.6. (If β43 =
+β24 = 0 or β43 =β32 = 0, then ρ = 0 implies independence of the two χ2
+1-
+random variables of which the minimum is taken.)
+(iii) In this case, the normals η and ¯η are proportional to each other and
+the two associated hyperplanes cone coincide. Hence, AΘ 0(Σ 0) is a hyper-
+plane and P (χ2
+1>t ) ≤p∞(t). Since the rank of the Jacobian of f at (β,ω )
+is equal to 8, the upper bound on p∞(t) follows from Lemma
+4.5. □
+The tangent coneTΘ 0(Σ 0) in case (iii) of Proposition A.4 seems diﬃcult to
+obtain. However, based on examination of the degree 3-terms in the equation
+that deﬁnes Θ 0 − Σ 0 at the origin, we believe that, similarly to Example 1.2,
+TΘ 0(Σ 0) ⊊ AΘ 0(Σ 0).
+APPENDIX B: THE SIMPLEST TWO-F ACTOR MODEL
+In this appendix we discuss the geometry of F5,2, the covariance matrix
+parameter space of factor analysis with 5 observed variable s and 2 factors.
+The Zariski closure of F5,2 is the hypersurface deﬁned by the vanishing of
+the pentad
+t12t13t24t35t45 −t12t13t25t34t45 −t12t14t23t35t45 +t12t14t25t34t35
++t12t15t23t34t45 −t12t15t24t34t35 +t13t14t23t25t45 −t13t14t24t25t35
+−t13t15t23t24t45 +t13t15t24t25t34 −t14t15t23t25t34 +t14t15t23t24t35.
+Finding the tangent cones of F5,2 is an open problem but we can compute
+the algebraic tangent cones of this hypersurface.
+The singularities of F5,2 are of two types ([ 10], Example 33). First, there
+are the symmetric matrices with a row (and column) that is oﬀ- diagonally
+zero. Consider the matrices
+Σ =
+
+
+
+
+
+
+σ11 0 0 0 0
+0 σ22 σ23 σ24 σ25
+0 σ23 σ33 σ34 σ35
+0 σ24 σ34 σ44 σ45
+0 σ25 σ35 σ45 σ55
+
+
+
+
+
+
+(B.1)
+with ﬁrst row and column oﬀ-diagonally zero as a representat ive set. For
+almost all singularities Σ = ( σij) of form (
+B.1), the algebraic tangent cone
+AF5, 2(Σ) is the irreducible real algebraic variety given by the qu adratic poly-
+nomial
+σ45(σ24σ35 −σ34σ25)t12t13 −σ35(σ23σ45 −σ34σ25)t12t14 ± · · ·
+
+[PDF PAGE 33]
+LIKELIHOOD RATIO TESTS AND SINGULARITIES 33
+obtained by replacing the indeterminates tgh with 2 ≤g <h ≤ 5 in the
+pentad by σgh. However, at special matrices of form ( B.1) the algebraic
+tangent cone may be of degree 3 or larger. This occurs if the su bmatrix
+Σ {2,...,5}×{2,...,5} satisﬁes all its tetrads or has an oﬀ-diagonal 2 × 2-submatrix
+that is zero. Degree 4 occurs if precisely one entry above the diagonal of Σ
+is nonzero. If Σ is diagonal, then AF5, 2(Σ) is the pentad hypersurface itself.
+The second type of singularities of F5,2 is given by symmetric matrices
+that satisfy all those tetrads that do not involve some given oﬀ-diagonal
+entry. As a representative set, consider the matrices that s atisfy all those
+tetrads that do not involve σ12. We note that these matrices can be parame-
+trized as
+Σ =
+
+
+
+
+
+
+δ11 0 0 0 0
+0 δ22 0 0 0
+0 0 δ33 0 0
+0 0 0 δ44 0
+0 0 0 0 δ55
+
+
+
+
+
+
++
+
+
+
+
+
+
+γ11 γ12
+γ21 γ22
+γ31 0
+γ41 0
+γ51 0
+
+
+
+
+
+
+
+
+
+
+
+
+γ11 γ12
+γ21 γ22
+γ31 0
+γ41 0
+γ51 0
+
+
+
+
+
+
+t
+.(B.2)
+For almost all singularities Σ = ( σij) of form (
+B.2), the algebraic tangent
+coneAF5, 2(Σ) is the irreducible real algebraic variety deﬁned by a qua dratic
+polynomial with 18 terms
+σ15σ45t23t34 +σ34σ45t23t15 +σ23σ34t45t15 −σ25σ45t34t13 −σ15σ35t34t24 ± · · ·
+that are obtained from the six pentad monomials of the form t12t2i3ti3i4ti4i5t1i5
+by droppingt12, and replacingt2i3ti3i4,ti3i4ti4i5 orti4i5t1i5 by the correspond-
+ing expression in σgh. The degree of AF5, 2(Σ) is larger than two if (i) γ12 = 0
+or γ22 = 0 such that Σ ∈F5,1, or (ii) two or more of the coeﬃcients γ31, γ41
+and γ51 are zero which leads to at least two oﬀ-diagonally zero rows ( and
+columns) in Σ, or (iii) γ11, γ21 and at least one coeﬃcient among γ31, γ41
+and γ51 are zero. In case (iii) the matrix becomes block-diagonal; f or ex-
+ample, if γ11 =γ21 =γ31 = 0 then Σ = diag(Σ 12×12,σ 33, Σ 45×45). As for the
+singularities of the ﬁrst type, the algebraic tangent cone a dmits degree 4 if
+Σ has precisely one nonzero oﬀ-diagonal entry and degree 5 if Σ is diagonal.
+For a generic one-factor matrix Σ ∈F5,1, the cone AF5, 2(Σ) is given by a
+cubic polynomial with 60 terms
+σ15σ45t12t23t34 +σ12σ15t23t34t45 +σ34σ45t12t23t15
++σ23σ34t12t45t15 +σ12σ23t34t45t15 −σ25σ45t12t34t13
+−σ12σ25t34t45t13 −σ24σ45t23t15t13 ± · · ·.
+The terms are obtained by choosing one of the twelve monomial s
+ti1i2ti2i3ti3i4ti4i5ti5i1 in the pentad and one of the ﬁve distinct indices ij ,
+and replacing tij ij+1tij+1ij+2 byσijij+1σij+1ij+2. Here the additions j + 1 and
+j + 2 are modulo 5.
+
+[PDF PAGE 34]
+34 M. DRTON
+The above algebraic tangent cones depend on the numerical va lues of the
+entries of a singularity. Since the tangent cones themselve s might even be
+more diverse, as was the case with one-factor analysis, we ca n expect the
+likelihood ratio statistic for testing the two-factor mode l to admit many
+diﬀerent limiting distributions.
+Acknowledgments. The author would like to thank two referees and an
+Associate Editor for their helpful comments on an earlier dr aft of this paper.
+REFERENCES
+[1] Anderson, T. W. and Rubin, H. (1956). Statistical inference in factor analysis.
+Proc. Third Berkeley Symp. Math. Statist. Probab. 1954–195 5 V 111–150. Univ.
+California Press, Berkeley and Los Angeles. MR0084943
+[2] Basu, S., Pollack, R. and Roy, M.-F. (2003). Algorithms in Real Algebraic Ge-
+ometry. Springer, Berlin. MR1998147
+[3] Benedetti, R. and Risler, J.-J. (1990). Real Algebraic and Semi-Algebraic Sets .
+Hermann, Paris. MR1070358
+[4] Berk, R. H. (1972). Consistency and asymptotic normality of MLE’s for e xponential
+models. Ann. Math. Statist. 43 193–204. MR0298810
+[5] Bochnak, J., Coste, M. and Roy, M.-F. (1998). Real Algebraic Geometry .
+Springer, Berlin. MR1659509
+[6] Chernoff, H. (1954). On the distribution of the likelihood ratio. Ann. Math. Statist.
+25 573–578. MR0065087
+[7] Cox, D., Little, J. and O’Shea, D. (1997). Ideals, Varieties, and Algorithms , 2nd
+ed. Springer, New York. MR1417938
+[8] Drton, M. (2006). Algebraic techniques for Gaussian models. In Prague Stochastics
+(M. Huˇ skov´ a and M. Janˇ zura, eds.) 81–90. Matfyzpress, Charles Univ. Prague.
+[9] Drton, M. and Sullivant, S. (2007). Algebraic statistical models. Statist. Sinica
+17 1273–1297. MR2398596
+[10] Drton M., Sturmfels B. and Sullivant, S. (2007). Algebraic factor analy-
+sis: Tetrads, pentads and beyond. Probab. Theory Related Fields 138 463–493.
+MR2299716
+[11] Fernando, J. F. and Gamboa, J. M. (2003). Polynomial images of Rn. J. Pure
+Appl. Algebra 179 241–254. MR1960133
+[12] Ferrarotti, M., Fortuna, E. and Wilson, L. (2000). Real algebraic varieties with
+prescribed tangent cones. Paciﬁc J. Math. 194 315–323. MR1760783
+[13] Geiger, D., Heckerman, D., King H. and Meek, C. (2001). Stratiﬁed exponen-
+tial families: Graphical models and model selection. Ann. Statist. 29 505–529.
+MR1863967
+[14] Geyer, C. J. (1994). On the asymptotics of constrained M -estimation. Ann. Statist.
+22 1993–2010. MR1329179
+[15] Greuel, G.-M., Pfister, G. and Sch¨onemann, H. (2005). Singular 3.0. A com-
+puter algebra system for polynomial computations Centre fo r Computer Alge-
+bra, Univ. Kaiserslautern. Available at http://www.singular.uni-kl.de.
+[16] Hanumara, R. C. and Thompson, W. A. (1968). Percentage points of the extreme
+roots of a Wishart matrix. Biometrika 55 505–512. MR0237044
+[17] Hayashi K., Bentler, P. M. and Yuan, K.-H. (2007). On the likelihood ratio test
+for the number of factors in exploratory factor analysis. Struct. Equ. Model. 14
+505–526. MR2393878
+
+[PDF PAGE 35]
+LIKELIHOOD RATIO TESTS AND SINGULARITIES 35
+[18] Kass, R. E. and Vos, P. W. (1997). Geometrical Foundations of Asymptotic Infer-
+ence. Wiley, New York. MR1461540
+[19] Lin, Y. and Lindsay, B. G. (1997). Projections on cones, chi-bar squared distribu-
+tions, and Weyl’s formula. Statist. Probab. Lett. 32 367–376. MR1602207
+[20] Miller, J. J. (1977). Asymptotic properties of maximum likelihood estim ates in the
+mixed model of the analysis of variance. Ann. Statist. 5 746–762. MR0448661
+[21] O’Shea, D. B. and Wilson, L. C. (2004). Limits of tangent spaces to real surfaces.
+Amer. J. Math. 126 951–980. MR2089078
+[22] P achter, L. and Sturmfels, B. (2005). Algebraic Statistics for Computational Bi-
+ology. Cambridge Univ. Press, Cambridge. MR2205865
+[23] Rockafellar, R. T. and Wets, R. J.-B. (1998). Variational Analysis . Springer,
+Berlin. MR1491362
+[24] Self, S. G. and Liang, K.-Y. (1987). Asymptotic properties of maximum likelihood
+estimators and likelihood ratio tests under nonstandard co nditions. J. Amer.
+Statist. Assoc. 82 605–610. MR0898365
+[25] Shapiro, A. (1985). Asymptotic distribution of test statistics in the a nalysis
+of moment structures under inequality constraints. Biometrika 72 133–144.
+MR0790208
+[26] Shapiro, A. (1988). Towards a uniﬁed theory of inequality constrained t esting in
+multivariate analysis. Internat. Statist. Rev. 56 49–62. MR0963140
+[27] Shapiro, A. (2000). On the asymptotics of constrained local M -estimators. Ann.
+Statist. 28 948–960. MR1792795
+[28] Shapiro, A. (2007). Statistical inference of moment structures. In Handbook of Latent
+Variable and Related Models (S.-Y. Lee, ed.) 229–260. Elsevier, Amsterdam.
+[29] Sil vapulle, M. J. and Sen, P. K. (2005). Constrained Statistical Inference. Wiley,
+Hoboken, NJ. MR2099529
+[30] Spirtes P., Glymour, C. and Scheines, R. (2000). Causation, Prediction, and
+Search, 2nd ed. MIT Press, Cambridge, MA. MR1815675
+[31] Takemura, A. and Kuriki, S. (1997). Weights of χ 2 distribution for smooth or
+piecewise smooth cone alternatives. Ann. Statist. 25 2368–2387. MR1604465
+[32] Takemura, A. and Kuriki, S. (2002). On the equivalence of the tube and Euler
+characteristic methods for the distribution of the maximum of Gaussian ﬁelds
+over piecewise smooth domains. Ann. Appl. Probab. 12 768–796. MR1910648
+[33] Taylor, J., Takemura, A. and Adler, R. J. (2005). Validity of the expected Euler
+characteristic heuristic. Ann. Probab. 33 1362–1396. MR2150192
+[34] van der V aart, A. W. (1998). Asymptotic Statistics. Cambridge Univ. Press, Cam-
+bridge. MR1652247
+Department of Statistics
+University of Chicago
+Chicago, Illinois 60637
+USA
+E-mail:
+drton@galton.uchicago.edu

@@ -1,0 +1,2632 @@
+
+[PDF PAGE 1]
+arXiv:1608.04861v2  [math.ST]  6 Feb 2017
+Adaptive conﬁdence sets for matrix completion
+February 7, 2017
+Alexandra Carpentier, Universit¨ at Potsdam1
+Olga Klopp, University Paris Ouest 2
+Matthias L¨ oﬄer and Richard Nickl, University of Cambridge 3
+Abstract
+In the present paper we study the problem of existence of hone st and adaptive conﬁdence sets for
+matrix completion. We consider two statistical models: the trace regression model and the Bernoulli
+model. In the trace regression model, we show that honest con ﬁdence sets that adapt to the unknown
+rank of the matrix exist even when the error variance is unkno wn. Contrary to this, we prove that in
+the Bernoulli model, honest and adaptive conﬁdence sets exi st only when the error variance is known a
+priori. In the course of our proofs we obtain bounds for the mi nimax rates of certain composite hypothesis
+testing problems arising in low rank inference.
+Keywords. Low rank recovery, conﬁdence sets, adaptivity, matrix completio n, unknown variance, minimax
+hypothesis testing.
+1 Introduction
+In matrix completion we observe n noisy entries of a data matrix M = ( Mij) ∈ Rm1×m2, and we aim at
+doing inference on M . In a typical situation of interest, n is much smaller than m1m2, the total number of
+entries. This problem arises in many applications such as recommende r systems and collaborative ﬁltering
+[
+3, 21], genomics [ 18] or sensor localization [ 37]. Two statistical models have been proposed in the matrix
+completion literature: the trace-regression model (e.g. [ 9, 27, 29, 31, 36] ) and the ‘Bernoulli model’ (e.g.
+[10, 17, 28]).
+In the trace-regression model we observe n pairs ( Xi, Y tr
+i ) satisfying
+Y tr
+i = ⟨Xi, M⟩ + ǫi = tr(X T
+i M ) + ǫi, i = 1, . . . , n, (1.1)
+where (ǫi) is a noise vector. The random matrices Xi ∈ Rm1×m2 are independent of the ǫi’s, chosen uniformly
+at random from the set
+B =
+{
+ej(m1)eT
+k (m2), 1 ≤ j ≤ m1, 1 ≤ k ≤ m2
+}
+, (1.2)
+were the ej(s) are the canonical basis vectors of Rs. In this model Y tr
+i returns the noisy value of the entry
+of M corresponding to the random position Xi.
+In the Bernoulli model each entry of M + E, where E = (ǫij) ∈ Rm1×m2 is a matrix of random errors, is
+observed independently of the other entries with probability p = n/(m1m2). More precisely, if n ≤ m1m2 is
+given and Bij are i.i.d. Bernoulli random variables of parameter p independent of the ǫij’s, we observe
+Y Ber
+ij = Bij (Mij + ǫij) , 1 ≤ i ≤ m1, 1 ≤ j ≤ m2. (1.3)
+1Institut f¨ ur Mathematik, carpentier@maths.uni-potsdam.de
+2MODALX, kloppolga@math.cnrs.fr
+3Statistical Laboratory, Centre for Mathematical Sciences , m.loﬄer@statslab.cam.ac.uk, r.nickl@statslab.cam.ac .uk
+1
+
+[PDF PAGE 2]
+The major diﬀerence between these models is that in the trace-reg ression model multiple sampling of a
+particular entry is possible whereas in the Bernoulli model each entr y can be sampled at most once. A
+further diﬀerence is that in the trace regression model the numbe r of observations, n, is ﬁxed whereas in the
+Bernoulli model the number of observations ˆn :=∑
+ij Bij is random with expectation E ˆn = n. Despite these
+diﬀerences, the results on minimax optimal recovery using computa tionally eﬃcient algorithms for these two
+models in the literature are very similar and from a ‘parameter estimat ion’ point of view the models appear
+to be eﬀectively equivalent (see, e.g., [ 9, 11, 12, 13, 17, 22, 26, 27, 29, 31, 34]). A key insight of the present
+paper is that for the construction of optimal conﬁdence sets , these models are in fact fundamentally diﬀerent,
+at least when the noise variance σ2 is unknown.
+When investigating questions that go beyond mere ‘adaptive estimation’ of a high-dimensional parameter,
+such as about the existence of adaptive conﬁdence sets, one can expect to encounter surprising phenomena –
+and various recent results (see e.g. [ 2, 6, 7, 19, 23, 25, 30, 32, 33, 35, 38] and Chapter 8.3 in [ 20]) show that
+the answers depend on a rather subtle interaction of certain ‘infor mation geometric’ properties of the model
+– the material relevant for the present paper is reviewed in Section 2. Many of these results reveal limitations
+by showing that conﬁdence regions that adapt to the whole parame ter space do not exist unless one makes
+speciﬁc ‘signal strength’ assumptions. For example, Low [ 30] and Gin´ e and Nickl [ 19] investigated this
+question in nonparametric density estimation and Nickl and van de Ge er [ 33] in the sparse high-dimensional
+regression model.
+Next to the challenge of adaptation, the construction of conﬁden ce sets in the matrix completion setting is
+diﬃcult mainly due to two reasons. Firstly, the Restricted Isometry Property (RIP) does not hold, requiring
+a more involved analysis than in a standard trace regression setting such as in [ 15]. Moreover, in most
+practical applications of matrix completion such as movie recommend er systems [ 3, 21] the variance of the
+errors is not known. Typical constructions of conﬁdence sets in h igh-dimensions such as χ2-conﬁdence sets
+(e.g. [ 33, 15]) require explicit knowledge of the variance and are thus not feasible . Particularly in the
+‘Bernoulli model’, the problem of unknown variance can be expected t o be potentially severe: for the related
+standard normal means model (without low rank structure and wit hout missing observations) Baraud [ 2]
+has shown that in the unknown variance case honest conﬁdence se ts of shrinking diameter do not exist, even
+if the true model is low dimensional. Similarly, in high-dimensional regres sion Cai and Guo [ 8] prove the
+impossibility of constructing adaptive conﬁdence sets for the lq-loss, 1 ≤ q ≤ 2, of adaptive estimators if the
+variance is unknown.
+Our main contributions are as follows: in the trace regression model, even if only an upper bound for the
+variance of the noise is known, it is shown that practical honest con ﬁdence sets exist that have Frobenius-
+norm diameter that adapts to the unknown rank of M . Contrary to this we prove that such conﬁdence regions
+cannot exist in the Bernoulli model when the noise variance is unknow n, and to complement our ﬁndings we
+also prove that in the Bernoulli model with known variance, adaptive conﬁdence regions do exist. So while
+recovery algorithms for matrix completion are not sensitive to the c hoice of model, the task of uncertainty
+quantiﬁcation for these algorithms is, and crucially depends on the statistician’s ability to estimate the nois e
+variance. For the Bernoulli ‘normal means’ model our results imply t hat the lack of availability of ‘repeated
+samples’ induces an information-theoretic ‘barrier’ for inference even in the presence of low rank structure.
+This paper is organized as follows: in Subsection 1.1 we formulate the assumptions and collect notation
+which we use throughout the paper. Then, in Section 2, we review and present general results about the
+existence of honest and adaptive conﬁdence sets in terms of some information-theoretic quantities that
+determine the complexity of the adaptation problem at hand. After wards we review the literature on
+minimax estimation in matrix completion problems. In Section 4 we give an explicit construction of honest
+and adaptive conﬁdence sets in the trace-regression case, adap ting a U-statistic approach inspired by Robins
+and van der Vaart [ 35] (see also [ 20], Section 6.4, and [ 15]). Finally, we present our results for the Bernoulli
+model in Section 5. First, we derive an upper bound for the minimax rate of testing a low rank hypothesis
+and deduce from it the existence of honest and adaptive conﬁdenc e regions in the known variance case. We
+then derive a lower bound for this testing rate in the unknown varian ce case, from which we can deduce that
+honest and adaptive conﬁdence sets over the whole parameter sp ace cannot exist in general. Sections 7-8
+contain the proofs of our results.
+2
+
+[PDF PAGE 3]
+1.1 Notation & assumptions
+By construction, in the Bernoulli model (
+1.3) the expected number of observations, n, is smaller than the total
+number of matrix entries, i.e. n ≤ m1m2. To provide a meaningful comparison we will assume throughout
+that n ≤ m1m2 also holds in the trace regression model ( 1.1). In many applications of matrix completion,
+such as recommender systems (e.g. [ 3, 21]) or sensor localization (e.g. [ 4, 37]) the noise is bounded but
+not necessarily identically distributed. This is the assumption which we adopt in the present paper. More
+precisely, we assume that the ǫι are independent random variables that are homoscedastic, have z ero mean
+and are bounded:
+Assumption 1.1. In the models (
+1.1) and ( 1.3) with index ι = i and ι = ( i, j), respectively, we assume
+E(ǫι) = 0 , E(ǫ2
+ι) = σ2, ǫι ⊥ ⊥ǫη for ι ̸= η and that there exists a positive constant U > 0 such that almost
+surely
+max
+ι
+|ǫι| ≤ U.
+We denote by M = (Mij) ∈ Rm1×m2 the unknown matrix of interest and deﬁne
+m = min(m1, m2),
+d = m1 + m2.
+For any l ∈ N we set [ l] = {1, . . . , l}. Let A, B be matrices in Rm1×m2. We deﬁne the matrix scalar product
+as ⟨A, B⟩ := tr(AT B). The trace norm of the matrix A is deﬁned as ∥A∥∗ :=∑ σj (A), the operator norm as
+∥A∥ := σ1(A) and the Frobenius norm as ∥A∥2
+F :=∑
+i σ2
+i =∑
+i,j A2
+ij where ( σj(A)) are the singular values
+of A arranged in decreasing order. Finally ∥A∥∞ = max i,j |Aij| denotes the largest absolute value of any
+entry of A. Given a semi-metric D we deﬁne the diameter of a set S by
+|S|D := sup{D(x, y) : x, y ∈ S}.
+Furthermore, for k ∈ N0 we deﬁne the parameter space of rank k matrices with entries bounded by a in
+absolute value as
+A(a, k) := {A ∈ Rm1×m2 : ∥A∥∞ ≤ a and rank( A) ≤ k}. (1.4)
+Finally, for a subset Σ ⊂ (0, U] we deﬁne
+A(a, k) ⊗ Σ := {(A, σ) : A ∈ A(a, k), σ ∈ Σ }.
+As usual, for sequences an and bn we say an ≲ bn if there exists a constant C independent of n such that
+an ≤ C · bn for all n. We write PM,σ (and EM,σ for the corresponding expectation) for the distribution of
+the observations in the models (
+1.1) or ( 1.3), respectively.
+2 Minimax theory for adaptive conﬁdence sets
+In this section we present results about existence of honest and a daptive conﬁdence sets in a general minimax
+framework. To this end, let Y = Y n ∼ P n
+f on some measure space (Ω n, B), n ∈ N, where f is contained in
+some parameter space A, endowed with a semi-metric D. Let rn denote the minimax rate of estimation over
+A, i.e.
+inf
+˜fn:Ω n→A
+sup
+f ∈A
+Ef D( ˜f , f) ≍ rn(A).
+We consider an ‘adaptation hypothesis’A0 ⊂ A characterised by the fact that the minimax rate of estimation
+in A0 is of asymptotically smaller order than in A: rn(A0) = o(rn(A)) as n → ∞ . In our matrix inference
+setting we will choose for D the distance induced by ∥ · ∥ F , for A0, A the parameter spaces A(a, k0) ⊗
+Σ , A(a, k) ⊗ Σ from above, k0 = o(k) as min( n, m) → ∞ , and data ( Yi, Xi) or ( Yij, Bij) arising from
+equation (
+1.1) or ( 1.3), respectively.
+3
+
+[PDF PAGE 4]
+Deﬁnition 2.1 (Honest and adaptive conﬁdence sets) . Let α, α′ > 0 be given. A set
+Cn = Cn(Y, α) ⊂ A is a honest conﬁdence set at level α for the model A if
+lim inf
+n
+inf
+f ∈A
+Pn
+f (f ∈ Cn) ≥ 1 − α. (2.1)
+Furthermore, we say that Cn is adaptive for the sub-model A0 at level α′ if there exists a constant K =
+K(α, α′) > 0 such that
+sup
+f ∈A0
+Pn
+f (|Cn|D > Kr n(A0)) ≤ α′ (2.2)
+while still retaining
+sup
+f ∈A
+Pn
+f (|Cn|D > Kr n(A)) ≤ α′. (2.3)
+We next introduce certain composite testing problems.
+Deﬁnition 2.2 (Minimax rate of testing & uniformly consistent tests) . Consider the testing problem
+H0 : f ∈ A 0 against H1 : f ∈ A, D(f, A0) ≥ ρn (2.4)
+where (ρn : n ∈ N) is a sequence of non-negative numbers. We say that ρn is the minimax rate of testing
+for (
+2.4) if
+(i) ∀β > 0 ∃ a constant L = L(β) > 0 and a test Ψ n = Ψ n(β), Ψ n : Ω n → {0, 1} such that
+sup
+f ∈A0
+Ef [Ψ n] + sup
+f ∈A, D(f, A0)≥ Lρ n
+Ef [1 − Ψ n] ≤ β. (2.5)
+We say that such a test Ψ n is β-uniformly consistent.
+(ii) For some β0 > 0 and any sequence ρ∗
+n = o(ρn) we have
+lim inf
+n→∞
+inf
+Ψ n:Ω n→{0, 1}
+[
+sup
+f ∈A0
+Ef [Ψ n] + sup
+f ∈A, D(f, A0)≥ρ ∗
+n
+Ef [1 − Ψ n]
+]
+≥ β0 > 0. (2.6)
+Theorem 2.1. Let ρn be the minimax rate of testing for the testing problem (
+2.4) and suppose that β0 > 0
+is as in (2.6). Suppose that
+rn(A0) = o(ρn).
+Then a honest and adaptive conﬁdence set Cn that satisﬁes (2.1)-(2.3) for any α, α′ > 0 such that 0 <
+2α + α′ < β 0 does not exist. In fact if 3α < β 0, then for any honest conﬁdence set Cn that satisﬁes (2.1) we
+have that
+sup
+f ∈A0
+Ef |Cn|D ≥ cρn. (2.7)
+for a constant c = c(α) > 0.
+The ﬁrst claim of this theorem is Proposition 8.3.6 in [ 20]. The lower bound ( 2.7) also follows from that
+proof, arguing as in the proof of Theorem 4 in [ 16].
+A converse of Theorem 2.1 also exists, as can be extracted from Proposition 8.3.7 in [ 20] and an observation
+in Carpentier (see [ 14], proof of Theorem 3.5 in Section 6). For this we need the notion of an oracle-estimator.
+Deﬁnition 2.3 (Oracle estimator) . Let β > 0 be given. We say that an estimator ˆf satisﬁes an oracle
+inequality at level β if there exists a constant C such that for all f ∈ A we have with Pn
+f -probability at least
+1 − β,
+D( ˆf , f) ≤ C inf
+˜A∈{A, A0}
+(
+D(f, ˜A) + rn( ˜A)
+)
+. (2.8)
+4
+
+[PDF PAGE 5]
+This is a typical property of adaptive estimators, and is for example in the trace-regression setting fulﬁlled
+by the soft-thresholding estimator proposed by Koltchinskii et.al. [29]. The following theorem proves that if
+the minimax rate of testing is no larger than the minimax rate of estima tion in the adaptation hypothesis,
+then honest adaptive conﬁdence sets do exist. The proof is const ructive and yields a conﬁdence set of
+non-asymptotic coverage at least 1 − α.
+Theorem 2.2. Let α, α′ > 0 be given. Let ρn be the minimax rate of testing for the problem (2.4) such
+that a min(α/2, α′)-uniformly consistent test exists. Assume that ρn ≤ C′rn(A0) for some constant C′ =
+C(α, α′) > 0. Moreover, assume that an oracle estimator ˆf at level α/2 fulﬁlling (2.8) exists. Then there
+exists a conﬁdence set Cn that adapts to the sub-model A0 at level α′ satisfying (2.2), (2.3) and that is honest
+at level α, i.e.,
+sup
+f ∈A
+Pn
+f (f /∈ Cn) ≤ α.
+3 Minimax matrix completion
+Noisy matrix completion has been extensively studied in several pape rs starting from Candes and Plan [
+12],
+see e.g. [ 13, 26, 29, 31, 27, 17, 9, 28, 34]). Optimal rates have been achieved under various sets of assump tions.
+For instance the construction of the estimator (and the resulting upper bound) in [ 31] requires knowledge
+of the ‘spikiness’ ratio of the unknown matrix and leads to sub-optim al rates in the case of sparse matrices.
+The bounds due to Keshavan et. al. [ 26] are also only optimal for certain classes of matrices, namely almost
+square matrices that have a condition number bounded by a consta nt and fulﬁl the incoherence condition
+introduced by [ 10]. Optimal convergence rates for the classes A(a, k) of matrices under consideration in the
+present paper have been obtained by Koltchinskii. et. al. [ 29] and Klopp [ 27] for the trace-regression model
+and by Klopp [ 28] for the Bernoulli model. For example, in the trace-regression set ting, Klopp [ 27] shows
+that a constrained Matrix Lasso estimator ˆM := ˆM (a, σ) satisﬁes with PM0,σ -probability at least 1 − 2/d
+∥ ˆM − M0∥2
+F
+m1m2
+≤ C kd log(d)
+n and ∥M0 − ˆM ∥∞ ≤ 2a (3.1)
+as long as m log(d) ≤ n ≤ d2 log(d) and where C = C(σ, a) > 0. Similarly, in the Bernoulli model with noise
+bounded by U it has been shown in Klopp [ 28] that an iterative soft thresholding estimator ˆM := ˆM (a, σ)
+satisﬁes with PM0,σ -probability at least 1 − 8/d
+∥ ˆM − M0∥2
+F
+m1m2
+≤ C kd
+n and ∥M0 − ˆM ∥∞ ≤ 2a (3.2)
+for n ≥ m log(d) and for a constant C = C(σ, a, U) > 0. Matching lower bounds have also been shown
+by Koltchinskii. et a. [ 29] and Klopp [ 28]. In the trace-regression model with Gaussian noise we have for
+constants β ∈ (0, 1) and c = c(σ, a) > 0 that
+inf
+ˆM
+sup
+M0∈A(a,k )
+PM0,σ
+(
+∥ ˆM − M0∥2
+F
+m1m2
+> c kd
+n
+)
+≥ β.
+A similar lower bound can be obtained in the Bernoulli setting (see Klopp [28]). These lower and upper
+bounds imply that for the Frobenius loss and the parameter space A(a, k) the minimax rate rn,m (A(a, k))
+is (at most up to a log-factor) of order √
+m1m2kd/n. (3.3)
+4 Trace Regression Model
+We ﬁrst consider the trace regression model. For the sake of prec ision we sometimes write M0 for the ‘true
+parameter’ M that has generated the equation (
+1.1).
+For notational simplicity we assume that n is even. Then we can split our observations in two independent
+sub-samples of equal size n/2. In what follows all probabilistic statements are under the distribu tion P (with
+corresponding expectation written E) of the ﬁrst sub-sample ( Y tr
+i , Xi)i≤n/ 2 of size n/2 ∈ N, conditional on
+the second sub-sample ( Y tr
+i , Xi)i>n/ 2, i.e. we have P(.) = PM0,σ ( · |(Y tr
+i , Xi)i>n/ 2).
+5
+
+[PDF PAGE 6]
+4.1 A non-asymptotic conﬁdence set in the trace regression m odel with known
+variance of the errors.
+In this case we can adapt the construction of [ 15]: we ﬁrst unbiasedly estimate the risk ∥ ˆM − M0∥2
+F /(m1m2)
+of a minimax optimal estimator ˆM computed from an independent sample (e.g., via sample splitting) by
+a natural χ2-statistic (see (
+4.1)). The construction of an unbiased estimate requires knowledge o f σ2, but
+when available this estimate, enlarged by natural quantile constant s, serves as a good proxy for the diameter
+of the conﬁdence set Cn centred at ˆM .
+More precisely, using only the second sub-sample ( Y tr
+i , Xi)i>n/ 2 we compute the matrix lasso estimator
+from Klopp [ 27] which achieves the bound ( 3.1) with probability at least 1 − 2/d. Then, we freeze ˆM and
+the second sub-sample. We deﬁne the following residual sum of squa res statistic:
+ˆRn = 2
+n
+∑
+i≤n/ 2
+(Y tr
+i − ⟨Xi, ˆM ⟩)2 − σ2. (4.1)
+Given α > 0, let ξα,σ,U =
+√
+2σU log(α), zα = log(3/α) and, for a z > 0, a ﬁxed constant to be chosen, deﬁne
+the conﬁdence set
+Cn =
+{
+A ∈ Rm1×m2 : ∥A − ˆM ∥2
+F
+m1m2
+≤ 2
+(
+ˆRn + z d
+n + ¯z + ξα,σ,U√n
+)}
+, (4.2)
+where
+¯z2 = ¯z2(α, d, n, σ, z) = zα σ2 max
+(
+3∥A − ˆM ∥2
+F
+m1m2
+, 4zd/n
+)
+.
+It is not diﬃcult to see (using that x2 ≲ y + x/√n implies x2 ≲ y + 1/n) that
+EM0,σ
+[ |Cn|2
+F
+m1m2
+⏐
+⏐
+⏐
+⏐ ˆM
+]
+≲ ∥ ˆM − M0∥2
+F
+m1m2
++ zd + σ2zα/ 3
+n + ξα,σ,U√n . (4.3)
+Markov’s inequality, (4.3) and that ˆM is minimax optimal (up to a log-factor) with PM0,σ -probability of
+at least 1 − 2/d as long as m log(d) ≤ n ≤ d2 log(d) imply that Cn has an adaptive and up to a log-factor
+minimax optimal squared diameter with probability 1 − α′ for any α′ > 2/d. The following theorem shows
+that Cn is also a honest conﬁdence set:
+Theorem 4.1. Let α > 0, α′ > 2/d and suppose that m log(d) ≤ n ≤ d2 log(d), that Assumption 1.1 is
+satisﬁed and that σ > 0 is known. Let Cn = Cn(Y, α, σ) be given by ( 4.2) with z > 0. Then, for every n ∈ N
+and every M0 ∈ A(a, m),
+PM0,σ (M0 ∈ Cn) ≥ 1 − 2α
+3 − 2e−zd/ (11a2).
+Hence, for any 1 ≤ k0 < k ≤ m, Cn is a honest and (up to a log-factor) adaptive conﬁdence set at the level
+α for the model A(a, k) ⊗ {σ} and adapts to the sub-model A(a, k0) ⊗ {σ} at level α′.
+The proof of Theorem 4.1 follows the lines of the proof of Theorem 2 in [ 15] and we omit it here as the
+unknown variance results considered in the next section straightf orwardly imply the known variance results.
+4.2 A non-asymptotic conﬁdence set in the trace regression m odel with un-
+known error variance.
+In this subsection we assume, that the precise knowledge of the no ise variance σ is not available, although
+the quantities a, U are available to the statistician (i.e. upper bounds on the matrix entr ies and on the noise).
+More precisely we assume that σ belongs to a known set Σ ⊂ (0, U]. In applications of matrix completion this
+is usually a realistic assumption since the entries of M0 are bounded: For example in a movie recommender
+system (e.g. [ 3, 21]) the entries of the observations Y and consequently M0 and ǫi are bounded from above
+by the best possible rating and below from the worst possible rating.
+6
+
+[PDF PAGE 7]
+As the variance is now assumed to be unknown the construction fro m ( 4.2) is not feasible anymore since we
+can not compute the test statistic ( 4.1). Instead we use a U-statistic approach: As in the previous sectio n,
+we use the second half of the sample, ( Y tr
+i , Xi)n/ 2<i≤n, for constructing a minimax optimal estimator ˆM of
+M that fulﬁlls ∥ ˆM ∥∞ ≤ a. We use again the matrix lasso estimator from Klopp [ 27] (with σ replaced by its
+upper bound U ) which achieves ( 3.1) with probability at least 1 − 2/d. In order to construct the conﬁdence
+set, we will be interested in all pairs of observations ( Y tr
+l , Xl) and ( Y tr
+s , Xs) in the ﬁrst sub-sample with
+1 ≤ l < s ≤ n/2 such that Xl = Xs (that is, independent measurements of the same matrix entry). F or
+each ( i, j) ∈ [m1] × [m2], let S(i,j ) = {k ∈ { 1, . . . , n/2} : Xk = ei(m1)eT
+j (m2)} =: {a1 < ... < a p(i,j ) } where
+p(i,j ) is the number of times that we observe the entry ( i, j). For all indices ( i, j) such that S(i,j ) ̸= ∅,
+we form the ⌊p(i,j )/2⌋ couples ( Xa1, Xa2), (Xa3 , Xa4 ), . . .etc. We denote by N the set of all these pairs and
+let |N | = N be their number. Re-ordering, we can write ( ˜Xk, Zk, Z′
+k)k≤N where ˜Xk = Xl = Xs for some
+couple ( Xl, Xs) ∈ N and Zk = Y tr
+l and Z ′
+k = Y tr
+s . That is, using two diﬀerent samples of the same entry
+˜Xk = Xl = Xs we form the observation triples ( ˜Xk, Zk, Z′
+k). We use ( ˜Xk, Zk, Z′
+k)k≤N to construct a U-
+Statistic to estimate the squared Frobenius loss. Contrary to the construction in (
+4.1) this does not require
+knowledge of the variance of the errors. We deﬁne:
+ˆRN := 1
+N
+N∑
+k=1
+(Zk − ⟨ ˆM , ˜Xk⟩)(Z ′
+k − ⟨ ˆM , ˜Xk⟩), (4.4)
+and we set ˆRN = 0 if N = 0. Note that
+EM0,σ
+[
+ˆRN
+⏐
+⏐
+⏐
+⏐ ˆM , N ≥ 1
+]
+= ∥ ˆM − M0∥2
+F
+m1m2
+. (4.5)
+We deﬁne the conﬁdence set
+Cn :=
+{
+A ∈ A(a, m) : ∥A − ˆM ∥2
+F
+m1m2
+≤ ˆRN + zα,N
+}
+(4.6)
+where the random quantile constant zα,N is deﬁned as
+zα,N := U 2 + 4a2
+√
+N α
+if N ̸= 0 and zα,N = 4a2 if N = 0.
+The quantity N is random but we can bound it from below with high probability by n2/(64m1m2) as proven
+in the following lemma.
+Lemma 4.1. For n ≤ m1m2 we have with probability at least 1 − exp
+(
+−n2/(372m1m2)
+)
+that:
+N ≥ n2
+64m1m2
+.
+Markov’s inequality, (4.5), Lemma 4.1 and that ˆM achieves the nearly optimal rate ( 3.1) with PM0,σ -
+probability of at least 1 − 2/d imply for any k ≤ m, any M0 ∈ A (a, k), any σ ≤ U , any α′ > 2/d +
+exp(−n2/(372m1m2)) and a large enough constant C = C(α, α′, σ, a, U) > 0 that
+PM0,σ
+( |Cn|2
+F
+m1m2
+> C kd log(d)
+n
+)
+≤ α′. (4.7)
+Since k is arbitrary this implies that Cn is a conﬁdence set whose ∥ · ∥ 2
+F -diameter adapts to the unknown
+rank of M0 without requiring the knowledge of σ ∈ Σ. The following theorem implies that Cn is also a
+honest conﬁdence set. Note that our result is non-asymptotic an d holds for any triple ( n, m1, m2) ∈ N3 as
+long as m log d ≤ n ≤ m1m2.
+Theorem 4.2. Let α > 0 be given, assume m log(d) ≤ n ≤ m1m2 and that Assumption
+1.1 is fulﬁlled. Let
+Cn = Cn(Y, α) as in ( 4.6). Then Cn satisﬁes for any M0 ∈ A(a, m) and any σ ∈ Σ
+PM0,σ (M0 ∈ Cn) ≥ 1 − α.
+Hence, for any α′ > 2/d + exp(−n2/(372m1m2)) and any 1 ≤ k0 < k ≤ m, Cn is a honest conﬁdence set at
+level α for the model A(a, k) ⊗ Σ that adapts (up to a log-factor) to the rank k0 of any sub-model A(a, k0) ⊗ Σ
+at level α′.
+7
+
+[PDF PAGE 8]
+5 Bernoulli Model
+In this section we consider the Bernoulli model (
+1.3). As before we let PM,σ (and EM,σ for the corresponding
+expectation) denote the distribution of the data when the parame ters are M and σ, and we sometimes write
+M0 for the ‘true’ parameter M for the sake of precision.
+5.1 A non-asymptotic conﬁdence set in the Bernoulli model wi th known vari-
+ance of the errors.
+Here we assume again that σ > 0 is known. In case of the Bernoulli model we are not able to obtain
+two independent samples and cannot use the risk estimation approa ches from the trace-regression setting.
+Instead we use the duality between testing and honest and adaptiv e conﬁdence sets laid out in Section 2.
+We ﬁrst determine an upper bound for the minimax rate ρ = ρn,m of testing the low rank hypothesis
+H0 : M ∈ A(a, k0) against H1 : M ∈ A(a, k), ∥M − A(a, k0)∥2
+F ≥ ρ2, (5.1)
+and then apply Theorem
+2.2. As test statistic, we propose an inﬁmum-test which has previously been used
+by Bull and Nickl [ 6] and Nickl and van de Geer [ 33] in density estimation and high-dimensional regression,
+respectively (see also Section 6.2.4. in [ 20]). Since σ2 = Eǫ2
+ij is known we can deﬁne the statistic
+Tn := inf
+A∈A(a,k 0)
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+1
+√
+2n
+∑
+i,j
+Bij
+(
+(Yij − Aij)2 − σ2)
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+= inf
+A∈A(a,k 0)
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+1
+√
+2n
+∑
+i,j
+(
+(Yij − BijAij)2 − Bijσ2)
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+(5.2)
+and choose the quantile constant uα such that
+Pσ
+
+ 1
+√
+2n
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+∑
+i,j
+Bij(ǫ2
+ij − Eǫ2
+ij)
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+> u α
+
+ ≤ α/3. (5.3)
+For example, using Markov’s inequality, we obtain
+Pσ
+
+ 1
+√
+2n
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+∑
+i,j
+Bij(ǫ2
+ij − σ2)
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+> u α
+
+ ≤ 1
+2nu2
+α
+∑
+i,j
+Varσ
+(
+Bij(ǫ2
+ij − σ2)
+)
+≤ σ2(U 2 − σ2)
+2u2
+α
+so uα = σ
+√
+(
+3(U 2 − σ2)
+)
+/(2α) is an admissible choice.
+Theorem 5.1. Let α ≥ 12 exp(−100d) be given. Consider the Bernoulli model (1.3) and the two parameter
+spaces A(a, k) and A(a, k0), 1 ≤ k0 < k ≤ m. Furthermore assume that Assumption 1.1 is fulﬁlled, that
+σ > 0 is known, that n ≥ m log(d) and consider the testing problem (5.1). Suppose
+ρ2 ≥ C m1m2k0d
+n ≍ r2
+n,m (A(a, k0))
+where C = C(α, a, U, σ) > 0 is a constant. Then the test Ψ n := 1{Tn>uα } where uα is the quantile constant
+in (5.3) and Tn is as in (5.2) fulﬁlls
+sup
+M∈A(a,k 0)
+EM,σ [Ψ n] + sup
+M∈A(a,k ), ∥M−A(a,k 0)∥ 2
+F ≥ρ 2
+EM,σ [1 − Ψ n] ≤ α.
+Now in order to apply Theorem
+2.2 we use the soft-thresholding estimator proposed by Koltchinskii e t.
+al. [ 29] which satisﬁes the oracle inequality ( 2.8) up to a log-factor in the trace regression model. That this
+holds in the Bernoulli-model as well with PM0,σ -probability of at least 1 − 1/d can be proven in a similar
+way and we sketch this in Proposition 8.3, removing the log-factor by using stronger bounds on the spectr al
+norm of the stochastic term ( Bijǫij)i,j .
+This and Theorem 5.1 imply, using Theorem 2.2, that there exist honest and adaptive conﬁdence sets in
+the Bernoulli model if the variance of the errors is known.
+8
+
+[PDF PAGE 9]
+Corollary 5.1. Let α ≥ 2/d and α′ ≥ 12 exp(−100d) be given. Suppose that σ > 0 is known, that Assump-
+tion 1.1 is fulﬁlled and that n ≥ m log(d). Then, for any 1 ≤ k0 < k ≤ m, there exists a honest conﬁdence
+set Cn at the level α for the model A(a, k) ⊗ {σ}, i.e., for any M0 ∈ A(a, k),
+PM0,σ (M0 ∈ Cn) ≥ 1 − α,
+and Cn adapts to the sub-model A(a, k0) ⊗ {σ} at level α′.
+5.2 The case of the Bernoulli model with unknown error varian ce.
+In this subsection we assume again, as in Subsection 5.2, that the pr ecise knowledge of the error variance σ
+is not available. Whereas in this case for the trace-regression model the construction of honest and adaptive
+conﬁdence set was seen to be possible, we will now show that this is no t the case for the Bernoulli model. We
+use again the duality between testing and conﬁdence sets, this time applying Theorem 2.1. The next theorem
+gives a lower bound for the minimax rate of testing for the composite null hypothesis H0 : M ∈ A (a, k0)
+of M having rank at most k0 against a rank- k alternative. To simplify the exposition we will consider only
+square matrices (but see the remark below) and also an asymptotic ‘high-dimensional’ framework where
+min(n, m) → ∞ and k0 = o(k). We formally allow for k0 = 0, thus including the ‘signal detection problem’
+when H0 : M = 0, σ2 = 1.
+Theorem 5.2. Suppose that Assumption 1.1 is satisﬁed for some U ≥ 2 and assume m = m1 = m2.
+Furthermore, let k = kn,m → ∞ be such that 0 < k ≤ m1/ 3 and k1/ 4√
+m/n < min(1, a)/2. For 0 ≤ k0 < k
+satisfying k0 = o(k) and a sequence ρ = ρn,m ∈ (0, 1/2) consider the testing problem
+H0 : M ∈ A(a, k0), σ 2 = 1 vs H1 : M ∈ A(a, k), ∥M − A(a, k0)∥2
+F ≥ m2ρ2, σ 2 = 1 − 4ρ2. (5.4)
+If as min(n, m) → ∞,
+ρ2 = o
+(√
+km
+n
+)
+, (5.5)
+then for any test Ψ we have that
+lim inf
+min(n,m )→∞
+[
+sup
+M∈A(a,k 0)
+EM, 1[Ψ] + sup
+M∈A(a,k ), ∥M−A(a,k 0)∥ 2
+F ≥m2ρ 2
+EM,
+√
+1−4ρ 2 [1 − Ψ]
+]
+≥ 1. (5.6)
+In particular, if Σ ⊂ (0, U] contains the interval [√1 − 4τ ,1] where τ = lim sup n,m k1/ 4√
+m/n, then (2.6)
+holds for the choices A0 = A(a, k0) ⊗ Σ , A = A(a, k) ⊗ Σ and β0 = 1, ρ∗ = ρ.
+Using Theorem 2.1 this implies the non-existence of honest and adaptive conﬁdence se ts in the model
+(1.3) if the variance of the errors is unknown and k0 = o(
+√
+k). In particular adaptation to a constant rank
+k0, k0 = O(1), is never possible if k → ∞ as min( m, n) → ∞.
+Corollary 5.2. Assume that the conditions of Theorem 5.2 are fulﬁlled and that k0 = o(
+√
+k). Then for
+any α, α′ > 0 satisfying 0 < 2α + α′ < 1 a honest conﬁdence set for the model A(a, k) ⊗ Σ at level α that
+adapts to the sub-model A(a, k0) ⊗ Σ at level α′ does not exist. In fact if α < 1/3, we have for every honest
+conﬁdence set Cn for the model A(a, k) ⊗ Σ at level α and constant c = c(a, U, α) that
+sup
+(M0,σ )∈A(a,k 0)⊗Σ
+EM0,σ |Cn|2
+F ≥ c m3√
+k
+n .
+The above results are formulated for square matrices ( m1 = m2) to keep the technicalities in the proof
+at a reasonable level. One can adapt the proof of Theorem 5.2 to obtain a lower bound of the order
+ρ2 ≳ √km1m2/n which likewise leads to non-existence results for adaptive conﬁdenc e sets for non-square
+matrices in relevant asymptotic regimes of k0, k, m1, m2.
+9
+
+[PDF PAGE 10]
+6 Conclusions
+We have investigated conﬁdence sets in two matrix completion models : the Bernoulli model and the trace
+regression model. In the trace regression model the constructio n of adaptive conﬁdence sets is possible, even
+if the variance is unknown. Contrary to this we have shown that the information theoretic structure in the
+Bernoulli model is diﬀerent; in this case the construction of adaptiv e conﬁdence sets is not possible if the
+variance is unknown.
+One interpretation is that in practical applications (e.g. recommend er systems such as Netﬂix [
+3]) one
+should incentivise users to perform multiple ratings, to justify the u se of the trace regression model and the
+proposed U-statistic conﬁdence set.
+Our proof only shows that one can not adapt to general low rank hy potheses if the variance is unknown.
+This covers the key cases where k0 = 1 or more generally k0 = o(
+√
+k). It remains an interesting open
+(and diﬃcult) question whether the lower bound ρ in Theorem 5.2 is tight, but the answer to this question
+does not aﬀect the main conclusions of our results on the existence of adaptive conﬁdence sets in matrix
+completion problems.
+7 Proofs
+7.1 Proof of Theorem
+2.2
+Proof. Let Ψ n be a test that attains the rate ρ with error probabilities bounded by min( α/2, α′) and let
+L = L(min(α/2, α′)) be the corresponding constant in ( 2.5). Let ˆf denote an estimator that satisﬁes the
+oracle inequality ( 2.8) with probability of at least 1 − α/2. Deﬁne a conﬁdence set
+Cn := {f ∈ A : D( ˆf , f) ≤ K (rn(A)Ψ n + rn(A0)(1 − Ψ n))}
+where K > 0 is a constant to be chosen.
+We ﬁrst prove that Cn is adaptive: If f ∈ A\A 0 there is nothing to prove, and if f ∈ A 0 we have
+Pn
+f (|Cn|D > Kr n(A0)) = Pn
+f (Ψ n = 1) ≤ α′.
+For coverage we investigate three distinct cases and note that
+sup
+f ∈ ˜A
+Pn
+f
+(
+D( ˆf , f) > Cr n( ˜A)
+)
+≤ α/2 (7.1)
+where C > 0 is as in (
+2.8) and where ˜A ∈ {A 0, A}. Hence ˆf is, by the oracle inequality, an adaptive
+estimator.
+Then for f ∈ A 0, by (
+7.1)
+Pn
+f (f /∈ Cn) ≤ Pn
+f
+(
+D( ˆf , f) > Kr n(A0)
+)
+≤ α/2 ≤ α
+for K ≥ C.
+If f ∈ A\A 0 and D(f, A0) ≥ Lρn, then for K ≥ C
+Pn
+f (f /∈ Cn) = Pn
+f (D( ˆf , f) > Kr n(A), Ψ n = 1) + Pn
+f (D( ˆf , f) > Kr n(A), Ψ n = 0)
+≤ Pn
+f (D( ˆf , f) > Kr n(A)) + Pn
+f (Ψ n = 0) ≤ α.
+If f /∈ A\A 0 but D(f, A0) < Lρ n, then by the oracle inequality and since ρn ≤ C′rn(A0) we have with
+probability at least 1 − α/2 for such f that
+D( ˆf , f) ≤ C(D(f, A0) + rn(A0)) ≤ CLρ n + Crn(A0) ≤ C(LC ′ + 1)rn(A0).
+Thus we still have
+Pn
+f (f /∈ Cn) = Pn
+f (D( ˆf , f) > Kr n(A0)) ≤ α/2 ≤ α
+for K ≥ C(LC ′ + 1).
+10
+
+[PDF PAGE 11]
+7.2 Proof of Theorem 4.2
+Proof. Recall that
+EM0,σ
+(
+ˆRN |N, N > 0
+)
+= ∥ ˆM − M0∥2
+F
+m1m2
+=: r. (7.2)
+Thus using Markov’s inequality we have for N > 0 that
+PM0,σ (M0 /∈ Cn|N, N > 0) ≤ PM0,σ
+(
+| ˆRN − r| > z α,N |N, N > 0
+)
+≤
+VarM0,σ
+(
+ˆRN
+⏐
+⏐N, N > 0
+)
+z2
+α,N
+. (7.3)
+Using equation ( 7.2) we compute
+VarM0,σ
+(
+ˆRN
+⏐
+⏐N, N > 0
+)
+= 1
+N EM0,σ
+((
+(Zk − ⟨ ˆM , ˜Xk⟩)(Z ′
+k − ⟨ ˆM , ˜Xi⟩) − r
+)2⏐
+⏐
+⏐N, N > 0
+)
+≤ 1
+N
+[(
+E⟨M0 − ˆM , X1⟩4
+)
++ 2σ2r + σ4
+]
+= 1
+N
+[
+∥ ˆM − M0∥4
+L4
+m1m2
++ 2σ2r + σ4
+]
+≤ U 4 + 8U 2a2 + 16a4
+N = αz2
+α,N
+since ∥ ˆM − M0∥∞ ≤ 2a and where we deﬁne ∥ ˆM − M0∥4
+L4 :=∑
+i,j ( ˆMij − Mij)4. Hence (
+7.3) implies
+PM0,σ (M0 /∈ Cn|N > 0) ≤ α.
+Moreover, as ∥ ˆM − M0∥∞ ≤ 2a and zα, 0 = 4a2, we have that P (M0 /∈ Cn|N = 0) = 0.
+7.3 Proof of Theorem 5.1
+Proof. If M ∈ A(a, k0), then by deﬁnition of the inﬁmum and uα we have
+EM,σ [Ψ] = PM,σ (Tn > u α ) ≤ Pσ
+
+ 1
+√
+2n
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+∑
+ij
+Bij(ǫ2
+ij − σ2)
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+> u α
+
+ ≤ α/3.
+The case M ∈ A(a, k), ∥M − A(a, k0)∥2
+F ≥ ρ2 requires more elaborate arguments. Let A∗ be a minimizer in
+(
+5.2). Then
+EM,σ [1 − Ψ] = PM,σ (Tn < u α )
+= Pσ
+
+
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+∑
+ij
+Bij[(A∗
+ij − Mij)2 − 2ǫij(A∗
+ij − Mij) + (ǫ2
+ij − σ2)]
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+<
+√
+2nuα
+
+ . (7.4)
+For ρ ≥ 8072a
+√
+k0d/p = 8072 a
+√
+m1m2k0d/n we can apply Lemma 8.1 which yields a weaker version of the
+Restricted Isometry Property (RIP). Namely, Lemma 8.1 implies that the event
+Ξ :=
+
+
+
+∑
+i,j
+Bij(Aij − Mij)2 ≥ p
+2 ∥A − M ∥2
+F ∀A ∈ A(a, k0)
+
+
+ , M ∈ H1,
+11
+
+[PDF PAGE 12]
+occurs with probability of at least 1 − 2 exp(−100d). We can thus bound ( 7.4) by
+Pσ
+
+ sup
+A∈A(a,k 0)
+
+2
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+∑
+i,j
+Bijǫij(Aij − Mij)
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+−
+∑
+i,j Bij(Aij − Mij)2
+2
+
+ > −√
+nuα , Ξ
+
+ (7.5)
++Pσ
+
+
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+∑
+i,j
+Bij(ǫ2
+ij − σ2)
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+>
+∑
+i,j Bij(A∗
+ij − Mij)2
+2 − √nuα , Ξ
+
+ + 2 exp(−100d). (7.6)
+The stochastic term (
+7.6) can be bounded using d2 ≥ 3n and that ρ is large enough. Indeed, on the event Ξ
+we have that ∑
+i,j Bij(A∗
+ij − Mij)2
+2 ≥ pρ2/4 ≥ (1 +
+√
+2)/
+√
+3duα ≥ (1 +
+√
+2)√nuα
+for ρ ≥ 2
+√
+uα d/p which implies together with the deﬁnition of uα in ( 5.3) that ( 7.6) can be bounded by
+α/3 + 2 exp( −100d). For the cross term ( 7.5) we use the two following inequalities which, just as before,
+hold on the event Ξ ∀ A ∈ A(a, k0)
+∑
+i,j Bij(Aij − Mij)2
+4 ≥ √nuα and
+∑
+i,j Bij(Aij − Mij)2
+8 ≥ p∥A − M ∥2
+F
+16 .
+Hence, using also a peeling argument, ( 7.5) can be bounded by
+∑
+s∈N: pρ 2/ 2≤2s<∞
+Pσ
+
+ sup
+A∈A(a,k 0), 2s≤p∥A−M∥ 2
+F ≤2s+1
+⏐
+⏐
+⏐
+∑
+i,j Bijǫij(Aij − Mij)
+⏐
+⏐
+⏐
+p∥A − M ∥2
+F
+> 1
+16
+
+
+≤
+∑
+s∈N: pρ 2/ 2≤2s<∞
+Pσ
+
+ sup
+A∈A(a,k 0), p ∥A−M∥ 2
+F ≤2s+1
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+∑
+i,j
+Bijǫij(Aij − Mij)
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+> 2s
+16
+
+
+=
+∑
+s∈N: pρ 2/ 2≤2s<∞
+Pσ
+(
+Z(s) > 2s
+16
+)
+(7.7)
+where we set the corresponding probability to 0 if the supremum is ta ken over an empty set and where we
+deﬁne
+Z(s) := sup
+A∈A(a,k 0), p ∥A−M∥ 2
+F ≤2s+1
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+∑
+i,j
+Bijǫij(Aij − Mij)
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+.
+Lemma
+8.2 (with choices z = 16 2, ξij = ǫij, t = 2 s and q = 1 there ) implies for ρ ≥ 16144U
+√
+k0d/p and for
+2s ≥ pρ2/2 that
+Pσ
+(
+Z(s) > 2s
+16
+)
+≤ exp
+( −2s
+2097152U 2 + 517120aU
+)
+Hence, ( 7.7) can be upper bounded by
+∑
+s∈N: pρ 2/ 2≤2s<∞
+exp
+( −2s
+2097152U 2 + 517120aU
+)
+≤2 exp
+(
+− pρ2
+2097152U 2 + 517120aU
+)
+(7.8)
+≤2 exp(−100d)
+for ρ ≥ 16169U (a ∨ U )
+√
+d/p. Consequently ( 7.4) can be bounded by α/3 + 4 exp( −100d) ≤ 2α/3 since
+α ≥ 12 exp(−100d).
+12
+
+[PDF PAGE 13]
+7.4 Proof of Theorem 5.2
+Proof. Step I : Reduction to an easier testing problem between two di stributions
+Assume without loss of generality that m is divisible by k. Suppose
+ρ = ρn,m = vk1/ 4√m√n (7.9)
+where v = vn,m is a sequence such that v = o(1), and assume w.l.o.g. that 0 < v ≤ 1. Moreover we denote
+u = 2ρ. For 1 ≤ i ≤ m, 1 ≤ κ ≤ k, 1 ≤ j ≤ m let
+Bij
+i.i.d.
+∼ B(p) and U κ
+i
+i.i.d.
+∼ R and Vj
+i.i.d.
+∼ R,
+where B(p) is a Bernoulli distribution of parameter p = n/m2 and R is the standard Rademacher distribution
+Pr(V1 = ±1) = 1 /2. Let P be a uniform random partition of {1, . . . , m} in k groups of size m/k, and denote
+by Kj, Kj ∈ {1, ..., k}, the label of element j of P. Consider the following testing problem:
+H ′
+0 : M = 0 and ǫij
+i.i.d.
+∼ R
+against
+H ′
+1 : Mij = uU Kj
+i Vj (7.10)
+and ǫ ij ∼ δ{1−Mij }(1 + Mij)/2 + δ{−1−Mij }(1 − Mi,j )/2
+Note that the variance of ǫij under H0 is 1 and the variance of the noise under H1 is
+(1 − Mij)2(1 + Mij)/2 + (−1 − Mij)2(1 − Mij)/2 = (1 − Mij)(1 + Mij) = 1 − 4ρ2,
+so the noise variables are homoscedastic across the ( i, j)’s and |ǫij| ≤ 2 ≤ U . Let π be the distribution of M
+under H ′
+1 and write ν0 and ν1 for the distribution of Y under H ′
+0 and H ′
+1, respectively.
+Since the prior M in ( 7.10) consists of k i.i.d. scaled Rademacher vectors that each form m/k columns of
+M we have rank( M ) ≤ k and ∥M ∥∞ = u = 2 ρ ≤ a for v small enough and since k1/ 4√
+m/n ≤ a/2. Thus
+M ∈ A(a, k). Then, reordering the columns of M we have
+∥M − A(a, k0)∥2
+F = ∥Mord − A(a, k0)∥2
+F
+where Mord is a m × m matrix with the ((( i − 1)m/k) + 1)-th to the ( im/k)-th columns each given by
+uri where ri are i.i.d Rademacher vectors of length m, i = 1 , ..., k. Then (as in the proof of Theorem
+1 in [
+16]) we transform Mord into the m × k matrix MordP = u
+√
+m/kR consisting of k column vectors
+u
+√
+m/kri, i = 1 , ..., k. The m × k projection matrix P consists of k column vectors, the i-th having zero
+entries except for the indices s ∈ [((i − 1)m/k) + 1 , . . . , im/k] where it equals
+√
+k/m. Hence P is an
+orthonormal projection matrix and we obtain
+∥M − A(a, k0)∥2
+F ≥ ∥(Mord − A(a, k0))P ∥2
+F = ∥u
+√
+m/kR − A(a
+√
+m/k, k, k0)∥2
+F
+where we deﬁne
+A(a, k, k0) := {A ∈ Rm×k : ∥A∥∞ ≤ a and rank( A) ≤ k0}.
+Therefore, if σmin(A) denotes the minimal singular value of a matrix A, we have that
+∥M − A(a, k0)∥2
+F ≥ m2
+k ∥uR/√m − A(a/√m, k, k0)∥2
+F
+≥ m2u2
+k (k − k0)(σmin(R/√m))2
+≥ m2u2
+2 (σmin(R/√m))2 ≥ m2u2
+4 = m2ρ2 (7.11)
+13
+
+[PDF PAGE 14]
+with probability going to 1, where we have used that k − k0 ≥ k/2 for m large enough (recall k0 = o(k))
+as well as the variational characterisation of minimal eigenvalues co mbined with Corollary 1 in [ 33] (with
+choices n = m, p = k1 = k, θ = 0 and Λ min = 1 there) to lower bound σ2
+min(R/√m) by 1 /2.
+To conclude, π is concentrated on H1 and the primed testing problem above is, asymptotically, strictly eas ier
+than the testing problem ( 5.4) since H ′
+0 is contained in H0 and H ′
+1 is asymptotically contained in H1. Thus,
+we have for any test Ψ by a standard lower bound (as, e.g., in (6.23) in [20]) that for all η > 0
+EH0 Ψ + sup
+H1
+EH1 (1 − Ψ) ≥ EH′
+0 Ψ + EH′
+1 (1 − Ψ) − o(1) ≥ (1 − η)
+(
+1 − dχ 2 (ν0, ν1)
+η
+)
+− o(1),
+where dχ 2 (ν0, ν1) denotes the χ2-distance between ν0 and ν1, which remains to be bounded.
+Step II : Expectation over censored data
+We deﬁne I = [m] × [m] and observe that the likelihood of the data under ν0 is
+L(Y1, ...Ym,m ) =
+∏
+(i,j )∈I
+(
+(1 − p)1{Yij =0} + p
+2 1{Yij =1} + p
+2 1{Yij =−1}
+)
+and that the likelihood of the data under ν1 is
+L(Y1, ...Ym,m ) = EM∼π
+∏
+(i,j )∈I
+(
+(1 − p)1{Yij =0} + p(1/2 + Mij/2)1{Yij =1} + p(1/2 − Mij/2)1{Yij =−1}
+)
+.
+Thus, the likelihood ratio L between these two distributions is given by
+L = EM∼π
+∏
+(i,j )∈I
+(
+1{Yij =0} + (1 + Mij)1{Yij =1} + (1 − Mij)1{Yij =−1}
+)
+.
+So we have that
+dχ 2 (ν0, ν1)2 + 1 = EY ∼ν0 L2
+= EY ∼ν0
+[
+EM∼π
+∏
+(i,j )∈I
+(
+1{Yij =0} + (1 + Mij)1{Yij =1} + (1 − Mij)1{Yij =−1}
+)] 2
+= EM,M ′∼π
+∏
+i,j
+[(
+1 − p + p
+2 (1 + Mij)(1 + M ′
+ij) + p
+2 (1 − Mij)(1 − M ′
+ij)
+)]
+= EM,M ′∼π
+∏
+i,j
+[
+1 + pMijM ′
+ij
+]
+. (7.12)
+where M ′ is an independent copy of M .
+Step III : Conditioning over the cross information
+Let Nr,r ′ be the number of times where the couple Kj = r, K′
+j = r′ occurs. That is,
+Nr,r ′ :=
+m∑
+j=1
+1{Kj=r,K ′
+j =r′}.
+We enumerate the elements inside these groups from 1 to Nr,r ′. We write ˜V r,r ′
+j for the corresponding
+enumeration of the Vj . Setting N = (Nr,r ′)r,r ′ and using the deﬁnition of the prior, we compute
+EM,M ′∼π
+∏
+i,j
+[
+1 + pMijM ′
+ij
+]
+= EN,U, ˜V ,U ′, ˜V ′
+m∏
+i=1
+∏
+r,r ′∈{1,...,k }2
+Nr,r ′
+∏
+j=1
+[
+1 + pu2U r
+i ˜V r,r ′
+j (U r′
+i )′( ˜V r,r ′
+j )′
+]
+=: EN
+∏
+r,r ′∈{1,...,k }2
+I(Nr,r ′) (7.13)
+14
+
+[PDF PAGE 15]
+where we deﬁne for any N = Nr,r ′ > 0
+I(N ) = EX,W,X ′,W ′
+m∏
+i=1
+N∏
+j=1
+[
+1 + pu2XiWj X ′
+iW ′
+j
+]
+and where ( Xi)i≤m, (X ′
+i)i≤m, (Wi)j≤N , (W ′
+i )j≤N are i.i.d. Rademacher random variables. Moreover, we set
+Ir,r ′(0) = 0.
+Step IV : Bound on EN
+∏
+r,r ′∈{1,...,k }2 I(Nr,r ′ ).
+In order to bound I(N ) we use the following lemma proved below
+Lemma 7.1. Let N = Nr,r ′. There exist constants C1, C2, C3 > 0 such that for v small enough
+I(N ) ≤ exp
+(
+C1v4N/m
+)
+exp
+(C2v4k2N
+m2
+)
+exp
+(
+C3v4N 2k2/m2
+)
+. (7.14)
+Using ( 7.12), ( 7.13) and ( 7.14) we have that
+dχ 2 (ν0, ν1)2 + 1
+= EN
+∏
+r,r ′∈{1,...,k }2
+I(Nr,r ′) (7.15)
+≤ EN
+
+
+
+exp
+
+ C2v4k2
+m2
+∑
+r,r ′
+Nr,r ′
+
+
+
+
+
+exp
+
+ C1v4
+m
+∑
+r,r ′
+Nr,r ′
+
+
+
+
+
+ ∏
+r,r ′∈{1,...,k }2
+exp
+(
+C3v4N 2
+r,r ′k2/m2
+)
+
+
+
+
+= exp
+(
+C2v4 k2
+m + C1v4
+)
+EN
+
+ ∏
+r,r ′∈{1,...,k }2
+exp
+(
+C3v4N 2
+r,r ′k2/m2
+)
+
+ , (7.16)
+since∑
+r,r ′ Nr,r ′ = m. We bound the expectation of the stochastic term in (
+7.16) using the following lemma
+proved below:
+Lemma 7.2. There exists a constant C′ > 0 such that for v small enough we have
+EN
+[ ∏
+r,r ′
+exp
+(
+C3v4N 2
+r,r ′k2/m2
+)]
+≤ 1 + 2C′v4 + exp
+(
+− m/k2
+)
+. (7.17)
+Inserting (
+7.17) into ( 7.16) and summarizing all the steps we obtain
+0 ≤ dχ 2 (ν0, ν1)2 ≤ C
+(
+v2 + exp
+(
+− m/k2))
+= o(1)
+for a constant C > 0 and therefore, letting η → 0,
+E0[Ψ] + sup
+H1
+EH1 [1 − Ψ] ≥ (1 − η)
+(
+1 − dχ 2 (ν0, ν1)
+η
+)
+− o(1) = 1 − o(1).
+Proof of Lemma 7.1. Note that, by construction of P, we have that
+N = Nr,r ′ ≤ m/k
+since the number of j where M.,j corresponds to Kj = r is bounded by m/k. As the product of two
+independent Rademacher random variables is again a Rademacher ra ndom variable, we have
+I(N ) = ER,R ′
+m∏
+i=1
+N∏
+j=1
+[
+1 + pu2RiR′
+j
+]
+,
+15
+
+[PDF PAGE 16]
+where R = (Ri)m
+i=1, R′ = (R′
+i)N
+i=1 are independent Rademacher vectors of length m and N , respectively. The
+usual strategy to use 1 + x ≤ ex and then to bound iterated exponential moments of Rademacher v ariables
+(as in the proof of Theorem 1 of [
+16]) only works when k = const, and a more reﬁned estimate is required
+for growing k, as relevant here.
+We now bound I(N ) for a ﬁxed N, m/k ≥ N > 0. Using the binomial theorem twice we have
+I(N ) = ER′
+[ [ 1
+2
+N∏
+j=1
+[
+1 + pu2R′
+j
+]
++ 1
+2
+N∏
+j=1
+[
+1 − pu2R′
+j
+] ] m
+]
+= 1
+2m
+m∑
+s=1
+(m
+s
+)[ 1
+2
+[
+1 + pu2] s[
+1 − pu2] m−s
++ 1
+2
+[
+1 − pu2] s[
+1 + pu2] m−s] N
+= 1
+2m2N
+m∑
+s=1
+(m
+s
+) N∑
+q=1
+(N
+q
+)[
+1 + pu2] sq+(m−s)(N −q)[
+1 − pu2] (m−s)q+s(N −q)
+= EQ,S
+[ [
+1 + pu2] SQ+(m−S)(N −Q)[
+1 − pu2] (m−S)Q+S(N −Q)]
+with independent Binomial random variables S ∼ B (1/2, m), Q ∼ B (1/2, N). If A := 1−pu2
+1+pu2 , we obtain
+I(N ) = EQ,S
+[ [
+1 + pu2] mN
+[ 1 − pu2
+1 + pu2
+] SN +mQ−2SQ]
+=
+[
+1 + pu2] mN
+EQ
+[
+AmQESAS(N −2Q)
+]
+=
+[
+1 + pu2] mN
+EQ
+[
+AmQ2−m
+(
+A(N −2Q) + 1
+)m]
+=
+[
+1 + pu2] mN
+EQ
+[
+AN m/ 2
+(1
+2 A(N/ 2−Q) + 1
+2 A(−N/ 2+Q)
+)m]
+=
+[
+1 − p2u4] mN/ 2
+EQ
+(1
+2 AQ−N/ 2 + 1
+2 AN/ 2−Q
+)m
+.
+Now, we denote x := pu2 = 4 vk1/ 2/m ≤ 1/2 for v small enough. Furthermore, we Taylor expand log( A)
+about 1 up to second order, i.e.
+log(A) = log(1 − x) − log(1 + x) = −2x − 1
+2
+( 1
+ξ2
+1
+− 1
+ξ2
+2
+)
+x2 =: −2x − c(x)x2
+for ξ1 ∈ [1/2, 1], ξ2 ∈ [1, 3/2] and where c(x) ∈ [0, 16/9] since x ≤ 1/2. Hence, using also the inequality
+ex ≤ 1 + x + x2/2 + x3/6 + 2x4 we deduce
+I(N ) ≤ exp
+[
+− mN x2/2
+]
+EQ
+[ 1
+2 exp
+(
+− 2x(Q − N/2) − c(x)(Q − N/2)x2)
+)
++ 1
+2 exp
+(
+− 2x(N/2 − Q) − c(x)(N/2 − Q)x2)
+)] m
+≤ exp
+[
+− mN x2/2
+]
+· EQ
+[
+1
+2
+(
+1 − 2x(Q − N/2) − c(x)(Q − N/2)x2 + (−2x(Q − N/2) − c(x)(Q − N/2)x2)2/2
++ (−2x(Q − N/2) − c(x)(Q − N/2)x2)3/6 + 2(−2x(Q − N/2) − c(x)(Q − N/2)x2)4
+)
++ 1
+2
+(
+1 − 2x(N/2 − Q) − c(x)(N/2 − Q)x2 + (−2x(N/2 − Q) − c(x)(N/2 − Q)x2)2/2
++ (−2x(N/2 − Q) − c(x)(N/2 − Q)x2)3/6 + 2(−2x(N/2 − Q) − c(x)(N/2 − Q)x2)4
+)] m
+.
+16
+
+[PDF PAGE 17]
+Since x ≤ 1/2 and |N/2 − Q|x ≤ 1/4 there exist two constants c2 = c2(x) = c(x)/2 + c(x)2/32 ≤ 1 and
+c1 = c1(x) = 32 + 32 c(x) + 12 c(x)2 + 2 c(x)3 + c(x)4/8 ≤ 140 such that the last equation above can be
+bounded by
+≤ exp
+[
+− mN x2/2
+]
+EQ
+[
+1 + 2x2(Q − N/2)2 + c1|Q − N/2|4x4 + c2|Q − N/2|x2
+] m
+≤ exp
+[
+− mN x2/2
+]
+EQ exp
+[
+mx2(N − 2Q)2/2 + c1m(Q − N/2)4x4 + c2m|Q − N/2|x2
+]
+= EQ
+[
+exp
+(m
+2
+(
+x2(2Q − N )2 − N x2))
+exp
+(
+c1m(Q − N/2)4x4 + c2m|Q − N/2|x2
+)]
+.
+Using the Cauchy-Schwarz inequality twice, this implies that
+I(N ) ≤
+√
+EQ
+[
+exp
+(
+mx2N
+(
+(2Q − N )2/N − 1
+))][
+EQ
+[
+exp
+(
+c1mx4(N − 2Q)4/4
+)]
+· EQ
+[
+exp
+(
+2c2m|2Q − N |x2
+)]] 1/ 4
+=:
+√
+(I)(II )1/ 4(III )1/ 4.
+Step 1 : Bound on term (III )
+Since Q ∼ B (1/2, N), since (2 Q − N ) is symmetric and since 2 c2mx2 ≤ 1/2 we have that
+(III ) = EQ
+[
+exp
+(
+2c2m|2Q − N |x2
+)]
+≤ 2EQ
+[
+exp
+(
+2c2m(2Q − N )x2
+)]
+= 2
+[
+exp
+(
+2c2mx2
+)
++ exp
+(
+− 2c2mx2
+)] N
+≤ 2
+[
+1 + 8c2
+2m2x4
+] N
+≤ exp
+(
+8c2
+2m2x4N
+)
+≤ exp
+(C2v4k2N
+m2
+)
+. (7.18)
+Step 2 : T erm (II )
+We use mN 2x4 ≤ 64v4/m, ( N − 2Q)2 ≤ N 2 and N ≤ m/k to obtain
+(II ) ≤ EQ
+[
+exp
+(
+64c1v4N/m · (N − 2Q)2/N
+)]
+.
+Since Q ∼ B (1/2, N) the Rademacher average Z = ( N − 2Q)/
+√
+N is sub-Gaussian with sub-Gaussian
+constant at most 1. It hence satisﬁes (e.g., equation (2.24) in [ 20]) for c > 2
+E exp{Z 2/c2} ≤ 1 + 2
+c2/4 − 1 ≤ ec3c−2
+,
+which for v small enough and the choice c−2 = 64c1v4N/m implies for some constant C1 that
+(II ) ≤ exp
+(4C1v4N
+m
+)
+.
+Step 3 : T erm (I)
+We have that
+(I) = EQ
+[
+exp
+(
+mN x2
+[ (2Q − N )2
+N − 1
+] )]
+= E
+
+exp
+
+ 16v2N k
+m
+
+ 1
+N
+( N∑
+i=1
+εi
+)2
+− 1
+
+
+
+
+
+ = E
+
+exp
+
+ 16v2k
+m
+∑
+i̸=j,i,j ≤N
+εiεj
+
+
+
+ ,
+where εi are i.i.d. Rademacher random variables. If A = (aij) is a symmetric matrix with all elements on the
+diagonal equal to zero, then for the Laplace transform of an ord er-two Rademacher chaos Z =∑
+i,j aijεiεj
+we have the inequality
+EeλZ ≤ exp
+{ 16λ2∥A∥2
+F
+2 (1 − 64∥A∥λ)
+}
+, λ > 0,
+17
+
+[PDF PAGE 18]
+see, e.g., Exercise 6.9 on p.212 in [ 5] with T = {A}. Now take A = ( δi̸=j )i,j ≤N so that we have ∥A∥ ≤ N
+and for v small enough 16 v2kN/m ≤ 16v2 ≤ 1/128.
+E
+[
+exp
+(16v2k
+m
+∑
+i̸=j,i,j ≤N
+εiεj
+)]
+≤ exp
+( 163v4k2∥A∥2
+F
+2m2(1 − 1024v2k∥A∥/m)
+)
+≤ exp
+(163v4k2N 2
+m2
+)
+and therefore we conclude for a constant C3 > 0 that
+(I) ≤ exp
+(
+2C3v4k2N 2/m2
+)
+. (7.19)
+Step 4 : Conclusion on I(N )
+Combining the bounds for ( I), ( II ) and ( III ) with the bound on I(N ) we have that
+I(N ) ≤ exp
+(
+C2v4k2N/m2
+)
+exp
+(
+C1v4N/m
+)
+exp
+(
+C3v4k2N 2/m2
+)
+.
+Proof of Lemma 7.2. We bound the expectation by bounding it separately on two compleme ntary events.
+For this we consider the event ξ where all Nr,r ′ are upper bounded by τ := 15m/k2, assumed to be an integer
+(if not replace it by its integer part plus one in the argument below). M ore precisely we deﬁne
+ξ =
+{
+∀r ≤ k, ∀r′ ≤ k : Nr,r ′ ≤ τ
+}
+.
+Note that {Nr,r ′ > τ } occurs only if the size of the intersection of the class r of partition P with the class r′
+of partition P ′ is larger than τ . This means that at least τ elements among m/k elements of the class r′, must
+belong to the class r. The positions of these τ elements can be taken arbitrarily within the m/k elements.
+For the ﬁrst element, among those τ , the probability to belong to the class r is m/k
+m . For the second element
+this probability is m/k
+m−1 or (m/k )−1
+m−1 and so on. All these probabilities are smaller than ( m/k)/(m − m/k + 1).
+Therefore we have
+PN(Nr,r ′ > τ ) ≤
+(m/k
+τ
+)( m/k
+m − m/k + 1
+)τ
+≤ (m/k)τ
+τ ! (2/k)τ ≤ 2τ (m/k2)τ τ −τ eτ ≤ e−τ ,
+where we use
+(m/k
+τ
+)
+≤ (m/k )τ
+τ ! and Stirling’s formula. Using a union bound this implies that the probabilit y
+of ξ is lower bounded by 1 − k2 exp(−15m/k2).
+We have on the event ξ
+EN
+[
+1{ξ}
+∏
+r,r ′∈{1,...,k }2
+exp
+(
+C3v4N 2
+r,r ′k2/m2
+)]
+≤ exp
+(
+C3v4k2 · 152(m/k2)2k2/m2
+)]
+≤ exp
+(
+C′v4
+)
+≤ 1 + 2C′v4.
+for C′ = 225 C3 and for v small enough. Moreover, by deﬁnition of Nr,r ′, we have that Nr,r ′ ≤ m/k and∑
+r,r ′ Nr,r ′ = m. Hence ∑
+r,r ′
+N 2
+r,r ′ ≤ km2/k2 = m2/k
+which implies that on ξC
+EN
+[
+1{ξC}
+∏
+r,r ′∈{1,...,k }2
+exp
+(
+C3v4N 2
+r,r ′k2/m2
+)]
+≤ PN(ξC ) exp
+(
+C3v4k
+)
+≤ k2 exp
+(
+− 15m/k2 + C3v4k
+)
+≤ k2 exp
+(
+− 3m/k2
+)
+≤ exp
+(
+− m/k2
+)
+,
+18
+
+[PDF PAGE 19]
+for v small enough and since k3 ≤ m. Thus, combining the bounds on ξ and ξC , we have that
+EN
+[ ∏
+r,r ′
+exp
+(
+C3v4N 2
+r,r ′k2/m2
+)]
+≤ 1 + 2C′v4 + exp
+(
+− m/k2
+)
+.
+8 Auxiliary results
+8.1 Proof of Lemma
+4.1
+Proof. Assume that among the ﬁrst n/4 samples we have less than n/8 entries that are sampled twice -
+otherwise the result holds since n/8 ≥ n2/64m1m2 for n ≤ m1m2. Then, among the ﬁrst n/4 samples,
+there are at least n/8 distinct elements of B, the set of all standard basis matrices in Rm1×m2 , that have
+been sampled at least once. We write S for the set of distinct elements of {Xi}i≤n/ 4 and obviously have
+|S| ≥ n/8. Hence, by deﬁnition of the sampling scheme, we have that
+P(Xi ∈ S ) ≥ n
+8m1m2
+, n/ 4 < i ≤ n/2.
+Furthermore, when sampling an element from S we have to remove this element from S as we have to use
+the entry that is stored in S to form a pair of entries. Hence the probability to sample another ele ment from
+S decreases and is bounded by
+P(Xj ∈ S\{ Xi}
+⏐
+⏐Xi ∈ S ) ≥ n − 1
+8m1m2
+for n/4 < i < j < n/ 2. We deduce by induction for j > i + k and k ≤ n/2 − i − 1 that
+P(Xj ∈ S\{ Xi, ..., Xi+k}
+⏐
+⏐Xi, ..., Xi+k ∈ S ) ≥ n − k
+8m1m2
+which yields
+P
+(
+N ≥ n2
+64m1m2
+)
+≥ P
+
+ ∑
+n/ 4<i≤n/ 2
+1{Xi∈S} ≥ n2
+64m1m2
+
+
+≥ P
+
+ ∑
+n/ 4<i≤n/ 2
+Zi ≥ n2
+64m1m2
+
+ (8.1)
+where Zi can be taken to be Bernoulli random variables with success probabilit y
+p′ =
+n − n2
+64m1m2
+8m1m2
+.
+Then, Bernstein’s inequality for bounded random variables (see e.g. Theorem 3.1.7 in [ 20]), ( 8.1) and the
+estimates
+E
+
+ ∑
+n/ 4<i≤n/ 2
+Zi
+
+ ≥ n2
+33m1m2
+which holds for n ≤ m1m2 and
+Var
+
+ ∑
+n/ 4<i≤n/ 2
+Zi
+
+ ≤ n2
+32m1m2
+imply that
+P
+(
+N ≥ n2
+64m1m2
+)
+≥ 1 − P
+
+ ∑
+n/ 4<i≤n/ 2
+Zi − E
+
+ ∑
+n/ 4<i≤n/ 2
+Zi
+
+ ≤ −n2
+72m1m2
+
+ ≥ 1 − exp
+( n2
+372m1m2
+)
+.
+19
+
+[PDF PAGE 20]
+8.2 Lemma 8.1
+Lemma 8.1. Consider the Bernoulli model (1.3) and assume n ≥ m log(d). Then, with probability at least
+1 − 2 exp(−100d) we have for any given M ∈ A(a, m) that
+sup
+A∈A(a,m ), ∥M−A∥ F ≥Ca
+√
+(rank(A)∨1)d/p
+
+
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+∑
+i,j
+(Bij − p)(Aij − Mij)2
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+− p
+2 ∥M0 − A∥2
+F
+
+ ≤ 0
+where C = 8072.
+Proof. We have, using a union bound, that
+P
+
+ sup
+A∈A(a,m ), ∥M−A∥ F ≥Ca
+√
+(rank(A)∨1)d/p
+
+
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+∑
+i,j
+(Bij − p)(Aij − Mij)2
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+− p
+2 ∥M0 − A∥2
+F
+
+ > 0
+
+
+≤
+m∑
+k=1
+P
+
+ sup
+A∈A(a,k ), p ∥M−A∥ 2
+F ≥C 2a2kd
+
+
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+∑
+i,j
+(Bij − p)(Aij − Mij)2
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+− p
+2 ∥A − M ∥2
+F
+
+ > 0
+
+ . (8.2)
+Then, using a peeling argument each of the terms in (
+8.2) can be bounded by
+∑
+s∈N: C 2a2kd/ 2≤2s<∞
+P
+
+ sup
+A∈A(a,k ), 2s≤p∥A−M∥ 2
+F ≤2s+1
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+∑
+i,j
+(Bij − p)(Aij − Mij)2
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+> 2s/2
+
+
+≤
+∑
+s∈N: C 2a2kd/ 2≤2s<∞
+P
+
+ sup
+A∈A(a,k ), p ∥A−M∥ 2
+F ≤2s+1
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+∑
+i,j
+(Bij − p)(Aij − Mij)2
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+> 2s/2
+
+ (8.3)
+with the convention that if the supremum is taken over an empty set the corresponding probability is set
+equal to 0. For the cases where the supremum is not taken over an empty set, we apply Lemma
+8.2 (with
+choices ξij = 1, q = 2, z = 4, U = 1 and t = 2 s there ) and obtain for
+Z(s) : = sup
+A∈A(a,k ), p ∥A−M∥ 2
+F ≤2s+1
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+∑
+i,j
+(Bij − p)(Aij − Mij)2
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+that we can bound
+P (Z(s) > 2s/2) ≤ exp
+( −2s
+260352a2
+)
+Hence, ( 8.3) can be upper bounded by
+∑
+s∈N: Ca 2kd/ 2≤2s<∞
+exp
+( −2s
+260352a2
+)
+≤2 exp
+(
+− C2kd
+260352
+)
+≤ 2 exp(−101d).
+The result then follows by noting that log( m) ≤ d.
+8.3 Lemma 8.2
+Lemma 8.2. Consider the Bernoulli model ( 1.3). Suppose that ξij are independent random variables with
+maxij |ξij| ≤ U and that m log(d) ≤ n. Let z > 0, q ∈ { 1, 2}, M ∈ A (a, m) and 1 ≤ k0 < m be given.
+Finally, for C = 1009 suppose that t ∈ R+ is such that t ≥ C2z(4a)2q−2U 2k0d/2 and that the supremum in
+Z(t) := sup
+A∈A(a,k 0), p ∥A−M∥ 2
+F ≤2t
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+∑
+i,j
+[(Bijξij − EBijξij)(Aij − Mij)q]
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+20
+
+[PDF PAGE 21]
+is not empty. Then,
+P
+(
+Z(t) > t√z
+)
+≤ exp
+( −t
+322(8(2a)2q−2U 2z + 505(2a)qU √z/32)
+)
+(8.4)
+Proof. We ﬁrst bound EZ(t) and then apply Talagrand’s [39] inequality. Using symmetrization (e.g. Theorem
+3.1.21 in [ 20]) and two contraction inequalities (e.g. Theorems 3.1.17 and 3.2.1 in [ 20]), we obtain that
+EZ(t) ≤ 2U E
+
+ sup
+A∈A(a,k 0), p ∥A−M∥ 2
+F ≤2t
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+∑
+i,j
+Bijεij(Aij − Mij)q
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+
+
+≤ 2(4a)q−1U E
+
+ sup
+A∈A(a,k 0), p ∥A−M∥ 2
+F ≤2t
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+∑
+i,j
+Bijεij(Aij − Mij)
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+
+
+≤ 2(4a)q−1U E
+(
+sup
+A∈A(a,k 0), p ∥A−M∥ 2
+F ≤2t
+|⟨Σ R, A − A0⟩|
+)
++ 2(4a)q−1U E |⟨Σ R, A0 − M ⟩|
+≤ 8(4a)q−1U
+√
+k0t/pE ∥Σ R∥ + 2(4a)q−1U E |⟨Σ R, A0 − M ⟩|. (8.5)
+where εij are independent Rademacher random variables, Σ R :=
+(
+Bijεij
+)
+ij and where A0 is an arbi-
+trary element in A(a, k0) such that p∥A0 − M ∥2
+F ≤ 2t. Such an A0 exists as soon as the supremum
+is not taken over an empty set. An extension of Corollary 3.6 in [
+1] to rectangular matrices by self-
+adjoint dilation (e.g. section 3.1. in [ 1]) implies (with choices ξij = Bijεij/√p, bij = √p, α = 3 and
+σ = max
+(
+maxj
+√ ∑ m1
+i=1 b2
+ij, maxi
+√
+∑ m2
+j=1 b2
+ij
+)
+≤ √
+pd there ) that
+E ∥Σ R∥ ≤ e2/ 3(2
+√
+pd + 42
+√
+log(d)) ≤ 86
+√
+pd
+since m log(d) ≤ n. For the second term in ( 8.5) we have
+E|⟨Σ R, A0 − M ⟩| ≤ (Var(⟨Σ R, A0 − M ⟩))1/ 2
+=
+(
+p∥A0 − M ∥2
+F
+)1/ 2
+≤
+√
+2t.
+Hence, for C2z(4a)2q−2U 2k0d/2 ≤ t and since C = 1009 we have that
+EZ(t) ≤ 688(4a)q−1U
+√
+k0td + 2(4a)q−1U
+√
+2t ≤ 31t/(32√z). (8.6)
+We now make use of the following inequality due to Talagrand [ 39], which in the current form with explicit
+constants can be obtained by inverting the tail bound in Theorem 3.3 .16 in [ 20].
+Theorem 8.1. Let (S, S) be a measurable space and let n ∈ N. Let Xk, k = 1 , . . . , n be independent S-
+valued random variables and let F be a countable set of functions f = (f1, ..., fn) : Sn → [−K, K]n such that
+Efk(Xk) = 0 for all f ∈ F and k = 1, ..., n. Set
+Z := sup
+f ∈F
+n∑
+k=1
+fk(Xk).
+Deﬁne the variance proxy
+Vn := 2KEZ + sup
+f ∈F
+n∑
+k=1
+E
+[
+(fk(Xk))2]
+.
+Then, for all t ≥ 0,
+P (Z − EZ ≥ t) ≤ exp
+( −t2
+4Vn + (9/2)Kt
+)
+.
+21
+
+[PDF PAGE 22]
+The functional A → ∥ A − M ∥2
+F is continuous on the compact set of matrices {A ∈ A (a, k0) : ∥A −
+M ∥2
+F ≤ 2t}, hence by continuity and compactness the supremum is attained ov er a countable subset. Thus
+we may apply Talagrand’s inequality to Z(t). We have for our particular case, since sup f ∈F |f (X)| =
+supf ∈{F ⋃ {−F }} f (x), that
+Xij = Bijξij − EBijξij, S = [−2U, 2U ]
+F =
+{
+f : Sm1×m2 → [−2(2a)qU, 2(2a)qU ]m1×m2, f ij(Xij) = ( −1)lXij(Aij − Mij)q,
+A ∈ A(a, k0), p ∥A − M ∥2
+F ≤ 2t, l ∈ {0, 1}
+}
+and moreover
+sup
+(A,l ), A ∈A(a,k 0), p ∥A−M∥ 2
+F ≤2t, l ∈{0, 1}
+∑
+i,j
+E
+[ (
+(−1)l(Bijξij − EBijξij)(Aij − Mij)q)2]
+≤(2a)2q−2 sup
+A∈A(a,k 0), p ∥A−M∥ 2
+F ≤2t
+∑
+i,j
+Var(Bijξij)(Aij − Mij)2
+≤(2a)2q−2U 2 sup
+A∈A(a,k 0), p ∥A−M∥ 2
+F ≤2t
+∑
+i,j
+p(Aij − Mij)2 ≤ 2(2a)2q−2U 2t.
+Therefore, using our previous estimate in (
+8.6) for EZ(t) as well, we have for the variance proxy Vm1m2 that
+Vm1m2 ≤ 2(2a)2q−2U 2t + 31(2a)qU t/(8√z).
+Hence, using ( 8.6) and Talagrand’s inequality, we obtain
+P
+(
+Z(t) > t√z
+)
+≤ P
+(
+Z(t) − EZ(t) > t
+32√z
+)
+≤ exp
+( −t
+322(8(2a)2q−2U 2z + 505(2a)qU √z/32)
+)
+.
+8.4 An oracle estimator in the Bernoulli model
+Here we prove that the soft-thresholding estimator proposed by Koltchinskii et. al. [
+29] for the trace-
+regression setting fulﬁlls the oracle inequality ( 2.8) in the Bernoulli model.
+Their estimator is deﬁned as
+ˆM ∈ arg min
+A∈Rm1×m2
+( ∥A∥2
+F
+m1m2
+− 2
+n ⟨Y, A⟩ + λ∥A∥∗
+)
+(8.7)
+where λ is a tuning parameter which we choose as
+λ = 3
+(
+3
+√
+2σ +
+√
+2CU√mn
+)
+(8.8)
+where C > 0 is the constant in Corollary 3.12 in [ 1].
+Proposition 8.3. Consider the Bernoulli model (1.3). Assume n ≥ m log(d) and that Assumption 1.1 is
+fulﬁlled. Let ˆM be given as in (8.7) with a choice of λ as in (8.8). Then, with PM0,σ -probability of at least
+1 − 1/d we have for any M0 ∈ A(a, m) that
+∥ ˆM − M0∥2
+F
+m1m2
+≤ inf
+A∈Rm1×m2
+(∥M0 − A∥2
+F
+m1m2
++ C drank(A)
+n
+)
+≤ inf
+k∈{0,...,m }
+(∥M0 − A(a, k)∥2
+F
+m1m2
++ C dk
+n
+)
+for a constant C = C(a, σ, U) > 0.
+22
+
+[PDF PAGE 23]
+Proof. Going through the proof of Theorem 2 and Corollary 2 in [ 29] line by line we see that we only need
+to bound the spectral norm of the matrix
+Σ := 1
+n (Bijǫij)i,j
+by λ/3 with high probability. Using self-adjoint dilation to generalize Corollar y 3.12 and Remark 3.13 in [ 1]
+for rectangular matrices (with choices ε = 1/2, ˜σ∗ = U and
+˜σ = max
+
+max
+j
+
+
+
+√
+m1∑
+i=1
+Eσ B2
+ijǫ2
+ij, max
+i
+
+
+
+√
+m2∑
+j=1
+Eσ B2
+ijǫ2
+ij
+
+ = σ
+√
+n/m
+there) we obtain
+Pσ
+(
+
+
+
+
+n∑
+i=1
+εiXi
+
+
+
+
+ > 3
+√
+2σ
+√ n
+m + t
+)
+≤ d exp
+(
+− −t2
+C1U 2
+)
+for a constant C1 > 0. Choosing t = √2C1U√ n
+m and using that n ≥ m log(d) yields that Ξ occurs with
+Pσ -probability at least 1 − 1/d.
+Acknowledgements
+The work of A. Carpentier is supported by the DFGs Emmy Noether g rant MuSyAD (CA 1488/1-1). The
+work of O. Klopp was conducted as part of the project Labex MME- DII (ANR11-LBX-0023-01). The work
+of M. L¨ oﬄer was supported by the UK Engineering and Physical Scie nces Research Council (EPSRC) grant
+EP/L016516/1 and the European Research Council (ERC) grant N o. 647812. The latter ERC grant also
+supported R. Nickl, who is further grateful to A. Tsybakov and EN SAE Paris for their hospitality during a
+visit in April 2016 where part of this research was undertaken.
+References
+[1] A. S. Bandeira and R. van Handel. (2016). Sharp nonasymptotic bounds on the norm of random matrices
+with independent entries. Ann. Probab. 44(4), 2479-2506
+[2] Y. Baraud. (2004). Conﬁdence balls in Gaussian regression. Ann. Statist. , 32(2):528-551.
+[3] J. Bennett and S. Lanning. (2007). The netﬂix prize. Proceedings of KDD Cup and Workshop .
+[4] P. Biswas, T. Liang, T. Wang, and Y. Ye. (2006). Semideﬁnite pro gramming based algorithms for sensor
+network localization. ACM Trans. Sen. Netw. , 2(2):188–220.
+[5] S. Boucheron, G. Lugosi and P. Massart. (2013). Concentration inequalities. Oxford University Press.
+[6] A. D. Bull and R. Nickl. (2013). Adaptive conﬁdence sets in L2. Probab. Theory Related Fields ,
+156(3):889–919.
+[7] T. T. Cai and M. G. Low. (2004). An adaptation theory for nonp arametric conﬁdence intervals. Ann.
+Statist., 32(5):1805–1840.
+[8] T. T. Cai and Z. Guo. (2016). Accuracy assessment for high-d imensional linear regression.
+http://arxiv.org/abs/1603.03474
+[9] T. T. Cai and W. Zhou. (2016). Matrix completion via max-norm co nstrained optimization. Electron.
+J. Statist. , 10(1):1493–1525.
+[10] E. J. Cand` es and B. Recht. (2009). Exact matrix completion v ia convex optimization. Found. Comput.
+Math., 9(6):717–772.
+23
+
+[PDF PAGE 24]
+[11] E. J. Cand` es and T. Tao. (2010). The power of convex relaxa tion: near-optimal matrix completion.
+IEEE Trans. Inform. Theory , 56(5):2053–2080.
+[12] Cand` es, E. J. and Plan, Y. (2009). Matrix completion with noise . Proceedings of IEEE, 98(6), 925-936.
+[13] E. J. Cand` es and Y. Plan. (2011). Tight oracle bounds for low- rank matrix recovery from a minimal
+number of random measurements. IEEE Trans. Inform. Theory , 57(4):2342–2359.
+[14] A. Carpentier. (2013). Honest and adaptive conﬁdence sets in Lp. Electron. J. Statist. , 7:2875–2923.
+[15] A. Carpentier, J. Eisert, D. Gross, and R. Nickl. (2015). Unce rtainty Quantiﬁcation for Matrix Com-
+pressed Sensing and Quantum Tomography Problems. http://arxiv.org/abs/1504.03234
+[16] A. Carpentier and R. Nickl. (2015). On signal detection and con ﬁdence sets for low rank inference
+problems. Electron. J. Statist. , 9(2):2675–2688.
+[17] S. Chatterjee. (2015). Matrix estimation by universal singula r value thresholding. Ann. Statist. ,
+43(1):177–214.
+[18] E. C. Chi, H. Zhou, G.K. Chen, D.O. Del Vecchyo and K. Lange. (2 013). Genotype imputation via
+matrix completion. Genome Res. , 23(3):509-518.
+[19] E. Gin´ e and R. Nickl. (2010). Conﬁdence bands in density estima tion. Ann. Statist. , 38(2):1122–1170.
+[20] E. Gin´ e and R. Nickl. (2016). Mathematical Foundations of Inﬁnite-Dimensional Statist ical Methods.
+Cambridge University Press.
+[21] D. Goldberg, D. Nichols, B. M. Oki, and D. Terry. (1992). Using c ollaborative ﬁltering to weave an
+information tapestry. Commun. ACM , 35(12):61–70.
+[22] D. Gross. (2011). Recovering low-rank matrices from few coe ﬃcients in any basis. IEEE Trans. Inform.
+Theory, 57(3):1548–1566.
+[23] M. Hoﬀmann and R. Nickl. (2011). On adaptive inference and con ﬁdence bands. Ann. Statist. ,
+39(5):2383–2409.
+[24] P. Jain, P. Netrapalli and S. Sanghavi. (2013). Low-rank matr ix completion using alternating minimiza-
+tion. STOC’13-Proceedings of the 2013 ACM Symposium on Theory of C omputing, 665-674, ACM, New
+York
+[25] A. Juditsky and S. Lambert-Lacroix. (2004). Nonparametric conﬁdence set estimation. Math. Methods
+Statist., 12(4):410–428.
+[26] R. H. Keshavan, A. Montanari, and S. Oh. (2010). Matrix comp letion from noisy entries. J. Mach.
+Learn. Res., 11:2057–2078.
+[27] O. Klopp. (2014). Noisy low-rank matrix completion with general sampling distribution. Bernoulli,
+20(1):282–303.
+[28] O. Klopp. (2015). Matrix completion by singular value thresholdin g: sharp bounds. Electron. J. Statist.,
+9(2):2348–2369.
+[29] V. Koltchinskii, K. Lounici, and A. B. Tsybakov. (2011). Nuclear -norm penalization and optimal rates
+for noisy low-rank matrix completion. Ann. Statist. , 39(5):2302–2329.
+[30] M. G. Low. (1997). On nonparametric conﬁdence intervals. Ann. Statist. , 25(6):2547–2554.
+[31] S. Negahban and M. J. Wainwright. (2012). Restricted strong convexity and weighted matrix completion:
+Optimal bounds with noise. J. Mach. Learn. Res. , 13:1665–1697.
+[32] R. Nickl and B. Szab´ o (2016). A sharp adaptive conﬁdence ba ll for self-similar functions. Stochastic
+Process. Appl. 126(12), 3913-3934.
+24
+
+[PDF PAGE 25]
+[33] R. Nickl and S. van de Geer. (2013). Conﬁdence sets in sparse regression. Ann. Statist., 41(6):2852–2876.
+[34] B. Recht. (2011). A simpler approach to matrix completion. J. Mach. Learn. Res. , 12:3413–3430.
+[35] J. Robins and A. W. van der Vaart. (2007). Adaptive nonparam etric conﬁdence sets. Ann. Statist. ,
+34(1):229–253.
+[36] A. Rohde and A. Tsybakov. (2011). Estimation of high-dimensio nal low-rank matrices. Ann. Statist. ,
+39(2):887–930.
+[37] A. Singer. (2008). A remark on global positioning from local dist ances. Proc. Natl. Acad. Sci. U.S.A. ,
+105(28):9507–9511.
+[38] B. Szab´ o, A. van der Vaart and H. van Zanten (2015). Frequ entist coverage of adaptive nonparametric
+Bayesian credible sets. Ann. Statist. 43(4):1391–1428.
+[39] M. Talagrand. (1996). New concentration inequalities in produc t spaces. Invent. Math., 126(3):505–563.
+25

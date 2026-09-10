@@ -1,0 +1,307 @@
+\section{Complete proofs}\label{app:proofs}
+
+The proofs apply in finite dimensions. Constants used in the main text are explicit. All tensors and Gaussian variables are real.
+
+\subsection{Canonical product expansions}
+
+\begin{lemma}[Controlled squared component weights]\label{lem:cp}
+For a tensor in either cap class there is a finite representation
+\[
+ A=\sum_{j=1}^{J_A}x_{1j}\otimes\cdots\otimes x_{Kj},\qquad
+ a_j^{\mathrm{cp}}=\prod_{k=1}^K\norm{x_{kj}}_2,
+\]
+such that $J_A\le J$ and $\sum_j(a_j^{\mathrm{cp}})^2=\norm A_F^2$.
+\end{lemma}
+
+
+\noindent\emph{Roadmap.} Choose orthonormal Tucker mode bases or left-orthogonal TT cores; expand product terms and sum their squared weights. The TT argument uses a prefix identity, not orthogonality of individual paths.
+\begin{proof}
+The zero tensor has a zero-term representation. For a nonzero Tucker tensor, choose orthonormal bases $U_k$ for the column spaces of its mode unfoldings. Orthogonal projection onto each such space leaves $A$ unchanged. Contracting these bases gives a core $\mathcal G$ with $A=\mathcal G\times_1U_1\cdots\times_KU_K$ and $\norm{\mathcal G}_F=\norm A_F$. The actual mode ranks satisfy $r_k\le\bar r_k$.
+
+Fix a mode $k$. Expand all core indices other than $k$. Each tuple $j_{-k}$ gives unit factors $U_\ell[:,j_\ell]$ in modes $\ell\ne k$ and factor $U_k\mathcal G[:,j_{-k}]$ in mode $k$. Its squared product weight is $\norm{\mathcal G[:,j_{-k}]}_2^2$. These slice squares sum to $\norm{\mathcal G}_F^2$. The number of terms is $\prod_{\ell\ne k}r_\ell$. Choosing $k$ to minimize the corresponding cap product proves the Tucker assertion.
+
+For a TT tensor, sequential matrix factorizations yield cores $G_k\in\R^{r_{k-1}\times p_k\times r_k}$, with $r_0=r_K=1$ and $r_k\le\bar r_k$. At each cut, factor the relevant matrix through a basis of its column space. Equivalently, left-orthogonalize the cores by QR and absorb the triangular factors into the next core. Thus the $(r_{k-1}p_k)\times r_k$ matrix associated with $G_k$ has orthonormal columns for $k<K$, and $\norm{G_K}_F=\norm A_F$. These steps use no inverse lower bound on a singular value.
+
+Expand the contraction over all internal paths $(a_1,\ldots,a_{K-1})$. A path contributes the product tensor with physical vectors $G_k[a_{k-1},:,a_k]$. There are at most $\prod_{k<K}r_k\le J$ paths. To sum their squared weights, let
+\[
+ t_k(b)=\sum_{a_1,\ldots,a_{k-1}}
+ \prod_{\ell=1}^k\norm{G_\ell[a_{\ell-1},:,a_\ell]}_2^2,
+ \qquad a_k=b.
+\]
+Column normalization gives $t_1(b)=1$. If $t_{k-1}(a)=1$ for all $a$, then
+\[
+ t_k(b)=\sum_a t_{k-1}(a)\norm{G_k[a,:,b]}_2^2=1
+\]
+for $k<K$. Hence the sum of all squared path weights is
+\[
+ \sum_a t_{K-1}(a)\norm{G_K[a,:,1]}_2^2=\norm{G_K}_F^2=\norm A_F^2.
+\]
+The individual path terms need not be orthogonal; the prefix identity is what proves the required equality.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:diagonal}}
+
+
+\noindent\emph{Roadmap.} Apply subadditivity, modewise H\"older and Bessel, then control the component-weight sum.
+\begin{proof}
+Let $q=2/K\le1$ and use Lemma~\ref{lem:cp}. Subadditivity of the $q$th power of absolute value gives
+\[
+ \sum_i|\ip A{V_i}|^q
+ \le\sum_j\sum_i\prod_{k=1}^K|\ip{x_{kj}}{v_{ki}}|^{2/K}.
+\]
+H\"older's inequality with $K$ equal exponents, followed by Bessel's inequality for each orthonormal family, yields
+\begin{align*}
+ \sum_i\prod_k|\ip{x_{kj}}{v_{ki}}|^{2/K}
+ &\le\prod_k\left(\sum_i|\ip{x_{kj}}{v_{ki}}|^2\right)^{1/K}\\
+ &\le\prod_k\norm{x_{kj}}_2^{2/K}=(a_j^{\mathrm{cp}})^q.
+\end{align*}
+Finally, the power-mean inequality (or H\"older with exponents $2/q$ and $2/(2-q)$) gives
+\[
+ \sum_j(a_j^{\mathrm{cp}})^q
+ \le J_A^{1-q/2}\left\{\sum_j(a_j^{\mathrm{cp}})^2\right\}^{q/2}
+ \le J^{1-q/2}M^q.
+\]
+This is \eqref{eq:compress}. For $J_A=0$ both sides of the first inequality are zero.
+\end{proof}
+
+\subsection{Exact rank-one diagonal image}
+
+\begin{lemma}[Exact diagonal reduction]\label{lem:image}
+Under \eqref{eq:loading}, the image of the rank-one tensor Frobenius ball of radius $M$ under $A\mapsto(\ip A{V_i})_{i=1}^m$ is exactly
+\[
+ \left\{a\in\R^m:\sum_i|a_i|^{2/K}\le M^{2/K}\right\}.
+\]
+\end{lemma}
+
+
+\noindent\emph{Roadmap.} Use the diagonal bound for one inclusion and construct signed product factors for the converse.
+\begin{proof}
+One inclusion follows from Theorem~\ref{thm:diagonal} with $J=1$. Conversely, for any vector in the displayed ball, put
+\[
+ x_1=\sum_i\operatorname{sign}(a_i)|a_i|^{1/K}v_{1i},\qquad
+ x_k=\sum_i|a_i|^{1/K}v_{ki},\quad k\ge2,
+\]
+and set $A=x_1\otimes\cdots\otimes x_K$. Orthonormality gives $\ip A{V_i}=a_i$ and
+\[
+ \norm A_F=\prod_k\norm{x_k}_2
+ =\left(\sum_i|a_i|^{2/K}\right)^{K/2}\le M.
+\]
+The tensor has every Tucker and TT rank at most one. The zero vector is handled by the zero tensor.
+\end{proof}
+
+\subsection{Threshold error and structural radius}
+
+\begin{lemma}[Scalar threshold envelope]\label{lem:soft}
+If $|e|\le\lambda$ and $s=\soft_\lambda(x+e)$, then $s$ lies between zero and $x$ and
+\[
+ |s-x|\le\min(|x|,2\lambda).
+\]
+For $q\in(0,1]$, $t,u\ge0$, one also has $\min(t,u)\le t^q u^{1-q}$, with the continuous interpretation at zero.
+\end{lemma}
+
+
+\noindent\emph{Roadmap.} Check positive and negative scalar inputs, then interpolate the two deterministic error bounds.
+\begin{proof}
+For $x\ge0$, $x+e\ge-\lambda$, so thresholding cannot produce a negative value. Also $x+e-\lambda\le x$, so $0\le s\le x$. If $x>2\lambda$, then $x+e>\lambda$ and $x-s=\lambda-e\le2\lambda$. Otherwise $x-s\le x\le2\lambda$. The negative case follows by oddness. If $t\le u$, then $t=t^q t^{1-q}\le t^q u^{1-q}$; if $u\le t$, then $u=u^q u^{1-q}\le t^q u^{1-q}$.
+\end{proof}
+
+\begin{lemma}[Matrix functional bound]\label{lem:structural}
+If $\rank(B)\le r$ and $H$ has singular values $s_1(H)\ge s_2(H)\ge\cdots$, then
+\[
+ |\ip HB|\le\norm B_F\left(\sum_{i\le r}s_i(H)^2\right)^{1/2}.
+\]
+\end{lemma}
+
+
+\noindent\emph{Roadmap.} Project onto the matrix column space and maximize the spectral trace over projections of bounded rank.
+\begin{proof}
+Let $P$ project onto the column space of $B$. Then $PB=B$ and Cauchy--Schwarz gives $|\ip HB|=|\ip{PH}B|\le\norm{PH}_F\norm B_F$. Write $HH^\top=\sum_i\lambda_i u_i u_i^\top$, with decreasing nonnegative eigenvalues. The numbers $b_i=u_i^\top P u_i$ satisfy $0\le b_i\le1$ and $\sum_i b_i=\operatorname{tr}(P)\le r$. Therefore $\norm{PH}_F^2=\sum_i\lambda_i b_i\le\sum_{i\le r}\lambda_i$: moving any weight from a smaller eigenvalue to an unfilled larger one cannot reduce this sum. Since $\lambda_i=s_i(H)^2$, the result follows.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:coverage}}
+
+
+\noindent\emph{Roadmap.} Construct a uniform coordinate-noise event, bound the threshold error pathwise, verify the other intervals and use the deterministic selection rule.
+\begin{proof}
+The product atoms are orthonormal because
+\[
+ \ip{V_i}{V_j}=\prod_k\ip{v_{ki}}{v_{kj}}=\mathbf1\{i=j\}.
+\]
+Gaussian isotropy then gives the independent normals in \eqref{eq:diagonal}. For a standard normal $g$, Chernoff's inequality gives $\PP(g>t)\le\exp(-t^2/2)$ by minimizing $\exp(-ut+u^2/2)$ at $u=t$. Apply the same inequality to $-g$ and take a union bound to obtain
+\[
+ \PP\{\max_i|\tau g_i|>\lambda\}
+ \le2m\exp\{-\lambda^2/(2\tau^2)\}=\alpha.
+\]
+On the complementary event, Lemma~\ref{lem:soft} and Theorem~\ref{thm:diagonal} give
+\begin{align*}
+ |\widehat\psi_{\NL}-\psi(A)|
+ &\le\norm w_\infty\sum_i\min(|a_i|,2\lambda)\\
+ &\le\norm w_\infty(2\lambda)^{1-q}\sum_i|a_i|^q\le h_{\NL}.
+\end{align*}
+This proves the uniform coverage of $I_{\NL}$.
+
+Because $\norm L_F=1$, $\ip LZ-\psi(A)\sim N(0,\tau^2)$, so $I_G$ has exact coverage. For any constrained unfolding, the loading matrix has singular values $|w_i|$: the product vectors on each side form orthonormal families. Lemma~\ref{lem:structural} thus gives $|\psi(A)|\le M(\sum_{i\le r}w_{(i)}^2)^{1/2}$. Choosing the smallest cap proves $|\psi(A)|\le h_0$, so $I_0$ has coverage one. The selected index in \eqref{eq:select} is deterministic, hence the selected interval retains its individual coverage without a multiple-selection correction. Its length is exactly \eqref{eq:length}.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:affine}}
+
+
+\noindent\emph{Roadmap.} Force a variance cost at zero and a bias cost at signed coordinate tensors, then combine the two necessary inequalities.
+\begin{proof}
+Set $t=\ip WL$. At $A=0$ the center error is normal with mean $b$ and standard deviation $v=\tau\norm W_F$. For fixed $h$ and $v>0$, the probability that this variable belongs to $[-h,h]$ is maximized at $b=0$. Indeed, for $b\ge0$ its derivative is
+\[
+ v^{-1}\{\phi((h+b)/v)-\phi((h-b)/v)\}\le0,
+\]
+since $|h+b|\ge|h-b|$; the function is even in $b$. Honesty at zero therefore implies $h\ge z\tau\norm W_F\ge z\tau|t|$. If $v=0$, the same last inequality is automatic.
+
+At $A=\pm M E_i$, the mean center error is
+\[
+ b\pm M(\ip W{E_i}-p^{-1/2}).
+\]
+At least one sign has absolute mean at least $M|\ip W{E_i}-p^{-1/2}|$. A symmetric interval whose radius is strictly smaller than this mean magnitude has probability below $1/2$ under a nondegenerate normal distribution: it lies strictly to one side of the median. In the degenerate case the coverage is zero. Since $1-\alpha>1/2$, honesty forces
+\[
+ h\ge M\max_i|\ip W{E_i}-p^{-1/2}|
+ \ge\frac M{\sqrt p}|1-t|.
+\]
+The last inequality follows from $t-1=p^{-1/2}\sum_i(\ip W{E_i}-p^{-1/2})$. Put $a=M/\sqrt p$ and $b'=z\tau$. The two bounds imply
+\[
+ 1\le|1-t|+|t|\le h/a+h/b',
+\]
+which rearranges to \eqref{eq:affinelower}. On the rank-one tensor ball, $h_0=M/\sqrt p$, and the direct/structural choice gives the matching order. No result about arbitrary data-dependent widths is invoked.
+\end{proof}
+
+\subsection{A mixture inequality for confidence intervals}
+
+\begin{lemma}[Common-target alternatives]\label{lem:mixture}
+Let $P_0$ have target zero and let $Q$ be a mixture of alternatives whose targets all equal $\delta>0$. If $C$ covers zero under $P_0$ and covers the target at every alternative with probability at least $1-\alpha$, then
+\begin{equation}\label{eq:mixtureCI}
+ \E_0|C|\ge\delta\{1-2\alpha-\TV(P_0,Q)\}.
+\end{equation}
+If $Q\ll P_0$, then $\TV(P_0,Q)\le\frac12\sqrt{\chi^2(Q,P_0)}$.
+\end{lemma}
+
+
+\noindent\emph{Roadmap.} Transfer coverage from the common-target mixture to the null using total variation, then intersect the two coverage events.
+\begin{proof}
+Mixture coverage gives $Q(\delta\in C)\ge1-\alpha$. By the definition of total variation, $P_0(\delta\in C)\ge1-\alpha-\TV(P_0,Q)$. Intersecting with $\{0\in C\}$ gives probability at least $1-2\alpha-\TV$. An interval containing both points has length at least $\delta$, proving \eqref{eq:mixtureCI}. The divergence bound follows from Cauchy--Schwarz applied to $\frac12\E_0|dQ/dP_0-1|$. Appending an independent random seed leaves total variation unchanged, so randomized intervals are covered as well.
+\end{proof}
+
+For Gaussian shifts $P_B=N(\operatorname{vec}(B),\tau^2I_D)$, direct integration of their likelihood ratios gives
+\begin{equation}\label{eq:LR}
+ \E_0\left[\frac{dP_B}{dP_0}\frac{dP_C}{dP_0}\right]
+ =\exp\{\ip BC/\tau^2\}.
+\end{equation}
+To verify this, each ratio is $\exp\{\ip ZB/\tau^2-\norm B_F^2/(2\tau^2)\}$. Multiply the ratios and use the moment generating function of $\ip Z{B+C}$, whose variance under $P_0$ is $\tau^2\norm{B+C}_F^2$. The exponent simplifies to \eqref{eq:LR}.
+
+\subsection{Proof of Theorem~\ref{thm:unfolding}}
+
+
+\noindent\emph{Roadmap.} Construct rank-one matrix alternatives within the chosen unfolding and bound their full Gaussian likelihood second moment using an auxiliary Gaussian.
+\begin{proof}
+For the given bipartition, let $f_i=\bigotimes_{k\in S}e_i$ and $g_i=\bigotimes_{k\notin S}e_i$. Both families are orthonormal. Let $u=p^{-1/2}(s_1,\ldots,s_p)$ with independent uniform signs, and define
+\[
+ \theta=\min(M,\tau\sqrt p/4),\qquad
+ A_u=\theta\left(\sum_i u_i f_i\right)\otimes
+                    \left(\sum_j u_j g_j\right).
+\]
+Every alternative has rank one in this unfolding, norm $\theta$, and functional value $\delta=\theta/\sqrt p$. Let $Q$ average their Gaussian laws. If $v$ is an independent copy of $u$, then \eqref{eq:LR} gives
+\[
+ 1+\chi^2(Q,P_0)=\E_{u,v}\exp\{\theta^2(u^\top v)^2/\tau^2\}
+ =\E\exp\{a S_p^2/p\},
+\]
+where $S_p$ is a sum of $p$ independent signs and $a=\theta^2/(\tau^2p)\le1/16$.
+
+Introduce an independent standard normal $H$. Its moment generating function yields
+\begin{align*}
+ \E\exp(aS_p^2/p)
+ &=\E_H\left\{\cosh(\sqrt{2a/p}\,H)\right\}^p\\
+ &\le\E_H\exp(aH^2)=(1-2a)^{-1/2}\le\sqrt{8/7}.
+\end{align*}
+The inequality uses $\log\cosh(x)\le x^2/2$: for $x\ge0$, its derivative $\tanh(x)$ is at most $x$, and both functions are even. The Gaussian-square expectation follows by integrating $\exp\{-(1-2a)h^2/2\}/\sqrt{2\pi}$; it is finite since $a<1/2$. Nonnegative integrands justify exchanging the expectations.
+
+Lemma~\ref{lem:mixture} now gives \eqref{eq:unfoldlower}. The constant is positive for $\alpha<1/4$. On $\Theta_S$, Lemma~\ref{lem:structural} with loading singular values all equal to $p^{-1/2}$ gives $|\psi(A)|\le M/\sqrt p$. Choosing between this structural interval and the direct interval attains the lower order. All calculations use the entire Gaussian experiment; the result does not arise from hiding off-diagonal observations.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:separation}}
+
+
+\noindent\emph{Roadmap.} Substitute the specified dimensions and norm scaling, then apply the two lower-bound theorems with their confidence-level restrictions.
+\begin{proof}
+Substitute $M=\tau\sqrt p$, $q=2/K$ and $\norm w_\infty=p^{-1/2}$ into \eqref{eq:nl}. This gives
+\[
+ h_{\NL}=\tau J^{1-1/K}
+ p^{1/K-1/2}\{8\log(2p/\alpha)\}^{(K-2)/(2K)},
+\]
+which is the radius in \eqref{eq:separation}. For fixed $K\ge3$, its exponent $\beta=(K-2)/(2K)$ is positive and $(\log p/p)^\beta\to0$. The cap classes contain all $\pm M E_i$ and zero, so Theorem~\ref{thm:affine} gives radius at least $z\tau/(1+z)$. For any retained constrained unfolding, the corresponding matrix-rank cap class contains $\Theta_S$, and Theorem~\ref{thm:unfolding} gives expected length at zero at least $c_\alpha\tau/4$. The same comparisons under the stated growing-cap condition follow by retaining the factor $J^{1-1/K}$.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:jointlower}}
+
+
+\noindent\emph{Roadmap.} Mix orthogonal coordinate shifts, compute the full likelihood second moment exactly and apply the interval mixture lemma.
+\begin{proof}
+Let $a=\min\{M,\tau\sqrt{\log(1+p/4)}\}$ and mix uniformly over $A_j=aE_j$, $j=1,\ldots,p$. Each is in the rank-one tensor class and has target $\delta=a/\sqrt p$. Orthogonality of the $E_j$ and \eqref{eq:LR} imply
+\[
+ 1+\chi^2(Q,P_0)=p^{-2}\{p\exp(a^2/\tau^2)+p(p-1)\}.
+\]
+Thus $\chi^2(Q,P_0)=\{\exp(a^2/\tau^2)-1\}/p\le1/4$ and $\TV(P_0,Q)\le1/4$. Lemma~\ref{lem:mixture} gives \eqref{eq:jointlower}. This construction does not establish that these alternatives are least favorable.
+\end{proof}
+
+
+\subsection{Proof of Proposition~\ref{prop:diagonal_minimax}}
+
+
+\noindent\emph{Roadmap.} Construct sparse diagonals inside the rank-one tensor class, bound the diagonal likelihood mixture using factorial moments and balance the support size. The full-data likelihood is kept separate.
+\begin{proof}
+For an integer $1\le s\le p$, let $S$ be a uniformly chosen size-$s$ subset of $\{1,\ldots,p\}$. Define
+\[
+ A_S=b_s\left(\sum_{i\in S}e_i\right)^{\otimes K}.
+\]
+This is a rank-one tensor, $\norm{A_S}_F=b_s s^{K/2}\le M$, and every alternative has target $\delta_s=s b_s/\sqrt p$. Its observed diagonal has mean $b_s\mathbf1_S$. Let $Q_d$ be the uniform mixture of these diagonal Gaussian laws, and let $P_{0,d}$ be the zero-mean diagonal law. Applying the Gaussian shift calculation \eqref{eq:LR} in dimension $p$ gives
+\begin{equation}\label{eq:diag_chisquare}
+ 1+\chi^2(Q_d,P_{0,d})
+ =\E_{S,T}\exp\{b_s^2|S\cap T|/\tau^2\},
+\end{equation}
+where $S,T$ are independent uniform size-$s$ subsets. This is the sparse-mixture mechanism used in classical sequence lower bounds \citep{collier2017}; the following counting argument records the needed bound explicitly.
+
+Conditional on $S$, $H=|S\cap T|$ is hypergeometric with population size $p$, success count $s$ and sample size $s$. Write $(x)_j=x(x-1)\cdots(x-j+1)$, with $(x)_0=1$. Counting the $j$-element subsets of $S$ contained in $T$ yields
+\[
+ \E\binom Hj=\binom sj\frac{(s)_j}{(p)_j}
+ \le\binom sj(s/p)^j,\qquad 0\le j\le s.
+\]
+For $j\ge1$, the inequality follows factor by factor from
+$(s-\ell)/(p-\ell)\le s/p$ for $0\le\ell<j$, since $s\le p$.
+Set $t=\exp(b_s^2/\tau^2)-1\ge0$. Expanding $(1+t)^H$ and using the preceding factorial moments gives
+\begin{align*}
+ \E\exp(b_s^2H/\tau^2)
+ &=\sum_{j=0}^s t^j\E\binom Hj\\
+ &\le (1+st/p)^s
+ \le \exp(s^2t/p)
+ \le e^{1/4}.
+\end{align*}
+The last inequality uses the definition of $b_s$. Equation~\eqref{eq:diag_chisquare} and Cauchy--Schwarz therefore give
+\[
+ \TV(Q_d,P_{0,d})\le\frac12\sqrt{e^{1/4}-1}.
+\]
+Lemma~\ref{lem:mixture}, now applied to the diagonal experiment, proves \eqref{eq:diagonal_lower}. The constant is positive because $\alpha<1/4$ and $\frac12\sqrt{e^{1/4}-1}<1/2$. The argument also covers independent randomization.
+
+To prove \eqref{eq:diagonal_rate}, let
+$x_p=(p/\log p)^{1/K}$ and $s_p=\lfloor x_p\rfloor$. For sufficiently large $p$,
+$x_p/2\le s_p\le x_p$ and $s_p\ge1$. When $M=\tau\sqrt p$, the norm term in $b_{s_p}$ is at least $\tau\sqrt{\log p}$. The noise term is at most this quantity, since $1+p/(4s_p^2)\le1+p/4\le p$ for $p\ge2$. Thus the minimum equals the noise term. Since $K>2$ and $s_p\le p^{1/K}$ eventually,
+\[
+ \log\{1+p/(4s_p^2)\}
+ \ge\log\{1+p^{1-2/K}/4\}
+ \ge\tfrac12(1-2/K)\log p
+\]
+for sufficiently large $p$. Consequently,
+\[
+ \frac{s_p b_{s_p}}{\sqrt p}
+ \ge \frac12\sqrt{\frac{1-2/K}{2}}\,
+ \tau\left(\frac{\log p}{p}\right)^{(K-2)/(2K)}.
+\]
+Theorem~\ref{thm:coverage} with $J=1$ gives an upper bound of the same order and deterministic length. Since the worst-case criterion is at least the criterion at zero, both rates follow. The fixed-cap extension follows by class inclusion for the lower bound and a constant $J^{1-1/K}$ for the upper bound.
+
+For completeness, the corresponding \emph{full-tensor} mixture would have
+$\ip{A_S}{A_T}=b_s^2|S\cap T|^K$ in \eqref{eq:LR}. Its likelihood second moment is not \eqref{eq:diag_chisquare}, and the preceding bound does not apply to it. The proposition is restricted to diagonal observations throughout.
+\end{proof}
+

@@ -1,0 +1,2673 @@
+
+[PDF PAGE 1]
+arXiv: 0000.0000
+An iterative hard thresholding
+estimator for low rank matrix recovery
+with explicit limiting distribution
+Alexandra Carpentier1,* and Arlene K. H. Kim 2,**
+1Institut f¨ ur Mathematik, Universit¨ at Potsdam, Am Neuen Palais 10
+14469 Potsdam, Germany.
+e-mail: *carpentier@math.uni-potsdam.de
+2Statistical Laboratory, Centre of mathematical sciences, Wilberforce Road,
+Cambridge, CB3 0WB, UK.
+e-mail: **a.kim@statslab.cam.ac.uk
+Abstract: We consider the problem of low rank matrix recovery in a
+stochastically noisy high dimensional setting. We propose a new estimator
+for the low rank matrix, based on the iterative hard thresholding method,
+and that is computationally eﬃcient and simple. We prove that our esti-
+mator is optimal both in terms of the Frobenius risk, and in terms of the
+operator norm risk, i.e. in terms of the entry-wise risk uniformly over any
+change of orthonormal basis. This result allows us to provide the limiting
+distribution of the estimator. In the case where the design is Gaussian, we
+prove that the entry-wise bias of the limiting distribution of the estimator
+is small, which is of great interest for constructing tests and conﬁdence sets
+for low dimensional subsets of entries of the low rank matrix.
+Keywords and phrases: low rank matrix recovery, high dimensional sta-
+tistical inference, inverse problem, numerical methods, limiting distribu-
+tion, uncertainty quantiﬁcation.
+1. Introduction
+High-dimensional data have generated a great challenge in diﬀerent ﬁelds of
+statistics, computer science, and machine learning. In order to consider cases
+where the number of covariates is larger than the sample size, new method-
+ologies, applicable for the model under some structural constraints, have been
+developed. For instance, there have been substantial works under the sparsity
+assumption including sparse linear regression, sparse covariance matrices esti-
+mation or sparse inverse covariance matrices estimation (see e.g. Meinshausen
+and B¨ uhlmann, 2006; Bickel et al., 2009; Huang et al., 2008; Friedman et al.,
+2008; Cai and Zhou, 2012). In this paper, we focus on the problem of low rank
+matrix recovery and uncertainty quantiﬁcation .
+There have been quite a few work on estimating low rank matrices in the ma-
+trix regression setting (also named the trace regression setting, the matrix com-
+pressed sensing setting, or the quantum tomography setting when the parameter
+is a density matrix). Many authors (e.g. Cand` es and Recht, 2009; Cand` es and
+1
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+arXiv:1502.04654v3  [math.ST]  1 Mar 2016
+
+[PDF PAGE 2]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 2
+Tao, 2010; Recht, 2011; Gross, 2011) considered the exact recovery of a low-
+rank matrix based on a subset of uniformly sampled entries. Also Recht (2011);
+Cand` es and Plan (2011); Flammia et al. (2012); Gross et al. (2010); Liu (2011)
+considered matrix recovery based on a small number of noisy linear measure-
+ments in the framework of Restricted Isometry Property (RIP). Negahban and
+Wainwright (2011) proved non-asymptotic bounds on the Frobenius risk, and
+investigated matrix completion under a row/column weighted random sampling.
+Koltchinskii et al. (2011) proposed a nuclear norm minimisation method and de-
+rived a general sharp oracle inequality under the condition of restricted isometry
+property. Very recently, Cai and Zhang (2015) considered a rank-one projection
+model and used constrained nuclear norm minimization method to estimate the
+matrix. Flammia et al. (2012); Gross et al. (2010) considered a speciﬁc quan-
+tum tomography problem where the parameter is a density matrix (for more
+details, plasase see Subsection 4.2), and Liu (2011) proved that the quantum
+tomography design setting satisﬁes the RIP. In addition, Koltchinskii (2011)
+proposed an estimator based on an entropy minimisation for solving a quantum
+tomography problem.
+Goldfarb and Ma (2011); Tanner and Wei (2012) adapt the iterative hard
+thresholding method (ﬁrst introduced in the sparse linear regression setting, see
+e.g. Needell and Tropp, 2009; Blumensath and Davies, 2009) to the problem of
+low rank matrix recovery in the case where the noise is non-stochastic and of
+smallL2 norm. This procedure has the advantage of being very computationally
+eﬃcient. In the same vein but applied to the more challenging stochastically
+noisy setting, Agarwal et al. (2012) introduced a soft thresholding technique
+that provides eﬃcient result in this setting in Frobenius norm, see also Bunea
+et al. (2011); Chen and Wainwright (2015); Klopp (2015) for other thresholding
+methods in related settings that provide results also in Frobenius norm.
+Another important problem is on understanding the uncertainty associated
+to these statistical methodologies, by e.g. characterizing the limiting distribution
+of the eﬃcient estimators. Yet results in this area for high dimensional models
+are still scarce, available mainly for the sparse (generalised) linear regression
+models (Zhang and Zhang, 2014; Javanmard and Montanari, 2014; van de Geer
+et al., 2014; Nickl and van de Geer, 2014). In the papers (Zhang and Zhang,
+2014; Javanmard and Montanari, 2014; van de Geer et al., 2014), the authors
+focus ﬁrst on constructing an estimator for the sparse parameter that has good
+properties in L∞ risk, and they use then this result to exhibit the limiting
+distribution of their estimator. Knowing this limiting distribution immediately
+enables the construction of tests and conﬁdence sets for low dimensional subsets
+of parameters.
+A similar achievement, i.e. the construction of an estimator that has an ex-
+plicit limiting distribution, does not exist in the low rank matrix recovery set-
+ting. To the best of our knowledge, moreover, all the theoretical results from
+the above papers on the estimation of the parameter in the noisy setting are
+derived in Frobenius risk—neither in the entrywise matrix L∞ risk, nor in the
+operator norm (i.e. the largest singular value).
+In our paper, we consider the problem of constructing an estimator for low-
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 3]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 3
+rank matrix in a stochastically noisy high-dimensional setting, under the as-
+sumption that a RIP-type isometry condition is satisﬁed (see Assumption 2.1).
+We provide (in Theorem 3.1) error bounds for our estimator in all p Schat-
+ten norms for p > 0. We prove in particular that this estimator has optimal
+Frobenius and operator norm risk by proving that this estimator has optimal
+L∞ risk performance uniformly over any change of orthonormal basis. In ad-
+dition, a slight modiﬁcation of our estimator has an explicit Gaussian limiting
+distribution with bounded bias in operator norm (see Theorem 3.2); and in the
+particular case when the design consists in uncorrelated Gaussian entries, we
+prove that the bias inL∞ entry wise norm is bounded as well, which is immedi-
+ately useful for testing hypotheses and constructing conﬁdence intervals for each
+parameter of interest, similar to the ideas in Zhang and Zhang (2014); Javan-
+mard and Montanari (2014); van de Geer et al. (2014). Moreover our estimator is
+computationally eﬃcient with an explicit algorithm. The proposed algorithm is
+inspired by the iterative hard thresholding, that reﬁnes its estimation of the ma-
+trix by iteratively estimating the low rank sub-space where the matrix’s image
+is deﬁned. It requires only O(logn) iteration steps to converge approximately,
+and the computational complexity of the method is of order O(nd2 logn) where
+d is the dimension of the matrix, and n is the sample size.
+In the experiment section we ﬁrst provide some simulations where we illus-
+trate the eﬃciency of our method and explain how it can be used to create a
+conﬁdence interval for the entries of the low rank matrix. We then apply our
+method to a speciﬁc quantum tomography application, namely multiple ion to-
+mography (see, e.g. Guta et al., 2012; Gross et al., 2010; Butucea et al., 2015;
+Haeﬀner et al., 2005; Acharya et al., 2015; Holevo, 2001; Nielsen and Chuang,
+2000), where the assumptions required by our method are naturally satisﬁed (see
+e.g. Liu, 2011; Flammia et al., 2012). Finally we compare our method with other
+existing estimation methods for the trace regression setting (Cand` es and Tao,
+2010; Gross et al., 2010; Koltchinskii et al., 2011; Flammia et al., 2012) using
+the gradient descent implementation of Agarwal et al. (2012) and also regular-
+ized maximum likelihood based procedures (Butucea et al., 2015; Acharya et al.,
+2015).
+As a complement in the Supplementary Material, we adapt our method to
+the setting of sparse linear regressionm and provide an estimator that has an
+explicit limiting distribution (recovering the results of Zhang and Zhang (2014);
+Javanmard and Montanari (2014); van de Geer et al. (2014)).
+2. Setting
+2.1. Preliminary notations
+ForT >0,q∈ N andu∈ Cq, we write⌊u⌋T for the hard thresholded version of
+u at level T , i.e. for the vector v such that vi =ui1{|ui|≥ T} for i = 1,...,q .
+Forq >0 and u∈ Rq, we write∥u∥2 =
+√∑
+i≤q|ui|2 for the standard L2 norm
+of u, and∥u∥∞ = supi|ui| for the standard L∞ norm of u.
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 4]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 4
+For aq×q complex matrix A, we write AT as the conjugate transpose of A.
+We write tr(A) =∑
+kAk,k for the trace of A, and diag(A) for the matrix whose
+diagonal entries are the same asA while its non-diagonal entries are all zeros. We
+write the entry-wise matrix norm of A as∥A∥∞ = maxi,j|Ai,j|, and its squared
+Frobenius norm as∥A∥2
+2 =∑
+i,jA2
+i,j. We write also the operator norm of A as
+∥A∥S = maxiλi, where the λi are the singular values of A, and the Schatten p
+norm of A for p> 1 as∥A∥Sp =
+(∑
+iλp
+i
+)1/p
+- and note that ∥A∥S2 =∥A∥2.
+For T > 0, we write ⌊A⌋T for the hard thresholded version of A at level
+T for each entry, i.e. for the matrix V such that Vi,j = Ai,j1{|Ai,j|≥ T} for
+i,j = 1,...,q .
+2.2. Model
+Let d,n∈ N. LetM be the set of d×d matrices, and
+M(k),
+be the set of d×d complex matrices of rank less than or equal to k. Let us also
+write
+MΩ,
+for the set of orthonormal matrices in M.
+ForXi∈M , Θ∈M , we consider the matrix regression problem where for
+anyi≤n,
+Yi = tr
+(
+(Xi)T Θ
+)
++ϵi,
+where ϵ∈ Rn is an i.i.d. vector of Gaussian white noise, i.e. ϵ∼N (0,In) (but
+our results hold in the same way for any sub-Gaussian independent noise ϵ: see
+Remark 3.2), and d≤ n but d2≫ n. Let us write X for the linear operator
+going fromM to Rn, and such that for any A∈M ,
+X(A) =
+(
+tr
+(
+(Xi)TA
+))
+i≤n
+.
+The model can be rewritten as
+Y = X(Θ) +ϵ,
+whereY = (Yi)i≤n. This matrix regression model is directly related to the quan-
+tum tomography model (in which case the design X is often chosen to be the
+random Pauli design (Flammia et al., 2012; Gross et al., 2010; Liu, 2011; Gross,
+2011; Koltchinskii, 2011), but it is also related to e.g. matrix completion (Ne-
+gahban and Wainwright, 2011; Koltchinskii, 2011).
+We state the following assumption on the design operator X.
+Assumption 2.1. Let K≤d. For any k≤ 2K, it holds that
+sup
+A∈M(k)
+⏐⏐⏐ 1
+n∥X(A)∥2
+2−∥A∥2
+2
+⏐⏐⏐≤ ˜cn(k)∥A∥2
+2,
+where ˜cn(k)> 0.
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 5]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 5
+Remark 2.1. The above assumption is very related to the Restricted Isom-
+etry Property. Typically, for uncorrelated Gaussian design with mean 0 and
+variance 1 entries, it will hold with probability larger than 1−δ for ˜cn(k)≤
+C
+√
+kd log(1/δ)/n where C > 0 is a universal constant. For the Pauli design
+used in quantum tomography, it will hold with probability larger than 1−δ for
+˜cn(k)≤C
+√
+kd log(d/δ)/n whereC >0 is a universal constant (Liu, 2011) - see
+Subsection 4.2 for a description of description of a quantum tomography setting
+in which the Pauli matrices represent measurements.
+3. Main results
+As a generalization of sparsity constraints in linear regression models, we impose
+a rank k≤ d constraint on a matrix Θ ∈ Rd×d. That is, we require the rows
+(or columns) of Θ lie in some k-dimensional subspace of Rd. This type of rank
+constraint arises in numerous applications such as quantum tomography, ma-
+trix completion, and matrix compressed sensing (see e.g. Flammia et al., 2012;
+Gross et al., 2010; Liu, 2011; Gross, 2011; Negahban and Wainwright, 2011;
+Koltchinskii et al., 2011).
+3.1. Method
+Our method considers the parametersB >0,δ >0,K > 0. The parameterδ is a
+small probability that will calibrate the precision of the estimate: the theoretical
+results that we will prove later for this estimate will hold with probability 1−δ,
+and the smaller δ, the larger the constant in the bound (see Theorem 3.1).
+The parameter K is an upper bound on two times the actual low rank of the
+parameter Θ. It does not need to be tight, and the ﬁnal results will not depend on
+it as long
+√
+K˜cn(K)≪ 1 (see Assumption 2.1 and Theorem 3.1). The parameter
+B is an upper bound on the Frobenius norm of the parameter Θ. It again does
+not need to be tight, but constants in the proof will scale with it.
+We set the initial values for the estimator ˆΘ0 and the threshold T0 such that
+ˆΘ0 = 0∈ Rd×d, T 0 =B∈ R+.
+We update the thresholds
+Tr = 4˜cn(2K)
+√
+KTr−1 +υn :=ρTr−1 +υn.
+where υn = C
+√
+d log(1/δ)
+n , C is an universal constant (see Lemma 5.2) and
+ρ := 4˜cn(2K)
+√
+K.
+Set now recursively, for r∈ N, r≥ 1,
+ˆΨr = 1
+n
+n∑
+i=1
+(Xi)T(
+Yi− tr(Xi ˆΘr−1)
+)
+∈ Rd×d,
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 6]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 6
+and let Ur,V r∈M 2
+Ω be two orthonormal matrices that diagonalise ˆΘr−1 + ˆΨr.
+Then we set
+ˆΘr =Ur⌊(Ur)T ( ˆΘr−1 + ˆΨr)Vr⌋Tr(Vr)T. (3.1)
+This procedure provides a sequence of estimates, and as we will prove in the
+next subsection, this sequence is with high probability close to the true Θ as
+soon as r is of order log(n) (see Theorems 3.1 and 3.2).
+Remark 3.1. Note that although we describe this method using many quantities,
+in fact while implementing our method we only need to set up four quantities:
+ρ,υn,T 0 and the stopping time r. We describe in Equation (3.3) how to imple-
+ment a good stopping rule, and in Subsection 3.3 how to choose the three ﬁrst
+parameters. In particular, T0 can be chosen in a data driven way.
+This method is related to Iterative Hard Thresholding (IHT), a method that
+has been developed for the sparse regression setting (see e.g. Blumensath and
+Davies, 2009; Needell and Tropp, 2009). It is less straightforward to see this in
+this setting, as in the sparse regression setting where we adapt also our method
+in Subsection A, and for a more comprehensive discussion of the relation between
+our method and IHT, see the Remark A.2. Note that IHT algorithms have been
+proved to work in settings where the noise is small and non-stochastic (see e.g.
+Blumensath and Davies, 2009; Needell and Tropp, 2009; Goldfarb and Ma, 2011;
+Tanner and Wei, 2012), but to the best of our knowledge, there are no results
+on IHT in a stochastically noisy setting.
+3.2. Results for the low rank matrix recovery
+Main result for our thresholded estimator We now provide a theorem
+that guarantees that the estimate ˆΘr afterO(log(n)) iterations has at most rank
+k, and its entry-wise L∞ risk and Frobenius risk are bounded with the optimal
+rates (see the ﬁrst point in Subsection 3.3).
+Theorem 3.1. Assume that Assumption 2.1 is satisﬁed and that ˜cn(2K)
+√
+K <
+1/4. Let r≈O(log(n)). We have that for a constant C1 > 0 it holds that with
+probability larger than 1−δ and for any k≤K/2
+sup
+Θ∈M(k),∥Θ∥2≤B
+∥Θ− ˆΘr∥S≤C1
+√
+d log(1/δ)
+n ,
+and also that
+sup
+Θ∈M(k),∥Θ∥2≤B
+rank( ˆΘr)≤k,
+and also that for any p> 0
+sup
+Θ∈M(k),∥Θ∥2≤B
+∥Θ− ˆΘr∥Sp≤C1k1/p
+√
+d log(1/δ)
+n .
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 7]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 7
+The above theorem proves among other things that our estimate attains the
+minimax optimal Schatten p risk, which other estimates in the literature also
+attain for e.g.p = 2. The ﬁrst interesting property is that our proposed estimator
+has an explicit algorithmic form and is very computationally eﬃcient. Another
+interesting additional property is that it is also minimax-optimal in operator
+norm (or entry-wise matrix L∞ risk), and that the entry-wise error is not more
+than
+√
+d/n with high probability for any orthonormal change of basis of the
+matrix Θ. This is a strong result since the entry-wise norm is not invariant by
+orthonormal change of basis while the Frobenius norm is. This result is already
+useful for measuring the uncertainty of an estimate (in particular since it does
+not require the a priori knowledge of the rank of the matrix Θ).
+Asymptotic normality results To prove asymptotic normality, we slightly
+modify the estimator deﬁned in Theorem 3.1. Consider the estimator ˆΘr of
+Theorem 3.1 (with r≈O(log(n))) and deﬁne
+ˆΘ = ˆΘr + 1
+n
+n∑
+i=1
+(Xi)T [Yi− tr((Xi)T ˆΘr)].
+Theorem 3.2. Set
+Z := 1√n
+∑
+i≤n
+(Xi)Tϵi
+∆ :=√n( ˆΘr− Θ)− 1√n
+∑
+i≤n
+(Xi)T tr
+(
+(Xi)T ( ˆΘr− Θ)
+)
+.
+Then we have √n( ˆΘ− Θ) = ∆ +Z, (3.2)
+whereZ|X∼N
+(
+0,
+( 1
+n
+∑
+i≤n(Xi
+j,j′Xi
+l,l′)
+)
+j,j′,l,l′
+)
+.
+Letr≈O(log(n)). The two following bounds hold for the bias term ∆ under
+two diﬀerent assumptions.
+• Assume that Assumption 2.1 is satisﬁed for someK >0 and that ˜cn(2K)
+√
+K =
+o(1). If the rank of Θ is smaller than 2K and if its Frobenius norm is
+bounded by B, there is a constant C1 > 0 such that with probability larger
+than 1−δ
+∥∆∥S√
+d
+≤ 4C1˜cn(2K)
+√
+K log(1/δ) =oP(1).
+• Assume that the elements in the design matrices Xi∈M are i.i.d. Gaus-
+sian with mean 0 and variance 1, and that max(K2d,Kd log(d)) = o(n),
+we have that
+∥∆∥∞ =oP(1).
+Note that this implies the previous result.
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 8]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 8
+This theorem, which is in the spirit of the works in the context of sparse
+linear regression of Zhang and Zhang (2014); Javanmard and Montanari (2014);
+van de Geer et al. (2014), implies that there exists an estimator of Θ that has
+a Gaussian limiting distribution, and whose rescaled bias ∆ with respect to Θ
+can be bounded i) in operator norm under our Assumption 2.1 and ii) in L∞
+norm as well in the speciﬁc case where the design is Gaussian.
+Remark 3.2. Theorems 3.1 and 3.2 are proved for a Gaussian noise ϵ, but
+these results are easily generalisable to any independent, sub-Gaussian noise,
+with a similar but more technical proof (based on Talagrand’s inequality). The
+results of Theorem 3.2 would however be modiﬁed in that the random variable
+Z, conditioned on the design X, would then not be exactly Gaussian, but have a
+limiting Gaussian distribution using the central limit theorem.
+Stopping ruler Theorem 3.1 is satisﬁed afterr =O(log(n)) iterations of our
+thresholding strategy, and so we know what is a theoretical value for r so that
+our strategy works. However, it is possible to propose a data driven stopping
+rule that will perform well. For a desired precision e >0, we propose to stop
+the algorithm as soon (after having thresholded a last time) as
+Tr≤ (1 +e) 1
+1−ρvn. (3.3)
+Let us write ˆr for the time where the stopping rule stops. The following result
+holds for the estimator stopped at this stopping rule.
+Theorem 3.3. Assume that Assumption 2.1 is satisﬁed and that ˜cn(2K)
+√
+K <
+1/8, i.e. ρ≤ 1/2. Lete≤ 0.1 in (3.3. The estimator ˆΘˆr satisﬁes with probability
+larger than 1−δ and for any k≤K/2
+sup
+Θ∈M(k),∥Θ∥2≤B
+∥Θ− ˆΘˆr∥S≤ 1.1
+1−ρvn = 2.2C
+√
+d log(1/δ)
+n ,
+and also that
+sup
+Θ∈M(k),∥Θ∥2≤B
+rank( ˆΘˆr)≤k,
+which implies for any p> 0
+sup
+Θ∈M(k),∥Θ∥2≤B
+∥Θ− ˆΘˆr∥Sp≤ 2.2C(2k)1/p
+√
+d log(1/δ)
+n .
+Moreover ˆr is such that
+ˆr≤ 1 +
+log
+(
+10(1−ρ)T0/(vn)
+)
+log(1/ρ) ≤O(log(n)).
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 9]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 9
+This empirical stopping rule, that does not require the tuning of any addi-
+tional parameters1, is guaranteeing minimax optimal results in less than log( n)
+iterations. Note that Theorem 3.2 would also hold using this stopping rule - this
+can be proved in the same way as Theorem 3.3 is proved.
+3.3. Discussion
+Comparison of our results with the literature Our Theorem 3.1 gives
+bounds for our estimators in all Schatten p >0 norms (including the operator
+norm, and therefore uniform entry wise bounds in all rotation basis). A ﬁrst
+point is that our results are minimax optimal in both Frobenius and opera-
+tor norm. The corresponding lower bound in Frobenius norm can be found in
+e.g. Theorem 5 of Koltchinskii et al. (2011) (under an assumption related to our
+Assumption 2.1) or Cand` es and Plan (2011) under an assumption that is the
+same as ours. The corresponding lower bound in operator norm can be found
+in e.g. Carpentier et al. (2015). In addition to this, the paper Koltchinskii and
+Xia (2015) even contains further lower bounds results proving that the operator
+norm rate
+√
+d/n (and associated Schatten q norm k1/q√
+d/n) is optimal also
+in the case of quantum tomography that we use in our experiments later on,
+i.e. under the additional assumptions that the parameter is a density matrix
+and that the design is random Pauli. To the best of our knowledge, our method
+is the ﬁrst iterative method that has such an optimality property in operator
+norm - for instance, the paper Koltchinskii and Xia (2015) provides results for
+Schatten norms with q∈ [1, 2], but not for other Schatten norms. Besides, we
+proved in Theorem 3.2 a slight modiﬁcation of our estimator has an explicit
+Gaussian limiting distribution, and this is, again to the best of our knowledge,
+the ﬁrst iterative method for low rank matrix recovery that has such a property.
+On top of that, the computational complexity of our algorithm is low as for any
+procedure based on iterative hard thresholding : see the papers (Goldfarb and
+Ma, 2011; Tanner and Wei, 2012). Our assumption 2.1 is a strong RIP condi-
+tion. But it is in particular satisﬁed in the interesting application of multiple
+ion tomography for the natural Pauli design as soon as the number of settings
+is large enough, see Subsection 4.2.
+Operator norm bounds are particularly interesting since they provide an en-
+trywise bound up to any change of orthonormal basis. In particular, they provide
+a bound on the eigen values - and since these bounds do not depend on the true
+rankk, they can be used to implement conservative conﬁdence sets. Moreover as
+highlighted in the papers Zhang and Zhang (2014); Javanmard and Montanari
+(2014); van de Geer et al. (2014), having a bound on the entrywise risk, and
+then an estimator with explicit limiting distribution, is interesting in that it can
+be used to construct tests and conﬁdence intervals for subsets of coordinates of
+the parameter Θ. We illustrate this point in the Simulation section (see Sec-
+tion 4.1), where a conﬁdence set is constructed using the limiting distribution.
+1In Subsection 4.1 we introduced the desired precision e. The precision e is a very natural
+quantity to choose for the experimenter—one can set e.g. e = 0.1 for an 1.1 optimal solution
+with respect to the solution outputted by an algorithm that runs for an inﬁnitely long time
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 10]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 10
+Note however that the bound on the bias term ∆ in L∞ norm in Theorem 3.2
+requires the fact that the design is Gaussian. On the other hand, the bound on
+the bias term ∆ in operator norm in Theorem 3.2 requires only the fact that
+our assumption 2.1 is satisﬁed.
+Stopping rule r Our theorems are satisﬁed after r =O(log(n)) iterations of
+our thresholding strategy, and so we know what is a theoretical value for r so
+that our strategy works. We also deﬁned an empirical stopping rule, see (3.3)
+and Theorem 3.3. We use this stopping rule in practice for all our experiments
+in Section (4).
+Calibration of the parameters of the proposed method Our method is
+not parameter free - there are three quantities that need to be calibrated. The
+two ﬁrst ones, that we write ρ and υn, enter in the deﬁnition of the thresholds
+sequence (Tr)r. ρ controls the rate at which we make our threshold decay, and
+υn/(1−ρ) is the quantity toward which it converges whenr goes to inﬁnity. The
+last quantity, namelyT0 is the initialisation of the threshold sequences. Here are
+some comments on how to choose these quantities:
+• Rate of decayρ : In theory the parameterρ can be taken between 1 and
+4
+√
+K˜cn(2K) where K is an upper bound on the rank of the parameter
+and ˜cn(2K) is the constant associated to the design such that Assump-
+tion 5.1 is satisﬁed. It might not be really possible to compute exactly K
+or ˜cn(2K) without more assumptions on the design. But there is at least
+one design that is interesting in practice, namely the random Pauli design
+for quantum tomography, that is such that we have an upper bound on
+˜cn(2K) for all K that is of order
+√
+Kd log(d)/n with high probability,
+i.e. it decays with n (the same holds in Gaussian design up to the log
+term). In this design if n is large enough, we know that taking ρ = 1/2
+will work - we do not want to take ρ too close to 1 since the bound on the
+performance of the estimator scales with 1 /(1−ρ).
+• Smallest threshold calibration υn The interpretation and theoretical
+value of υn is clear: it should be taken to be larger than the δ quantile of
+the LHS quantity deﬁned in Equation (5.5) divided by ∥A∥2. Now since
+we do not have access to this quantile, we calibrate it in the experimental
+section of this paper as an empirical estimator of the asymptotic quantile
+described above (using Theorem 3.2).
+• Initialisation threshold T0 : The constant T0 needs to be taken as an
+upper bound on the Frobenius norm of Θ. Note ﬁrst that estimating from
+the data an upper bound on ∥Θ∥2
+2 is easy under Assumption 5.1, i.e. the
+quantity for κ> 0
+1
+n∥Y∥2
+2(1 +κ),
+overestimates∥Θ∥2
+2 . In our simulations, we propose a slightly more reﬁned
+heuristic upper bound and use the same T0 and Tr in Subsection 4.1 and
+4.2.
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 11]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 11
+To conclude on the practical tuning of the constants, we would like to empha-
+size that at least in practical situation, namely quantum tomography, we have
+enough information about both the design and the noise level to know that the
+above calibration will be working, provided that the target matrix is indeed
+low rank. So although the tuning of parameters is always a tricky issue for any
+algorithm, in at least this speciﬁc application, our algorithm can be used as it
+is.
+4. Experiments
+In this section we present some experiments, ﬁrst some simulation for the con-
+struction of conﬁdence intervals, and then a formal comparison of our thresh-
+olded estimator with other methods on speciﬁc quantum tomography problem,
+namely multiple ion tomography.
+4.1. Simulation results for the construction of entry-wise
+conﬁdence intervals
+We performed experiments for low-rank matrix recovery, with matrix dimension
+d . We consider a Gaussian design where each Xi
+j,j′∼N (0, 1) and are indepen-
+dent. We also consider a Gaussian uncorrelated noise ϵ∼N (0,In). We consider
+a parameter Θ of rank k that is stochastically generated in an isotropic way as
+Θ =
+k∑
+l=1
+NlNT
+l , where, N l∼N (0,Id).
+We implemented our method choosing a data-driven heuristic for the choice
+of our parameters. We ﬁrst set
+ˆΘ0 = 0.
+We set for any r≥ 1
+ˆσ2
+r =∥Y− (tr
+(
+(Xi)T ˆΘr−1)
+i≤n∥2
+2/n, (4.1)
+i.e. the empirical risk, and
+υn(r) = ˆσr
+√
+d
+nq90%, (4.2)
+whereq90% is the 90% quantile of aN (0, 1) random variable.υn(r) replaces here
+υn, and is a heuristic high probability bound on the error for each coordinate.
+We set
+T1 =B = ˆσ1 +υn(1), (4.3)
+which is by construction higher than the Frobenius norm of Θ with high prob-
+ability, and
+Tr =ρTr−1 +υn(r), (4.4)
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 12]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 12
+where we select ρ = 1/2 (we take 1/2 so that the decay is not too fast, but also
+so that 1/(1−ρ) is not too large).
+We also use the heuristic stopping rule described in Equation (3.3), i.e. we
+iterate until
+Tr≤ (1 +e)× 1
+1−ρυn(r) = 2.2υn(r),
+for e = 0.1.
+We also construct, using the limiting distribution results provided in Theorem
+3.2, a conﬁdence set for the all the entries of Θ that is such that for any entry
+(m,m′), we set the conﬁdence interval
+Cm,m′
+n = [ˆθm,m′−cm,m′, ˆθm,m′ +cm,m′],
+where
+cm,m′ = ˆσr ˆΣm,m′
+q95%√n ,
+where ˆΣ2
+m,m′ = 1/n×∑
+i≤n(Xi
+m,m′)2.
+We provide several results, depending on the values of (n,p,k ), averaged over
+100 iterations of simulations. For these simulations, we present three kinds of
+results:
+• A ﬁrst set of graphs (Figure 1) presents, for diﬀerent values of p,k , and
+in function of the sample size n, the logarithm of the rescaled Frobenius
+risk of the estimate ˆΘ, i.e.
+log
+(∥ ˆΘ− Θ∥2
+∥Θ∥2
+)
+.
+• A second set of graphs (Figure 2) presents, for diﬀerent values of p,k , and
+in function of the sample size n, the logarithm of the averaged diameter
+of the conﬁdence intervals Cm,m′
+n , i.e.
+log
+( 1
+d2
+∑
+m,m′
+cm,m′
+)
+.
+• A last set of graphs (Figure 3) presents, for diﬀerent values of p,k , and
+in function of the sample size n, the averaged coverage probability of the
+conﬁdence intervalsCm,m′
+n , i.e.
+1
+d2
+∑
+m,m′
+1{θm,m′∈Cm,m′
+n }.
+All these graphs also exhibit 95% conﬁdence intervals (upper and lower 2 .5%
+quantile values from 100 iterations) around their means (dotted lines in the
+graphs, the solid line being the mean).
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 13]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 13
+1000 2000 3000 4000 5000 6000
+−6 −4 −2 0
+n
+log(Rescaled Risk)
+●
+●
+●
+● ● ●
+●
+●
+●
+● ● ●
+●
+●
+●
+● ● ●
+p=64,k=3
+2000 3000 4000 5000 6000 7000
+−6 −4 −2 0
+n
+log(Rescaled Risk)
+●
+●
+●
+●
+● ●
+●
+●
+●
+● ● ●
+●
+●
+●
+●
+● ●
+p=100,k=3
+1000 2000 3000 4000 5000 6000
+−3.5 −2.5 −1.5 −0.5
+n
+log(Rescaled Risk)
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+● ●
+●
+●
+●
+●
+p=64,k=10
+2000 3000 4000 5000 6000 7000
+−2.0 −1.0 0.0
+n
+log(Rescaled Risk)
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+● ●
+●
+●
+●
+●
+p=100,k=10
+Fig 1 . Logarithm of the rescaled Frobenius risk of the estimate in function of n, for diﬀerent
+values of p,k . The solid line is the average over 100 iterations, the dotted lines form 95%
+conﬁdence intervals.
+1000 2000 3000 4000 5000 6000
+−4 −3 −2 −1 0 1
+n
+log(Length of CI)
+●
+●
+●
+● ● ●
+●
+●
+● ● ● ●
+●
+●
+●
+● ● ●
+p=64,k=3
+2000 3000 4000 5000 6000 7000
+−4 −3 −2 −1 0 1
+n
+log(Length of CI)
+●
+●
+●
+● ● ●
+●
+●
+●
+● ● ●
+●
+●
+●
+● ● ●
+p=100,k=3
+1000 2000 3000 4000 5000 6000
+−1 0 1 2
+n
+log(Length of CI)
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+p=64,k=10
+2000 3000 4000 5000 6000 7000
+0.0 1.0 2.0
+n
+log(Length of CI)
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+●
+p=100,k=10
+Fig 2 . Logarithm of the averaged rescaled length of the conﬁdence intervals of the in function
+of n, for diﬀerent values of p,k . The solid line is the average over 100 iterations, the dotted
+lines form 95% conﬁdence intervals.
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 14]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 14
+1000 2000 3000 4000 5000 6000
+0.5 0.7 0.9
+n
+Coverage Probability
+● ●
+● ● ● ●
+● ●
+●
+● ● ●● ● ● ● ● ●
+p=64,k=3
+2000 3000 4000 5000 6000 7000
+0.5 0.7 0.9
+n
+Coverage Probability
+● ● ● ● ● ●● ● ●
+● ● ●● ● ● ● ● ●
+p=100,k=3
+1000 2000 3000 4000 5000 6000
+0.5 0.7 0.9
+n
+Coverage Probability
+●
+● ●
+●
+●
+●
+●
+● ●
+●
+●
+●
+● ● ● ●
+●
+●
+p=64,k=10
+2000 3000 4000 5000 6000 7000
+0.5 0.7 0.9
+n
+Coverage Probability
+●
+●
+●
+●
+● ●●
+●
+●
+●
+●
+●
+● ● ● ● ● ●
+p=100,k=10
+Fig 3 . Averaged coverage of the conﬁdence intervals of the in function of n, for diﬀerent
+values of p,k . The solid line is the average over 100 iterations the dotted lines form 95%
+conﬁdence intervals.
+These ﬁgures exhibit diﬀerent behaviours depending on the diﬃculty of the
+problems (increasing with p and more importantly with k). The graphs in Fig-
+ure 1 for k = 3 (and p∈{ 64, 100}) exhibit ﬁrst a very fast decay of the risk,
+until some critical thresholdn =ckd wherec seems to be between 10 and 20. At
+this point, one can actually observe that the method recovers in most case the
+true rank k of the matrix, whereas it before recovered only a smaller rank ap-
+proximate of Θ—with a too small n, it could not distinguish all the signal from
+the noise, and the fact that it gradually does for larger n explains the fast decay
+of the logarithm of the rescaled risk. After that, the curve has a kink and the
+decay becomes slower (the theory predicts that the logarithm of the rescaled risk
+should decrease with n as− log(n)). After this kink, all the k “rank directions”
+have been identiﬁed, and the logarithm of the rescaled risk starts decreasing
+slower, according to the theoretical rate of − log(n). The graphs in Figure 1 for
+k = 10 (and p∈{ 64, 100}) exhibit mainly the ﬁrst regime, since k is larger
+and the second regimes comes for larger values of n—empirically, we can ob-
+serve that the method recovers most of the time all k “directions” as soon as
+n = 4000 for p = 64, as soon as n = 6000 for p = 100.
+A parallel evolution can be observed in Figure 2, for the logarithm of the
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 15]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 15
+average length of the conﬁdence intervals. It is not at all surprising since this
+length is supposed to reﬂect the risk. The averaged coverage of these intervals
+in Figure 3 is in average larger than 87% in all cases, and in more than 95% of
+the cases, it is higher than 74% in all cases, which makes our method reliable.
+4.2. Quantum tomography experiments
+4.2.1. Description of the ion tomography setting
+An important application that satisﬁes our assumptions and to which our method
+can be applied is quantum tomography, i.e. the estimation of quantum states.
+We consider the popular problem of multiple ion tomography, i.e. the problem
+of estimating the joint quantum state of m two-dimensional systems (qubits),
+as encountered in ion trap quantum tomography, see Guta et al. (2012); Gross
+et al. (2010); Butucea et al. (2015); Haeﬀner et al. (2005); Acharya et al. (2015)
+or Holevo (2001); Nielsen and Chuang (2000) for textbooks on this problem.
+Such a system’s quantum state can be represented by a positive semi-deﬁnite
+unit trace complex matrix Θ (a density matrix ) of dimension d := 2m.
+For each individual qubit, the experimenter can measure one of the three
+Pauli observables described by the 2 by 2 Pauli matrices σ1,σ 2,σ 3, where
+σ1 =
+[ 0 1
+1 0
+]
+, σ2 =
+[ 0 −i
+i 0
+]
+, σ3 =
+[ 1 0
+0 −1
+]
+, (4.5)
+and each of these measurements may yield one of two outcomes, denoted by +1
+and−1 respectively.
+Therefore, a full experiment (i.e. an experiment that describes the measure-
+ment for each of the m qubits) is then deﬁned by a setting S = (s1,...,s m)
+where each sl∈{σ1,σ 2,σ 3} for l≤m, which speciﬁes which of the 3 Pauli ob-
+servables is measured for each qubit. For each ﬁxed setting S, the measurement
+produces random outcomes O∈{ +1,−1}m, with expected probability
+pO,S = tr(PO,SΘ),
+where
+PO,S =πo1,s1⊗..., ⊗πom,sm,
+whereπol,sl is the eigen projector of the the 2 by 2 Pauli matrix sl associated to
+the eigen value ol (we remind that the 2 by 2 Pauli matrices have eigen values
+of either +1 or −1).
+Now set
+σ0 =
+[ 1 0
+0 1
+]
+, (4.6)
+for the last 2×2 Pauli matrix such that (σi)i∈{0,...,3} form an orthogonal basis of
+C2×2. Let O be the outcome of an experiment given a setting S = (s1,...,s m)
+(where each sl ∈ σ1,σ 2,σ 3). Write ˜S(E) for a setting where a subset E ⊂
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 16]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 16
+{1,...,m } of the m matrices sl of this setting have been replaced by σ0, and
+˜O(E) for the outcome where the same subset E of the m elementsol have been
+replaced by 1. Since the only eigen value ofσ0 is 1, the outcome of the measure-
+ment of a qubit byσ0 is always 1. This implies in particular that the distribution
+of ˜O(E) as described above, is the same as the distribution of the outcome of an
+experiment when the measurement setting is ˜S(E). For this reason, measuring
+according to settingS actually gives information about all settings ˜S(E) for any
+subsetE of{1,...,m }. Thus instead of measuring all settings which are tensor
+products of 2× 2 Pauli matrices σ0,...,σ 3, it is enough to measure all settings
+which are tensor products of 2 × 2 Pauli matrices{σ1,σ 2,σ 3}, as they provide
+information about corresponding settings that involve σ0. Therefore if one mea-
+sures all 3 m settings that correspond to the settings S = (s1,...,s m) where
+each sl∈{ σ1,σ 2,σ 3}, we have observations about all measurements direction,
+and our measurement setting is complete.
+Now we are interested in also dealing with situations where one does not
+want to observe all 3 m settings, and where one has only a number of settings
+N≤ 3m.
+We consider a random measurement setting as in Flammia et al. (2012),
+i.e. each measurement setting S is chosen uniformly at random (each sl is cho-
+sen uniformly at random among σ1,...,σ 3). Let N be the total number of
+measurement setting chosen in this random way. For each chosen measurement
+settingS, we performT repetition of the experiment and observeT independent
+outcomes. So for each chosen measurement setting Si with i≤ N, we observe
+T independent outcomes Ot,Si
+which are observations according to setting Si.
+4.2.2. Expression of the outcomes in the trace regression model
+It is often convenient to express the information contained by a measurement
+(S,O ) in a way that involves tensor products of 2×2 Pauli matrices, rather than
+their spectral projections, see Flammia et al. (2012). Indeed, the set of matrices
+that are created bym tensor products of 2×2 Pauli matricesσ0,...,σ 3 is exactly
+the set of 2m× 2m =d×d Pauli matrices rescaled by
+√
+d (introduced brieﬂy in
+Remark 2.1) i.e. the d×d rescaled Pauli basis. Indeed let f(O) = ∏
+lol, then
+one easily veriﬁes that
+tr((s1⊗···⊗ sm)Θ)
+=
+∑
+O∈{1,−1}m
+(∏
+l
+ol
+)
+tr
+(
+(πs1,o1⊗···⊗ πsm,om)Θ
+)
+= EO|S
+(
+f(O)
+)
+,
+where EO|S is the expectation according to the outcome O when measurement
+S is chosen. In this sense, the measurement described by thed×d rescaled Pauli
+matrix PS = s1⊗···⊗ sm can be measured by the parity of the spins f(O)
+that one gets when performing measurement S : in fact f(O)|S is a random
+variable such that its value is 1 with probability
+(
+tr(PSΘ) + 1
+)
+/2 and−1 with
+probability 1−
+(
+tr(PSΘ) + 1
+)
+/2 - and its expectation is tr( PSΘ) as noted. We
+writeR(tr(PSΘ)) for this distribution.
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 17]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 17
+Let us go back to our experimental setup. As remarked before, each of the
+N quantum measurement settings according to setting Si (with i≤N), where
+Si = (si
+1,...,s i
+m) and where each si
+l∈{σ1,σ 2,σ 3} for k≤m provides us with
+d information in the sense of our trace regression model, i.e. we observe at each
+measurementSi, for each replication t≤T and for all E⊂{ 1,...m }
+ySi,E =f( ˜Ot,Si(E))∼R (tr(P ˜Si(E)Θ)).
+In our trace regression model, we can average the observations f( ˜Ot,Si(E))
+and we have the the following averaged observations for any i≤ s and for all
+E⊂{ 1,...m }
+¯YSi,E = 1
+T
+∑
+t≤T
+¯yt
+Si,E = tr(P ˜Si(E)Θ)) + ¯ϵSi,E,
+where ¯yt
+Si,E is the tth repetition (among T iterations) of the observation and
+where ¯ϵSi,E is the averaged noise and is such that E(Ot,Si)|Si¯ϵSi,E = 0, and such
+that ¯ϵSi,E is sub-Gaussian has a sum of bounded random variables and satisﬁes
+E(Ot,Si))|Si exp(λ¯ϵSi,E)≤ exp(λ2/T ) for any λ≥ 0.
+Now in order for our Assumption 2.1 to be satisﬁed for rank k matrices for a
+large enough number of settings N, we need to rescale our data. We set
+YSi,E =
+√
+d3−|E|/2
+(3
+4
+)m/2
+¯YSi,E =
+√
+d3−|E|/2
+(3
+4
+)m/2
+tr(P ˜Si(E)Θ)) +ϵSi,E,
+where|E| is the cardinality of E and where ϵSi,E is the rescaled noise and is
+such that E(Ot,Si)|SiϵSi,E = 0, and such that ϵSi,E is sub-Gaussian and satisﬁes
+E(Ot,Si)|Si exp(λϵSi,E) ≤ exp(λ23−|E|
+(
+3
+2
+)m
+/T ) for any λ ≥ 0. It is a direct
+consequence from the results of Liu (2011) and from our Remark 2.1 that if
+N ≥ O(k2d log(d)), then with high probability on the random draws of our
+settings we have that Assumption 2.1 is satisﬁed for rank k matrices. We can
+therefore apply our method and other low rank recovery methods such as trace
+regression methods to our rescaled data
+(
+YSi,E,
+√
+d3−|E|/2
+(3
+4
+)m/2
+P ˜Si(E)
+)
+i≤N,E⊂{1,...,m}
+. (4.7)
+4.2.3. Experimental results
+We let m ∈ {4, 5, 6} so that d ∈ {16, 32, 64}, and let k ∈ {1, 2} with α ∈
+{2, 3, 4, 5} and consider N = αkd measurement settings. These settings with
+smallk andα were chosen since we are more interested in the truncated measure-
+ment setting (such thatN≤ 3m). For the replication, we considerT∈{d, 10d}.
+Using the data (4.7), we estimate Θ by three methods—our proposed method
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 18]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 18
+(IHT), the truncated maximum likelihood estimator (MLE) for the high dimen-
+sional multiple ion tomography model as described in Acharya et al. (2015), and
+nuclear norm penalization (NNP) method computed using a gradient descent
+method (e.g. Agarwal et al., 2012).
+We use the same tuning parameters as in (4.1), (4.2), (4.3), and (4.4) and
+also we select ρ = 1/2 and the same stopping rule as we describe in Subsection
+4.1. For the stepsize of the gradient descent method used to compute the NNP
+estimator, we follow the recommendation in Subsection 3.1 in Agarwal et al.
+(2012).
+Figure 4 and 5 present the result when the number T of replications is d and
+when the true rank is 1 or 2 respectively, and for four diﬀerent values of d. We
+provide average values of squared Frobenius norm, operator norm, entrywise
+L∞ norm, and Shatten 1 norm of ˆΘ− Θ averaged over 100 iterations. Red dots,
+blue blank triangles, and black asterisks are average value of IHT, MLE, and
+NNP, respectively. Intuitively when α increases these risks will decrease. Our
+estimator shows almost comparable result to the MLE except in the case where
+d = 4 andα = 2. In this case, IHT estimates Θ by 0 a few times and pretty well
+for most cases so that on average the Frobenius norm is still large. Figures 6
+and 7 present the result when the replication is 10d and when the true rank is 1
+or 2 respectively, and for four diﬀerent values of d. They show similar patterns
+as for the cases T = d, but we can see that IHT performs well especially for
+α∈{ 4, 5}. An interesting feature that all these pictures illustrate is that IHT
+performs the best relatively to other methods for a large number of replication
+T , and for diﬃcult problems with high d and k (see in particular the plots in
+Figure 7 for large d). Note that our method is computationally more eﬃcienct
+than the other two methods in the sense that when d = 64,α = 5,k = 2, IHT
+takes about 40 seconds while MLE (and even NNP) takes about 2.5 minutes for
+one iteration, on a regular laptop, i.e. it is about four times slower.
+5. Proofs
+5.1. Preliminaries
+For convenience in writing the proofs, we introduce the following quantities.
+We write, for integersq,q′, the vectorisation of aq×q′ matrix (whereq′ > 0)
+A by stacking the rows of A∈ Rq×q′
+as
+vec(A) = (A1,1,A 1,2,...,A 1,q′,A 2,1,...,A 2,q′,...,A q,1,...,A q,q′)T.
+We write the Kronecker product between two matrices A and B as A⊗B.
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 19]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 19
+2 3 4 5
+0.0 0.1 0.2 0.3 0.4 0.5
+alpha
+L2(d=16, k=1, T=d)
+●
+●
+● ●
+● IHT
+MLE
+NNP
+2 3 4 5
+0.0 0.1 0.2 0.3 0.4 0.5
+alpha
+Oper
+●
+●
+●
+●
+2 3 4 5
+0.00 0.02 0.04 0.06 0.08 0.10
+alpha
+Linf
+●
+●
+●
+●
+2 3 4 5
+0.0 0.2 0.4 0.6 0.8
+alpha
+Shatten
+●
+●
+●
+●
+2 3 4 5
+0.0 0.1 0.2 0.3 0.4 0.5
+alpha
+L2(d=32, k=1, T=d)
+●
+● ● ●
+2 3 4 5
+0.0 0.1 0.2 0.3 0.4 0.5
+alpha
+Oper
+●
+●
+● ●
+2 3 4 5
+0.00 0.02 0.04 0.06 0.08 0.10
+alpha
+Linf
+●
+● ● ●
+2 3 4 5
+0.0 0.2 0.4 0.6 0.8
+alpha
+Shatten
+●
+●
+● ●
+2 3 4 5
+0.0 0.1 0.2 0.3 0.4 0.5
+L2(d=64, k=1, T=d)
+● ● ● ●
+2 3 4 5
+0.0 0.1 0.2 0.3 0.4 0.5
+Oper
+● ● ●
+●
+2 3 4 5
+0.00 0.02 0.04 0.06 0.08 0.10
+Linf
+● ● ● ●
+2 3 4 5
+0.0 0.2 0.4 0.6 0.8
+Shatten
+●
+● ●
+●
+Fig 4 . Squared Frobenius norm (L2), operator norm (Oper), entrywise L∞ norm (Linf) and
+Shatten 1 norm (Shatten) of ˆΘ −Θ in function of α (and therefore in function og the number
+of settings N), for diﬀerent values of d for replication T = d and k = 1 using the three
+methods described.
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 20]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 20
+2 3 4 5
+0.0 0.1 0.2 0.3 0.4 0.5
+alpha
+L2(d=16, k=2, T=d)
+●
+●
+●
+●
+2 3 4 5
+0.0 0.1 0.2 0.3 0.4 0.5
+alpha
+Oper
+●
+●
+●
+●
+2 3 4 5
+0.00 0.02 0.04 0.06 0.08 0.10
+alpha
+Linf
+●
+●
+●
+●
+2 3 4 5
+0.0 0.2 0.4 0.6 0.8
+alpha
+Shatten
+●
+●
+●
+●
+2 3 4 5
+0.0 0.1 0.2 0.3 0.4 0.5
+alpha
+L2(d=32, k=2, T=d)
+●
+●
+● ●
+2 3 4 5
+0.0 0.1 0.2 0.3 0.4 0.5
+alpha
+Oper
+●
+●
+● ●
+2 3 4 5
+0.00 0.02 0.04 0.06 0.08 0.10
+alpha
+Linf
+●
+● ● ●
+2 3 4 5
+0.0 0.2 0.4 0.6 0.8
+alpha
+Shatten
+●
+●
+●
+●
+2 3 4 5
+0.0 0.1 0.2 0.3 0.4 0.5
+L2(d=64, k=2, T=d)
+●
+● ● ●
+2 3 4 5
+0.0 0.1 0.2 0.3 0.4 0.5
+Oper
+●
+●
+● ●
+2 3 4 5
+0.00 0.02 0.04 0.06 0.08 0.10
+Linf
+● ● ● ●
+2 3 4 5
+0.0 0.2 0.4 0.6 0.8
+Shatten
+●
+●
+●
+●
+Fig 5 . Squared Frobenius norm (L2), operator norm (Oper), entrywise L∞ norm (Linf) and
+Shatten 1 norm (Shatten) of ˆΘ − Θ in function of α, for diﬀerent values of d for replication
+T =d and k = 2 using three methods.
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 21]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 21
+2 3 4 5
+0.00 0.10 0.20 0.30
+alpha
+L2(d=16, k=1, T=10d)
+●
+●
+● ●
+● IHT
+MLE
+NNP
+2 3 4 5
+0.00 0.10 0.20 0.30
+alpha
+Oper
+●
+●
+●
+●
+2 3 4 5
+0.00 0.01 0.02 0.03 0.04 0.05
+alpha
+Linf
+●
+●
+●
+●
+2 3 4 5
+0.0 0.1 0.2 0.3 0.4 0.5
+alpha
+Shatten
+●
+●
+●
+●
+2 3 4 5
+0.00 0.10 0.20 0.30
+alpha
+L2(d=32, k=1, T=10d)
+● ●
+● ●
+2 3 4 5
+0.00 0.10 0.20 0.30
+alpha
+Oper
+●
+●
+● ●
+2 3 4 5
+0.00 0.01 0.02 0.03 0.04 0.05
+alpha
+Linf
+●
+●
+● ●
+2 3 4 5
+0.0 0.1 0.2 0.3 0.4 0.5
+alpha
+Shatten
+●
+●
+● ●
+2 3 4 5
+0.00 0.10 0.20 0.30
+L2(d=64, k=1, T=10d)
+● ● ● ●
+2 3 4 5
+0.00 0.10 0.20 0.30
+Oper
+● ● ● ●
+2 3 4 5
+0.00 0.01 0.02 0.03 0.04 0.05
+Linf
+● ● ● ●
+2 3 4 5
+0.0 0.1 0.2 0.3 0.4 0.5
+Shatten
+● ●
+● ●
+Fig 6 . Squared Frobenius norm (L2), operator norm (Oper), entrywise L∞ norm (Linf) and
+Shatten 1 norm (Shatten) of ˆΘ − Θ in function of α, for diﬀerent values of d for replication
+T = 10d and k = 1 using three methods.
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 22]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 22
+2 3 4 5
+0.00 0.10 0.20 0.30
+alpha
+L2(d=16, k=2, T=10d)
+●
+● ● ●
+2 3 4 5
+0.00 0.10 0.20 0.30
+alpha
+Oper
+●
+●
+● ●
+2 3 4 5
+0.00 0.01 0.02 0.03 0.04 0.05
+alpha
+Linf
+●
+●
+● ●
+2 3 4 5
+0.0 0.1 0.2 0.3 0.4 0.5
+alpha
+Shatten
+●
+●
+●
+●
+2 3 4 5
+0.00 0.10 0.20 0.30
+alpha
+L2(d=32, k=2, T=10d)
+●
+● ● ●
+2 3 4 5
+0.00 0.10 0.20 0.30
+alpha
+Oper
+●
+● ● ●
+2 3 4 5
+0.00 0.01 0.02 0.03 0.04 0.05
+alpha
+Linf
+●
+● ● ●
+2 3 4 5
+0.0 0.1 0.2 0.3 0.4 0.5
+alpha
+Shatten
+●
+●
+● ●
+2 3 4 5
+0.00 0.10 0.20 0.30
+L2(d=64, k=2, T=10d)
+● ● ● ●
+2 3 4 5
+0.00 0.10 0.20 0.30
+Oper
+● ● ● ●
+2 3 4 5
+0.00 0.01 0.02 0.03 0.04 0.05
+Linf
+● ● ● ●
+2 3 4 5
+0.0 0.1 0.2 0.3 0.4 0.5
+Shatten
+●
+●
+● ●
+Fig 7 . Squared Frobenius norm (L2), operator norm (Oper), entrywise L∞ norm (Linf) and
+Shatten 1 norm (Shatten) of ˆΘ − Θ in function of α, for diﬀerent values of d for replication
+T = 10d when k = 2 using three methods.
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 23]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 23
+Consider the n×d2 matrixX such that Xi,M = Xi
+m,m′ for i≤ n and for
+M = (m− 1)d +m′≤d2 where m,m′ = 1,...,d :
+X :=
+
+
+vec(X1)T
+vec(X2)T
+...
+vec(Xn)T
+
+ =
+
+
+X1
+1,1 X1
+1,2 ... X 1
+1,d ... X 1
+d,1 ... X 1
+d,d
+X2
+1,1 X2
+1,2 ... X 2
+1,d ... X 2
+d,1 ... X 2
+d,d
+... ... ... ... ... ... ... ...
+Xn
+1,1 Xn
+1,2 ... X n
+1,d ... X n
+d,1 ... X n
+d,d
+
+.
+LetR(k) be the set of vectorization of matrices in M(k), that is, R(k) =
+{vec(A) :A∈M (k)}. IfA∈M (k), thenR(k) contains a vector a of dimension
+d2 such that aM =Am,m′ for M = (m− 1)d +m′∈{ 1,...,d 2}.
+Assumption 2.1 can be rewritten as follows in this vectorized new notation.
+Assumption 5.1. Let K≤d. For any k≤ 2K, it holds that
+sup
+A∈R(k)
+⏐⏐⏐ 1
+n∥XA∥2
+2−∥A∥2
+2
+⏐⏐⏐≤ ˜cn(k)∥A∥2
+2,
+where ˜cn(k)> 0.
+Assumption 5.1 actually implies the following lemma that bounds the scalar
+products rather than the norms.
+Lemma 5.1. If Assumption 5.1 holds, then for any k≤K, we have that
+sup
+A,B∈R(k)2
+⏐⏐⏐ 1
+n⟨XA,XB⟩−⟨ A,B⟩
+⏐⏐⏐
+≤ 2˜cn(2k)∥A∥2∥B∥2 =:∥A∥2∥B∥2cn(k). (5.1)
+The proof of this lemma is in Subsection 5.3.
+5.2. Proof of Theorem 3.1
+Let Ω be the set of vectors of Rd and of norm 1.
+1. Explicit writing of the quantities For any matrices U,V of dimension
+d×m with m≥ 1, we set
+˜γr(U,V ) :=UT
+( 1
+n
+∑
+i≤n
+(Xi)T [Yi− tr
+(
+(Xi)T ˆΘr−1)
+]
+)
+V
+=UT
+( 1
+n
+∑
+i≤n
+(Xi)TYr
+i
+)
+V =:UT ˆΨrV
+where Yr
+i = Yi− tr
+(
+(Xi)T ˆΘr−1)
+and ˜γr(U,V )∈ Rm×m. Also we set Ψ r :=
+Θ− ˆΘr−1 and
+γr(U,V ) :=UT
+(
+Θ− ˆΘr−1
+)
+V =UT ΨrV ∈ Rm×m.
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 24]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 24
+Note that Yr
+i = tr
+(
+(Xi)T Ψr)
++ϵi by linearity of the trace.
+Let u, v∈ Ω, then ˜γr(u, v) is a scalar:
+˜γr(u, v) =
+∑
+m,m′≤d
+umvm′
+1
+n
+∑
+i≤n
+Xi
+m′,mYr
+i
+=
+∑
+m,m′≤d
+umvm′
+1
+n
+∑
+i≤n
+Xi
+m′,m
+(
+tr
+(
+(Xi)T Ψr)
++ϵi
+)
+=
+∑
+m,m′≤d
+umvm′
+1
+n
+∑
+i≤n
+Xi
+m′,m
+( ∑
+k,k′≤d
+Xi
+k,k′Ψr
+k,k′ +ϵi
+)
+.
+LetU be the column vector of dimensiond2 such thatU = vec(uvT ) = u⊗v,
+that is,UM = umvm′ for M = (m− 1)d +m′. Note that U∈R (1), and that
+∥U∥2
+2 =∑
+m,m′≤d(umvm′)2 =∑
+m(um)2∑
+m′(vm′)2 = 1. Consider the n×d2
+matrixX such that Xi,M = Xi
+m,m′ for i≤ n . Consider the column vector
+ψr∈ Rd2
+where ψr = vec(Ψr). Then we have
+˜γr(u, v) = 1
+n
+∑
+M∈{1,...,d2}
+UM
+∑
+i≤n
+(Xi,M)T
+( ∑
+K∈{1,...,d2}
+Xi,Kψr
+K +ϵi
+)
+= 1
+n(U)T (X )T
+(
+Xψr +ϵ
+)
+= 1
+n
+(
+⟨XU,Xψr⟩ +⟨XU,ϵ⟩
+)
+, (5.2)
+where here⟨.,.⟩ is the classic vectorial scalar product on Rn. Also by deﬁnition
+ofU and ψr, we have
+γr(u, v) =⟨U,ψr⟩. (5.3)
+The last equation implies that
+sup
+u,v∈Ω
+|˜γr(u, v)−γr(u, v)|
+≤ sup
+U∈R(1),∥U∥2=1
+⏐⏐⏐ 1
+n⟨XU,Xψr⟩−⟨U ,ψr⟩
+⏐⏐⏐ + sup
+U∈R(1),∥U∥2=1
+⏐⏐⏐ 1
+n⟨XU,ϵ⟩
+⏐⏐⏐. (5.4)
+2. Bound on the stochastic term We ﬁrst bound the second term in (5.4)
+with the following lemma.
+Lemma 5.2. Assume that cn(1)≤ 1 (note that cn(1)≤cn(K) for K≥ 1). It
+holds with probability larger than 1−δ that
+sup
+A∈R(1)
+⏐⏐⏐ 1
+n⟨XA,ϵ⟩
+⏐⏐⏐≤C∥A∥2
+√
+dlog(1/δ)
+n =:∥A∥2υn, (5.5)
+whereC is an universal constant.
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 25]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 25
+Its proof is in Subsection 5.4. Lemma 5.2 implies that on an event of proba-
+bility larger than 1−δ, we can bound the stochastic term in (5.4)
+sup
+U∈R(1),∥U∥2=1
+⏐⏐⏐ 1
+n⟨XU,ϵ⟩
+⏐⏐⏐≤υn. (5.6)
+Let ξ be an event of probability larger than 1 −δ where the above holds.
+3. Bound on the ﬁrst term in (5.4) provided that the rank kr of Ψr
+is smaller than 2k Let us assume, only for this Paragraph 3. of the proof,
+that the rank kr of Ψr is smaller than 2k≤ K. By Lemma 5.1, we can apply
+Equation (5.1) (since kr ≤ 2k≤ K), and combining this with the fact that
+∥U∥2 = 1, we have
+sup
+U∈R(1),∥U∥2=1
+⏐⏐⏐ 1
+n⟨XU,Xψr⟩−⟨U ,ψr⟩
+⏐⏐⏐≤cn(2k)∥ψr∥2. (5.7)
+By combining Equation (5.4), (5.6) and (5.7), and using ∥ψr∥2 =∥Ψr∥2, we
+then have in the case that kr≤ 2k≤K that on ξ
+sup
+u,v∈Ω
+|˜γr(u, v)−γr(u, v)|≤ cn(2k)∥Ψr∥2 +υn. (5.8)
+Since the previous result holds in the worst case of u, v∈ Ω, we directly have
+on ξ the corresponding entrywise result whenever kr≤ 2k
+sup
+U,V∈MΩ
+∥˜γr(U,V )−γr(U,V )∥∞≤cn(2k)∥Ψr∥2 +υn. (5.9)
+By deﬁnition, we know ˜γr(U,V ) =UT ˆΨrV andγr(U,V ) =UT ΨrV =UT (Θ−
+ˆΘr−1)V , which gives on ξ wheneverkr≤ 2k,
+sup
+U,V∈MΩ
+∥UT ( ˆΨr + ˆΘr−1− Θ)V∥∞≤cn(2k)∥Ψr∥2 +υn. (5.10)
+Note also by deﬁnition of the thresholding process, the matrix
+D = (Ur)T ( ˆΨr + ˆΘr−1)Vr−⌊ (Ur)T ( ˆΨr + ˆΘr−1)Vr⌋Tr,
+is such that it is diagonal with all diagonal elements smaller than Tr. Let
+˜U = (Ur)TU ∈M Ω and ˜V = (Vr)TV ∈M Ω for U,V ∈M Ω. By elemen-
+tary calculations, we have
+˜UTD ˜V =
+(∑
+k
+˜Uk,iDk,k ˜Vk,j
+)
+i,j,
+and so we have that
+∥ ˜UTD ˜V∥∞≤ sup
+i,j
+|
+∑
+k
+˜Uk,iDk,k ˜Vk,j|
+≤Tr sup
+i,j
+∑
+k
+| ˜Uk,i ˜Vk,j|≤ Tr sup
+i,j
+√
+∥ ˜U,i∥2∥ ˜V,j∥2 =Tr.
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 26]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 26
+By deﬁnition of ˆΘr, we have
+˜UTD ˜V =UT ( ˆΨr + ˆΘr−1)V−UTUr⌊(Ur)T ( ˆΨr + ˆΘr−1)Vr⌋Tr(Vr)TV
+=UT ( ˆΨr + ˆΘr−1)V−UT ˆΘrV,
+so this implies that
+sup
+U,V∈MΩ
+∥UT ( ˆΨr + ˆΘr−1)V−UT ˆΘrV∥∞≤Tr.
+Combining this with Equation (5.10), we obtain that onξ and wheneverkr≤ 2k
+sup
+U,V∈MΩ
+∥UT Ψr+1V∥∞ = sup
+U,V∈MΩ
+∥UT (Θ− ˆΘr)V∥∞
+≤cn(2k)∥Ψr∥2 +υn +Tr. (5.11)
+4. Induction We now stop assuming that the rank kr of Ψr is smaller than
+2k, and we consider the general case.
+We are going to prove by induction that on ξ, for any integer r≥ 1, we have
+that (i) the rank of ˆΘr−1 is smaller than k, and (ii)∥Ψr∥2≤ 2
+√
+2kTr−1 :=Cr.
+Forr = 1, since ˆΘ0 = 0, then its rank is 0 and is therefore bounded by k and
+(i) is satisﬁed. Moreover, since T0 =B≥∥ Θ∥2 =∥Θ− ˆΘ0∥2 =∥Ψ1∥2, then (ii)
+is satisﬁed as well.
+Now assume that (i) and (ii) hold on ξ for a givenr (as it holds for r = 1 not
+only on ξ but on the entire probability space). By induction assumption (i), we
+have that on ξ the rank of ˆΘr−1 is smaller than k, which implies that the rank
+of Ψr = Θ− ˆΘr−1 is smaller than k +k = 2k.
+Because we have that kr≤ 2k, Equation (5.11) applies and on ξ
+sup
+U,V∈MΩ
+∥UT Ψr+1V∥∞≤cn(2k)Cr +υn +Tr
+≤ 2
+√
+2kcn(2k)Tr−1 +υn +Tr≤ 2Tr, (5.12)
+by deﬁnition of Tr and since 2
+√
+2kcn(2k)≤ 4
+√
+K˜cn(2K) (since 2k≤K). More-
+over, in the same way, we have that on ξ (see Equation (5.10) since kr≤ 2k)
+sup
+U,V∈MΩ
+∥UT ( ˆΨr + ˆΘr−1− Θ)V∥∞≤cn(2k)Cr +υn≤Tr. (5.13)
+Let us now state the following lemma.
+Lemma 5.3. LetM∈ Rd1×d2 be a matrix (with d1≥d2), with singular values
+(λj)j ordered in decreasing order (all positive). For any j ≤ d2 and for any
+collection of orthogonal vectors (wj′
+)j′≤j−1, we have
+λj≤ sup
+u∈Rd1,v∈Rd2:∥u2∥=1,∥v∥2=1,u⊥(wj′)j′≤j−1
+|uTMv|.
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 27]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 27
+Write (ˆλr
+j)j for the singular values of ˆΨr + ˆΘr−1 ordered in decreasing order
+and all positive (and Ur,V r for the diagonalising matrices). Let U∗,V∗ be the
+matrices that diagonalise Θ and order its singular values in decreasing order on
+the diagonal and write (λ∗
+j)j for its singular values (all positive). By Lemma 5.3,
+we know that, for any j≤d,
+ˆλr
+j≤ sup
+u,v∈Ω:u⊥(U∗
+l,.)l≤j−1
+|uT ( ˆΨr + ˆΘr−1)v|.
+Therefore, on ξ, by Equation (5.13), we know that for any j≤d
+ˆλr
+j≤ sup
+u,v∈Ω:u⊥(U∗
+l,.)l≤j−1
+|uT Θv| +Tr =λ∗
+j +Tr.
+So since all ˆλr
+j that are smaller than Tr are thresholded for constructing ˆΘr (we
+remind that the ˆλr
+j are the diagonal elements of the diagonal matrix (Ur)T ( ˆΨr +
+ˆΘr−1)Vr, that is thresholded at level Tr in the construction of ˆΘr), it means
+that on ξ, the rank of ˆΘr is smaller than the rank of Θ, i.e. it is smaller than k.
+This proves the ﬁrst part of the induction (i).
+Now let ˘Ur, ˘Vr be the matrices that diagonalise Ψ r+1, and let Dr+1 =
+( ˘Ur)T Ψr+1 ˘Vr. By (5.12), we have that on ξ
+∥Dr+1∥∞ =∥( ˘Ur)T Ψr+1 ˘Vr∥∞≤ 2Tr.
+Now since the rank of both ˆΘr and Θ are smaller than k onξ, we know that the
+rank of Ψr+1, and thus of Dr+1, is smaller than 2 k. Therefore, we have since
+Dr+1 is diagonal and has therefore only 2 k non-zeros elements that on ξ
+∥Dr+1∥2≤ 2
+√
+2kTr,
+which implies that on ξ, since the Frobenius norm is invariant by rotation
+∥Ψr+1∥2 =∥Dr+1∥2≤ 2
+√
+2kTr.
+This concludes part (ii) of the induction and therefore, it concludes the induc-
+tion.
+5. Conclusion By the previous induction, we know that on ξ, we have
+sup
+Θ∈R(k),∥Θ∥2≤B,U,V∈M2
+Ω
+∥UT Ψr+1V∥∞≤ 2Tr, (5.14)
+and also that
+rank( ˆΘr)≤k,
+and also that for any p> 0
+sup
+Θ∈R(k),∥Θ∥2≤B
+∥Ψr+1∥Sp≤ 2(2k)1/pTr.
+This concludes the proof since for r larger than cl log(n) with cl a large
+enough constant, we have by deﬁnition of the sequence Tr that
+Tr≤ 2υn≤ 2C
+√
+d log(1/δ)
+n .
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 28]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 28
+5.3. Proof of Lemma 5.1
+First, note that for A∈R (k),B∈R (k), we have
+∥A∥2∥B∥2
+⏐⏐⏐⏐
+⣨
+X A
+∥A∥2
+,X B
+∥B∥2
+⟩
+−
+⣨ A
+∥A∥2
+, B
+∥B∥2
+⟩⏐⏐⏐⏐ =|⟨XA,XB⟩−⟨ A,B⟩|.
+Thus, without loss of generality, we consider ∥A∥2 =∥B∥2 = 1. We know that
+⟨XA,XB⟩ =∥XA∥2
+2 +∥XB∥2
+2−∥X (A−B)∥2
+2
+2 ,
+and
+⟨A,B⟩ =∥A∥2
+2 +∥B∥2
+2−∥A−B∥2
+2
+2 .
+This gives
+⏐⏐⏐ 1
+n⟨XA,XB⟩−⟨ A,B⟩
+⏐⏐⏐
+≤ 1
+2
+(⏐⏐⏐ 1
+n∥XA∥2
+2−∥A∥2
+2
+⏐⏐⏐ +
+⏐⏐⏐ 1
+n∥XB∥2
+2−∥B∥2
+2
+⏐⏐⏐ +
+⏐⏐⏐ 1
+n∥X (A−B)∥2
+2−∥A−B∥2
+2
+⏐⏐⏐
+)
+.
+By Assumption 5.1, using A−B∈R (2k), we have for k≤K,
+⏐⏐⟨XA,XB⟩−⟨ A,B⟩
+⏐⏐≤ 1
+2 (˜cn(k) + ˜cn(k) + 2˜cn(2k))≤ 2˜cn(2k) =:cn(k).
+This concludes the proof.
+5.4. Proof of Lemma 5.2
+Since ϵ∼N (0,In), we have that
+1
+n⟨XA,ϵ⟩∼N (0, 1
+n2∥XA∥2
+2).
+This implies that (using a Gaussian tail probability P (|X| > x)≤ e−x2/2 for
+x> 0 when X∼N (0, 1)) with probability larger than 1−δ
+⏐⏐⏐ 1
+n⟨XA,ϵ⟩
+⏐⏐⏐≤ 1
+n∥XA∥2
+√
+1
+2 log(1/δ). (5.15)
+SinceX satisﬁes the Assumption 5.1 with K≥ 1, we have that
+sup
+A∈R(2)
+⏐⏐⏐ 1
+n∥XA∥2
+2−∥A∥2
+2
+⏐⏐⏐≤ ˜cn(2)∥A∥2
+2,
+which implies that for any A∈R (2), we have
+∥XA∥2≤√n∥A∥2
+√
+1 + ˜cn(2). (5.16)
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 29]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 29
+Equation (5.16) implies together with Equation (5.15) that for a matrix A∈
+R(2), with probability larger than 1−δ,
+⏐⏐⏐ 1
+n⟨XA,ϵ⟩
+⏐⏐⏐≤
+√
+1 + ˜cn(2)
+2 ∥A∥2
+√
+log(1/δ)
+n =:∥A∥2vn(δ), (5.17)
+where vn(δ) =
+√
+1+˜cn(2)
+2
+√
+log(1/δ)
+n .
+To obtain the bound for the supremum of the quantity in (5.17) over all
+A ∈ {A,A ∈ R(1),∥A∥2 ≤ 1} =: A(1), we consider the approximating set
+B0 ⊆ B1 ⊆ ... whose property is described as follows. Let B0 = {0}. Let,
+for any i∈ N∗,Bi be a 2−i covering set of A(1). Here we use a classic result
+(Cand` es and Plan, 2011, Lemma 3.1), saying that the υ-covering numbers of
+A(1) is bounded by (C/υ)2d+1.
+Thus the cardinality ofBi is smaller than (C2i)2d+1. Let ˜ξ be the event such
+that for all i,j ∈ N2 and for each vector in u, v∈B i×Bj, it holds that
+⏐⏐⏐ 1
+n⟨X (u− v),ϵ⟩
+⏐⏐⏐≤∥ u− v∥2vn(δi,j), (5.18)
+where δi,j = δ(C′2max(i,j))−7d, where C′ > 2C is a large constant. By Equa-
+tion (5.17), and since u− v∈R (2) we know that (5.18) holds with probability
+1−δi,j for each i,j and for each vector u, v∈B i×Bj. By a union bound, we
+have that
+P(˜ξ)≥ 1−
+∑
+i,j∈N2
+|Bi||Bj|δi,j
+≥ 1− 2δ
+(∑
+i
+(C2i)2d+1∑
+j≤i
+(C2j)2d+1(C′2max(i,j))−7d
+)
+≥ 1− 2C4d+2(C′)−7dδ
+(∑
+i
+24di+2ii(2i)−7d
+)
+≥ 1− 2C4+2(C′)−7dδ
+(∑
+i
+i2−i
+)
+= 1− 2C4d+2(C′)−7dδ
+≥ 1−δ,
+since C′ > 2C.
+Let now A∈R (A) such that∥A∥2 = 1. It is possible to write A as
+A =
+∞∑
+i=1
+(ui− ui−1),
+where each ui belongs toBi, and where the ( ui)i are such that∥ui− ui−1∥2≤
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 30]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 30
+2−i. We have on ˜ξ that
+sup
+A∈R(1)
+⏐⏐⏐ 1
+n⟨XA,ϵ⟩
+⏐⏐⏐ =
+⏐⏐⏐ 1
+n
+⟨
+X
+( ∞∑
+i=1
+(ui− ui−1)
+)
+,ϵ
+⟩⏐⏐⏐ =
+⏐⏐⏐ 1
+n
+∞∑
+i=1
+⟨X (ui− ui−1),ϵ⟩
+⏐⏐⏐
+≤
+∞∑
+i=1
+⏐⏐⏐ 1
+n⟨X (ui− ui−1),ϵ⟩
+⏐⏐⏐
+≤
+∞∑
+i=1
+∥ui− ui−1∥2vn(δi,i−1)
+≤
+∞∑
+i=1
+2−ivn(δi,i−1)
+≤
+∞∑
+i=1
+2−iC
+√
+log((C′2i−1)7d/δ)
+n ≤ ˜C
+√
+dlog(1/δ)
+n .
+This concludes the proof.
+5.5. Proof of Lemma 5.3
+Let (uk)k∈ Rd1, (vk)k∈ Rd2 be the singular vectors of M, i.e. Mvk = λkuk.
+Let E = span((vk)k≤j). The dimension of E is j. Let now F be the vectorial
+sub-space that is orthogonal to span(( wj′
+)j′≤j−1). Its dimension is d2−j + 1.
+Since dim(E) + dim(F ) = d2 + 1, there is at lest one unitary vector in E⋂F .
+Let h∈ Rd2 be this vector, since it is in E, it can be written as
+h =
+∑
+k≤j
+hkvk
+where for k = 1,...,j , we havehk≥ 0 and∑
+kh2
+k = 1. Therefore, we have that
+Mh =
+∑
+k≤j
+λkhkuk.
+Consider g =Mh/∥Mh∥2. So we have that
+|gTMh| =
+{
+(Mh)T (Mh)
+}
+∥Mh∥2
+=∥Mh∥2
+=
+√∑
+k≤j
+λ2
+kh2
+k≥
+√
+min
+k≤j
+(λ2
+k)×
+∑
+k
+h2
+k =λj,
+since the (uk)k are orthonormal, and since the singular values are positive and
+ordered in decreasing order. This concludes the proof.
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 31]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 31
+5.6. Proof of Theorem 3.3
+From the proof of Theorem 3.1, Equation (5.14), we know that the estimator
+ˆΘˆr satisﬁes
+∥ ˆΘˆr− Θ∥S≤Tˆr≤ 1.1 1
+1−ρvn =O(
+√
+d/n),
+i.e. the desired result in operator norm and from which the results on the rank
+and in the other Schatten norm follow because of the thresholding. Also since
+the sequence Tr is an arithmetico-geometrical sequence converging to 1
+1−ρvn, of
+arithmetic term vn and of geometric term ρ, it is clear that ˆr is such that
+ρˆr−1T0≥ 0.1
+1−ρvn,
+i.e.
+ˆr≤ 1 +
+log
+(
+10(1−ρ)T0/(vn)
+)
+log(1/ρ) ≤O(log(n)).
+This concludes the proof.
+5.7. Proof of Theorem 3.2
+By deﬁnition, we have that
+√n( ˆΘ− Θ) =√n( ˆΘr− Θ) + 1√n
+n∑
+i=1
+(Xi)T(
+tr((Xi)T (Θ− ˆΘr)) +ϵi
+)
+=√n( ˆΘr− Θ) + 1√n
+n∑
+i=1
+(Xi)T(
+tr((Xi)T (Θ− ˆΘr))
+)
++ 1√n
+n∑
+i=1
+(Xi)Tϵi
+= ∆ +Z.
+Letm,m′≤d and let um be the vector with all element equal to 0 except the
+mth entry which is equal to 1, and we consider that Um,m′
+= vec(um(um′
+)T ).
+We have by deﬁnition and using representations (5.2) and (5.3) that
+∆m,m′ =√n
+( 1
+n⟨XUm,m′
+,Xψr+1⟩−⟨U m,m′
+,ψr+1⟩
+)
+and
+Zm,m′ = 1√n
+n∑
+i=1
+(Xi)m,m′ϵi.
+Note that given Xi, i= 1,...,n ,
+Var(Zm,m′) = 1
+n
+n∑
+i=1
+(Xi)2
+m,m′
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 32]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 32
+and
+Cov(Zj,j′,Zl,l′) = 1
+n
+n∑
+i=1
+(Xi)j,j′(Xi)l,l′.
+The following Lemma is a concentration inequality that holds in Gaussian
+design.
+Lemma 5.4. Assume that the design is Gaussian. Let A∈M . We have that
+with probability larger than 1−δ (on the design)
+⏐⏐⏐ 1
+n∥XA∥2
+2−∥A∥2
+2
+⏐⏐⏐≤C∥A∥2
+2
+(
+√
+log(1/δ)
+n + log(1/δ)
+n
+)
+=:∥A∥2
+2˜vn(δ).
+Proof. Let A∈R (k). We have
+1√nXA∼N (0, 1
+n∥A∥2
+2In),
+where In is the n×n identity matrix. This implies that
+1
+n∥XA∥2
+2∼ 1
+n∥A∥2
+2χ2
+n = 1
+n∥A∥2
+2
+∑
+i≤n
+χ2
+1,
+whereχ2
+j is the chi square distribution withj degrees of freedom. By Bernstein’s
+inequality, we thus have (since the χ2
+1 distribution is sub-Gaussian) that, with
+probability larger than 1−δ,
+| 1
+n
+∑
+i≤n
+χ2
+1− 1|≤ C
+(
+√
+log(1/δ)
+n + log(1/δ)
+n
+)
+,
+whereC is an universal constant. This implies that, with probability larger than
+1−δ,
+⏐⏐⏐ 1
+n∥XA∥2
+2−∥A∥2
+2
+⏐⏐⏐≤C∥A∥2
+2
+(
+√
+log(1/δ)
+n + log(1/δ)
+n
+)
+=:∥A∥2
+2˜vn(δ).
+This concludes the proof.
+Combining Lemma 5.4 with Pythagoras’s theorem as in the proof of Lemma 5.1,
+we have that for any A,B∈M , with probability larger than 1−δ,
+⏐⏐⏐ 1
+n⟨XA,XB⟩−⟨ A,B⟩
+⏐⏐⏐≤ 4˜vn(δ/3)∥A∥2∥B∥2.
+By a union bound, this implies that with probability larger than 1 −δ,
+∥∆∥∞ = sup
+m≤d,m′≤d
+|∆m,m′|
+=√n sup
+m≤d,m′≤d
+⏐⏐⏐⏐
+1
+n⟨XUm,m′
+,Xψr+1⟩−⟨U m,m′
+,ψr+1⟩
+⏐⏐⏐⏐
+≤√n∥ψr+1∥2
+(
+4˜vn(δ/(3d2))
+)
+≤C√n
+√
+kd log(1/δ)
+n
+√
+log(d/δ)
+n ,
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 33]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 33
+where C is a universal constant. This concludes the proof (in remarking that
+the above quantity is arbitrarily small when kd log(d) =o(n)).
+Acknowledgements We would like to thank Richard Nickl, Richard Sam-
+worth and Rajen Shah for insightful comments and discussions. Part of this
+work was produced when AC was in the StatsLab in the University of Cam-
+bridge. ACs work is supported since 2015 by the DFGs Emmy Noether grant
+MuSyAD (CA 1488/1-1).
+References
+Acharya, A., T. Kypraios, and M. Guta (2015). Eﬃcient quantum tomography
+with incomplete measurement settings. arXiv preprint arXiv:1510.03229 .
+Agarwal, A., S. Negahban, and M. J. Wainwright (2012). Fast global conver-
+gence of gradient methods for high-dimensional statistical recovery. Ann.
+Statist. 40(5), 2452–2482.
+Bickel, P., Y. Ritov, and A. Tsybakov (2009). Simultaneous analysis of lasso
+and dantzig selector. Ann. Statist., 37, 1705–1732.
+Blumensath, T. and M. E. Davies (2009). Iterative hard thresholding for com-
+pressed sensing. Appl. Computat. Har. Analysis 27(3), 265–274.
+Bunea, Florentina, Y. She, and M. Wegkamp (2011). Optimal selection of re-
+duced rank estimators of high-dimensional matrices. Ann. Statist., 39(2),
+1282–1309.
+Butucea, C., M. Gut ¸˘ a, and T. Kypraios (2015). Spectral thresholding quantum
+tomography for low rank states. New Journal of Physics 17 (11), 113050.
+Cai, T. and H.H Zhou (2012). Optimal rates of convergence for sparse covariance
+matrix estimation. Ann. Statist., 40, 2389–2420.
+Cai, T. and A. Zhang (2015). ROP: matrix recovery via rank-one projections.
+Ann. Statist. 43, 102–138.
+Cand` es, E. and T. Tao (2010). The power of convex relazation: near-optimal
+matrix completion. IEEE Trans. Inform. Theory 56, 2053–2080.
+Cand` es, E. J. and Y. Plan (2011). Tight oracle bounds for low-rank matrix
+recovery from a minimal number of random measurements. IEEE Trans.
+Inform. Theory 57(4), 2342–2359.
+Cand` es, E. and B. Recht (2009). Exact matrix completion via convex optimiza-
+tion. Found. Comput. Math. 9, 717–772.
+Carpentier, A., J. Eisert, D. Gross, and R. Nickl (2015). Uncertainty quan-
+tiﬁcation for matrix compressed sensing and quantum tomography problems.
+arXiv preprint arXiv:1504.03234 .
+Chen, Y. and M. Wainwright (2015). Fast low-rank estimation by projected gra-
+dient descent: General statistical and algorithmic guarantees. arXiv preprint
+arXiv:1509.03025
+Flammia, S. T, D. Gross, Y.-K. Liu, and J. Eisert. Quantum tomography via
+compressed sensing: error bounds, sample complexity and eﬃcient estimators.
+New J. Phys. , 14(9):095022, 2012.
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 34]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 34
+Friedman J. and T. Hastie and R. Tibshirani (2008). Sparse inverse covariance
+estimation with the graphical lasso. Biostatistics 9(3), 432–441.
+van de Geer, S., P. B¨ uhlmann, Y. Ritov, and R. Dezeure (2014). On asymptoti-
+cally optimal conﬁdence regions and tests for high-dimensional models. Ann.
+Statist. 42(3), 1166–1202.
+Goldfarb, D. and S. Ma (2011). Convergence of ﬁxed-point continuation algo-
+rithms for matrix rank minimization. Found. Comput. Math. 11, 183–210.
+Gross, D. (2011). Recovering low-rank matrices from few coeﬃcients in any
+basis. IEEE Trans. Inform. Theory 57(3), 1548–1566.
+Gross, D., Y.-K. Liu, S. T Flammia, S. Becker, and J. Eisert. (2010) Quan-
+tum state tomography via compressed sensing. Physical Rev. letters ,
+105(15):150401.
+Guta, M., T. Kypraios, and I. Dryden (2012). Rank-based model selection for
+multiple ions quantum tomography. New J. Phys. 14 , 105002.
+Haeﬀner, H., W. Haensel, C. F. Roos, J. Benhelm, D. C. al Kar, M. Chwalla,
+T. Koerber, U. D. Rapol, M. Riebe, P. O. Schmidt, C. Becher, O. G¨ uhne,
+W. Dur, and R. Blatt (2005). Scalable multi-particle entanglement of trapped
+ions. Nature 438, 643.
+Holevo, A. S. (2001). Statistical structure of quantum theory . Springer.
+Huang, H. and S. Ma and C-H. Zhang (2008). Adaptive lasso for sparse high-
+dimensional regression models. Stat. Sinica 18, 1603–1618.
+Javanmard, A. and A. Montanari. (2014) Conﬁdence intervals and hypothesis
+testing for high-dimensional regression. J. Mach. Learn. Res. 15 (1), 2869–
+2909.
+Klopp, O. Matrix completion by singular value thresholding: sharp bounds.
+Electron. J. Statist. 9, (2). 2348–2369.
+Knight, K. and W. Fu (2000). Asymptotics for lasso-type estimators. Ann.
+Statist. 28, 1356–1378.
+Koltchinskii, V. (2011). on Neumann entropy penalization and low-rank matrix
+estimation. Ann. Statist. 39(6), 2936-2973.
+Koltchinskii, V., K. Lounici, and A. B. Tsybakov (2011). Nuclear-norm pe-
+nalization and optimal rates for noisy low-rank matrix completion. Ann.
+Statist. 39(5), 2302–2329.
+Koltchinskii, V., D. Xia (2015). Optimal Estimation of Low Rank Density
+Matrices. arXiv preprint arXiv:1507.05131.
+Liu, Y.K. (2011). Universal low-rank matrix recovery from Pauli measurements.
+Adv. Neural Inf. Process. Syst. , 1638–1646.
+Meinshausen, N. and P. B¨ uhlmann (2006). High dimensional graphs and variable
+selection with the lasso. Ann. Statist. 34, 1436–1462.
+Needell, D. and J.A. Tropp (2009). CosaMP: Iterative signal recovery from
+incomplete and inaccurate samples. Appl. comput. Harmon. Anal. 26, 301–
+321.
+Negahban, S. and Wainwright, M. (2011). Estimation of (near) low-rank matri-
+ces with noise and high-dimensional scaling. Ann. Statist. 39, 1069–1097.
+Nickl, R. and van de Geer, S. (2014). Conﬁdence sets in sparse regression. Ann.
+Statist. 41(6), 2852-2876.
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 35]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 35
+Nielsen, M. A. and I. L. Chuang (2000). Quantum computation and quantum
+information. Cambridge: Cambridge University Press.
+Recht, B. (2011). A simpler approach to matrix completion. J. Mach. Learn.
+Res. 12, 3413–3430.
+Tanner, J. and K. Wei (2012). Normalized iterative hard thresolding for matrix
+completion. SIAM J. Sci. Comput. 35, S104–S125.
+Zhang, C-H. and Zhang, S-S. (2012). Conﬁdence intervals for low dimensional
+parameters in high dimensional linear models. J. R. Stat. Soc. Ser. B Stat.
+Methodol. 76, 217–242.
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 36]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 36
+Supplementary Material
+Appendix A: Results for the sparse linear regression model
+The method that we proposed and studied in the low rank matrix recovery
+setting can be adapted and simpliﬁed to accommodate another setting : the
+sparse linear regression setting. We explain how to construct an estimator based
+on IHT, and prove that the estimator is eﬃcient inL2 andL∞ norm, and provide
+the limiting distribution of a simple modiﬁcation of our estimate.
+A.1. Setup
+We letB(k) :=B0(0,k ) be the “l0(Rp) ball” of radius k, i.e. B(k) is the subset
+of the vectors u∈ Rp such that u has less than k non-zero coordinates.
+Consider the linear model
+Y =Xθ +ϵ,
+where X is a n×p matrix, the signal vector θ∈ Rp is k-sparse (θ∈ B(k)),
+and ϵ∈ Rn is an i.i.d. vector of Gaussian white noise, i.e. ϵ∼N (0,In) (as in
+the matrix regression, we do not need the Gaussian assumption and our results
+hold with sub-Gaussian independent noise), and p≫n. We denote the sample
+covariance matrix by ˆΣ = 1
+nXTX∈ Rp×p.
+Assumption A.1. Let K≤ p. We assume that there exists a matrix V such
+that for any k≤ 2K, there exists a constant rk > 0 such that
+sup
+u∈B(k)
+∥V ˆΣu−u∥∞
+∥u∥∞
+≤rk.
+Remark A.1. Suppose X is from a distribution whose covariance matrix is
+Σ∈ Rp×p. Let the minimum eigenvalue σmin(Σ)≥Cmin > 0 and the maximum
+eigenvalue σmax(Σ)≤ Cmax <∞ and maxi∈[p]Σii≤ 1. Assume that XΣ−1/2
+has independent sub-Gaussian rows with zero mean and sub-Gaussian norm
+∥Σ−1/2X1∥ψ2 = κ. Then from the paper (Javanmard and Montanari, 2014),
+for n ≥ Cmin logp/(4e2Cmaxκ4), with probability larger than 1− 2p−c2 with
+c2≡Cmin/(24e2κ4Cmax), there exists a computationally feasible V such that
+∥V ˆΣ−I∥∞≤
+√
+logp
+n (A.1)
+holds. In this case, we can take rk =k
+√
+logp
+n .
+A.2. Method
+This algorithm takes again three parameters : δ,K and B. We have the same
+interpretation forδ as in the matrix regression setting, K is an upper bound on
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 37]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 37
+two times the sparsity of θ (again, it does not need to be tight as long as rK is
+small enough), and B is a loose bound on the L∞ norm of θ.
+First, we set the initial values for the estimator ˆθ0 and the threshold T0 such
+that
+ˆθ0 = 0, T 0 =B.
+Then we update thresholds in each iteration r∈ N∗, by
+Tr = 2rKTr−1 +υ,
+where υ = 2
+√
+M log(p/δ)
+n where M = max diag(V ˆΣVT ). Recall that the pseudo
+inverseV of ˆΣ and rK are taken from Assumption A.1.
+Set now recursively,
+ˆαr =⌊ 1
+nVX T (Y−X ˆθr−1)⌋Tr,
+and
+ˆθr = ˆθr−1 + ˆαr. (A.2)
+This procedure provides a sequence of estimates, and as we will prove in the
+next subsection, this sequence is with high probability close to the true θ as
+soon as r is of order log(n) (see Theorems A.1 and A.2).
+Remark A.2 (Iterative hard thresholding (IHT)). The proposed method mod-
+iﬁes iterative algorithms (see e.g. Blumensath and Davies, 2009; Needell and
+Tropp, 2009). The usual (normalised) IHT algorithm updates the estimate using
+ˆθr =Pk(ˆθr−1 +wr−1XT (Y−X ˆθr−1)) wherePk is a hard thresholding operator
+that keeps the largest k elements of a vector and wr−1∈ R is a stepsize that can
+have the interpretation of a Gradient step when it is much smaller than 1. The
+diﬀerence is in the thresholding; we update thresholds while they pick the largest
+k values after adjusting the added parts. Most importantly, previous works on
+this estimator only considered the case of a deterministic (small) noise, so their
+analysis is not applicable in our model where the noise is stochastic.
+A.3. Main results
+We now provide a theorem that guarantees that the estimate ˆθr in (A.2) has an
+optimal L∞ risk after O(log(n)) iterations.
+Theorem A.1. Assume that Assumption A.1 is satisﬁed and that 2rK < 1.
+Letr = log(n)/ log(1/(2rK))≈O(log(n)). We have that with probability larger
+than 1−δ, for any k≤K/2,
+sup
+θ∈B(k),∥θ∥∞≤B
+∥θ− ˆθr∥∞≤C0
+√
+M log(p/δ)
+n ,
+whereC0 = (B + 2
+1−2rk
+) and M = max diag(V ˆΣVT ).
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 38]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 38
+Remark A.3. If the design is obtained as in Remark A.1, then as long as
+K =o(
+√
+n/ log(p)), with high probability the assumptions of Theorem A.1 will
+hold.
+Theorem A.1 provides two side results—L2 convergence rates and asymptotic
+normality. The ﬁrst corollary is immediately obtained from the fact that for any
+θ∈B(k),∥θ∥2≤
+√
+k∥θ∥∞.
+Corollary 1. Suppose that the same assumptions and notation used in Theorem
+A.1 hold. We have that with probability larger than 1−δ, for any k≤K/2
+sup
+θ∈B(k),∥θ∥∞≤B
+∥ˆθr−θ∥2≤C0
+√
+kM log(p/δ)
+n .
+To prove asymptotic normality, we slightly modify the estimator deﬁned in
+Theorem A.1. This is similar to the de-sparsiﬁed LASSO by van de Geer et al.
+(2014) in the sense that we also use a de-sparsiﬁed version of our estimator. Con-
+sider the estimator ˆθr of Theorem A.1 (with the samer = log(n)/ log(1/(2rK)))
+and V in Assumption A.1, and deﬁne
+ˆθ := ˆθr + 1
+nVX T (Y−X ˆθr). (A.3)
+Theorem A.2. Suppose that the same assumptions and notation used in The-
+orem A.1 hold. Then, writing Z := 1√nVX Tϵ and ∆ :=√n(I−V ˆΣ)(ˆθr−θ),
+we have √n(ˆθ−θ) = ∆ +Z (A.4)
+whereZ|X∼N (0, 1
+nV ˆΣVT ). If rK =o(1) (e.g. for designs as in Remark A.1,
+we have rK = O(K
+√
+(logp)/n) so it suﬃces that K = o(√n/ logp)) then we
+also have
+∥∆∥∞ =oP(1).
+The estimate we provide has similar properties as in Javanmard and Monta-
+nari (2014); van de Geer et al. (2014).
+A.4. Proof of Theorem A.1
+We have
+∥(θ− ˆθr−1)− 1
+nVX T (Y−X ˆθr−1)∥∞ =∥(θ− ˆθr−1)− 1
+nVX T (Xθ +ϵ−X ˆθr−1)∥∞
+=∥(θ− ˆθr−1)−V ˆΣ(θ− ˆθr−1)− 1
+nVX Tϵ∥∞
+≤∥ (θ− ˆθr−1)−V ˆΣ(θ− ˆθr−1)∥∞ +∥ 1
+nVX Tϵ∥∞. (A.5)
+Since ϵ∼N (0,In), we know that
+1
+nVX Tϵ∼N (0, 1
+nV ˆΣVT ).
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 39]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 39
+By an union bound (with Hoeﬀding’s inequality) we know that with proba-
+bility larger than 1−δ
+∥ 1
+nVX Tϵ∥∞≤ 2
+√
+M log(p/δ)
+n =υ. (A.6)
+Let ξ be the event of probability 1−δ where the previous equation is satisﬁed.
+We have by Assumption A.1 if θ− ˆθr−1 is k sparse
+∥V ˆΣ(θ− ˆθr−1)− (θ− ˆθr−1)∥∞≤rk∥θ− ˆθr−1∥∞. (A.7)
+Combining Equations (A.5), (A.6) and (A.7) implies that on ξ, if if θ− ˆθr−1
+is k sparse
+∥(θ− ˆθr−1)− 1
+nVX T (Y−X ˆθr−1)∥∞≤rk∥θ− ˆθr−1∥∞ +υ. (A.8)
+We are going to prove by induction that on ξ,
+∥θ− ˆθr∥∞≤ 2Tr,
+and that the support of ˆθr is included in the support of θ.
+1. Initialisation: Considerr = 0. Since ˆθ0 = 0, its support is included in the
+support of θ. Moreover, by deﬁnition of B, we have that
+∥θ−θ0∥∞ =∥θ∥∞≤B≤ 2T0.
+This concludes the proof for r = 0.
+2. Induction step: Assume that for a given r, on ξ
+∥θ− ˆθr∥∞ =∥(θ− ˆθr−1)− ˆαr∥∞≤ 2Tr.
+We moreover assume that the support of ˆθr is contained in the support of θ,
+which implies that it is k sparse.
+By Equation (A.8) we know that on ξ, since θ− ˆθr is k sparse
+∥ 1
+nVX T (Y−X ˆθr)− (θ− ˆθr)∥∞≤rk∥θ− ˆθr∥∞ +υ
+≤ 2rkTr +υ≤Tr+1, (A.9)
+since Tr+1 = 2rKTr +υ. Since ˆαr+1 =⌊ 1
+nVX T (Y−X ˆθr)
+⌋
+Tr+1
+, we have that
+on ξ, by Equation (A.9), all the coordinates j of ˆαr+1 such that (θ− ˆθr)j = 0
+are set to 0. This implies that the support of ˆ αr+1 (and thus the support of
+ˆθr+1 = ˆθr + ˆαr+1) is included in the support of θ on ξ. Therefore, ˆαr+1 is
+k−sparse on ξ. Also, still since ˆαr+1 =⌊ 1
+nVX T (Y−X ˆθr)
+⌋
+Tr+1
+, we have that
+∥ 1
+nVX T (Y−X ˆθr)− ˆαr+1∥∞≤Tr+1,
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016
+
+[PDF PAGE 40]
+Carpentier and Kim/An iterative hard thresholding estimator for low rank matrix 40
+and this implies together with Equation (A.9) that on ξ, we have
+∥θ− ˆθr+1∥∞ =∥(θ− ˆθr)− ˆαr+1∥∞≤ 2Tr+1.
+This concludes the proof for r + 1.
+The induction is complete, and we have that the previous equation holds for
+allr≥ 1. It is equivalent to the fact that on ξ (and thus with probability larger
+than 1−δ), for all r≥ 1
+∥θ− ˆθr∥∞≤ 2Tr, (A.10)
+and the support of ˆθr is included in the support of θ.
+3. Study of the sequence Tr The sequence Tr is such that
+Tr = 2rKTr−1 +υ and T0 =B.
+A simple induction on this geometric sequence provides that
+Tr = 1
+1− 2rK
+[
+(2rK)r(
+(1− 2rK)B−υ
+)
++υ
+]
+≤ (2rK)rB +υ/(1− 2rK).
+4. Conclusion Letr =− log(n)/ log(2rK)≈O(log(n)), since 2rK < 1 and is
+a constant. We have by Equation (A.10) and by the recursion on Tr that on ξ
+∥θ− ˆθr∥∞≤ B
+n + υ
+1− 2rK
+≤
+(
+B + 2
+1− 2rK
+)√
+M log(p/δ)
+n . (A.11)
+A.5. Proof of Theorem A.2
+By deﬁnition,
+√n(ˆθ−θ) =√n
+(
+(ˆθr−θ) + 1
+nVX T (Xθ−X ˆθr) + 1
+nVX Tϵ
+)
+=√n
+(
+(ˆθr−θ)−V ˆΣ(ˆθr−θ)
+)
++ 1√nVX Tϵ = ∆ +Z.
+GivenX, we know that Z is a linear function of the Gaussian vector ϵ, thus
+Z|X∼N(0,V ˆΣVT ).
+Now we prove the bound for ∆. Note that using (A.1) andrk =O(k
+√
+(logp)/n),
+for a suﬃciently large n, we have a constant C >0 such that
+∥∆∥∞ =√n∥(I−V ˆΣ)(ˆθr−θ)∥∞≤Ck
+√
+logp∥ˆθr−θ∥∞.
+Then using the result from Theorem A.1, with probability at least 1 −δ, we
+have as long as k =o(√n/ logp)
+∥∆∥∞≤CC0kM log(p/δ)√n → 0,
+as n→∞ .
+imsart-generic ver. 2011/11/15 file: low_rank_final.tex date: March 2, 2016

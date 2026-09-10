@@ -1,0 +1,54 @@
+\section{Reproducibility details and additional numerical results}
+\label{app:experiments}
+
+All experiments use NumPy/SciPy pseudorandom generator seed 20260907. TT contractions use double precision. The core-to-tensor Jacobian is computed by centered differences with step \(10^{-6}\); its numerical-rank threshold is \(10^{-8}\) times the largest singular value. The smallest retained singular values for TT ranks 1, 2, and 3 are 0.370, 0.069, and 0.027, while gauge-null singular values are below \(10^{-9}\).
+
+Bernoulli likelihoods are optimized by damped Newton steps with backtracking and a \(10^{-9}\) numerical ridge. Population KL is evaluated on a common 12,000-prompt test design within each TT rank. The exact-soft-label experiment uses 30,000 test prompts. The separate Gaussian-sequence benchmark has ambient dimension 180, candidate quotient dimensions \(13,36,69,112\), coefficient sequence
+\(\theta_j=1.4j^{-1.3}\), and the criterion
+\[
+\operatorname{Crit}(d)=\sum_{j>d}Z_j^2+2d/n.
+\]
+The additive term independent of \(d\) is omitted.  The metric-misordering
+experiment uses \(T_H=e_0^{\otimes4}\), \(T_L=e_1^{\otimes4}\),
+\((a,b,t)=(0.8,1,0.5)\), and exact Bernoulli KL under
+\(\rho_H/\rho_L\in\{2,4,8,16,32\}\).  Both candidate tensors have TT rank
+one; the local quadratic risks in the plot are reference values, not the
+simulated target.
+
+Full TT-tangent risks and Gaussian-sequence selection summaries appear in
+\cref{tab:rate-full,tab:oracle-full}, respectively.
+
+\begin{table}[ht]
+\centering
+\caption{Normalized TT-tangent risk \(n\wh\cD/d\). Values tend toward the LAN constant \(1/2\).}
+\label{tab:rate-full}
+\begin{tabular}{rcccc}
+\toprule
+& \multicolumn{4}{c}{\(n/d\)}\\
+TT rank & 8 & 16 & 32 & 64\\
+\midrule
+1 & 0.727 & 0.569 & 0.487 & 0.497\\
+2 & 0.665 & 0.594 & 0.545 & 0.502\\
+3 & 0.692 & 0.616 & 0.549 & 0.510\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Gaussian-sequence model selection. The ratio compares mean selected risk with the approximation-plus-estimation benchmark.}
+\label{tab:oracle-full}
+\begin{tabular}{rrrrr}
+\toprule
+\(n\) & Oracle \(d\) & Mean selected \(d\) & Oracle risk & Risk ratio\\
+\midrule
+200  & 13 & 13.32 & 0.0837 & 1.036\\
+500  & 13 & 14.23 & 0.0447 & 1.068\\
+1000 & 13 & 18.02 & 0.0317 & 1.102\\
+2000 & 36 & 29.17 & 0.0216 & 1.081\\
+5000 & 36 & 37.08 & 0.0108 & 1.023\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The script \texttt{code/run\_simulations.py} regenerates every table source and figure. The \texttt{--quick} flag reduces Monte Carlo counts without altering conditions; \texttt{code/test\_simulations.py} checks the dimension formula, KL implementation, and exact-soft-label optimizer.

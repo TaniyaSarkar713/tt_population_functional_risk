@@ -1,0 +1,125 @@
+\section{Statistical experiment and population targets}
+\label{sec:experiment}
+
+\subsection{Finite-query teacher experiment}
+
+Let \(E\in\{1,\ldots,K\}\) index deployment environments, with prespecified weights \(w_e>0\) and \(\sum_e w_e=1\). Conditional on \(E=e\), a prompt \(X\) has law \(P_e\). The teacher is a fixed conditional distribution
+\[
+q_0(y\mid x,e)=p_{W^0}(y\mid x,e),
+\]
+where \(Y\) is a complete response in a finite or length-truncated output space \(\mathcal Y\). The main experiment observes
+\begin{equation}
+ Z_i=(E_i,X_i,Y_i)\stackrel{\mathrm{iid}}\sim Q_0^w,
+ \quad E_i\sim\operatorname{Cat}(w),\quad
+ X_i\mid E_i=e\sim P_e,\quad
+ Y_i\mid X_i,E_i\sim q_0,
+ \label{eq:experiment}
+\end{equation}
+for \(i=1,\ldots,n\). One response is one statistical unit; tokens within a continuation are not treated as independent observations.
+
+A model index \(\lambda=(\tau,\bm r)\in\Lambda\) specifies tensorizations and TT ranks. It determines a deployable class \(\Theta_\lambda\) and conditional laws \(p_W\), \(W\in\Theta_\lambda\). A fitting routine does not enter \(\lambda\) unless it changes the deployable class; its failure to attain the empirical optimum is recorded as \(\varepsilon_{\lambda,\mathrm{opt}}\).
+
+For two conditional laws \(q\) and \(p\), define the truth-first divergence
+\begin{equation}
+ \Kw{q}{p}
+ =\sum_{e=1}^K w_e\E_{X\sim P_e}
+ \KL\{q(\cdot\mid X,e)\|p(\cdot\mid X,e)\}.
+ \label{eq:truth-first-kl}
+\end{equation}
+The order in \cref{eq:truth-first-kl} fixes the asymmetric KL arguments. For a student
+parameter \(W\) and teacher parameter \(W^0\), define
+\begin{align}
+ \cD_e(W,W^0)
+ &=\E_{X\sim P_e}\KL\{q_0(\cdot\mid X,e)\|p_W(\cdot\mid X,e)\},\\
+ \cD_w(W;W^0)&=\sum_{e=1}^K w_e\cD_e(W,W^0)
+ =\Kw{p_{W^0}}{p_W}.
+ \label{eq:functional-risk}
+\end{align}
+This is an exact, global proper-score divergence. No quadratic or Fisher approximation is used in its definition. The joint approximation error of one network is
+\begin{equation}
+ A_w^2(\lambda)=\inf_{W\in\Theta_\lambda}\cD_w(W,W^0).
+ \label{eq:joint-approx}
+\end{equation}
+In general,
+\[
+A_w^2(\lambda)\ge
+\sum_e w_e\inf_{W_e\in\Theta_\lambda}\cD_e(W_e,W^0),
+\]
+because the expression on the right is allowed to deploy a different network in each environment.
+
+If calibration proportions \(\pi_e\) differ from \(w_e\), the likelihood contrast is weighted by \(w_e/\pi_e\), and rates depend on \(\max_e w_e/\pi_e\). We take \(\pi=w\) in the main finite-sample theorem and return to general \(\pi\) in the local asymptotic result.
+
+\subsection{Downstream degradation is a separate estimand}
+
+Let \(L_e(y;x,r)\in[0,B_e]\) be a bounded capability loss, possibly depending on a task reference \(r\), and suppose teacher and student generation use their respective conditional laws. Define
+\[
+\Delta_e(W)=
+\E\{L_e(Y_W;X,R)-L_e(Y_0;X,R)\}.
+\]
+The following transfer is useful but deliberately one-way.
+
+\begin{proposition}[Proper-score to bounded-task transfer]
+\label{prop:pinsker-transfer}
+For every \(W\),
+\[
+ |\Delta_e(W)|
+ \le B_e\E_{P_e}\TV\{p_W(\cdot\mid X,e),q_0(\cdot\mid X,e)\}
+ \le B_e\sqrt{\cD_e(W,W^0)/2}.
+\]
+Consequently, controlling \(\cD_e\) controls every prespecified bounded randomized-output capability loss. A deterministic argmax decoder requires an additional margin condition and is not covered by this statement.
+\end{proposition}
+
+\subsection{Soft-label and white-box access are different experiments}
+
+Under \emph{soft-label query access}, each sampled prompt is accompanied by
+the full vector \(q_0(\cdot\mid X_i,E_i)\).  Define the soft-label loss
+\[
+ \bar\ell_W(X,E)=-\sum_y q_0(y\mid X,E)\log p_W(y\mid X,E).
+\]
+Write \(\bar\cD_w(\theta)=\Kw{q_0}{p_\theta}\) for its population
+divergence, up to the teacher-only entropy constant.
+Only prompt quadrature remains random.  This is distinct from
+\emph{white-box access}, in which the teacher parameter \(W^0\) itself is
+provided directly. The following proposition gives two precise ways in which the
+black-box lower bound fails to transfer; it is not a minimax characterization
+of every soft-label experiment.
+
+\begin{proposition}[Access-dependent counterexamples and soft-label limit]
+\label{prop:access}
+Assume a regular coordinate \(\theta\in\R^d\).
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+    \item Under white-box access, if \(q_0=p_{\theta_0}\) and \(\theta_0\)
+    is feasible, the estimator that returns \(\theta_0\) has exactly zero
+    population excess risk for every \(n\).
+    \item Soft labels alone can also permit finite-sample exact recovery.  In
+    binary logistic regression,
+    \(q_0(1\mid X)=\sigma(X^\top\theta_0)\), the observed labels satisfy
+    \[
+      \operatorname{logit}\{q_0(1\mid X_i)\}=X_i^\top\theta_0.
+    \]
+    If \(n\ge d\) and the design matrix has column rank \(d\), solving this
+    linear system recovers \(\theta_0\) exactly and hence gives zero
+    population divergence.  Therefore no universal positive \(c d/n\)
+    lower bound holds over all soft-label experiments.
+    \item More generally, under correct specification the pointwise score
+    \(\nabla\bar\ell_{\theta_0}(X,E)\) vanishes, but exact recovery requires
+    empirical identifiability and an optimizer or tie-break that selects the
+    population law.  Under misspecification, let \(\theta^*\) be an interior
+    population minimizer, \(H=\E\nabla^2\bar\ell_{\theta^*}(X,E)\succ0\), and
+    \[
+      V_X=\operatorname{Var}\{\nabla\bar\ell_{\theta^*}(X,E)\}.
+    \]
+    Under standard smooth M-estimation conditions, an empirical soft-label minimizer satisfies
+    \[
+      \sqrt n(\wh\theta-\theta^*)\rightsquigarrow
+      N(0,H^{-1}V_XH^{-1}),
+      \qquad
+      n\E\{\bar\cD_w(\wh\theta)-\bar\cD_w(\theta^*)\}
+      \longrightarrow \tfrac12\tr(V_XH^{-1}),
+    \]
+    whenever the sequence is uniformly integrable. In particular, \(V_X=0\)
+    at pointwise correct specification.
+\end{enumerate}
+\end{proposition}
+
+Under regular matched-information conditions, averaging \(m\) independent teacher draws at each of \(n\) prompts gives a response-noise contribution of order \(d/(nm)\) at correct specification. Prompt-quadrature variation under misspecification need not shrink with \(m\). Greedy teacher outputs are not stochastic draws from \(q_0\), so they do not instantiate \cref{eq:experiment}.

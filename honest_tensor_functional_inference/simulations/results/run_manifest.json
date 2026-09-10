@@ -1,0 +1,19 @@
+{
+  "seed": 20260909,
+  "configurations": 175,
+  "rows": 817,
+  "repetitions_per_configuration": 2000,
+  "elapsed_seconds": 16.283563249977306,
+  "completed_utc": "2026-09-09T16:10:34.556838+00:00",
+  "python": "3.13.9",
+  "numpy": "2.3.5",
+  "scipy": "1.16.3",
+  "platform": "macOS-15.6-arm64-arm-64bit-Mach-O",
+  "code_sha256": {
+    "check_theory.py": "8d0e6ee17423c2e8080d93a76d266335da6daf8499ffb290b3c8c38c641c7be2",
+    "intervals.py": "e491ce25e40bff37e8c772e32fb49bb92740e893b1871079817ed7cd4401c0fd",
+    "run_simulations.py": "c0650e2f12214ebc1057f3253716df12b55c4c75877d4aae8cc940a1d77f2ebd"
+  },
+  "result_sha256": "98ceba7fbeb90c46949427713c8b0436fbaa7dadcab4265e9c8b82613ddb67d5",
+  "experiment": "Exact marginal of full Gaussian tensor mean; stress rows excluded"
+}

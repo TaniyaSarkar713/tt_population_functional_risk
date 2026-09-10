@@ -1,0 +1,295 @@
+\section{Proofs for geometry and the oracle inequality}
+\label{app:oracle-proofs}
+
+\subsection{Elementary transfer and access results}
+
+\begin{proof}[Proof of Proposition~\ref{prop:pinsker-transfer}]
+Condition on \((X,R,E=e)\). The difference between expectations of a function with range length \(B_e\) under two probability measures is at most \(B_e\) times their total variation distance. Pinsker's inequality gives
+\[
+\TV(p_W,q_0)\le\sqrt{\KL(q_0\|p_W)/2}.
+\]
+Average over \((X,R)\), then use Jensen's inequality for the concave square root.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:access}]
+For (i), returning the directly provided feasible parameter makes the student law equal
+to the teacher law, so its population divergence is zero.
+
+For (ii), strict monotonicity of the logistic link gives
+\(\operatorname{logit}\{q_0(1\mid X_i)\}=X_i^\top\theta_0\).  A full-column-rank
+design has the unique solution
+\(\theta_0=(X^\top X)^{-1}X^\top z\), where
+\(z_i=\operatorname{logit}\{q_0(1\mid X_i)\}\).  The recovered conditional law
+therefore has zero population divergence.
+
+For (iii), conditional cross-entropy decomposes pointwise as
+\[
+\bar\ell_\theta(x,e)=H\{q_0(\cdot\mid x,e)\}
++\KL\{q_0(\cdot\mid x,e)\|p_\theta(\cdot\mid x,e)\}.
+\]
+At correct specification, its gradient vanishes at \(\theta_0\) for every
+prompt.  Under misspecification, the first-order condition and a Taylor
+expansion give
+\[
+0=P_n\nabla\bar\ell_{\wh\theta}
+=P_n\nabla\bar\ell_{\theta^*}
++H(\wh\theta-\theta^*)+o_p(n^{-1/2}).
+\]
+The multivariate central limit theorem yields the displayed sandwich limit. A second Taylor expansion of population risk gives
+\[
+\bar\cD_w(\wh\theta)-\bar\cD_w(\theta^*)
+=\tfrac12(\wh\theta-\theta^*)^\top H(\wh\theta-\theta^*)
++o_p(n^{-1}).
+\]
+Taking expectations under uniform integrability and using cyclicity of trace yields
+\[
+\tfrac12\tr\{H(H^{-1}V_XH^{-1})\}
+=\tfrac12\tr(V_XH^{-1}).
+\]
+At correct specification the pointwise gradient is zero, so \(V_X=0\). This is the standard smooth M-estimator calculation~\citep{vandervaart1998}.
+\end{proof}
+
+\subsection{TT geometry}
+
+\begin{proof}[Proof of Lemma~\ref{lem:tt-dimension}]
+For one layer, the product core space has dimension
+\(m_\ell=\sum_jr_{\ell,j-1}m_{\ell j}r_{\ell j}\). Minimal TT representations of the same exact-rank tensor differ by the adjacent invertible transformations displayed in \cref{sec:geometry}; conversely these transformations preserve the contraction. On the minimal-rank stratum the action is free, so each orbit has dimension
+\(\sum_{j<q_\ell}\dim\mathrm{GL}(r_{\ell j})
+=\sum_{j<q_\ell}r_{\ell j}^2\). The quotient-manifold theorem therefore gives dimension \(m_\ell-\sum_{j<q_\ell}r_{\ell j}^2\)~\citep{holtz2012manifolds}. Independent layer products add dimensions, as do identifiable free coordinates. Tying imposes constraints across this product, so neither the product action nor the additive calculation need remain valid.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:tt-atlas}]
+For any orthonormal basis \(U_{\ell j}\) of an unfolding column space,
+Cauchy--Binet gives
+\[
+ 1=\det(U_{\ell j}^\top U_{\ell j})
+ =\sum_{|I|=r_{\ell j}}\det\{U_{\ell j}[I,:]\}^2.
+\]
+Consequently at least one row set \(I_{\ell j}\) has determinant in absolute
+value at least \(c_{\ell j}\). Because every singular value of the square
+submatrix is at most one, its smallest singular value is at least the absolute
+determinant. Thus, for at least one pivot, the corresponding principal block
+of the projector has smallest eigenvalue at least \(c_{\ell j}^2\). Every
+tensor therefore belongs to the corresponding open patch with threshold
+\(c_{\ell j}^2/4\) in \cref{eq:pivot-patch}. Counting pivot collections gives
+\cref{eq:pivot-count}, including the separate atlas for constrained free
+coordinates.
+
+Write \(A=U_{\ell j}[I,:]\). On a thresholded patch, \(A\) is invertible and
+\[
+ P_{\ell j}[:,I]\{P_{\ell j}[I,I]\}^{-1}
+ =U_{\ell j}A^\top(AA^\top)^{-1}
+ =U_{\ell j}A^{-1}.
+\]
+Thus the normalized interface is expressed entirely through the column-space
+projector and is independent of every choice of singular vectors. It fixes
+the corresponding bond gauge uniquely, and \(\|A^{-1}\|_{\mathrm{op}}<
+2/c_{\ell j}\) on the thresholded patch.
+
+On the exact-minimal-rank core space, the derivative kernel of the full
+contraction map is the vertical gauge tangent~\citep{holtz2012manifolds}.
+Its restriction to the transverse normalized-pivot slice consequently has
+zero kernel. Lemma~\ref{lem:tt-dimension} and the constant-rank theorem give
+a \(d_\lambda\)-dimensional Euclidean chart around every point of a pivot
+patch; they do not assert that the entire patch is one chart.
+
+For uniform control, each unfolding has fixed rank and smallest nonzero
+singular value at least \(\eta\). Its column-space spectral projector
+\(P_{\ell j}\) is therefore \(C^2\) locally in the tensor, with derivatives
+bounded in terms of \(\eta^{-1}\).
+Sequential core recovery on a thresholded patch uses contractions, these
+spectral projectors, pivot inverses bounded by \(2/c_{\ell j}\), and inverses
+of nonzero unfolding blocks bounded by \(\eta^{-1}\). On the compact
+\(R\)-bounded set, the quantitative constant-rank theorem therefore supplies
+uniform local radii and the derivative bound in
+\cref{eq:atlas-constant}. Compactness extracts finitely many such subcharts
+over the finite pivot cover; their total number is \(H_\lambda\).
+
+Finally, each subchart is \(C_{\mathrm{atlas},\lambda}\)-Lipschitz. Map the
+standard Euclidean \(\epsilon/C_{\mathrm{atlas},\lambda}\)-net of a
+\(d_\lambda\)-ball through the chart and use the volume bound
+\(N(\delta,B_d(a,t),\norm{\cdot}_2)\le(1+2t/\delta)^{d_\lambda}\).
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop:block-curvature}]
+Let \(S(p)=\operatorname{diag}(p)-pp^\top\). The logit derivative in direction \(H\) is
+\[
+D_Wz_W[H]=C\operatorname{diag}\{\phi'(Wh)\}Hh.
+\]
+The conditional softmax information quadratic form is
+\[
+\{D_Wz_W[H]\}^\top S(p_W)D_Wz_W[H].
+\]
+The assumed head and activation bounds make this at least
+\(\kappa_C\kappa_\phi^2\norm{Hh}_2^2\). Averaging and using
+\(\E(hh^\top)\succeq\kappa_hI\) gives
+\[
+\E\norm{Hh}_2^2=\tr\{H\E(hh^\top)H^\top\}
+\ge\kappa_h\norm H_F^2.
+\]
+The result follows. The head condition also removes the softmax all-ones null direction.
+\end{proof}
+
+\subsection{Localized entropy and within-model fitting}
+
+\begin{proof}[Proof of Lemma~\ref{lem:entropy}]
+First suppose \(r<g_\lambda\). The global gap puts the entire risk sublevel inside \(U_\lambda^*\), and the margin places it in a Euclidean chart ball of radius \(\sqrt{2r/\mu_\lambda}\) about the projection representative. The pointwise likelihood Lipschitz condition maps a Euclidean \(\delta\)-net to an \(L_\infty\) net of radius at most \(L_\lambda\delta\). The standard volume cover of a \(d_\lambda\)-ball gives
+\[
+N(u\sqrt r,\mathcal F_\lambda(r),L_\infty)
+\le
+\left(1+\frac{2L_\lambda\sqrt{2/\mu_\lambda}}{u}\right)^{d_\lambda}.
+\]
+For \(r\ge g_\lambda\), cover the full compact atlas. If its largest coordinate diameter is \(R_\lambda\), the same argument gives
+\[
+N(u\sqrt r,\mathcal F_\lambda(r),L_\infty)
+\le H_\lambda
+\left(1+\frac{2L_\lambda R_\lambda}{u\sqrt{g_\lambda}}\right)^{d_\lambda}.
+\]
+These displays imply \cref{eq:local-entropy} after enlarging \(a_\lambda\).
+
+Inside \(U_\lambda^*\), pointwise Lipschitzness and the margin give
+\[
+Q_0^w(\ell_W-\ell_{W_\lambda^*})^2
+\le L_\lambda^2\norm{\theta-\theta_\lambda^*}^2
+\le\frac{2L_\lambda^2}{\mu_\lambda}
+\{\cD_w(W,W^0)-A_w^2(\lambda)\}.
+\]
+Outside that neighborhood, the likelihood difference is bounded by \(2B\) and the excess risk is at least \(g_\lambda\), which gives the factor \(4B^2/g_\lambda\). Compactness and continuity permit a finite enlargement of the constant on the interface.
+\end{proof}
+
+We record the empirical-process step used below. It is a localized finite-dimensional likelihood lemma, stated with the constants needed here.
+
+\begin{lemma}[Localized likelihood deviation]
+\label{lem:local-deviation}
+Let \(\mathcal F\) be a pointwise measurable, separable, bounded loss-difference class with nonnegative means, variance bound \(Pf^2\le vPf\), and local uniform covering numbers
+\[
+\log N(u\sqrt r,\{f:Pf\le r\},L_\infty)
+\le d\log(a/u)+h.
+\]
+There is \(C=C(a,v,\norm{\mathcal F}_\infty)\) such that, with probability at least \(1-e^{-z}\), simultaneously over \(f\in\mathcal F\),
+\begin{equation}
+|(P_n-P)f|\le\tfrac14Pf+C\frac{d+h+z}{n}.
+\label{eq:isomorphic-lemma}
+\end{equation}
+The same conclusion holds for a finite atlas with the \(h=\log H\) term above.
+\end{lemma}
+
+\begin{proof}
+We give the uniform-metric chaining step because an ordinary
+\(L_2(P)\)-cover would not suffice. Fix \(r>0\), put
+\(\mathcal F(r)=\{f:Pf\le r\}\), and take proper finite
+\(L_\infty\)-nets \(T_k\subset\mathcal F(r)\), not necessarily nested, at radii
+\(\epsilon_k=2^{-k}\sqrt r\), \(k\ge0\). Their logarithmic cardinalities are
+at most
+\[
+ d\log(a2^k)+h.
+\]
+For a net point in \(T_0\), the variance is at most \(vr\) and its envelope
+is at most \(\norm{\mathcal F}_\infty\). Bernstein's inequality and a union
+bound control every such coarse point by
+\[
+ C\left\{\sqrt{\frac{vr(d+h+z)}n}
+ +\frac{d+h+z}{n}\right\},
+\]
+where dependence on \(a\) and the envelope is absorbed into \(C\).
+
+Let \(\pi_kf\) be a nearest point to \(f\) in \(T_k\), and connect these
+approximants at adjacent levels. Every increment
+\(\pi_kf-\pi_{k-1}f\) has envelope at most
+\(3\epsilon_{k-1}\) and variance at most
+\(9\epsilon_{k-1}^2\). Apply Bernstein simultaneously to all adjacent net
+pairs, assigning level \(k\) failure probability proportional to
+\(e^{-z-k}\). Summing the resulting bounds uses
+\[
+ \sum_{k\ge1}2^{-k}\sqrt{k+u}\le C\sqrt{1+u},
+ \qquad
+ \sum_{k\ge1}2^{-k}(k+u)\le C(1+u).
+\]
+Separability lets \(\pi_kf\to f\) uniformly. Consequently, with probability
+at least \(1-e^{-z}\),
+\begin{equation}
+ \sup_{f\in\mathcal F(r)}|(P_n-P)f|
+ \le C\left\{\sqrt{\frac{vr(d+h+z)}n}
+ +\frac{d+h+z}{n}\right\}.
+ \label{eq:local-chain-bound}
+\end{equation}
+The constant also absorbs the bounded uniform diameter in the linear
+increment terms.
+
+Finally apply \cref{eq:local-chain-bound} on the dyadic shells
+\(2^{j-1}r_0<Pf\le2^jr_0\), assign shell \(j\) failure probability
+proportional to \(e^{-z-j}\), and take
+\(r_0=C_0(d+h+z)/n\). Young's inequality, together with
+\(j+1\le2^{j+1}\), makes the square-root and shell-allocation terms at most
+\(Pf/4+C(d+h+z)/n\) after increasing \(C_0\). The class is bounded, so only
+finitely many nonempty shells are needed; the sublevel below \(r_0\) is
+absorbed by the remainder. This proves \cref{eq:isomorphic-lemma}. It is the
+standard localization-and-peeling scheme~\citep{koltchinskii2006local}, with
+the uniform cover making the chaining valid for every empirical measure.
+\end{proof}
+
+Applying \cref{lem:local-deviation} to \(f_W=\ell_W-\ell_{W_\lambda^*}\), and using a weighted union bound with failure probability \(e^{-t}\pi_\lambda\), gives simultaneously over \(\lambda\)
+\begin{equation}
+\cD_w(\wh W_\lambda,W^0)-A_w^2(\lambda)
+\le C_{\mathrm{reg},\lambda}
+\frac{d_\lambda+\log H_\lambda+x_\lambda+t}{n_1}
++C\varepsilon_{\lambda,\mathrm{opt}}.
+\label{eq:within-rate}
+\end{equation}
+Indeed, insert the approximate ERM inequality into two copies of \cref{eq:isomorphic-lemma} and absorb the quarter-risk terms.
+
+\subsection{Validation selection and proof of the oracle}
+
+\begin{lemma}[Likelihood-ratio Bernstein condition]
+\label{lem:lr-bernstein}
+If \(u=p_W/q_0\in[e^{-B},e^B]\), then
+\[
+Q_0^w\left\{\log(q_0/p_W)\right\}^2
+\le c_B\cD_w(W,W^0),
+\quad
+c_B=\sup_{u\in[e^{-B},e^B]}
+\frac{(\log u)^2}{u-1-\log u}<\infty.
+\]
+\end{lemma}
+
+\begin{proof}
+Conditional on \((X,E)\), \(\E_{q_0}(u-1)=0\), and hence
+\[
+\KL(q_0\|p_W)=\E_{q_0}\{u-1-\log u\}.
+\]
+The scalar ratio defining \(c_B\) extends continuously at \(u=1\), with limit 2, and is bounded on the compact interval. Integrate the scalar inequality and then average over prompts.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:oracle}]
+Condition on the training split. Then \(\wh W_\lambda\) is fixed for validation. Bernstein's inequality, Lemma~\ref{lem:lr-bernstein}, and the inequality \(2\sqrt{ab}\le a/4+4b\) imply, with conditional probability at least \(1-e^{-t}\), simultaneously over \(\lambda\),
+\begin{equation}
+\left|(P_{n_2}-P_0)h_\lambda\right|
+\le\tfrac14P_0h_\lambda+C_B\frac{x_\lambda+t}{n_2},
+\quad h_\lambda=\log(q_0/p_{\wh W_\lambda}).
+\label{eq:validation-deviation}
+\end{equation}
+Here the weighted union bound uses \(\sum_\lambda\pi_\lambda\le1\). The unknown term \(-\log q_0\) cancels from the empirical comparison in \cref{eq:selector}, so the selector also compares \(P_{n_2}h_\lambda\).
+
+For any comparator \(\lambda\), combine the lower side of \cref{eq:validation-deviation} for \(\wh\lambda\), the selection inequality, and the upper side for \(\lambda\):
+\begin{align*}
+\tfrac34\cD_w(\wh W,W^0)
+&\le P_{n_2}h_{\wh\lambda}
++C_B\frac{x_{\wh\lambda}+t}{n_2}\\
+&\le P_{n_2}h_\lambda
++\kappa_B\frac{x_\lambda-x_{\wh\lambda}}{n_2}
++\varepsilon_{\mathrm{sel}}
++C_B\frac{x_{\wh\lambda}+t}{n_2}\\
+&\le\tfrac54\cD_w(\wh W_\lambda,W^0)
++C_B\frac{x_\lambda+t}{n_2}
++\kappa_B\frac{x_\lambda-x_{\wh\lambda}}{n_2}
++C_B\frac{x_{\wh\lambda}+t}{n_2}
++\varepsilon_{\mathrm{sel}}.
+\end{align*}
+Choose \(\kappa_B\ge C_B\) and enlarge constants; the selected-index code term is nonpositive after cancellation. Insert \cref{eq:within-rate}, then take the infimum over \(\lambda\), proving \cref{eq:oracle-hp}.
+
+Under uniform regularity and balanced splits, integrate the exponential tail. Bounded risk controls the small-probability complement and contributes at most \(C/n\) after a standard truncation of the tail integral. This proves \cref{eq:oracle-expectation}.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:same-sample-oracle}]
+Subtract the unavailable but candidate-independent empirical teacher log likelihood from the penalized criterion. Apply the assumed isomorphic inequality to the selected candidate and to an arbitrary comparator. A sufficiently large penalty cancels the selected model's complexity; absorb the two quarter-risk terms and optimize over the comparator.
+\end{proof}

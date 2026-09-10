@@ -1,0 +1,156 @@
+[
+  {
+    "ID": "L1",
+    "Number": "Lemma 1",
+    "Result": "Controlled squared component weights",
+    "Dependencies": "Exact mode bases; sequential orthogonal factorizations",
+    "Status": "PROVED"
+  },
+  {
+    "ID": "L2",
+    "Number": "Lemma 2",
+    "Result": "Exact rank-one diagonal image",
+    "Dependencies": "T1; signed product construction",
+    "Status": "PROVED"
+  },
+  {
+    "ID": "L3",
+    "Number": "Lemma 3",
+    "Result": "Scalar threshold envelope",
+    "Dependencies": "Scalar sign cases",
+    "Status": "PROVED"
+  },
+  {
+    "ID": "L4",
+    "Number": "Lemma 4",
+    "Result": "Matrix functional bound",
+    "Dependencies": "Cauchy\u2013Schwarz; spectral projection",
+    "Status": "PROVED"
+  },
+  {
+    "ID": "L5",
+    "Number": "Lemma 5",
+    "Result": "Common-target mixture interval bound",
+    "Dependencies": "Probability union bound; total variation",
+    "Status": "PROVED"
+  },
+  {
+    "ID": "T1",
+    "Number": "Theorem 1",
+    "Result": "Diagonal compressibility",
+    "Dependencies": "L1; Holder; Bessel; q-subadditivity",
+    "Status": "PROVED"
+  },
+  {
+    "ID": "T2",
+    "Number": "Theorem 2",
+    "Result": "Finite-sample honest interval",
+    "Dependencies": "T1; L3; L4; Gaussian tails",
+    "Status": "PROVED"
+  },
+  {
+    "ID": "T3",
+    "Number": "Theorem 3",
+    "Result": "Fixed affine lower bound",
+    "Dependencies": "Normal median and variance bound",
+    "Status": "PROVED"
+  },
+  {
+    "ID": "T4",
+    "Number": "Theorem 4",
+    "Result": "Single-unfolding class lower bound",
+    "Dependencies": "L5; Gaussian LR; cosh/Gaussian-square calculation",
+    "Status": "PROVED"
+  },
+  {
+    "ID": "T5",
+    "Number": "Theorem 5",
+    "Result": "Strict separations",
+    "Dependencies": "T2; T3; T4",
+    "Status": "PROVED after explicit domain repair"
+  },
+  {
+    "ID": "T6",
+    "Number": "Theorem 6",
+    "Result": "Within-class coordinate lower bound",
+    "Dependencies": "L5; orthogonal Gaussian shifts",
+    "Status": "PROVED"
+  },
+  {
+    "ID": "D1",
+    "Number": "Proposition 1",
+    "Result": "Diagonal-only minimax benchmark",
+    "Dependencies": "L2; L5; hypergeometric factorial moments; T2",
+    "Status": "PROVED"
+  },
+  {
+    "ID": "S1",
+    "Number": "Proposition 2",
+    "Result": "Refined diagonal budget",
+    "Dependencies": "Bessel; mode leverage trace; TT mode-rank bound",
+    "Status": "PROVED"
+  },
+  {
+    "ID": "S2",
+    "Number": "Proposition 3",
+    "Result": "Exact structural range and affine optimum",
+    "Dependencies": "Sparse diagonal witnesses; normal quantile monotonicity",
+    "Status": "PROVED"
+  },
+  {
+    "ID": "S3",
+    "Number": "Proposition 4",
+    "Result": "Envelope and approximation calibration",
+    "Dependencies": "Scalar envelope; residual Lipschitz; Bessel",
+    "Status": "PROVED"
+  },
+  {
+    "ID": "S4",
+    "Number": "Proposition 5",
+    "Result": "Finite variance and row-corruption calibration",
+    "Dependencies": "Chebyshev; independent clean block indicators; S3",
+    "Status": "PROVED"
+  },
+  {
+    "ID": "S5",
+    "Number": "Proposition 6",
+    "Result": "Unknown Gaussian variance with residuals",
+    "Dependencies": "Orthogonal residual transform; chi-square; conditional selection",
+    "Status": "PROVED"
+  },
+  {
+    "ID": "S6",
+    "Number": "Proposition 7",
+    "Result": "Confidence-level and covariance comparison",
+    "Dependencies": "Retuned mixture constants; Gaussian noise addition",
+    "Status": "PROVED"
+  },
+  {
+    "ID": "S7",
+    "Number": "Theorem 7",
+    "Result": "Full-data scan; sharp L0 for K>=4",
+    "Dependencies": "L1; T1; L6; T2; T6; finite Gaussian union bound",
+    "Status": "PROVED"
+  },
+  {
+    "ID": "S8",
+    "Number": "Theorem 8",
+    "Result": "Cubic harmonic lower bound",
+    "Dependencies": "L7; full likelihood identity; Holder; L5",
+    "Status": "PROVED"
+  },
+  {
+    "ID": "L6",
+    "Number": "Lemma 6",
+    "Result": "Finite nets and injective norm",
+    "Dependencies": "Volume packing; product telescoping; L1",
+    "Status": "PROVED"
+  },
+  {
+    "ID": "L7",
+    "Number": "Lemma 7",
+    "Result": "Uniform cubic moment of weighted signs",
+    "Dependencies": "Head/tail split; Chernoff; Tonelli",
+    "Status": "PROVED"
+  }
+]

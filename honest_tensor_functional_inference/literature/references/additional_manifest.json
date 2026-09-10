@@ -1,0 +1,20 @@
+[
+  {
+    "name": "fan2023",
+    "url": "https://arxiv.org/pdf/2012.03436",
+    "status": "link available; download failed",
+    "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+  },
+  {
+    "name": "friedlandlim2018",
+    "url": "https://arxiv.org/pdf/1410.6072",
+    "status": "link available; download failed",
+    "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+  },
+  {
+    "name": "delathauwer2000",
+    "url": "https://www.math.ucdavis.edu/~saito/data/tensor/lathauwer-etal_mulilinear-SVD.pdf",
+    "status": "link available; download failed",
+    "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+  }
+]

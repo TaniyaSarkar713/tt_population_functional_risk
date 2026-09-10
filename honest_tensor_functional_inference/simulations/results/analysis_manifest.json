@@ -1,0 +1,19 @@
+{
+  "input_sha256": "98ceba7fbeb90c46949427713c8b0436fbaa7dadcab4265e9c8b82613ddb67d5",
+  "code_sha256": {
+    "summarize_and_plot.py": "58d96201e75d632c6ab7bd87b259d32fedee3ce67716c82a0fb69b782015f79e",
+    "run_simulations.py": "c0650e2f12214ebc1057f3253716df12b55c4c75877d4aae8cc940a1d77f2ebd",
+    "intervals.py": "e491ce25e40bff37e8c772e32fb49bb92740e893b1871079817ed7cd4401c0fd",
+    "plot_utils.py": "447d8c8fa22fadab2c96b80271962ebdff304e37ef97eca297598015a5808bfd",
+    "check_theory.py": "8b6614388e876d37e6aad11f1615bb89543e8d0754ebf2fbe5836bb585f68687"
+  },
+  "artifacts_sha256": {
+    "simulations/figures/theoretical_comparison.pdf": "296c3e2c58ec5484a97e8090066f971d1da4cd04151d20604fdfecf2d9cd69ad",
+    "simulations/figures/weak_rank_coverage.pdf": "b6f8324fdc4e41b9ba29f40fa2a3eb878cdea77d3ffddefb25e92e2dedf8a4cf",
+    "simulations/figures/weak_rank_coverage.png": "4d16c007352ec13463cda4451a27655c3b0ba16943172f6363bc64db56efddab",
+    "simulations/figures/theoretical_comparison.png": "891df1640afe92cca35ceed13d3e321ebec98f50c2d8144e407e25d2e33acfbd",
+    "simulations/results/findings.md": "73c02b4319d6d82cdddd983082f0309b20fa1421a65e1ac29eb7af8898fbaeb4",
+    "paper/coverage_table.tex": "562694a671900a13d028fd074681fa3f0fea131e8e2c0bbb4ea833b815b5dc78",
+    "paper/stress_table.tex": "32b42a4484f3403691679b8c2ee8b3cc65f1143c84ea36902e68500738098046"
+  }
+}

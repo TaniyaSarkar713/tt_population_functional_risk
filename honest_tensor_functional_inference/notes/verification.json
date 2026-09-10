@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "simulation_configurations": 175,
+  "method_rows": 817,
+  "replications_per_configuration": 2000,
+  "reproduced_configuration": {
+    "experiment": "core",
+    "K": 2,
+    "p": 128,
+    "n": 128,
+    "cap": 1,
+    "amplitude": 1.0,
+    "support": 1,
+    "noise": "gaussian"
+  },
+  "reproduced_method_rows": 5,
+  "bitwise_scalar_metric_match": true,
+  "bibliography_entries": 44,
+  "cited_entries": 26,
+  "theorem_count": 6,
+  "proof_count": 11,
+  "final_build_warnings": [],
+  "body_vocabulary_scan": {},
+  "body_em_dash_count": 0,
+  "current_theory_check_sha256": "8b6614388e876d37e6aad11f1615bb89543e8d0754ebf2fbe5836bb585f68687",
+  "note": "Simulation algorithm files unchanged from run. Theory checker later extended for the exact image lemma; no simulation rerun required.",
+  "pdf_pages": 18,
+  "pdf_sha256": "f31ed5d5e2bb41394a7b3b9a7a88b5742145a0542f9f28ab878c160eed207e23"
+}

@@ -1,0 +1,7384 @@
+
+[PDF PAGE 1]
+Statistical Inferences of Linear Forms for Noisy Matrix
+Completion∗
+Dong Xia† and Ming Yuan♯
+† Hong Kong University of Science and Technology
+♯ Columbia University
+Abstract
+We introduce a ﬂexible framework for making inferences about general linear forms
+of a large matrix based on noisy observations of a subset of its entries. In particu-
+lar, under mild regularity conditions, we develop a universal procedure to construct
+asymptotically normal estimators of its linear forms through double-sample debiasing
+and low-rank projection whenever an entry-wise consistent estimator of the matrix is
+available. These estimators allow us to subsequently construct conﬁdence intervals
+for and test hypotheses about the linear forms. Our proposal was motivated by a
+careful perturbation analysis of the empirical singular spaces under the noisy matrix
+completion model which might be of independent interest. The practical merits of our
+proposed inference procedure are demonstrated on both simulated and real-world data
+examples.
+∗Dong Xia’s research is partially supported by Hong Kong RGC Grant ECS 26302019. Ming Yuan’s
+research is supported in part by NSF Grant DMS-1803450.
+1
+arXiv:1909.00116v2  [math.ST]  11 Jun 2020
+
+[PDF PAGE 2]
+1 Introduction
+Noisy matrix completion (NMC) refers to the reconstruction of a low rank matrix M ∈
+Rd1×d2 after observing a small subset of M’s entries with random noise. Problems of this
+nature arise naturally in various applications. For the sake of generality, we shall cast it
+in the framework of trace regression where each observation is a random pair ( X,Y ) with
+X∈ Rd1×d2 and Y ∈ R. The random matrix X is sampled uniformly from the orthonormal
+basis E ={ej1eT
+j2 :j1∈ [d1],j 2∈ [d2]} where [d] ={1,··· ,d} and{ej1}j1∈[d1] and{ej2}j2∈[d2]
+are the canonical basis vectors in Rd1 and Rd2, respectively. It is worth pointing out that,
+while we shall focus on the canonical basis in this work, our framework can be easily extended
+to general product basis where {ej1}j1∈[d1] and{ej2}j2∈[d2] are arbitrary orthonormal basis
+in Rd1 and Rd2, respectively. Without loss of generality, we shall assume that d1≥ d2 and
+denote αd =d1/d2 the aspect ratio of M. The response variable Y is related to X via
+Y =⟨M,X⟩ +ξ (1.1)
+where⟨M,X⟩ = tr(M TX), and the independent measurement error ξ is assumed to be
+a centered sub-Gaussian random variable. Our goal is to infer M from n i.i.d. copies
+{(Xi,Yi)}n
+i=1 obeying (1.1) when, in particular, M is of (approximately) low rank and n is
+much smaller than d1d2.
+In the absence of measurement error (e.g., ξ = 0), Cand` es and Recht (2009) ﬁrst discov-
+ered that exact matrix completion can be solved eﬃciently by relaxing the non-convex and
+non-smooth rank constraint of a matrix to its nuclear norm. Following the pioneering work,
+nuclear-norm penalized least squares estimators (Negahban and Wainwright, 2011; Rohde
+and Tsybakov, 2011; Cai et al., 2010; Cai and Zhou, 2016; Cand` es and Tao, 2009; Candes
+and Plan, 2010; Gross, 2011) and numerous other variants (Koltchinskii et al., 2011; Klopp,
+2014; Liu, 2011; Recht et al., 2010; Sun and Zhang, 2012; Cai and Zhang, 2015; Gao et al.,
+2016) have been studied. It is now understood, from these developments, that even when
+the observations are contaminated with noise, statistically optimal convergence rates are at-
+tainable by eﬃciently computable convex methods. For instance, Koltchinskii et al. (2011)
+2
+
+[PDF PAGE 3]
+proved that a modiﬁed matrix LASSO estimator, denoted byˆM KLT, achieves the convergence
+rate:
+∥ˆM
+KLT
+−M∥2
+F =OP
+(
+(σξ +∥M∥max)2· rd2
+1d2 logd1
+n
+)
+(1.2)
+as long as n ≫ d1 logd1 where r is the rank of M and σ2
+ξ is the variance of ξ. Here,
+∥·∥ F denotes the matrix Frobenius norm and ∥·∥ max denotes the max-norm deﬁned as
+∥A∥max = maxj1∈[d1],j2∈[d2]|A(j1,j 2)|. It is worth noting that (1.2) was established without
+additional assumptions on M. As a result, the rate given on the righthand side of (1.2)
+depends on∥M∥max and does not vanish even when σξ = 0.
+In addition to convex methods, non-convex approaches such as those based on matrix-
+factorization have also been developed. For instance, Keshavan et al. (2010b) proposed a
+non-convex estimator based on the thin SVD, denoted by ˆM KMO, and show that
+∥ˆM
+KMO
+−M∥2
+F =OP
+(
+σ2
+ξ· rd2
+1d2 logd1
+n
+)
+(1.3)
+assuming that n≫ rd1(r + logd1) and M satisﬁes the so-called incoherent condition. See
+also, e.g., Zhao et al. (2015); Chen and Wainwright (2015); Cai et al. (2016b) and references
+therein. The rate (1.3) is optimal up to the logarithmic factors, see, e.g., Koltchinskii et al.
+(2011) and Ma and Wu (2015), for a comparable minimax lower bound. More recently, an
+alternative scheme of matrix factorization attracted much attention. See, e.g., Wang et al.
+(2016); Ge et al. (2016); Zheng and Laﬀerty (2016); Chen et al. (2019c,b); Ma et al. (2017);
+Chen et al. (2019a). In particular, Ma et al. (2017) showed this approach yields an estimator,
+denoted by ˆM MWC, that is statistically optimal not only in matrix Frobenius norm but also
+in entry-wise max-norm, i.e.,
+∥ˆM
+MWC
+−M∥2
+max =OP
+(
+σ2
+ξ· rd1 logd1
+n
+)
+(1.4)
+provided that n≫r3d1 log3d1.
+While there is a rich literature on statistical estimation for NMC, results about its sta-
+tistical inferences are relatively scarce. In Carpentier et al. (2015), a debiasing procedure,
+based on sample splitting, was proposed for the nuclear norm penalized least squares esti-
+mator which enables constructing conﬁdence region for M with respect to matrix Frobenius
+3
+
+[PDF PAGE 4]
+norm when n≫ rd1 logd1. Their technique, however, cannot be directly used to make in-
+ferences about individual entries or linear forms as conﬁdence regions for M with respect to
+matrix Frobenius norm can be too wide for such purposes. To this end, Carpentier et al.
+(2018) proposed another procedure to construct entrywise conﬁdence intervals. However
+their procedure requires that the design, namely the underlying distribution of X satisfy the
+so-called restricted isometry property which is violated when X is sampled uniformly from
+E. Another proposal introduced by Cai et al. (2016a) can be used to construct conﬁdence
+intervals forM’s entries. However, it requires that the sample size n≫d1d2 which is signif-
+icantly larger than the optimal sample size requirement for estimation. In addition, during
+the preparation of the current work, Chen et al. (2019c) announced a diﬀerent approach to
+constructing conﬁdence intervals for the entries of M.
+The present article aims to further expand this line of research by introducing a ﬂexible
+framework for constructing conﬁdence intervals and testing hypotheses about general linear
+forms of M, with its entries as special cases, under optimal sample size requirement. In a
+nutshell, we develop a procedure that, given any entry-wise consistent estimatorˆM init in that
+∥ˆM init−M∥max =oP (σξ), can yield valid statistical inferences for mT := tr(M TT ) under mild
+regularity conditions. More speciﬁcally, we show that, through double-sample debiasing and
+spectral projection, we can obtain from the initial estimator a new one, denoted by ˆM, so
+that
+tr(ˆM TT )− tr(M TT )
+σξ(∥U TT∥2
+F +∥TV∥2
+F)1/2
+√
+d1d2/n
+d
+−→N (0, 1), (1.5)
+provided that
+∥U TT∥F +∥TV∥F≫∥T∥ℓ1
+√ r
+d1
+· max
+{√
+r logd1
+d2
+, σξ
+λr
+√
+αdrd2
+1d2 log2d1
+n
+}
+where U,V are M’s left and right singular vectors and λr is its r-th singular value, and
+∥·∥ ℓ1 stands for the vectorized ℓ1 norm. We not only show that (1.5) holds under optimal
+sample size (independent ofT ) but also derive its non-asymptotic convergence rate explicitly.
+Note that condition for∥U TT∥F +∥TV∥F in a certain sense is necessary to avoid non-regular
+asymptotic behavior when ∥U TT∥F +∥TV∥F = 0. Moreover, we show that under similar
+4
+
+[PDF PAGE 5]
+conditions, (1.5) continues to hold when we replace σξ, ∥U TT∥F and∥TV∥F by suitable
+estimates, denoted by ˆσξ,∥ˆU TT∥F and∥TˆV∥F respectively:
+tr(ˆM TT )− tr(M TT )
+ˆσξ(∥ˆU TT∥2
+F +∥TˆV∥2
+F)1/2
+√
+d1d2/n
+d
+−→N (0, 1). (1.6)
+The statistic on the lefthand side is now readily applicable for making inferences about the
+linear form tr(M TT ).
+Our proposal greatly generalizes the scope of earlier works on inferences for entries ofM in
+several crucial aspects. Firstly, unlike earlier approaches that focus on a speciﬁc estimator of
+M, our procedure can be applied to any entry-wise consistent estimator. This not only brings
+potential practical beneﬁts but also helps us better understand the fundamental diﬀerences
+between estimation and testing in the context of NMC. For instance, our results suggest that,
+perhaps surprisingly, when it comes to make valid inferences with optimal sample sizes, the
+rate of convergence of the initial estimate is irrelevant as long as it is consistent; therefore a
+suboptimal estimator may be used for making optimal inferences.
+Secondly, our approach can be applied in general when T is sparse, and depending on its
+alignment with the singular spaces of M, even to cases where it is dense and ∥T∥2
+ℓ1/∥T∥2
+F is
+of the order O(d2). Entry-wise inferences correspond to the special case when T takes the
+formeieT
+j . Extensions to more general linear forms could prove useful in many applications.
+For example, in recommender systems, it may be of interest to decide between items j1 and
+j2 which should we recommend to user i. This can obviously be formulated as a testing
+problem:
+H0 :M(i,j 1) =M(i,j 2) v .s. H 1 :M(i,j 1)>M (i,j 2), (1.7)
+which can be easily solved within our framework by taking T =eieT
+j1−eieT
+j2. More generally,
+if the target is a group of usersG⊂ [d1], we might take a linear formT =∑
+i∈Gei(ej1−ej2)T.
+At a technical level, inferences about general linear forms as opposed to entries of M present
+nontrivial challenges because of the complex dependence structure among the estimated
+entries. As our theoretical analysis shows, the variance of the plug-in estimator for the
+linear form depends on the alignment of the linear form with respect to the singular space
+of M rather than the sparsity of the linear form.
+5
+
+[PDF PAGE 6]
+An essential part of our technical development is the characterization of the distribution
+of the empirical singular vectors for NMC where we take advantage of the recently developed
+spectral representation for empirical singular vectors. Similar tools have been used earlier
+to derive conﬁdence regions for singular subspaces with respect to ℓ2-norm for low-rank
+matrix regression (LMR) when the linear measurement matrixXs are Gaussian (Xia, 2019a),
+and the planted low rank matrix (PLM) model where every entry of M is observed with
+i.i.d. Gaussian noise (Xia, 2019b). In both cases, Gaussian assumption plays a critical role
+and furthermore, it was observed that ﬁrst order approximation may lead to suboptimal
+performances. In absence of the Gaussian assumption, the treatment of NMC is technically
+more challenging and requires us to derive sharp bounds for the (2, max)-norm for the higher
+order perturbation terms. Interestingly, it turns out that, unlike LMR or PLM, a ﬁrst order
+approximation actually suﬃces for NMC.
+Even though our framework applies to any max-norm consistent matrix estimator, for
+concreteness, we introduce a novel rotation calibrated gradient descent algorithm on Grass-
+mannians that yields such an initial estimator. The rotation calibration promotes fast con-
+vergence on Grassmannians so that constant stepsize can be selected to guarantee geometric
+convergence. We note that existing results on max-norm convergence rates are established
+for sampling without replacement (Ma et al., 2017). It is plausible that (1.4) may continue
+to hold under our assumption of independent sampling given the close connection between
+the two sampling schemes, but an actual proof is likely much more involved and therefore
+we opted for the proposed alternative for illustration as it is more amenable for analysis.
+The rest of our paper is organized as follows. In next section, we present a general
+framework for estimating mT = tr(M TT ) given an initial estimator through double-sample-
+debiasing and spectral projection. In Section 3, we establish the asymptotic normality of
+the estimate obtained. In Section 4, we propose data-driven estimates for the noise vari-
+ance and the true singular vectors, based on which conﬁdence intervals of mT are con-
+structed. In Section 5, we introduce a rotation calibrated gradient descent algorithm on
+Grassmannians, which, under mild conditions, provides the initial estimator ˆM init so that
+6
+
+[PDF PAGE 7]
+∥ˆM init−M∥max =oP (σξ). Numerical experiments on both synthetic and real world datasets
+presented in Section 6 further demonstrate the merits of the proposed methodology. All
+proofs are presented in the online supplement.
+2 Estimating Linear Forms
+We are interested in making inferences about mT = tr(M TT ) for a given T based on obser-
+vations D ={(Xi,Yi) : 1≤ i≤ n} satisfying model (1.1), assuming that M has low rank.
+To this end, we ﬁrst need to construct an appropriate estimate of mT which we shall do in
+this section.
+Without loss of generality, we assume n is an even number with n = 2n0, and split D
+into two sub-samples:
+D1 =
+{
+(Xi,Yi)
+}n0
+i=1 and D2 =
+{
+(Xi,Yi)
+}n
+i=n0+1.
+In what follows, we shall denoteM’s thin singular value decomposition (SVD) byM =UΛV T
+where U∈ Od1×r,V ∈ Od2×r and Λ = diag(λ1,··· ,λr) represent M’s singular vectors and
+singular values, respectively. The Stiefel manifold Od×r is deﬁned as Od×r :=
+{
+A∈ Rd×r :
+ATA =I
+}
+. We arrangeM’s positive singular values non-increasingly, i.e.,λ1≥···≥ λr > 0.
+Assuming the availability of an initial estimator, our procedure consists of four steps as
+follows:
+• Step 1 (Initialization) : By utilizing the ﬁrst and second data sub-sample D1, D2 sepa-
+rately, we apply the initial estimating procedure on noisy matrix completion to yield
+initial (biased in general) estimates ˆM init
+1 and ˆM init
+2 , respectively.
+• Step 2 (Debiasing) : Using the second data sub-sample D2, we debias ˆM init
+1 :
+ˆM
+unbs
+1 =ˆM
+init
+1 + d1d2
+n0
+n∑
+i=n0+1
+(
+Yi−⟨ˆM
+init
+1 ,Xi⟩
+)
+Xi.
+Similarly, we use the ﬁrst data sub-sample D1 to debias ˆM init
+2 and obtain
+ˆM
+unbs
+2 =ˆM
+init
+2 + d1d2
+n0
+n0∑
+i=1
+(
+Yi−⟨ˆM
+init
+2 ,Xi⟩
+)
+Xi.
+7
+
+[PDF PAGE 8]
+• Step 3 (Projection): Compute the top-r left and right singular vectors ofˆM unbs
+1 , denoted
+by ˆU1 and ˆV1. Similarly, compute the top- r left and right singular vectors of ˆM unbs
+2 ,
+denoted by ˆU2 and ˆV2. Then, we calculate the (averaged) projection estimate
+ˆM = 1
+2
+ˆU1ˆU T
+1ˆM
+unbs
+1 ˆV1ˆV T
+1 + 1
+2
+ˆU2ˆU T
+2ˆM
+unbs
+2 ˆV2ˆV T
+2 .
+• Step 4 (Plug-in) : Finally, we estimate mT by ˆmT = tr(ˆM TT ).
+We now discuss each of the steps in further details.
+Initialization. Apparently, our ﬁnal estimate depends on the initial estimates ˆM init
+1 ,ˆM init
+2 .
+However, as we shall show in the next section, such dependence is fairly weak and the
+resulting estimate ˆmT is asymptotically equivalent as long as the estimation error of ˆM init
+1
+and ˆM init
+2 , in terms of max-norm, is of a smaller order than σξ. More speciﬁcally, we shall
+assume that
+Assumption 1. There exists a sequenceγn,d1,d2→ 0 asn,d 1,d 2→∞ so that with probability
+at least 1−d−2
+1 ,
+∥ˆM
+init
+1 −M∥max +∥ˆM
+init
+2 −M∥max≤Cγn,d1,d2·σξ (2.1)
+for an absolute constant C >0.
+In particular, bounds similar to (2.1) have recently been established by Ma et al. (2017);
+Chen et al. (2019c). See eq. (1.4). Assumption 1 was motivated by their results. However,
+as noted earlier, (1.4) was obtained under sampling without replacement and for positively
+semi-deﬁnite matrices. While it is plausible that it also holds under independent sampling
+as considered here, an actual proof is lacking at this point. For concreteness, we shall
+present a simple algorithm in Section 5 capable of producing an initial estimate that satisﬁes
+Assumption 1.
+8
+
+[PDF PAGE 9]
+Debiasing. The initial estimate is only assumed to be consistent. It may not necessarily
+be unbiased or optimal. To ensure good quality of our ﬁnal estimate ˆmT , it is important
+that we ﬁrst debias it which allows for sharp spectral perturbation analysis. Debiasing is
+an essential technique in statistical inferences of high-dimensional sparse linear regression
+(see, e.g., Zhang and Zhang, 2014; Javanmard and Montanari, 2014; Van de Geer et al.,
+2014; ?) and low-rank matrix regression (see, e.g., Cai et al., 2016a; Carpentier and Kim,
+2018; Carpentier et al., 2018; Xia, 2019a). Oftentimes, debiasing is done in absence of the
+knowledge of Evec(X)vec(X)⊤ and a crucial step is to construct an appropriate decorrelating
+matrix. In our setting, it is clear that Evec(X)vec(X)⊤ = (d1d2)−1Id1d2. This allows for a
+much simpliﬁed treatment via sample splitting, in the same spirit as earlier works including
+Carpentier et al. (2015); Xia (2019a), among others. The particular double-sample-splitting
+technique we employ was ﬁrst proposed by Chernozhukov et al. (2018) and avoids the loss of
+statistical eﬃciency associated with the sample splitting. It is worth noting that if the entries
+are not sampled uniformly, the debiasing procedure needs to be calibrated accordingly.
+In addition to reducing possible bias of the initial estimate, the sample splitting also
+enables us to extend the recently developed spectral representation for empirical singular
+vectors under Gaussian assumptions to general sub-Gaussian distributions.
+Spectral Projection. Since M have low rank, it is natural to apply spectral truncation
+to a matrix estimate to yield an improved estimate. To this end, we project ˆM unbs
+1 and ˆM unbs
+2
+to their respective leading singular subspaces. Note that, while ˆM unbs
+1 ,ˆM unbs
+2 are unbiased,
+their empirical singular vectors ˆU1,ˆU2,ˆV1 and ˆV2 are typically not. The spectral projection
+serves the purpose of reducing entry-wise variances at the cost of negligible biases.
+It is worth noting that the estimate ˆM may not be of rank r. If an exact rank- r esti-
+mator is desired, it suﬃces to obtain the best rank- r approximation of ˆM via singular value
+decomposition and all our development remains valid under such a modiﬁcation. In general,
+getting the initial estimates is the most computational expensive step as the other steps
+involving fairly standard operation without incurring any challenging optimization. This is
+noteworthy because it suggests that as long as we can compute a good estimate, it does not
+9
+
+[PDF PAGE 10]
+cost much more computationally to make inferences.
+3 Asymptotic Normality of ˆmT
+We now show the estimate ˆmT we derived in the previous section is indeed suitable for
+inferences about mT by establishing its asymptotic normality.
+3.1 General results
+For brevity, letej denote the j-th canonical basis in Rd whered might be d1 ord2 ord1 +d2
+at diﬀerent appearances. With slight abuse of notation, denote by ∥·∥ the matrix operator
+norm or vector ℓ2-norm depending on the dimension of its argument. Denote the condition
+number of M by
+κ(M) =λ1(M)/λr(M) =λ1/λr. (3.1)
+As is conventional in the literature, we shall assume implicitly that rank r is known with
+r≪ d2 and M is well-conditioned so that κ(M)≤ κ0. In practice, r is usually not known
+in advance and needs to be estimated from the data. Our experience with numerical exper-
+iments such as those reported in Section 6 suggests that our procedure is generally robust
+to reasonable estimate of r. Although a more rigorous justiﬁcation of such a phenomenon
+has thus far eluded us, these promising empirical observations nonetheless indicate a more
+careful future investigation is warranted.
+In addition, we shall assume thatU andV are incoherent, a standard condition for matrix
+completion.
+Assumption 2. Let∥U∥2,max = maxj∈[d1]∥eT
+jU∥ and there exists µmax > 0 so that
+max
+{√
+d1
+r∥U∥2,max,
+√
+d2
+r∥V∥2,max
+}
+≤µmax.
+We also assume that the noise ξ is independent with X and sub-Gaussian such that
+10
+
+[PDF PAGE 11]
+Assumption 3. The noise ξ is independent with X and
+Eξ = 0, Eξ2 =σ2
+ξ, and Eesξ≤es2σ2
+ξ, ∀s∈ R (3.2)
+Letαd =d1/d2. There exists a large enough absolute constant C1 > 0 so that
+λr≥C1µmaxκ2
+0σξ
+√
+αdrd2
+1d2 log2d1
+n . (3.3)
+The SNR condition (3.3) is optimal up to the logarithmic factors if αd,µ max,κ 0 = O(1).
+Indeed, the consistent estimation of singular subspaces requires λr≫ σξ
+√
+rd2
+1d2/n. This
+condition is common for non-convex methods of NMC. However, when αd≫ 1, i.e., M is
+highly rectangular, condition (3.3) is signiﬁcantly stronger than the optimal SNR condition
+even if µmax,κ 0 = O(1). It is unclear to us whether this sub-optimality is due to techni-
+cal issues or reﬂection of more fundamental diﬀerences between statistical estimation and
+inference.
+To avoid the nonregular asymptotics, we focus on the case when T does not lie entirely
+in the null space of M. More speciﬁcally, we assume that
+Assumption 4. There exists a constant αT > 0 such that
+∥U TT∥F≥αT∥T∥F·
+√ r
+d1
+or ∥TV∥F≥αT∥T∥F·
+√ r
+d2
+.
+The alignment parameter αT in Assumption 4 is allowed to vanish as d1,d 2,n →∞ .
+Indeed, as we show below, the asymptotic normality of ˆmT−mT only requires that
+αT≥∥T∥ℓ1
+∥T∥F
+· max
+
+
+µ2
+max
+√
+r logd1
+d2
+, κ0µ2
+maxσξ
+λr
+√
+αdrd2
+1d2 log2d1
+n
+
+
+. (3.4)
+We are now in position to establish the asymptotic normality of ˆmT .
+Theorem 1. Under Assumptions 1-4, there exist absolute constants C1,C 2,C 3,C 4,C 5,C 6 >
+0 so that if n≥C1µ2
+maxrd1 logd1, then
+sup
+x∈R
+⏐⏐⏐P
+( ˆmT−mT
+σξ(∥TV∥2
+F +∥U TT∥2
+F)1/2·
+√
+d1d2/n
+≤x
+)
+− Φ(x)
+⏐⏐⏐
+11
+
+[PDF PAGE 12]
+≤C2
+µ2
+max∥T∥ℓ1
+αT∥T∥F
+√
+logd1
+d2
++C3κ0
+µ2
+max∥T∥ℓ1
+αT∥T∥F
+· σξ
+λr
+√
+αdrd2
+1d2 log2d1
+n
++C4
+µ4
+max∥T∥2
+ℓ1
+α2
+T∥T∥2
+F
+· r√logd1
+d2
++ 6 logd1
+d2
+1
++C5γn,d1,d2
+√
+logd1 +C6µmax
+√
+rd1
+n .
+where Φ(x) denotes the c.d.f. of the standard normal distribution.
+By Theorem 1, if µmax,αd,κ 0 =O(1) and
+max
+{ ∥T∥ℓ1
+αT∥T∥F
+√
+r logd1
+d2
+, ∥T∥ℓ1
+αT∥T∥F
+· σξ
+λr
+√
+rd2
+1d2 log2d1
+n ,γn,d1,d2
+√
+logd1
+}
+→ 0, (3.5)
+then
+ˆmT−mT
+σξ(∥TV∥2
+F +∥U TT∥2
+F)1/2·
+√
+d1d2/n
+d
+−→N (0, 1),
+as n,d 1,d 2→∞ .
+3.2 Speciﬁc examples
+We now consider several speciﬁc linear forms to further illustrate the implications of Theorem
+1.
+Example 1: As noted before, among the simplest linear forms are entries of M. In partic-
+ular, M(i,j ) =⟨M,T⟩ with T =eieT
+j . It is clear that ∥T∥ℓ1 =∥T∥F = 1 and Assumption 4
+is equivalent to
+∥eT
+iU∥ +∥eT
+jV∥≥ αT
+√ r
+d1
+. (3.6)
+Theorem 1 immediately implies that
+ˆM(i,j )−M(i,j )
+(∥eT
+iU∥2 +∥eT
+jV∥2)1/2·σξ
+√
+d1d2/n
+d
+−→N (0, 1),
+provided that
+max
+{µ2
+max
+αT
+√
+r logd1
+d2
+, κ0µ2
+max
+αT
+· σξ
+λr
+√
+αdrd2
+1d2 log2d1
+n , γn,d1,d2
+√
+logd1
+}
+→ 0 (3.7)
+as n,d 1,d 2→∞ .
+12
+
+[PDF PAGE 13]
+We can also infer from the entry-wise asymptotic normality that
+E∥ˆM−M∥2
+F = (1 +o(1))· σ2
+ξrd1d2(d1 +d2)
+n . (3.8)
+The mean squared error on the righthand side is sharply optimal and matches the minimax
+lower bound in Koltchinskii et al. (2011).
+Example 2: In the case when we want to compare M(i,j 1) and M(i,j 2), we can take
+T =eieT
+j1−eieT
+j2. Because∥T∥ℓ1/∥T∥F =
+√
+2, Assumption 4 then becomes
+∥TV∥2
+F +∥U TT∥2
+F = 2∥U Tei∥2 +∥V T(ej1−ej2)∥2≥ 2α2
+Tr
+d1
+. (3.9)
+Theorem 1 therefore implies that
+(ˆM(i,j 1)−ˆM(i,j 2)
+)
+−
+(
+M(i,j 1)−M(i,j 2)
+)
+(
+2∥U Tei∥2 +∥V T(ej1−ej2)∥2)1/2
+·σξ
+√
+d1d2/n
+d
+−→N (0, 1),
+provided that
+max
+
+
+
+µ2
+max
+αT
+√
+r logd1
+d2
+, κ0µ2
+max
+αT
+· σξ
+λr
+√
+αdrd2
+1d2 log2d1
+n , γn,d1,d2
+√
+logd1
+
+
+→ 0. (3.10)
+Example 3: More generally, we can consider the case whenT is sparse in that it has up to
+s0 nonzero entries. By Cauchy-Schwartz inequality,∥T∥ℓ1/∥T∥F≤√s0 so that Assumption 4
+holds. By Theorem 1,
+ˆmT−mT
+σξ(∥TV∥2
+F +∥U TT∥2
+F)1/2·
+√
+d1d2/n
+d
+−→N (0, 1),
+as long as
+max
+
+
+
+µ2
+max
+αT
+√
+s0r logd1
+d2
+,κ0µ2
+max
+αT
+· σξ
+λr
+√
+s0αdrd2
+1d2 log2d1
+n ,γn,d1,d2
+√
+logd1
+
+
+→ 0. (3.11)
+It is of interest to consider the eﬀect of alignment ofT with respect to the singular spaces
+of M. Note that
+∥T∥2
+F =∥U TT∥2
+F +∥U T
+⊥T∥2
+F =∥TV∥2
+F +∥TV⊥∥2
+F,
+13
+
+[PDF PAGE 14]
+where U⊥∈ Od1×(d1−r) and V⊥∈ Od2×(d2−r) are the basis of the orthogonal complement of
+U and V respectively. In the case that T is not dominated by its projection onto U⊥ or V⊥
+in that∥U TT∥F +∥TV∥F is of the same order as ∥T∥F, we can allow T to have as many as
+O(d2) nonzero entries.
+4 Inferences about Linear Forms
+The asymptotic normality of ˆmT we showed in the previous section forms the basis for
+making inferences about mT . To derive conﬁdence intervals of or testing hypotheses about
+mT , however, we need to also estimate the variance of ˆmT . To this end, we shall estimate
+the noise variance by
+ˆσ2
+ξ = 1
+2n0
+n∑
+i=n0+1
+(
+Yi−⟨ˆM
+init
+1 ,Xi⟩
+)2
++ 1
+2n0
+n0∑
+i=1
+(
+Yi−⟨ˆM
+init
+2 ,Xi⟩
+)2
+. (4.1)
+and∥TV∥2
+F +∥U TT∥2
+F by
+ˆs2
+T := 1
+2
+(
+∥TˆV1∥2
+F +∥ˆU T
+1T∥2
+F +∥TˆV2∥2
+F +∥ˆU T
+2T∥2
+F
+)
+.
+The following theorem shows that the asymptotic normality remains valid if we replace the
+variance of ˆmT with these estimates:
+Theorem 2. Under Assumptions 1-4, if n≥ Cµ 2
+maxrd1 logd1 for some absolute constant
+C >0 and
+max
+{µ2
+max∥T∥ℓ1
+αT∥T∥F
+√
+r logd1
+d2
+,κ0µ2
+max∥T∥ℓ1
+αT∥T∥F
+· σξ
+λr
+√
+αdrd2
+1d2 logd2
+1
+n ,γn,d1,d2
+√
+logd1
+}
+→ 0,
+then
+ˆmT−mT
+ˆσξˆsT·
+√
+d1d2/n
+d
+−→N (0, 1),
+as n,d 1,d 2→∞ .
+Theorem 2 immediately allows for constructing conﬁdence intervals for mT . More specif-
+ically, we can deﬁne the 100(1−θ)%-th conﬁdence interval as
+ˆCIθ,T =
+[
+ˆmT−zθ/2·ˆσξˆsT
+√
+d1d2
+n , ˆmT +zθ/2·ˆσξˆsT
+√
+d1d2
+n
+]
+(4.2)
+14
+
+[PDF PAGE 15]
+for any θ∈ (0, 1), where zθ = Φ−1(1−θ) is the upper θ quantile of the standard normal. In
+light of Theorem 2, we have
+lim
+n,d1,d2→∞
+P
+(
+mT∈ˆCIθ,T
+)
+= 1−θ,
+for any θ∈ (0, 1).
+Similarly, we can also consider using Theorem 2 for the purpose of hypothesis test.
+Consider, for example, testing linear hypothesis
+H0 :⟨M,T⟩ = 0 against H1 :⟨M,T⟩̸ = 0.
+Then we can proceed to reject H0 if|ˆz|>z θ/2 and accept H0 otherwise, where
+ˆz = ˆmT
+ˆσξˆsT·
+√
+d1d2/n
+.
+Following Theorem 2, this is a test with asymptotic level θ. For example, in the particular
+case of comparing two entries of M:
+H0 :M(i,j 1) =M(i,j 2) v .s. H 1 :M(i,j 1)>M (i,j 2), (4.3)
+the test statistic can be expressed as
+ˆz =
+√
+2(ˆM(i,j 1)−ˆM(i,j 2))
+ˆσξ
+(
+∥ˆV T
+1 (ej2−ej1)∥2
+F + 2∥ˆU T
+1ei∥2
+F +∥ˆV T
+2 (ej2−ej1)∥2
+F + 2∥ˆU T
+2ei∥2
+F
+)1/2√
+d1d2/n
+and we shall proceed to reject the null hypothesis if and only if ˆz > zθ to account for the
+one-sided alternative.
+5 Initial Estimate
+Thus far, our development has assumed a generic max-norm consistent matrix estimate as
+initial estimator. For concreteness, we now introduce a rotation calibrated gradient descent
+algorithm on Grassmannians which, under mild conditions, produces such an estimate.
+15
+
+[PDF PAGE 16]
+Any rank r matrix of dimension d1×d2 can be written as UGV T where U ∈ Od1×r,
+V∈ Od2×r and G∈ Rr×r. The loss of the triplet ( U,G,V ) over D is given by
+L
+(
+D, (U,G,V )
+)
+=
+∑
+(X,Y )∈D
+(
+Y−⟨UGV T,X⟩
+)2
+. (5.1)
+Given (U,V ), we can easily minimize (5.1) to solve for G. This allows us to reduce the
+problem of minimizing (5.1) to a minimization over the product space of two Grassmannians
+Gr(d1,r )× Gr(d2,r ) as Gr(d,r ) = Od1×r/Or×r. In particular we can do so via a rotation
+calibrated gradient descent algorithm on Grassmannians as detailed in Algorithm 1 where,
+for simplicity, we resort to data-splitting. It is plausible that a more elaborative analysis via
+the leave-one-out (LOO) framework introduced by Ma et al. (2017) can be applied to show
+that our algorithm continues to produce estimates of similar quality without data-splitting,
+as we observe empirically. An actual proof however is likely much more involved under our
+setting. For brevity, we opted here for data-splitting.
+Let m =C1⌈log(d1 +d2)⌉ for some positive integer C1≥ 1. We shall partition the data
+D ={(Xi,Yi)}n
+i=1 into 2m subsets:
+Dt =
+{
+(Xj,Yj)
+}tN0
+j=(t−1)N0+1, ∀ t = 1,··· , 2m
+where, without loss of generality, we assumed n = 2mN0 for some positive integer N0.
+16
+
+[PDF PAGE 17]
+Algorithm 1 Rotation Calibrated Gradient descent on Grassmannians
+Let ˆU (1) and ˆV (1) be the top-r left and right singular vectors of d1d2N−1
+0
+∑
+j∈D1YjXj.
+2: Compute ˆG(1) = arg minG∈Rr×rL(D2, (ˆU (1),G, ˆV (1))) and its SVD ˆG(1) =ˆL(1)
+G ˆΛ(1)ˆR(1)T
+G .
+for t = 1, 2, 3,··· ,m− 1 do
+4: Update by rotation calibrated gradient descent
+ˆU (t+0.5) = ˆU (t)ˆL(t)
+G −η· d1d2
+N0
+∑
+j∈D2t+1
+(
+⟨ˆU (t)ˆG(t)ˆV (t),Xj⟩− Yj
+)
+XjˆV (t)ˆR(t)
+G (ˆΛ(t))−1
+ˆV (t+0.5) =ˆV (t)ˆR(t)
+G −η· d1d2
+N0
+∑
+j∈D2t+1
+(
+⟨ˆU (t)ˆG(t)ˆV (t),Xj⟩− Yj
+)
+X T
+j ˆU (t)ˆL(t)
+G (ˆΛ(t))−1
+Compute the top-r left singular vectors
+ˆU (t+1) = SVD(ˆU (t+0.5)) and ˆV (t+1) = SVD(ˆV (t+0.5))
+6: Compute ˆG(t+1) by
+ˆG(t+1) = arg min
+G∈Rr×r
+L
+(
+D2t+2, (ˆU (t+1),G, ˆV (t+1))
+)
+and its SVD ˆG(t+1) =ˆL(t+1)
+G ˆΛ(t+1)ˆR(t+1)T
+G
+end for
+8: Output: (ˆU (m),ˆG(m),ˆV (m)) and ˆM (m) = ˆU (m)ˆG(m)(ˆV (m))T.
+The algorithm presented here is similar in spirit to those developed earlier by Keshavan
+et al. (2010a,b); Xia and Yuan (2017). A key diﬀerence is that we introduce an explicit
+rule of gradient descent update where each iteration on Grassmannians is calibrated with
+orthogonal rotations. The rotation calibrations are necessary to guarantee the contraction
+property for the (2, max)-norm accuracy of empirical singular vectors. Indeed, we show that
+the algorithm converges geometrically with constant stepsizes.
+To this end, write
+ˆO(1)
+U = arg min
+O∈Or×r
+∥ˆU (1)−UO∥ and ˆO(1)
+V = arg min
+O∈Or×r
+∥ˆV (1)−VO∥
+and, for all t = 1,··· ,m− 1, denote the SVDs
+ˆU (t+0.5) = ˆU (t+1)ˆΣ(t+1)
+U ˆK (t+1)T
+U and ˆV (t+0.5) =ˆV (t+1)ˆΣ(t+1)
+V ˆK (t+1)T
+V .
+17
+
+[PDF PAGE 18]
+For allt = 1,··· ,m− 1, deﬁne the orthogonal matrices
+ˆO(t+1)
+U = ˆO(t)
+U ˆL(t)
+G ˆK (t+1)
+U and ˆO(t+1)
+V = ˆO(t)
+V ˆR(t)
+G ˆK (t+1)
+V .
+Then we have
+Theorem 3. Under Assumptions 2 and 3, if η∈ [0.25, 0.75] and
+n≥C1αdκ6
+0µ6
+maxr3d1 log2d1 and C2κ2
+0µmax
+σξ
+λr
+·
+√
+αdrd2
+1d2 log2d1
+n ≤ 1
+for some large enough constants C1,C 2 > 0, then for all t = 1,··· ,m− 1, with probability
+at least 1− 4md−2
+1 ,
+ˆU (t+1)−UˆO(t+1)
+U
+
+2,max +
+ˆV (t+1)−V ˆO(t+1)
+V
+
+2,max≤C3ησξ
+λr
+√
+rd1d2 log2d1
+n
++
+(
+1− 2η
+3
+)
+·
+(
+∥ˆU (t)−UˆO(t)
+U∥2,max +∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+where C3 > 0 is an absolute constant. Moreover, if in addition ∥M∥max/σξ≤ dC4
+1 for some
+constant C4 > 0, then, by setting m = 2⌈C4 logd1⌉ and η = 0.75, with probability at least
+1−C5d−2
+1 logd1,
+ˆM (m)−M
+
+max≤C6µmaxκ0σξ
+√
+r2d1 log2d1
+n
+for some absolute constants C5,C 6 > 0.
+We can then apply Algorithm 1 to produce initial estimates suitable for inferences about
+linear forms of M. With this particular choice of initial estimate, Assumption 1 is satisﬁed
+with
+γn,d1,d2 =µmaxκ0
+√
+r2d1 log2d1
+n
+when the sample size n≥C1αdκ6
+0µ6
+maxr3d1 log2d1. We note that this sample size requirement
+in general is not optimal and the extra logarithmic factor is due to data splitting. As this is
+not the main focus of the current work, no attempt is made here to further improve it.
+18
+
+[PDF PAGE 19]
+6 Numerical Experiments
+We now present several sets of numerical studies to further illustrate the practical merits of
+the proposed methodology, and complement our theoretical developments.
+6.1 Simulations
+We ﬁrst consider several sets of simulation studies. Throughout the simulations, the true
+matrix M has rank r = 3 and dimension d1 =d2 =d = 2000. M’s singular values were set
+to be λi =d for i = 1, 2, 3. In addition, M’s singular vectors were generated from the SVD
+of d×r Rademacher random matrices. The noise standard deviation was set at σξ = 0.6.
+First, we show the convergence performance of the proposed Algorithm 1 where both
+Frobenius norm and max-norm convergence rates are recorded. Even though the algorithm
+we presented in the previous section uses sample splitting for technical convenience, in the
+simulation, we did not split the sample. Figure 1 shows a typical realization under Gaussian
+noise, which suggest the fast convergence of Algorithm 1. In particular, log ∥ ˆM init−M∥max
+σξ
+becomes negative after 3 iterations when the stepsize is η = 0.6. Recall that our double-
+sample debiasing approach requires ∥ˆM init−M∥max = oP (σξ) for the initial estimates, i.e.,
+ˆM init
+1 ,ˆM init
+2 in Assumption 1.
+Next, we investigate how the proposed inference tools behave under Gaussian noise and
+for four diﬀerent linear forms corresponding to T1 = e1eT
+1 , T2 = e1eT
+1−e1eT
+2 , T3 = e1eT
+1−
+e1eT
+2 +e2eT
+1 and
+T4 =e1eT
+1−e1eT
+2 + 2e2eT
+1 + 3e2eT
+2.
+For each T , we drew the density histogram of ( ˆmT−mT )/
+(
+ˆσξˆsT
+√
+d1d2/n
+)
+based on 1000
+independent simulation runs. The density histograms are displayed in Figure 2 where the
+red curve represents the p.d.f. of standard normal distributions. The sample size was
+n = 4r2d log(d) for T1,T 2 and n = 5r2d log(d) for T3,T 4. The empirical observation agrees
+fairly well with our theoretical results.
+Finally, we examine the performance of the proposed approach under non-Gaussian noise.
+19
+
+[PDF PAGE 20]
+Iterations
+0 2 4 6 8 10 12 14
+log ∥ ˆM (t)− M∥F
+∥M∥F
+-3.2
+-3
+-2.8
+-2.6
+-2.4
+-2.2
+-2Fast convergence of gradient descent on Grassmannians
+η = 0.6
+η = 0.4
+η = 0.2
+Iterations
+0 2 4 6 8 10 12 14
+log ∥ ˆM (t)− M∥max
+σξ
+-0.4
+-0.2
+0
+0.2
+0.4
+0.6
+0.8
+1Fast convergence of gradient descent on Grassmannians
+η = 0.6
+η = 0.4
+η = 0.2
+Figure 1: Convergence of Algorithm 1 in relative matrix Frobenius norm and the max-norm,
+with respect to step size η and the number of iterations. The parameters are d1 =d2 =d =
+2000,r = 3,λi = d,σξ = 0.6 and U,V are generated from the SVD of d×r Rademacher
+random matrices. The sample size is n = 4r2d log(d) and the noise is Gaussian.
+In particular, we repeated the last set of experiments with noise ( ξ/
+√
+3σξ)∈ Unif([−1, 1]).
+The density histograms are displayed in Figure 3 where the red curve represents the p.d.f.
+of standard normal distributions. Again the empirical evidences support the asymptotic
+normality of the proposed statistic.
+6.2 Real-world data examples
+We now turn our attention to two real-world data examples – the Jester and MovieLens
+datasets. The Jester dataset contains ratings of 100 jokes from ∼ 70K users ( ?)). The
+dataset consists of 3 subsets of data with diﬀerent characteristics as summarized in Table 1.
+For each subset, the numbers of ratings of all users are equal. MovieLens was a recommender
+system created by GroupLens that recommends movies for its users. We use three datasets
+released by MovieLens (?) whose details are summarized in Table 1. In these three datasets,
+each user rates at least 20 movies.
+For illustration, we consider the task of recommending jokes or movies to a particular
+users. Because of the lack of ground truth, we resort to resampling. For the Jester dataset, we
+randomly sample∼ 2000 users, and for each user 2 ratings that at least ζ∈{ 0, 2, 6, 10, 14}
+20
+
+[PDF PAGE 21]
+Figure 2: Normal approximation of ˆmT−mT
+ˆσξˆsT
+√
+d1d2/n
+. The parameters ared1 =d2 =d = 2000,r =
+3,λi = d,σξ = 0.6 and U,V are generated from the SVD of d×r Rademacher random
+matrices. The sample size is n = 4r2d log(d) for the top two and n = 5r2d log(d) for
+bottom two. The noise is Gaussian. Each density histogram is based on 1000 independent
+simulations and the red curve represents the p.d.f. of standard normal distributions. Top
+left: T = e1eT
+1 , top right: T = e1eT
+1−e1eT
+2 . Bottom left: T = e1eT
+1−e1eT
+2 +e2eT
+1 , bottom
+right: T =e1eT
+1−e1eT
+2 + 2e2eT
+1 + 3e2eT
+2 .
+21
+
+[PDF PAGE 22]
+Figure 3: Normal approximation of ˆmT−mT
+ˆσξˆsT
+√
+d1d2/n
+. The parameters ared1 =d2 =d = 2000,r =
+3,λi = d,σξ = 0.6 and U,V are generated from the SVD of d×r Rademacher random
+matrices. The sample size is n = 4r2d log(d) for the top two and n = 5r2d log(d) for the
+bottom two. The non-Gaussian noise ( ξ/
+√
+3σξ)∈ Unif([−1, 1]). Each density histogram is
+based on 1000 independent simulations and the red curve represents the p.d.f. of standard
+normal distributions. Top left: T = e1eT
+1 , top right: T = e1eT
+1−e1eT
+2 . Bottom left: T =
+e1eT
+1−e1eT
+2 +e2eT
+1 , bottom right: T =e1eT
+1−e1eT
+2 + 2e2eT
+1 + 3e2eT
+2 .
+22
+
+[PDF PAGE 23]
+Table 1: Summary of Datasets
+Dataset #users #jokes #ratings per user rating values
+Jester-1 24983 100 29 [-10, 10]
+Jester-2 23500 100 34 [-10, 10]
+Jester-3 24938 100 14 [-10, 10]
+Dataset #users #movies total #ratings rating values
+ml-100k 943 1682 ∼ 105 {1,2,3,4,5}
+ml-1m 6040 3952 ∼ 106 {1,2,3,4,5}
+ml-10m 71567 10681 ∼ 107 {0.5, 1.0,··· , 4.5, 5.0}
+apart. We removed these ratings from the training and used the proposed procedure to
+infer, for each user (i), between these two jokes (j1 or j2) with ratings which one should be
+recommended. This amounts to the following one-sided tests:
+H0 :M(i,j 1)≤M(i,j 2) v .s. H 1 :M(i,j 1)>M (i,j 2).
+We ran the proposed procedure on the training data and evaluate the test statistic ˆ z for
+each user from the testing set. In particular, we ﬁxed the rank r = 2 corresponding to
+the smallest estimate ˆσξ. Note that we do not know the true value of M(i,j ) and only
+observe Y (i,j ) = M(i,j ) +ξ(i,j ). We therefore use I(Y (i,j 1) > Y(i,j 2)) as a proxy to
+diﬀerentiate between H0 and H1. Assuming that the ξ has a distribution symmetric about
+0, then I(Y (i,j 1) > Y(i,j 2)) is more likely to take value 0 under H0, and 1 under H1. We
+shall evaluate the performance of our procedure based on its discriminant power in predicting
+I(Y (i,j 1) > Y(i,j 2)). In particular, we record the ROC curve of ˆ z for all users from the
+testing set. The results, averaged over 10 simulation runs for each value of ζ, are reported in
+Figure 4. Clearly, we can observe an increase in predictive power as ζ increases suggesting
+ˆz as a reasonable statistic for testing H0 against H1.
+We ran a similar experiment on the MovieLens datasets. In each simulation run, we
+randomly sampled ∼ 800 users and 2 ratings each as the test data. These ratings are
+23
+
+[PDF PAGE 24]
+0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4
+False Positive Rate
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8True Positive Rate
+ROC curve of One-sided Test on Jester-1 dataset
+0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4
+False Positive Rate
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8True Positive Rate
+ROC curve of One-sided Test on Jester-2 dataset
+0 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4
+False Positive Rate
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8True Positive Rate
+ROC curve of One-sided Test on Jester-3 dataset
+Figure 4: ROC curves for one-sided tests H0 : M(i,j 1)≤ M(i,j 2) v.s. H1 : M(i,j 1) >
+M(i,j 2) on Jester datasets. The testing data are sampled such that |Y (i,j 1)−Y (i,j 2)|≥ ζ.
+The estimated noise level ˆσξ = 4.5160 on Jester-1, ˆσξ = 4.4843 on Jester-2, and ˆσξ = 5.1152
+on Jester-3. The rightmost point of each ROC curve corresponds to the signiﬁcance level
+θ = 0.5 so that zθ = 0.
+sampled such that |Y (i,j 1)− Y (i,j 2)| ≥ζ for ζ = 0, 1, 2, 3, 4. The false positive rates
+and true positive rates of our proposed procedure were again recorded. The ROC curves,
+averaged again over 10 runs for each value ofζ, are shown in Figure 5. This again indicates a
+reasonable performance of the proposed testing procedure. Empirically, we observe a better
+de-biasing approach on these datasets which is ˆM unbs
+1 = ˆM init
+1 +∑
+i∈D2(Yi−⟨ ˆM init
+1 ,Xi⟩)Xi.
+The rationale is to partially replace ˆM init
+1 ’s entries with the observed training ratings. This
+improvement might be due to the severe heterogeneity in the numbers of observed ratings
+from distinct users, or due to the unknown noise distributions.
+7 Proofs
+Throughout the proof, we write γn in short for γn,d1,d2.
+7.1 De-localized perturbation of singular vectors
+Essential to our proofs is the precise characterization of the empirical singular spaces. To this
+end, we shall ﬁrst develop bounds for the estimation error of ˆU1,ˆU2,ˆV1 and ˆV2. Recall that
+the matrix (2, max)-norm is deﬁned as ∥A∥2,max = maxj∈[d1]∥eT
+jA∥. This can be naturally
+24
+
+[PDF PAGE 25]
+0 0.05 0.1 0.15 0.2 0.25 0.3 0.35
+False Positive Rate
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9True Positive Rate
+ROC curve of One-sided Test on ml-100k dataset
+0 0.05 0.1 0.15 0.2 0.25 0.3 0.35
+False Positive Rate
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9
+1
+True Positive Rate
+ROC curve of One-sided Test on ml-1m dataset
+0 0.05 0.1 0.15 0.2 0.25 0.3 0.35
+False Positive Rate
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+0.9True Positive Rate
+ROC curve of One-sided Test on ml-10m dataset
+Figure 5: ROC curves for one-sided tests H0 : M(i,j 1)≤ M(i,j 2) v.s. H1 : M(i,j 1) >
+M(i,j 2) on MovieLens datasets. The testing data are sampled such that|Y (i,j 1)−Y (i,j 2)|≥
+ζ. The estimated noise level ˆσξ = 0.9973 on ml-100k, ˆσξ = 0.8936 on ml-1m, and ˆσξ = 0.9151
+on ml-10m. The rightmost point of each ROC curve corresponds to the signiﬁcance level
+θ = 0.5 so that zθ = 0.
+extended to a distance on Grassmannians
+d2,max(U1,U 2) :=∥U1U T
+1−U2U T
+2∥2,max,
+for U1,U 2∈ Od×r. The main goal of this subsection is to establish the following result:
+Theorem 4. Under Assumptions 1-3, there exists an absolute constant C >0 such that if
+n≥Cµ 2
+maxrd1 logd1, then with probability at least 1− 5d−2
+1 logd1,
+d2,max(ˆUi,U )≤C2µmax
+(1 +γn)σξ
+λr
+·
+√
+rd2d1 logd1
+n
+and
+d2,max(ˆVi,V )≤C2µmax
+(1 +γn)σξ
+λr
+·
+√
+rd2
+1 logd1
+n
+for i = 1, 2 and some absolute constant C2 > 0.
+Immediately following Theorem 4 and Assumption 3, we know that
+eT
+jˆU1
+ =
+eT
+j (ˆU1ˆU T
+1−UU T)ˆU1
+ +
+eT
+jUU TˆU1
+
+≤C2
+σξ
+λr
+√
+d2
+1d2 logd1
+n ·µmax
+√ r
+d1
++∥eT
+jU∥≤ 2µmax
+√ r
+d1
+.
+25
+
+[PDF PAGE 26]
+Then, we conclude that
+∥ˆUi∥2,max≤ 2µmax
+√ r
+d1
+and ∥ˆVi∥2,max≤ 2µmax
+√ r
+d2
+, ∀i = 1, 2,
+an observation that we shall repeatedly use in the following subsections.
+7.1.1 Preliminary bounds
+Denote ˆ∆1 =M−ˆM init
+1 and ˆ∆2 =M−ˆM init
+2 . We then write
+ˆM
+unbs
+1 =M + d1d2
+n0
+n∑
+i=n0+1
+ξiXi
+  
+ˆZ(1)
+1
++
+(d1d2
+n0
+n∑
+i=n0+1
+⟨ˆ∆1,Xi⟩Xi−ˆ∆1
+)
+  
+ˆZ(1)
+2
+(7.1)
+and
+ˆM
+unbs
+2 =M + d1d2
+n0
+n0∑
+i=1
+ξiXi
+  
+ˆZ(2)
+1
++
+(d1d2
+n0
+n0∑
+i=1
+⟨ˆ∆2,Xi⟩Xi−ˆ∆2
+)
+  
+ˆZ(2)
+2
+, (7.2)
+where ˆ∆1 is independent with {(Xi,ξi)}n
+i=n0+1, and ˆ∆2 is independent with {(Xi,ξi)}n0
+i=1.
+Denote ˆZ (i) = ˆZ (i)
+1 + ˆZ (i)
+2 and then ˆM unbs
+i = M + ˆZ (i) for i = 1, 2. Clearly, EˆZ (i) = EˆZ (i)
+1 +
+EˆZ (i)
+2 = 0.
+Observe that eq. (7.1, 7.2) admit explicit representation formulas for ˆM unbs
+1 ,ˆM unbs
+2 . Mean-
+while, because ∥ˆ∆1∥max,∥ˆ∆2∥max = oP (σξ), the strength of ˆZ (1)
+2 and ˆZ (2)
+2 are dominated by
+that of ˆZ (1)
+1 and ˆZ (2)
+1 , respectively. Observe that the perturbation by ˆZ (1)
+1 is analogous (or
+close) to a random perturbation with i.id. entry-wise noise. Put it diﬀerently, the debiasing
+treatment by (7.1,7.2) is essentially to re-randomize ˆM init
+1 and ˆM init
+2 . It plays the key role in
+characterizing the distributions of ˆU1,ˆU2 and ˆV1,ˆV2.
+We begin with several preliminary properties of{ˆUi}2
+i=1 and{ˆVi}2
+i=1. Recall that ˆU1 and
+ˆV1 are top-r left and right singular vectors of ˆM unbs
+1 =M +ˆZ (1)
+1 +ˆZ (1)
+2 . The following bounds
+for ˆZ (i)
+j s are useful for our derivation.
+Lemma 1. There exist absolute constants C1,C 2 > 0 such that if n≥ C1d1 logd1, with
+probability at least 1− 2d−2
+1 , the following bounds hold for i = 1, 2
+ˆZ (i)
+1
+≤C2σξ
+√
+d2
+1d2 logd1
+n and
+ˆZ (i)
+2
+≤C2∥ˆ∆i∥max
+√
+d2
+1d2 logd1
+n ,
+26
+
+[PDF PAGE 27]
+where the probability of the second inequality is conditioned on ˆ∆i.
+We shall defer the proof of Lemma 1 to the Appendix. These bounds can be readily
+used to derive bounds for the empirical singular vectors under Frobenius-norm distance and
+operator-norm distance. Recall that for U1,U 2∈ Od×r, the Frobenius-norm distance and
+operator-norm distance are deﬁned by
+dF(U1,U 2) =∥U1U T
+1−U2U T
+2∥F and dO(U1,U 2) =∥U1U T
+1−U2U T
+2∥.
+It is well known that
+min
+O∈Or×r
+∥U1−U2O∥F≤
+√
+2dF(U1,U 2)≤
+√
+2· min
+O∈Or×r
+∥U1−U2O∥F
+and
+min
+O∈Or×r
+∥U1−U2O∥≤
+√
+2dO(U1,U 2)≤
+√
+2· min
+O∈Or×r
+∥U1−U2O∥.
+See, e.g., Edelman et al. (1998).
+Lemma 2. Under Assumptions 1-3, there exists an absolute constant C > 0 such that if
+n≥Cd 1 logd1, then with probability at least 1− 2d−2
+1 ,
+max{dF(ˆUi,U ),d F(ˆVi,V )}≤ C2
+(1 +γn)σξ
+λr
+·
+√
+rd2
+1d2 logd1
+n for i = 1, 2,
+and
+max{dO(ˆUi,U ),d O(ˆVi,V )}≤ C2
+(1 +γn)σξ
+λr
+·
+√
+d2
+1d2 logd1
+n for i = 1, 2,
+whereC2 > 0 is an absolute constant and γn is deﬁned by Assumption 1.
+7.2 Proof of Theorem 1
+We are now in position to prove Theorem 1. Recall that
+ˆmT−mT =1
+2
+⟨ˆU1ˆU T
+1 ˆZ (1)ˆV1ˆV T
+1 ,T
+⟩
++ 1
+2
+⟨ˆU2ˆU T
+2 ˆZ (2)ˆV2ˆV T
+2 ,T
+⟩
++ 1
+2
+⟨ˆU1ˆU T
+1MˆV1ˆV T
+1 −M,T
+⟩
++ 1
+2
+⟨ˆU2ˆU T
+2MˆV2ˆV T
+2 −M,T
+⟩
+.
+Our strategy is to show that
+{⏐⏐⟨ˆUiˆU T
+i ˆZ (i)ˆViˆV T
+i ,T
+⟩⏐⏐}2
+i=1 are negligible. Then, we prove the
+normal approximation of
+{⟨ˆUiˆU T
+i MˆViˆV T
+i −M,T
+⟩}2
+i=1. We begin with the upper bounds of
+{⏐⏐⟨ˆUiˆU T
+i ˆZ (i)ˆViˆV T
+i ,T
+⟩⏐⏐}2
+i=1.
+27
+
+[PDF PAGE 28]
+Lemma 3. Under Assumptions 1-3, and conditioned on the event in Theorem 4, there exist
+absolute constants C1,C 2 > 0 such that with probability at least 1− 2d−2
+1 ,
+⏐⏐⟨ˆUiˆU T
+i ˆZ (i)ˆViˆV T
+i ,T
+⟩⏐⏐≤C1∥T∥ℓ1µ2
+maxσξ
+√
+r logd1
+n
++C2∥T∥ℓ1µ2
+max
+σξ
+λr
+√
+rd2
+1d2 logd1
+n ·σξ
+√
+rd1 logd1
+n .
+We now prove the normal approximation of
+1
+2
+⟨ˆU1ˆU T
+1MˆV1ˆV T
+1 −M,T
+⟩
++ 1
+2
+⟨ˆU2ˆU T
+2MˆV2ˆV T
+2 −M,T
+⟩
+.
+Let Θ and A be deﬁned as in the proof of Theorem 4. Moreover, we deﬁne
+ˆΘ1 =
+
+
+ˆU1 0
+0 ˆV1
+
+ and ˆΘ2 =
+
+
+ˆU2 0
+0 ˆV2
+
+.
+Then, we write
+ˆΘ1ˆΘT
+1AˆΘ1ˆΘT
+1− ΘΘTAΘΘT =
+
+ 0 ˆU1ˆU T
+1MˆV1ˆV T
+1 −M
+(ˆU1ˆU T
+1MˆV1ˆV T
+1 −M)T 0
+
+
+and
+ˆΘ2ˆΘT
+2AˆΘ2ˆΘT
+2− ΘΘTAΘΘT =
+
+ 0 ˆU2ˆU T
+2MˆV2ˆV T
+2 −M
+(ˆU2ˆU T
+2MˆV2ˆV T
+2 −M)T 0
+
+.
+Denote
+˜T =
+
+ 0 T
+0 0
+
+ and ˆE(i) =
+
+ 0 ˆZ (i)
+ˆZ (i)T 0
+
+ ∀i = 1, 2.
+Therefore, we have
+1
+2
+⟨ˆU1ˆU T
+1MˆV1ˆV T
+1 −M,T
+⟩
++ 1
+2
+⟨ˆU2ˆU T
+2MˆV2ˆV T
+2 −M,T
+⟩
+=1
+2
+⟨ˆΘ1ˆΘT
+1AˆΘ1ˆΘT
+1− ΘΘTAΘΘT,˜T
+⟩
++ 1
+2
+⟨ˆΘ2ˆΘT
+2AˆΘ2ˆΘT
+2− ΘΘTAΘΘT,˜T
+⟩
+.
+By (7.11), we write
+ˆΘiˆΘT
+i − ΘΘT =
+∞∑
+k=1
+SA,k(ˆE(i)) ∀i = 1, 2,
+28
+
+[PDF PAGE 29]
+and as a result, for i = 1, 2,
+ˆΘiˆΘT
+iAˆΘˆΘT− ΘΘTAΘΘT
+=
+(
+SA,1(ˆE(i))AΘΘT + ΘΘTASA,1(ˆE(i))
+)
++
+∞∑
+k=2
+(
+SA,k(ˆE(i))AΘΘT + ΘΘTASA,k(ˆE(i))
+)
++ (ˆΘiˆΘT
+i − ΘΘT)A(ˆΘiˆΘT
+i − ΘΘT).
+Then, we write
+1
+2
+⟨ˆU1ˆU T
+1MˆV1ˆV T
+1 −M,T
+⟩
++ 1
+2
+⟨ˆU2ˆU T
+2MˆV2ˆV T
+2 −M,T
+⟩
+=1
+2
+2∑
+i=1
+⟨(
+SA,1(ˆE(i))AΘΘT + ΘΘTASA,1(ˆE(i))
+)
+,˜T
+⟩
++1
+2
+2∑
+i=1
+∞∑
+k=2
+⟨(
+SA,k(ˆE(i))AΘΘT + ΘΘTASA,k(ˆE(i))
+)
+,˜T
+⟩
++1
+2
+2∑
+i=1
+⟨
+(ˆΘiˆΘT
+i − ΘΘT)A(ˆΘiˆΘT
+i − ΘΘT),˜T
+⟩
+.
+By the deﬁnition ofSA,1(ˆE(i)), we write
+1
+2
+2∑
+i=1
+⟨
+SA,1(ˆE(i))AΘΘT + ΘΘTASA,1(ˆE(i)),˜T
+⟩
+=⟨U⊥U T
+⊥(ˆZ (1)/2 +ˆZ (2)/2)VV T,T⟩ +⟨UU T(ˆZ (1)/2 +ˆZ (2)/2)V⊥V T
+⊥,T⟩.
+We begin with the normal approximation of 1
+2
+∑2
+i=1
+⟨
+SA,1(ˆE(i))AΘΘT +ΘΘ TASA,1(ˆE(i)),˜T
+⟩
+.
+Lemma 4. Under Assumptions 1-3 and suppose that n≥C1µ2
+maxrd1 logd1, we have
+sup
+x∈R
+⏐⏐⏐⏐P
+( 1
+2
+∑2
+i=1
+⟨
+SA,1(ˆE(i))AΘΘT + ΘΘTASA,1(ˆE(i)),˜T
+⟩
+σξ(∥V TT T∥2
+F +∥U TT∥2
+F)1/2·
+√
+d1d2/n
+≤x
+)
+− Φ(x)
+⏐⏐⏐⏐
+≤C2
+µ4
+max∥T∥2
+ℓ1
+α2
+T∥T∥2
+F
+· r√logd1
+d2
++ 3
+d2
+1
++C3γn
+√
+logd1 +C4µmax
+√
+rd1
+n .
+whereC1,C 2,C 3,C 4 > 0 are absolute constants and γn is deﬁned by Assumption 1.
+Lemma 5 and Lemma 6 characterize sharp bounds for the remainder terms.
+29
+
+[PDF PAGE 30]
+Lemma 5. Under Assumptions 1-3, under the event of Theorem 4,
+⏐⏐
+2∑
+i=1
+∞∑
+k=2
+⟨(
+SA,k(ˆE(i))AΘΘT + ΘΘTASA,k(ˆE(i))
+)
+,˜T
+⟩⏐⏐
+≤C2∥T∥ℓ1µ2
+maxσξ
+√
+rd1 logd1
+n ·
+(σξ
+λr
+·
+√
+rd2
+1d2 logd1
+n
+)
+,
+whereC2 > 0 is some absolute constant.
+Lemma 6. Under Assumptions 1-3, on the event of Theorem 4,
+2∑
+i=1
+⏐⏐⟨
+(ˆΘiˆΘT
+i − ΘΘT)A(ˆΘiˆΘT
+i − ΘΘT),˜T
+⟩⏐⏐
+≤C2κ0µ2
+max∥T∥ℓ1σξ
+√
+rd1 logd1
+n · σξ
+λr
+√
+rd2
+1d2 logd1
+n
+for some absolute constant C2 > 0 and κ(M)≤κ0 denotes M’s condition number.
+We write
+ˆmT−mT
+σξ(∥V TT T∥2
+F +∥U TT∥2
+F)1/2·
+√
+d1d2/n
+=
+∑2
+i=1⟨ˆUiˆU T
+i ˆZ (i)ˆViˆV T
+i ,T⟩/2
+σξ(∥V TT T∥2
+F +∥U TT∥2
+F)1/2·
+√
+d1d2/n
++
+∑2
+i=1
+⟨
+SA,1(ˆE(i))AΘΘT + ΘΘTASA,1(ˆE(i)),˜T
+⟩
+/2
+σξ(∥V TT T∥2
+F +∥U TT∥2
+F)1/2·
+√
+d1d2/n
++
+∑2
+i=1
+∑∞
+k=2
+⟨(
+SA,k(ˆE(i))AΘΘT + ΘΘTASA,k(ˆE(i))
+)
+,˜T
+⟩
+/2
+σξ(∥V TT T∥2
+F +∥U TT∥2
+F)1/2·
+√
+d1d2/n
++
+∑2
+i=1
+⟨
+(ˆΘiˆΘT
+i − ΘΘT)A(ˆΘiˆΘT
+i − ΘΘT),˜T
+⟩
+/2
+σξ(∥V TT T∥2
+F +∥U TT∥2
+F)1/2·
+√
+d1d2/n
+.
+Under Assumption 4, it holds that ∥V TT T∥2
+F +∥U TT∥2
+F≥α2
+T∥T∥2
+Fr/d1. As a result,
+σξ(∥V TT T∥2
+F +∥U TT∥2
+F)1/2·
+√
+d1d2/n≥αT∥T∥Fσξ
+√
+rd2
+n .
+Together with Lemma 3,5 and Lemma 6, we get, with probability at least 1 − 6d−2
+1 logd1,
+that
+⏐⏐(ˆmT−mT )−∑2
+i=1
+⟨
+SA,1(ˆE(i))AΘΘT + ΘΘTASA,1(ˆE(i)),˜T
+⟩
+/2
+⏐⏐
+σξ(∥V TT T∥2
+F +∥U TT∥2
+F)1/2·
+√
+d1d2/n
+30
+
+[PDF PAGE 31]
+≤C1
+µ2
+max∥T∥ℓ1
+αT∥T∥F
+·
+√
+logd1
+d2
++C2κ0
+µ2
+max∥T∥ℓ1
+αT∥T∥F
+· σξ
+λr
+√
+αdrd2
+1d2 log2d1
+n
+for some absolute constantsC1,C 2 > 0. By the normal approximation of∑2
+i=1
+⟨
+SA,1(ˆE(i))AΘΘT+
+ΘΘTASA,1(ˆE(i)),˜T
+⟩
+/2 in Lemma 4 and the Lipschitz property of Φ( x), we get
+sup
+x∈R
+⏐⏐⏐P
+( ˆmT−mT
+σξ(∥V TT T∥2
+F +∥U TT∥2
+F)1/2·
+√
+d1d2/n
+≤x
+)
+− Φ(x)
+⏐⏐⏐
+≤C1
+µ2
+max∥T∥ℓ1
+αT∥T∥F
+√
+logd1
+d2
++C2κ0
+µ2
+max∥T∥ℓ1
+αT∥T∥F
+· σξ
+λr
+√
+αdrd2
+1d2 log2d1
+n
++C4
+µ4
+max∥T∥2
+ℓ1
+α2
+T∥T∥2
+F
+· r√logd1
+d2
++ 6 logd1
+d2
+1
++C5γn
+√
+logd1 +C6µmax
+√
+rd1
+n ,
+which concludes the proof of Theorem 1.
+7.3 Proof of Theorem 2
+It suﬃces to prove the normal approximation of
+ˆmT−mT
+ˆσξˆsT·
+√
+d1d2/n
+with data-driven estimators ˆσξ andˆsT . Write
+ˆmT−mT
+ˆσξˆsT·
+√
+d1d2/n
+= ˆmT−mT
+σξ(∥V TT T∥2
+F +∥U TT∥2
+F)1/2·
+√
+d1d2/n
++ ˆmT−mT
+ˆσξˆsT·
+√
+d1d2/n
+·
+(
+1−ˆσξ
+σξ
+)
++ ˆmT−mT
+σξ(∥V TT T∥2
+F +∥U TT∥2
+F)1/2·
+√
+d1d2/n
+·
+((∥V TT T∥2
+F +∥U TT∥2
+F)1/2
+ˆsT
+− 1
+)
+.
+Recall that
+ˆσ2
+ξ = 1
+2n0
+n∑
+i=n0+1
+(
+Yi−⟨ˆM
+init
+1 ,Xi⟩
+)2
++ 1
+2n0
+n0∑
+i=1
+(Yi−⟨ˆM
+init
+2 ,Xi⟩)2
+= 1
+n
+n∑
+i=1
+ξ2
+i + 1
+2n0
+n∑
+i=n0+1
+⟨ˆ∆1,Xi⟩2 + 1
+2n0
+n0∑
+i=1
+⟨ˆ∆2,Xi⟩2
+31
+
+[PDF PAGE 32]
++ 1
+n0
+n∑
+i=n0+1
+ξi⟨ˆ∆1,Xi⟩ + 1
+n0
+n0∑
+i=1
+ξi⟨ˆ∆2,Xi⟩.
+Note that {(Xi,ξi)}n
+i=n0+1 are independent with ˆ∆1. By Bernstein inequality and under
+Assumption 1, it is easy to show that, with probability at least 1 − 2d−2
+1 ,
+⏐⏐ˆσ2
+ξ−σ2
+ξ
+⏐⏐≤ 2(∥ˆ∆1∥2
+F +∥ˆ∆2∥2
+F)
+d1d2
++ C1σ2
+ξ logd1
+√n ≤ C1σ2
+ξ logd1
+√n +C2γ2
+n·σ2
+ξ.
+Then, if C2γ2
+n≤ 1/3 so that|ˆσ2
+ξ−σ2
+ξ|≤ σ2
+ξ/2, we get
+⏐⏐⏐1−ˆσξ
+σξ
+⏐⏐⏐≤
+⏐⏐⏐1−ˆσ2
+ξ
+σ2
+ξ
+⏐⏐⏐≤ C1 logd1√n +C2γ2
+n.
+We now bound
+⏐⏐∥TV∥2
+F−∥TˆV1∥2
+F
+⏐⏐. Observe that V and ˆV1 both have orthonormal columns.
+Then,
+⏐⏐∥TV∥2
+F−∥TˆV1∥2
+F
+⏐⏐ =
+⏐⏐∥TVV T∥2
+F−∥TˆV1ˆV T
+1∥2
+F
+⏐⏐
+≤
+T (VV T−ˆV1ˆV T
+1 )
+2
+F + 2
+⏐⏐⟨
+T (VV T−ˆV1ˆV T
+1 ),TVV T⟩⏐⏐.
+Clearly,
+T (VV T−ˆV1ˆV T
+1 )
+2
+F≤
+( ∑
+(j1,j2)∈supp(T )
+|Tj1,j2|
+eT
+j2(VV T−ˆV1ˆV T
+1 )
+
+)2
+≤∥T∥2
+ℓ1·∥VV T−ˆV1ˆV T
+1∥2
+2,max≤C1µ2
+max
+∥T∥2
+ℓ1
+d2
+·
+(σ2
+ξ
+λ2
+r
+)rd2
+1d2 logd1
+n .
+Similarly,
+⏐⏐⟨
+T (VV T−ˆV1ˆV T
+1 ),TVV T⟩⏐⏐≤∥TV∥F∥T (VV T−ˆV1ˆV T
+1 )V∥F
+≤∥TV∥F∥T∥ℓ1∥(VV T−ˆV1ˆV T
+1 )V∥2,max
+≤∥TV∥F∥T∥ℓ1µmax· σξ
+λr
+√
+rd2
+1 logd1
+n .
+Therefore,
+⏐⏐∥TV∥2
+F−∥TˆV1∥2
+F
+⏐⏐ =
+⏐⏐∥TVV T∥2
+F−∥TˆV1ˆV T
+1∥2
+F
+⏐⏐
+≤C1µ2
+max
+∥T∥2
+ℓ1
+d2
+·
+(σ2
+ξ
+λ2
+r
+)rd2
+1d2 logd1
+n +C2∥TV∥F∥T∥ℓ1µmax· σξ
+λr
+√
+rd2
+1 logd1
+n .
+32
+
+[PDF PAGE 33]
+Similar bounds can be shown for
+⏐⏐∥U TT∥2
+F−∥ˆU T
+1T∥2
+F
+⏐⏐. The same bounds also hold for∥ˆU T
+2T∥2
+F
+and∥TˆV2∥2
+F. Under the event of Theorem 4,
+⏐⏐ˆs2
+T−
+(
+∥V TT T∥2
+F +∥U TT∥2
+F
+)⏐⏐
+≤C1µ2
+max
+∥T∥2
+ℓ1
+d2
+·
+(σ2
+ξ
+λ2
+r
+)rd2
+1d2 logd1
+n +C2∥TV∥F∥T∥ℓ1µmax· σξ
+λr
+√
+rd2
+1 logd1
+n ,
+and as a result
+⏐⏐⏐⏐
+ˆs2
+T
+∥V TT T∥2
+F +∥U TT∥2
+F
+− 1
+⏐⏐⏐⏐≤C1µmax
+∥T∥ℓ1
+∥T∥FαT
+· σξ
+λr
+√
+αdd2
+1d2 logd1
+n ,
+where we used the fact ∥V TT T∥2
+F +∥U TT∥2
+F≥α2
+T∥T∥2
+F(r/d1) and also the fact
+∥V TT T∥2
+F +∥U TT∥2
+F≥ max{∥TV∥F,∥U TT∥F}· αT∥T∥F
+√
+r/d1,
+due to Assumption 4. It also implies, under condition (3.5), that
+ˆs2
+T≥
+(
+∥V TT T∥2
+F +∥U TT∥2
+F
+)
+/2≥α2
+T∥T∥2
+F· r
+2d1
+.
+Then,
+⏐⏐⏐⏐
+(∥V TT T∥2
+F +∥U TT∥2
+F)1/2
+ˆsT
+− 1
+⏐⏐⏐⏐≤
+⏐⏐⏐⏐
+∥V TT T∥2
+F +∥U TT∥2
+F
+ˆs2
+T
+− 1
+⏐⏐⏐⏐
+≤C2µmax
+∥T∥ℓ1
+∥T∥FαT
+· σξ
+λr
+√
+αdd2
+1d2 logd1
+n .
+By the normal approximation in Theorem 1, there is an event E2 with
+P(E2)≥1−C1
+∥T∥ℓ1µ2
+max
+∥T∥FαT
+√
+logd1
+d2
+−C2κ0
+∥T∥ℓ1µ2
+max
+∥T∥FαT
+· σξ
+λr
+√
+αdrd2
+1d2 log2d1
+n
+−C3
+∥T∥2
+ℓ1µ2
+max
+∥T∥2
+Fα2
+T
+· r√logd1
+d1
+− 6 logd1
+d2
+1
+−C4γn
+√
+logd1−C5µmax
+√
+rd1
+n ,
+so that on eventE2,
+ˆmT−mT
+ˆσξˆsT·
+√
+d1d2/n
+≤C6
+√
+logd1
+and
+ˆmT−mT
+σξ(∥V TT T∥2
+F +∥U TT∥2
+F)1/2·
+√
+d1d2/n
+≤C6
+√
+logd1.
+33
+
+[PDF PAGE 34]
+Therefore, under eventE2, with probability at least 1− 2d−2
+1 ,
+⏐⏐⏐⏐
+ˆmT−mT
+ˆσξˆsT·
+√
+d1d2/n
+·
+(
+1−ˆσξ
+σξ
+)⏐⏐⏐⏐≤ C1 log3/2d1√n +C2γ2
+n
+√
+logd1 (7.3)
+and
+⏐⏐⏐⏐
+ˆmT−mT
+σξ(∥V TT T∥2
+F +∥U TT∥2
+F)1/2·
+√
+d1d2/n
+·
+((∥V TT T∥2
+F +∥U TT∥2
+F)1/2
+ˆsT
+− 1
+)⏐⏐⏐⏐
+≤C2µmax
+∥T∥ℓ1
+∥T∥FαT
+· σξ
+λr
+√
+αdrd2
+1d2 logd2
+1
+n . (7.4)
+As a result, if
+lim
+d1,d2→∞
+max
+{µ2
+max∥T∥ℓ1
+αT∥T∥F
+√
+r logd1
+d2
+,κ0µ2
+max∥T∥ℓ1
+αT∥T∥F
+· σξ
+λr
+√
+αdrd2
+1d2 logd2
+1
+n ,γn
+√
+logd1
+}
+= 0,
+then
+ˆmT−mT
+ˆσξˆsT·
+√
+d1d2/n
+d
+−→N (0, 1)
+as d1,d 2→∞ .
+7.4 Proof of Theorem 3
+We begin with the accuracy of ˆG(t). By the deﬁnition of ˆG(t), we have
+d1d2
+N0
+∑
+j∈D2t
+(
+⟨ˆU (t)ˆG(t)(ˆV (t))T,Xj⟩− Yj
+)ˆU (t)TXjˆV (t) = 0. (7.5)
+To this end, let ˆO(t)
+U and ˆO(t)
+V be any orthogonal matrices so that
+max
+(
+∥ˆU (t)−UˆO(t)
+U∥,∥ˆV (t)−V ˆO(t)
+V∥
+)
+≤ 1
+C1µmaxκ2
+0
+√r (7.6)
+for some large enough constant C1 > 0.
+Lemma 7. Suppose that∥ˆU (t)∥2,max≤ 2µmax
+√
+r/d1 and∥ˆV (t)∥2,max≤ 2µmax
+√
+r/d2 and if n≥
+C2µ4
+maxr3(r2 + logd1) logd1, then with probability at least 1− 3d−2
+1 ,
+ˆG(t)−ˆO(t)T
+U ΛˆO(t)
+V
+
+34
+
+[PDF PAGE 35]
+≤C3σξ
+√
+rd1d2 logd1
+N0
++ 2∥Λ∥·
+(
+∥ˆU (t)−UˆO(t)
+U∥2 +∥ˆV (t)−V ˆO(t)
+V∥2)
++C4∥Λ∥
+(√ r
+d2
+∥ˆU (t)−UˆO(t)
+U∥2,max +
+√ r
+d1
+∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+·µmax
+√
+rd1d2 logd1
+N0
+for some absolute constants C2,C 3,C 4 > 0.
+Let ˆG(t) = ˆL(t)
+GˆΛ(t)ˆR(t)T
+G denote ˆG(t)’s SVD where ˆL(t)
+G , ˆR(t)
+G are both r×r orthogonal
+matrices and ˆΛ(t) is a diagonal matrix. Recall the gradient descent step of Algorithm 1,
+ˆU (t+0.5) = ˆU (t)ˆL(t)
+G −η· d1d2
+N0
+∑
+j∈D2t+1
+⟨ˆU (t)ˆG(t)ˆV (t)T−UΛV T,Xj
+⟩
+XjˆV (t)ˆR(t)
+G (ˆΛ(t))−1
+−η· d1d2
+N0
+∑
+j∈D2t+1
+ξjXjˆV (t)ˆR(t)
+G (ˆΛ(t))−1.
+Observe that (ˆU (t),ˆV (t),ˆG(t)) are independent with D2t+1. Then, we write
+ˆU (t+0.5) = ˆU (t)ˆL(t)
+G −η· (ˆU (t)ˆG(t)ˆV (t)T−UΛV T)ˆV (t)ˆR(t)
+G (ˆΛ(t))−1 + ˆE(t)
+V + ˆE(t)
+ξ,V,
+where
+ˆE(t)
+V =η· (ˆU (t)ˆG(t)ˆV (t)T−UΛV T)ˆV (t)ˆR(t)
+G (ˆΛ(t))−1
+−η· d1d2
+N0
+∑
+j∈D2t+1
+⟨ˆU (t)ˆG(t)ˆV (t)T−UΛV T,Xj
+⟩
+XjˆV (t)ˆR(t)
+G (ˆΛ(t))−1
+and
+ˆE(t)
+ξ,V =−η· d1d2
+N0
+∑
+j∈D2t+1
+ξjXjˆV (t)ˆR(t)
+G (ˆΛ(t))−1.
+Note that
+(ˆU (t)ˆG(t)ˆV (t)T−UΛV T)ˆV (t)ˆR(t)
+G (ˆΛ(t))−1 = ˆU (t)(ˆG(t)− ˆO(t)T
+U ΛˆO(t)
+V
+)ˆR(t)
+G (ˆΛ(t))−1
++
+(ˆU (t)ˆL(t)
+G −UˆO(t)
+U ˆL(t)
+G
+)ˆL(t)T
+G ˆO(t)T
+U ΛˆO(t)
+V ˆR(t)
+G (ˆΛ(t))−1
++UΛ(ˆV (t)ˆO(t)T
+V −V )TˆV (t)ˆR(t)
+G (ˆΛ(t))−1.
+Therefore,
+ˆU (t+0.5) =UˆO(t)
+U ˆL(t)
+G + (ˆU (t)ˆL(t)
+G −UˆO(t)
+U ˆL(t)
+G )
+(
+I−η·ˆL(t)T
+G ˆO(t)T
+U ΛˆO(t)
+V ˆR(t)
+G (ˆΛ(t))−1)
+35
+
+[PDF PAGE 36]
+−η·ˆU (t)(ˆG(t)− ˆO(t)T
+U ΛˆO(t)
+V
+)ˆR(t)
+G (ˆΛ(t))−1
+−η·UΛ(ˆV (t)ˆO(t)T
+V −V )TˆV (t)ˆR(t)
+G (ˆΛ(t))−1
++ ˆE(t)
+V + ˆE(t)
+ξ,V. (7.7)
+Lemma 8. Under Assumptions 2 and 3 and the assumptions of Lemma 7, suppose that
+∥ˆU (t)∥2,max≤ 2µmax
+√
+r/d1,∥ˆV (t)∥2,max≤ 2µmax
+√
+r/d2,
+max
+{
+∥ˆU (t)−UˆO(t)
+U∥,∥ˆV (t)−V ˆO(t)
+V∥
+}
+≤ 1/(C1µmaxκ0
+√rαd),
+and n≥ C2αdκ2
+0µ4
+maxr2d1(r + logd1) logd1 for some large enough constant C1,C 2 > 0, if
+η∈ [0.25, 0.75], then the following bound holds with probability at least 1− 2d−2
+1 ,
+ˆU (t+0.5)−UˆO(t)
+U ˆL(t)
+G
+
+2,max≤
+(
+1−9η
+10
+)
+∥ˆU (t)−UˆO(t)
+U∥2,max +C3ησξ
+λr
+√
+rd1d2 logd1
+N0
++ η
+8·
+(
+∥ˆU (t)−UˆO(t)
+U∥2,max +∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+;
+and with probability at least 1− 2d−2
+1 ,
+{
+|1−λr(ˆU (t+0.5))|,|1−λ1(ˆU (t+0.5))|
+}
+≤C3ησξ
+λr
+·
+√
+d2
+1d2 logd1
+N0
++C4(κ0η +κ2
+0η2)·
+(
+∥ˆU (t)−UˆO(t)
+U∥2 +∥ˆV (t)−V ˆO(t)
+V∥2)
++C5ηκ0·
+(√ r
+d2
+∥ˆU (t)−UˆO(t)
+U∥2,max +
+√ r
+d1
+∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+·µmax
+√
+rd2
+1d2
+N0
+,
+for some absolute constants C3,C 4,C 5 > 0.
+By Lemma 8, we denote the SVD of ˆU (t+0.5) by ˆU (t+0.5) = ˆU (t+1)ˆΣ(t+1)
+U ˆK (t+1)T
+U where
+ˆΣ(t+1)
+U is diagonal and
+∥ˆΣ(t+1)
+U −I∥
+≤C3ησξ
+λr
+·
+√
+d2
+1d2 logd1
+N0
++C4(κ0η +κ2
+0η2)·
+(
+∥ˆU (t)−UˆO(t)
+U∥2 +∥ˆV (t)−V ˆO(t)
+V∥2)
++C5ηκ0·
+(√ r
+d2
+∥ˆU (t)−UˆO(t)
+U∥2,max +
+√ r
+d1
+∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+·µmax
+√
+rd2
+1d2
+N0
+.
+36
+
+[PDF PAGE 37]
+By ˆU (t+1)ˆΣ(t+1)
+U ˆK (t+1)T
+U =UˆO(t)
+U ˆL(t)
+G +
+(ˆU (t+0.5)−UˆO(t)
+U ˆL(t)
+G
+)
+, we write
+ˆU (t+1) =UˆO(t)
+U ˆL(t)
+G ˆK (t+1)
+U (ˆΣ(t+1)
+U )−1 +
+(ˆU (t+0.5)−UˆO(t)
+U ˆL(t)
+G
+)ˆK (t+1)
+U (ˆΣ(t+1)
+U )−1
+and obtain
+ˆU (t+1)−UˆO(t)
+U ˆL(t)
+G ˆK (t+1)
+U =UˆO(t)
+U ˆL(t)
+G ˆK (t+1)
+U
+(
+(ˆΣ(t+1)
+U )−1−I
+)
++
+(ˆU (t+0.5)−UˆO(t)
+U ˆL(t)
+G
+)ˆK (t+1)
+U (ˆΣ(t+1)
+U )−1. (7.8)
+Note that ˆO(t)
+U ˆL(t)
+G ˆK (t+1)
+U is an r×r orthogonal matrix. The Assumptions of Lemma 8 can
+guaranteeλr(ˆΣ(t+1)
+U )≥ 1−η/20 so that∥(ˆΣ(t+1)
+U )−1∥≤ 1 +η/10.
+Therefore,
+ˆU (t+1)−UˆO(t)
+U ˆL(t)
+G ˆK (t+1)
+U
+
+2,max≤ ∥U∥2,max·
+(ˆΣ(t+1)
+U )−1−I
+ + (1 +η/10)∥ˆU (t+0.5)−UˆO(t)
+U ˆL(t)
+G∥2,max.
+Then, by Lemma 8,
+ˆU (t+1)−UˆO(t)
+U ˆL(t)
+G ˆK (t+1)
+U
+
+2,max≤µmax
+√ r
+d1
+(ˆΣ(t+1)
+U )−1−I
+ + (1 +η/10)∥ˆU (t+0.5)−UˆO(t)
+U ˆL(t)
+G∥2,max
+≤C3ηµmax· σξ
+λr
+√
+rd1d2 logd1
+N0
++C4(κ0η +κ2
+0η2)µmax·
+√ r
+d1
+(
+∥ˆU (t)−UˆO(t)
+U∥2 +∥ˆV (t)−V ˆO(t)
+V∥2)
++C5η·
+(√ r
+d2
+∥ˆU (t)−UˆO(t)
+U∥2,max +
+√ r
+d1
+∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+·µ2
+maxκ0
+√
+r2d1d2
+N0
++
+(
+1− 4η
+5
+)
+∥ˆU (t)−UˆO(t)
+U∥2,max +C3ησξ
+λr
+√
+rd1d2 logd1
+N0
++ η
+7·
+(
+∥ˆU (t)−UˆO(t)
+U∥2,max +∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+≤
+(
+1− 4η
+5
+)
+∥ˆU (t)−UˆO(t)
+U∥2,max + η
+6·
+(
+∥ˆU (t)−UˆO(t)
+U∥2,max +∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
++C3ησξ
+λr
+√
+rd1d2 logd1
+N0
+,
+where the last inequality holds as long as n≥C5αdκ2
+0µ4
+maxd1r3 logd1,∥ˆU (t)−UˆO(t)
+U∥+∥ˆV (t)−
+V ˆO(t)
+V∥≤ (C6κ2
+0µmax
+√rαd)−1 for some large enough constants C5,C 6 > 0. Then,
+ˆU (t+1)−UˆO(t)
+U ˆL(t)
+G ˆK (t+1)
+U
+
+2,max≤C3ησξ
+λr
+√
+rd1d2 logd1
+N0
+37
+
+[PDF PAGE 38]
++
+(
+1− 4η
+5
+)
+∥ˆU (t)−UˆO(t)
+U∥2,max + η
+6·
+(
+∥ˆU (t)−UˆO(t)
+U∥2,max +∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+.
+Similarly, the gradient descent step for ˆV (t) reads
+ˆV (t+0.5) =ˆV (t)ˆR(t)
+G −η· d1d2
+N0
+∑
+j∈D2t+1
+⟨ˆU (t)ˆG(t)ˆV (t)T−UΛV T,Xj
+⟩
+X T
+j ˆU (t)ˆL(t)
+G (ˆΛ(t))−1
+−η· d1d2
+N0
+∑
+j∈D2t+1
+ξjX T
+j ˆU (t)ˆL(t)
+G (ˆΛ(t))−1.
+Let ˆV (t+0.5) = ˆV (t+1)ˆΣ(t+1)
+V ˆK (t+1)T
+V denote ˆV (t+0.5)’s SVD where ˆK (t+1)
+V is an orthogonal ma-
+trix. In the same fashion, with probability at least 1 − 4d−2
+1 ,
+ˆV (t+1)−V ˆO(t)
+V ˆR(t)
+G ˆK (t+1)
+V
+
+2,max≤C3ησξ
+λr
+√
+rd1d2 logd1
+N0
++
+(
+1− 4η
+5
+)
+∥ˆV (t)−V ˆO(t)
+V∥2,max + η
+6·
+(
+∥ˆU (t)−UˆO(t)
+U∥2,max +∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+.
+Then, we conclude with
+ˆU (t+1)−UˆO(t)
+U ˆL(t)
+G ˆK (t+1)
+U
+
+2,max +
+ˆV (t+1)−V ˆO(t)
+V ˆR(t)
+G ˆK (t+1)
+V
+
+2,max
+≤C3ησξ
+λr
+√
+rd1d2 logd1
+N0
++
+(
+1− 2η
+3
+)
+·
+(
+∥ˆU (t)−UˆO(t)
+U∥2,max +∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+, (7.9)
+where both ˆO(t)
+U ˆL(t)
+G ˆK (t+1)
+U and ˆO(t)
+V ˆR(t)
+G ˆK (t+1)
+V are orthogonal matrices.
+The contraction property of the iterations is then proved after replacing ˆO(t)
+U and ˆO(t)
+V
+with the orthogonal matrices deﬁned in Theorem 3. It suﬃces to show that
+max
+{
+∥ˆU (t)−UˆO(t)
+U∥,∥ˆV (t)−V ˆO(t)
+V∥
+}
+≤ 1
+C6µmaxκ2
+0
+√rαd
+, (7.10)
+and∥ˆU (t)∥2,max≤ 2µmax
+√
+r/d1,∥ˆV (t)∥2,max≤ 2µmax
+√
+r/d2 for all 1 ≤ t≤ m and some large
+constantC6 > 0.
+We ﬁrst show∥ˆU (t)∥2,max≤ 2µmax
+√
+r/d1,∥ˆV (t)∥2,max≤ 2µmax
+√
+r/d2 for all 1 ≤ t≤ m. By
+the contraction property (7.9), it suﬃces to show ∥ˆU (1)−UˆO(1)
+U∥2,max≤ µmax
+√
+r/d1,∥ˆV (1)−
+V ˆO(1)
+V ∥2,max ≤ µmax
+√
+r/d1 and C3(σξ/λr)
+√
+rd1d2 logd1/N0 ≤ µmax
+√
+r/d1 where the last in-
+equality holds automatically under Assumption 3. Similarly as the proof of Theorem 4, with
+probability at least 1− 5d−2
+1 logd1,
+d2,max(ˆU (1),U )≤C2µmax
+σξ +∥M∥max
+λr
+·
+√
+rd2d1 logd1
+N0
+,
+38
+
+[PDF PAGE 39]
+d2,max(ˆV (1),V )≤C2µmax
+σξ +∥M∥max
+λr
+·
+√
+rd1d1 logd1
+N0
+.
+Since∥M∥max ≤∥ Λ∥∥U∥2,max∥V∥2,max ≤ µ2
+max∥Λ∥
+√
+r2/d1d2, it implies ∥ˆU (1)−UˆO(1)
+U∥2,max ≤
+µmax
+√
+r/d1 and∥ˆV (1)−V ˆO(1)
+V ∥2,max≤µmax
+√
+r/d1 as long as
+n≥C2αdµ4
+maxκ2
+0r2d1 log2d1 and C2
+σξ
+λr
+·
+√
+αdd2
+1d2 log2d1
+n ≤ 1
+for some large enough constant C2 > 0.
+We then show (7.10) for all t = 1,··· ,m . By eq. (I.1), we write
+ˆU (t+1)ˆΣ(t+1)
+U −UˆO(t)
+U ˆL(t)
+G ˆK (t+1)
+U
+= (ˆU (t)ˆL(t)
+G −UˆO(t)
+U ˆL(t)
+G )
+(
+I−η·ˆL(t)T
+G ˆO(t)T
+U ΛˆO(t)
+V ˆR(t)
+G (ˆΛ(t))−1)ˆK (t+1)
+U
+−η·ˆU (t)(ˆG(t)− ˆO(t)T
+U ΛˆO(t)
+V
+)ˆR(t)
+G (ˆΛ(t))−1ˆK (t+1)
+U
+−η·UΛ(ˆV (t)ˆO(t)T
+V −V )TˆV (t)ˆR(t)
+G (ˆΛ(t))−1ˆK (t+1)
+U + ˆE(t)
+V ˆK (t+1)
+U + ˆE(t)
+ξ,V ˆK (t+1)
+U .
+Similar as the proof of Lemma 8 and (I.1), we can write
+ˆU (t+1)ˆΣ(t+1)
+U −UˆO(t)
+U ˆL(t)
+G ˆK (t+1)
+U
+≤ (1− 0.9η)∥ˆU (t)−UˆO(t)
+U∥ + 2η∥ˆG(t)− ˆO(t)T
+U ΛˆO(t)
+V∥
+λr
++ 2ηκ0∥ˆV (t)−V ˆO(t)
+V∥2 +
+ˆE(t)
+V ˆK (t+1)
+U + ˆE(t)
+ξ,V ˆK (t+1)
+U
+,
+and as a result
+ˆU (t+1)−UˆO(t)
+U ˆL(t)
+G ˆK (t+1)
+U
+
+≤(1− 0.9η)∥ˆU (t)−UˆO(t)
+U∥ + 2η∥ˆG(t)− ˆO(t)T
+U ΛˆO(t)
+V∥
+λr
++ 2ηκ0∥ˆV (t)−V ˆO(t)
+V∥2
++
+ˆE(t)
+V ˆK (t+1)
+U + ˆE(t)
+ξ,V ˆK (t+1)
+U
+ +∥ˆΣ(t+1)
+U −I∥.
+Then, by Lemma 7-8 and the upper bound of ∥ˆE(t)
+V + ˆE(t)
+ξ,V∥ in the proof of Lemma 8,
+ˆU (t+1)−UˆO(t)
+U ˆL(t)
+G ˆK (t+1)
+U
+≤ (1− 0.8η)∥ˆU (t)−UˆO(t)
+U∥ +C3ησξ
+λr
+·
+√
+d2
+1d2 logd1
+N0
++C4(κ0η +κ2
+0η2)·
+(
+∥ˆU (t)−UˆO(t)
+U∥2 +∥ˆV (t)−V ˆO(t)
+V∥2)
+39
+
+[PDF PAGE 40]
++C5ηκ0·
+(√ r
+d2
+∥ˆU (t)−UˆO(t)
+U∥2,max +
+√ r
+d1
+∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+·µmax
+√
+rd2
+1d2
+N0
+.
+Similarly, we can get the bound for ∥ˆV (t+1)−V ˆO(t)
+V ˆR(t)
+G ˆK (t+1)
+V ∥ and as a result
+ˆU (t+1)−UˆO(t)
+U ˆL(t)
+G ˆK (t+1)
+U
+ +∥ˆV (t+1)−V ˆO(t)
+V ˆR(t)
+G ˆK (t+1)
+V ∥
+≤ (1− 0.8η)
+(
+∥ˆU (t)−UˆO(t)
+U∥ +∥ˆV (t)−UˆO(t)
+V∥
+)
++C3ησξ
+λr
+·
+√
+d2
+1d2 logd1
+N0
++C4(κ0η +κ2
+0η2)·
+(
+∥ˆU (t)−UˆO(t)
+U∥2 +∥ˆV (t)−V ˆO(t)
+V∥2)
++C5ηκ0·
+(√ r
+d2
+∥ˆU (t)−UˆO(t)
+U∥2,max +
+√ r
+d1
+∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+·µmax
+√
+rd2
+1d2
+N0
+.
+By the previous proof, with probability at least 1 − 2d−2
+1 ,
+∥ˆU (t)−UˆO(t)
+U∥2,max≤C1µmax
+√ r
+d1
+and ∥ˆV (t)−V ˆO(t)
+V∥2,max≤C1µmax
+√ r
+d2
+.
+If∥ˆU (t)−UˆO(t)
+U∥ +∥ˆV (t)−V ˆO(t)
+V∥≤ 1/(3C4µmaxκ2
+0
+√rαd), we get
+ˆU (t+1)−UˆO(t)
+U ˆL(t)
+G ˆK (t+1)
+U
+ +∥ˆV (t+1)−V ˆO(t)
+V ˆR(t)
+G ˆK (t+1)
+V ∥
+≤C3ησξ
+λr
+·
+√
+d2
+1d2 logd1
+N0
++
+(
+1− η
+2
+)
+·
+(
+∥ˆU (t)−UˆO(t)
+U∥ +∥ˆV (t)−V ˆO(t)
+V∥
+)
++ 2C5ηµ2
+maxκ0
+√
+r3d1
+N0
+≤ 1
+3C4µmaxκ2
+0
+√rαd
+,
+where the last inequality holds as long as η ≤ 0.75 and n≥ C6αdµ6
+maxκ6
+0r3d1 log2d1 and
+µmaxκ2
+0(σξ/λr)·
+√
+αdrd2
+1d2 log2d1/n≤C−1
+7 for some large enough constantsC6,C 7 > 0. Then,
+it suﬃces to prove∥ˆU (1)−UˆO(1)
+U∥ +∥ˆV (1)−V ˆO(1)
+V ∥≤ 1/(3C4µmaxκ2
+0
+√rαd) where, by Davis-
+Kahan theorem, with probability at least 1 − 2d−2
+1 ,
+∥ˆU (1)ˆU (1)T−UU T∥ +∥ˆV (1)ˆV (1)T−VV T∥≤ C4
+σξ +∥M∥max
+λr
+·
+√
+d2
+1d2 logd1
+N0
+≤ 1
+3C4µmaxκ2
+0
+√rαd
+,
+as long as n≥ C5αdκ6
+0µ6
+maxr3d1 log2d1 and C6µmaxκ2
+0(σξ/λr)·
+√
+αdrd2
+1d2 log2d1/n≤ 1. We
+then conclude the proof of the ﬁrst statement of Theorem 3.
+40
+
+[PDF PAGE 41]
+We now prove the second statement. Recall that N0≍ n/ logd1, by the ﬁrst statement
+with η = 0.75, we get with probability at least 1 − 4md−2
+1 ,
+ˆU (m)−UˆO(m)
+U
+
+2,max +
+ˆV (m)−V ˆO(m)
+V
+
+2,max− 2C3
+σξ
+λr
+√
+rd1d2 log2d1
+n
+≤
+(1
+2
+)m
+·
+(ˆU (1)−UˆO(1)
+U
+
+2,max +
+ˆV (1)−V ˆO(1)
+V
+
+2,max− 2C3
+σξ
+λr
+√
+rd1d2 log2d1
+n
+)
+.
+Similar as the proof of Theorem 4, with probability at least 1 −d−2
+1 ,
+∥ˆU (1)−UˆO(1)
+U∥2,max +∥ˆV (1)−V ˆO(1)
+V ∥2,max≤ C4µmax
+σξ
+λr
+√
+rd2
+1 log2d1
+n +C5µmax
+∥M∥max
+λr
+√
+rd2
+1 log2d1
+n .
+Therefore, if m = 2⌈log(αd∥M∥max/σξ)⌉≤ 2C1⌈logd1⌉, we get
+ˆU (m)−UˆO(m)
+U
+
+2,max +
+ˆV (m)−V ˆO(m)
+V
+
+2,max≤C4
+σξ
+λr
+√
+rd1d2 log2d1
+n ,
+which holds with probability at least 1 − 4C1d−2
+1 logd1. Then, by Lemma 7,
+ˆM (m)−M
+
+max≤ 2∥Λ∥µmax·
+(√ r
+d2
+∥ˆUm−UˆO(m)
+U ∥2,max +
+√ r
+d1
+∥ˆV (m)−V ˆO(m)
+V ∥2,max
+)
++µ2
+max
+√
+r2
+d1d2
+∥ˆG(m)− ˆO(m)T
+U ΛˆO(m)
+V ∥≤ C3µmaxκ0σξ
+√
+r2d1 log2d1
+n .
+7.5 Proof of Theorem 4
+W.L.O.G., we only prove the bounds for d2,max(ˆU1,U ) and d2,max(ˆV1,V ). To this end, deﬁne
+the (d1 +d2)× (2r) matrices
+Θ =
+
+ U 0
+0 V
+
+ and ˆΘ1 =
+
+
+ˆU1 0
+0 ˆV1
+
+.
+We also deﬁne the (d1 +d2)× (d1 +d2) matrices
+A =
+
+ 0 M
+M T 0
+
+ and ˆE(1) =
+
+ 0 ˆZ (1)
+ˆZ (1)T 0
+
+.
+41
+
+[PDF PAGE 42]
+LetU⊥∈ Rd1×(d1−r) andV⊥∈ Rd2×(d2−r) so that (U⊥,U ) and (V⊥,V ) are orthogonal matrices.
+For any positive integer s≥ 1, we deﬁne
+P−s =
+
+
+
+
+
+UΛ−sU T 0
+0 V Λ−sV T
+
+, if s is even;
+
+
+0 UΛ−sV T
+V Λ−sU T 0
+
+, if s is odd.
+Deﬁne also
+P0 = P⊥ =
+
+ U⊥U T
+⊥ 0
+0 V⊥V T
+⊥
+
+.
+As shown by Xia (2019b), if λr≥ 2∥ˆZ (1)∥, then
+ˆΘ1ˆΘT
+1− ΘΘT =
+∞∑
+k=1
+∑
+s:s1+···+sk+1=k
+(−1)1+τ (s)· P−s1ˆE(1)P−s2··· P−skˆE(1)P−sk+1
+  
+SA,k( ˆE(1))
+, (7.11)
+where s1,··· ,sk+1≥ 0 are integers and τ(s) = ∑k+1
+i=1 1(si > 0). We aim to prove sharp
+upper bounds for∥ˆU1ˆU T
+1−UU T∥2,max and∥ˆV1ˆV T
+1 −VV T∥2,max. Note that
+ˆΘ1ˆΘT
+1− ΘΘT =
+
+
+ˆU1ˆU T
+1−UU T 0
+0 ˆV1ˆV T
+1 −VV T
+
+.
+Therefore, it suﬃces to investigate∥ˆΘ1ˆΘT
+1− ΘΘT∥2,max. By (7.11), we obtain
+∥ˆΘ1ˆΘT
+1− ΘΘT∥2,max≤
+∞∑
+k=1
+∑
+s:s1+···+sk+1=k
+P−s1ˆE(1)P−s2··· P−skˆE(1)P−sk+1
+
+2,max.
+Denoteej thej-th canonical basis vector in Rd1+d2 for anyj∈ [d1 +d2]. Recall Assumption 2
+and the deﬁnition of P−s, it is obvious that for all s≥ 1,
+max
+j∈[d1]
+eT
+j P−s≤µmax
+√ r
+d1
+·∥ Λ−s∥ and max
+j∈[d2]
+eT
+j+d1P−s≤µmax
+√ r
+d2
+·∥ Λ−s∥.
+For any (s1,··· ,sk+1) such that ∑k+1
+j=1sj =k and s1≥ 1, we have
+eT
+j P−s1ˆE(1)P−s2··· P−skˆE(1)P−sk+1
+≤∥eT
+j P−s1∥·
+ˆE(1)P−s2··· P−skˆE(1)P−sk+1
+
+42
+
+[PDF PAGE 43]
+≤∥eT
+j P−s1∥·∥ ˆE(1)∥k∥Λ−1∥k−s1.
+By Lemma 1, there exists an event E0 with P(E0)≥ 1− 2d−2
+1 so that onE0,
+ˆE(1)≤C2(1 +γn)σξ
+√
+d2
+1d2 logd1
+n  
+δ
+. (7.12)
+Therefore, on eventE0, if s1≥ 1, then
+max
+j∈[d1]
+eT
+j P−s1ˆE(1)P−s2··· P−skˆE(1)P−sk+1
+≤
+( δ
+λr
+)k
+·µmax
+√ r
+d1
+and
+max
+j∈[d2]
+eT
+j+d1P−s1ˆE(1)P−s2··· P−skˆE(1)P−sk+1
+≤
+( δ
+λr
+)k
+·µmax
+√ r
+d2
+,
+where δ is deﬁned in (7.12).
+As a result, it suﬃces to prove the upper bounds for∥P−s1ˆE(1)P−s2··· P−skˆE(1)P−sk+1∥2,max
+for s1 = 0. Because s1 +··· +sk+1 = k, there must exists sj≥ 1 for some j≥ 2. It then
+suﬃces to prove the upper bounds for ∥P⊥(P⊥ˆE(1)P⊥)kˆE(1)Θ∥2,max with k≥ 0. Note that
+we used the fact ΘΘ TP−sΘΘT = P−s for any integer s≥ 1.
+Lemma 9. Under the eventE0 where (7.12) holds, there exist absolute constants C1,C 2 > 0
+so that, for all k≥ 0, the following bounds hold with probability at least 1− 2(k + 1)d−2
+1 ,
+max
+j∈[d1]
+eT
+j P⊥(P⊥ˆE(1)P⊥)kˆE(1)Θ
+≤C1(C2δ)k+1·µmax
+√ r
+d1
+,
+max
+j∈[d2]
+eT
+j+d1P⊥(P⊥ˆE(1)P⊥)kˆE(1)Θ
+≤C1(C2δ)k+1·µmax
+√ r
+d2
+whereδ is deﬁned in (7.12) and µmax is the incoherence constant in Assumption 2.
+We shall defer the proof of Lemma 9 to Appendix.
+By Lemma 9 and (7.12), choosing kmax =⌈2 logd1⌉ yields that, for all s = (s1,··· ,sk+1)
+with∑k+1
+j=1sj =k,
+max
+j∈[d1]
+eT
+j P−s1ˆE(1)P−s2··· P−skˆE(1)P−sk+1
+≤C1
+(C2δ
+λr
+)k
+·µmax
+√ r
+d1
+,
+43
+
+[PDF PAGE 44]
+which holds for all k≤kmax with probability at least 1− 4d−2
+1 logd1, under eventE0. Then,
+max
+j∈[d1]
+eT
+j (ˆU1ˆU T
+1−UU T)
+ = max
+j∈[d1]
+eT
+j (ˆΘˆΘT− ΘΘT)
+,
+where we abuse the notations that ej∈ Rd1 on the left hand side and ej∈ Rd1+d2 on the
+right hand side. Then, by the representation formula (7.11),
+max
+j∈[d1]
+eT
+j (ˆU1ˆU T
+1−UU T)
+≤ max
+j∈[d1]
+kmax∑
+k=1
+∑
+s:s1+···+sk+1=k
+eT
+j P−s1ˆE(1)P−s2··· P−skˆE(1)P−sk+1
+
++
+∞∑
+k=kmax+1
+∑
+s:s1+···+sk+1=k
+P−s1ˆE(1)P−s2··· P−skˆE(1)P−sk+1
+
+2,max.
+Obviously,
+Card
+({
+(s1,··· ,sk+1) :
+k+1∑
+j=1
+sj =k,sj∈ Z,sj≥ 0
+})
+≤ 4k.
+Therefore, under eventE0,
+max
+j∈[d1]
+eT
+j (ˆU1ˆU T
+1−UU T)
+≤
+kmax∑
+k=1
+C1
+(4C2δ
+λr
+)k
+·µmax
+√ r
+d1
++
+∞∑
+k=kmax+1
+4k·
+( δ
+λr
+)k
+≤C1
+kmax∑
+k=1
+(4C2δ
+λr
+)k
+·µmax
+√ r
+d1
++
+∞∑
+k=kmax+1
+(4δ
+λr
+)k
+.
+If 8C2δ/λr≤ 1 and C2 > 4, then
+max
+j∈[d1]
+eT
+j (ˆU1ˆU T
+1−UU T)
+≤C1
+δ
+λr
+·µmax
+√ r
+d1
++ 2
+(4δ
+λr
+)kmax+1
+≤C1
+δ
+λr
+·µmax
+√ r
+d1
++ 8δ
+λr
+·
+( 1
+2C2
+)⌈2 logd1⌉
+≤C2
+(1 +γn)σξ
+λr
+√
+d2
+1d2 logd1
+n ·µmax
+√ r
+d1
+.
+Therefore,
+P
+(ˆU1ˆU T
+1−UU T
+2,max≤C2
+(1 +γn)σξ
+λr
+√
+d2
+1d2 logd1
+n ·µmax
+√ r
+d1
+)
+≥ 1− 5d−2
+1 logd1.
+Similarly, on the same event,
+ˆV1ˆV T
+1 −VV T
+2,max≤C2
+(1 +γn)σξ
+λr
+√
+d2
+1d2 logd1
+n ·µmax
+√ r
+d2
+,
+which proves the claimed bound.
+44
+
+[PDF PAGE 45]
+References
+Andrew C Berry. The accuracy of the gaussian approximation to the sum of independent
+variates. Transactions of the american mathematical society , 49(1):122–136, 1941.
+Jian-Feng Cai, Emmanuel J Cand` es, and Zuowei Shen. A singular value thresholding algo-
+rithm for matrix completion. SIAM Journal on optimization , 20(4):1956–1982, 2010.
+T Tony Cai and Anru Zhang. Rop: Matrix recovery via rank-one projections. The Annals
+of Statistics, 43(1):102–138, 2015.
+T Tony Cai and Wen-Xin Zhou. Matrix completion via max-norm constrained optimization.
+Electronic Journal of Statistics , 10(1):1493–1525, 2016.
+T Tony Cai, Tengyuan Liang, and Alexander Rakhlin. Geometric inference for general high-
+dimensional linear inverse problems. The Annals of Statistics , 44(4):1536–1563, 2016a.
+Tianxi Cai, T Tony Cai, and Anru Zhang. Structured matrix completion with applications
+to genomic data integration. Journal of the American Statistical Association , 111(514):
+621–633, 2016b.
+Emmanuel J Candes and Yaniv Plan. Matrix completion with noise. Proceedings of the
+IEEE, 98(6):925–936, 2010.
+Emmanuel J Cand` es and Benjamin Recht. Exact matrix completion via convex optimization.
+Foundations of Computational mathematics , 9(6):717, 2009.
+Emmanuel J Cand` es and Terence Tao. The power of convex relaxation: Near-optimal matrix
+completion. arXiv preprint arXiv:0903.1476 , 2009.
+Alexandra Carpentier and Arlene KH Kim. An iterative hard thresholding estimator for low
+rank matrix recovery with explicit limiting distribution. Statistica Sinica, 28:1371–1393,
+2018.
+45
+
+[PDF PAGE 46]
+Alexandra Carpentier, Jens Eisert, David Gross, and Richard Nickl. Uncertainty quantiﬁ-
+cation for matrix compressed sensing and quantum tomography problems. arXiv preprint
+arXiv:1504.03234, 2015.
+Alexandra Carpentier, Olga Klopp, Matthias L¨ oﬄer, and Richard Nickl. Adaptive conﬁdence
+sets for matrix completion. Bernoulli, 24(4A):2429–2460, 2018.
+Ji Chen, Dekai Liu, and Xiaodong Li. Nonconvex rectangular matrix completion via gradient
+descent without ℓ2,∞ regularization. arXiv preprint arXiv:1901.06116 , 2019a.
+Yudong Chen and Martin J Wainwright. Fast low-rank estimation by projected gradient
+descent: General statistical and algorithmic guarantees. arXiv preprint arXiv:1509.03025,
+2015.
+Yuxin Chen, Yuejie Chi, Jianqing Fan, Cong Ma, and Yuling Yan. Noisy matrix completion:
+Understanding statistical guarantees for convex relaxation via nonconvex optimization.
+arXiv preprint arXiv:1902.07698 , 2019b.
+Yuxin Chen, Jianqing Fan, Cong Ma, and Yuling Yan. Inference and uncertainty quantiﬁ-
+cation for noisy matrix completion. arXiv preprint arXiv:1906.04159 , 2019c.
+Victor Chernozhukov, Denis Chetverikov, Mert Demirer, Esther Duﬂo, Christian Hansen,
+Whitney Newey, and James Robins. Double/debiased machine learning for treatment and
+structural parameters. The Econometrics Journal , 21(1):C1–C68, 2018.
+Chandler Davis and William Morton Kahan. The rotation of eigenvectors by a perturbation.
+iii. SIAM Journal on Numerical Analysis , 7(1):1–46, 1970.
+Alan Edelman, Tom´ as A Arias, and Steven T Smith. The geometry of algorithms with
+orthogonality constraints. SIAM journal on Matrix Analysis and Applications , 20(2):303–
+353, 1998.
+Carl-Gustav Esseen. A moment inequality with an application to the central limit theorem.
+Scandinavian Actuarial Journal, 1956(2):160–170, 1956.
+46
+
+[PDF PAGE 47]
+Chao Gao, Yu Lu, Zongming Ma, and Harrison H Zhou. Optimal estimation and completion
+of matrices with biclustering structures. The Journal of Machine Learning Research , 17
+(1):5602–5630, 2016.
+Rong Ge, Jason D Lee, and Tengyu Ma. Matrix completion has no spurious local minimum.
+In Advances in Neural Information Processing Systems , pages 2973–2981, 2016.
+David Gross. Recovering low-rank matrices from few coeﬃcients in any basis. IEEE Trans-
+actions on Information Theory , 57(3):1548–1566, 2011.
+Adel Javanmard and Andrea Montanari. Conﬁdence intervals and hypothesis testing for
+high-dimensional regression. The Journal of Machine Learning Research, 15(1):2869–2909,
+2014.
+Raghunandan H Keshavan, Andrea Montanari, and Sewoong Oh. Matrix completion from
+a few entries. IEEE transactions on information theory , 56(6):2980–2998, 2010a.
+Raghunandan H Keshavan, Andrea Montanari, and Sewoong Oh. Matrix completion from
+noisy entries. Journal of Machine Learning Research , 11(Jul):2057–2078, 2010b.
+Olga Klopp. Noisy low-rank matrix completion with general sampling distribution.Bernoulli,
+20(1):282–303, 2014.
+Vladimir Koltchinskii. Von neumann entropy penalization and low-rank matrix estimation.
+The Annals of Statistics , 39(6):2936–2973, 2011.
+Vladimir Koltchinskii and Dong Xia. Optimal estimation of low rank density matrices.
+Journal of Machine Learning Research , 16(53):1757–1792, 2015.
+Vladimir Koltchinskii, Karim Lounici, and Alexandre B Tsybakov. Nuclear-norm penaliza-
+tion and optimal rates for noisy low-rank matrix completion. The Annals of Statistics , 39
+(5):2302–2329, 2011.
+Yi-Kai Liu. Universal low-rank matrix recovery from pauli measurements. In Advances in
+Neural Information Processing Systems, pages 1638–1646, 2011.
+47
+
+[PDF PAGE 48]
+Cong Ma, Kaizheng Wang, Yuejie Chi, and Yuxin Chen. Implicit regularization in noncon-
+vex statistical estimation: Gradient descent converges linearly for phase retrieval, matrix
+completion and blind deconvolution. arXiv preprint arXiv:1711.10467 , 2017.
+Zongming Ma and Yihong Wu. Volume ratio, sparsity, and minimaxity under unitarily
+invariant norms. IEEE Transactions on Information Theory , 61(12):6939–6956, 2015.
+Stanislav Minsker. On some extensions of bernsteins inequality for self-adjoint operators.
+Statistics & Probability Letters , 127:111–119, 2017.
+Sahand Negahban and Martin J Wainwright. Estimation of (near) low-rank matrices with
+noise and high-dimensional scaling. The Annals of Statistics , 39(2):1069–1097, 2011.
+Alain Pajor. Metric entropy of the grassmann manifold. Convex Geometric Analysis , 34:
+181–188, 1998.
+Benjamin Recht, Maryam Fazel, and Pablo A Parrilo. Guaranteed minimum-rank solutions
+of linear matrix equations via nuclear norm minimization. SIAM review, 52(3):471–501,
+2010.
+Angelika Rohde and Alexandre B Tsybakov. Estimation of high-dimensional low-rank ma-
+trices. The Annals of Statistics , 39(2):887–930, 2011.
+Tingni Sun and Cun-Hui Zhang. Calibrated elastic regularization in matrix completion. In
+Advances in Neural Information Processing Systems , pages 863–871, 2012.
+Joel A Tropp. User-friendly tail bounds for sums of random matrices. Foundations of
+computational mathematics, 12(4):389–434, 2012.
+Sara Van de Geer, Peter B¨ uhlmann, Yaacov Ritov, and Ruben Dezeure. On asymptotically
+optimal conﬁdence regions and tests for high-dimensional models.The Annals of Statistics,
+42(3):1166–1202, 2014.
+48
+
+[PDF PAGE 49]
+Lingxiao Wang, Xiao Zhang, and Quanquan Gu. A uniﬁed computational and statistical
+framework for nonconvex low-rank matrix estimation. arXiv preprint arXiv:1610.05275 ,
+2016.
+Per-˚Ake Wedin. Perturbation bounds in connection with singular value decomposition. BIT
+Numerical Mathematics, 12(1):99–111, 1972.
+Dong Xia. Conﬁdence region of singular subspaces for high-dimensional and low-rank matrix
+regression. IEEE Transactions on Information Theory , 2019a.
+Dong Xia. Normal approximation and conﬁdence region of singular subspaces.arXiv preprint
+arXiv:1901.00304, 2019b.
+Dong Xia and Ming Yuan. On polynomial time methods for exact low-rank tensor comple-
+tion. Foundations of Computational Mathematics , pages 1–49, 2017.
+Cun-Hui Zhang and Stephanie S Zhang. Conﬁdence intervals for low dimensional parameters
+in high dimensional linear models. Journal of the Royal Statistical Society: Series B
+(Statistical Methodology), 76(1):217–242, 2014.
+Tuo Zhao, Zhaoran Wang, and Han Liu. A nonconvex optimization framework for low rank
+matrix estimation. In Advances in Neural Information Processing Systems, pages 559–567,
+2015.
+Qinqing Zheng and John Laﬀerty. Convergence analysis for rectangular matrix completion
+using burer-monteiro factorization and gradient descent. arXiv preprint arXiv:1605.07051,
+2016.
+49
+
+[PDF PAGE 50]
+A Proof of Lemma 1
+W.L.O.G., we only prove the bounds for ∥ˆZ (1)
+1 ∥ and∥ˆZ (1)
+2 ∥. Recall that ˆZ (1)
+1 is deﬁned by
+ˆZ (1)
+1 = d1d2
+n0
+n∑
+i=n0+1
+ξiXi
+where{(ξi,Xi)}n
+i=n0+1 are i.i.d. The ψα-norm of a random variable Y is deﬁned by∥Y∥ψα =
+inf{t >0 : E exp|Y/t|α
+≤ 2} for α∈ [1, 2]. Since ξ is sub-Gaussian, we obtain ∥ξ∥ψ2 ≲ σξ.
+Clearly,
+∥ξiXi∥
+
+ψ2
+≤∥ξi∥ψ2 ≲σξ
+where we used the fact Xi∈ E ={ej1eT
+j2 :j1∈ [d1],j 2∈ [d2]}. Meanwhile,
+Eξ2
+iXiX T
+i
+ =
+σ2
+ξ· 1
+d1d2
+d1∑
+j1=1
+d2∑
+j2=1
+ej1eT
+j2ej2eT
+j1
+ =
+σ2
+ξ
+d1
+·Id1
+≤ σ2
+ξ
+d1
+.
+Similar bounds also hold for ∥Eξ2
+iX T
+i Xi∥ and we conclude with
+max
+{Eξ2
+iXiX T
+i
+,∥Eξ2
+iX T
+i Xi∥
+}
+≤ σ2
+ξ
+d2
+.
+By matrix Bernstein inequality (Koltchinskii (2011); Minsker (2017); Tropp (2012)), for all
+t> 0, the following bound holds with probability at least 1 −e−t,
+ˆZ (1)
+1
+≤C1σξ
+√
+d2
+1d2(t + logd1)
+n +C2σξ
+d1d2(t + logd1)
+n .
+By setting t = 2 logd1 and the fact n≥C3d1 logd1, we conclude with
+P
+(
+∥ˆZ (1)
+1 ∥≥ C1σξ
+√
+d2
+1d2(t + logd1)
+n
+)
+≤ 1
+d2
+1
+.
+The upper bound for ∥ˆZ (1)
+2 ∥ can be derived in the same fashion by observing that
+d1d2⟨ˆ∆1,Xi⟩Xi−ˆ∆1
+≤d1d2∥ˆ∆1∥max +∥ˆ∆1∥≤ 2d1d2∥ˆ∆1∥max
+and
+E
+(
+d1d2⟨ˆ∆1,Xi⟩Xi−ˆ∆1
+)(
+d1d2⟨ˆ∆1,Xi⟩Xi−ˆ∆1
+)T
+≤
+d2
+1d2
+2E⟨ˆ∆1,Xi⟩2XiX T
+i
+ +∥ˆ∆1∥2≤d2
+1d2∥ˆ∆1∥2
+max +∥ˆ∆1∥2≤ 2d2
+1d2∥ˆ∆1∥2
+max.
+50
+
+[PDF PAGE 51]
+B Proof of Lemma 2
+W.L.O.G., we only prove the upper bounds for (ˆU1,ˆV1) since the proof for (ˆU2,ˆV2) is identical.
+Recall from Assumption 1 that∥ˆ∆1∥max≤C1γn·σξ with probability at least 1−d−2
+1 . To this
+end, we conclude with
+P
+(
+∥ˆZ (1)∥≥ C2(1 +γn)σξ
+√
+d2
+1d2 logd1
+n
+)
+≤ 2
+d2
+1
+.
+Recall that ˆM unbs
+1 = M + ˆZ (1). By Davis-Kahan Theorem (Davis and Kahan (1970)) or
+Wedin’s sin Θ Theorem (Wedin (1972)), we get
+max{dO(ˆU1,U ),d O(ˆV1,V )}≤
+√
+2∥ˆZ (1)∥
+λr
+≤C2
+√
+2(1 +γn)σξ
+λr
+·
+√
+d2
+1d2 logd1
+n
+where the last inequality holds with probability at least 1 − 2d−2
+1 . Similarly, with the same
+probability,
+max{dF(ˆU1,U ),d F(ˆV1,V )}≤
+√
+2r∥ˆZ (1)∥
+λr
+≤C2
+√
+2(1 +γn)σξ
+λr
+·
+√
+rd2
+1d2 logd1
+n
+which concludes the proof of Lemma 2.
+C Proof of Lemma 9
+For notational simplicity, we write ˆE = ˆE(1) in this section.
+C.1 Case 0: k = 0
+W.L.O.G., we bound∥eT
+j P⊥ˆEΘ∥ for j∈ [d1]. Clearly,
+∥eT
+j P⊥ˆEΘ∥≤∥eT
+j ΘΘTˆEΘ∥ +∥eT
+j ˆEΘ∥≤ δµmax·
+√ r
+d1
++∥eT
+j ˆEΘ∥
+where δ denotes the upper bound of ∥ˆE∥ deﬁned in (7.12) and the last inequality is due to
+∥U∥2,max≤µmax
+√
+r/d1. By the deﬁnitions of ˆE and Θ,∥eT
+j ˆEΘ∥ =∥eT
+j ˆZ (1)V∥ where we abuse
+the notations and denote ej the canonical basis vectors in Rd1.
+51
+
+[PDF PAGE 52]
+Recall that ˆZ (1) = ˆZ (1)
+1 + ˆZ (1)
+2 . We write
+eT
+j ˆZ (1)V = d1d2
+n0
+n∑
+i=n0+1
+ξieT
+jXiV +
+(d1d2
+n0
+n∑
+i=n0+1
+⟨ˆ∆1,Xi⟩eT
+jXiV−eT
+jˆ∆1V
+)
+.
+Clearly,
+∥ξieT
+jXiV∥
+
+ψ2
+≤σξ∥V∥2,max≤σξµmax·
+√ r
+d2
+and
+Eξ2
+ieT
+jXiVV TX T
+i ej≤ σ2
+ξ
+d1d2
+· tr(VV T)≤ rσ2
+ξ
+d1d2
+.
+Then, by Bernstein inequality, we get
+P
+(eT
+j ˆZ (1)
+1 V
+≥C1σξ
+√
+rd1d2(t + logd1)
+n +C2µmaxσξ
+d1
+√rd2(t + logd1)
+n
+)
+≤e−t
+for all t> 0 and some absolute constants C1,C 2 > 0. Similarly,
+P
+(eT
+j ˆZ (1)
+2 V
+≥C1∥ˆ∆1∥max
+√
+rd1d2(t + logd1)
+n +C2µmax∥ˆ∆1∥max
+d1
+√rd2(t + logd1)
+n
+)
+≤e−t
+By setting t = 3 logd1 and observing∥ˆ∆1∥max≤C1γn·σξ, we conclude that
+∥eT
+j ˆZ (1)V∥≤ C1(1 +γn)σξ
+√
+rd1d2 logd1
+n =δ·
+√ r
+d1
+which holds with probability at least 1−2d−3
+1 and we used the assumptionn≥Cµ 2
+maxrd1 logd1
+for some large enough constant C >0. As a result,
+P
+(
+max
+j∈[d1]
+∥eT
+j P⊥ˆEΘ∥≤ 2δµmax·
+√ r
+d1
+)
+≥ 1− 2d1d−3
+1 .
+Following the same arguments, we can prove the bound for max j∈[d2]∥eT
+d1+jP⊥ˆEΘ∥. There-
+fore, with probability at least 1− 2d−2
+1 ,
+max
+j∈[d1]
+∥eT
+j P⊥ˆEΘ∥≤ 2δµmax·
+√ r
+d1
+and max
+j∈[d2]
+∥eT
+d1+jP⊥ˆEΘ∥≤ 2δµmax·
+√ r
+d2
+where δ is deﬁned by (7.12).
+52
+
+[PDF PAGE 53]
+C.2 Case 1: k = 1
+W.L.O.G., we bound maxj∈[d1]
+eT
+j P⊥ˆEP⊥ˆEΘ
+. Observe that
+eT
+j P⊥ˆEP⊥ˆEΘ
+≤
+eT
+j ΘΘTˆEP⊥ˆEΘ
+ +
+eT
+j ˆEP⊥ˆEΘ
+≤ δ2µmax·
+√ r
+d1
++
+eT
+j ˆEP⊥ˆEΘ
+.
+By the deﬁnition of ˆE and P⊥, we have
+ˆEP⊥ˆEΘ =
+
+
+ˆZ (1)V⊥V T
+⊥ˆZ (1)TU 0
+0 ˆZ (1)TU⊥U T
+⊥ˆZ (1)V
+
+.
+It suﬃces to prove the upper bound for
+eT
+j ˆZ (1)V⊥V T
+⊥ˆZ (1)TU
+. Deﬁne Ij = ejeT
+j ∈ Rd1×d1
+and I⊥
+j =I− Ij. Then, write ˆZ (1) = IjˆZ (1) + I⊥
+j ˆZ (1) and
+eT
+j ˆZ (1)V⊥V T
+⊥ˆZ (1)TU =eT
+j ˆZ (1)V⊥V T
+⊥
+(
+IjˆZ (1))T
+U +eT
+j ˆZ (1)V⊥V T
+⊥
+(
+I⊥
+j ˆZ (1))T
+U.
+As a result,
+eT
+j ˆZ (1)V⊥V T
+⊥ˆZ (1)TU
+≤
+eT
+j ˆZ (1)V⊥V T
+⊥
+(
+IjˆZ (1))T
+U
+ +
+eT
+j ˆZ (1)V⊥V T
+⊥
+(
+I⊥
+j ˆZ (1))T
+U
+
+≤∥eT
+jU∥∥eT
+j ˆZ (1)V⊥V T
+⊥ˆZ (1)Tej∥ +
+eT
+j ˆZ (1)V⊥V T
+⊥
+(
+I⊥
+j ˆZ (1))T
+U
+
+≤δ2µmax·
+√ r
+d1
++
+eT
+j ˆZ (1)V⊥V T
+⊥
+(
+I⊥
+j ˆZ (1))T
+U
+.
+Recall
+ˆZ (1) = d1d2
+n0
+n∑
+i=n0+1
+ξiXi +
+(d1d2
+n0
+n∑
+i=n0+1
+⟨ˆ∆1,Xi⟩Xi−ˆ∆1
+)
+.
+Deﬁne
+Nj =
+{
+n0 + 1≤i≤n :eT
+jXi̸= 0
+}
+and N
+c
+j =
+{
+n0 + 1≤i≤n :i /∈N j
+}
+.
+By Chernoﬀ bound, we get that if n≥ C1d1 logd1 for a large enough absolute constant
+C1 > 0, then
+P
+( d1⋂
+j=1
+{n0
+2d1
+≤
+⏐⏐Nj
+⏐⏐≤ 2n0
+d1
+})
+≥ 1−e−c1n/d1 (C.1)
+for some absolute constant c1 > 0. Denote the above event by E1 with P
+(
+E1
+)
+≥ 1−e−c1n/d1.
+53
+
+[PDF PAGE 54]
+We now prove the upper bound
+eT
+j ˆZ (1)V⊥V T
+⊥
+(
+I⊥
+j ˆZ (1))T
+U
+ conditioned onNj. To this
+end, by the deﬁnitions of Ij and I⊥
+j , we write
+eT
+j ˆZ (1)V⊥V T
+⊥
+(
+I⊥
+j ˆZ (1))T
+U =d1d2
+n0
+∑
+i∈Nj
+ξieT
+jXiV⊥V T
+⊥
+(
+I⊥
+j ˆZ (1))T
+U
++
+[d1d2
+n0
+∑
+i∈Nj
+⟨ˆ∆1,Xi⟩eT
+jXiV⊥V T
+⊥
+(
+I⊥
+j ˆZ (1))T
+U−eT
+jˆ∆1V⊥V T
+⊥
+(
+I⊥
+j ˆZ (1))T
+U
+]
+.
+Note that, conditioned onNj,{ξi,Xi}i∈Nj are independent with I⊥
+j ˆZ (1). Conditioned onNj
+and I⊥
+j ˆZ (1), the following facts are obvious.
+ξi
+eT
+jXiV⊥V T
+⊥
+(
+I⊥
+j ˆZ (1))T
+U
+
+
+ψ2
+≤σξ
+V⊥V T
+⊥
+(
+I⊥
+j ˆZ (1))T
+U
+
+2,max.
+By the results of Case 0 when k = 0, we have
+V⊥V T
+⊥
+(
+I⊥
+j ˆZ (1))T
+U
+
+2,max≤
+V⊥V T
+⊥
+(
+IjˆZ (1))T
+U
+
+2,max +
+V⊥V T
+⊥ˆZ (1)TU
+
+2,max
+≤δµmax·
+√ r
+d1
++δµmax·
+√ r
+d2
+≤ 2δµmax·
+√ r
+d2
+.
+Meanwhile, (note that conditioned on i∈N j, Xi
+d
+=ejeT
+k with k being uniformly distributed
+over [d2])
+Eξ2
+ieT
+jXiV⊥V T
+⊥
+(
+I⊥
+j ˆZ (1))T
+UU T(
+I⊥
+j ˆZ (1))
+V⊥V T
+⊥X T
+i ej
+⏐⏐⏐
+(
+I⊥
+j ˆZ (1))
+,i∈N j
+= σ2
+ξ
+d2
+∥V⊥V T
+⊥ (I⊥
+j ˆZ (1))TU∥2
+F≤ rσ2
+ξ
+d2
+·
+(
+I⊥
+j ˆZ (1))T
+U
+2
+By Bernstein inequality, for all t> 0, we get
+P
+(
+∑
+i∈Nj
+ξieT
+jXiV⊥V T
+⊥
+(
+I⊥
+j ˆZ (1))T
+U
+≥C1σξ|Nj|1/2
+√
+r(t + logd1)
+d2
+(
+I⊥
+j ˆZ (1))T
+U
+
++C2(t + logd1)σξ·
+V⊥V T
+⊥
+(
+I⊥
+j ˆZ (1))T
+U
+
+2,max
+⏐⏐⏐⏐I⊥
+j ˆZ (1),Nj
+)
+≥ 1−e−t
+for some absolute constants C1,C 2 > 0.
+On eventE0,
+(
+I⊥
+j ˆZ (1))T
+U
+≤∥ ˆZ (1)∥≤ δ.
+54
+
+[PDF PAGE 55]
+By setting t = 3 logd1, then with probability at least 1 −d−3
+1 ,
+d1d2
+n0
+n∑
+i=n0+1
+ξieT
+jXiV⊥V T
+⊥
+(
+I⊥
+j ˆZ (1))T
+U
+
+≤C1δ·σξ
+√
+rd1d2 logd1
+n +C2δ·µmaxσξ
+√
+rd2d2
+1 log2d1
+n
+≤2C1δ·σξ
+√
+rd1d2 logd1
+n ≤C2δ2·
+√ r
+d1
+conditioned onE0∩E 1. The second inequality holds as long as n≥ Cµ 2
+maxd1 logd1 for some
+large enough constant C >0.
+Similarly, sinceˆ∆1 is independent with{(Xi,ξi)}n
+i=n0+1, with probability at least 1−d−3
+1 ,
+d1d2
+n0
+n∑
+i=n0+1
+⟨ˆ∆1,Xi⟩eT
+jXiV⊥V T
+⊥
+(
+I⊥
+j ˆZ (1))T
+U−eT
+jˆ∆1V⊥V T
+⊥
+(
+I⊥
+j ˆZ (1))T
+U
+≤C2δ2·
+√ r
+d1
+as long as∥ˆ∆1∥max≤σξ. Therefore, conditioned onE0∩E 1, with probability at least 1−2d−3
+1 ,
+eT
+j ˆZ (1)V⊥V T
+⊥
+(
+I⊥
+j ˆZ (1))T
+U
+≤C2δ2·
+√ r
+d1
+.
+Therefore, conditioned onE0∩E 1,
+P
+(
+max
+j∈[d1]
+∥eT
+j P⊥ˆEP⊥ˆEΘ∥≥ C2δ2·µmax
+√ r
+d1
+)
+≤ 2d−2
+1 .
+Finally, conditioned onE0∩E 1, with probability at least 1− 4d−2
+1 ,
+max
+j∈[d1]
+∥eT
+j P⊥ˆEP⊥ˆEΘ∥≤ C2δ2·µmax
+√ r
+d1
+and max
+j∈[d2]
+∥eT
+d1+jP⊥ˆEP⊥ˆEΘ∥≤ C2δ2·µmax
+√ r
+d2
+.
+C.3 General k≥ 2
+(Induction Assumption) Suppose that for all 1 ≤ k0≤ k with k≥ 2, the following bounds
+hold, under eventsE0∩E 1, with probability at least 1− 2kd−2
+1
+max
+j∈[d1]
+eT
+j P⊥(
+P⊥ˆEP⊥)k0−1ˆEΘ
+≤C1(C2δ)k0·µmax
+√ r
+d1
+(C.2)
+and
+max
+j∈[d2]
+eT
+j+d1P⊥(
+P⊥ˆEP⊥)k0−1ˆEΘ
+≤C1(C2δ)k0·µmax
+√ r
+d2
+(C.3)
+55
+
+[PDF PAGE 56]
+where C1,C 2 > 0 are some absolute constants.
+Based on the Induction Assumption, we prove the upper bound for
+(
+P⊥ˆEP⊥)kˆEΘ
+
+2,max.
+W.O.L.G, we consider∥eT
+j
+(
+P⊥ˆEP⊥)kˆEΘ
+ for any j∈ [d1]. To this end, deﬁne the dilation
+operator D so that
+D(M) =
+
+ 0 M
+M T 0
+
+.
+Then, ˆE = D(ˆZ (1)). Similarly, deﬁne the following projectors on ˆE,
+Pj(ˆE) = D
+(
+ejeT
+j ˆZ (1))
+and P⊥
+j (ˆE) = D
+(
+I⊥
+j ˆZ (1))
+.
+On eventE0,
+eT
+j
+(
+P⊥ˆEP⊥)kˆEΘ
+ =
+eT
+j P⊥ˆE
+(
+P⊥ˆEP⊥)k−1ˆEΘ
+
+≤
+eT
+j ΘΘTˆE
+(
+P⊥ˆEP⊥)k−1ˆEΘ
+ +
+eT
+j ˆE
+(
+P⊥ˆEP⊥)k−1ˆEΘ
+
+≤δk+1·µmax
+√ r
+d1
++
+eT
+j ˆE
+(
+P⊥ˆEP⊥)k−1ˆEΘ
+.
+We then write
+eT
+j ˆE
+(
+P⊥ˆEP⊥)k−1ˆEΘ =eT
+j ˆEP⊥Pj(ˆE)P⊥(
+P⊥ˆEP⊥)k−2ˆEΘ
++eT
+j ˆEP⊥P⊥
+j (ˆE)P⊥(
+P⊥ˆEP⊥)k−2ˆEΘ.
+By the Induction Assumption, under eventE0,
+eT
+j ˆEP⊥Pj(ˆE)P⊥(
+P⊥ˆEP⊥)k−2ˆEΘ
+≤∥ˆE∥·
+Pj(ˆE)P⊥(
+P⊥ˆEP⊥)k−2ˆEΘ
+
+2,max
+≤C1(C2δ)kδ·µmax
+√ r
+d1
+.
+Similarly,
+eT
+j ˆEP⊥P⊥
+j (ˆE)P⊥(
+P⊥ˆEP⊥)k−2ˆEΘ
+=eT
+j ˆEP⊥P⊥
+j (ˆE)P⊥(
+P⊥ˆE
+)k−1
+Θ
+=eT
+j ˆE
+(
+P⊥P⊥
+j (ˆE)
+)k
+Θ +
+k−1∑
+t=1
+eT
+j ˆE
+(
+P⊥P⊥
+j (ˆE)
+)t
+P⊥Pj(ˆE)
+(
+P⊥ˆE
+)k−1−t
+Θ.
+56
+
+[PDF PAGE 57]
+By the Induction Assumption and under eventE0,
+eT
+j ˆE
+(
+P⊥P⊥
+j (ˆE)
+)t
+P⊥Pj(ˆE)
+(
+P⊥ˆE
+)k−1−t
+Θ
+
+≤∥ˆE∥t+1Pj(ˆE)
+(
+P⊥ˆE
+)k−1−t
+Θ
+
+2,max≤C1(C2δ)k−tδt+1·µmax
+√ r
+d1
+which holds for all 1 ≤ t≤ k− 1. Therefore, we conclude that on event E0∩E 1, with
+probability at least 1− 2kd−2
+1 ,
+eT
+j ˆE
+(
+P⊥ˆEP⊥)k−1ˆEΘ
+≤
+eT
+j1
+ˆE
+(
+P⊥P⊥
+j1(ˆE)
+)k
+Θ
+ +C1µmax
+√ r
+d1
+·
+k∑
+t=0
+(C2δ)k−tδt+1
+≤
+eT
+j1
+ˆE
+(
+P⊥P⊥
+j1(ˆE)
+)k
+Θ
+ +C1µmax
+√ r
+d1
+(C2δ)k+1·
+k∑
+t=0
+C−(t+1)
+2
+≤
+eT
+j1
+ˆE
+(
+P⊥P⊥
+j1(ˆE)
+)k
+Θ
+ + C1
+2 µmax
+√ r
+d1
+(C2δ)k+1
+as long as C2 > 4. We now bound
+eT
+j ˆE
+(
+P⊥P⊥
+j (ˆE)
+)k
+Θ
+. The idea is the same to Case 1
+and we shall utilize the independence between eT
+j ˆE andP⊥
+j (ˆE), conditioned onNj. Indeed,
+conditioned onNj andP⊥
+j (ˆE), by Bernstein inequality, for all t≥ 0,
+P
+(eT
+j ˆE
+(
+P⊥P⊥
+j (ˆE)
+)k
+Θ
+≥C1σξ
+√
+rd1d2(t + logd1)
+n ∥P⊥
+j ˆE∥k
++C2σξ
+d1d2(t + logd1)
+n
+(
+P⊥P⊥
+j (ˆE)
+)k
+Θ
+
+2,max
+⏐⏐⏐⏐Nj,P⊥
+j (ˆE)
+)
+≤e−t.
+Again, by the Induction Assumption and under eventE0,
+(
+P⊥P⊥
+j (ˆE)
+)k
+Θ
+
+2,max≤
+(
+P⊥P⊥
+j (ˆE)
+)k−1
+P⊥Pj(ˆE)Θ
+
+2,max +
+(
+P⊥P⊥
+j (ˆE)
+)k−1
+P⊥ˆEΘ
+
+2,max
+≤C1δk·µmax
+√ r
+d2
++
+(
+P⊥P⊥
+j (ˆE)
+)k−1
+P⊥ˆEΘ
+
+2,max
+≤C1δk·µmax
+√ r
+d2
++∥(P⊥ˆE)kΘ∥2,max +
+k−1∑
+t=1
+
+(
+P⊥P⊥
+j (ˆE)
+)k−t−1
+P⊥Pj(ˆE)
+(
+P⊥ˆE
+)t
+Θ
+
+2,max
+≤C1δkµmax
+√ r
+d2
++C1µmax
+√ r
+d2
+·
+k−1∑
+t=0
+(C2δ)t+1δk−t−1≤ 2C1µmax
+√ r
+d2
+· (C2δ)k.
+By setting t = 3 log d1, conditioned on Induction Assumption , with probability at least
+1−d−3
+1 ,
+eT
+j ˆE
+(
+P⊥P⊥
+j (ˆE)
+)k
+Θ
+≤C1δk·σξ
+√
+rd1d2 logd1
+n + 2C1(C2δ)k·µmaxσξ
+√
+d2d2
+1 logd2
+1
+n
+57
+
+[PDF PAGE 58]
+≤2C1(C2δ)k·σξ
+√
+rd1d2 logd1
+n ≤ C1
+2
+√ r
+d1
+(C2δ)k+1
+where the last inequality holds as long as n≥Cµ 2
+maxrd1 logd1 for a large enough C >0.
+Therefore, conditioned on Induction Assumption, with probability at least 1−d−2
+1
+max
+j∈[d1]
+eT
+j (P⊥ˆEP⊥)kˆEΘ
+≤C1(C2δ)k+1·µmax
+√ r
+d1
+.
+Finally, we conclude that, under eventE0∩E 1, with probability at least 1− 2(k + 1)d−2
+max so
+that for all 1≤k0≤k + 1,
+max
+j∈[d1]
+eT
+j P⊥(
+P⊥ˆEP⊥)k0−1ˆEΘ
+≤C1(C2δ)k0·µmax
+√ r
+d1
+(C.4)
+and
+max
+j∈[d2]
+eT
+j+d1P⊥(
+P⊥ˆEP⊥)k0−1ˆEΘ
+≤C1(C2δ)k0·µmax
+√ r
+d2
+(C.5)
+where C1,C 2 > 0 are some absolute constants. We conclude the proof of Lemma 9
+D Proof of Lemma 3
+W.O.L.G., we only prove the upper bound for
+⏐⏐⟨ˆU1ˆU T
+1 ˆZ (1)ˆV1ˆV T
+1 ,T
+⟩⏐⏐. Clearly,
+⏐⏐⟨ˆU1ˆU T
+1 ˆZ (1)ˆV1ˆV T
+1 ,T
+⟩⏐⏐≤∥T∥ℓ1·
+ˆU1ˆU T
+1 ˆZ (1)ˆV1ˆV T
+1
+
+max.
+It suﬃces to prove the upper bound for
+ˆU1ˆU T
+1 ˆZ (1)ˆV1ˆV T
+1
+
+max. By Theorem 4,
+ˆU1ˆU T
+1 ˆZ (1)ˆV1ˆV T
+1
+
+max≤
+UU TˆZ (1)VV T
+max +
+(ˆU1ˆU T
+1−UU T)ˆZ (1)VV T
+max
++
+UU TˆZ (1)(ˆV1ˆV T
+1 −VV T)
+
+max +
+(ˆU1ˆU T
+1−UU T)ˆZ (1)(ˆV1ˆV T
+1 −VV T)
+
+max
+≤
+UU TˆZ (1)VV T
+max +∥ˆZ (1)∥∥ˆU1ˆU T
+1−UU T∥2,max∥V∥2,max
++∥ˆZ (1)∥∥ˆV1ˆV T
+1 −VV T∥2,max∥U∥2,max +∥ˆZ (1)∥∥ˆV1ˆV T
+1 −VV T∥2,max∥ˆU1ˆU T
+1−UU T∥2,max
+≤
+UU TˆZ (1)VV T
+max +C2µ2
+max
+σξ
+λr
+√
+rd2
+1d2 logd1
+n ·σξ
+√
+rd1 logd1
+n
+which holds under the event in Theorem 4. Now, we prove the bound for∥UU TˆZ (1)VV T∥max.
+For anyj1∈ [d1],j 2∈ [d2], we write
+eT
+j1UU TˆZ (1)VV Tej2 =d1d2
+n0
+n∑
+i=n0+1
+ξieT
+j1UU TXiVV Tej2
+58
+
+[PDF PAGE 59]
++eT
+j1UU T
+(d1d2
+n0
+n∑
+i=n0+1
+⟨ˆ∆1,Xi⟩Xi−ˆ∆1
+)
+VV Tej2.
+Clearly,
+ξieT
+j1UU TXiVV Tej2
+
+ψ2
+≤σξµ4
+max· r2
+d1d2
+and
+E
+(
+ξieT
+j1UU TXiVV Tej2
+)2
+= σ2
+ξ
+d1d2
+d1∑
+i1=1
+d2∑
+i2=1
+(eT
+j1UU Tei1)2(eT
+i2VV Tej2)2
+= σ2
+ξ
+d1d2
+∥eT
+j1U∥2∥eT
+j2V∥2≤ µ4
+maxσ2
+ξr
+d2
+1d2
+2
+.
+By Bernstein inequality, for all t≥ 0, with probability at least 1−e−t,
+⏐⏐⏐d1d2
+n0
+n∑
+i=n0+1
+ξieT
+j1UU TXiVV Tej2
+⏐⏐⏐≤C1µ2
+maxσξ·
+√
+r(t + logd1)
+n +C2µ4
+maxσξ· r2(t + logd1)
+n .
+By setting t = 3 logd1 and the union bound for all j1∈ [d1],j 2∈ [d2], we conclude that
+P
+(
+∥UU TˆZ (1)
+1 VV T∥max≥C1µ2
+maxσξ
+√
+r logd1
+n
+)
+≤d−2
+1
+as long as n≥ C3µ4
+maxr logd1. Similar bounds also hold for ∥UU TˆZ (1)
+2 VV T∥max. Therefore,
+conditioned on the event of Theorem 4, with probability at least 1 − 2d−2
+1 ,
+∥ˆU1ˆU T
+1 ˆZ (1)ˆV1ˆV T
+1∥max≤C1µ2
+maxσξ
+√
+r logd1
+n +C2µ2
+max
+σξ
+λr
+√
+rd2
+1d2 logd1
+n ·σξ
+√
+rd1 logd1
+n
+which concludes the proof of Lemma 3.
+E Proof of Lemma 4
+We aim to show the normal approximation of
+1
+2
+2∑
+i=1
+(⟨
+U⊥U T
+⊥ˆZ (i)VV T,T
+⟩
++
+⟨
+UUˆZ (i)V⊥V T
+⊥,T
+⟩)
+=
+⟨
+U⊥U T
+⊥(ˆZ (1)/2 +ˆZ (2)/2)VV T,T
+⟩
++
+⟨
+UU (ˆZ (1)/2 +ˆZ (2)/2)V⊥V T
+⊥,T
+⟩
+.
+59
+
+[PDF PAGE 60]
+Recall that ˆZ (i) = ˆZ (i)
+1 + ˆZ (i)
+2 where
+ˆZ (1)
+1 = d1d2
+n0
+n∑
+i=n0+1
+ξiXi and ˆZ (2)
+1 = d1d2
+n0
+n0∑
+i=1
+ξiXi
+so that (recall that n = 2n0)
+ˆZ (1)
+1 + ˆZ (2)
+1
+2 = d1d2
+n
+n∑
+i=1
+ξiXi
+and
+ˆZ (1)
+2 + ˆZ (2)
+2
+2 = d1d2
+n
+( n0∑
+i=1
+⟨ˆ∆2,Xi⟩Xi +
+n∑
+i=n0+1
+⟨ˆ∆1,Xi⟩Xi
+)
+−
+ˆ∆1 +ˆ∆2
+2 .
+Therefore, write
+⟨
+U⊥U T
+⊥(ˆZ (1)
+1 /2 +ˆZ (2)
+1 /2)VV T,T
+⟩
++
+⟨
+UU (ˆZ (1)
+1 /2 +ˆZ (2)
+1 /2)V⊥V T
+⊥,T
+⟩
+= d1d2
+n
+n∑
+i=1
+ξi
+(⟨
+U⊥U T
+⊥XiVV T,T
+⟩
++
+⟨
+UU TXiV⊥V T
+⊥,T
+⟩)
+which is a sum of i.i.d. random variables: ξ
+(⟨
+U⊥U T
+⊥XVV T,T
+⟩
++
+⟨
+UU TXV⊥V T
+⊥,T
+⟩)
+. To
+apply Berry-Essen theorem, we calculate its second and third moments. Clearly,
+Eξ2(⟨
+U⊥U T
+⊥XVV T,T
+⟩
++
+⟨
+UUXV⊥V T
+⊥,T
+⟩)2
+=σ2
+ξ E
+(⟨
+U⊥U T
+⊥XVV T,T
+⟩
++
+⟨
+UUXV⊥V T
+⊥,T
+⟩)2
+=σ2
+ξ
+(
+E
+⟨
+U⊥U T
+⊥XVV T,T
+⟩2
++ E
+⟨
+UUXV⊥V T
+⊥,T
+⟩2
++ 2E
+⟨
+U⊥U T
+⊥XVV T,T
+⟩⟨
+UU TXV⊥V T
+⊥,T
+⟩)
+.
+Recall that X is uniformly distributed over E ={ej1eT
+j2 :j1∈ [d1],j 2∈ [d2]}. Therefore,
+E
+⟨
+U⊥U T
+⊥XVV T,T
+⟩2
+= 1
+d1d2
+d1∑
+i1=1
+d2∑
+i2=1
+(eT
+i2VV TT TU⊥U T
+⊥ei1)2
+= 1
+d1d2
+∥VV TT TU⊥U T
+⊥∥2
+F = 1
+d1d2
+∥V TT TU⊥∥2
+F.
+Similarly, E
+⟨
+UUXV⊥V T
+⊥,T
+⟩2
+=∥U TTV⊥∥2
+F/(d1d2). Meanwhile,
+E
+⟨
+U⊥U T
+⊥XVV T,T
+⟩⟨
+UU TXV⊥V T
+⊥,T
+⟩
+60
+
+[PDF PAGE 61]
+= 1
+d1d2
+d1∑
+i1=1
+d2∑
+i2=1
+(eT
+i2VV TT TU⊥U T
+⊥ei1)· (eT
+i1UU TTV⊥V T
+⊥ei2)
+= 1
+d1d2
+d2∑
+i2=1
+eT
+i2VV TT TU⊥U T
+⊥UU TTV⊥V T
+⊥ei2
+=0
+where we used the fact U TU⊥ = 0. As a result, the second moment is
+Eξ2(⟨
+U⊥U T
+⊥XVV T,T
+⟩
++
+⟨
+UUXV⊥V T
+⊥,T
+⟩)2
+= σ2
+ξ
+d1d2
+(
+∥V TT TU⊥∥2
+F +∥U TTV⊥∥2
+F
+)
+.
+Next, we bound the third moment of ξ
+(⟨
+U⊥U T
+⊥XVV T,T
+⟩
++
+⟨
+UUXV⊥V T
+⊥,T
+⟩)
+. By the sub-
+Gaussian Assumption 3, we have
+E|ξ|3⏐⏐⟨
+U⊥U T
+⊥XVV T,T
+⟩
++
+⟨
+UU TXV⊥V T
+⊥,T
+⟩⏐⏐3
+≤C2σ3
+ξ· E
+⏐⏐⟨
+U⊥U T
+⊥XVV T,T
+⟩
++
+⟨
+UU TXV⊥V T
+⊥,T
+⟩⏐⏐3
+=C2σ3
+ξ· 1
+d1d2
+d1∑
+i1=1
+d2∑
+i2=1
+⏐⏐⟨
+U⊥U T
+⊥ei1eT
+i2VV T,T
+⟩
++
+⟨
+UU Tei1eT
+i2V⊥V T
+⊥,T
+⟩⏐⏐3
+≤C3σ3
+ξ
+d1d2
+·
+d1∑
+i1=1
+d2∑
+i2=1
+(⏐⏐⟨
+U⊥U T
+⊥ei1eT
+i2VV T,T
+⟩⏐⏐3
++
+⏐⏐⟨
+UU Tei1eT
+i2V⊥V T
+⊥,T
+⟩⏐⏐3)
+.
+Clearly,
+⏐⏐⟨
+U⊥U T
+⊥ei1eT
+i2VV T,T
+⟩⏐⏐ =
+⏐⏐⟨
+U T
+⊥ei1eT
+i2V,U T
+⊥TV
+⟩⏐⏐≤∥U T
+⊥TV∥F
+U T
+⊥ei1eT
+i2V
+
+≤∥U T
+⊥TV∥Fµmax
+√ r
+d2
+≤∥U T
+⊥TV∥F·µmax
+√ r
+d2
+.
+Similar bound also holds for |⟨UU Tei1eT
+i2V⊥V T
+⊥,T⟩|. Then,
+E|ξ|3⏐⏐⟨
+U⊥U T
+⊥XVV T,T
+⟩
++
+⟨
+UU TXV⊥V T
+⊥,T
+⟩⏐⏐3
+≤C3
+√rµmaxσ3
+ξ
+d1d2
+√d2
+×
+d1∑
+i1=1
+d2∑
+i2=1
+(⏐⏐⟨
+U⊥U T
+⊥ei1eT
+i2VV T,T
+⟩⏐⏐2
+∥U T
+⊥TV∥F +
+⏐⏐⟨
+UU Tei1eT
+i2V⊥V T
+⊥,T
+⟩⏐⏐2
+∥U TTV⊥∥F
+)
+.
+61
+
+[PDF PAGE 62]
+We write
+d1∑
+i1=1
+d2∑
+i2=1
+(⏐⏐⟨
+U⊥U T
+⊥ei1eT
+i2VV T,T
+⟩⏐⏐2
+=
+d1∑
+i1=1
+d2∑
+i2=1
+(eT
+i1U⊥U T
+⊥TVV Tei2)2 =∥U⊥U T
+⊥TVV T∥2
+F =∥U T
+⊥TV∥2
+F
+Therefore,
+E|ξ|3⏐⏐⟨
+U⊥U T
+⊥XVV T,T
+⟩
++
+⟨
+UU TXV⊥V T
+⊥,T
+⟩⏐⏐3
+≤C1
+σ3
+ξµmax
+√r
+d1d2
+√d2
+(
+∥U T
+⊥TV∥3
+F +∥U TTV⊥∥3
+F
+)
+.
+By Berry-Essen theorem (Berry (1941), Esseen (1956)), we get
+sup
+x∈R
+⏐⏐⏐⏐P
+(⟨U⊥U T
+⊥(ˆZ (1)
+1 /2 +ˆZ (2)
+1 /2)VV T,T⟩ +⟨UU T(ˆZ (1)
+1 /2 +ˆZ (2)
+1 /2)V⊥V T
+⊥,T⟩
+σξ(∥V TT TU⊥∥2
+F +∥U TTV⊥∥2
+F)1/2·
+√
+d1d2/n
+≤x
+)
+− Φ(x)
+⏐⏐⏐⏐
+≤C4µmax
+√
+rd1
+n · ∥U TTV⊥∥3
+F +∥U T
+⊥TV∥3
+F
+(∥V TT TU⊥∥2
+F +∥U TTV⊥∥2
+F)3/2≤C4µmax
+√
+rd1
+n , (E.1)
+where Φ(x) denotes the c.d.f. of standard normal distributions. By Assumption 2, we write
+∥U TTV∥F
+=
+
+∑
+j1,j2
+Tj1,j2U Tej1eT
+j2V
+
+F
+≤
+∑
+j1,j2
+|Tj1,j2|·∥ U Tej1∥∥V Tej2∥≤∥ T∥ℓ1·µ2
+max
+√
+r2
+d1d2
+. (E.2)
+We then replace ∥V TT TU⊥∥2
+F and∥U TTV⊥∥2
+F with∥TV∥2
+F and∥U TT∥2
+F, respectively, to
+simplify the representation. We write
+⟨U⊥U T
+⊥(ˆZ (1)
+1 /2 +ˆZ (2)
+1 /2)VV T,T⟩ +⟨UU T(ˆZ (1)
+1 /2 +ˆZ (2)
+1 /2)V⊥V T
+⊥,T⟩
+σξ(∥V TT TU⊥∥2
+F +∥U TTV⊥∥2
+F)1/2·
+√
+d1d2/n
+=⟨U⊥U T
+⊥(ˆZ (1)
+1 /2 +ˆZ (2)
+1 /2)VV T,T⟩ +⟨UU T(ˆZ (1)
+1 /2 +ˆZ (2)
+1 /2)V⊥V T
+⊥,T⟩
+σξ(∥TV∥2
+F +∥U TT∥2
+F)1/2·
+√
+d1d2/n
++⟨U⊥U T
+⊥(ˆZ (1)
+1 /2 +ˆZ (2)
+1 /2)VV T,T⟩ +⟨UU T(ˆZ (1)
+1 /2 +ˆZ (2)
+1 /2)V⊥V T
+⊥,T⟩
+σξ(∥V TT TU⊥∥2
+F +∥U TTV⊥∥2
+F)1/2·
+√
+d1d2/n
+×
+(
+1− (∥V TT TU⊥∥2
+F +∥U TTV⊥∥2
+F)1/2
+(∥TV∥2
+F +∥U TT∥2
+F)1/2
+)
+.
+62
+
+[PDF PAGE 63]
+By Bernstein inequality, there exists an event E2 with P(E2)≥ 1−d−2
+1 so that underE2,
+⏐⏐⏐⏐
+⟨U⊥U T
+⊥(ˆZ (1)
+1 /2 +ˆZ (2)
+1 /2)VV T,T⟩ +⟨UU T(ˆZ (1)
+1 /2 +ˆZ (2)
+1 /2)V⊥V T
+⊥,T⟩
+σξ(∥V TT TU⊥∥2
+F +∥U TTV⊥∥2
+F)1/2·
+√
+d1d2/n
+⏐⏐⏐⏐≤C2
+√
+logd1
+for some large enough constant C2 > 0. On the other hand, by Assumption 4,
+1− (∥V TT TU⊥∥2
+F +∥U TTV⊥∥2
+F)1/2
+(∥TV∥2
+F +∥U TT∥2
+F)1/2 ≤ 1−∥V TT TU⊥∥2
+F +∥U TTV⊥∥2
+F
+∥TV∥2
+F +∥U TT∥2
+F
+=∥V TT TU∥2
+F +∥U TTV∥2
+F
+∥TV∥2
+F +∥U TT∥2
+F
+≤µ4
+max∥T∥2
+ℓ1
+α2
+T∥T∥2
+F
+· r
+d2
+where the last inequality is due to (E.2). Therefore, we conclude that, under event E2,
+⏐⏐⏐⏐
+⟨U⊥U T
+⊥(ˆZ (1)
+1 /2 +ˆZ (2)
+1 /2)VV T,T⟩ +⟨UU T(ˆZ (1)
+1 /2 +ˆZ (2)
+1 /2)V⊥V T
+⊥,T⟩
+σξ(∥V TT TU⊥∥2
+F +∥U TTV⊥∥2
+F)1/2·
+√
+d1d2/n
+−⟨U⊥U T
+⊥(ˆZ (1)
+1 /2 +ˆZ (2)
+1 /2)VV T,T⟩ +⟨UU T(ˆZ (1)
+1 /2 +ˆZ (2)
+1 /2)V⊥V T
+⊥,T⟩
+σξ(∥TV∥2
+F +∥U TT∥2
+F)1/2·
+√
+d1d2/n0
+⏐⏐⏐⏐
+≤C2
+µ4
+max∥T∥2
+ℓ1
+α2
+T∥T∥2
+F
+· r√logd1
+d2
+.
+By the Lipschitz property of Φ(x), it is obvious that (see, e.g., Xia (2019a,b))
+sup
+x∈R
+⏐⏐⏐⏐P
+(⟨U⊥U T
+⊥(ˆZ (1)
+1 /2 +ˆZ (2)
+1 /2)VV T,T⟩ +⟨UU T(ˆZ (1)
+1 /2 +ˆZ (2)
+1 /2)V⊥V T
+⊥,T⟩
+σξ(∥V TT T∥2
+F +∥U TT∥2
+F)1/2·
+√
+d1d2/n
+≤x
+)
+− Φ(x)
+⏐⏐⏐⏐
+≤C4µmax
+√
+rd1
+n +C2
+µ4
+max∥T∥2
+ℓ1
+α2
+T∥T∥2
+F
+· r√logd1
+d2
++ 1
+d2
+1
+.
+Next, we prove the upper bound for
+⟨
+U⊥U T
+⊥(ˆZ (1)
+2 /2 +ˆZ (2)
+2 /2)VV T,T
+⟩
++
+⟨
+UU T(ˆZ (1)
+2 /2 +ˆZ (2)
+2 /2)V⊥V T
+⊥,T
+⟩
+.
+We write
+⟨
+U⊥U T
+⊥ˆZ (1)
+2 VV T,T
+⟩
+=d1d2
+n0
+n∑
+i=n0+1
+⟨ˆ∆1,Xi⟩ tr
+(
+T TU⊥U T
+⊥XiVV T)
+− tr
+(
+T TU⊥U T
+⊥ˆ∆1VV T)
+.
+63
+
+[PDF PAGE 64]
+Observe that
+⏐⏐⟨ˆ∆1,Xi⟩ tr
+(
+T TU⊥U T
+⊥XiVV T)⏐⏐≤∥ ˆ∆1∥max∥U T
+⊥TV∥F·µmax
+√ r
+d2
+.
+Moreover,
+E⟨ˆ∆1,Xi⟩2
+(
+tr
+(
+T TU⊥U T
+⊥XiVV T))2
+≤∥ ˆ∆1∥2
+max· E
+(
+tr
+(
+T TU⊥U T
+⊥XiVV T))2
+=∥ˆ∆1∥2
+max
+d1d2
+d1∑
+i1=1
+d2∑
+i2=1
+eT
+i1U⊥U T
+⊥TVV Tei2eT
+i2VV TT TU⊥U T
+⊥ei1
+=∥ˆ∆1∥2
+max
+d1d2
+∥U T
+⊥TV∥2
+F.
+By Bernstein inequality, with probability at least 1−d−2
+1 ,
+⏐⏐⟨
+U⊥U T
+⊥ˆZ (1)
+2 VV T,T
+⟩
++
+⟨
+UU TˆZ (1)
+2 V⊥V T
+⊥,T
+⟩⏐⏐
+∥U T
+⊥TV∥F +∥U TTV⊥∥F
+≤C2∥ˆ∆1∥max
+√
+d1d2 logd1
+n +C3µmax∥ˆ∆1∥max·
+√
+rd2
+1d2 logd1
+n
+≤C2∥ˆ∆1∥max
+√
+d1d2 logd1
+n
+where the last bound holds as long as n≥Cµ 2
+maxrd1 logd1 for a large enough constantC >0.
+Recall from Assumption 1 that
+P
+(
+∥ˆ∆1∥2
+max≤C2γ2
+n·σ2
+ξ
+)
+≥ 1−d−2
+1 .
+Therefore, with probability at least 1− 2d−2
+1 , for i = 1, 2,
+⏐⏐⟨
+U⊥U T
+⊥ˆZ (i)
+2 VV T,T
+⟩
++
+⟨
+UU TˆZ (i)
+2 V⊥V T
+⊥,T
+⟩⏐⏐
+σξ(∥V TT T∥2
+F +∥U TT∥2
+F)1/2·
+√
+d1d2/n
+≤C3γn
+√
+logd1.
+By Lipschitz property of Φ(x), then
+sup
+x∈R
+⏐⏐⏐⏐P
+(⟨U⊥U T
+⊥(ˆZ (1)/2 +ˆZ (2)/2)VV T,T⟩ +⟨UU T(ˆZ (1)/2 +ˆZ (2)/2)V⊥V T
+⊥,T⟩
+σξ(∥V TT T∥2
+F +∥U TT∥2
+F)1/2·
+√
+d1d2/n
+≤x
+)
+− Φ(x)
+⏐⏐⏐⏐
+≤C2
+µ4
+max∥T∥2
+ℓ1
+α2
+T∥T∥2
+F
+· r√logd1
+d2
++ 3
+d2
+1
++C3γn
+√
+logd1 +C4µmax
+√
+rd1
+n .
+We conclude the proof of Lemma 4.
+64
+
+[PDF PAGE 65]
+F Proof of Lemma 5
+The following fact is clear.
+⏐⏐
+2∑
+i=1
+∞∑
+k=2
+⟨(
+SA,k(ˆE(i))AΘΘT + ΘΘTASA,k(ˆE(i))
+)
+,˜T
+⟩⏐⏐
+≤
+2∑
+i=1
+∞∑
+k=2
+⏐⏐⟨(
+SA,k(ˆE(i))AΘΘT + ΘΘTASA,k(ˆE(i))
+)
+,˜T
+⟩⏐⏐
+≤∥T∥ℓ1·
+2∑
+i=1
+∞∑
+k=2
+max
+j1∈[d1]
+j2∈[d2]
+⏐⏐eT
+j1
+(
+SA,k(ˆE(i))AΘΘT + ΘΘTASA,k(ˆE(i))
+)
+ed1+j2
+⏐⏐.
+Observe that for i = 1, 2
+⏐⏐eT
+j1
+(
+SA,k(ˆE(i))AΘΘT)
+ej2+d1
+⏐⏐≤µmax
+√ r
+d2
+·
+eT
+j1SA,k(ˆE(i))AΘ
+
+and
+⏐⏐eT
+j1
+(
+ΘΘTASA,k(ˆE(i))
+)
+ed1+j2
+⏐⏐≤µmax
+√ r
+d1
+·∥eT
+d1+j2SA,k(ˆE(i))AΘ∥.
+Recall that
+SA,k(ˆE(i)) =
+∑
+s:s1+···+sk+1=k
+P−s1ˆE(i)P−s2··· P−skˆE(i)P−sk+1, ∀i = 1, 2.
+Then, we write
+eT
+j1SA,k(ˆE(i))AΘ =
+∑
+s:s1+···+sk+1=k
+eT
+j1P−s1ˆE(i)P−s2··· P−skˆE(i)P−sk+1AΘ.
+Clearly, if sk+1 = 0, then P−sk+1A = P⊥A = 0. Therefore, it suﬃces to focus on sk+1≥ 1.
+Then,
+eT
+j1SA,k(ˆE(i))AΘ =
+∑
+s:s1+···+sk+1=k
+sk+1≥1
+eT
+j1P−s1ˆE(i)P−s2··· P−skˆE(i)ΘΘTP−sk+1AΘ.
+Letkmax = 2⌈logd1⌉. Then, for all k≤kmax,i = 1, 2 and by Lemma 9 (and the arguments for
+the cases s1≥ 1),
+max
+j1∈[d1]
+eT
+j1P−s1ˆE(i)P−s2··· P−skˆE(i)ΘΘTP−sk+1AΘ
+
+65
+
+[PDF PAGE 66]
+≤ max
+j1∈[d1]
+∥eT
+j1P−s1ˆE(i)P−s2··· P−skˆE(i)Θ∥·∥ P−sk+1A∥
+≤C1
+(C2δ
+λr
+)k−1
+δ·µmax
+√ r
+d1
+where δ is the upper bound of ∥ˆE(i)∥ deﬁned by (7.12). Therefore, conditioned on event E0
+(see (7.12)) and the event of Lemma 9 , for all k≤kmax,
+max
+j1∈[d1]
+eT
+j1SA,k(ˆE(i))AΘ
+≤C1
+(4C2δ
+λr
+)k−1
+δ·µmax
+√ r
+d1
+≤C1
+(4C2δ
+λr
+)k−1
+δ·µmax
+√ r
+d1
+.
+As a result, we get
+max
+j1∈[d1]
+j2∈[d2]
+2∑
+i=1
+kmax∑
+k=2
+⏐⏐eT
+j1
+(
+SA,k(ˆE(i))AΘΘT + ΘΘTASA,k(ˆE(i))
+)
+ed1+j2
+⏐⏐
+≤C1µ2
+max
+r√d1d2
+δ·
+kmax∑
+k=2
+(4C2δ
+λr
+)k−1
+≤C1µ2
+max
+r√d1d2
+δ· δ
+λr
+where the last inequality holds since 8C2δ/λr < 1 by Assumption 3. Moreover, on event E0,
+we have
+max
+j1∈[d1]
+j2∈[d2]
+2∑
+i=1
+∞∑
+k=kmax+1
+⏐⏐eT
+j1
+(
+SA,k(ˆE(i))AΘΘT + ΘΘTASA,k(ˆE(i))
+)
+ed1+j2
+⏐⏐
+≤2µmax
+√ r
+d2
+·
+∞∑
+k=kmax+1
+∑
+s:s1+···+sk+1=k
+δ·
+( δ
+λr
+)k−1
+≤2µmax
+√ r
+d2
+·
+∞∑
+k=kmax+1
+δ·
+(4δ
+λr
+)k−1
+≤ 2δµmax
+√ r
+d2
+·
+(4δ
+λr
+)kmax
+≤2µmax
+√ r
+d2
+1d2
+δ· δ
+λr
+where the last inequality is due to (1/2)logd1≤d−1
+1 . Therefore, under the event of Theorem 4,
+⏐⏐
+2∑
+i=1
+∞∑
+k=2
+⟨(
+SA,k(ˆE(i))AΘΘT+ΘΘTASA,k(ˆE(i))
+)
+,˜T
+⟩⏐⏐
+≤C2∥T∥ℓ1µ2
+max
+( δ
+λr
+)
+· rδ√d1d2
+which concludes the proof by replacing δ with Cσξ
+√
+d2
+1d2 logd1/n.
+66
+
+[PDF PAGE 67]
+G Proof of Lemma 6
+By the deﬁnitions of A and{ˆΘi}2
+i=1, we have
+⟨
+(ˆΘiˆΘT
+i − ΘΘT)A(ˆΘiˆΘT
+i − ΘΘT),˜T
+⟩
+=
+⟨
+(ˆUiˆU T
+i −UU T)M(ˆViˆV T
+i −VV T),T
+⟩
+for i = 1, 2. Then,
+⏐⏐⟨
+(ˆΘiˆΘT
+i − ΘΘT)A(ˆΘiˆΘT
+i − ΘΘT),˜T
+⟩⏐⏐
+≤
+(ˆUiˆU T
+i −UU T)M(ˆViˆV T
+i −VV T)
+
+max·∥T∥ℓ1
+≤∥T∥ℓ1·∥ Λ∥∥ˆUiˆU T
+i −UU T∥2,max∥ˆViˆV T
+i −VV T∥2,max.
+Therefore, under the event of Theorem 4,
+⏐⏐⟨
+(ˆΘiˆΘT
+i − ΘΘT)A(ˆΘiˆΘT
+i − ΘΘT),˜T
+⟩⏐⏐
+≤C2κ0µ2
+max∥T∥ℓ1σξ
+√
+r2d1 logd1
+n · σξ
+λr
+√
+d2
+1d2 logd1
+n .
+H Proof of Lemma 7
+By eq. (7.5), we write
+d1d2
+N0
+∑
+j∈D2t
+⟨ˆU (t)ˆG(t)ˆV (t)T−UΛV T,Xj⟩ˆU (t)TXjˆV (t)− d1d2
+N0
+∑
+j∈D2t
+ξjˆU (t)TXjˆV (t) = 0
+where, due to data splitting, ( ˆU (t),ˆV (t)) are independent with D2t. Note that
+ˆU (t)ˆG(t)ˆV (t)T−UΛV T
+=ˆU (t)(ˆG(t)− ˆO(t)T
+U ΛˆO(t)
+V )ˆV (t)T +
+(ˆU (t)ˆO(t)T
+U Λ(ˆV (t)ˆO(t)T
+V )T−UΛV T)
+.
+Then,
+ˆG(t)−ˆO(t)T
+U ΛˆO(t)
+V
+=
+(ˆG(t)− ˆO(t)T
+U ΛˆO(t)
+V
+)
+− d1d2
+N0
+∑
+j∈D2t
+⟨ˆG(t)− ˆO(t)T
+U ΛˆO(t)
+V ,ˆU (t)TXjˆV (t)⟩ˆU (t)TXjˆV (t)
+67
+
+[PDF PAGE 68]
+− d1d2
+N0
+∑
+j∈D2t
+⟨
+(ˆU (t)ˆO(t)T
+U Λ(ˆV (t)ˆO(t)T
+V )T−UΛV T)
+,Xj⟩ˆU (t)TXjˆV (t)
++ d1d2
+N0
+∑
+j∈D2t
+ξjˆU (t)TXjˆV (t).
+Since∥ˆU (t)∥≤ 2µmax
+√
+r/d1,∥ˆV (t)∥≤ 2µmax
+√
+r/d2, then
+
+ξiˆU (t)TXiˆV (t)
+
+ψ2
+≲σξ·µ2
+max
+√
+r2
+d1d2
+where theψ2-norm of a random variableZ is deﬁned by∥Z∥ψ2 = min{C >0 : exp(|Z|2/C 2)≤
+2}. Meanwhile,
+E(ξ2ˆU (t)TXˆV (t)ˆV (t)TX TˆU (t))
+ =σ2
+ξ
+E(ˆU (t)TXˆV (t)ˆV (t)TX TˆU (t))
+ =σ2
+ξ· r
+d1d2
+.
+By matrix Bernstein inequality (Tropp, 2012; Koltchinskii et al., 2011), for any t≥ 0,
+P
+(d1d2
+N0
+∑
+j∈D2t
+ξjˆU (t)TXjˆV (t)
+≥C2σξ
+√
+rd1d2(t + logd1)
+N0
++C3µ2
+maxσξ
+√r2d1d2(t + logd1)
+N0
+)
+≤e−t.
+By setting t = 2 logd1 and the fact n≥ C5µ4
+maxr log2d1, we get, with probability at least
+1−d−2
+1 , that d1d2
+N0
+∑
+j∈D2t
+ξjˆU (t)TXjˆV (t)
+≤C2σξ
+√
+rd1d2 logd1
+N0
+for some absolute constant C2 > 0.
+We then prove the upper bound for
+
+(ˆG(t)− ˆO(t)T
+U ΛˆO(t)
+V
+)
+− d1d2
+N0
+∑
+j∈D2t
+⟨ˆG(t)− ˆO(t)T
+U ΛˆO(t)
+V ,ˆU (t)TXjˆV (t)⟩ˆU (t)TXjˆV (t)
+
+where ˆG(t) is dependent with{(Xj,Yj)}j∈D2t. To this end, we write
+
+(ˆG(t)−ˆO(t)T
+U ΛˆO(t)
+V
+)
+− d1d2
+N0
+∑
+j∈D2t
+⟨ˆG(t)− ˆO(t)T
+U ΛˆO(t)
+V ,ˆU (t)TXjˆV (t)⟩ˆU (t)TXjˆV (t)
+
+≤∥ˆG(t)− ˆO(t)T
+U ΛˆO(t)
+V∥· sup
+A∈Rr×r,∥A∥≤1
+A− d1d2
+N0
+∑
+j∈D2t
+⟨A,ˆU (t)TXjˆV (t)⟩ˆU (t)TXjˆV (t)
+.
+DenoteOr ={A∈ Rr×r,∥A∥≤ 1} andN1/3(Or) the 1/3-net ofOr, i.e., for anyA∈O r, there
+existsA0∈N 1/3(Or) so that∥A−A0∥≤ 1/3. It is well-known by (Pajor, 1998; Koltchinskii
+68
+
+[PDF PAGE 69]
+and Xia, 2015) that Card
+(
+N1/3(Or)
+)
+≤ 3C2r2
+for some absolute constants C2 > 0. By the
+deﬁnition ofN1/3(Or),
+
+(ˆG(t)−ˆO(t)T
+U ΛˆO(t)
+V
+)
+− d1d2
+N0
+∑
+j∈D2t
+⟨ˆG(t)− ˆO(t)T
+U ΛˆO(t)
+V ,ˆU (t)TXjˆV (t)⟩ˆU (t)TXjˆV (t)
+
+≤3∥ˆG(t)− ˆO(t)T
+U ΛˆO(t)
+V∥· max
+A∈N1/3(Or)
+A− d1d2
+N0
+∑
+j∈D2t
+⟨A,ˆU (t)TXjˆV (t)⟩ˆU (t)TXjˆV (t)
+.
+For eachA∈N 1/3(Or),
+⟨A,ˆU (t)TXiˆV (t)⟩ˆU (t)TXiˆV (t)≤∥ ˆU (t)TXiˆV (t)∥⋆·∥ˆU (t)TXiˆV (t)∥≤∥ ˆU (t)∥2
+2,max∥ˆV (t)∥2
+2,max≤µ4
+max
+r2
+d1d2
+where∥·∥ ⋆ denotes the matrix nuclear norm. Moreover,
+E⟨A,ˆU (t)TXiˆV (t)⟩2ˆU (t)TXiˆV (t)ˆV (t)TX T
+i ˆU (t)≤µ4
+max
+r3
+(d1d2)2.
+Therefore, for each A∈N 1/3(Or) and any t> 0,
+P
+(A− d1d2
+N0
+∑
+j∈D2t
+⟨A,ˆU (t)TXjˆV (t)⟩ˆU (t)TXjˆV (t)
+≥C1µ2
+max
+√
+r3(t + logd1)
+N0
++C2µ4
+max
+r2(t + logd1)
+N0
+)
+≤e−t.
+By settingt =C2r2 + 2 logd1 and the union bound over all A∈N 1/3(Or), ifn≥C3µ4
+max(r3 +
+r logd1) logd1, then with probability at least 1 −d−2
+1 ,
+max
+A∈N1/3(Or)
+A− d1d2
+N0
+∑
+j∈D2t
+⟨A,ˆU (t)TXjˆV (t)⟩ˆU (t)TXjˆV (t)
+≤C1µ2
+max
+√
+r3(r2 + logd1)
+N0
+implying that
+
+(ˆG(t)−ˆO(t)T
+U ΛˆO(t)
+V
+)
+− d1d2
+N0
+∑
+j∈D2t
+⟨ˆG(t)− ˆO(t)T
+U ΛˆO(t)
+V ,ˆU (t)TXjˆV (t)⟩ˆU (t)TXjˆV (t)
+
+≤∥ˆG(t)− ˆO(t)T
+U ΛˆO(t)
+V∥· C1µ2
+max
+√
+r3(r2 + logd1)
+N0
+.
+Similarly if n≥C2µ4
+maxr log2d1, then with probability at least 1 −d−2
+1 ,
+d1d2
+N0
+∑
+j∈D2t
+⟨
+(ˆU (t)ˆO(t)T
+U Λ(ˆV (t)ˆO(t)T
+V )T−UΛV T)
+,Xj⟩ˆU (t)TXjˆV (t)
+
+69
+
+[PDF PAGE 70]
+≤
+ˆU (t)T(ˆU (t)ˆO(t)T
+U Λ(ˆV (t)ˆO(t)T
+V )T−UΛV T)ˆV (t)
++C2
+ˆU (t)ˆO(t)T
+U Λ(ˆV (t)ˆO(t)T
+V )T−UΛV T
+max·
+√
+rd1d2 logd1
+N0
+where we used the fact
+⟨
+(ˆU (t)ˆO(t)T
+U Λ(ˆV (t)ˆO(t)T
+V )T−UΛV T)
+,Xj⟩ˆU (t)TXjˆV (t)
+≤
+ˆU (t)ˆO(t)T
+U Λ(ˆV (t)ˆO(t)T
+V )T−UΛV T
+max·µ2
+max
+√
+r2
+d1d2
+and
+E⟨ˆU (t)ˆO(t)T
+U Λ(ˆV (t)ˆO(t)T
+V )T−UΛV T,Xj⟩2ˆU (t)TXjˆV (t)ˆV (t)TX T
+j ˆU (t)
+≤
+ˆU (t)ˆO(t)T
+U Λ(ˆV (t)ˆO(t)T
+V )T−UΛV T2
+max· r
+d1d2
+.
+Therefore, we conclude that if n≥C2µ4
+maxr3(r2 + logd1) logd1, then with probability at least
+1− 3d−2
+1 ,
+∥ˆG(t)− ˆO(t)T
+U ΛˆO(t)
+V∥≤
+ˆU (t)T(ˆU (t)ˆO(t)T
+U Λ(ˆV (t)ˆO(t)T
+V )T−UΛV T)ˆV (t) +C6σξ
+√
+rd1d2 logd1
+N0
++C2∥ˆU (t)ˆO(t)T
+U Λ(ˆV (t)ˆO(t)T
+V )T−UΛV T∥max·
+√
+rd1d2 logd1
+N0
+Note that
+∥ˆU (t)ˆO(t)T
+U Λ(ˆV (t)ˆO(t)T
+V )T−UΛV T∥max
+≤ 3∥Λ∥µmax·
+(√ r
+d2
+∥ˆU (t)−UˆO(t)
+U∥2,max +
+√ r
+d1
+∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+.
+By the diﬀerential property of Grassmannians, see, e.g., (Keshavan et al., 2010a; Xia and
+Yuan, 2017; Edelman et al., 1998),
+ˆU (t)T(ˆU (t)ˆO(t)T
+U Λ(ˆV (t)ˆO(t)T
+V )T−UΛV T)ˆV (t)
+≤∥Λ∥·∥ ˆU (t)T(ˆU (t)ˆO(t)T
+U −U)∥ +∥Λ∥·∥ ˆV (t)T(ˆV (t)ˆO(t)T
+V −V )∥
+≤2∥Λ∥·∥ ˆU (t)−UˆO(t)
+U∥2 + 2∥Λ∥·∥ ˆV (t)−V ˆO(t)
+V∥2.
+70
+
+[PDF PAGE 71]
+Finally, we conclude with probability at least 1− 3d−2
+1 ,
+ˆG(t)−ˆO(t)T
+U ΛˆO(t)
+V
+≤C5σξ
+√
+rd1d2 logd1
+N0
++ 2∥Λ∥·
+(
+∥ˆU (t)−UˆO(t)
+U∥2 +∥ˆV (t)−V ˆO(t)
+V∥2)
++C7∥Λ∥
+(√ r
+d2
+∥ˆU (t)−UˆO(t)
+U∥2,max +
+√ r
+d1
+∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+·µmax
+√
+rd1d2 logd1
+N0
+I Proof of Lemma 8
+Recall that
+ˆU (t+0.5)−UˆO(t)
+U ˆL(t)
+G = (ˆU (t)ˆL(t)
+G −UˆO(t)
+U ˆL(t)
+G )
+(
+I−η·ˆL(t)T
+G ˆO(t)T
+U ΛˆO(t)
+V ˆR(t)
+G (ˆΛ(t))−1)
+−η·ˆU (t)(ˆG(t)− ˆO(t)T
+U ΛˆO(t)
+V
+)ˆR(t)
+G (ˆΛ(t))−1−η·UΛ(ˆV (t)ˆO(t)T
+V −V )TˆV (t)ˆR(t)
+G (ˆΛ(t))−1
++ ˆE(t)
+V + ˆE(t)
+ξ,V. (I.1)
+By Lemma 7,
+ˆΛ(t)−ˆL(t)T
+G ˆO(t)T
+U ΛˆO(t)
+V ˆR(t)
+G
+≤C5σξ
+√
+rd1d2 logd1
+N0
++ 2∥Λ∥·
+(
+∥ˆU (t)−UˆO(t)
+U∥2 +∥ˆV (t)−V ˆO(t)
+V∥2)
++C7∥Λ∥
+(√ r
+d2
+∥ˆU (t)−UˆO(t)
+U∥2,max +
+√ r
+d1
+∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+·µmax
+√
+rd1d2 logd1
+N0
+(I.2)
+which implies that ∥ˆΛ(t)− ˆL(t)T
+G ˆO(t)T
+U ΛˆO(t)
+V ˆR(t)
+G∥ ≤λr/20 under Assumption 3 and when
+max{∥ˆU (t)−UˆO(t)
+U∥,∥ˆV (t)−V ˆO(t)
+V∥}≤ 1/(80√κ0),∥ˆU (t)∥2,max≤ 2µmax
+√
+r/d1,∥ˆV (t)∥2,max≤
+2µmax
+√
+r/d2 and n≥C3κ2
+0µ4
+maxr3 logd1.
+Since η≤ 0.75, we have
+(ˆU (t)ˆL(t)
+G −UˆO(t)
+U ˆL(t)
+G )
+(
+I−η·ˆL(t)T
+G ˆO(t)T
+U ΛˆO(t)
+V ˆR(t)
+G (ˆΛ(t))−1)
+2,max
+≤
+(ˆU (t)ˆL(t)
+G −UˆO(t)
+U ˆL(t)
+G )
+
+2,max·
+I−η·ˆL(t)T
+G ˆO(t)T
+U ΛˆO(t)
+V ˆR(t)
+G (ˆΛ(t))−1
+≤∥ˆU (t)−UˆO(t)
+U∥2,max· (1−η) +∥ˆU (t)−UˆO(t)
+U∥2,max·η
+ˆΛ(t)−ˆL(t)T
+G ˆO(t)T
+U ΛˆO(t)
+V ˆR(t)
+G
+·
+(ˆΛ(t))−1
+≤
+(
+1−η
+)
+·∥ˆU (t)−UˆO(t)
+U∥2,max + 2∥ˆU (t)−UˆO(t)
+U∥2,max·η
+ˆΛ(t)−ˆL(t)T
+G ˆO(t)T
+U ΛˆO(t)
+V ˆR(t)
+G
+·λ−1
+r
+where the last inequality is due to λr(ˆΛ(t)) ≥ λr/2 by (I.2). Again, by Lemma 7 and
+Assumption 3,
+2
+ˆΛ(t)−ˆL(t)T
+G ˆO(t)T
+U ΛˆO(t)
+V ˆR(t)
+G
+·λ−1
+r ≤ 1
+10.
+71
+
+[PDF PAGE 72]
+Then, we obtain
+(ˆU (t)ˆL(t)
+G −UˆO(t)
+U ˆL(t)
+G )
+(
+I−η·ˆL(t)T
+G ˆO(t)T
+U ΛˆO(t)
+V ˆR(t)
+G (ˆΛ(t))−1)
+2,max≤
+(
+1− 9η
+10
+)
+·∥ˆU (t)−UˆO(t)
+U∥2,max.
+Since∥ˆU (t)∥max≤ 2µmax
+√
+r/d1, by (I.2), we get
+η
+ˆU (t)(ˆG(t)− ˆO(t)T
+U ΛˆO(t)
+V
+)ˆR(t)
+G (ˆΛ(t))−1
+2,max≤ 2η∥ˆU (t)∥2,max·∥ ˆG(t)− ˆO(t)T
+U ΛˆO(t)
+V∥· λ−1
+r
+≤C3
+µmaxησξ
+λr
+·
+√
+r2d2 logd1
+N0
++C4ηκ0µmax
+√ r
+d1
+(
+∥ˆU (t)−UˆO(t)
+U∥2 +∥ˆV (t)−V ˆO(t)
+V∥2
+)
++C5ηκ0µmax·
+(√ r
+d2
+∥ˆU (t)−UˆO(t)
+U∥2,max +
+√ r
+d1
+∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+·µmax
+√
+r2d2 logd1
+N0
+.
+Observe that
+C4κ0µmax
+√ r
+d1
+∥ˆU (t)−UˆO(t)
+U∥2≤C4κ0µmax
+√r∥ˆU (t)−UˆO(t)
+U∥· ∥ˆU (t)−UˆO(t)
+U∥√d1
+≤C4κ0µmax
+√r∥ˆU (t)−UˆO(t)
+U∥· ∥ˆU (t)−UˆO(t)
+U∥F
+√d1
+≤∥ˆU (t)−UˆO(t)
+U∥2,max
+20
+if∥ˆU (t)−UˆO(t)
+U∥≤ 1/(20κ0µmax
+√r). Similarly, if ∥ˆV (t)−V ˆO(t)
+V∥≤ 1/(20κ0µmax
+√rαd) where
+αd =d1/d2, then
+C4κ0µmax
+√ r
+d1
+∥ˆV (t)−V ˆO(t)
+V∥2≤∥ˆV (t)−V ˆO(t)
+V∥2,max
+20 .
+Therefore,
+C4κ0µmax
+√ r
+d1
+(
+∥ˆU (t)−UˆO(t)
+U∥2 +∥ˆV (t)−V ˆO(t)
+V∥2
+)
+≤∥ˆU (t)−UˆO(t)
+U∥2,max +∥ˆV (t)−V ˆO(t)
+V∥2,max
+20 .
+Moreover, if n≥C1αdκ2
+0µ4
+maxr3 log2d1, then
+C5κ0µmax·
+(√ r
+d2
+∥ˆU (t)−UˆO(t)
+U∥2,max +
+√ r
+d1
+∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+·µmax
+√
+r2d2 logd1
+N0
+≤∥ˆU (t)−UˆO(t)
+U∥2,max +∥ˆV (t)−V ˆO(t)
+V∥2,max
+40 .
+72
+
+[PDF PAGE 73]
+Then, we get
+η
+ˆU (t)(ˆG(t)− ˆO(t)T
+U ΛˆO(t)
+V
+)ˆR(t)
+G (ˆΛ(t))−1
+2,max
+≤C3
+ηµmaxσξ
+λr
+·
+√
+r2d2 logd1
+N0
++ 3η
+40·
+(
+∥ˆU (t)−UˆO(t)
+U∥2,max +∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+.
+Since∥(ˆV (t)ˆO(t)T
+V −V )TˆV (t)∥≤∥ ˆV (t)ˆO(t)T
+V −V∥2, we get
+UΛ(ˆV (t)ˆO(t)T
+V −V )TˆV (t)ˆR(t)
+G (ˆΛ(t))−1
+2,max≤ 2κ0µmax
+√ r
+d1
+∥ˆV (t)ˆO(t)T
+V −V∥2≤ 1
+40·∥ˆV (t)−V ˆO(t)
+V∥2,max
+if∥ˆV (t)ˆO(t)T
+V −V∥≤ 1/(C2κ0µmax
+√r). Putting together the above bounds, we obtain
+ˆU (t+0.5)−UˆO(t)
+U ˆL(t)
+G
+
+2,max≤
+(
+1− 9η
+10
+)
+∥ˆU (t)−UˆO(t)
+U∥2,max +C3ηµmax
+σξ
+λr
+√
+r2d2 logd1
+N0
++ η
+10·
+(
+∥ˆU (t)−UˆO(t)
+U∥2,max +∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
++∥ˆEV∥2,max +∥ˆEξ,V∥2,max
+Since (ˆU (t),ˆG(t),ˆV (t)) are independent with D2t+1 and ˆU (t),ˆV (t) are incoherent, by Bernstein
+inequality and an union bound for all rows, with probability at least 1 −d−2
+1 ,
+∥ˆEV∥2,max +∥ˆEξ,V∥2,max≤C3ησξ +∥ˆM (t)−M∥max
+λr
+√
+rd1d2 logd1
+N0
+where ˆM (t) = ˆU (t)ˆG(t)ˆV (t)T. Note that
+ˆM (t)−M
+
+max≤∥ (ˆU (t)−UˆO(t)
+U )ˆG(t)ˆV (t)T∥max +∥U
+(ˆO(t)
+U ˆG(t)− ΛˆO(t)
+V
+)ˆV (t)T∥max
++
+UΛ
+(ˆV (t)ˆO(t)T
+V −V
+)T
+2,max
+≤2µmax∥Λ∥·
+(√ r
+d2
+∥ˆU (t)−UˆO(t)
+U∥2,max +
+√ r
+d1
+∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
++µ2
+max
+√
+r2
+d1d2
+∥ˆG(t)− ˆO(t)T
+U ΛˆO(t)
+V∥.
+Together with Lemma 7,
+µ2
+max
+√
+r2
+d1d2
+∥ˆG(t)− ˆO(t)T
+U ΛˆO(t)
+V∥
+≤C5µ2
+maxσξ
+√
+r3 logd1
+N0
++ 4µ2
+max∥Λ∥
+√
+r2
+d1d2
+(
+∥ˆU (t)−UˆO(t)
+U∥2 +∥ˆV (t)−V ˆO(t)
+V∥2)
+73
+
+[PDF PAGE 74]
++C7µ2
+max∥Λ∥
+(√ r
+d2
+∥ˆU (t)−UˆO(t)
+U∥2,max +
+√ r
+d1
+∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+·µmax
+√
+r3 logd1
+N0
+.
+If n≥C3αdµ4
+maxr3 log2d1 and∥ˆU (t)−UˆO(t)
+U∥ +∥ˆV (t)−V ˆO(t)
+V∥≤ 1/(10µmax
+√r), then
+ˆM (t)−M
+
+max≤σξ + 2µmax∥Λ∥·
+(√ r
+d2
+∥ˆU (t)−UˆO(t)
+U∥2,max +
+√ r
+d1
+∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+(I.3)
+Therefore, if n≥C3αdκ2
+0µ4
+maxr2d1 log2d1, with probability at least 1− 2d−2
+1 ,
+∥ˆE(t)
+V∥2,max +∥ˆE(t)
+ξ,V∥2,max≤ C3ησξ
+λr
+√
+rd1d2 logd1
+N0
++ η
+40·
+(
+∥ˆU (t)−UˆO(t)
+U∥2,max +∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+and as a result
+ˆU (t+0.5)−UˆO(t)
+U ˆL(t)
+G
+
+2,max≤
+(
+1− 9η
+10
+)
+∥ˆU (t)−UˆO(t)
+U∥2,max +C3ησξ
+λr
+√
+rd1d2 logd1
+N0
++ η
+8·
+(
+∥ˆU (t)−UˆO(t)
+U∥2,max +∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+.
+Next, we investigate the singular values of ˆU (t+0.5)−UˆO(t)
+U ˆL(t)
+G . Recall
+ˆU (t+0.5) = ˆU (t)ˆL(t)
+G −η· (ˆU (t)ˆG(t)ˆV (t)T−UΛV T)ˆV (t)ˆR(t)
+G (ˆΛ(t))−1
+  
+I1
++ˆE(t)
+V + ˆE(t)
+ξ,V
+  
+I2
+. (I.4)
+By the independence between (ˆU (t),ˆG(t),ˆV (t),ˆL(t)
+G,ˆR(t)
+G,ˆΛ(t)) and D2t+1, and matrix Bernstein
+inequality (Tropp, 2012; Koltchinskii et al., 2011), with probability at least 1 − 2d−2
+1 ,
+ˆE(t)
+V + ˆE(t)
+ξ,V
+≤C4η· σξ +∥ˆM (t)−M∥max
+λr
+√
+d2
+1d2 logd1
+N0
+≤C4η· σξ
+λr
+√
+d2
+1d2 logd1
+N0
++C5ηκ0µmax
+√
+d2
+1d2 logd1
+N0
+·
+(√ r
+d2
+∥ˆU (t)−UˆO(t)
+U∥2,max +
+√ r
+d1
+∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+where the last inequality is due to (I.3). Note that the singular values of ˆU (t+0.5) are the
+square root of eigenvalues of ˆU (t+0.5)TˆU (t+0.5). We write
+ˆU (t+0.5)TˆU (t+0.5) =I T
+1I1 +I T
+2I2 +I T
+1I2 +I T
+2I1.
+Since∥ˆU (t)T(ˆU (t)−UˆO(t)
+U )∥≤ 2∥ˆU (t)−UˆO(t)
+U∥2 and∥ˆV (t)T(ˆV (t)−V ˆO(t)
+V )∥≤ 2∥ˆV (t)−V ˆO(t)
+V∥2,
+by Lemma 7, we get
+I T
+1I1−I
+
+74
+
+[PDF PAGE 75]
+≤3κ0η·
+(
+∥ˆU (t)−UˆO(t)
+U∥2 +∥ˆV (t)−V ˆO(t)
+V∥2)
++ 2λ−1
+r η·∥ ˆO(t)
+U ˆG(t)− ΛˆO(t)
+V∥
++ 2η2·
+(
+κ2
+0∥ˆU (t)−UˆO(t)
+U∥2 +κ2
+0∥ˆV (t)−V ˆO(t)
+V∥2 +λ−2
+r ∥ˆO(t)
+U ˆG(t)− ΛˆO(t)
+V∥2)
+≤3(κ2
+0η2 +κ0η)·
+(
+∥ˆU (t)−UˆO(t)
+U∥2 +∥ˆV (t)−V ˆO(t)
+V∥2)
++ 4λ−1
+r η·∥ ˆO(t)
+U ˆG(t)− ΛˆO(t)
+V∥
+≤3(κ2
+0η2 +κ0η)·
+(
+∥ˆU (t)−UˆO(t)
+U∥2 +∥ˆV (t)−V ˆO(t)
+V∥2)
++C2ησξ
+λr
+·
+√
+rd1d2 logd1
+N0
++C3ηκ0·
+(√ r
+d2
+∥ˆU (t)−UˆO(t)
+U∥2,max +
+√ r
+d1
+∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+·µmax
+√
+rd1d2 logd1
+N0
+.
+Similar as above analysis, we have
+I T
+2I2
+≤C4η2σ2
+ξ
+λ2
+r
+· d2
+1d2 logd1
+N0
++C5η2κ2
+0µ2
+max
+αdrd1d2 logd1
+N0
+·
+(
+∥ˆU (t)−UˆO(t)
+U∥2
+2,max +∥ˆV (t)−V ˆO(t)
+V∥2
+2,max
+)
+.
+When∥ˆU (t)−UˆO(t)
+U∥ +∥ˆV (t)−V ˆO(t)
+V∥≤ 1/(C3κ0
+√r) so that ∥I1∥≤ 2, due to the inde-
+pendence betweenI1 and D2t+1, by matrix Bernstein inequality, we get with probability at
+least 1− 2d−2
+1 ,
+I T
+1I2 +I T
+2I1
+≤C3ησξ +∥ˆM (t)−M∥max
+λr
+·
+√
+rd1d2 logd1
+N0
+≤C3ησξ
+λr
+·
+√
+rd1d2 logd1
+N0
++C4ηµmaxκ0·
+√
+rd1d2 logd1
+N0
+·
+(√ r
+d1
+∥ˆU (t)−UˆO(t)
+U∥2,max +
+√ r
+d1
+∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+where the last inequality is due to (I.3). Therefore, with probability at least 1 − 4d−2
+1 ,
+ˆU (t+0.5)TˆU (t+0.5)−I
+
+≤C3ησξ
+λr
+·
+√
+d2
+1d2 logd1
+N0
++ 4(κ0η +κ2
+0η2)·
+(
+∥ˆU (t)−UˆO(t)
+U∥2 +∥ˆV (t)−V ˆO(t)
+V∥2)
++C3ηκ0·
+(√ r
+d2
+∥ˆU (t)−UˆO(t)
+U∥2,max +
+√ r
+d1
+∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+·µmax
+√
+rd2
+1d2
+N0
+.
+implying that
+{
+|1−λr(ˆU (t+0.5))|,|1−λ1(ˆU (t+0.5))|
+}
+≤C3ησξ
+λr
+·
+√
+d2
+1d2 logd1
+N0
++C4(κ0η +κ2
+0η2)·
+(
+∥ˆU (t)−UˆO(t)
+U∥2 +∥ˆV (t)−V ˆO(t)
+V∥2)
+75
+
+[PDF PAGE 76]
++C5ηκ0·
+(√ r
+d2
+∥ˆU (t)−UˆO(t)
+U∥2,max +
+√ r
+d1
+∥ˆV (t)−V ˆO(t)
+V∥2,max
+)
+·µmax
+√
+rd2
+1d2
+N0
+which concludes the proof of Lemma 8.
+76

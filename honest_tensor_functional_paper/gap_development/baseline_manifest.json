@@ -1,0 +1,16 @@
+{
+  "source": "honest_tensor_functional_paper/theory_review/revised_paper",
+  "sha256": {
+    "main.pdf": "e5b9df8ac5583acaa5ada6cee2d645be89986964c6412070cd2d789a0eed533e",
+    "references.bib": "0a143c14a1e1db1599ec04154577c02ed862410e6068e6feaaa0c10f15a896aa",
+    "main.tex": "3ad54cc006fa31d467825846ae7cda32e41077065ae1f43759a8882b4f3c32a9",
+    "full_data_proofs.tex": "8387c8dfbbc85852a6b4d5833a16cf6c313208eb44d57da8d70ccbc87a7fb139",
+    "stress_table.tex": "32b42a4484f3403691679b8c2ee8b3cc65f1143c84ea36902e68500738098046",
+    "refinements.tex": "f849013999c035c3adf0f89e314899991011dd0df6f72f9d31c5f45f23e31e5b",
+    "precision_table.tex": "e0a24a33a760dd74125f750c74546f9804f33f3d64da87c056f584b64bd85713",
+    "coverage_table.tex": "562694a671900a13d028fd074681fa3f0fea131e8e2c0bbb4ea833b815b5dc78",
+    "full_data_section.tex": "d4db433ead2732733b09a561978c5732801772d2583bcbf1dbc174d38d25fbaa",
+    "status.tex": "4eb67bff6ae835a4a274a6e5ffc3537a0700ee949f12838caedb18e304527bbc",
+    "appendix.tex": "227bd448ff7f29d0ca653c980596fd95ce234bff0cc12f301136912e120a7f7f"
+  }
+}

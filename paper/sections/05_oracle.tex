@@ -1,0 +1,119 @@
+\section{A population functional-risk oracle inequality}
+\label{sec:oracle}
+
+\subsection{Candidate fits and selection}
+
+Assign every member of a fixed finite or countable candidate list a code probability \(\pi_\lambda>0\), with \(\sum_{\lambda\in\Lambda}\pi_\lambda\le1\), and write \(x_\lambda=\log(1/\pi_\lambda)\). Split the observations independently into samples of sizes \(n_1\) and \(n_2\). On the first sample, compute an approximate likelihood fit
+\begin{equation}
+ P_{n_1}\ell_{\wh W_\lambda}
+ \le \inf_{W\in\Theta_\lambda}P_{n_1}\ell_W
+ +\varepsilon_{\lambda,\mathrm{opt}},
+ \qquad \ell_W(Z)=-\log p_W(Y\mid X,E).
+ \label{eq:within-fit}
+\end{equation}
+On the second sample, select
+\begin{equation}
+ \wh\lambda\in\argmin_{\lambda\in\Lambda}
+ \left\{P_{n_2}\ell_{\wh W_\lambda}
+       +\kappa_B\frac{x_\lambda}{n_2}\right\}
+ \quad\text{up to error }\varepsilon_{\mathrm{sel}},
+ \qquad \wh W=\wh W_{\wh\lambda}.
+ \label{eq:selector}
+\end{equation}
+The split makes the fitted candidates fixed during validation. A same-sample version is given in \cref{cor:same-sample-oracle} under a stronger uniform condition.
+
+\subsection{Regularity conditions}
+
+For each \(\lambda\), let \(W_\lambda^*\) be a population KL projection attaining \cref{eq:joint-approx}. We impose the following on the full compact class used for empirical fitting, rather than only along the realized optimization path.
+
+\begin{assumption}[Regular likelihood TT models]
+\label{ass:oracle}
+There are constants \(B<\infty\) and, for each \(\lambda\), \(\mu_\lambda,L_\lambda>0\) and a finite horizontal atlas of size \(H_\lambda\) such that:
+\begin{enumerate}[label=(A\arabic*),leftmargin=*]
+    \item \textbf{Likelihood ratios:} \(e^{-B}\le p_W(Y\mid X,E)/q_0(Y\mid X,E)\le e^B\), \(Q_0^w\)-almost surely, for every \(W\) in every fitted class.
+    \item \textbf{Projection, local margin, and global gap:} the minimizing conditional law \(p_{W_\lambda^*}\) is unique. It is represented by an interior chart point \(\theta_\lambda^*\), and on a neighborhood \(U_\lambda^*\) within that chart,
+    \[
+    \cD_w\{\psi_\lambda(\theta),W^0\}-A_w^2(\lambda)
+    \ge\frac{\mu_\lambda}{2}\norm{\theta-\theta_\lambda^*}_2^2.
+    \]
+    For some \(g_\lambda>0\), every \(W\notin U_\lambda^*\) has excess risk at least \(g_\lambda\).
+    \item \textbf{Likelihood increments and measurability:} in every chart,
+    \[
+    |\ell_{\psi_\lambda(\theta)}(z)-
+      \ell_{\psi_\lambda(\theta')}(z)|
+    \le L_\lambda\norm{\theta-\theta'}_2
+    \]
+    for almost every \(z\). The loss classes are pointwise measurable and separable.
+    \item \textbf{Regular stratum:} \(\Theta_\lambda\) is a compact, gauge-fixed, rank-separated TT stratum covered by the quantitative atlas of \cref{prop:tt-atlas}. Its dimension is \(d_\lambda\) in \cref{eq:tt-dim}.
+    \item \textbf{Optimization:} \cref{eq:within-fit,eq:selector} hold with the displayed errors.
+\end{enumerate}
+\end{assumption}
+
+Assumption~\ref{ass:oracle}(A1) is convenient rather than innocuous. It follows, for example, for a finite output space when teacher and student probabilities are uniformly bounded away from zero. Sequence-level alternatives require subexponential likelihood-ratio control and lead to different constants. The concrete block in \cref{eq:nonlinear-block} supplies the local margin when its restricted curvature remains positive.
+
+\begin{lemma}[Localized quotient entropy]
+\label{lem:entropy}
+Under Assumption~\ref{ass:oracle}(A1)--(A4), for \(0<u\le1\) and every \(r>0\),
+\begin{multline}
+\log N\left(
+u\sqrt r,
+\left\{\ell_W-\ell_{W_\lambda^*}:
+W\in\Theta_\lambda,
+\ \cD_w(W,W^0)-A_w^2(\lambda)\le r\right\},
+L_\infty
+\right)\\
+\le d_\lambda\log(a_\lambda/u)+\log H_\lambda,
+\label{eq:local-entropy}
+\end{multline}
+where \(a_\lambda\) depends on \(L_\lambda/\sqrt{\mu_\lambda}\), \(g_\lambda^{-1/2}\), compact chart diameters, and atlas conditioning, but not on \(n\). Moreover, for every \(W\in\Theta_\lambda\),
+\[
+Q_0^w(\ell_W-\ell_{W_\lambda^*})^2
+\le v_\lambda
+\{\cD_w(W,W^0)-A_w^2(\lambda)\}
+\]
+with \(v_\lambda=\max\{2L_\lambda^2/\mu_\lambda,4B^2/g_\lambda\}\), after a finite enlargement to cover the boundary of \(U_\lambda^*\).
+\end{lemma}
+
+The subtraction of gauge dimensions enters through the Euclidean dimension of a horizontal chart. If the atlas size, reach, or \(L_\lambda^2/\mu_\lambda\) deteriorates with rank, then \(d_\lambda\) alone does not describe the rate constant.
+
+\subsection{Oracle theorem}
+
+\begin{theorem}[Split-sample TT functional oracle]
+\label{thm:oracle}
+Suppose Assumption~\ref{ass:oracle} holds, \(n_1\wedge n_2\ge2\), and the empirical-process constants implied by \cref{eq:local-entropy} are finite. There are constants \(C_B,C>0\), and regularity factors \(C_{\mathrm{reg},\lambda}\) polynomial in \(a_\lambda\), \(v_\lambda\), and chart conditioning, such that if \(\kappa_B\) is sufficiently large, then for every \(t\ge1\), with probability at least \(1-Ce^{-t}\),
+\begin{align}
+\cD_w(\wh W,W^0)
+\le C_B\inf_{\lambda\in\Lambda}\bigg[&A_w^2(\lambda)
++C_{\mathrm{reg},\lambda}
+\frac{d_\lambda+\log H_\lambda+x_\lambda+t}{n_1}
++\frac{x_\lambda+t}{n_2}
++\varepsilon_{\lambda,\mathrm{opt}}\bigg]
++C_B\varepsilon_{\mathrm{sel}}.
+\label{eq:oracle-hp}
+\end{align}
+If \(n_1\asymp n_2\asymp n\), all regularity factors and \(\log H_\lambda\) are uniformly bounded, the risk is bounded, and optimization errors are zero, then
+\begin{equation}
+\E\cD_w(\wh W,W^0)
+\le C\inf_{\lambda\in\Lambda}
+\left\{A_w^2(\lambda)+
+\frac{d_\lambda+\log(1/\pi_\lambda)}{n}\right\}
++\frac Cn.
+\label{eq:oracle-expectation}
+\end{equation}
+The stochastic term is capped by the maximum allowed KL risk when \(d_\lambda\gtrsim n\).
+\end{theorem}
+
+The theorem is a population result: \(A_w^2(\lambda)\) and the left side are evaluated under new deployment prompts. It is also a statement about a statistical optimizer. It does not imply that TT-SVD or unconstrained SGD attains \(\varepsilon_{\lambda,\mathrm{opt}}=0\).
+
+\begin{corollary}[Same-sample structural risk minimization]
+\label{cor:same-sample-oracle}
+Suppose that, simultaneously over the full coded union, the likelihood-ratio classes satisfy the isomorphic inequality
+\[
+ |(P_n-P_0)\log(q_0/p_W)|
+ \le \tfrac14\cD_w(W,W^0)
+ +C\frac{d_\lambda+\log H_\lambda+x_\lambda+t}{n}.
+\]
+Then a single-sample penalized empirical likelihood with penalty at least a sufficiently large multiple of \((d_\lambda+\log H_\lambda+x_\lambda)/n\) obeys \cref{eq:oracle-hp} with \(n_1=n\) and no validation split.
+\end{corollary}
+
+The stronger premise is obtainable from localized entropy and likelihood-ratio Bernstein control, but it must hold over the predeclared union. A path of ranks generated after viewing the same data is not entitled to a post hoc \(\log|\Lambda|\) penalty.

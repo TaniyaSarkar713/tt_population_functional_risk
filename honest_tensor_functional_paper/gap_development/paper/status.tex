@@ -1,0 +1,27 @@
+
+\section{Result status and remaining questions}\label{sec:status}
+\textbf{PROVED} denotes a complete supplied argument, with finite checks where useful. It does not denote independent peer review, formal proof verification or certified priority.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}lYl@{}}
+\toprule Item & Scope & Status\\\midrule
+Theorems 1--6 & Original geometry, honest interval and comparison bounds & PROVED\\
+Proposition~\ref{prop:diagonal_minimax} & Classical diagonal-information optimum & PROVED\\
+Theorems~\ref{thm:scan}--\ref{thm:harmonic} & Initial full-data scan and harmonic obstruction & PROVED\\
+Theorem~\ref{thm:sparse_harmonic} & Sharp cubic sparse harmonic lower bound & PROVED\\
+Theorem~\ref{thm:full_minimax} & Matching full-data zero-point and worst-case lengths & PROVED\\
+Proposition~\ref{prop:mse_sharp} & Full-data squared-error minimax rates & PROVED\\
+Proposition~\ref{prop:truncated} & Certified finite-scan search tradeoff & PROVED\\
+Theorem~\ref{thm:low_degree} & Restricted polynomial-estimation obstruction & PROVED\\
+Proposition~\ref{prop:ci_detection} & Interval-to-testing implication & PROVED\\
+Appendix~\ref{app:refinements} & Calibrated geometric and noise refinements & PROVED\\
+Original Q2 & Coordinate lower scale for all $K\ge3$ & REFUTED\\
+Q3 & Actual-rank adaptation and arbitrary loading geometry & OPEN\\
+Q4 & Polynomial-time minimax confidence intervals & OPEN\\
+\bottomrule
+\end{tabularx}
+\caption{Updated ledger. The earlier cubic and worst-case statistical gaps are closed in the specified fixed-cap regime. The low-degree result is not an unrestricted computational-hardness theorem.}\label{tab:status}
+\end{table}
+
+The remaining theory concerns efficient minimax interval construction, actual-rank adaptation, arbitrary loading geometry, sharp cap dependence and other norm/noise scalings. The noise extensions require their stated calibration and information. No empirical result for exact minimax projection or real-data/LLM validation is asserted. The priority of the new sharp-rate and scalar low-degree statements requires independent literature scrutiny.

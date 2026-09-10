@@ -1,0 +1,2231 @@
+
+[PDF PAGE 1]
+Uncertainty Quantiﬁcation for Matrix
+Compressed Sensing and Quantum
+Tomography Problems
+Alexandra Carpentier ??, Jens Eisert ??,
+David Gross?? Richard Nickl??
+e-mail: carpentier@maths.uni-potsdam.de
+jense@physik.fu-berlin.de
+e-mail: david.gross@thp.uni-koeln.de
+e-mail: r.nickl@statslab.cam.ac.uk
+Abstract: We construct minimax optimal non-asymptotic conﬁdence sets
+for low rank matrix recovery algorithms. These are employed to devise
+sequential sampling procedures that guarantee recovery of the true matrix
+in Frobenius norm after a data-driven stopping time ˆn for the number of
+measurements that have to be taken. With high probability, this stopping
+time is minimax optimal. We detail applications to quantum tomography
+problems where measurements arise from Pauli observables. We also give
+a theoretical construction of a conﬁdence set for the density matrix of
+a quantum state that has optimal diameter in nuclear norm. The non-
+asymptotic properties of our conﬁdence sets are investigated in a simulation
+study.
+Key words: Low rank recovery, quantum information, conﬁdence sets
+1. Introduction
+Consider the high-dimensional matrix trace regression model
+Yi =tr(Xiθ) +εi, i = 1,...,n, (1)
+where the εi’s are random noise variables, independent of the random design
+matrices Xi, and where the matrix θ is the object of inferential interest. We
+denote the law of ( Y,X ) given θ by Pθ. To reﬂect the structure of the main
+application we have in mind – quantum tomography, introduced in detail below
+– we assume that Xi and θ are both d×d square matrices, and study the case
+where the number n of measurements taken may be smaller than the eﬀective
+parameter dimension d2. Recovery of θ in such situations is still possible by
+compressed sensing techniques [5, 22, 21, 29], under two main structural as-
+sumptions on the model: 1) the matrix θ is of low rank and 2) the measurement
+matricesXi satisfy the restricted isometry (or a related coherence) property. In
+this case recovery of a rank k matrix θ is possible in Frobenius distance ∥·∥ F
+by, e.g., the Matrix Lasso ˆθn: for any ϵ> 0 and with high Pθ-probability,
+∥ˆθn−θ∥F <ϵ as soon as n ≳kdlogd,
+1
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+arXiv:1504.03234v2  [math.ST]  21 Dec 2015
+
+[PDF PAGE 2]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 2
+where logd = logηd,η > 0, is the so-called ‘polylog’ function. The design used
+in quantum tomography is such that the Xi are randomly drawn from a basis
+{E1,...,E d2} of the space of d×d matrices, and one samples fewer than all
+d2 basis coeﬃcients tr(Eiθ) without losing recovery guarantees for low rank
+matrices θ. In experimental settings (e.g., [16]), d = 2N where N is a possibly
+large number of particles, but θ will represent an approximately pure quantum
+state, motivating the low rank hypothesis and explaining the interest of quantum
+information theorists in dimension reduction methods (see the appendix and
+[14, 13, 25, 10, 15, 32]).
+In practice the implementation of the compressed sensing paradigm requires
+a way to decide how many measurements n should be taken. The preceding
+theoretical bound n ≳ kdlogd is not useful for this because it may involve
+unspeciﬁed constants, but also, more importantly, because the rank k of θ is
+typically not known. Instead one can try to ﬁnd a data driven stopping rule
+ˆn that guarantees that recovery with precision ϵ occurs after ˆn measurements,
+with high probability. In the quantum tomography context such stopping rules
+are called ‘certiﬁcates’ (see Section IV in [10]), as they certify the reconstruction
+of the true quantum state θ. It is not diﬃcult to see, and will be made precise
+below, that the construction of such stopping rules is intimately connected to
+the construction of a (sequential) conﬁdence region for the unknown parameter
+θ, and due to its importance in applications this topic has received considerable
+attention recently by physicists, see [8, 3, 33, 2, 10, 31]. None of the previous
+constructions has succeeded, however, in constructing an optimal stopping rule
+for which ˆn≈kdlogd holds with high probability.
+The main contribution of the present paper is to construct optimal non-
+asymptotic Frobenius norm conﬁdence regions for low rank parameters in the
+model (1), and to use them to devise optimal sequential data driven stopping
+rules ˆn (‘certiﬁcates’) for the measurement process. That such procedures exist
+may at ﬁrst look surprising in view of negative results in the ‘sparse’ compressed
+sensing setting in [26], but our results reveal the more favourable information-
+theoretic structure of the matrix model. While our techniques are based on
+unbiased risk estimation ideas that were ﬁrst used in nonparametric statistics
+(see [24, 30], and also [4]) and that apply in a general setting, we lay out the
+details for a basic (sub-) Gaussian design and noise model, as well as for the
+Pauli observation scheme relevant in quantum tomography (see [10] and Condi-
+tion 1b) below). We shall also address the more diﬃcult question of constructing
+conﬁdence regions for a quantum state matrix in the stronger nuclear norm. Re-
+lationships between our ﬁndings and the recent literature on conﬁdence regions
+for high-dimensional statistical parameters are discussed at the end. We also
+investigate the performance of our procedures in basic simulation study.
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 3]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 3
+2. The framework of matrix compressed sensing
+2.1. Notation
+Denote by Md(K) the space of d×d matrices with entries in K = C or K = R.
+We write∥·∥ F for the usual Frobenius norm on Md(K) arising from the inner
+product tr(ATB) = ⟨A,B⟩F . Moreover let Hd(K) be the set of all Hermitian
+matrices (equal to the set of all symmetric d×d matrices when K = R). The
+norm symbol∥·∥ denotes the standard Euclidean norm on Cn arising from the
+Euclidean inner product⟨·,·⟩.
+We denote the usual operator norm on Md(K) by∥·∥ op. ForM∈ Md(K) let
+(λ2
+k : k = 1,...,d ) be the eigenvalues of MTM (which are all real-valued and
+positive). The l1-Schatten, trace, or nuclear norm of M is deﬁned as
+∥M∥S1 =
+∑
+j≤d
+|λj|.
+Note that for any matrix M of rank 1≤r≤d,
+∥M∥F≤∥M∥S1≤√r∥M∥F. (2)
+We will consider parameter subspaces of Hd(K) described by low rank con-
+straints on θ, and denote by R(k) the space of all Hermitian d×d matrices
+that have rank at most k,k≤d. In quantum tomography applications, we may
+assume an additional ‘shape constraint’, namely that θ is a density matrix of a
+quantum state, and hence contained in state space
+Θ+ ={θ∈ Hd(K) :tr(θ) = 1,θ⪰ 0},
+where θ⪰ 0 means that θ is positive semi-deﬁnite. In fact, in most situations,
+we will only require the bound ∥θ∥S1≤ 1 which holds for any θ in Θ+.
+2.2. Sensing matrices
+We now specify assumptions on the design matrices Xi used in our observation
+model (1). When θ has real-valued entries we shall restrict to design matrices
+Xi with real-valued entries too, and for general θ ∈ Hd(C) we shall assume
+Xi∈ Hd(C). This way, in either case, the measurements tr(Xiθ)’s and hence
+the Yi’s are all real-valued. Note that in Part a) below the design matrices are
+not Hermitian but our results can easily be generalised to symmetrised sub-
+Gaussian ensembles (as those considered in ref. [21]). Part b) corresponds to
+the quantum tomography measurement model used in [13, 25, 10, 14] – we refer
+to the appendix for a detailed derivation.
+Condition 1 a) θ∈ Hd(R), ‘isotropic’ sub-Gaussian design: The ran-
+dom variables (Xi
+m,k), 1≤m,k≤d,i = 1,...,n, generating the entries of
+the random matrix Xi are i.i.d. distributed across all indices i,m,k with
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 4]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 4
+mean zero and unit variance. Moreover, for every θ∈ Md(R) such that
+∥θ∥F ≤ 1 the real random variables Zi = tr(Xiθ) are sub-Gaussian: for
+some ﬁxed constants τ1,τ 2 > 0 independent of θ,
+EeλZi≤τ1eλ2τ 2
+2 ∀λ∈ R.
+b) θ∈ Hd(C), random sampling from a basis (‘Pauli design’): Let
+{E1,...,E d2}⊂ Hd(C) be a basis of Md(C) that is orthonormal for the
+scalar product⟨·,·⟩F and such that the operator norms satisfy, for all i =
+1,...,d 2,
+∥Ei∥op≤ K√
+d
+,
+for some K >0. [In the Pauli basis case we have K = 1.] Assume the Xi,
+i = 1,...,n, are draws from the ﬁnite family E ={dEi : i = 1,...,d 2}
+sampled uniformly at random.
+The above examples all obey the matrix restricted isometry property, that we
+describe now. Note ﬁrst that ifX : Rd×d→ Rn is the linear ‘sampling’ operator
+X :θ↦→X θ = (tr(X 1θ),...,tr (Xnθ))T, (3)
+so that we can write the model equation (1) as Y =Xθ +ε, then in the above
+examples we have the ‘expected isometry’
+E 1
+n∥Xθ∥2 =∥θ∥2
+F.
+Indeed, in the isotropic design case we have
+1
+n E∥Xθ∥2 = 1
+n
+n∑
+i=1
+E
+(∑
+m
+∑
+k
+Xi
+m,kθm,k
+)2
+=
+∑
+m
+∑
+k
+EX 2
+m,kθ2
+m,k =∥θ∥2
+F, (4)
+and in the ‘basis case’ we have, from Parseval’s identity and since the Xi’s are
+sampled uniformly at random from the basis,
+1
+n E∥Xθ∥2 = d2
+n
+n∑
+i=1
+d2
+∑
+j=1
+Pr(Xi =Ej)|⟨Ej,θ⟩F|2 =∥θ∥2
+F. (5)
+The restricted isometry property (RIP) requires that this ‘expected isometry’
+holds, up to constants and with probability ≥ 1−δ, for a given realisation of
+the sampling operator, and for all d×d matrices θ of rank at most k:
+sup
+θ∈R(k)
+⏐⏐⏐⏐
+1
+n∥Xθ∥2−∥θ∥2
+F
+∥θ∥2
+F
+⏐⏐⏐⏐≤τn(k), (6)
+where τn(k) are some constants that may depend, among other things, on the
+rank k and the ‘exceptional probability’ δ. For the above examples of isotropic
+and Pauli basis design inequality (6) can be shown to hold with
+τ 2
+n(k) =c2kd· logd
+n , (7)
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 5]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 5
+wherec =c(δ) =O(1/δ2) as δ→ 0 is a ﬁxed constant. See refs. [5, 25] for these
+results.
+2.3. Gaussian and Bernoulli errors, and Pauli observables
+We still have to specify the distribution of the errors εi in the model (1). In the
+quantum tomography setting of Condition 1b), if we ﬁx an element Ei∈E for
+the moment, then as detailed in the appendix the observationsYi =dtr(Eiθ)+εi
+are themselves an average of repeated samples from a Bernoulli random variable
+Bi taking values{1,−1} with probabilities given by
+P(Bi = 1) = 1 +
+√
+dtr(Eiθ)
+2 .
+More precisely,
+Yi =
+√
+d
+T
+T∑
+j=1
+Bi,j =d·tr(Eiθ) +εi
+where
+εi =
+√
+d
+T
+T∑
+j=1
+(Bi,j− EBi,j)
+is the eﬀective error arising from the measurement procedure making use of T
+preparations to estimate each quantum mechanical expectation value. We could
+work with this Bernoulli error model directly, but since the εi’s are themselves
+sums of independent random variables, an approximate Gaussian error model
+will be appropriate, too. Note further that
+|εi|≤ 2
+√
+d, Eε2
+i≤ d
+T Var(Bi,1)≤ d
+T (8)
+so the variances Eε2
+i =σ2 are bounded by d/T . A natural assumption is then
+Condition 2 The εi,i = 1,...,n, are i.i.d. N(0,σ 2) where σ2≤ v for some
+known constant v.
+This uniﬁes the exposition for both designs considered in Condition 1, but we
+note that our proofs are valid in the exact Bernoulli error model as well, see
+Remark 2 below.
+2.4. Minimax estimation under the RIP
+Assuming the matrix RIP from (6) to hold and Gaussian noise ε∼N(0,σ 2In),
+one can show that the minimax risk for recovering a Hermitian rank k matrix
+is
+inf
+ˆθ
+sup
+θ∈R(k)
+Eθ∥ˆθ−θ∥2
+F≃σ2dk
+n , (9)
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 6]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 6
+where≃ denotes two-sided inequality up to universal constants. For the upper
+bound one can use the nuclear norm minimisation procedure or matrix Dantzig
+selector from Cand` es and Plan [5] (see also [25] for the case of Pauli-design), and
+needsn to be large enough so that the matrix RIP holds with τn(k)<c 0 where
+c0 is a small enough numerical constant. Such an estimator ˜θ then satisﬁes, for
+everyθ∈R(k) and those n∈ N for which τn(k)<c 0,
+∥˜θ−θ∥2
+F≤D(δ)σ2kd
+n , (10)
+with probability≥ 1− 2δ, and with the constant D(δ) depending on δ and also
+on c0 (suppressed in the notation). Note that the results in [5] use a diﬀerent
+scaling in sample size in their Theorem 2.4, but eq. (II.7) in that reference
+explains that this is just a matter of renormalisation. The same bound holds for
+the Bernoulli noise model from Subsection 2.3, see [10].
+3. Main results
+We now turn to the problem of quantifying the uncertainty of estimators ˜θ that
+satisfy the risk bound (10). In fact the procedures we construct could be used
+for any estimator of θ, but the conclusions are most interesting when used for
+minimax optimal estimators ˜θ.
+3.1. Conﬁdence sets and sequential sampling protocols
+From a statistical point of view the problem at hand is the one of constructing
+a conﬁdence set for θ: a data-driven subset Cn of Md(C) that is ‘centred’ at ˜θ,
+that satisﬁes
+Pθ(θ∈Cn)≥ 1−α, 0<α< 1,
+for a chosen ‘coverage’ or signiﬁcance level 1 −α, and such that the Frobenius
+norm diameter |Cn|F reﬂects the accuracy of estimation, that is, it satisﬁes,
+with high probability,
+|Cn|2
+F≈∥ ˜θ−θ∥2
+F.
+In particular such a conﬁdence set provides, through its diameter|Cn|F , a data-
+driven estimate of how well the algorithm has recovered the true matrix θ in
+Frobenius-norm loss, and in this sense provides a quantiﬁcation of the uncer-
+tainty in the estimate.
+In an experimental situation conﬁdence sets ( Cn : n∈ N) can be used to
+decide sequentially whether more measurements should be taken (to improve
+the recovery rate), or whether a satisfactory performance has been reached.
+Concretely, for given n we check if |Cn|F ≤ ϵ, and continue to take further
+measurements if not. Assuming ˜θ satisﬁes the minimax optimal risk bounddk/n
+from (10), we expect to need, ignoring constants,
+dk
+n <ϵ 2 and hence at least n> dk
+ϵ2
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 7]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 7
+measurements. Note that we also need the RIP to hold with τn(k) from (7) less
+than a small constant c0, which requires the same number of measurements,
+increased by a further poly-log factor of d (and independently of σ). The goal
+is then to prove that a sequential procedure based on Cn does not require more
+than approximately
+n> dklogd
+ϵ2
+samples (with high probability). This is made precise in the following deﬁnition,
+where we recall that R(k) denotes the set of d×d Hermitian matrices of rank
+at most k≤d.
+Deﬁnition 1 Letϵ> 0,δ > 0 be given constants. An algorithm A returning a
+d×d matrix ˆθ after ˆn∈ N measurements in model (1) is called an (ϵ,δ ) - adap-
+tive sampling procedure if, with Pθ-probability greater than 1−δ, the following
+properties hold for every θ∈R(k) and every 1≤k≤d:
+∥ˆθ−θ∥F≤ϵ, (11)
+and, for some positive constants C(δ),γ, the stopping time ˆn satisﬁes
+ˆn≤C(δ)kd(logd)γ
+ϵ2 . (12)
+Such an algorithm provides recovery at given accuracy level ϵ with ˆn mea-
+surements of minimax optimal order of magnitude (up to a poly-log factor), and
+with probability greater than 1 −δ. The sampling algorithm is adaptive since
+it does not require the knowledge of k, and since the number of measurements
+required depends only on k and not on the ‘worst case’ rank d.
+Our ﬁrst main result is the following theorem, whose proof relies on the
+construction of non-asymptotic conﬁdence sets Cn for θ at any sample size n,
+given in the next subsection.
+Theorem 1 Consider observations in the model (1) under Conditions 1b) and
+2, and where θ ∈ Θ+. Then an adaptive sampling algorithm in the sense of
+Deﬁnition 1 exists for any ϵ,δ >0.
+The result above holds for isotropic design from Condition 1a) too, without
+the constraint θ∈ Θ+, see Remark 1 below. For Pauli design the assumption
+θ∈ Θ+ (instead of just θ∈ Md(K)) is, however, necessary: Else the example
+of θ = 0 or θ = Ei – where Ei is an arbitrary element of the Pauli basis –
+demonstrates that the number of measurements has to be at least of order d2:
+otherwise with positive probability Ei is not drawn at a ﬁxed sample size. On
+this event both the measurements and ˆθ coincide under the laws P0 and PEi,
+so we cannot have ∥ˆθ− 0∥F < ϵAND∥ˆθ−Ei∥F < ϵsimultaneously for every
+ϵ > 0, disproving existence of an adaptive sampling algorithm. In fact, the
+crucial condition for Theorem 1 to work is that the nuclear norms ∥θ∥S1 are
+bounded by an absolute constant (here = 1), which is violated by∥Ei∥S1 =
+√
+d.
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 8]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 8
+3.2. Frobenius norm conﬁdence sets based on unbiased risk
+estimation
+3.2.1. An optimal conﬁdence region for n≤d2
+We suppose that we have two samples at hand, the ﬁrst being used to construct
+an estimator ˜θ, such as the one from (10). We freeze ˜θ and the ﬁrst sample in
+what follows and all probabilistic statements are under the distribution Pθ of
+the second sample Y,X of size n∈ N, conditional on the value of ˜θ. We deﬁne
+the following residual sum of squares (RSS) statistic
+ˆrn = 1
+n∥Y−X ˜θ∥2−σ2, (13)
+which satisﬁes Eθˆrn =∥θ− ˜θ∥2
+F in the model (1) under Conditions 1 and 2
+(see the proof of Theorem 2 below). We assume for now that σ is known, see
+Subsection 3.2.4 below for a discussion of the necessary modiﬁcations in the
+general case. Given α> 0, let ξα,σ be quantile constants such that
+Pr
+( n∑
+i=1
+(ε2
+i− 1)>ξ α,σ
+√n
+)
+=α (14)
+(these constants converge to the quantiles of a ﬁxed normal distribution as
+n→∞ ), let zα = log(3/α) and, for z≥ 0 a ﬁxed constant to be chosen, deﬁne
+the conﬁdence set
+Cn =
+{
+v∈ Hd(C) :∥v− ˜θ∥2
+F≤ 2
+(
+ˆrn +zd
+n + ¯z +ξα/3,σ√n
+)}
+, (15)
+where
+¯z2 = ¯z2(α,d,n,σ,v ) =zα/3σ2 max(3∥v− ˜θ∥2
+F, 4zd/n).
+Note that in the ‘quantum shape constraint’ case θ∈ Θ+ we can always upper
+bound∥v− ˜θ∥F ≤ 2 in the deﬁnition of ¯z, which gives a conﬁdence set that
+is easier to compute and of only marginally larger overall diameter. In some
+situations, however, the quantity ¯z/√n is of smaller order than 1 /√n, and the
+more complicated expression above is generally preferable.
+It is not diﬃcult to see (using that x2 ≲y +x/√n impliesx2 ≲y + 1/n) that
+the mean square Frobenius norm diameter of Cn is of order
+Eθ|Cn|2
+F ≲∥˜θ−θ∥2
+F + zd +zα/3
+n + ξα/3,σ√n . (16)
+Wheneverd≥√n – so as long as at mostn≤d2 measurements have been taken
+– the deviation terms are of smaller order than kd/n for any k≥ 1, and hence
+Cn has minimax optimal expected squared diameter whenever the estimator ˜θ
+is minimax optimal as in (10).
+The following result shows that Cn is a valid conﬁdence set for arbitrary
+Hermitiand×d matrices (without any rank constraint). Note that the result is
+non-asymptotic – it holds for every n∈ N.
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 9]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 9
+Theorem 2 Let θ∈ Hd(C) be arbitrary and let Pθ be the distribution of Y,X
+from model (1) under Condition 2.
+a) Assume the design satisﬁes Condition 1a) and let Cn be given by (15) with
+z = 0. We then have for every n∈ N that
+Pθ(θ∈Cn)≥ 1− 2α
+3 − 2e−cn
+where c is a numerical constant. In the case of standard Gaussian design, c =
+1/24 is admissible.
+b) Assume the design satisﬁes Condition 1b) with constant K >0, let Cn be
+given by (15) with z >0 and assume also that θ∈ Θ+ and ˜θ∈ Θ+ (that is, both
+satisfy the ‘quantum shape constraint’). Then for every n∈ N,
+Pθ(θ∈Cn)≥ 1− 2α
+3 − 2e−C(K)z
+whereC(K) = 1/[(16 + 8/3)K 2].
+In Part a), if we want to control the coverage probability at level 1 −α, n
+needs to be large enough so that the third deviation term is controlled at level
+α/3. In the Gaussian design case withα = 0.05,n≥ 100 is suﬃcient, for smaller
+sample sizes one can use the conﬁdence region from the next subsection. The
+bound in b) is entirely non-asymptotic for suitable choices of z. Also note that
+the quantile constants z,zα,ξα all scale at least as O(log(1/α)) in the desired
+coverage levelα→ 0.
+As mentioned above, the conﬁdence set from Theorem 2 is optimal whenever
+the desired performance of ∥θ− ˜θ∥2
+F is no better than of order 1 /√n, corre-
+sponding to the important regime n≤ d2 for sequential sampling algorithms.
+Reﬁnements for measurement scales n≥d2 are also of interest - we present two
+optimal approaches in the next two subsections for the designs from Condition
+1.
+3.2.2. Isotropic design and a conﬁdence set based on U-statistics
+Consider isotropic i.i.d design from Condition 1a), and an estimator ˜θ based on
+an initial sample of size n (all statements that follow are conditional on that
+sample) . Collect another n samples to perform the uncertainty quantiﬁcation
+step. Deﬁne the U-statistic
+ˆRn = 2
+n(n− 1)
+∑
+i<j
+∑
+m,k
+(YiXi
+m,k− ˜θm,k)(YjXj
+m,k− ˜θm,k) (17)
+whose Eθ-expectation, conditional on ˜θ, equals∥θ− ˜θ∥2
+F in view of
+EYiXi
+m,k = E
+∑
+m′,k′
+Xi
+m′,k′Xi
+m,kθm′,k′ =θm,k.
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 10]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 10
+Deﬁne
+Cn =
+{
+v∈ Hd(R) :∥v− ˜θ∥2
+F≤ ˆRn +zα,n
+}
+(18)
+where
+zα,n = C1∥θ− ˜θ∥F√n + C2d
+n
+andC1≥ζ1∥θ∥F, C2≥ζ2∥θ∥2
+F withζi constants depending onα and the upper
+boundv forσ from Condition 2. Note that ifθ∈ Θ+ then∥θ∥F≤ 1 can be used
+as an upper bound in Ci,i = 1, 2. In practice the constants ζi can be calibrated
+by Monte Carlo simulations (see the implementation section below), or chosen
+based on concentration inequalities forU-statistics (see ref. [12], Theorem 4.4.8).
+This conﬁdence set has expected diameter
+Eθ|Cn|2
+F ≲∥˜θ−θ∥2
+F + C1 +C2d
+n ,
+and hence is compatible with any minimax recovery rate∥˜θ−θ∥2
+F ≲kd/n from
+(10), where k≥ 1 is now arbitrary. For suitable choices of ζi we now show that
+Cn also has non-asymptotic coverage.
+Theorem 3 Assume Conditions 1a) and 2, and let Cn be as in (18). For every
+α> 0 we can choose ζi(α) =O(
+√
+1/α),i = 1, 2, large enough so that for every
+n∈ N we have
+Pθ(θ∈Cn)≥ 1−α.
+3.2.3. Pauli design: Re-averaging basis elements when n≥d2
+For the design from Condition 1b) where we sample uniformly at random from
+a (scaled) basis{dE1,...,dE d2} of Md(C), theU-statistic approach from Theo-
+rem 3 appears not to be viable, and thus for d≤√n the existence of an optimal
+conﬁdence region still needs to be ensured. When d≤√n we are taking n≥d2
+measurements, and there is no need to sample at random from the basis as we
+can measure each individual coeﬃcient, possibly even multiple times. Repeat-
+edly sampling a basis coeﬃcient tr(Ekθ) leads to a reduction of the variance of
+the measurement by averaging. More precisely, when taking n =md2 measure-
+ments for some (for simplicity integer) m≥ 1, and if ( Yk,l : l = 1,...,m ) are
+the measurementsYi corresponding to the basis element Ek,k∈{ 1,...,d 2}, we
+can form averaged measurements
+Zk = 1√m
+m∑
+l=1
+Yk,l =√md⟨Ek,θ⟩F +ϵk, ϵk = 1√m
+m∑
+l=1
+εl∼N(0,σ 2).
+We can then deﬁne the new measurement vector ˜Z = ( ˜Z1,..., ˜Zd2)T (using also
+m =n/d2)
+˜Zk =Zk−√n⟨˜θ,Ek⟩ =√n⟨Ek,θ− ˜θ⟩F +ϵk, k = 1,...,d 2
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 11]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 11
+and the statistic
+ˆRn = 1
+n∥ ˜Z∥2
+Rd2− σ2d2
+n (19)
+which estimates∥θ− ˜θ∥2
+F with precision
+ˆRn−∥θ− ˜θ∥2
+F = 2√n
+d2
+∑
+k=1
+ϵk⟨Ek,θ− ˜θ⟩F + 1
+n
+d2
+∑
+k=1
+(ϵ2
+k− Eϵ2)
+=OP
+(
+σ∥θ− ˜θ∥F√n + σ2d
+n
+)
+.
+Hence, for zα the quantiles of a N(0, 1) distribution and ξα,σ as in (14) with d2
+replacing n there, we can deﬁne a conﬁdence set
+¯Cn =
+{
+v∈ Hd(C) :∥v− ˜θ∥2
+F≤ ˆRn + zα/2σ∥θ− ˜θ∥F
+√n + ξα/2,σd
+n
+}
+(20)
+which has non-asymptotic coverage
+Pθ(θ∈ ¯Cn)≥ 1−α
+for every n∈ N, by similar (in fact, since Lemma 1 is not needed, simpler)
+arguments as in the proof of Theorem 2 below. The expected diameter of ¯Cn is
+by construction
+Eθ| ¯Cn|2
+F ≲∥θ− ˜θ∥2
+F + σ2d
+n , (21)
+now compatible with any rate of recoverykd/n, 1≤k≤d. The case of unknown
+variance is discussed in the next subsection.
+3.2.4. Unknown variance
+The U-statistic based conﬁdence set from (18) does not require knowledge of
+σ but works only for the design from Condition 1a). For Pauli design from
+Condition 1b) we can use the conﬁdence setsCn in Theorem 2 or ¯Cn in (20), but
+these do require exact knowledge of the noise variance σ2. As described before
+(8) above, in the Pauli case σ2 can be apriori bounded by d/T , where T is the
+number of preparations used to measure each individual Pauli observable. IfT≥
+n then the statistics ˆrn and ˆRn from (13) and (19) above can be used without
+subtractingσ2 andσ2d2/n, respectively, in their deﬁnitions. The coverage proofs
+then go through with minor modiﬁcations simply by noting that these centerings
+are of suﬃciently small order of magnitude σ2 ≤ d/T ≤ d/n and σ2d2/n≤
+d3/Tn ≤ d/n compared to the minimax rate of estimation, and by using the
+upper bound σ2≤v =d/T in all relevant constants featuring in the deﬁnition
+of Cn, ¯Cn.
+Typically preparing T≥ n measurements of a ﬁxed Pauli observable is not
+a major problem in experimental situations. If for some reason this cannot be
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 12]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 12
+done, one can make sure that each tr(Eiθ) is at least measured twice (so T≥
+2), say in batches Y1,...,Y n/2 and Yn/2+1,...,Y n, and then use the modiﬁed
+statistic
+˜rn = 2
+n
+n/2∑
+i=1
+(Yi−⟨Xi, ˜θ⟩F )(Yi+n/2−⟨Xi, ˜θ⟩F )
+in the construction of the conﬁdence set. Arguments similar to above, using
+concentration inequalities for Gaussian chaos of order two (Theorem 3.1.9 in
+[12]) then allow for the construction of a conﬁdence region that does neither
+require knowledge of σ2≤v nor T≥n. Details are omitted.
+3.3. A conﬁdence set in trace norm under quantum shape
+constraints
+The conﬁdence sets from the previous subsections are all valid in the sense that
+they contain information about the recovery of θ by ˜θ in Frobenius norm∥·∥ F .
+It is of interest to obtain results in stronger norms, such as for instance the
+nuclear norm ∥·∥ S1, which is particularly meaningful for quantum tomogra-
+phy problems since it then corresponds to the total variation distance on the
+set of ‘probability density matrices’. The absence of the ‘Hilbert space geom-
+etry’ induced by the relationship of the Frobenius norm to the inner product
+⟨·,·⟩F makes this problem signiﬁcantly harder, both technically and from an
+information-theoretic point of view. In particular the quantum shape constraint
+θ∈ Θ+ is crucial to obtain any results whatsoever. For the theoretical results
+presented here it will be more convenient to perform an asymptotic analysis
+where min(n,d )→∞ (with o,O -notation to be understood accordingly).
+Instead of Condition 1 we now consider more generally any design ( Xi,i =
+1,...,n ) in model (1) that satisﬁes the matrix RIP (6) with
+τn(k) =c
+√
+kd log(d)
+n . (22)
+We shall still use the convention discussed before Condition 1 that θ and the
+matrices Xi are such that tr(Xiθ) is always real-valued.
+In contrast to the results from the previous section we shall now assume a
+minimal low rank constraint on the parameter space:
+Condition 3 θ∈R+(k) :=R(k)∩ Θ+ for some k satisfying
+k
+√
+dlogd
+n =o(1),
+This in particular implies that the RIP holds with τn(k) = o(1). Given this
+minimal rank constraintθ∈R+(k), we now show that it is possible to construct
+a conﬁdence setCn that adapts to any low rank 1≤k0 <k . Here we may choose
+k =d but note that this forces n≫d2 (for Condition 3 to hold with k =d).
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 13]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 13
+We assume that there exists an estimator ˜θPilot that satisﬁes, uniformly in
+R(k0) for any k0≤k and for n large enough,
+∥˜θPilot−θ∥2
+F≤Dσ2k0d
+n := r2
+n(k0)
+4 (23)
+whereD =D(δ) depends on δ, and where so-deﬁned rn will be used frequently
+below. Such estimators exist as has already been discussed before (10). We shall
+in fact require a little more, namely the following oracle inequality: for any k
+and any matrix S of rank k≤d, with high probability and for n large enough,
+∥˜θPilot−θ∥F ≲∥θ−S∥F +rn(k), (24)
+which implies (23). Such inequalities exist assuming the RIP and Condition 3,
+see, e.g., Theorem 2.8 in ref. [5]. Starting from ˜θPilot one can construct (see
+Theorem 5 below) an estimator that recovers θ ∈ R(k) in nuclear norm at
+rate k
+√
+d/n, which is again optimal from a minimax point of view, even under
+the quantum constraint (as discussed, e.g., in ref. [21]). We now construct an
+adaptive conﬁdence set for θ centred at a suitable projection of ˜θPilot onto Θ+.
+In the proof of Theorem 4 below we will construct estimated eigenvalues
+(ˆλj,j = 1,...,d ) of θ (see after Lemma 3). Given those eigenvalues and ˜θPilot,
+we choose ˆk to equal the smallest integer ≤ d such that there exists a rank ˆk
+matrix ˜θ′ for which
+∥˜θ′− ˜θPilot∥F≤rn(ˆk) and 1−
+∑
+J≤ˆk
+ˆλJ≤ 2ˆk
+√
+d/n
+is satisﬁed. Suchˆk exists with high probability (since the inequalities are satisﬁed
+for the true θ and λj’s, as our proofs imply). Deﬁne next ˆϑ to be the ⟨·,·⟩F -
+projection of ˜θPilot onto
+R+(2ˆk) :=R(2ˆk)∩ Θ+
+and note that, since 2 ˆk≥ ˆk,
+∥˜θPilot− ˆϑ∥F =∥˜θPilot−R+(2ˆk)∥F≤∥ ˜θPilot− ˜θ′∥F≤rn(ˆk). (25)
+Finally deﬁne, for C a constant chosen below,
+Cn =
+{
+v∈ Θ+ :∥v− ˆϑ∥S1≤C
+√
+ˆkrn(ˆk)
+}
+. (26)
+Theorem 4 Assume Condition 3 for some 1≤k≤d, and let δ >0 be given.
+Assume that with probability greater than 1− 2δ/3, a) the RIP (6) holds with
+τn(k) as in (22) and b) there exists an estimator ˜θPilot for which (24) holds. Then
+we can choose C =C(δ) large enough so that, for Cn as in the last display,
+lim inf
+min(n,d)→∞
+inf
+θ∈R+(k)
+Pθ(θ∈Cn)≥ 1−δ.
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 14]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 14
+Moreover, uniformly inR+(k0), 1≤k0≤k, and with Pθ-probability greater than
+1−δ,
+|Cn|S1 ≲
+√
+k0rn(k0).
+Theorem 4 shows how the quantum shape constraint allows for the construc-
+tion of an optimal nuclear norm conﬁdence set that adapts to the unknown low
+rank structure. A careful study of certain hypothesis testing problems (combined
+with lower bound techniques for conﬁdence sets as in [17, 26]) shows that the
+assumption θ∈ R+(k) in the above theorem is actually necessary, and cannot
+be relaxed to θ∈R(k). See [7], Theorem 4.
+3.4. Conclusions
+We have constructed adaptive conﬁdence regions for matrix parametersθ in the
+trace regression model (1). These conﬁdence regions contract at the minimax
+optimal rates for low rank parameters, either in Frobenius or nuclear norm, and
+are ‘honest’ (in the sense of [24], see also [30, 17]). The conditions employed are
+naturally compatible with quantum tomography applications - where θ is the
+density matrix of a quantum state, and where the noise variance has an a priori
+upper bound that can be controlled experimentally. This in turn can be used to
+demonstrate the existence of fully adaptive sequential sampling protocols that
+generate valid certiﬁcates for the recovery of unknown low rank quantum states.
+While it can be shown on the one hand (see Theorem 4 in [7]) that our
+results for the nuclear norm (Theorem 4) fundamentally rely on the ‘quantum
+shape constraint’ θ ∈ Θ+, our results for the Frobenius norm on the other
+hand are valid in a general compressed sensing inference setting. This may seem
+surprising in light of negative results in [26], where it is shown that in the related
+‘sparse’ high-dimensional linear model, signal strength assumptions (inspired by
+the nonparametric statistics literature, [11, 17]) are generally necessary for the
+existence of ℓ2-conﬁdence regions for the entire parameter vector. However, the
+information theoretic structure of the matrix inference problem is diﬀerent, as
+is also illustrated by the fact that the signal detection rates in the model (1) in
+Frobenius norm do not depend on the low rank structure at all (see Theorem
+1 in [7]). In this sense, our ﬁndings in the matrix regression model form a
+remarkable exception to the rule that uncertainty quantiﬁcation methodology
+does not generally exist for high-dimensional adaptive algorithms, unless one
+restricts the inferential interest to a simple semi-parametric low-dimensional
+functional ([34, 35, 20, 6]).
+4. Simulation experiments
+In order to illustrate the methods from this paper, we present some numerical
+simulations. The setting of the experiments is as follows: A random matrix η∈
+Md(C) of norm∥η∥F =R1/2 is generated according to two distinct procedures
+that we will specify later, and the observations are now
+¯Yi = tr(Xiη) +εi.
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 15]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 15
+where the εi are i.i.d. Gaussian of mean 0 and variance 1. The observations
+are reparametrised so that η represents the ‘estimation error’ θ− ˆθ, and we
+investigate how well the statistics
+ˆrn = 1
+n∥ ¯Y∥− 1 and ˆRn = 2
+n(n− 1)
+∑
+i<j
+∑
+m,k
+¯YiXi
+m,k ¯YjXj
+m,k
+estimate the ‘accuracy of estimation’ ∥η∥2
+F = ∥θ− ˆθ∥2
+F , conditional on the
+value of ˆθ. We will choose η in order to illustrate two extreme cases: a ﬁrst
+one where the nuclear norm∥η∥S1 is ‘small’, corresponding to a situation where
+the quantum constraint is fulﬁlled; and a second one where the nuclear norm is
+large, corresponding to a situation where the quantum constraint isnot fulﬁlled.
+More precisely we generate the parameter η in two ways:
+• ‘Random Dirac’ case: set a single entry (with position chosen at random
+on the diagonal) of η to R1/2, and all the other coordinates equal to 0.
+• ‘Random Pauli’ case: Setη equal to a Pauli basis element chosen uniformly
+at random and then multiplied by R1/2.
+The designs that we consider are the Gaussian design, and the Pauli design,
+described in Condition 1. We perform experiments with d = 32, R∈{ 0.1, 1}
+and n∈{ 100, 200, 500, 1000, 2000, 5000}. Note that d2 = 1024, so that the ﬁrst
+four choices of n correspond to the important regime n < d2. Our results are
+plotted as a function of the number n of samples in Figures 1, 2, 3, 4. The solid
+red an blue curves are the median errors of the normalised estimation errors
+√ ˆRn−R
+R1/2 , and
+√ˆrn−R
+R1/2 ,
+after 1000 iterations, and the dotted lines are respectively, the (two-sided) 90%
+quantiles. We also report (see Tables 1, 2, 3, 4) how well the conﬁdence sets based
+on these estimates of the norm perform in terms of coverage probabilities, and
+of diameters. The diameters are computed as
+(
+ˆRn + CUStatd
+n + C′
+UStat ˆR1/2
+n√n
+)1/2
+,
+for the U-Statistic approach and
+(
+ˆrn + CRSS√n + C′
+RSSˆr1/2
+n√n
+)1/2
+,
+for the RSS approach, where we have chosen CUStat = 2.5, CRSS = 1 and
+C′
+UStat = CRSS = 6 for all experiments –calibrated to a 95% coverage level.
+From these numerical results, several observations can be made:
+1) In Gaussian random designs, the results are insensitive to the nature of
+η (see Figures 1 and 2 and Tables 1 and 2). This is not surprising since the
+Gaussian design is ‘isotropic’.
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 16]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 16
+0 1000 2000 3000 4000 5000
+−3 −1 1 3
+n
+(Rn^2 − R^2)^{1/2}/R
+U−Stat
+RSS
+Gaussian design, eta = Dirac, R^2 = 0.1
+0 1000 2000 3000 4000 5000
+−1.0 0.0 1.0
+n
+(Rn^2 − R^2)^{1/2}/R
+U−Stat
+RSS
+Gaussian design, eta = Dirac, R^2 = 1
+Fig 1 . Gaussian design, and random Dirac (a single entry, chosen at random, is non-zero
+on the diagonal) η, with R = 0.1 (left picture) and R = 1 (right picture).
+2) For Pauli designs with the quantum constraint (see Figure 3 and Table 3)
+the RSS method works quite well even for small sample sizes. But the U-Stat
+method is not very reliable – indeed we see no empirical evidence that Theorem
+3 should also hold true for Pauli design.
+3) For Pauli design and when the quantum shape constraint is not satisﬁed
+our methods cease to provide reliable results (see Figure 4 and in particular
+Table 4). Indeed, when the matrix η is chosen itself as a random Pauli (which
+is the hardest signal to detect under Pauli design) both the RSS and the U-Stat
+approach perform poorly. The conﬁdence set are not honest anymore, which is in
+line with the theoretical limitations we observe in Theorem 2. Figure 4 illustrates
+that the methods do not detect the signal, since the norm of η is largely under-
+evaluated for small sample sizes. These limitations are less pronounced when
+n≥d2. In this case one could use alternatively the re-averaging approach from
+Subsection 3.2.3 (not investigated in the simulations) to obtain honest results
+without the quantum shape constraint.
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 17]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 17
+0 1000 2000 3000 4000 5000
+−3 −1 1 3
+n
+(Rn^2 − R^2)^{1/2}/R
+U−Stat
+RSS
+Gaussian design, eta = Pauli, R^2 = 0.1
+0 1000 2000 3000 4000 5000
+−1.0 0.0 1.0
+n
+(Rn^2 − R^2)^{1/2}/R
+U−Stat
+RSS
+Gaussian design, eta = Pauli, R^2 = 1
+Fig 2 . Gaussian design, and random Pauli η, with R = 0.1 (left picture) and R = 1 (right
+picture).
+0 1000 2000 3000 4000 5000
+−3 −1 1 3
+n
+(Rn^2 − R^2)^{1/2}/R
+U−Stat
+RSS
+Pauli design, eta = Dirac, R^2 = 0.1
+0 1000 2000 3000 4000 5000
+−1 0 1 2
+n
+(Rn^2 − R^2)^{1/2}/R
+U−Stat
+RSS
+Pauli design, eta = Dirac, R^2 = 1
+Fig 3. Pauli design, and random Dirac (a single entry, chosen at random, is non-zero on the
+diagonal) η, with R = 0.1 (left picture) and R = 1 (right picture).
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 18]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 18
+R = 0.1 R = 1
+n 100 200 500 1000 2000 5000 100 200 500 1000 2000 5000
+Coverage U-Stat 0.97 0.98 0.99 1.00 1.00 1.00 0.93 0.96 0.97 0.98 0.98 0.98
+Diameter U-Stat 1.10 0.64 0.34 0.24 0.18 0.14 2.43 1.84 1.44 1.27 1.17 1.10
+Coverage RSS 0.97 0.97 0.98 0.98 0.98 0.98 0.99 0.99 0.99 0.99 0.99 0.99
+Diameter RSS 0.38 0.31 0.23 0.19 0.16 0.14 1.69 1.49 1.32 1.22 1.16 1.10
+Table 1
+Gaussian design, and random Dirac (a single entry, chosen at random, is non-zero on the
+diagonal) η, with R = 0.1 (left table) and R = 1 (right table).
+R = 0.1 R = 1
+n 100 200 500 1000 2000 5000 100 200 500 1000 2000 5000
+Coverage U-Stat 0.98 0.98 0.99 0.99 1.0 1.0 0.93 0.95 0.97 0.98 0.98 0.98
+Diameter U-Stat 1.10 0.62 0.34 0.24 0.18 0.14 2.40 1.83 1.43 1.27 1.18 1.10
+Coverage RSS 0.98 0.98 0.97 0.97 0.97 0.97 0.99 0.99 0.99 0.99 1.00 1.00
+Diameter RSS 0.39 0.31 0.23 0.19 0.17 0.14 1.71 1.49 1.31 1.22 1.16 1.10
+Table 2
+Gaussian design, and random Pauli η, with R = 0.1 (left table) and R = 1 (right table).
+5. Proofs
+5.1. Proof of Theorem 1
+Before we deﬁne the algorithm and prove the result, a few preparatory remarks
+are required: Our sequential procedure will be implemented in m = 1, 2,...,T
+potential steps, in each of which 2 · 2m = 2m+1 measurements are taken. The
+arguments below will show that we can restrict the search to at most
+T =O(log(d/ϵ))
+steps. We also note that from the discussion after (6) – in particular since
+c = c(δ) from (7) is O(1/δ2) – a simple union bound over m ≤ T implies
+that the RIP holds with probability ≥ 1−δ′, some δ′ > 0, simultaneously for
+every m≤ T satisfying 2m≥ c′kdlogd, and with τ2m(k) < c0, where c′ is a
+constant that depends onδ′,c 0 only. The maximum overT =O(log(d/ϵ)) terms
+is absorbed in a slightly enlarged poly-log term. Hence, simultaneously for all
+such sample sizes 2 m,m ≤ T , a nuclear norm regulariser exists that achieves
+the optimal rate from (10) with n = 2m and for every k≤ d, with probability
+greater than 1−δ/3. Projecting this estimator onto Θ + changes the Frobenius
+error only by a universal multiplicative constant (arguing as in (25) below), and
+we denote by ˜θ2m∈ Θ+ the resulting estimator computed from a sample of size
+2m.
+We now describe the algorithm at them-th step: Split the 2m+1 observations
+into two halves and use the ﬁrst subsample to construct˜θ2m∈ Θ+ satisfying (10)
+with Pθ-probability≥ 1−δ/3. Then use the other 2m observations to construct
+a conﬁdence setC2m forθ centred at ˜θ2m: if 2m <d 2 we takeC2m from (15) and
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 19]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 19
+R = 0.1 R = 1
+n 100 200 500 1000 2000 5000 100 200 500 1000 2000 5000
+Coverage U-Stat 0.97 0.98 0.98 0.99 0.98 0.98 0.85 0.54 0.69 0.69 0.70 0.71
+Diameter U-Stat 1.10 0.63 0.34 0.24 0.18 0.14 2.28 1.87 1.43 1.26 1.18 1.10
+Coverage RSS 0.96 0.96 0.96 0.96 0.97 0.97 0.88 0.89 0.88 0.88 0.88 0.88
+Diameter RSS 0.39 0.29 0.23 0.19 0.16 0.14 1.70 1.50 1.30 1.21 1.16 1.10
+Table 3
+Pauli design, and random Dirac (a single entry, chosen at random, is non-zero on the
+diagonal) η, with R = 0.1 (left table) and R = 1 (right table).
+0 1000 2000 3000 4000 5000
+−3 −1 1
+n
+(Rn^2 − R^2)^{1/2}/R
+U−Stat
+RSS
+Pauli design, eta = Pauli, R^2 = 0.1
+0 1000 2000 3000 4000 5000
+−1 0 1 2
+n
+(Rn^2 − R^2)^{1/2}/R
+U−Stat
+RSS
+Pauli design, eta = Pauli, R^2 = 1
+Fig 4 . Pauli design, and random Pauli η, with R = 0.1 (left picture) and R = 1 (right
+picture).
+if 2m≥d2 we takeC2m from (20) – in both cases of non-asymptotic coverage at
+least 1−α,α =δ/(3T ) [If σ is unknown we proceed as described in Subsection
+3.2.4]. If|C2m|F≤ϵ we terminate the procedure (m = ˆm, ˆn = 2 ˆm+1, ˆθ = ˜θ2 ˆm),
+but if|C2m|F > ϵwe repeat the above procedure with 2 · 2m+1 = 2m+1+1 new
+measurements, etc., until the algorithm terminates, in which case we have used
+∑
+m≤ ˆm
+2m+1 ≲ 2 ˆm≈ ˆn
+measurements in total.
+To analyse this algorithm, recall that the quantile constantsz,zα,ξα appear-
+ing in the conﬁdence sets (15) and (20) for our choice of α = δ/(3T ) grow at
+most as O(log(1/α)) = O(logT ) = o(logd). In particular in view of (10) and
+(16) or (21) the algorithm necessarily stops at a ‘maximal sample size’n = 2T +1
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 20]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 20
+R = 0.1 R = 1
+n 100 200 500 1000 2000 5000 100 200 500 1000 2000 5000
+Coverage U-Stat 0.97 0.97 0.96 0.86 0.65 0.58 0.82 0.22 0.25 0.27 0.30 0.37
+Diameter U-Stat 1.09 0.57 0.34 0.25 0.18 0.15 2.45 2.09 1.33 1.38 1.19 1.09
+Coverage RSS 0.93 0.86 0.77 0.77 0.77 0.77 0.12 0.19 0.40 0.63 0.56 0.53
+Diameter RSS 0.38 0.29 0.22 0.19 0.16 0.14 1.71 1.56 1.31 1.26 1.14 1.08
+Table 4
+Pauli design, and random Pauli η, with R = 0.1 (left table) and R = 1 (right table).
+in which the squared Frobenius risk of the maximal model ( k =d) is controlled
+at level ϵ. Such T ∈ N is O(log(d/ϵ)) and depends on σ,d,ϵ,δ , hence can be
+chosen by the experimenter.
+To prove that this algorithms works we show that the event
+{
+∥ˆθ−θ∥2
+F >ϵ 2
+}
+∪
+{
+ˆn> C(δ)kd(logd)γ
+ϵ2
+}
+=A1∪A2
+has probability at most 2 δ/3 for large enough C(δ),γ . By the union bound it
+suﬃces to bound the probability of each event separately by δ/3. For the ﬁrst:
+Since ˆn has been selected we know|Cˆn|F≤ϵ and since ˆθ = ˜θˆn the eventA1 can
+only happen when θ /∈Cˆn. Therefore
+Pθ(A1)≤ Pθ(θ /∈Cˆn)≤
+T∑
+m=1
+Pθ(θ /∈C2m)≤δ T
+3T = δ
+3.
+ForA2, wheneverθ∈R(k) and for allm≤T for which 2m≥c′kdlogd, we have,
+as discussed above, from (16) or (21) and (10) that
+Eθ|C2m|2
+F≤D′kd logT
+2m ,
+where D′ is a constant. In the last inequality the expectation is taken under
+the distribution of the sample used for the construction of C2m, and it holds on
+the event on which ˜θ2m realises the risk bound (10). Then let C(δ),γ be large
+enough so that C(δ)kd(logd)γ/ϵ2≥ c′kdlogd and let m0∈ N be the smallest
+integer such that
+2m0 > C(δ)kd(logd)γ
+ϵ2 .
+Then, for C(δ) large enough and since T =O(log(d/ϵ),
+Pθ
+(
+ˆn> C(δ)kd(logd)γ
+ϵ2
+)
+≤ Pθ
+(
+|C2m0|2
+F >ϵ 2)
+≤ Eθ|C2m0|2
+F
+ϵ2 ≤ D′ logT
+C(δ)(logd)γ <δ/ 3,
+by Markov’s inequality, completing the proof.
+Remark 1 (Isotropic sampling) The proof above works for isotropic design
+from Condition 1a) likewise. When 2m≥d2 we replace the conﬁdence set (20) in
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 21]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 21
+the above proof by the conﬁdence set from (18). Assuming also that ∥θ∥F≤M
+for some ﬁxed constant M we can construct a similar upper bound for T and
+the above proof applies directly (with T of slighter larger but still small enough
+order).
+5.2. Proof of Theorem 2
+By Lemma 1 below with ϑ = ˜θ−θ the Pθ-probability of the complement of the
+event
+E =
+{⏐⏐⏐⏐
+1
+n∥X (˜θ−θ)∥2−∥ ˜θ−θ∥2
+F
+⏐⏐⏐⏐≤ max
+(
+∥θ− ˜θ∥2
+F
+2 ,zd
+n
+)}
+is bounded by the deviation terms 2e−cn and 2e−C(K)z, respectively (notez = 0
+in Case a)). We restrict to this event in what follows. We can decompose
+ˆrn = 1
+n∥X (˜θ−θ)∥2 + 2
+n⟨ε,X (θ− ˜θ)⟩ + 1
+n
+n∑
+i=1
+(ε2
+i− Eε2
+i ) =A +B +C.
+Since P(Y +Z <0)≤ P(Y < 0) + P(Z <0) for any random variables Y,Z we
+can bound the probability
+Pθ(θ /∈Cn,E) = Pθ
+({1
+2∥θ− ˜θ∥2
+F >A +B +C + zd
+n + ¯z +ξα/3,σ√n
+}
+,E
+)
+by the sum of the following probabilities
+I := Pθ
+({1
+2∥θ− ˜θ∥2
+F > 1
+n∥X (˜θ−θ)∥2 + zd
+n
+}
+,E
+)
+,
+II := Pθ
+({
+− 1√n⟨ε,X (θ− ˜θ)⟩> ¯z
+}
+,E
+)
+,
+III := Pθ
+(
+− 1√n
+n∑
+i=1
+(ε2
+i− Eε2
+i )>ξ α/3,σ
+)
+.
+The ﬁrst probability I is bounded by
+Pθ
+({
+− 1
+n∥X (˜θ−θ)∥2 +∥θ− ˜θ∥2
+F > 1
+2∥θ− ˜θ∥2
+F + zd
+n
+}
+,E
+)
+≤ Pθ
+({⏐⏐⏐⏐
+1
+n∥X (˜θ−θ)∥2−∥ ˜θ−θ∥2
+F
+⏐⏐⏐⏐> max
+(
+∥θ− ˜θ∥2
+F
+2 ,zd
+n
+)}
+,E
+)
+= 0
+About term II : Conditional onX the variable 1√n⟨ε,X (θ− ˜θ)⟩ is centred Gaus-
+sian with variance (σ2/n)∥X (θ− ˜θ)∥2. The standard Gaussian tail bound then
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 22]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 22
+gives by deﬁnition of ¯z, and conditional on X ,
+≤ exp{−¯z2/2(σ2/n)∥X (θ− ˜θ)∥2}
+= exp
+{
+−zα/3 max(3∥θ− ˜θ∥2
+F, 4zd/n)
+2∥X (θ− ˜θ)∥2/n
+}
+≤ exp{−zα/3} =α/3
+since, on the eventE,
+max(3∥θ− ˜θ∥2
+F, 4zd/n)≥ (2/n)∥X (θ− ˜θ)∥2.
+The overall bound for II follows from integrating the last but one inequality
+over the distribution of X. TermIII is bounded by α/3 by deﬁnition of ξα,σ.
+Remark 2 (Modiﬁcation of the proof for Bernoulli errors) If instead of
+Gaussian errors we work with the error model from Subsection 2.3, we require a
+modiﬁed treatment of the terms II,III in the above proof. For the pure noise
+term III we modify the quantile constants slightly to ξα,σ =
+√
+(1/α). If the
+numberT of preparations satisﬁesT≥ 4d2 then Chebyshev’s inequality and (8)
+give
+Pθ
+(⏐⏐⏐⏐⏐
+1√n
+n∑
+i=1
+(ε2
+i− Eε2
+i )
+⏐⏐⏐⏐⏐>ξ α/3,σ
+)
+≤ α
+3n
+n∑
+i=1
+Eε4
+i≤ α
+3
+4d2
+T ≤ α
+3.
+For the ‘cross term’ we have likewise with zα =
+√
+1/α and ai = (X (θ− ˜θ))i
+that, on the eventE,
+Pε
+({
+− 1√n⟨ε,X (θ− ˜θ)⟩> ¯z
+}
+,E
+)
+≤ 1
+n¯z2 Eε
+( n∑
+i=1
+εiai1E
+)2
+≤ d
+T ¯z2
+∥X (θ− ˜θ)∥2
+n 1E≤α/3,
+just as at the end of the proof of Theorem 2, so that coverage follows from
+integrating the last inequality w.r.t. the distribution of X. The scaling T≈d2
+is similar to the one discussed in Theorem 3 in ref. [10].
+Lemma 1 a) For isotropic design from Condition 1a) and any ﬁxed matrix
+ϑ∈ Hd(C) we have, for every n∈ N,
+Pr
+(⏐⏐⏐⏐
+1
+n∥Xϑ∥2−∥ϑ∥2
+F
+⏐⏐⏐⏐>∥ϑ∥2
+F
+2
+)
+≤ 2e−cn.
+In the standard Gaussian design case we can take c = 1/24.
+b) In the ‘Pauli basis’ case from Condition 1b) we have for any ﬁxed matrix
+ϑ∈ Hd(C) satisfying the Schatten-1-norm bound ∥ϑ∥S1≤ 2 and every n∈ N,
+Pr
+(⏐⏐⏐⏐
+1
+n∥Xϑ∥2−∥ϑ∥2
+F
+⏐⏐⏐⏐> max
+(∥ϑ∥2
+F
+2 ,z d
+n
+))
+≤ 2 exp{−C(K)z}
+whereC(K) = 1/[(16 + 8/3)K 2], and where K is the coherence constant of the
+basis.
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 23]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 23
+Proof. We ﬁrst prove the isotropic case. From (4) we see
+Pr
+(⏐⏐⏐⏐
+1
+n∥Xϑ∥2−∥ϑ∥2
+F
+⏐⏐⏐⏐>∥ϑ∥2
+F/2
+)
+= Pr
+(⏐⏐⏐⏐⏐
+n∑
+i=1
+(Z 2
+i− EZ 2
+1)/∥ϑ∥2
+F
+⏐⏐⏐⏐⏐>n/ 2
+)
+where the Zi/∥ϑ∥F are sub-Gaussian random variables. Then the Z 2
+i/∥ϑ∥2
+F are
+sub-exponential and we can apply Bernstein’s inequality (Prop. 4.1.8 in ref. [12])
+to the last probability. We give the details for the Gaussian case and derive
+explicit constants. In this case gi :=Zi/∥ϑ∥F∼N(0, 1) so the last probability
+is bounded, using Theorem 4.1.9 in ref. [12], by
+Pr
+(⏐⏐⏐⏐⏐
+n∑
+i=1
+(g2
+i− 1)
+⏐⏐⏐⏐⏐> n
+2
+)
+≤ 2 exp
+{
+− n2/4
+4n + 2n
+}
+,
+and the result follows.
+Under Condition 1b), if we write D = max(n∥ϑ∥2
+F/2,zd ) we can reduce
+likewise to bound the probability in question by
+Pr
+(⏐⏐⏐⏐⏐
+n∑
+i=1
+(Yi− EY1)
+⏐⏐⏐⏐⏐>D
+)
+where the Yi =|tr(Xiϑ)|2 are i.i.d. bounded random variables. Using ∥Ei∥op≤
+K/
+√
+d from Condition 1b) and the quantum constraint ∥ϑ∥F ≤∥ ϑ∥S1≤ 2 we
+can bound
+|Yi|≤ d2 max
+i
+∥Ei∥2
+op∥ϑ∥2
+S1≤ 4K 2d :=U
+as well as
+EY 2
+i ≤U E|Yi|≤ 4K 2d∥ϑ∥2
+F :=s2.
+Bernstein’s inequality for bounded variables (e.g., Theorem 4.1.7 in ref. [12])
+applies to give the bound
+2 exp
+{
+− D2
+2ns2 + 2
+3UD
+}
+≤ 2 exp{−C(K)z},
+after some basic computations, by distinguishing the two regimes ofD =n∥ϑ∥2
+F/2≥
+zd and D =zd≥n∥ϑ∥2
+F/2.
+5.3. Proof of Theorem 3
+Since Eθ ˆRn =∥θ− ˜θ∥2
+F we have from Chebyshev’s inequality
+Pθ(θ /∈Cn)≤ Pθ
+(
+| ˆRn− E ˆRn|>z α,n
+)
+≤ Varθ( ˆRn− E ˆRn)
+z2αn
+.
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 24]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 24
+NowUn = ˆRn− Eθ ˆRn is a centred U-statistic and has Hoeﬀding decomposition
+Un = 2Ln +Dn where
+Ln = 1
+n
+n∑
+i=1
+∑
+m,k
+(YiXi
+m,k− Eθ[YiXi
+m,k])(Θm,k− ˜Θm,k)
+is the linear part and
+Dn = 2
+n(n− 1)
+∑
+i<j
+∑
+m,k
+(YiXi
+m,k− Eθ[YiXi
+m,k])(YjXi
+m,k− E[YjXi
+m,k])
+the degenerate part. We note that Ln and Dn are orthogonal in L2(Pθ).
+The linear part can be decomposed into Ln =L(1)
+n +L(2)
+n where
+L(1)
+n = 1
+n
+n∑
+i=1
+∑
+m,k
+
+∑
+m′,k′
+Xi
+m′,k′Xi
+m,kΘm′,k′− Θm,k
+
+ (Θm,k− ˜Θm,k)
+and
+L(2)
+n = 1
+n
+n∑
+i=1
+εi
+∑
+m,k
+Xi
+m,k(Θm,k− ˜Θm,k).
+Now by the i.i.d. assumption we have
+Varθ(L(2)
+n ) =σ2∥˜θ−θ∥2
+F
+n .
+Moreover, by transposing the indices m,k and m′,k′ in an arbitrary way into
+single indices M = 1,...,d 2,K = 1,...,d 2, d2 = p, respectively, basic compu-
+tations given before eq. (28) in ref. [26] imply that the variance of the second
+term is bounded by
+Varθ(L(1)
+n )≤ c∥θ− ˜θ∥2
+F∥θ∥2
+F
+n
+wherec is a constant that depends only on EX 4
+1,1 (which is ﬁnite since the X1,1
+are sub-Gaussian in view of Condition 1a)). Moreover, the degenerate term
+satisﬁes
+Varθ(Dn)≤c d
+n2∥θ∥4
+F
+in view of standard U-statistic computations leading to eq. (6.6) in ref. [19],
+with d2 =p, and using the same transposition of indices as before. This proves
+coverage by choosing the constants in the deﬁnition of zα,n large enough.
+5.4. Proof of Theorem 4
+We prove the result for symmetric matrices with real entries – the case of Her-
+mitian matrices requires only minor (mostly notational) adaptations.
+Given the estimator ˜θPilot, we can easily transform it into another estimator
+˜θ for which the following is true.
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 25]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 25
+Theorem 5 There exists an estimator ˜θ that satisﬁes, uniformly in θ∈R(k),
+for any k≤d and with Pθ-probability greater than 1− 2δ/3,
+∥˜θ−θ∥F≤rn(k),
+as well as,
+˜θ∈R(k),
+and then also
+∥˜θ−θ∥S1≤
+√
+2krn(k).
+Proof. Let ˜θPilot and let ˜θ be the element of R(d) with smallest rank k′ such
+that
+∥˜θPilot− ˜θ∥2
+F≤ r2
+n(k′)
+4 .
+Such ˜θ exists and has rank ≤ k, with probability ≥ 1− 2δ/3, since θ∈ R(k)
+satisﬁes the above inequality in view of (23). The ∥·∥ 2
+F -loss of ˜θ is no larger
+than rn(k) by the triangle inequality
+∥˜θ−θ∥F≤∥ ˜θ− ˜θPilot∥F +∥˜θPilot−θ∥F,
+and this completes the proof of the third claim in view of (2).
+The rest of the proof consists of three steps: The ﬁrst establishes some aux-
+iliary empirical process type results, which are then used in the second step to
+construct a suﬃciently good simultaneous estimate of the eigenvalues of θ. In
+Step III the coverage of the conﬁdence set is established.
+STEP I
+Let θ∈ R+(k) = R(k)∩ Θ+ and let ˜θ be the estimator from Theorem 5.
+Then with probability≥ 1− 2δ/3, and if η = ˜θ−θ, we have
+∥η∥2
+F≤r2
+n(k) ∀θ∈R+(k), (27)
+and that η∈R(2k). For the rest of the proof we restrict in what follows to the
+event of probability greater than or equal to 1− 2δ/3 described by a) and b) in
+the hypothesis of the theorem.
+WriteY′
+i =Yi−tr(Xi˜θ) for the ‘new observations’
+Y′
+i =tr(Xiη) +εi, i = 1,...,n.
+For anyd×d′ matrix V we set
+˜γη(V ) =VT
+(
+1
+n
+n∑
+i=1
+XiY′
+i
+)
+V
+which estimates
+γη(V ) =VTηV.
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 26]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 26
+Let now U be any unit vector in Rd. Then in the above notation ( d′ = 1) we
+can write
+˜γη(U) = 1
+n
+n∑
+i=1
+∑
+m,m′≤d
+UmUm′Xi
+m,m′Y′
+i
+= 1
+n
+n∑
+i=1
+∑
+m,m′≤d
+UmUm′Xi
+m,m′(tr(Xiη) +εi)
+= 1
+n
+n∑
+i=1
+∑
+m,m′≤d
+UmUm′Xi
+m,m′
+
+ ∑
+k,k′≤d
+Xi
+k,k′ηk,k′ +εi
+
+.
+If U denotes the d×d matrix UUT , the last quantity can be written as
+1
+n⟨X U,Xη⟩ + 1
+n⟨X U,ε⟩.
+We can hence bound, for S ={U∈ Rd :∥U∥2 = 1}
+sup
+η∈R(2k),∥η∥F≤rn(k),U∈S
+|˜γη(U)−γη(U)|
+≤ sup
+η∈R(2k),∥η∥F≤rn(k),U∈S
+⏐⏐⏐⏐
+1
+n⟨X U,Xη⟩−⟨ U,η⟩
+⏐⏐⏐⏐ + sup
+U∈S
+⏐⏐⏐⏐
+1
+n⟨X U,ε⟩
+⏐⏐⏐⏐.
+Lemma 2 The right hand side on the last inequality is, with probability greater
+than 1−δ, of order
+vn :=O
+(
+rn(k)τn(k) +
+√
+d
+n
+)
+.
+Proof. The ﬁrst term in the bound corresponds to the ﬁrst supremum on the
+right hand side of the last inequality, and follows directly from the matrix RIP
+(and Lemma 4). For the second term we argue conditionally on the values of X
+and on the event for which the matrix RIP is satisﬁed. We bound the supremum
+of the Gaussian process
+Gε(U) := 1√n⟨X U,ε⟩∼ N(0,∥X U∥2/n)
+indexed by elements U of the unit sphere S of Rd, which satisﬁes the metric
+entropy bound
+logN(δ,S,∥·∥ ) ≲d log(A/δ)
+by a standard covering argument. MoreoverU =UUT∈R(1) and hence for any
+pair of vectors U, ¯U∈S we have that U− ¯U∈R(2). From the RIP we deduce
+for every ﬁxed U, ¯U∈S that
+1
+n∥X U−X ¯U∥2 =∥U− ¯U∥2
+F
+(
+1 +
+1
+n∥X (U− ¯U)∥2−∥ U− ¯U∥2
+F
+∥U− ¯U∥2
+F
+)
+≤ (1 +τn(2))∥U− ¯U∥2
+F≤C∥U− ¯U∥2
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 27]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 27
+since τn(2) =O(1) and since
+∥U− ¯U∥2
+F =
+∑
+m,m′
+(UmUm′− ¯Um ¯Um′)2
+=
+∑
+m,m′
+(UmUm′−Um ¯Um′ +Um ¯Um′− ¯Um ¯Um′)2≤ 2∥U− ¯U∥2.
+Hence any δ-covering ofS in∥·∥ induces a δ/C covering ofS in the intrinsic
+covariancedGε of the (conditional on X ) Gaussian process Gε, i.e.,
+logN(δ,S,d Gε) ≲d log(A′/δ)
+with constants independent of X. By Dudley’s metric entropy bound (e.g., ref.
+[12]) applied to the conditional Gaussian process we have for D > 0 some
+constant
+E sup
+U∈S
+|Gε(U)| ≲
+∫ D
+0
+√
+logN(δ,S,d Gε)dδ ≲
+√
+d
+and hence we deduce that
+Eε sup
+U∈S
+1
+n|⟨X U,ε⟩| = Eε
+1√n sup
+U∈S
+|Gε(U)| ≲
+√
+d
+n (28)
+with constants independent of X, so that the result follows from applying
+Markov’s inequality.
+STEP II:
+Deﬁne the estimator
+ˆθ′ = ˜θ + 1
+n
+n∑
+i=1
+XiY′
+i = ˜θ + ˜γη(Id).
+Then we can write, using UT ˜γη(Id)U = ˜γη(U),
+UT ˆθ′U−UTθU =UT (˜θ + ˜γη(Id))U−UT (˜θ +η)U
+= ˜γη(U)−γη(U),
+and from the previous lemma we conclude, for any unit vector U that with
+probability≥ 1−δ,
+|UT ˆθ′U−UTθU|≤ vn.
+Let now ˆθ be any symmetric positive deﬁnite matrix such that
+|UT ˆθU−UT ˆθ′U|≤ vn.
+Such a matrix exists, for instance θ∈R+(k), and by the triangle inequality we
+also have
+|UT ˆθU−UTθU|≤ 2vn. (29)
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 28]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 28
+Lemma 3 LetM be a symmetric positive deﬁnite d×d matrix with eigenvalues
+λj’s ordered such that λ1≥λ2≥...≥λd. For any j≤d consider an arbitrary
+collection of j orthonormal vectorsVj = (Vι : 1≤ι≤j) in Rd. Then we have
+a) λj+1≤ sup
+U∈S,U⊥span(Vj )
+UTMU,
+and
+b)
+∑
+ι≤j
+λι≥
+∑
+ι≤j
+(Vι)TMV ι.
+The proof of this lemma is basic and given in the appendix. Let now ˆR be the
+rotation that diagonalises ˆθ such that ˆRT ˆθ ˆR = diag(ˆλj : j = 1,...,d ) ordered
+such that ˆλj≥ ˆλj+1∀j. Moreover let R be the rotation that does the same for
+θ and its eigenvaluesλj. We apply the previous lemma withM = ˆθ andV equal
+to the column vectors rι :ι≤l− 1 of R to obtain, for any ﬁxed l≤j≤d,
+ˆλl≤ sup
+U∈S,U⊥span(rι,ι≤l−1)
+UT ˆθU, (30)
+and also that ∑
+l≤j
+ˆλl≥
+∑
+l≤j
+rT
+l ˆθrl. (31)
+From (29) we deduce, that
+ˆλl≤ sup
+U∈S,U⊥span(rι,ι≤j−1)
+UTθU + 2vn =λj + 2vn ∀ l≤j,
+as well as ∑
+l≤j
+ˆλl≥
+∑
+l≤j
+rT
+l θrl− 2jvn =
+∑
+l≤j
+λl− 2jvn,
+with probability≥ 1−δ. Combining these bounds we obtain
+⏐⏐⏐⏐⏐⏐
+∑
+l≤j
+ˆλl−
+∑
+l≤j
+λl
+⏐⏐⏐⏐⏐⏐
+≤ 2jvn, j ≤d. (32)
+STEP III
+We show that the conﬁdence sets covers the true parameter on the event of
+probability≥ 1−δ on which Steps I and II are valid, and for the constant C
+chosen large enough.
+Let Π = ΠR+(2ˆk) be the projection operator onto R+(2ˆk). We have
+∥ˆϑ−θ∥S1≤∥ ˆϑ− Πθ∥S1 +∥Πθ−θ∥S1.
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 29]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 29
+We have, using (32) and Lemma 5 below
+∥Πθ−θ∥S1 =
+∑
+J>2ˆk
+λJ = 1−
+∑
+J≤2ˆk
+λJ
+≤ 1−
+∑
+J≤2ˆk
+ˆλJ + 4ˆkvn
+≤ 6vnˆk≤ (C/2)
+√
+ˆkrn(ˆk)
+for C large enough.
+Moreover, using the oracle inequality (24) with S = Πθ and (25),
+∥ˆϑ− Πθ∥S1≤
+√
+4ˆk∥ˆϑ− Πθ∥F
+≤
+√
+4ˆk(∥ˆϑ−θ∥F +∥Πθ−θ∥F )
+≤
+√
+4ˆk(∥ˆϑ− ˜θPilot∥F +∥˜θPilot−θ∥F +∥Πθ−θ∥F )
+≲
+√
+ˆk(rn(ˆk) +∥Πθ−θ∥F ).
+We ﬁnally deal with the approximation error: Note
+∥Πθ−θ∥2
+F =
+∑
+l>2ˆk
+λ2
+l≤ max
+l>2ˆk
+|λl|
+∑
+l>2ˆk
+|λl|.
+By (32) we know that
+∑
+l>ˆk
+λl = 1−
+∑
+l≤ˆk
+λl≤ 1−
+∑
+l≤ˆk
+ˆλl + 2vnˆk≤ 4vnˆk.
+Hence out of the λl’s with indices l> ˆk there have to be less than ˆk coeﬃcients
+which exceed 4vn. Since the eigenvalues are ordered this implies that the λl’s
+with indices l >2ˆk are all less than or equal to 4 vn, and hence the quantity in
+the last but one display is bounded by (since ˆk< 2ˆk), using again (32) and the
+deﬁnition of ˆk,
+4vn
+
+1−
+∑
+l≤ˆk
+|λl|
+
+ ≲vn
+
+1−
+∑
+l≤ˆk
+|ˆλl|
+
+ + ˆkv2
+n ≲v2
+nˆk ≲
+√
+ˆkrn(ˆk).
+Overall we get the bound
+∥ˆϑ− Πθ∥S1 ≲ ˆkvn ≲ (C/2)
+√
+ˆkrn(ˆk)
+forC large enough, which completes the proof of coverage ofCn by collecting the
+above bounds. The diameter bound follows from ˆk≤k (in view of the deﬁning
+inequalities of ˆk being satisﬁed, for instance, for ˜θ′ =θ, whenever θ∈R+(k0).)
+We conclude with the following auxiliary results used above.
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 30]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 30
+Lemma 4 Under the RIP (6) we have for every 1≤k≤d that, with probability
+at least 1−δ,
+sup
+A,B∈R(k)
+⏐⏐⏐⏐
+1
+n⟨XA,XB⟩−⟨ A,B⟩F
+∥A∥F∥B∥F
+⏐⏐⏐⏐≤ 10τn(k). (33)
+Proof. The matrix RIP can be written as
+sup
+A∈R(k)
+⏐⏐⏐⏐
+⟨XA,XA⟩
+n⟨A,A⟩F
+− 1
+⏐⏐⏐⏐ =|⟨A, (n−1M− I)A⟩F|
+⟨A,A⟩F
+≤τn(k), (34)
+for a suitable M ∈ Hd2(C). The above bound then follows from applying the
+Cauchy-Schwarz inequality to
+1
+n⟨XA,XB⟩−⟨ A,B⟩F =⟨A, (n−1M− I)B⟩F. (35)
+The proof of the following basic lemma is left to the reader.
+Lemma 5 Let M ≥ 0 with positive eigenvalues (λj)j ordered in decreasing
+order. Denote with ΠR+(j−1) the projection onto R+(j− 1) = R(j− 1)∩ Θ+.
+Then for any 2≤j≤d we have
+∑
+j′≥j
+λj′ =∥M− ΠR+(j−1)M∥S1.
+Acknowledgements. This work has been supported by the EU (SIQS,
+RAQUEL), the ERC (TAQ, UQMSI) and the DFG (SPP1798, MuSyAd Emmy
+Noether grant). AC worked on this project while a postdoc at the University of
+Cambridge. We also acknowledge discussions with C. Riofrio.
+References
+[1] L. Artiles, R. Gill, and M. Guta. An invitation to quantum tomography.
+J. Roy. Statist. Soc. , 67:109, 2005.
+[2] K. M. R. Audenaert and S. Scheel. Quantum tomographic reconstruction
+with error bars: a Kalman ﬁlter approach. New J. Phys. , 11(2):023028,
+2009.
+[3] R. Blume-Kohout. Robust error bars for quantum tomography, 2012.
+arXiv:1202.5270.
+[4] A.D. Bull and R. Nickl. Adaptive conﬁdence sets in L2. Probability Theory
+and Related Fields, 156:889–919, 2013.
+[5] E. J. Cand` es and Y. Plan. Tight oracle inequalities for low-rank matrix
+recovery from a minimal number of noisy random measurements. IEEE
+Trans. Inform. Theory, 57(4):2342–2359, 2011.
+[6] A. Carpentier and A. Kim. An iterative hard thresholding estimator for low
+rank matrix recovery with explicit limiting distribution. arXiv:1502.04654,
+2015.
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 31]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 31
+[7] A. Carpentier and R. Nickl. On signal detection and conﬁdence sets for
+low rank inference problems. Electronic J. Stat., to appear, 2015.
+[8] M. Christandl and R. Renner. Reliable quantum state tomography. Phys.
+Rev. Lett., 109:120403, 2012.
+[9] R. De Eq. A brief introduction to Fourier analysis on the Boolean cube.
+Theo. Comp., 1:1–20, 2008.
+[10] S. T Flammia, D. Gross, Y.-K. Liu, and J. Eisert. Quantum tomogra-
+phy via compressed sensing: error bounds, sample complexity and eﬃcient
+estimators. New J. Phys. , 14(9):095022, 2012.
+[11] E. Gin´ e and R. Nickl. Conﬁdence bands in density estimation.Ann. Statist.,
+38:1122–1170, 2010.
+[12] E. Gin´ e and R. Nickl. Mathematical foundations of inﬁnite-dimensional
+statistical models. to appear, Cambridge University Press, 2015.
+[13] D. Gross. Recovering low-rank matrices from few coeﬃcients in any basis.
+IEEE Trans. Inf. Th. , 57(3):1548–1566, 2011.
+[14] D. Gross, Y.-K. Liu, S. T Flammia, S. Becker, and J. Eisert. Quantum
+state tomography via compressed sensing.Phys. Rev. Lett., 105(15):150401,
+2010.
+[15] M. Guta, T. Kypraios, and I. Dryden. Rank-based model selection for
+multiple ions quantum tomography. New J. Phys. , 14:105002, 2012.
+[16] H. Haeﬀner, W. Haensel, C. F. Roos, J. Benhelm, D. C. al Kar, M. Chwalla,
+T. Koerber, U. D. Rapol, M. Riebe, P. O. Schmidt, C. Becher, O. G¨ uhne,
+W. Dur, and R. Blatt. Scalable multi-particle entanglement of trapped
+ions. Nature, 438:643, 2005.
+[17] M. Hoﬀmann and R. Nickl. On adaptive inference and conﬁdence bands.
+Ann. Statist., 39:2382–2409, 2011.
+[18] A. S. Holevo. Statistical structure of quantum theory . Springer, 2001.
+[19] Y. I. Ingster, Tsybakov A. B., and N. Verzelen. Detection boundary in
+sparse regression. Elec. J. Stat. , 4:1476–1526, 2010.
+[20] A. Javanmard and A. Montanari. Conﬁdence intervals and hypothesis test-
+ing for high-dimensional regression. J. Mach. Learn. Res., 15(1):2869–2909,
+2014.
+[21] V. Koltchinskii. Von Neumann entropy penalization and low-rank matrix
+estimation. Ann. Statist., 39(6):2936–2973, 2011.
+[22] V. Koltchinskii, K. Lounici, and A. B. Tsybakov. Nuclear-norm penaliza-
+tion and optimal rates for noisy low-rank matrix completion. Ann. Statist.,
+39(5):2302–2329, 2011.
+[23] U. Leonhardt. Measuring the quantum state of light . Cambridge University
+Press, Cambridge, 2005.
+[24] K.-C. Li. Honest conﬁdence regions for nonparametric regression. Ann.
+Statist., 17:1001–1008, 1989.
+[25] Y.-K. Liu. Universal low-rank matrix recovery from Pauli measurements.
+In Adv. Neur. Inf. Proc. Sys. , pages 1638–1646, 2011.
+[26] R. Nickl and S. van de Geer. Conﬁdence sets in sparse regression. Ann.
+Statist., 41(6):2852–2876, 2013.
+[27] M. A. Nielsen and I. L. Chuang. Quantum computation and quantum in-
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 32]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 32
+formation. Cambridge University Press, Cambridge, 2000.
+[28] A. Peres. Quantum theory. Springer, Berlin, 1995.
+[29] B. Recht, M. Fazel, and P. A. Parrilo. Guaranteed minimum-rank solutions
+of linear matrix equations via nuclear norm minimization. SIAM Rev. ,
+52:471, 2010.
+[30] J. Robins and A.W. van der Vaart. Adaptive nonparametric conﬁdence
+sets. Ann. Statist., 34:229–253, 2006.
+[31] J. Shang, H. K. Ng, A. Sehrawat, X. Li, and B.-G. Englert. Optimal error
+regions for quantum state estimation. New J. Phys. , 15(12):123026, 2013.
+[32] A. Smith, C. A. Riofrio, B. E. Anderson, H. Sosa-Martinez, I. H. Deutsch,
+and P. S. Jessen. Quantum state tomography by continuous measurement
+and compressed sensing. Phys. Rev. A , 87:030102(R), 2013.
+[33] K. Temme and F. Verstraete. Quantum chi-squared and goodness of ﬁt
+testing. J. Math. Phys. , 56(1):012202, 2015.
+[34] S. van de Geer, P. B¨ uhlmann, Y. Ritov, and R. Dezeure. On asymptotically
+optimal conﬁdence regions and tests for high-dimensional models. Ann.
+Statist., 42(3):1166–1202, 2014.
+[35] C.H. Zhang and S. S. Zhang. Conﬁdence intervals for low dimensional
+parameters in high dimensional linear models. J. R. Stat. Soc. Ser. B.
+Stat. Methodol., 76(1):217–242, 2014.
+6. Appendix
+6.1. Pauli spin measurements & Quantum Tomography
+This work was partly motivated by a problem arising in present-day physics
+experiments that aim at estimating quantum states. Conceptually, a quantum
+mechanical experiment involves two stages: A source (or preparation procedure)
+that emits quantum mechanical systems with unknown properties, and a mea-
+surement device that interacts with incoming quantum systems and produces
+real-valued measurement outcomes, e.g. by pointing a dial to a value on a scale.
+Quantum mechanics stipulates that both stages are completely described by
+certain matrices.
+The properties of the source are represented by a positive semi-deﬁnite unit
+trace matrix θ, the quantum state , also referred to as density matrix . In turn,
+the measurement device is modelled by a Hermitian matrix X, which is referred
+to as an observable in physics jargon. A key axiom of the quantum mechanical
+formalism states that if the measurementX is repeatedly performed on systems
+emitted by the source that is preparing θ, then the real-valued measurement
+outcomes will ﬂuctuate randomly with expected value
+⟨X,θ⟩F =tr(Xθ). (36)
+The precise way in which physical properties are represented by these matrices
+is immaterial to our discussion (cf. any textbook, e.g. ref. [28]). We merely note
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 33]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 33
+that, while in principle any Hermitian X can be measured by some physical
+apparatus, the required experimental procedures are prohibitively complicated
+for all but a few highly structured matrices. This motivates the introduction of
+Pauli designs below, which correspond to fairly tractable ‘spin measurements’.
+The quantum state estimation or quantum tomography 1 problem is to esti-
+mate an unknown density matrix θ from the measurement of a collection of
+observablesX 1,...,X n. This task is of particular importance to the young ﬁeld
+of quantum information science [27]. There, the sources might be carefully en-
+gineered components used for technological applications such as quantum key
+distribution or quantum computing. In this context, quantum state estimation
+is the process of characterising the components one has built – clearly an im-
+portant capability for any technology.
+A major challenge lies in the fact that relevant instances are described byd×
+d-matrices for fairly large dimensions d ranging from 100 to 10.000 in presently
+performed experiments [16]. Such high-dimensional estimation problems can
+beneﬁt substantially from structural properties of the objects to be recovered.
+Fortunately, the density matrices occurring in quantum information experiments
+are typically well-approximated by matrices of low rank r≪ d. In fact, in the
+practically most important applications, one usually even aims at preparing a
+state of unit rank – a so-called pure quantum state .
+6.1.1. Pauli observables
+We now introduce a paradigmatic set of quantum measurements that is fre-
+quently used in both theoretical and practical treatments of quantum state esti-
+mation (see, e.g., refs. [14, 16]). For a more general account, we refer to standard
+textbooks [18, 27]. The purpose of this section is to motivate the ‘Pauli design’
+case (Condition 1b) of the main theorem, as well as the approximate Gaussian
+noise model described in Subsection 2.3.
+We start by describing ‘spin measurements’ on a single ‘spin-1 /2 particle’.
+Such a measurement corresponds to the situation of having d = 2. Without
+worrying about the physical signiﬁcance, we accept as fact that on such particles,
+one may measure one of three properties, referred to as the ‘spin along the x,y ,
+or z-axis’ of R3. Each of these measurements may yield one of two outcomes,
+denoted by +1 and−1 respectively.
+The mathematical description of these measurements is derived from the
+Pauli matrices
+σ1 =
+[ 0 1
+1 0
+]
+, σ2 =
+[ 0 −i
+i 0
+]
+, σ3 =
+[ 1 0
+0 −1
+]
+(37)
+1 The term ‘tomography’ goes back to the use of Radon transforms in early schemes
+for estimating quantum states of electromagnetic ﬁelds [23, 1]. It has become synonymous
+with ‘quantum density matrix estimation’, even though current methods applied to quan-
+tum systems with a ﬁnite dimension d have no technical connection to classical tomographic
+reconstruction algorithms.
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 34]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 34
+in the following way. Recall that the Pauli matrices have eigenvalues ±1. For
+x∈{ 1, 2, 3} and j∈{ +1,−1}, we write ψx
+j for the normalised eigenvector of
+σx with eigenvaluej. The spectral decomposition of each Pauli spin matrix can
+hence be expressed as
+σx =πx
++−πx
+−, (38)
+with
+πx
+± =ψx
+±(ψy
+±)∗≥ 0 (39)
+denoting the projectors onto the eigenspaces. Now, a physical measurement of
+the ‘spin along direction x’ on a system in state θ will give rise to a {−1, 1}-
+valued random variable Cx with
+P(Cx =j) =tr
+(
+πx
+jθ
+)
+, (40)
+whereθ∈ H2(C). Using eq. (38), this is equivalent to stating that the expected
+value of Cx is given by
+E(Cx) =tr (σxθ). (41)
+Next, we consider the case of joint spin measurements on a collection of N
+particles. For each, one has to decide on an axis for the spin measurement. Thus,
+the joint measurement setting is now described by a word x = (x1,...,x N)∈
+{1, 2, 3}N. The axioms of quantum mechanics posit that the joint state θ of the
+N particles acts on the tensor product space ( C2)⊗N, so that θ∈ H2N (C).
+Likewise, the measurement outcome is a word j = (j1,...,j N)∈{ 1,−1}N,
+with ji the value of the spin along axis xi of particle i = 1,...,N . As above,
+this prescription gives rise to a{1,−1}N-valued random variableCx. Again, the
+axioms of quantum mechanics imply that the distribution of Cx is given by
+P(Cx =j) =tr
+(
+(πx1
+j1⊗···⊗ πxN
+jN )θ
+)
+. (42)
+Note that the components of the random vector Cx are not necessarily inde-
+pendent, as θ will generally not factorise
+It is often convenient to express the information in eq. (42) in a way that
+involves tensor products of Pauli matrices, rather than their spectral projections.
+In other words, we seek a generalisation of eq. (41) to N particles. As a ﬁrst
+step toward this goal, let
+χ(j) =
+{−1 number of −1 elements in j is odd
+1 number of −1 elements in j is even (43)
+be the parity function. Then one easily veriﬁes
+tr((σx1⊗···⊗ σxN )θ) =
+∑
+j∈{1,−1}N
+χ(j)tr
+(
+θ(πx1
+j1⊗···⊗ πxN
+jN )
+)
+= E
+(
+χ(Cx)
+)
+.
+(44)
+In this sense, the tensor product σx1⊗···⊗ σxN describes a measurement of
+the parity of the spins along the respective directions given by x.
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 35]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 35
+In fact, the entire distribution of Cx can be expressed in terms of tensor
+products of Pauli matrices and suitable parity functions. To this end, we extend
+the deﬁnitions above. Write
+σ0 =
+[ 1 0
+0 1
+]
+(45)
+for the identity matrix in M2(C). For every subset S of{1,...,N }, deﬁne the
+‘parity function restricted to S’ via
+χS(j) =
+{ −1 number of −1 elements ji for i∈S is odd
+1 number of −1 elements ji for i∈S is even. (46)
+Lastly, forS⊂{ 1,...,N } and x∈{ 1, 2, 3}N, the restriction of x to S is
+xS
+i =
+{ xi i∈S
+0 i̸∈S. (47)
+Then for every such x,S one veriﬁes the identity
+tr((σxS
+1⊗···⊗ σxS
+N )θ) = E
+(
+χS(Cx)
+)
+. (48)
+In other words, the distribution of Cx contains enough information to compute
+the expectation value of all observables (σxS
+1⊗···⊗ σxS
+N ) that can be obtained by
+replacing the Pauli matrices on an arbitrary subsetS of particles by the identity
+σ0. The converse is also true: the set of all such expectation values allows one
+to recover the distribution of Cx. The explicit formula reads
+P(Cx =j) = 1
+2N
+∑
+S⊂{1,...,N}
+χS(j) E
+(
+χS(Cx)
+)
+(49)
+= 1
+2N
+∑
+S∈{1,...,N}
+χS(j)tr
+(
+θ(σxS
+1⊗···⊗ σxS
+N )
+)
+and can be veriﬁed by direct computation. [Note that E
+(
+χS(Cx)
+)
+is eﬀectively
+a Fourier coeﬃcient (over the group ZN
+2 ) of the distribution function of the
+{−1, 1}N-valued random variable Cx. Equation (49) is then nothing but an
+inverse Fourier transform.]
+In this sense, the information obtainable from joint spin measurements on N
+particles can be encoded in the 4 N real numbers
+2−N/2tr((σy1⊗···⊗ σyN )θ), y ∈{ 0, 1, 2, 3}N. (50)
+Indeed, every such y arises as y = xS for some (generally non-unique) combi-
+nation of x and S. This representation is particularly convenient from a math-
+ematical point of view, as the collection of matrices
+Ey := 2−N/2σy1⊗···⊗ σyN, y ∈{ 0, 1, 2, 3}N (51)
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 36]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 36
+forms an ortho-normal basis with respect to the ⟨·,·⟩F inner product. Thus the
+terms in eq. (50) are just the coeﬃcients of a basis expansion of the density
+matrix θ.2
+6.1.2. From (50) to Condition 1b)
+Following [10] we use eq. (50) as our model for quantum tomographic measure-
+ments. Note that the Ey satisfy Condition 1b) with coherence constant K = 1
+and d = 2N. In the model (1) under Condition 1b) we wish to approximate
+d·tr(Eyθ) for a ﬁxed observableEy (we ﬁx the random values of the Xi’s here)
+and for d = 2N. If y = xS for some setting x and subset S, then the parity
+function By := χS(Cx) has expected value 2 N/2·tr(Eyθ) =
+√
+d·tr(Eyθ) (see
+eqs. (48) and (51)), and itself is a Bernoulli variable taking values {1,−1} with
+p = P(By = 1) = 1 +
+√
+dtr(Eyθ)
+2 .
+Note that √
+d|tr(Eyθ)|≤
+√
+d∥Ey∥op∥θ∥S1≤ 1,
+so indeed p∈ [0, 1] and the variance satisﬁes
+VarBy = 1−d·tr(Eyθ)2≤ 1.
+This is precisely the error model described in Subsection 2.3.
+6.2. Proof of Lemma 3
+a): Consider the subspaces E = span((Vι)ι≤j)⊥ and F = span((eι)ι≤j+1) of
+Rd, where the eι’s are the eigenvectors of the d×d matrix M corresponding
+to eigenvalues λj. Since dim(E) + dim(F ) = (d−j) +j + 1 = d + 1, we know
+that E⋂F is not empty and there is a vectorial sub-space of dimension 1 in
+the intersection. Take U∈ E⋂F such that∥U∥ = 1. Since U∈ F , it can be
+written as
+U =
+j+1∑
+ι=1
+uιeι
+for some coeﬃcients uι. Since the eι’s are orthogonal eigenvectors of the sym-
+metric matrix M we necessarily have
+MU =
+j+1∑
+ι=1
+λιuιeι,
+2We note that quantum mechanics allows to design measurement devices that directly
+probe the observable ofσy1 ⊗ · · · ⊗σyN , without ﬁrst measuring the spin of every particle and
+then computing a parity function. In fact, the ability to perform such correlation measurements
+is crucial for quantum error correction protocols [27]. For practical reasons these setups are
+used less commonly in tomography experiments, though.
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015
+
+[PDF PAGE 37]
+A. Carpentier, J. Eisert, D. Gross and R. Nickl/Uncertainty Quantiﬁcation for Matrix CS 37
+and thus
+UTMU =
+j+1∑
+ι=1
+λιu2
+ι.
+Since theλι’s are all non-negative and ordered in decreasing absolute value, one
+has
+UTMU =
+j+1∑
+ι=1
+λιu2
+ι≥λj+1
+j+1∑
+ι=1
+u2
+ι =λj+1∥U∥2 =λj+1.
+Taking the supremum in U yields the result.
+b): For each ι≤ j, let us write the decomposition of Vι on the basis of
+eigenvectors (el :l≤d) of M as
+Vι =
+∑
+l≤d
+vι
+lel.
+Since the (el) are the eigenvectors of M we have
+∑
+ι≤j
+(Vι)TMV ι =
+∑
+ι≤j
+d∑
+l=1
+λl(vι
+l)2,
+where ∑d
+l=1(vι
+l)2 = 1 and ∑
+ι≤j(vι
+l)2≤ 1, since the Vι are orthonormal. The
+last expression is maximised in (vι
+l)ι≤j,1≤l≤d and under these constraints, when
+vι
+ι = 1 and vι
+l = 0 if ι̸=l (since the (λι) are in decreasing order), and this gives
+∑
+ι≤j
+(Vι)TMV ι≤
+∑
+ι≤j
+λι.
+imsart-generic ver. 2011/11/15 file: ell1lowrankrevision.tex date: December 22, 2015

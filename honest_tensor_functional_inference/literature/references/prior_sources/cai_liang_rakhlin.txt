@@ -1,0 +1,2095 @@
+
+[PDF PAGE 1]
+Geometric Inference for General High-Dimensional Linear
+Inverse Problems
+T . Tony Cai∗, Tengyuan Liang † and Alexander Rakhlin ‡
+Department of Statistics
+The Wharton School
+University of Pennsylvania
+Abstract
+This paper presents a uniﬁed geometric framework for the statistical analysis of a general ill-posed
+linear inverse model which includes as special cases noisy compressed sensing, sign vector recovery,
+trace regression, orthogonal matrix estimation, and noisy matrix completion. We propose computa-
+tionally feasible convex programs for statistical inference including estimation, conﬁdence intervals
+and hypothesis testing. A theoretical framework is developed to characterize the local estimation
+rate of convergence and to provide statistical inference guarantees. Our results are built based on
+the local conic geometry and duality. The difﬁculty of statistical inference is captured by the geomet-
+ric characterization of the local tangent cone through the Gaussian width and Sudakov minoration
+estimate.
+1 Introduction
+Driven by a wide range of applications, high-dimensional linear inverse problems such as noisy com-
+pressed sensing, sign vector recovery, trace regression, orthogonal matrix estimation, and noisy matrix
+completion have drawn signiﬁcant recent interest in several ﬁelds, including statistics, applied mathe-
+matics, computer science, and electrical engineering. These problems are often studied in a case-by-
+case fashion and the focus so far is mainly on estimation. Although similarities in the technical analyses
+have been suggested heuristically, a general uniﬁed theory for statistical inference including estimation,
+conﬁdence intervals and hypothesis testing is still yet to be developed.
+∗The research of Tony Cai was supported in part by NSF Grants DMS-1208982 and DMS-1403708, and NIH Grant R01
+CA127334.
+†Tengyuan Liang acknowledges the support of Winkelman Fellowship.
+‡Alexander Rakhlin gratefully acknowledges the support of NSF under grant CAREER DMS-0954737.
+1
+arXiv:1404.4408v3  [math.ST]  16 Jun 2015
+
+[PDF PAGE 2]
+In this paper, we consider a general linear inverse model
+Y = X (M) + Z (1)
+where M ∈ Rp is the vectorized version of the parameter of interest,X : Rp → Rn is a linear operator, and
+Z ∈ Rn is a noise vector. We observe (X ,Y ) and wish to recover the unknown parameter M. A particular
+focus is on the high-dimensional setting where the ambient dimension p of the parameter M is much
+larger than the sample size n, i.e., the dimension of Y . In such a setting, the parameter of interest M
+is commonly assumed to have, with respect to a given atom set A , a certain low complexity structure
+which captures the true dimension of the statistical estimation problem. A number of high-dimensional
+inference problems actively studied in the recent literature can be seen as special cases of this general
+linear inverse model.
+High Dimension Linear Regression/Noisy Compressed Sensing.In high-dimensional linear regression,
+one observes (X ,Y ) with
+Y = X M + Z , (2)
+where Y ∈ Rn, X ∈ Rn×p with p ≫ n, M ∈ Rp is a sparse signal, and Z ∈ Rn is a noise vector. The goal
+is to recover the unknown sparse signal of interest M ∈ Rp based on the observation ( X ,Y ) through an
+efﬁcient algorithm. Many estimation methods including ℓ1-regularized procedures such as the Lasso
+and Dantzig Selector have been developed and analyzed. See, for example, Tibshirani (1996); Candès and
+Tao (2007); Bickel et al. (2009); Bühlmann and van de Geer (2011) and the references therein. Conﬁdence
+intervals and hypothesis testing for high-dimensional linear regression have also been actively studied in
+the last few years. A common approach is to ﬁrst construct a de-biased Lasso or de-biased scaled-Lasso
+estimator and then make inference based on the asymptotic normality of low-dimensional functionals
+of the de-biased estimator. See, for example, Bühlmann (2013); Zhang and Zhang (2014); van de Geer
+et al. (2014); Javanmard and Montanari (2014).
+Trace Regression. Accurate recovery of a low-rank matrix based on a small number of linear measure-
+ments has a wide range of applications and has drawn much recent attention in several ﬁelds. See, for
+example, Recht et al. (2010); Koltchinskii (2011); Rohde et al. (2011); Koltchinskii et al. (2011); Candès and
+Plan (2011). In trace regression, one observes (Xi ,Yi ), i = 1, ...,n with
+Yi = Tr(X T
+i M) + Zi , (3)
+where Yi ∈ R, Xi ∈ Rp1×p2 are measurement matrices, and Zi are noise. The goal is to recover the un-
+known matrix M ∈ Rp1×p2 which is assumed to be of low rank. Here the dimension of the parameter
+M is p ≡ p1p2 ≫ n. A number of constrained and penalized nuclear minimization methods have been
+introduced and studied in both the noiseless and noisy settings. See the aforementioned references for
+further details.
+2
+
+[PDF PAGE 3]
+Sign Vector Recovery. The setting of sign vector recovery is similar to the one for the high-dimensional
+regression except the signal of interest is a sign vector. More speciﬁcally, in sign vector recovery, one
+observes (X ,Y ) with
+Y = X M + Z (4)
+where Y ∈ Rn, X ∈ Rn×p, M ∈ {+1, −1}p is a sign vector, and Z ∈ Rn is a noise vector. The goal is to recover
+the unknown sign signal of interest M. Exhaustive search over the parameter set is computationally
+prohibitive. The noiseless case of (4), known as the generalized multi-knapsack problem (Khuri et al.,
+1994; Mangasarian and Recht, 2011), can be solved through an integer program which is known to be
+computationally difﬁcult even for checking the uniqueness of the solution, see (Prokopyev et al., 2005;
+Valiant and Vazirani, 1986).
+Orthogonal Matrix Recovery. In some applications the matrix of interest in trace regression is known
+to be an orthogonal/rotation matrix (Ten Berge, 1977; Gower and Dijksterhuis, 2004). More speciﬁcally,
+in orthogonal matrix recovery, we observe (Xi ,Yi ), i = 1, .. .,n as in the trace regression model (3) where
+Xi ∈ Rm×m are measurement matrices and M ∈ Rm×m is an orthogonal matrix. The goal is to recover the
+unknown M using an efﬁcient algorithm. Computational difﬁculties come in because of the non-convex
+constraint. See Chandrasekaran et al. (2012).
+Matrix Completion. Matrix completion aims to recover a low-rank matrix based on observations of a
+subset of entries. It can be viewed as a special case of the trace regression model (3) with the measure-
+ment matrices of the form eik e⊺
+jk
+for k = 1, ...,n, where ei is the i th standard basis vector, and i1, · · ·,in
+and j1, · · ·, jn are randomly drawn with replacement from {1,· · ·, p1} and {1, · · ·, p2}, respectively. That is,
+the individual entries of the matrix M are observed at randomly selected positions. The goal is to recover
+the low-rank matrix M based on the partial observations Y . See Candès and Recht (2009); Recht (2011)
+for matrix recovery in the noiseless case and Candes and Plan (2010); Chatterjee (2012); Cai and Zhou
+(2013) for the noisy case.
+Other high-dimensional inference problems that are closely connected to the structured linear in-
+verse model (1) include high-dimensional covariance matrix estimation where the covariance matrix of
+interest is banded/sparse/spiked (Karoui, 2008; Cai et al., 2010, 2013, 2014), sparse and low rank de-
+composition in robust principal component analysis (Candès et al., 2011), and sparse noise and sparse
+parameter in demixing problem (Amelunxen et al., 2013), to name a few. We will discuss the connections
+in details in Section 3.4.5.
+There are several fundamental questions for this general class of high-dimensional linear inverse
+problems.
+Statistical Questions: How well can the parameter M be estimated? What is the intrinsic difﬁculty
+of the estimation problem? How to provide inference guarantees for M, i.e., conﬁdence intervals
+and hypothesis testing, in general?
+3
+
+[PDF PAGE 4]
+Computational Questions: Are there computationally efﬁcient (polynomial time complexity) al-
+gorithms that are also sharp in terms of statistical estimation and inference?
+1.1 High-Dimensional Linear Inverse Problems
+Linear inverse problems have been well studied in the classical setting where the parameter of interest
+lies in a convex set. See, for example, Tikhonov and Arsenin (1977), O’Sullivan (1986), and Johnstone
+and Silverman (1990). In particular, for estimation of a linear functional over a convex parameter space,
+Donoho (1994) developed an elegant geometric characterization of the minimax theory in terms of the
+modulus of continuity. However, the theory relies critically on the convexity assumption of the parameter
+space. As shown in Cai and Low (2004a,b), the behavior of the functional estimation and conﬁdence
+interval problems is signiﬁcantly different even when the parameter space is the union of two convex
+sets. For the high-dimensional linear inverse problems considered in the present paper, the parameter
+space is highly non-convex and the theory and techniques developed in the classical setting are not
+readily applicable.
+For high-dimensional linear inverse problems such as those mentioned earlier, the parameter space
+has low-complexity and exhaustive search often leads to the optimal solution in terms of statistical ac-
+curacy. However, it is computationally prohibitive and requires the prior knowledge of the true low com-
+plexity. In recent years, relaxing the problem to a convex program such as ℓ1 or nuclear norm mini-
+mization and then solving it with optimization techniques have proven to be a powerful approach in
+individual cases.
+Uniﬁed approaches to signal recovery recently appeared both in the applied mathematics literature
+(Chandrasekaran et al., 2012; Amelunxen et al., 2013; Oymak et al., 2013) and in the statistics literature
+(Negahban et al., 2012). Oymak et al. (2013) studied the generalized LASSO problem through conic ge-
+ometry with a simple bound in terms of the ℓ2 norm of the noise vector. (Chandrasekaran et al., 2012)
+introduced the notion of atomic norm to deﬁne a low complexity structure and showed that Gaussian
+width captures the minimum sample size required to ensure recovery. Amelunxen et al. (2013) studied
+the phase transition for the convex algorithms for a wide range of problems. These papers suggested that
+the geometry of the local tangent cone determines the minimum number of samples to ensure successful
+recovery in the noiseless or deterministic noise settings. Negahban et al. (2012) studied the regularized-
+M estimation with a decomposable norm penalty in the additive Gaussian noise setting.
+Another line of research is focused on a detailed analysis of the Empirical Risk Minimization (ERM)
+(Lecué and Mendelson, 2013). Here, the objective function is the excess risk for the squared error loss.
+The excess risk is shown to have the rate of n−1/2 or n−1, in terms of the sample size n. The analy-
+sis is based on the empirical processes indexed by the general subgaussian functional classes, with a
+proper localization radius around the best parameter. In addition to convexity, the ERM requires the
+prior knowledge on the size of the bounded parameter set of interest. This knowledge is not needed for
+4
+
+[PDF PAGE 5]
+the algorithm we propose in the present paper.
+Compared to estimation, there is a paucity of methods and theoretical results for conﬁdence intervals
+and hypothesis testing for these linear inverse models. Speciﬁcally for high-dimensional linear regres-
+sion, conﬁdence intervals and signiﬁcance testing have drawn increasing recent attention. Bühlmann
+(2013) studied a bias correction method based on the ridge estimation, while Zhang and Zhang (2014)
+proposed bias correction via score vector using scaled Lasso as the initial estimator. van de Geer et al.
+(2014); Javanmard and Montanari (2014) focused on de-sparsifying the Lasso via constructing a near “in-
+verse” of the Gram matrix, one uses node-wise Lasso while the other uses an ℓ∞ constrained quadratic
+programing, with similar theoretical guarantees. To the best of our knowledge, inference procedures for
+other high-dimensional linear inverse models are yet to be developed.
+1.2 Geometric Characterization of Linear Inverse Problems
+Under the linear inverse model (1), the parameterM is assumed to have certain low complexity structure
+with respect to a given atom set in a high-dimensional Euclidean space, which introduces a non-convex
+constraint. The non-convex constraint poses difﬁculty for the inverse problem. However, proper convex
+relaxation based on the general atom structure provides a computationally feasible solution. Our goal
+is to recover and make inference on the parameter M based on the observation ( X ,Y ) efﬁciently. This
+problem can also be framed in the language of geometric functional analysis (Ledoux and Talagrand,
+1991; Vershynin, 2011). For point estimation, we are interested in how the local convex geometry around
+the true parameter affects the estimation procedure and the intrinsic estimation difﬁculty, in terms of
+the local upper bound and the local minimax lower bound respectively. Note that local tangent cone
+plays a key role in our analysis. For statistical inference, we develop general procedures induced by the
+convex geometry, which answers inferential questions such as conﬁdence intervals and hypothesis test-
+ing efﬁciently. We are also interested in the sample size condition induced by the local convex geometry
+for valid inference guarantees.
+Complexity measures such as Gaussian width and Rademacher complexity are well studied in the
+empirical processes theory (Ledoux and Talagrand, 1991; Talagrand, 1996), and are known to capture the
+difﬁculty of the estimation problem. Covering/Packing entropy and volume ratio (Yang and Barron, 1999;
+Vershynin, 2011; Ma and Wu, 2013) are also widely used in geometric functional analysis to measure the
+complexity. In this paper, we show how these geometric quantities affect the computationally efﬁcient
+estimation/inference procedure, as well as the intrinsic difﬁculty of the estimation/inference problem.
+Our main result can be summarized as follows. We propose uniﬁed convex algorithms for estimation
+and inference, and then analyze the theoretical properties for these algorithms. On the local tangent
+cone TA (M) (the formal deﬁnition is given in (8), and B p
+2 below denotes Euclidean ball inRp), geometric
+quantities such as the Gaussian width w(B p
+2 ∩ TA (M)), Sudakov minoration estimate e(B p
+2 ∩ TA (M)),
+and volume ratio v(B p
+2 ∩ TA (M)) (deﬁned in Section 2.2) capture the rate of convergence of the linear
+5
+
+[PDF PAGE 6]
+inverse problem. In terms of the upper bound, with overwhelming probability, if n ≿ w 2(B p
+2 ∩ TA (M)),
+the estimation error under ℓ2 norm for our algorithm is of the rate
+σ γA (M)w(X A )pn
+where γA (M) is the local asphericity ratio deﬁned in (15). The minimax lower bound for estimation
+under ℓ2 norm over the local tangent cone TA (M)satisﬁes
+σ
+[
+e(B p
+2 ∩ TA (M))
+pn ∨
+v(B p
+2 ∩ TA (M))
+pn
+]
+.
+For statistical inference, we establish valid asymptotic normality for any low-dimensional linear func-
+tional of the parameter M under the condition
+limn,p→∞
+γ2
+A (M)w 2(X A )
+pn = 0,
+which can be compared to the condition for point estimation consistency
+limn,p→∞
+γA (M)w(X A )pn = 0.
+We remark on the critical difference on the sufﬁcient conditions between valid inference and estimation
+consistency - more stringent condition on sample sizen is required for inference beyond estimation. In-
+tuitively, statistical inference is purely geometrized by Gaussian width and Sudakov minoration estimate.
+1.3 Our Contributions
+The main contributions of the present paper are two-fold.
+• Uniﬁed convex algorithms for estimation and inference. We propose a general computation-
+ally feasible convex program that provides near optimal rate of convergence simultaneously for a
+collection of high-dimensional linear inverse problems. We also provide a general convex feasi-
+bility program that leads to inference guarantees for any ﬁnite linear contrast, such as conﬁdence
+intervals and hypothesis testing.
+• Local geometric theory: Upper and lower bounds, conﬁdence intervals and hypothesis test-
+ing. A uniﬁed theoretical framework is provided for analyzing high-dimensional linear inverse
+problems based on the local conic geometry and duality. The point estimation and statistical in-
+ference are adaptive in the sense that the difﬁculty (rate of convergence, conditions on sample
+size, etc.) automatically adapts to the low complexity structure of the true parameter. Both the
+inference guarantee and estimation consistency are closely related and rely on conditions induced
+by the local conic geometry. It is shown that the minimax lower bound for estimation over the
+local tangent cone is captured by the Sudakov minoration estimate or volume ratio. The results
+geometrize statistical inference for general linear inverse problems with low complexity structure.
+6
+
+[PDF PAGE 7]
+1.4 Organization of the Paper
+The rest of the paper is structured as follows. In Section 2, after notation, deﬁnitions, and basic convex
+geometry are reviewed, we formally present convex programs for recovering the parameter M, and for
+providing inference guarantees for M, based on the observation (X ,Y ). The properties of the proposed
+procedures are then studied in Section 3. Under the Gaussian setting, a geometric theory is developed
+in terms of the local upper bound, the minimax lower bound as well as the conﬁdence intervals and
+hypothesis testing. Applications to particular high-dimensional estimation problems are also included
+at the end of this section. Section 4 extends the geometric theory beyond Gaussian. Relations between
+the upper and lower bounds are discussed. Further discussions appear in Section 5, and the proofs of
+the main results are given in Section 6 and Appendix A and B.
+2 Preliminaries and Algorithms
+We review in this section notation and deﬁnitions that will be used in the rest of the paper. In particular,
+we introduce basics of convex geometry including important geometric quantities that will be shown to
+be instrumental in characterizing the difﬁculty for statistical estimation and inference in later sections.
+We then collect some known results on the complexity measures, Gaussian width, Sudakov estimate and
+volume ratio, that will be used repeatedly later. Finally, we will formally introduce our general estimation
+and inference programs based on the convex geometry and duality.
+In this paper, we use∥·∥ ℓq to denote the ℓq norm of a vector and useB p
+2 to denote the unit Euclidean
+ball in Rp. For a matrix M, denote by ∥M ∥F , ∥M ∥∗, and ∥M ∥ the Frobenius norm, nuclear norm, and
+spectral norm of M respectively. When there is no confusion, we also denote ∥M ∥F = ∥M ∥ℓ2 for a matrix
+M. For a vector V ∈ Rp, denote its transpose by V ∗. The inner product on vectors is deﬁned as usual
+〈V1,V2〉 = V ∗
+1 V2. For matrices 〈M1, M2〉 = Tr(M ∗
+1 M2) = Vec(M1)∗Vec(M2), where Vec(M) ∈ Rpq denotes
+the vectorized version of matrix M ∈ Rp×q . X : Rp → Rn denotes a linear operator from Rp to Rn. Follow-
+ing the notation above, M ∗ ∈ Rq×p is the adjoint (transpose) matrix of M and X ∗ : Rn → Rp is the adjoint
+operator of X such that 〈X (V1),V2〉 = 〈V1, X ∗(V2)〉.
+For a convex compact setK in a metric space with the metricd, we say that S ⊂ K is an ϵ-covering set
+if ∀x ∈ K , ∃y ∈ S such that d(x, y) < ϵ. And we say that S ⊂ K is an ϵ-packing set if ∀x, y ∈ S, x ̸= y, d(x, y) ≥
+ϵ. The ϵ-entropy for a convex compact setK with respect to the metric d is denoted in the following way:
+ϵ-packing entropy log M (K , ϵ,d) is the logarithm cardinality of the largest ϵ-packing set, and ϵ-covering
+entropy logN (K , ϵ,d) is the logarithm cardinality of the smallest ϵ-covering set with respect to metric d.
+A well known result is M (K , 2ϵ,d) ≤ N (K , ϵ,d) ≤ M (K , ϵ,d). When the metric d is the usual Euclidean
+distance, we will omit d in M (K , ϵ,d) and N (K , ϵ,d) and simply write M (K , ϵ) and N (K , ϵ).
+For two sequences of positive numbers {an} and {bn}, we denote an ≳ bn if there exists a constant c0
+such that an
+bn
+≥ c0 for all n and an ≲ bn if there exists a constant C0 such that an
+bn
+≤ C0 for all n. We write
+7
+
+[PDF PAGE 8]
+an ≍ bn if an ≳ bn and an ≲ bn. Throughout the paper, c,C ,c0,C0 denote constants that may vary from
+place to place.
+2.1 Basic Convex Geometry
+We consider the linear inverse model (1) in the high-dimensional setting where the dimension p can
+possibly be much larger than the sample size n and the parameter of interest M lies in a certain “low
+complexity” space. Examples include sparsity in noisy compressed sensing and low rank in trace regres-
+sion and matrix completion. The linear operator X in the model (1) can be viewed as a matrixX ∈ Rn×p.
+Without loss of generality, we assume X is standardized to have unit column ℓ2 norm. The noise vector
+Z ∈ Rn is assumed to have the noise level σ/pn and the covariance matrix σ2
+n In.
+The notion of low complexity is based on a collection of basic atoms. We denote the collection of
+these basic atoms as an atom setA , either countable or uncountable, as illustrated in Figure 1. A param-
+eter M is of complexity k in terms of the atoms in A if M can be expressed as a linear combination of at
+most k atoms in A , i.e., there exists a decomposition
+M =
+∑
+a∈A
+ca(M) · a, where
+∑
+a∈A
+1{ca(M)̸=0} ≤ k
+A
+Figure 1: Atom set illustration. The red dots de-
+note atoms. This particular example illustrates the
+atoms being basis vectors for sparse regression.
+conv (A)
+M
+kM kA conv (A)
+Figure 2: Atomic norm illustration. The red dashed
+line denotes the convex hull of atoms set. The blue
+dashed line denotes the scaled convex hull where
+M lies in.
+In convex geometry (Pisier, 1999), the Minkowski functional (gauge) of a symmetric convex body K
+8
+
+[PDF PAGE 9]
+is deﬁned as
+∥x∥K = inf{t > 0 : x ∈ t K}.
+Let A be a collection of atoms that is a compact subset of Rp. We assume that the elements of A are ex-
+treme points of the convex hullconv(A ) (in the sense that for any x ∈ Rp, sup{〈x, a〉 : a ∈ A } = sup{〈x, a〉 :
+a ∈ conv(A )}). The atomic norm ∥x∥A for any x ∈ Rp is deﬁned as the gauge of conv(A ) (see Figure 2):
+∥x∥A = inf{t > 0 : x ∈ t conv(A )}.
+As noted in Chandrasekaran et al. (2012), the atomic norm can also be written as
+∥x∥A = inf
+{
+∑
+a∈A
+ca : x =
+∑
+a∈A
+ca · a, ca ≥ 0
+}
+. (5)
+The dual norm of this atomic norm is deﬁned in the following way (since the atoms inA are the extreme
+points of conv(A )),
+∥x∥∗
+A = sup{〈x, a〉 : a ∈ A } = sup{〈x, a〉 : ∥a∥A ≤ 1}. (6)
+We have the following (“Cauchy-Schwarz”) symmetric relation for the norm and its dual
+〈x, y〉 ≤ ∥x∥∗
+A ∥y∥A . (7)
+It is clear that the unit ball with respect to the atomic norm∥·∥ A is the convex hull of the set of atoms
+A . The tangent cone at x with respect to the scaled unit ball ∥x∥A conv(A ) is deﬁned to be (see Figures
+3 and 4)
+TA (x) = cone{h : ∥x + h∥A ≤ ∥x∥A }. (8)
+Also known as a recession cone, TA (x) is the collection of directions where the atomic norm becomes
+smaller. This tangent cone TA (x) determines the geometric property of the neighborhood around the
+true parameter M, and thus the complexity of this cone will affect the difﬁculty of the recovery problem.
+The cone is unbounded, but we can look at the cone intersected with the unit ball B p
+2 ∩ TA (M) in ana-
+lyzing the complexity of the cone. Figure 3 provides an intuitive illustration where the red shaded area
+is the scaled atomic norm ball, M is the true parameter, the black arrow denotes one vector inside the
+tangent cone, and the region enclosed by the blue dashed lines is the TA (M).
+In order to better illustrate the general model and notion of low complexity, it is helpful to look at the
+atom set, atomic norm and tangent cone geometry in a few examples.
+Example 1 For sparse signal recovery in high-dimensional linear regression, the atom set consists of
+the unit basis vectors { ±ei }, the atomic norm is the vector ℓ1 norm, and its dual norm is the vector ℓ∞
+9
+
+[PDF PAGE 10]
+kM kA conv (A)
+M
+M + h
+h
+TA (M )
+Figure 3: Tangent cone general illustration 2D. The
+red shaped area is the scaled convex hull of atom
+set. The blue dashed line forms the tangent cone
+at M. Black arrow denotes the possible directions
+inside the cone.
+M 1
+M 2
+M 3
+Figure 4: Tangent cone illustration 3D for sparse
+regression. For three possible locations Mi ,1 ≤ i ≤
+3, the tangent cone are different, with cones be-
+coming more complex as i increases.
+norm. The convex hull conv(A ) is called the cross-polytope. Figure 4 illustrates this tangent cone for
+3D ℓ1 norm ball for 3 different cases TA (Mi ),1 ≤ i ≤ 3. The “angle” or “complexity” of the local tangent
+cone determines the difﬁculty of recovery. Most of the previous work showed that the algebraic charac-
+terization (sparsity) of the parameter space drives the global rate, and we are arguing that the geometric
+characterization through the local tangent cone provides an intuitive and reﬁned local approach to high-
+dimensional linear inverse problem.
+Example 2 In trace regression and matrix completion, the goal is to recover low rank matrices. In such
+settings, the atom set consists of the rank one matrices (matrix manifold)A = {uv ∗ : ∥u∥ℓ2 = 1, ∥v∥ℓ2 = 1}
+and the atomic norm is the nuclear norm and the dual norm is the spectral norm. The convex hull
+conv(A ) is called the nuclear norm ball of matrices. The position of the true parameter on the scaled
+nuclear norm ball determines the geometry of the local tangent cone, thus affecting the estimation difﬁ-
+culty.
+Example 3 In integer programming, one would like to recover the sign vectors whose entries take on
+values ±1. The atom set is all sign vectors (cardinality 2p) and the convex hull conv(A ) is the hypercube.
+Tangent cones for each parameter have the same structure in this case.
+Example 4 In orthogonal matrix recovery, the matrix of interest is constrained to be orthogonal. In this
+10
+
+[PDF PAGE 11]
+case, the atom set is all orthogonal matrices and the convex hull conv(A ) is the spectral norm ball. Sim-
+ilar to sign vector recovery, the local tangent cones for each orthogonal matrix share similar geometric
+property.
+2.2 Gaussian Width, Sudakov Estimate, and Other Geometric Quantities
+Our theoretical analysis relies on several key geometric quantities. We ﬁrst introduce two complexity
+measures, the Gaussian width and Sudakov estimate.
+Deﬁnition 1 (Gaussian Width) For a compact set K ∈ Rp, the Gaussian width is deﬁned as
+w(K ) := Eg
+[
+sup
+v∈K
+〈g , v〉
+]
+. (9)
+where g ∼ N (0, Ip) is the standard multivariate Gaussian vector .
+Gaussian width quantiﬁes the probability that a randomly oriented subspace misses a convex subset.
+It was introduced in Gordon’ s analysis (Gordon, 1988), and was shown recently to play a crucial rule in
+linear inverse problems in various noiseless or deterministic noise settings, see, for example, Amelunxen
+et al. (2013). Explicit upper bounds on the Gaussian width for different convex sets have been given
+in Chandrasekaran et al. (2012); Amelunxen et al. (2013). For example, if M ∈ Rp is a s−sparse vec-
+tor, w(B p
+2 ∩ TA (M)) ≲
+√
+s log p/s. When M ∈ Rp×q is a rank-r matrix, w(B p
+2 ∩ TA (M)) ≲
+√
+r (p + q − r ).
+For sign vector in Rp, w(B p
+2 ∩ TA (M)) ≲ pp, while for orthogonal matrix in Rm×m, w(B p
+2 ∩ TA (M)) ≲
+p
+m(m − 1). See Section 3.4 propositions 3.10-3.14 in Chandrasekaran et al. (2012) for detailed calcula-
+tions. The Gaussian width as a complexity measure of the local tangent cone will be used in the upper
+bound analysis in Sections 3 and 4.
+Deﬁnition 2 (Sudakov Minoration Estimate) The Sudakov estimate of a compact set K ∈ Rp is deﬁned as
+e(K ) := sup
+ϵ
+ϵ
+√
+log N (K , ϵ). (10)
+where N (K , ϵ) denotes the ϵ−covering number of set K with respect to the Euclidean norm.
+Sudakov estimate has been widely known in the literature to capture the complexity of a general func-
+tional class (Yang and Barron, 1999). Through balancing the cardinality of the covering set at scale ϵ and
+the covering radius ϵ, Sudakov estimate deﬁnes the best radius ϵ that maximizes
+ϵ
+√
+log N (B p
+2 ∩ TA (M), ϵ),
+thus determines the complexity of the set TA (M), ϵ). Sudakov estimate as a complexity measure of the
+local tangent cone is useful for the minimax lower bound analysis.
+11
+
+[PDF PAGE 12]
+TA (M )
+g
+B
+sup
+v2B \TA (M )
+hg,v i
+Figure 5: Gaussian width.
+TA (M )
+B
+sup
+✏> 0
+✏
+p
+log N (B \ TA (M ),✏)
+✏B Figure 6: Sudakov estimate.
+The following Sudakov minoration and Dudley entropy integral (Dudley, 1967; Ledoux and Tala-
+grand, 1991) show how the Gaussian width w(·) and Sudakov estimate e(·), both geometric quantities,
+are related to each other.
+Lemma 1 (Sudakov Minoration and Dudley Entropy Integral) For any compact subset K ⊆ Rp, there ex-
+ist a universal constant c > 0 such that
+c · e(K ) ≤ w(K ) ≤ 24
+∫ ∞
+0
+√
+log N (K , ϵ)d ϵ. (11)
+In the literature, another complexity measure, volume ratio has also been used to characterize the
+minimax lower bounds (Ma and Wu, 2013). Volume ratio has been studied in Pisier (1999) and Vershynin
+(2011). For a convex set K ∈ Rp, volume ratio used in the present paper is deﬁned as follows.
+Deﬁnition 3 (Volume Ratio) The volume ratio is deﬁned as
+v(K ) := pp
+(
+vol(K )
+vol(B p
+2 )
+) 1
+p
+(12)
+The following Urysohn’ s inequality, which is proved through Brunn-Minkowski Theorem, links the
+Gaussian width w(·) with the volume ratio v(·).
+Lemma 2 (Urysohn’s Inequality) Let K be a compact subset of Rp. Then
+v(K ) ≤ w(K )
+with the equality achieved if and only if K is the ℓ2 ball B p
+2 .
+The recovery difﬁculty of the linear inverse problem also depends on other geometric quantities de-
+ﬁned on the local tangent cone TA (M): the local isometry constants φA (M, X ) and ψA (M, X ) and the
+12
+
+[PDF PAGE 13]
+local asphericity ratio γA (M). The local isometry constants are deﬁned for the local tangent cone at the
+true parameter M as
+φA (M, X ) := inf
+{ ∥X (h)∥ℓ2
+∥h∥ℓ2
+: h ∈ TA (M),h ̸= 0
+}
+(13)
+ψA (M, X ) := sup
+{ ∥X (h)∥ℓ2
+∥h∥ℓ2
+: h ∈ TA (M),h ̸= 0
+}
+. (14)
+The local isometry constants measure how well the linear operator preserves the ℓ2 norm within the
+local tangent cone. Intuitively, the larger the ψ or the smaller the φ is, the harder the recovery is. We
+will see later that the local isometry constants are determined by the Gaussian width under the Gaussian
+ensemble design.
+The local asphericity ratio is deﬁned as
+γA (M) := sup
+{ ∥h∥A
+∥h∥ℓ2
+: h ∈ TA (M),h ̸= 0
+}
+, (15)
+which measures how extreme the atomic norm is relative to the ℓ2 norm within the local tangent cone.
+2.3 Point Estimation via Convex Relaxation
+We now return to the linear inverse model (1) in the high-dimensional setting. Suppose we observe
+(X , Y ) as in (1) where the parameter of interest M is assumed to have low complexity with respect to a
+given atom set A . The low complexity of M introduces a non-convex constraint, which leads to serious
+computational difﬁculties if solved directly. Convex relaxation is an effective and natural approach in
+such a setting. We propose a generic convex constrained minimization procedure induced by the atomic
+norm and the corresponding dual norm to estimate M:
+ˆM = argmin
+M
+{
+∥M ∥A : ∥X ∗(Y − X (M))∥∗
+A ≤ λ
+}
+(16)
+where λ is a tuning parameter (localization radius) that depends on the sample size, noise level, and
+geometry of the atom set A . An explicit formula for λ is given in (20) in the case of Gaussian noise.
+Intuitively, the atomic norm minimization (16) is a convex relaxation to the low complexity structure and
+λ speciﬁes the localization scale given the noise distribution. This generic convex program utilizes the
+duality and recovers the low complexity structure adaptively. The Dantzig selector for high-dimensional
+sparse regression (Candès and Tao, 2007) and the constrained nuclear norm minimization Candès and
+Plan (2011) for trace regression are particular examples of (16). The properties of the estimator ˆM will be
+investigated in Sections 3 and 4.
+2.4 Statistical Inference via Feasibility of Convex Program
+In the high-dimensional setting, p-values as well as conﬁdence intervals are important inferential ques-
+tions beyond point estimation. In this section we will show how to perform statistical inference for the
+13
+
+[PDF PAGE 14]
+linear inverse model (1). Let M ∈ Rp be the vectorized parameter of interest, and { ei , 1 ≤ i ≤ p} are the
+corresponding basis vectors. Consider the following convex feasibility problem for matrix Ω ∈ Rp×p,
+where each row Ωi · satisﬁes
+∥X ∗X Ω∗
+i · − ei ∥∗
+A ≤ η, ∀1 ≤ i ≤ p (17)
+where η is some tuning parameter that depends on the sample size and geometry of the atom setA . One
+can also solve a stronger version of the above convex program for η ∈ R, Ω ∈ Rp×p simultaneously
+(Ω, ηn) = argmin
+Ω,η
+{
+η : ∥X ∗X Ω∗
+i · − ei ∥∗
+A ≤ η, ∀1 ≤ i ≤ p
+}
+. (18)
+Built upon the constrained minimization estimator ˆM in (16) and feasible matrix Ω in (18), the de-
+biased estimator for inference on parameter M is deﬁned as
+˜M := ˆM + ΩX ∗(Y − X ( ˆM)). (19)
+We will establish the asymptotic normality for ﬁnite linear contrast〈v, M 〉, where v ∈ Rp, ∥v∥ℓ2 = 1, ∥v∥ℓ0 ≤
+k, k does not grow with n, p, and construct conﬁdence intervals and hypothesis tests based on the
+asymptotic normality result. In the case of high-dimensional linear regression, de-biased estimators has
+been investigated in Bühlmann (2013); Zhang and Zhang (2014); van de Geer et al. (2014); Javanmard
+and Montanari (2014). The convex feasibility program we proposed here can be viewed as a uniﬁed
+treatment for general linear inverse models. We will show that under some conditions on the sample
+size and the local tangent cone, asymptotic conﬁdence intervals and hypothesis tests are valid for ﬁnite
+linear contrast 〈v, M 〉 which include as a special case the individual coordinates of M.
+3 Local Geometric Theory: Gaussian Setting
+We establish in this section a general theory of geometric inference for the linear inverse problem under
+the Gaussian setting where the noise vector Z is Gaussian and the linear operator X is the Gaussian
+ensemble design in the following sense.
+Deﬁnition 4 (Gaussian Ensemble Design) Let X ∈ Rn×p overload the matrix form of the linear operator
+X : Rp → Rn. X is Gaussian ensemble if each element is i.i.d Gaussian random variable with mean 0 and
+variance 1
+n .
+Our analysis is quite different from the case by case global analysis of the Dantzig selector, Lasso and
+nuclear norm minimization. We show a stronger result which adapts to the local tangent cone geometry.
+All the analyses in our theory are non-asymptotic, and the constants are explicit. Another advantage is
+that the local analysis yields robustness for a given parameter (with near but not exact low complexity), as
+the convergence rate is captured by the geometry of the associated local tangent cone at a givenM. Later
+14
+
+[PDF PAGE 15]
+in Section 4 we will show how to extend the theory to a more general setting. Without loss of generality,
+we assume in our analysis that the atom set A is scaled so that supv∈A ∥v∥ℓ2 = 1. That is, the atom set A
+is embedded into the unit Euclidean ball.
+3.1 Local Geometric Upper Bound
+For the upper bound analysis, we need to choose a suitable localization radiusλ (in the convex program
+(16)) to guarantee that the true parameter M is in the feasible set with high probability. The tuning
+parameter, under the Gaussian noise assumption, is chosen as
+λA (X , σ,n) = σpn
+{
+w(X A ) + δ · sup
+v∈A
+∥X v∥ℓ2
+}
+≍ σpn w(X A ) (20)
+where X A is the image of the atom set under the linear operator X , and δ > 0 can be chosen arbi-
+trarily according to the probability of success we would like to attain ( δ is commonly chosen at order√
+log p). λA (X , σ,n) is a global parameter that depends on the linear operator X and the atom set A ,
+but, importantly, not on the complexity of M.
+The following theorem geometrizes the local rate of convergence in the Gaussian case.
+Theorem 1 (Gaussian Ensemble: Convergence Rate) Suppose we observe(X , Y ) as in (1) with the Gaus-
+sian ensemble design and Z ∼ N (0, σ2
+n In). Let ˆM be the solution of (16) with λ chosen as in (20). Let
+0 < c < 1 be a constant. For any δ > 0, if
+n ≥
+4[w(B p
+2 ∩ TA (M)) + δ]2
+c2 ∨ 1
+c ,
+then with probability at least 1 − 3 exp(−δ2/2),
+∥ ˆM − M ∥ℓ2 ≤ 2σ
+(1 − c)2 · γA (M)w(X A )pn ,
+∥ ˆM − M ∥A ≤ 2σ
+(1 − c)2 ·
+γ2
+A (M)w(X A )
+pn ,
+∥X ( ˆM − M)∥ℓ2 ≤ 2σ
+(1 − c) · γA (M)w(X A )pn .
+Theorem 1 gives bounds for the estimation error under both the ℓ2 norm loss and the atomic norm
+loss as well as for the in sample prediction error. The upper bounds are determined by the geometric
+quantities w(X A ), γA (M) and w(B p
+2 ∩TA (M)). Take for example the estimation error under theℓ2 loss.
+Given any ϵ > 0, the smallest sample size n to ensure the recovery error ∥ ˆM − M ∥ℓ2 ≤ ϵ with probability
+at least 1 − 3 exp(−δ2/2) is
+n ≥ max
+{
+4σ2
+(1 − c)4 ·
+γ2
+A (M)w 2(X A )
+ϵ2 ,
+4w 2(B p
+2 ∩ TA (M))
+c2
+}
+.
+15
+
+[PDF PAGE 16]
+That is, the minimum sample size for guaranteed statistical accuracy is driven by two geometric terms
+w(X A )γA (M) and w(B p
+2 ∩ TA (M)). We will see in Section 3.4 that these two rates match in a range
+of speciﬁc high-dimensional estimation problems. For the other two loss functions, similar calculation
+applies. It should be noted that Theorem 1 provides a local analysis of the performance of the estimator
+for a given M, which is quite different from a usual global analysis over a large parameter space.
+The proof of Theorem 1 (and Theorem 4 in Section 4) relies on the following two key lemmas. The ﬁrst
+one is on the choice of the tuning parameter λ which is based on the following lemma in the Gaussian
+case.
+Lemma 3 (Choice of Tuning Parameter) Consider the linear inverse model (1) with Z ∼ N (0, σ2
+n In). For
+any δ > 0, with probability at least 1 − exp(−δ2/2),
+∥X ∗(Z )∥∗
+A ≤ σpn
+{
+w(X A ) + δ · sup
+v∈A
+∥X v∥ℓ2
+}
+. (21)
+This lemma is proved in Section 6. The particular value of λA (X , σ,n) for a range of examples will
+be calculated in Section 3.4.
+The next lemma addresses the local behavior of the linear operator X around the true parameter M
+under the Gaussian ensemble design. We call a linear operatorlocally near-isometric if the local isometry
+constants are uniformly bounded. The following lemma tells us that in the most widely used Gaussian
+ensemble case, the local isometry constants are guaranteed to be bounded, given the sample size n is at
+least of order [w(B p
+2 ∩TA (M))]2. Hence, the difﬁculty of the problem is captured by the Gaussian width.
+Lemma 4 (Local Isometry Bound for Gaussian Ensemble) Assume the linear operator X is the Gaus-
+sian ensemble design. Let 0 < c < 1 be a constant. For any δ > 0, if
+n ≥
+4[w(B p
+2 ∩ TA (M)) + δ]2
+c2 ∨ 1
+c ,
+then with probability at least 1 − 2 exp(−δ2/2), the local isometry constants are around 1 with
+φA (M, X ) ≥ 1 − c and ψA (M, X ) ≤ 1 + c.
+3.2 Local Geometric Inference: Conﬁdence Intervals and Hypothesis Testing
+For statistical inference on the general linear inverse model, we would like to choose the smallest η in
+(17) to ensure that, under the Gaussian ensemble design, the feasibility set for (17) is non-empty with
+high probability. The following theorem establishes geometric inference for Model (1) .
+Theorem 2 (Geometric Inference) Suppose we observe (X , Y ) as in (1) with the Gaussian ensemble de-
+sign and Z ∼ N (0, σ2
+n In). Let ˆM ∈ Rp, Ω ∈ Rp×p be the solution of (16) and (17) , and let ˜M ∈ Rp be the
+16
+
+[PDF PAGE 17]
+de-biased estimator as in (19). Assume p ≥ n ≿ w 2(B p
+2 ∩ TA (M)). If the tuning parameters λ, η are chosen
+with
+λ ≍ σpn w(X A ), η ≍ 1pn w(X A ),
+convex programs (16) and (17) have non-empty feasibility set for Ω with high probability.
+The following decomposition
+˜M − M = ∆ + σpn ΩX ∗W (22)
+holds, where W ∼ N (0, In) is the standard Gaussian vector with
+ΩX ∗W ∼ N (0, ΩX ∗X Ω∗).
+and ∆ ∈ Rp satisﬁes
+∥∆∥∞ ≼ γ2
+A (M) · λη ≍ σ
+γ2
+A (M)w 2(X A )
+n .
+Suppose
+limn,p→∞
+γ2
+A (M)w 2(X A )
+pn = 0,
+then for any v ∈ Rp, ∥v∥ℓ2 = 1, ∥v∥ℓ0 ≤ k with k ﬁnite, we have the asymptotic normality for the functional
+〈v, ˜M 〉,
+pn
+(
+〈v, ˜M 〉 − 〈v, M 〉
+)
+σ
+p
+v ∗[ΩX ∗X Ω∗]v
+n,p→∞
+∼ N (0, 1) (23)
+It follows from Theorem 2 that a valid asymptotic (1 − α)-level conﬁdence intervals for Mi ,1 ≤ i ≤ p
+(when v is taken as ei in Theorem 2) is
+
+ ˜Mi + Φ−1
+( α
+2
+)
+σ
+√
+[ΩX ∗X Ω∗]i i
+n , ˜Mi + Φ−1
+(
+1 − α
+2
+)
+σ
+√
+[ΩX ∗X Ω∗]i i
+n
+
+. (24)
+If we are interested in a low-dimensional linear contrast〈v, M 〉 = v0, ∥v∥ℓ2 = 1, ∥v∥ℓ0 = k with k ﬁxed,
+consider the hypothesis testing problem
+H0 :
+p∑
+i =1
+vi Mi = v0 v.s. Hα :
+p∑
+i =1
+vi Mi ̸= v0.
+The test statistic is pn
+(
+〈v, ˜M 〉 −v0
+)
+σ(v ∗[ΩX ∗X Ω∗]v)1/2
+and under the null, it follows an asymptotic standard normal distribution as n → ∞.
+17
+
+[PDF PAGE 18]
+Similarly, the p-value is of the form
+2 − 2Φ−1
+(⏐⏐⏐⏐
+pn
+(
+〈v, ˜M 〉 −v0
+)
+σ(v ∗[ΩX ∗X Ω∗]v)1/2
+⏐⏐⏐⏐
+)
+as n → ∞.
+Note the asymptotic normality holds for any ﬁnite linear contrast, and the asymptotic variance nearly
+achieves the Fisher information lower bound, as Ω is an estimate of the inverse of X ∗X . For ﬁxed di-
+mension inference, Fisher information lower bound is asymptotically optimal.
+Remark 1 Note that the condition for estimation consistency of the parameter M under the ℓ2 norm is
+limn,p→∞
+γA (M)w(X A )pn = 0.
+In contrast, valid conﬁdence intervals require a stronger condition
+limn,p→∞
+γ2
+A (M)w 2(X A )
+pn = 0.
+In the case when n > p and the Gaussian ensemble design, X ∗X is non-singular with high probability.
+With the choice of Ω = (X ∗X )−1 and η = 0, for any i ∈ [p], the following equation
+p
+n( ˜Mi − Mi ) ∼ N (0, σ2[(X ∗X )−1]i i)
+holds non-asymptotically.
+3.3 Minimax Lower Bound for Local Tangent Cone
+As seen in Section 3.1 and 3.2, the local tangent cone plays an important role in the upper bound analysis.
+In this section, we are interested in restricting the parameter space to the local tangent cone and seeing
+how the geometry of the cone affects the minimax lower bound.
+Theorem 3 (Lower bound Based on Local Tangent Cone) Suppose we observe (X , Y ) as in (1) with the
+Gaussian ensemble design and Z ∼ N (0, σ2
+n In). Let M be the true parameter of interest. Let 0 < c < 1 be a
+constant. For any δ > 0, if
+n ≥
+4[w(B p
+2 ∩ TA (M)) + δ]2
+c2 ∨ 1
+c .
+Then with probability at least 1 − 2 exp(−δ2/2),
+inf
+ˆM
+sup
+M ′∈TA (M)
+E·|X ∥ ˆM − M ′∥2
+ℓ2
+≥ c0σ2
+(1 + c)2 ·
+(
+e(B p
+2 ∩ TA (M))
+pn
+)2
+for some universal constant c0 > 0. Here E·|X stands for the conditional expectation given the design matrix
+X , and the probability statement is with respect to the distribution of X under the Gaussian ensemble
+design.
+18
+
+[PDF PAGE 19]
+In the Gaussian setting, when n ≳ w 2(B p
+2 ∩ TA (M)), we have the following observations. From The-
+orem 1, the local upper bound is basically determined by γ2
+A (M)w 2(X A ), which is of the rate w 2(B p
+2 ∩
+TA (M)), as we will show in Section 3.4 in many examples. The general relationship between these two
+quantities is given in Lemma 5 below.
+Lemma 5 For any atom set A , we have the following relation
+γA (M)w(A ) ≥ w(B p
+2 ∩ TA (M))
+where w(·) is the Gaussian width and γA (M) is deﬁned in (15).
+Lemma 5 is proved in Appendix A.
+From Theorem 3, the minimax lower bound for estimation over the local tangent cone is determined
+by the Sudakov estimate e2(B p
+2 ∩ TA (M)). An interesting question is: How are the two terms w(B p
+2 ∩
+TA (M)) and e(B p
+2 ∩ TA (M)) related to each other? It follows directly from Lemma 1 that there exists a
+universal constant c > 0 such thatc ·e(B p
+2 ∩TA (M)) ≤ w(B p
+2 ∩TA (M)) ≤ 24
+∫ ∞
+0
+√
+log N (B p
+2 ∩ TA (M), ϵ)d ϵ.
+Thus we have shown that under the Gaussian setting, both in terms of the upper bound and lower bound,
+geometric complexity measures govern the difﬁculty of the estimation problem, through closely related
+quantities Gaussian width and Sudakov estimate.
+3.4 Universality of the Geometric Approach
+In this section we apply the general theory under the Gaussian setting to some of the actively studied
+high-dimensional problems mentioned in Section 1 to illustrate the wide applicability of the theory. The
+detail proofs are deferred to Appendix B.
+3.4.1 High Dimensional Linear Regression
+We begin by considering the high-dimensional linear regression model (2) under the assumption that
+the true parameter M ∈ Rp is sparse, say ∥M ∥l0 = s. Our general theory applying to the ℓ1 minimiza-
+tion recovers the optimality results as in Dantzig selector and Lasso. In this case, it can be shown that
+γA (M)w(A ) and w(B p
+2 ∩ TA (M)) are of the same rate
+√
+s log p. See Section B for the detailed calcula-
+tions. The asphericity ratio γA (M) ≥ 1
+2ps reﬂects the sparsity of M through the local tangent cone and
+the Gaussian width w(X A ) ≍
+√
+log p. The following corollary, proved in Section B, follows from the
+geometric analysis of the high-dimensional regression model.
+Corollary 1 Consider the high-dimensional linear regression model (2). Assume that X ∈ Rn×p is the
+Gaussian ensemble design and the parameter of interest M ∈ Rp is of sparsity s. Let ˆM be the solution to
+19
+
+[PDF PAGE 20]
+the constrained ℓ1 minimization (16) with λ = C1σ
+√
+log p
+n . If n ≥ C2s log p, then
+∥ ˆM − M ∥ℓ2 ≤ C3 · σ
+√
+s log p
+n ,
+∥ ˆM − M ∥ℓ1 ≤ C3 · σs
+√
+log p
+n ,
+∥X ( ˆM − M)∥ℓ2 ≤ C3 · σ
+√
+s log p
+n .
+with high probability, where Ci > 0, 1≤ i ≤ 3 are some universal constants.
+For ℓ2 norm consistency of the estimation for M, we require limn,p→∞
+s log p
+n = 0. However, for valid infer-
+ential guarantee, the de-biased Dantzig selector type estimator ˜M satisﬁes asymptotic normality under
+the condition limn,p→∞
+s log ppn = 0 through Theorem 2. Under this condition, the conﬁdence intervals given
+in (24) has asymptotic coverage probability of (1 − α) and its expected length is at the parametric rate
+1pn . Furthermore, the conﬁdence intervals do not depend on the speciﬁc value of s. These properties
+are similar to the conﬁdence intervals constructed in Zhang and Zhang (2014); van de Geer et al. (2014);
+Javanmard and Montanari (2014).
+3.4.2 Low Rank Matrix Recovery
+We now consider the recovery of low-rank matrices under the trace regression model (3). The geomet-
+ric theory leads to the optimal recovery results as in nuclear norm minimization and penalized trace
+regression in existing literatures.
+Assume the true parameter M ∈ Rp×q is of low rank in the sense that rank( M) = r . Let us examine
+the behavior of φA (M, X ), γA (M), and λA (X , σ,n). Detailed calculations given in Section B show that
+in this case γA (M)w(A ) and w(B p
+2 ∩ TA (M)) are of the same order
+√
+r (p + q). The asphericity ratio
+γA (M) ≥ 1
+2
+p
+2r characterizes the low rank structure and the Gaussian width w(X A ) ≍ pp + q. We have
+the following corollary for low rank matrix recovery.
+Corollary 2 Consider the trace regression model (3). Assume that X ∈ Rn×pq is the Gaussian ensemble
+design and the true parameter M ∈ Rp×q is of rank r . Let ˆM be the solution to the constrained nuclear
+norm minimization (16) with λ = C1σ
+√
+p+q
+n . If n ≥ C2r (p + q), then, with high probability,
+∥ ˆM − M ∥F ≤ C3 · σ
+√
+r (p + q)
+n ,
+∥ ˆM − M ∥∗ ≤ C3 · σr
+√
+p + q
+n ,
+∥X ( ˆM − M)∥ℓ2 ≤ C3 · σ
+√
+r (p + q)
+n .
+20
+
+[PDF PAGE 21]
+where Ci > 0, 1≤ i ≤ 3 are some universal constants.
+For point estimation consistency ofM under the Frobenius norm loss, the asymptotic condition is limn,p,q→∞
+p
+r (p+q)pn =
+0. For statistical inference, Theorem 2 requires limn,p,q→∞
+r (p+q)pn = 0, which is essentially n ≳ pq (sample
+size is larger than the dimension) for r = 1. This phenomenon happens when the Gaussian width com-
+plexity of the rank-1 matrices is large, i.e., the atom set being too rich. We would like to remark that in
+practice, convex program (18) can still be used for constructing conﬁdence intervals and performing hy-
+pothesis testing. However, it is harder to provide sharp bound theoretically for the approximation error
+η in (18), for any given r, p, q.
+3.4.3 Sign Vector Recovery
+We turn to the sign vector recovery model (4) where the parameter of interest M ∈ {+1, −1}p is a sign
+vector. The convex hull of the atom set (sign vectors) is the ℓ∞ norm ball and the corresponding ℓ∞
+norm minimization program is:
+ˆM = argmin
+M
+{
+∥M ∥ℓ∞ : ∥X ∗(Y − X (M))∥ℓ1 ≤ λ
+}
+. (25)
+Applying the general theory to the ℓ∞ norm minimization leads to the rates of convergence for the sign
+vector recovery. The calculations given in Section B show that the asphericity ratio γA (M) ≥ 1 and the
+Gaussian width w(X A ) ≍ pp. Furthermore, γA (M)w(A ) and w(B p
+2 ∩ TA (M)) are of the same order
+pp. Applying the geometric theory to sign vector recovery leads to the following result.
+Corollary 3 Consider the model (4) where the true parameter M ∈ {+1, −1}p is a sign vector . Assume that
+X ∈ Rn×p is the Gaussian ensemble design. Let ˆM be the solution to the convex program (16) with λ =
+C1σ
+√
+p
+n . If n ≥ C2p, then, with high probability,
+∥ ˆM − M ∥ℓ2, ∥ ˆM − M ∥ℓ∞, ∥X ( ˆM − M)∥ℓ2 ≤ C · σ
+√ p
+n ,
+where C > 0 is some universal constants.
+3.4.4 Orthogonal Matrix Recovery
+We now treat orthogonal matrix recovery using the spectral norm minimization. Please see Example 4 in
+Section 2.1 for details. The spectral norm minimization program is
+ˆM = argmin
+M
+{
+∥M ∥ : ∥X ∗(Y − X (M))∥∗ ≤ λ
+}
+. (26)
+Consider the same model as in trace regression, but the parameter of interestM ∈ Rm×m is an orthogonal
+matrix. Calculations in Section B show that γA (M)w(A ) and w(B p
+2 ∩ TA (M)) are of the same rate
+p
+m2.
+21
+
+[PDF PAGE 22]
+Applying the geometric analysis to orthogonal matrix recovery using the constrained spectral norm min-
+imization yields the following.
+Corollary 4 Consider the orthogonal matrix recovery model (3). Assume that X ∈ Rn×m2
+is the Gaussian
+ensemble matrix and the true parameter M ∈ Rm×m is an orthogonal matrix. Let ˆM be the solution to the
+program (16) with λ = C1σ
+√
+m2
+n . If n ≥ C2m2, then, with high probability,
+∥ ˆM − M ∥ℓ2, ∥ ˆM − M ∥, ∥X ( ˆM − M)∥ℓ2 ≤ C · σ
+√
+m2
+n ,
+where C > 0 is some universal constants.
+3.4.5 Other examples
+Other examples that can be formalized under the framework of the linear inverse model include permu-
+tation matrix recovery (Jagabathula and Shah, 2011), sparse plus low rank matrix recovery (Candès et al.,
+2011) and matrix completion (Candès and Recht, 2009). The convex relaxation of permutation matrix is
+double stochastic matrix; the atomic norm corresponding to sparse plus low rank atom set is the inﬁmal
+convolution of the ℓ1 norm and nuclear norm; for matrix completion, the design matrix can be viewed
+as a diagonal matrix with diagonal elements being independent Bernoulli random variables. See Section
+5 for a discussion on further examples.
+4 Local Geometric Theory: General Setting
+We have developed in the last section a local geometric theory for the linear inverse model in the Gaus-
+sian setting. The Gaussian assumption on the design and noise enables us to carry out concrete and
+more speciﬁc calculations as seen in the examples given in Section 3.4, but the distributional assump-
+tion is not essential. In this section we extend this theory to the general setting.
+4.1 General Local Upper Bound
+We shall consider a ﬁxed design matrix X . In the case of random design, results we will establish are
+conditional on the design. We condition on the event when the noise is controlled ∥X ∗(Z )∥∗
+A ≤ λn. We
+have seen in Section 3.1 how to chooseλn to make this happen with overwhelming probability in Lemma
+3 under Gaussian noise.
+Theorem 4 (Geometrizing Local Convergence) Suppose we observe (X , Y ) as in (1). Condition on the
+event that the noise vector Z satisﬁes, for some given choice of localization radius λn
+∥X ∗(Z )∥∗
+A ≤ λn.
+22
+
+[PDF PAGE 23]
+Let ˆM be the solution to the convex program (16) with λn being the tuning parameter . Then the geometric
+quantities deﬁned on the local tangent cone capture the local convergence rate for ˆM,
+∥ ˆM − M ∥ℓ2 ≤ 2 · γA (M)
+φ2
+A (M, X )
+λn,
+∥ ˆM − M ∥A ≤
+2 · γ2
+A (M)
+φ2
+A (M, X )
+λn,
+∥X ( ˆM − M)∥ℓ2 ≤ 2 · γA (M)
+φA (M, X ) λn
+with the local asphericity ratio γA (M) deﬁned in (15) and the local lower isometry constant φA (M, X )
+deﬁned in (13).
+Remark 2 This theorem decomposes the estimation and prediction errors into three geometric compo-
+nents. The tuning parameter λn can be regarded as a localization radius around the true parameter — it
+quantiﬁes the uncertainty in estimation for a given sample size. It is a global parameter which does not
+depend on the local geometry.
+The other two geometric terms depend on the local tangent cone geometry. For example, whenX is
+the Gaussian ensemble design, then the local lower isometry constant φA (M, X ) is lower bounded by a
+constant under certain conditions, which we have shown in Lemma 4. The bounds 1 − c ≤ φA (M, X ) ≤
+ψA (M, X ) ≤ 1 + c hold for many different random design matrices X . As we have seen, Section 3.4
+illustrates how this term behaves in several settings.
+Another observation worth noting is that Theorem 4 holds deterministically under the conditions on
+∥X ∗(Z )∥∗
+A and φA (M, X ). It does not require distributional assumptions on noise, nor does it impose
+conditions on the design matrix. Theorem 1 can be viewed as a special case where the local isometry
+constant φA (M, X ) and the local radius λn are calculated explicitly under the Gaussian assumption.
+4.2 General Geometric Inference
+Geometric inference can also be extended for other ﬁxed design and noise distributions. We can modify
+the convex feasibility program (17) into the following stronger form
+(Ω, ηn) = argmin
+Ω,η
+{
+η : ∥X ∗X Ω∗
+i · − ei ∥∗
+A ≤ η, ∀1 ≤ i ≤ p
+}
+. (27)
+Then the following theorem holds (proof is analogous to Theorem 2).
+Theorem 5 (Geometric Inference) Suppose we observe (X , Y ) as in (1). Condition on the event that the
+noise vector Z satisﬁes, for some given choice of localization radius λn, ∥X ∗(Z )∥∗
+A ≤ λn. Let ˆM be the
+solution to the convex program (16) with λn being the tuning parameter . DenoteΩ and ηn as the optimal
+23
+
+[PDF PAGE 24]
+solution to the convex program (27), and ˜M as the de-biased estimator . The following decomposition
+˜M − M = ∆ + σpn ΩX ∗W (28)
+holds, where W ∼ N (0, In) is the standard Gaussian vector
+ΩX ∗W ∼ N (0, ΩX ∗X Ω∗)
+and ∆ ∈ Rp satisﬁes
+∥∆∥∞ ≤
+2 · γ2
+A (M)
+φA (M, X ) · λnηn.
+4.3 General Local Minimax Lower Bound
+The lower bound given in the Gaussian case can also be extended to the general setting where the class
+of noise distributions contains the Gaussian distributions. We aim to geometrize the intrinsic difﬁculty
+of the estimation problem in a uniﬁed manner.
+We ﬁrst present a general result for a convex cone T in the parameter space, which illustrates how
+the Sudakov estimate, volume ratio and the design matrix affect the minimax lower bound.
+Theorem 6 (Minimax Lower Bound via Sudakov Estimate and Volume Ratio) Let T ∈ Rp be a compact
+convex cone. The minimax lower bound for the linear inverse model (1), if restricted to the cone T , is
+inf
+ˆM
+sup
+M ∈T
+E·|X ∥ ˆM − M ∥2
+ℓ2
+≥ c0σ2
+ψ2 ·
+(
+e(B p
+2 ∩ T )
+pn ∨
+v(B p
+2 ∩ T )
+pn
+)2
+.
+where ˆM is any measurable estimator , ψ = supv∈B p
+2 ∩T ∥X (v)∥ℓ2 and c 0 is a universal constant. Here the
+notation E·|X means taking expectation conditioned on the design matrix X . e (·) and v (·) denote the
+Sudakov estimate (see (10)) and volume ratio (see (12)).
+Applying the theorem to the local tangent cone yields the following corollary.
+Corollary 5 (Lower bound Based on Local Tangent Cone) Assume TA (M) is the local tangent cone of in-
+terest. For for any measurable estimator ˆM and for parameters ˜M ∈ TA (M), we have the following mini-
+max lower bound
+inf
+ˆM
+sup
+M ′∈TA (M)
+E·|X ∥ ˆM − M ′∥2
+ℓ2
+≥ c0σ2
+ψ2
+A (M, X )
+·
+(
+e(B p
+2 ∩ TA (M))
+pn ∨
+v(B p
+2 ∩ TA (M))
+pn
+)2
+where ψA (M, X ) is deﬁned in (13). Here the notation E·|X means taking expectation conditioned on the
+design matrix X .
+24
+
+[PDF PAGE 25]
+Theorem 6 and Corollary 5 give minimax lower bounds in terms of the Sudakov estimate and vol-
+ume ratio. In the Gaussian setting, Lemma 4 shows that the local upper isometry constant satisﬁes
+ψA (M, X ) ≤ 1 + c with probability at least 1 − 2 exp(−δ2/2), as long as
+n ≥
+4[w(B p
+2 ∩ TA (M)) + δ]2
+c2 ∨ 1
+c .
+We remark that ψA (M, X ) can be bounded under more general design matrix X . However, under the
+Gaussian ensemble design, the minimum sample size n to ensure that ψA (M, X ) is upper bounded
+directly links with Gaussian width of the tangent cone.
+From Sudakov minoration in Lemma 1
+c · e(B p
+2 ∩ TA (M)) ≤ w(B p
+2 ∩ TA (M)). (29)
+Let us inspect how the right hand side of (29) compares with the upper bound in Theorem 1. Under mild
+conditions on X , w(X A ) is of order w(A ), and thus the upper bound in Theorem 1 is of the order on
+the left hand side in the following equation. By Lemma 5 given in Section 6 we have
+γA (M)w(A ) ≥ w(B p
+2 ∩ TA (M)). (30)
+However, the right hand side is of the same order as the left hand side in most cases (see Section 3.4).
+Therefore, if the Sudakov minoration is sharp up to a constant factor for the local tangent cone,c ·e(B p
+2 ∩
+TA (M)) ≤ w(B p
+2 ∩ TA (M)) ≤ C · e(B p
+2 ∩ TA (M)) then the rate is sharp.
+Applying Urysohn’ s inequality in Lemma 2 we havev(B p
+2 ∩ TA (M)) ≤ w(B p
+2 ∩ TA (M)). Hence, if the
+reverse Urysohn’ s inequality holds for the local tangent cone v(B p
+2 ∩ TA (M)) ≥ c · w(B p
+2 ∩ TA (M)) with
+some constant c > 0, then the obtained rate is sharp. Please see Giannopoulos et al. (2000) for more
+information on reverse Urysohn’ s inequality.
+5 Discussion
+This paper presents a uniﬁed geometric characterization of the local estimation rates of convergence as
+well as statistical inference for high-dimensional linear inverse problems. Major technical tools used in
+our analysis are geometric functional analysis and concentration of measure for Gaussian processes.
+The lower bound constructed in the current paper can be contrasted with the lower bounds in Ye
+and Zhang (2010); Candes and Davenport (2013). Both the above two papers consider speciﬁcally the
+minimax lower bound for high-dimensional linear regression. Ye and Zhang (2010) related the high-
+dimensional linear regression problem to the normal means problem and provided the minimax lower
+bound under general ℓq norm. Candes and Davenport (2013) constructed packing/covering set via a
+probabilistic existence argument, then derived a minimax lower bound over sparse vectors. We focus on
+a more generic perspective – lower bounds in Theorem 6 holds in general for arbitrary star-shaped body
+T , which includes ℓp, 0≤ p ≤ ∞, balls and cones as special cases.
+25
+
+[PDF PAGE 26]
+6 Proofs
+We prove the main results in this section. The proofs are divided into several parts. For the upper bound
+of point estimation, we will ﬁrst prove Theorem 4 and then two lemmas, Lemma 4 and Lemma 3 (these
+two Lemmas are included in Appendix A). Theorem 1 is then easy to prove. As for the statistical infer-
+ence, Theorem 2 is proved based on Theorem 1. For the lower bound of point estimation, we ﬁrst prove
+Theorem 6 and use it together with Lemma 4 to prove Theorem 3. Technical lemmas are deferred to
+Appendix A. Corollaries are proved in Appendix B.
+Proof of Theorem 4. The proof is clean and in a general fashion, following directly from the assumptions
+of the theorem and the deﬁnitions:
+∥X ∗(Y − X M)∥∗
+A ≤ λn Assumption of the Theorem
+∥X ∗(Y − X ˆM)∥∗
+A ≤ λn Constraint in program
+∥ ˆM ∥A ≤ ∥M ∥A Deﬁnition of minimizer
+Thus we have
+∥X ∗X ( ˆM − M)∥∗
+A ≤ 2λn and ˆM − M ∈ TA (M). (31)
+The ﬁrst equation is due to triangle inequality and second one due to Tangent cone deﬁnition. Deﬁne
+H = ˆM −M ∈ TA (M). According to the “Cauchy-Schwarz” (7) relation between atomic norm and its dual,
+∥X (H)∥2
+ℓ2
+= 〈X (H), X (H)〉 = 〈X ∗X (H), H 〉 ≤ ∥X ∗X (H)∥∗
+A ∥H ∥A
+Using the earlier result ∥X ∗X (H)∥∗
+A ≤ 2λn, as well as the following two equations for any H ∈ TA (M)
+φA (M, X )∥H ∥ℓ2 ≤ ∥X (H)∥ℓ2 local isometry constant
+∥H ∥A ≤ γA (M)∥H ∥ℓ2 local asphericity ratio
+we get the following self-bounding relationship
+φ2
+A (M, X )∥H ∥2
+ℓ2
+≤ ∥X (H)∥2
+ℓ2
+≤ 2λn∥H ∥A ≤ 2λnγA (M)∥H ∥ℓ2.
+The proof is then completed by simple algebra.
+Proof of Theorem 1. Theorem 1 is a special case of Theorem 4 under Gaussian setting, combining with
+Lemma 4 and Lemma 3. All we need to show is a good control of λn and φA (M, X ) with probability at
+least 1 − 3 exp(−δ2/2) under Gaussian ensemble and Gaussian noise. We bound λn with probability at
+least 1 − exp(−δ2/2) via Lemma 3. For φA (M, X ), we can lower bound by 1 − c with probability at least
+1 − 2 exp(−δ2/2). Let’ s deﬁne good event to be when
+λn ≤ σpn
+{
+Eg
+[
+sup
+v∈A
+〈g , X v〉
+]
++ δ · sup
+v∈A
+∥X v∥ℓ2
+}
+26
+
+[PDF PAGE 27]
+and 1 − c ≤ φA (M, X ) ≤ ψA (M, X ) ≤ 1 + c both hold. It is easy to see this good event holds with proba-
+bility 1 − 3 exp(−δ2/2). Thus all we need to prove is maxz∈A ∥X z∥ ≤ 1 + c under the good event.
+According to Lemma 4, equation (36)’ s calculation, maxz∈A ∥X z∥ ≤ 1 + c is satisﬁed under the con-
+dition
+n ≥
+[w(B p
+2 ∩ A ) + δ]2
+c2 .
+As we know for any M, the unit atomic norm ball conv(A ) is contained in 2B p
+2 and TA (M), which means
+B p
+2 ∩ A ⊂ 2B p
+2 ∩TA (M), thus w(B p
+2 ∩ A ) ≤ 2w(B p
+2 ∩TA (M)) (monotonic property of Gaussian width). So
+we have for any M, if
+n ≥
+4[w(B p
+2 ∩ TA (M)) + δ]2
+c2 ∨ 1
+c .
+we have the following two equations with probability at least 1− 2 exp(−δ2/2)
+max
+z∈A
+∥X z∥ ≤ 1 + c
+1 − c ≤ φA (M, X ) ≤ ψA (M, X ) ≤ 1 + c. (32)
+Now plugging (32) into the expression of Lemma 3, together with Lemma 4, Theorem 4 reduces to Theo-
+rem 1.
+Proof of Theorem 2. Let’ s ﬁrst prove that, with high probability, the convex feasibility program (17)
+is indeed feasible with Ω = In. Equivalently we want to establish that, with high probability, for any
+1 ≤ i ≤ p,
+∥X ∗X ei − ei ∥∗
+A ≤ η
+for some proper choice of η. Here X ∈ Rn×p, and each entry Xi j ∼ N (0, 1/n),i .i .d.. Denote g = pnX·i
+as a scaling version of the i -th column of X , g ∼ N (0, In) and g ′ ∼ N (0, In) being an independent copy.
+Below the notation Op(·) denotes the asymptotic order in probability.
+∥X ∗X ei − ei ∥∗
+A = sup
+v∈A
+〈X ∗X ei − ei , v〉 = sup
+v∈A
+〈X ∗g − ei , v〉/
+p
+n
+≤ sup
+v∈A
+〈X ∗
+(−i )g , v〉/
+p
+n + sup
+v∈A
+(
+1
+n
+n∑
+j =1
+g 2
+j − 1
+)
+vi
+w.h.p
+≼ w(X(−i )A )pn +Op(log p/
+p
+n) invoking Lemma 3
+≤ w(X A )pn +
+Eg ′ supv∈A
+∑n
+k=1 g ′
+k Xki vi
+pn +Op(log p/
+p
+n)
+≤ w(X A )pn +
+√
+Eg ′(∑n
+k=1 g ′
+k Xki )2 supv∈A v 2
+i
+pn +Op(log p/
+p
+n)
+≤ w(X A )pn +
+√
+1 +Op(log p/pn)
+n +Op(log p/
+p
+n)
+27
+
+[PDF PAGE 28]
+where X(−i ) is the linear operator settingi -th column to be all zeros. We applied Lemma 3 in establishing
+the above bounds.
+For the de-biased estimate ˜M, we have
+˜M = ˆM + ΩX ∗(Y − X ( ˆM))
+˜M − M = (ΩX ∗X − Ip)(M − ˆM) + ΩX ∗Z := ∆ + σpn ΩX ∗W.
+Then for any 1 ≤ i ≤ p, from the Cauchy-Schwartz relationship (7),
+|∆i | = |〈X ∗X Ω∗
+i · − ei , M − ˆM 〉| ≤ ∥X ∗X Ω∗
+i · − ei ∥∗
+A ∥M − ˆM ∥A ≤
+γ2
+A (M)w 2(X A )
+n . (33)
+The last line invokes the consistency result in Theorem 1, ∥ ˆM − M ∥A ≼
+γ2
+A (M)w(X A )pn . Thus we have
+∥∆∥∞ ≤
+γ2
+A (M)w 2(X A )
+n .
+Proof of Theorem 6 with Sudakov Estimate. The key technical tool in proving Theorem 6 is the follow-
+ing well-known Fano’ s information lemma. This version is from Ma and Wu (2013), similar versions are
+provided in Yang and Barron (1999); Yu (1997); Tsybakov (2009), and the ideas are essentially the same.
+Lemma 6 (Fano’s Lemma) Let (Θ,d(·, ·)) be a (pseudo) metric space and {Pθ : θ ∈ Θ} be a collection of
+probability measures. Let r ≥ 2 be an integer and let S ⊂ T ⊂ Θ. Denote by M (S , ϵ,d) the ϵ packing set as
+well as the packing number of T with respect to metric d, i.e.
+inf
+θ,θ′∈M (S ,ϵ,d)
+d(θ, θ′) ≥ ϵ.
+Suppose β := supθ,θ′∈M (S ,ϵ,d) DK L(Pθ||Pθ′) > 0. Then
+inf
+ˆθ
+sup
+θ∈T
+Eθd 2( ˆθ, θ) ≥ sup
+S ⊂T,ϵ>0
+ϵ2
+4
+(
+1 − β + log2
+log M (S , ϵ,d)
+)
+.
+For the lower bound using Sudakov estimate. Recall the linear inverse model
+Y = X (M) + Z , where Z ∼ N (0, σ2
+n In).
+Without loss of generality, we can assume σ = 1. The Kullback-Leiber divergence between standardized
+linear inverse models with different parameters under the Gaussian noise is
+DK L(M ||M ′) =
+n∥X (M) − X (M ′)∥2
+ℓ2
+2 .
+28
+
+[PDF PAGE 29]
+Recall Sudakov Minoration in Lemma 1, and denote the critical radius
+˜ϵ(B p
+2 ∩ T ) := argmaxϵ ϵ
+√
+log N (B p
+2 ∩ T, ϵ)
+Consider the cone intersected with ℓ2 ball with radius δ, K (δ) := B p
+2 (δ)∩T ∈ Rp, where δ will be speciﬁed
+later. As before, deﬁne ψ = supv∈B p
+2 ∩T ∥X (v)∥ℓ2
+sup
+M,M ′∈K (δ)
+DK L(M ||M ′) ≤ n(∥X (M)∥ℓ2 + ∥X (M ′)∥ℓ2)2
+2 ≤ 2nδ2ψ2.
+The packing number is lower bounded by the covering number as (the last equality holds because we
+can scale both the set and covering ball by δ)
+M (K (δ), ϵ) ≥ N (K (δ), ϵ) = N (K (1), ϵ
+δ )
+Applying the Fano’ s lemma, we have
+inf
+ˆM
+sup
+M ∈T
+E·|X ∥ ˆM − M ∥2
+ℓ2
+≥ sup
+δ>0,0<ϵ<δ
+ϵ2
+4
+(
+1 − 2nδ2ψ2 + log2
+log N (K (1), ϵ
+δ )
+)
+.
+Because K (1) = B p
+2 ∩ T , set
+δ = 1
+2ψ ·
+√
+log N (B p
+2 ∩ T, ˜ϵ(B p
+2 ∩ T ))
+n , ϵ = δ · ˜ϵ(B p
+2 ∩ T )
+Then we have
+inf
+ˆM
+sup
+M ∈T
+E·|X ∥ ˆM − M ∥2
+ℓ2
+≥ c0
+ψ2n ·
+(
+˜ϵ(B p
+2 ∩ T )
+√
+log N (B p
+2 ∩ T, ˜ϵ(B p
+2 ∩ T ))
+)2
+.
+with some universal constant c0. Thus
+inf
+ˆM
+sup
+M ∈T
+E·|X ∥ ˆM − M ∥2
+ℓ2
+≥ c0σ2
+ψ2n ·
+(
+e(B p
+2 ∩ T )
+)2
+.
+References
+Amelunxen, D., Lotz, M., McCoy, M. B., and Tropp, J. A. (2013). Living on the edge: A geometric theory of
+phase transitions in convex optimization. arXiv preprint arXiv:1303.6672.
+Bickel, P . J., Ritov, Y., and Tsybakov, A. B. (2009). Simultaneous analysis of lasso and dantzig selector.The
+Annals of Statistics, 37(4):1705–1732.
+Bühlmann, P . (2013). Statistical signiﬁcance in high-dimensional linear models. Bernoulli, 19(4):1212–
+1242.
+29
+
+[PDF PAGE 30]
+Bühlmann, P . and van de Geer, S. (2011). Statistics for high-dimensional data: methods, theory and ap-
+plications. Springer.
+Cai, T . T ., Liu, W ., and Zhou, H. H. (2014). Estimating sparse precision matrix: Optimal rates of conver-
+gence and adaptive estimation. The Annals of Statistics, 42:to appear.
+Cai, T . T . and Low, M. G. (2004a). An adaptation theory for nonparametric conﬁdence intervals. The
+Annals of Statistics, 32:1805–1840.
+Cai, T . T . and Low, M. G. (2004b). Minimax estimation of linear functionals over nonconvex parameter
+spaces. The Annals of Statistic, 32(2):552–576.
+Cai, T . T ., Ma, Z., and Wu, Y. (2013). Sparse pca: Optimal rates and adaptive estimation. The Annals of
+Statistics, 41(6):3074–3110.
+Cai, T . T ., Zhang, C.-H., and Zhou, H. H. (2010). Optimal rates of convergence for covariance matrix
+estimation. The Annals of Statistics, 38(4):2118–2144.
+Cai, T . T . and Zhou, W . (2013). Matrix completion via max-norm constrained optimization.arXiv preprint
+arXiv:1303.0341.
+Candes, E. J. and Davenport, M. A. (2013). How well can we estimate a sparse vector? Applied and
+Computational Harmonic Analysis, 34(2):317–323.
+Candès, E. J., Li, X., Ma, Y., and Wright, J. (2011). Robust principal component analysis? Journal of the
+ACM (JACM), 58(3):11.
+Candes, E. J. and Plan, Y. (2010). Matrix completion with noise. Proceedings of the IEEE, 98(6):925–936.
+Candès, E. J. and Plan, Y. (2011). Tight oracle inequalities for low-rank matrix recovery from a minimal
+number of noisy random measurements. Information Theory, IEEE Transactions on, 57(4):2342–2359.
+Candès, E. J. and Recht, B. (2009). Exact matrix completion via convex optimization. Foundations of
+Computational mathematics, 9(6):717–772.
+Candès, E. J. and Tao, T . (2007). The dantzig selector: Statistical estimation when p is much larger than
+n. The Annals of Statistics, 35:2313–2351.
+Chandrasekaran, V ., Recht, B., Parrilo, P . A., and Willsky, A. S. (2012). The convex geometry of linear
+inverse problems. Foundations of Computational Mathematics, 12(6):805–849.
+Chatterjee, S. (2012). Matrix estimation by universal singular value thresholding. arXiv preprint
+arXiv:1212.1247.
+Donoho, D. L. (1994). Statistical estimation and optimal recovery.The Annals of Statistics, pages 238–270.
+Dudley, R. M. (1967). The sizes of compact subsets of hilbert space and continuity of gaussian processes.
+Journal of Functional Analysis, 1(3):290–330.
+30
+
+[PDF PAGE 31]
+Giannopoulos, A., Milman, V ., and Rudelson, M. (2000). Convex bodies with minimal mean width. In
+Geometric Aspects of Functional Analysis, pages 81–93. Springer.
+Gordon, Y. (1988). On Milman’s inequality and random subspaces which escape through a mesh in Rn.
+Springer.
+Gower, J. C. and Dijksterhuis, G. B. (2004).Procrustes problems, volume 3. Oxford University Press Oxford.
+Jagabathula, S. and Shah, D. (2011). Inferring rankings using constrained sensing. Information Theory,
+IEEE Transactions on, 57(11):7288–7306.
+Javanmard, A. and Montanari, A. (2014). Conﬁdence intervals and hypothesis testing for high-
+dimensional regression. The Journal of Machine Learning Research, 15(1):2869–2909.
+Johnstone, I. M. and Silverman, B. W . (1990). Speed of estimation in positron emission tomography and
+related inverse problems. The Annals of Statistics, pages 251–280.
+Karoui, N. E. (2008). Operator norm consistent estimation of large-dimensional sparse covariance ma-
+trices. The Annals of Statistics, 36:2717–2756.
+Khuri, S., Bäck, T ., and Heitkötter, J. (1994). The zero/one multiple knapsack problem and genetic algo-
+rithms. In Proceedings of the 1994 ACM symposium on Applied computing, pages 188–193. ACM.
+Koltchinskii, V . (2011). Von neumann entropy penalization and low-rank matrix estimation. The Annals
+of Statistics, 39(6):2936–2973.
+Koltchinskii, V ., Lounici, K., and Tsybakov, A. B. (2011). Nuclear-norm penalization and optimal rates for
+noisy low-rank matrix completion. The Annals of Statistics, 39(5):2302–2329.
+Lecué, G. and Mendelson, S. (2013). Learning subgaussian classes: Upper and minimax bounds. arXiv
+preprint arXiv:1305.4825.
+Ledoux, M. and Talagrand, M. (1991). Probability in Banach Spaces: isoperimetry and processes , vol-
+ume 23. Springer.
+Ma, Z. and Wu, Y. (2013). Volume ratio, sparsity, and minimaxity under unitarily invariant norms. arXiv
+preprint arXiv:1306.3609.
+Mangasarian, O. L. and Recht, B. (2011). Probability of unique integer solution to a system of linear
+equations. European Journal of Operational Research, 214(1):27–30.
+Negahban, S. N., Ravikumar, P ., Wainwright, M. J., and Yu, B. (2012). A uniﬁed framework for high-
+dimensional analysis of m-estimators with decomposable regularizers. Statistical Science, 27(4):538–
+557.
+O’Sullivan, F . (1986). A statistical perspective on ill-posed inverse problems.Statistical Science, 1(4):502–
+518.
+31
+
+[PDF PAGE 32]
+Oymak, S., Thrampoulidis, C., and Hassibi, B. (2013). Simple bounds for noisy linear inverse problems
+with exact side information. arXiv preprint arXiv:1312.0641.
+Pisier, G. (1999). The volume of convex bodies and Banach space geometry , volume 94. Cambridge Uni-
+versity Press.
+Prokopyev, O. A., Huang, H.-X., and Pardalos, P . M. (2005). On complexity of unconstrained hyperbolic
+0–1 programming problems. Operations Research Letters, 33(3):312–318.
+Recht, B. (2011). A simpler approach to matrix completion. The Journal of Machine Learning Research ,
+12:3413–3430.
+Recht, B., Fazel, M., and Parrilo, P . A. (2010). Guaranteed minimum-rank solutions of linear matrix equa-
+tions via nuclear norm minimization. SIAM review, 52(3):471–501.
+Rohde, A., Tsybakov, A. B., et al. (2011). Estimation of high-dimensional low-rank matrices. The Annals
+of Statistics, 39(2):887–930.
+Talagrand, M. (1996). Majorizing measures: the generic chaining. The Annals of Probability, 24(3):1049–
+1103.
+Ten Berge, J. M. (1977). Orthogonal procrustes rotation for two or more matrices. Psychometrika,
+42(2):267–276.
+Tibshirani, R. (1996). Regression shrinkage and selection via the lasso. Journal of the Royal Statistical
+Society. Series B (Methodological), pages 267–288.
+Tikhonov, A. and Arsenin, V . Y. (1977).Methods for solving ill-posed problems. John Wiley and Sons, Inc.
+Tsybakov, A. B. (2009).Introduction to nonparametric estimation, volume 11. Springer.
+Valiant, L. G. and Vazirani, V . V . (1986). Np is as easy as detecting unique solutions.Theoretical Computer
+Science, 47:85–93.
+van de Geer, S., Bühlmann, P ., Ritov, Y., and Dezeure, R. (2014). On asymptotically optimal conﬁdence
+regions and tests for high-dimensional models. The Annals of Statistics, 42(3):1166–1202.
+Vershynin, R. (2011). Lectures in geometric functional analysis. Unpublished manuscript. Available at
+http://www-personal. umich. edu/˜ romanv/papers/GFA-book/GFA-book. pdf.
+Yang, Y. and Barron, A. (1999). Information-theoretic determination of minimax rates of convergence.
+The Annals of Statistics, 27:1564–1599.
+Ye, F . and Zhang, C.-H. (2010). Rate minimaxity of the lasso and dantzig selector for the lq loss in lr balls.
+The Journal of Machine Learning Research, 11:3519–3540.
+Yu, B. (1997). Assouad, fano, and le cam. In Festschrift for Lucien Le Cam, pages 423–435. Springer.
+Zhang, C.-H. and Zhang, S. S. (2014). Conﬁdence intervals for low dimensional parameters in high di-
+32
+
+[PDF PAGE 33]
+mensional linear models. Journal of the Royal Statistical Society: Series B (Statistical Methodology) ,
+76(1):217–242.
+33
+
+[PDF PAGE 34]
+A Appendix: Supplementary Proofs for Technical Lemmas
+Proof of Lemma 3. The proof uses concentration of Lipschitz functions on Gaussian space, which is
+illustrated in the following lemma taken from equation (1.6) in Ledoux and Talagrand (1991).
+Lemma 7 (Gaussian concentration inequality for Lipschitz functions) Let g ∈ Rp be a Gaussian vector
+with i.i.d mean zero and variance one elements and let F : Rp → R be a Lipschitz function with Lipschitz
+constant L (i.e. F (x) − F (y)| ≤ L|x − y| for any x, y ∈ Rp, with Euclidean metric on Rp). Then for any λ > 0,
+P(|F (g ) − Eg F (g ))| ≥ λ) ≤ 2 exp
+(
+− λ2
+2L2
+)
+.
+We would like to upper bound ∥X ∗(Z )∥∗
+A with high probability, where Z ∼ N (0, σ2
+n In). We have
+∥X ∗Z ∥∗
+A = sup
+v∈A
+〈X ∗Z , v〉 = sup
+v∈A
+〈Z , X v〉.
+Fixing X , we can think of supv∈A 〈·, X v〉 : Rp → R as a function on the Gaussian space g ∼ N (0, In) satis-
+fying the Lipschitz constant K A
+X := supv∈A ∥X v∥ℓ2
+| sup
+v∈A
+〈g1, X v〉 −sup
+v∈A
+〈g2, X v〉| ≤ K A
+X · ∥g1 − g2∥ℓ2.
+In fact, ﬁrst ﬁxing an u1 = argsup v∈A 〈g1, X v〉, then
+sup
+v∈A
+〈g1, X v〉 −sup
+v∈A
+〈g2, X v〉 ≤ 〈g1 − g2, X u1〉 ≤ ∥X u1∥ℓ2 · ∥g1 − g2∥ℓ2.
+The other side uses the same trick, ﬁxing u2 = argsup v∈A 〈g2, X v〉
+sup
+v∈A
+〈g1, X v〉 −sup
+v∈A
+〈g2, X v〉 ≥ 〈g1 − g2, X u2〉 ≥ −∥X u2∥ℓ2 · ∥g1 − g2∥ℓ2.
+Thus we proved the Lipschitz constant is upper bounded byK A
+X . Now we can apply the concentration of
+Lipschitz function on Gaussian space and get
+P(∥X ∗Z ∥∗
+A ≥ E∥X ∗Z ∥∗
+A + λ) ≤ exp
+(
+− nλ2
+2σ2(K A
+X )2
+)
+. (34)
+Thus we have with probability at least 1 − exp(−δ2/2),
+∥X ∗Z ∥ ≤ σpn
+{
+Eg
+[
+sup
+v∈A
+〈g , X v〉
+]
++ δ · sup
+v∈A
+∥X v∥ℓ2
+}
+. (35)
+Proof of Lemma 4. The proof uses Gordon’ s method Gordon (1988). The lower bound side part of this
+lemma is a modiﬁed version of the key lemma in Chandrasekaran et al. (2012). First let’ s introduce an
+important lemma in Gordon’ s analysis.
+34
+
+[PDF PAGE 35]
+Lemma 8 (Corollary 1.2 in Gordon (1988)) Let Ω be a closed subset of Sp−1. Let Φ : Rp → Rn be a random
+map with i.i.d. zero-mean Gaussian entries having variance one. Then
+λn − w(Ω) ≤ E
+[
+min
+z∈Ω
+∥Φz∥ℓ2
+]
+≤ E
+[
+max
+z∈Ω
+∥Φz∥ℓ2
+]
+≤ λn + w(Ω)
+where λn =
+p
+2Γ( n+1
+2 )/Γ( n
+2 ) satisﬁes n /
+p
+n + 1 < λn < pn.
+Use the same step as in Lemma 3: for any closed subset Ω ∈ Sp−1, the functions Φ → minz∈Ω ∥Φz∥ℓ2 and
+Φ → maxz∈Ω ∥Φz∥ℓ2 both are Lipschitz maps on Gaussian space Φ with Lipchitz constant 1:
+|min
+z∈Ω
+∥Φ1z∥ℓ2 − min
+z∈Ω
+∥Φ2z∥ℓ2| ≤ ∥Φ1 − Φ2∥F , |max
+z∈Ω
+∥Φ1z∥ℓ2 − max
+z∈Ω
+∥Φ2z∥ℓ2| ≤ ∥Φ1 − Φ2∥F .
+Thus using the Lipchitz concentration in Gaussian space, we have
+P
+(
+min
+z∈Ω
+∥X z∥ℓ2 ≤ E[min
+z∈Ω
+∥X z∥ℓ2] − t
+)
+≤ exp(−nt 2/2)
+P
+(
+max
+z∈Ω
+∥X z∥ℓ2 ≥ E[max
+z∈Ω
+∥X z∥ℓ2] + t
+)
+≤ exp(−nt 2/2)
+where X is a Gaussian ensemble design. And we have
+P
+(
+min
+z∈Ω
+∥X z∥ℓ2 ≤ 1 − c
+)
+≤ exp(−(λn − w(Ω) −
+p
+n(1 − c))2/2)
+P
+(
+max
+z∈Ω
+∥X z∥ℓ2 ≥ 1 + c
+)
+≤ exp(−(
+p
+n(1 + c) − λn − w(Ω))2/2).
+Thus under the condition
+n ≥ 4[w(Ω) + δ]2
+c2 ∨ 1
+c
+we have
+p
+n(1 + c) − λn − w(Ω) ≥
+p
+n(1 + c) −
+p
+n − w(Ω) ≥ 2[w(Ω) + δ] − w(Ω) ≥ δ (36)
+and
+λn − w(Ω) −
+p
+n(1 − c) ≥ np
+n + 1
+−
+p
+n(1 − c) − w(Ω) − δ + δ
+≥ −
+pnp
+n + 1
+· 1p
+n + 1 + pn
++
+p
+nc − (w(Ω) + δ) + δ
+≥ − 1
+2pn +
+pnc
+2 + δ ≥ δ.
+Thus
+λn − w(Ω) −
+p
+n(1 − c) ≥ δ > 0,
+p
+n(1 + c) − λn − w(Ω) ≥ δ > 0.
+35
+
+[PDF PAGE 36]
+In fact, we proved a stronger result
+P
+(
+min
+z∈Ω
+∥X z∥ℓ2 ≥ 1 − c
+)
+≥ 1 − exp(−δ2/2), P
+(
+max
+z∈Ω
+∥X z∥ℓ2 ≤ 1 + c
+)
+≥ 1 − exp(−δ2/2).
+Now apply our lemma to local tangent cone TA (M), observe w(B p
+2 ∩ TA (M)) = w(Sp−1 ∩ TA (M)). Now
+the lemma holds by plugging in the tangent cone.
+Proof of Lemma 5. The proof requires an observation
+w(A ) = Eg sup
+v∈A
+〈g , v〉 = Eg ∥g ∥∗
+A deﬁnition of dual norm.
+Then
+γA (M)w(A ) = Eg ∥g ∥∗
+A · sup
+h∈TA (M)
+∥h∥A
+∥h∥ℓ2
+= Eg
+[
+∥g ∥∗
+A · sup
+h∈TA (M)
+∥h∥A
+∥h∥ℓ2
+]
+(37)
+= Eg
+[
+sup
+h∈TA (M)
+∥g ∥∗
+A ∥h∥A
+∥h∥ℓ2
+]
+(38)
+≥ Eg sup
+h∈TA (M)
+〈g ,h〉
+∥h∥ℓ2
+= w(B p
+2 ∩ TA (M)). (39)
+The last step requires the Cauchy Schwartz relationship (7).
+Proof of Theorem 6 with Volume Ratio. For the lower bound using volume ratio. Recall the standard-
+ized linear inverse model
+Y = X (M) + Z , where Z ∼ N (0, σ2
+n In).
+Without loss of generality, we can assume σ = 1. The Kullback-Leiber divergence between standardized
+linear inverse models with different parameters under the Gaussian noise is
+DK L(M ||M ′) =
+n∥X (M) − X (M ′)∥2
+ℓ2
+2 .
+Consider the intersection of a cone T with ℓ2 ball of radius δ, K (δ) := B p
+2 (δ) ∩ T ⊂ Rp, where δ will be
+speciﬁed later. Deﬁning ψ = supv∈B p
+2 ∩T ∥X (v)∥ℓ2,
+sup
+M,M ′∈K (δ)
+DK L(M ||M ′) ≤ n(∥X (M)∥ℓ2 + ∥X (M ′)∥ℓ2)2
+2 ≤ 2nδ2ψ2.
+We have the packing number lower bounded by covering number as follows:
+M (K (δ), ϵ) ≥ N (K (δ), ϵ) ≥ vol(K (δ))
+vol(B p
+2 (ϵ))
+=
+( δ
+ϵ
+)p
+·
+vol(B p
+2 ∩ T )
+vol(B p
+2 )
+. (40)
+Applying Fano’ s inequality of Lemma 6, we have
+inf
+ˆM
+sup
+M ∈T
+E·|X ∥ ˆM − M ∥2
+ℓ2
+≥ sup
+δ>0,0<ϵ<δ
+ϵ2
+4
+
+1 − 2nδ2ψ2 + log2
+p log
+[
+δ
+ϵ ·
+( vol(B p
+2 ∩T )
+vol(B p
+2 )
+) 1
+p
+]
+
+.
+36
+
+[PDF PAGE 37]
+If for a > 0, 0 < b < 1 we choose
+δ = 1
+2ψ ·
+√ ap
+n , ϵ = δ
+p
+b ·
+(
+vol(B p
+2 ∩ T )
+vol(B p
+2 )
+) 1
+p
+then we have
+inf
+ˆM
+sup
+M ∈T
+E·|X ∥ ˆM − M ∥2
+ℓ2
+≥ p
+ψ2n ·
+(
+vol(B p
+2 ∩ T )
+vol(B p
+2 )
+) 2
+p
+· sup
+a>0,0<b<1
+ab
+4
+(
+1 − pa + 2 log2
+p log 1
+b
+)
+.
+As shown in (Ma and Wu, 2013, equation (29)), there is a universal constantc0 > 0 such that
+inf
+ˆM
+sup
+M ∈T
+E·|X ∥ ˆM − M ∥2
+ℓ2
+≥ c0 · p
+ψ2n ·
+(
+vol(B p
+2 ∩ T )
+vol(B p
+2 )
+) 2
+p
+. (41)
+Thus
+inf
+ˆM
+sup
+M ∈T
+E·|X ∥ ˆM − M ∥2
+ℓ2
+≥ c0σ2
+ψ2n ·
+(
+v(B p
+2 ∩ T )
+)2
+.
+Proof of Theorem 3 and Corollary 5. Theorem 3 is a special case of Theorem 6, combining with Lemma
+4. Plug in the general convex cone T by local tangent cone TA (M), then all we need is to upper bound
+ψA (M, X ) ≤ 1 + c with high probability. This has been done in Lemma 4. Corollary 5 is a direct applica-
+tion of Theorem 3.
+B Proof of Corollaries
+In this section, we denote ˆM as the solution to the program (16) and the estimation error to beH = ˆM −M.
+We refer explicit calculations of Gaussian width for various local tangent cone to Section 3.4 propositions
+3.10-3.14 in Chandrasekaran et al. (2012) for simplicity of our paper.
+Proof of Corollary 1. Let’ s calculate the rate for sparse vector recovery. We will treat the geometric terms
+γA (M), φA (M, X ), λA (X , σ,n) separately.
+For γA (M): We know that H lives in the tangent cone TA (M). Decompose H = H0 + Hc according to
+the support of M, where ∥H0∥l0 = s and share the same support as M. We have
+∥M ∥ℓ1 + ∥Hc ∥ℓ1 − ∥H0∥ℓ1 = ∥M + Hc ∥ℓ1 − ∥H0∥ℓ1 ≤ ∥M + H0 + Hc ∥ℓ1 ≤ ∥M ∥ℓ1
+which means ∥H ∥ℓ1 ≤ 2∥H0∥ℓ1, ∥H0∥ℓ2 ≤ ∥H ∥ℓ2. Thus we have the following relations
+∥H ∥ℓ1 ≤ 2∥H0∥ℓ1 ≤ 2
+p
+s∥H0∥ℓ2 ≤ 2
+p
+s∥H ∥ℓ2
+Therefore,
+∥H ∥ℓ1
+∥H ∥ℓ2
+≤ 2ps and thus γA (M) ≤ 2ps.
+37
+
+[PDF PAGE 38]
+As for φA (M, X ): By the tangent cone calculation, we can prove φA (M, X ) ≥ 1 − c with high proba-
+bility if
+n ≥
+4[w(B p
+2 ∩ TA (M)) + δ]2
+c2 ∨ 1
+c ≍ s log p
+s
+The last bound is from Gaussian width upper bound for local tangent cone for s−sparse vector.
+Lastly, forλA (X , σ,n): We know the operatorX is norm preserving in the sense that supv∈A ∥X v∥ℓ2 ≤
+1+c. and w(X A ) is the Gaussian width of p discrete points on Euclidean ball, which is at most
+√
+2 logp
+due to the behavior of maximum of Gaussian variables. Thus we can proveλ ≍ σ
+√
+log p
+n with some proper
+constant is enough with high probability. The corollary then follows fromTheorem 1.
+Proof of Corollary 2. Let’ s calculate the rate for low rank matrix recovery. We will bound the geometric
+terms γA (M), φA (M, X ), λA (X , σ,n) separately.
+For γA (M): Note H lives in the tangent coneTA (M). We can write H = H0 +Hc according to the span
+of M (that is, M = U DV T , H0 is spanned by either U as the row space or V as the column space, and Hc
+is spanned by U ⊥ as the row space and V ⊥ as the column space) with the following properties
+∥M ∥∗ + ∥Hc ∥∗ − ∥H0∥∗ = ∥M + Hc ∥∗ − ∥H0∥∗ ≤ ∥M + H ∥∗ ≤ ∥M ∥∗.
+Thus we have rank(H0) ≤ 2r and ∥H ∥∗ ≤ 2∥H0∥∗, ∥H0∥F ≤ ∥H ∥F . Thus we have the following relations
+∥H ∥∗ ≤ 2∥H0∥∗ ≤ 2
+p
+2r ∥H0∥F ≤ 2
+p
+2r ∥H ∥F
+We then have ∥H ∥∗
+∥H ∥F
+≤ 2
+p
+2r and thus γA (M) ≤ 2
+p
+2r .
+As for φA (M, X ): By the tangent cone calculation for rank- r matrix, we can prove φA (M, X ) ≥ 1 − c
+with high probability if
+n ≥
+4[w(B p
+2 ∩ TA (M)) + δ]2
+c2 ∨ 1
+c ≍ r (p + q − r )
+At last, for λA (X , σ,n): Rank one matrix manifold is a subspace with dimension p + q − 2. Thus
+w(X A ) can be bounded by pp + q because the Gaussian width of the p + q-dimensional subspace is
+pp + q and the linear transformation cannot enlarge the dimension. The rank one matrices are of unit
+Frobenius norm and theX is norm preserving in the sense that supv∈A ∥X v∥ℓ2 ≤ 1+c. Putting together,
+we can prove λ ≍ σ
+√
+p+q
+n with some proper constant is enough with high probability.
+The corollary follows by putting together the geometric terms and applying the Theorem 1.
+Proof of Corollary 3. As usual, we will bound the geometric terms one at a time. For γA (M)], it is
+clear that ∥H ∥ℓ2/∥H ∥ℓ∞ ≥ 1 and so γA (M) ≤ 1. As for φA (M, X ), by the tangent cone calculation for sign
+vector, we can prove φA (M, X ) ≥ 1 − c with high probability if
+n ≥
+4[w(B p
+2 ∩ TA (M)) + δ]2
+c2 ∨ 1
+c ≍ p
+38
+
+[PDF PAGE 39]
+Finally, forλA (X , σ,n): X is norm preserving in the sense that supv∈A ∥X v∥ℓ2 ≤ 1+c and w(X A ) is
+the Gaussian width of 2p discrete points on Euclidean ball, which is at most
+√
+2 log2p due to the behavior
+of maximum of Gaussian variables. Thus we can prove λ ≍ σ
+√
+p
+n with some proper constant in front of
+the order is enough with high probability. The corollary now follows fromTheorem 1.
+Proof of Corollary 4. We bound separately the three geometric termsγA (M), φA (M, X ), and λA (X , σ,n).
+For γA (M), it is clear that ∥H ∥F /∥H ∥ ≥ 1 and thus γA (M) ≤ 1. As for φA (M, X ), by the tangent cone cal-
+culation for orthogonal matrix, it is easy to show that φA (M, X ) ≥ 1 − c with high probability if
+n ≥
+4[w(B p
+2 ∩ TA (M)) + δ]2
+c2 ∨ 1
+c ≍ m(m − 1)
+2 .
+At last, for λA (X , σ,n): Orthogonal matrix manifold is a subspace with dimension m(m−1)
+2 . Thus
+w(X A ) can be bounded by
+√
+m(m−1)
+2 because the Gaussian width of the m(m−1)
+2 -dimensional subspace
+embedded into Euclidean ball is
+√
+m(m−1)
+2 and linear transformation cannot enlarge the dimension.
+Note X is norm preserving in the sense that sup v∈A ∥X v∥ℓ2 ≤ 1 + c. Thus λ ≍ σ
+√
+m2
+n with some proper
+constant in front of the order is enough with high probability. Applying the Theorem 1, we can prove the
+corollary with simple algebra.
+39

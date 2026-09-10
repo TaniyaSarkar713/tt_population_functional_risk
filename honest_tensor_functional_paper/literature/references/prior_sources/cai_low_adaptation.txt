@@ -1,0 +1,2536 @@
+
+[PDF PAGE 1]
+arXiv:math/0503662v1  [math.ST]  29 Mar 2005
+The Annals of Statistics
+2004, Vol. 32, No. 5, 1805–1840
+DOI:
+10.1214/009053604000000049
+c⃝ Institute of Mathematical Statistics , 2004
+AN ADAPTATION THEORY FOR NONPARAMETRIC
+CONFIDENCE INTER V ALS1
+By T. Tony Cai and Mark G. Low
+University of Pennsylvania
+A nonparametric adaptation theory is developed for the con-
+struction of conﬁdence intervals for linear functionals. A between
+class modulus of continuity captures the expected length of adaptive
+conﬁdence intervals. Sharp lower bounds are given for the ex pected
+length and an ordered modulus of continuity is used to constr uct
+adaptive conﬁdence procedures which are within a constant f actor
+of the lower bounds. In addition, minimax theory over noncon vex
+parameter spaces is developed.
+1. Introduction. The problem of estimating a linear functional occupies
+a central position in nonparametric function estimation. I t is most complete
+in the Gaussian settings:
+dY (t) =f (t)dt +n−1/ 2dW (t), − 1
+2 ≤t ≤ 1
+2,(1)
+where W (t) is standard Brownian motion and
+Y (i) =f (i) +n−1/ 2zi, i ∈ M,(2)
+where zi are i.i.d. standard normal random variables and M is a ﬁnite or
+countably inﬁnite index set. In particular, minimax estima tion theory has
+been well developed in Ibragimov and Hasminskii (
+1984), Donoho and Liu
+(1991) and Donoho ( 1994).
+Conﬁdence sets also play a fundamental role in statistical i nference. In
+the context of nonparametric function estimation variable size conﬁdence
+intervals, bands and balls have received particular attent ion recently. For
+any conﬁdence set there are two main interrelated issues whi ch need to
+Received February 2003; revised December 2003.
+1Supported in part by NSF Grant DMS-03-06576.
+AMS 2000 subject classiﬁcations. Primary 62G99; secondary 62F12, 62F35, 62M99.
+Key words and phrases. Adaptation, between class modulus, conﬁdence intervals, c ov-
+erage, expected length, linear functionals, minimax estim ation, modulus of continuity,
+white noise model.
+This is an electronic reprint of the original article published by the
+Institute of Mathematical Statistics in The Annals of Statistics ,
+2004, Vol. 32, No. 5, 1805–1840 . This reprint diﬀers from the original in
+pagination and typographic detail.
+1
+
+[PDF PAGE 2]
+2 T. T. CAI AND M. G. LOW
+be considered together, coverage probability and the expec ted size of the
+conﬁdence set.
+One common technique for constructing conﬁdence bands and i ntervals is
+through the bootstrap. In this context it has been noted that intervals based
+on the bootstrap often have poor coverage probability. See, for example, Hall
+(1992) and H¨ ardle and Marron ( 1991). Picard and Tribouley ( 2000) con-
+struct adaptive conﬁdence intervals for functions at a poin t using a wavelet
+method which achieve optimal coverage accuracy up to a logar ithmic factor
+although in this case the issue of optimal expected length is not addressed.
+On the other hand Li ( 1989), Beran and D¨ umbgen (1998) and Genovese and
+Wasserman (2002) have constructed conﬁdence balls which guarantee cover-
+age probability. Closer to the present work, adaptive conﬁd ence bands have
+been constructed in the special case of shape restricted fun ctions. In this
+context Hengartner and Stark ( 1995) and D¨ umbgen (1998) give a variable
+width conﬁdence band which adapts to local smoothness while maintaining
+a given level of coverage probability.
+In this paper we focus on the construction of conﬁdence inter vals for
+linear functionals which adapt to the unknown function. Thi s adaptation
+problem can be made precise by considering collections of pa rameter spaces
+{Fj,j ∈J}, where J is some index set. For such a collection of parameter
+spaces the conﬁdence interval should have a given coverage p robability over
+the union of the parameter spaces. Subject to this constrain t the goal is
+to minimize the maximum expected length simultaneously ove r each of the
+parameter spaces.
+For example, consider the simple and most easily explained c ase of two
+nested spaces, F1 ⊆ F . An adaptive conﬁdence interval must attain optimal
+expected length performance over both F1 and F while satisfying a given
+coverage probability over F . More speciﬁcally write Iα, F for the collection of
+all conﬁdence intervals which cover the linear functional Tf with minimum
+coverage probability of at least 1 −α over the parameter space F . Denote by
+L(CI, G) = supf ∈GEf (L(CI )) the maximum expected length of a conﬁdence
+interval CI over G where L(CI ) is the length of the CI . Then a benchmark
+for the evaluation of the maximum expected length over F1 for anyCI ∈ Iα, F
+is given by
+L∗
+α (F1, F) = inf
+CI ∈Iα, F
+L(CI, F1).(3)
+In particular, when F1 = F setL∗
+α (F) =L∗
+α (F, F), which gives the minimax
+expected length of conﬁdence intervals of level 1 −α over F . For convex F ,
+Donoho (
+1994) constructed ﬁxed length intervals centered at aﬃne estima -
+tors which have length within a small constant factor of L∗
+α (F).
+The major result in the present paper is the construction of c onﬁdence
+intervals which have expected length within a constant fact or of L∗
+α (Fj, F)
+
+[PDF PAGE 3]
+NONPARAMETRIC CONFIDENCE INTER V ALS 3
+simultaneously over a collection of convex parameter space s Fj where F =
+∪Fj . The construction of such intervals is general and is applic able to col-
+lections of arbitrary convex parameter spaces. It is shown i n Cai and Low
+(2003) that in particular cases, such as collections of convex fun ctions, the
+general procedure can be modiﬁed to yield simple and easily i mplementable
+procedures.
+The main technical tools used in the derivation of the genera l adaptive
+conﬁdence intervals are geometric quantities, the ordered and between class
+moduli of continuity which are deﬁned as follows. For a linea r functional
+T and parameter spaces F and G there are ordered moduli of continuity
+ω(ε, F, G) associated with the Gaussian models ( 1) and ( 2) deﬁned by
+ω(ε, F, G) = sup{Tg −Tf : ∥g −f ∥2 ≤ε;f ∈ F,g ∈ G},(4)
+where ∥ · ∥2 is the L2(− 1
+2, 1
+2 ) function norm in the white noise model ( 1)
+and the ℓ2 sequence norm over the index set M in the Gaussian model ( 2).
+As we shall give a uniﬁed treatment of both models it is conven ient in the
+notation used throughout the paper not to distinguish the fu nction norm
+and the sequence norm. It is implicit that for results concer ning the white
+noise model ( 1) the notation ∥ · ∥2 always refers to the L2 function norm
+whereas for the sequence model ( 2) it always refers to the ℓ2 sequence norm.
+When G = F , ω(ε, F, F) is the modulus of continuity over F introduced by
+Donoho and Liu ( 1991) and will be denoted by ω(ε, F).
+For two parameter spaces F and G and a given linear functional T , the be-
+tween class modulus of continuity is deﬁned as ω+(ε, F, G) = max{ω(ε, F, G),ω (ε, G, F)},
+or equivalently
+ω+(ε, F, G) = sup{|Tg −Tf | : ∥g −f ∥2 ≤ε;f ∈ F,g ∈ G}.(5)
+The between class and ordered moduli were ﬁrst introduced in Cai and
+Low (2002) in the context of adaptive estimation under mean squared er ror
+where they were shown to be instrumental in characterizing t he possible
+degree of adaptability over two convex classes F and G in the same way
+that the modulus of continuity ω(ε, F) used by Donoho and Liu ( 1991) and
+Donoho ( 1994) captures the minimax diﬃculty of estimation over a single
+convex parameter space F .
+The paper is organized as follows. Section 2 covers adaptation over two
+convex parameter spaces F1 and F2 where the theory is most easily under-
+stood. A lower bound based on the between class modulus as deﬁ ned in ( 5)
+is given for L∗
+α (F1, F) where F = F1 ∪ F2. An adaptive conﬁdence interval
+attaining this bound is also constructed by using the ordere d moduli as given
+in (
+4). Various examples are used to illustrate the adaptation th eory.
+More generally let {Fj,j ∈J} be a collection of convex parameter spaces
+with nonempty intersections and let F = ∪Fj . The goal is then to simul-
+taneously minimize L(CI, Fj) for conﬁdence intervals CI ∈ Iα, F . For each
+
+[PDF PAGE 4]
+4 T. T. CAI AND M. G. LOW
+parameter space Fj, L∗
+α (Fj, F) provides a lower bound on the maximum
+expected length over Fj for any CI ∈ Iα, F . In Section
+3 a complete treat-
+ment is given for nested Fj, possibly inﬁnite in number. For any collection
+of nested convex parameter spaces a variable length conﬁden ce interval is
+constructed which for a given level of coverage has expected length within
+a constant factor of the minimum expected length simultaneo usly over all
+parameter spaces in the collection.
+Section 4 treats the case of a general ﬁnite collection of convex param eter
+spaces. A more complicated procedure results in an interval which also has
+expected length within a constant factor of the minimum expe cted length al-
+though the constant factor now depends on the number of param eter spaces
+in the collection. Finally in Section 5 it is shown, by example, that the rate
+of growth in this constant factor as a function of the number o f parameter
+spaces cannot in general be avoided. In addition, the adapta tion theory de-
+veloped in this paper is used to extend the minimax theory to a ﬁnite union
+of convex parameter spaces. This extension is given in Secti on 5.
+2. Adaptation over two parameter spaces. In this section we consider
+adaptation over two parameter spaces. For the development o f this theory,
+it is convenient for a given α to provide a benchmark for the maximum
+expected length over F1 of conﬁdence intervals with a given coverage prob-
+ability of 1 −α over F = F1 ∪ F2, namely to provide a lower bound for
+L∗
+α (F1, F) as deﬁned in (
+3). This benchmark is given in Section 2.1 for ar-
+bitrary parameter spaces.
+We give a complete treatment of adaptation when the two param eter
+spaces are convex. In this case adaptive intervals attainin g the lower bound
+given in Section 2.1 are constructed. The adaptive procedure is given in
+Section 2.2. Examples illustrating the theory are given in Section 2.3.
+It is convenient to write al ≍bl whenever 0< lim infal/bl ≤ lim supal/bl<
+∞, where l ranges over either a continuous or discrete index set.
+2.1. Lower bound on the length of conﬁdence intervals. The following
+simple two-point Normal mean problem is the basis for a surpr isingly use-
+ful general lower bound on the expected length of 1 −α level conﬁdence
+intervals. We shall see later that the two-point bound is eas y to apply for
+adaptation theory because each point can be chosen to lie in d iﬀerent pa-
+rameter spaces. Previous work on conﬁdence intervals for bo unded Normal
+means as in Pratt ( 1961), Zeytinoglu and Mintz ( 1984) and Stark ( 1992)
+is useful for minimax theory but it is not applicable for gene ral adaptation
+problems.
+Let X ∼N (θ,σ 2) and suppose that θ ∈ Θ = {θ0,θ 1} where θ0<θ 1. Con-
+sider the following simple statistical decision theory pro blem: construct con-
+ﬁdence intervals CI (X) for θ which have smallest expected length under θ0
+
+[PDF PAGE 5]
+NONPARAMETRIC CONFIDENCE INTER V ALS 5
+subject to the coverage constraint
+Pθ(θ ∈ CI (X)) ≥ 1 −α for θ ∈ Θ.
+Throughout the paper set zα = Φ −1(1 −α) where Φ is the cumulative density
+function of a standard Normal distribution. In addition wri teL(CI ) for the
+length of a conﬁdence interval CI .
+Proposition 1. Let X ∼N (θ,σ 2) and suppose that θ ∈ Θ = {θ0,θ 1}
+whereθ0<θ 1. Let CI (X) be a 1 −α level conﬁdence interval for θ. Then
+EθiL(CI (X)) ≥ (θ1 −θ0)
+(
+1 −α − Φ
+( θ1 −θ0
+σ −zα
+))
++
+(6)
+for i = 0, 1. Moreover there exists a conﬁdence interval which attains t he
+lower bounds simultaneously for both i = 0 and i = 1.
+Proof. It is clear that it suﬃces to consider conﬁdence intervals CI (X)
+of three possible forms: [ θ0,θ 1], {θ0} and {θ1}. The problem is then to min-
+imizePθ0(CI (X) = [θ0, θ1]) subject to the constraints Pθ0 (CI (X) = {θ1}) ≤
+α and Pθ1(CI (X) = {θ0}) ≤α.
+It follows from the Neyman–Pearson lemma that, subject to th e constraint
+that Pθ1(CI (X) = {θ0}) ≤α,
+Pθ0(CI (X) = {θ0}) ≤ Φ
+( θ1 −θ0
+σ −zα
+)
+.
+Hence
+Eθ0L(CI (X)) = (θ1 −θ0)Pθ0 (CI (X) = [θ0,θ 1])
+= (θ1 −θ0)(1 −Pθ0(CI (X) = {θ1}) −Pθ0(CI (X) = {θ0}))
+≥ (θ1 −θ0)
+(
+1 −α − Φ
+( θ1 −θ0
+σ −zα
+))
+.
+The bound for θ1 follows similarly.
+It is easy to see that an interval attaining the lower bound fo r θ0 and θ1
+is given by
+CI (X) =
+
+
+
+{θ0}, if X ≤θ1 −zασ,
+[θ0,θ 1], if θ1 −zασ<X<θ 0 +zασ,
+{θ1}, if X ≥θ0 +zασ,
+when θ1 −zασ<θ 0 +zασ. Otherwise set
+CI (X) =
+
+
+
+
+
+{θ0}, if X ≤θ0 +θ1
+2 ,
+{θ1}, if X> θ0 +θ1
+2 .
+
+[PDF PAGE 6]
+6 T. T. CAI AND M. G. LOW
+In this case the conﬁdence interval always has zero length an d coverage of
+at least 1 −α. □
+Based on the two-point bound given in Proposition 1 the following theo-
+rem gives a lower bound for inﬁnite-dimensional Gaussian mo dels.
+Theorem 1. Let 0<α< 1
+2 and let F1 ⊆ F be two parameter spaces.
+Then
+L∗
+α (F1, F) ≥
+( 1
+2 −α
+)
+ω+
+( zα√n, F1, F
+)
+(7)
+whereL∗
+α (F1, F) is deﬁned in (
+3) andω+(ε, F1, F) is the between class mod-
+ulus as given in (5).
+Proof. We shall focus on the proof for the white noise with drift mode l
+(1). The proof for the sequence model ( 2) is analogous. Fix ε> 0. For any
+δ> 0 there are functions f1 ∈ F1 and f2 ∈ F such that
+|Tf 2 −Tf 1| ≥ω+
+( ε√n, F1, F
+)
+−δ
+and such that
+∥f2 −f1∥2 ≤ ε√n.
+Denote byPi the probability measure associated with the white noise pro cess
+dY (t) =fi(t)dt + 1√ndW (t), − 1
+2 ≤t ≤ 1
+2,i = 1, 2.
+Let βn =n∥f1 −f2∥2
+2. Then a suﬃcient statistic for the family of measures
+{Pi :i = 1, 2} is given by the log-likelihood ratio Sn = log(dP2/dP1) with
+Sn ∼
+
+
+
+
+
+
+
+N −
+( βn
+2 ,βn
+)
+under P1,
+N
+( βn
+2 ,βn
+)
+under P2.
+An equivalent suﬃcient statistic is thus given by
+Qn =Tf 1 +Tf 2
+2 +Tf 2 −Tf 1
+βn
+·Sn
+where
+Qn ∼
+
+
+
+
+
+
+
+
+
+N
+(
+Tf 1, (Tf 2 −Tf 1)2
+βn
+)
+under P1,
+N
+(
+Tf 2, (Tf 2 −Tf 1)2
+βn
+)
+under P2.
+
+[PDF PAGE 7]
+NONPARAMETRIC CONFIDENCE INTER V ALS 7
+It follows from Proposition 1 that for any conﬁdence interval CI (Qn) based
+on Qn,
+Ef1L(CI (Qn)) ≥ |Tf 2 −Tf 1|
+(
+1 −α − Φ
+( |Tf 2 −Tf 1|
+σ −zα
+))
++
+where σ = |Tf 2−Tf 1|√
+β n
+. Hence
+Ef1L(CI (Qn)) ≥ |Tf 2 −Tf 1|(1 −α − Φ( √n ∥f2 −f1∥2 −zα ))+
+≥
+(
+ω+
+( ε√n, F1, F
+)
+−δ
+)
+(1 −α − Φ(ε −zα ))+.
+Letting δ → 0, it follows that for any ε> 0,
+L(CI (Qn), F1) ≥ω+
+( ε√n, F1, F
+)
+(1 −α − Φ(ε −zα ))+.
+By the suﬃciency of Qn, it follows that for any conﬁdence interval CI ∈ Iα, F
+L(CI, F1) ≥ sup
+ε>0
+ω+
+( ε√n, F1, F
+)
+(1 −α − Φ(ε −zα ))+.(8)
+The theorem follows on taking ε =zα . □
+Remark 1. Although the primary use of this theorem is for adaptive
+conﬁdence intervals, it can also be used to show that from a mi nimax point of
+view there is relatively little to gain by using variable len gth intervals. In the
+minimax setting Donoho (
+1994) showed that over a given convex parameter
+space F , ﬁxed length conﬁdence intervals for a linear functional Tf with
+coverage of at least 1 −α must have maximum length at least 2ω( 2zα√n, F) and
+that ﬁxed length conﬁdence intervals can be centered on aﬃne estimators
+with maximum length at most 2 ω(
+2zα/ 2√n , F). By taking F1 = F , Theorem 1
+yields that the minimax expected length of a 1 −α level conﬁdence interval
+over any parameter space F satisﬁes
+L∗
+α (F) ≥
+( 1
+2 −α
+)
+ω
+( zα√n, F
+)
+.(9)
+This shows that for any given α< 1/2 the optimal variable length conﬁdence
+intervals must have maximum expected length at least a ﬁxed c onstant fac-
+tor of the length of the shortest ﬁxed length conﬁdence inter val when the
+parameter space F is convex.
+
+[PDF PAGE 8]
+8 T. T. CAI AND M. G. LOW
+2.2. Adaptive conﬁdence interval. There are at least two natural ways
+to deﬁne adaptive conﬁdence intervals over a collection of c onvex parameter
+spaces {Fi,i = 1,...,k }. Let F =⋃ k
+i=1 Fi. Call a conﬁdence interval CI ∈
+Iα, F adaptive over the collection {Fi,i = 1,...,k } if, for all 1 ≤i ≤k,
+L(CI, Fi) ≤Ci(α)ω+
+( zα
+√n, Fi, F
+)
+,(10)
+whereCi(α) are constants depending on α only. In other words a conﬁdence
+interval which adapts over the parameter spaces Fi attains the lower bound
+given in Theorem
+1 for each i while maintaining coverage over F . We shall
+show that such adaptive conﬁdence intervals can always be co nstructed when
+k is ﬁnite.
+It is also reasonable, in light of the minimax discussion giv en above, to
+term a conﬁdence interval CI ∈ Iα, F adaptive over the collection of param-
+eter spaces Fi if, for all 1 ≤i ≤k,
+L(CI, Fi) ≤Ci(α)ω
+( zα√n, Fi
+)
+(11)
+where Ci(α) are constants depending on α only. We shall call such a conﬁ-
+dence interval strongly adaptive. It is clear that a conﬁdence interval which is
+strongly adaptive is also adaptive. However strongly adapt ive conﬁdence in-
+tervals do not always exist. Low (
+1997) has given examples whereL∗
+α (F1, F) ≫
+L∗
+α (F1), in which case strongly adaptive estimators do not exist. O ther ex-
+amples are given in Section
+2.3 and throughout the paper. On the other
+hand, when L∗
+α (F1, F) ≍L∗
+α (F1) strongly adaptive estimators do exist and
+any estimator which is adaptive is also strongly adaptive.
+In this section the focus is on adaptation over two parameter spaces where
+the theory is most easily understood. For two parameter spac es F1 ⊆ F ,
+Theorem
+1 gives a lower bound for the maximum expected length over F1 of
+conﬁdence intervals with guaranteed coverage over F . We now show that the
+lower bound can in fact be attained within a constant factor n ot depending
+on n when F1 is convex and F is the union of F1 and another convex set
+F2.
+Let {F1, F2} be a pair of convex parameter spaces with nonempty inter-
+section and let F = F1 ∪ F2. Our ﬁrst objective is to construct a conﬁdence
+interval for a linear functional Tf which has guaranteed coverage probability
+of 1 −α over F and has maximum expected length over F1 within a constant
+factor of the lower bound given in Theorem 1, namely, for any CI ∈ Iα, F ,
+L(CI, F1) ≥
+( 1
+2 −α
+)
+ω+
+( zα√n, F1, F
+)
+.(12)
+
+[PDF PAGE 9]
+NONPARAMETRIC CONFIDENCE INTER V ALS 9
+The construction of the adaptive conﬁdence interval relies on the ordered
+modulus ω(ε, Fi, Fj) as given in ( 4). For 1 ≤i,j ≤ 2, set
+ωi,j =ω
+( zα/ 2√n, Fi, Fj
+)
+.
+Cai and Low ( 2004) give an algorithm for the construction of a linear esti-
+mator ˆTi,j which has variance bounded by
+Var( ˆTi,j ) ≤ 1
+z2
+α/ 2
+ω2
+i,j(13)
+and bias which satisﬁes
+inf
+f ∈Fj
+(E( ˆTi,j ) −Tf ) ≥ − 1
+2ωi,j(14)
+and
+sup
+f ∈Fi
+(E( ˆTi,j ) −Tf ) ≤ 1
+2ωi,j.(15)
+We shall use the linear estimators ˆTi,j to construct a conﬁdence interval
+which has guaranteed coverage probability over F and which also has ex-
+pected length over F1 within a constant factor of the lower bound given by
+(
+26). For j = 1 and 2 deﬁne the conﬁdence intervals CI ∗
+j,α by
+CI ∗
+j,α =
+[
+min
+i=1, 2
+{ ˆTi,j − 3
+2ωi,j }, max
+i=1, 2
+{ ˆTj,i + 3
+2ωj,i }
+]
+.(16)
+The following result shows that the conﬁdence interval CI ∗
+1,α attains the
+lower bound on the maximum expected length over F1 given in (
+7) within a
+constant factor not depending on n and satisﬁes the constraint that it has
+the minimum coverage of 1 −α for all f ∈ F .
+Lemma 1. Let F1 and F2 be convex parameter spaces with F1 ∩ F2 ̸= ∅
+and let F = F1 ∪ F2. Let the interval CI ∗
+j,α be deﬁned as in (
+16) forj = 1 and
+2. Then CI ∗
+j,α ∈ Iα, F and CI ∗
+j,α has expected length over Fj which satisﬁes
+L(CI ∗
+j,α , Fj) ≤
+{ 9
+zα/ 2
++ 4
+}
+ω+
+( zα/ 2√n, Fj, F
+)
+.(17)
+Lemma
+1 follows from the proof of Proposition 4 given in Section 4.1.
+Remark 2. Theorem 1 and Lemma 1 together show that under the
+conditions of Lemma 1,
+L∗
+α (F1, F) ≍ω+
+( zα/ 2
+√n, F1, F
+)
+.(18)
+
+[PDF PAGE 10]
+10 T. T. CAI AND M. G. LOW
+Although the interval CI ∗
+1,α has guaranteed coverage probability over F
+and optimal expected length over F1, it may not have optimal expected
+length over F because the expected length over F2 is not controlled. On the
+other hand, by symmetry CI ∗
+2,α has guaranteed coverage probability over F
+and optimal expected length over F2. By Bonferroni, the conﬁdence interval
+CI ∗
+α = CI ∗
+1,α/ 2 ∩ CI ∗
+2,α/ 2 also has coverage probability of at least 1 −α and
+so CI ∗
+α ∈ Iα, F . Furthermore, it is easy to see that it has optimal expected
+length over both F1 and F2 and hence also over F . In other words the
+conﬁdence interval CI ∗
+α is a 1 −α level adaptive conﬁdence interval over F1
+and F2.
+Proposition 2. Let F1 and F2 be convex parameter spaces with F1 ∩
+F2 ̸= ∅ and let F = F1 ∪ F2. Let the interval CI ∗
+j,α be deﬁned as in (
+16) and
+let CI ∗
+α = CI ∗
+1,α/ 2 ∩ CI ∗
+2,α/ 2. Then CI ∗
+α is a 1 −α level adaptive conﬁdence
+interval over F1 and F2. That is, CI ∗
+α ∈ Iα, F and for both j = 1 and 2,
+L∗
+α (Fj, F) ≤L(CI ∗
+α, Fj) ≤C(α)L∗
+α (Fj, F)(19)
+where C(α) is a constant depending only on α. Consequently L(CI ∗
+α, Fj) ≍
+ω+(
+zα/ 2
+√n, Fj, F).
+Remark 3. It is shown in Cai and Low ( 2004) that the ordered modulus
+is concave. It follows that, if b ≥ 1, then for all ε> 0,
+ω+(bε, F, G) = max(ω(bε, F, G),ω (bε, G, F))
+≤ max(bω(ε, F, G),bω (ε, G, F))
+≤bω+(ε, F, G).
+(20)
+It then follows from the bounds given in (
+7) and ( 17) and inequality ( 20)
+that the constant C(α) in ( 19) can be taken as
+C(α) = 9 + 4zα/ 4
+(1/2 −α)zα
+.
+2.3. Discussion. In nonparametric function estimation the goal of adap-
+tive estimation is often framed in terms of achieving optima lity results si-
+multaneously over a collection of parameter spaces {Fj }. The benchmark for
+success is given by how well one could do if the parameter spac e is completely
+speciﬁed. We termed any such conﬁdence interval strongly ad aptive.
+So far, attention has focused on constructing adaptive conﬁ dence proce-
+dures which attain the lower bound on expected length given i n Theorem
+1. This bound gives the best one can do in this adaptive conﬁden ce interval
+problem. The lower bound however may diﬀer quite dramaticall y from the
+
+[PDF PAGE 11]
+NONPARAMETRIC CONFIDENCE INTER V ALS 11
+minimax expected length if the parameter space Fj is prespeciﬁed. In par-
+ticular suppose, as is common, that the between class modulu s of continuity
+is H¨ olderian. That is, the modulus satisﬁes
+ω+(ε, Fi, Fj) =Ci,jεqi,j (1 +o(1)), 1 ≤i,j ≤ 2,
+for some constants Ci,j > 0 and 0 <qi,j ≤ 1. Such is the case in the examples
+given in Section 3.2 and also in many other commonly treated problems.
+When the modulus ω+(ε, F, G) is H¨ olderian writeq(F, G) for the exponent
+of the modulus. That is,
+ω+(ε, F, G) ≍εq(F, G).
+Also set q(G) =q(G, G).
+Without loss of generality, assumeq(F1) ≥q(F2). Throughout the remain-
+der of the paper C is used to denote a generic constant which may vary from
+place to place and set F = F1 ∪F 2. Note thatq(F1, F) = min{q(F1),q (F1, F2)}
+and q(F) = min {q(F1),q (F2),q (F1, F2)}. In this setup strongly adaptive
+conﬁdence intervals exist if and only if q(F1, F) = q(F1) or equivalently
+q(F1) ≤q(F1, F2).
+There are four cases of interest.
+Case 1. q(F2) ≤q(F1) ≤q(F1, F2). In this case q(F1, F) = q(F1) and
+strongly adaptive conﬁdence intervals exist. These interv als have maximum
+expected length which can attain the same optimal rate of con vergence as
+the minimax conﬁdence interval over known Fi. Speciﬁc shape restricted
+examples are given in Section
+3.2 which illustrate this case and more general
+theory.
+Case 2. q(F1, F2) = q(F2)<q (F1). In this case q(F1, F)<q (F1) and
+thus strongly adaptive conﬁdence intervals do not exist. Ad aptive conﬁdence
+intervals of level 1 −α over F1 and F2 have maximum expected length over
+F1 which satisﬁes
+L(CI, F1) ≥
+( 1
+2 −α
+)
+ω+
+( zα√n, F1, F
+)
+≍n−q(F )/ 2.(21)
+In contrast, if it is known that f ∈ F1, 1 −α level conﬁdence intervals can
+be constructed which satisfy
+L(CI, F1) ≤Cn −q(F1)/ 2 ≪Cn −q(F )/ 2.
+Hence from this point of view the cost of adaptation is substa ntial. The rate
+of convergence of the maximum expected length of CI over F1 is the same
+as that for the maximum expected length over F .
+
+[PDF PAGE 12]
+12 T. T. CAI AND M. G. LOW
+Example 1. Consider estimating the linear functional Tf =f (0) over
+Lipschitz classes based on the Gaussian observations given in ( 1). For 0 <
+β ≤ 1 and − 1
+2 ≤a<b ≤ 1
+2 , the Lipschitz function class over the interval [ a,b ]
+is deﬁned as
+F (β,M, [a,b ])
+= {f : [− 1
+2, 1
+2 ] → R, |f (x) −f (y)| ≤M |x −y|β for x,y ∈ [a,b ]}.(22)
+It is also convenient to write F (β,M ) for F (β,M, [− 1
+2, 1
+2 ]).
+Let 0 <β 2<β 1 ≤ 1, set Fi =F (βi,M ) for i = 1, 2. In this case standard
+calculations as, for example, outlined in Cai and Low ( 2002) show that
+ω(ε, F1) =Cε 2β 1/ (2β 1+1)(1 +o(1)) and ω(ε, F1, F2) =Cε 2β 2/ (2β 2+1)(1 +o(1)).
+Hence
+q(F1, F) =q(F1, F2) = 2β2
+2β2 + 1<q (F1) = 2β1
+2β1 + 1.
+Case 3. q(F2)<q (F1, F2)<q (F1). In this case q(F1, F)<q (F1) and
+strongly adaptive conﬁdence intervals do not exist. Any 1 −α level adaptive
+conﬁdence interval CI over F1 and F2, must have maximum expected length
+of CI over F1 satisfying
+L(CI, F1) ≥
+( 1
+2 −α
+)
+ω+
+( zα√n, F1, F
+)
+≍n−q(F1, F2)/ 2 ≫n−q(F1)/ 2.(23)
+The cost of adaptation in this case is that the rate of converg ence of the
+maximum expected length of CI over F1 is slower than that if it is known
+that f ∈ F1 but faster than for the maximum expected length over F2. An
+example for this case can be given as follows.
+Example 2. Suppose that the white noise with drift process (
+1) is ob-
+served and that the linear functional Tf =f (0). Let the Lipschitz class
+F (β,M, [a,b ]) be deﬁned as above and let D be the set of all decreasing
+functions on [ − 1
+2, 1
+2 ]. Set
+FD(β1,M 1,β 2,M 2) =F (β1,M 1, [− 1
+2, 0]) ∩F (β2,M 2, [0, 1
+2 ]) ∩ D.
+Let F1 =FD(γ1,M 1,γ 2,M 2) and F2 =FD(β1,N 1,β 2,N 2) with 1 ≥γ1>γ 2>
+β1>β 2> 0. Then as in Cai and Low ( 2002) it is easy to check that
+ω(ε, F1) =Cε 2γ1/ (2γ1+1)(1 +o(1)),
+ω(ε, F2) =Cε 2β 1/ (2β 1+1)(1 +o(1)),
+(24)
+ω(ε, F1, F2) =Cε 2γ2/ (2γ2+1)(1 +o(1)),
+ω(ε, F2, F1) =Cε 2γ1/ (2γ1+1)(1 +o(1)).
+
+[PDF PAGE 13]
+NONPARAMETRIC CONFIDENCE INTER V ALS 13
+Note that in this case ω(ε, F1, F2) ̸=ω(ε, F2, F1)(1 +o(1)). Since γ1>γ 2, it
+then follows from ( 24) that
+q(F1, F) =q(F1, F2) = 2γ2
+2γ2 + 1.
+Hence 0 <q (F2)<q (F1, F)<q (F1)< 1.
+Case 4. q(F1, F2)<q (F2) ≤q(F1). In this case, strongly adaptive conﬁ-
+dence intervals do not exist and the cost of adaptation is ext raordinary. If
+f is known to be in Fi, one can attain the rate of convergence nq(Fi)/ 2 for
+the maximum expected length of the optimal 1 −α level conﬁdence interval
+over Fi. Without the information 1 −α level adaptive conﬁdence intervals
+over F1 and F2 must have maximum expected length over Fi at least of
+order n−q(F1, F2)/ 2. An example is given below.
+Example 3. Once again consider the white noise model with Tf =f (0).
+Let
+F (β1,M 1,β 2,M 2) =F (β1,M 1, [− 1
+2, 0]) ∩F (β2,M 2, [0, 1
+2 ])
+and consider 0<γ 2 ≤γ1 ≤ 1 and 0<β 1 ≤β2 ≤ 1. Set F1 =F (γ1,M 1,γ 2,M 2)
+and F2 =F (β1,N 1,β 2,N 2). Standard calculations show thatω(ε, F1) =Cε 2γ1/ (2γ1+1)(1+
+o(1)) and ω(ε, F2) =Cε 2β 2/ (2β 2+1)(1 +o(1)). The between class modulus is
+given as
+ω(ε, F1, F2) =Cε 2ρ/ (2ρ+1)(1 +o(1))(25)
+where ρ = max(min(γ1,β 1), min(γ2,β 2)).
+When γ1 ≥β2>β 1 ≥γ2, the quantity ρ in (
+25) equals β1 and hence
+q(F1, F2) = 2β1
+2β1 + 1.
+Therefore in this case q(F1, F2)< min(q(F1),q (F2)).
+3. Adaptation over nested parameter spaces. Section 2 gave the adap-
+tation theory for two convex parameter spaces. This theory c an be extended
+to more general collections of parameter spaces. In this sec tion the focus is
+on adaptation over a collection of a ﬁnite or countably inﬁni te number of
+nested convex parameter spaces, F1 ⊂ F2 ⊂ · · · ⊂ Fk, where in the case of
+k = ∞, F∞ denotes ⋃ ∞
+i=1 Fi. The objective is, for a given linear functional
+Tf , to construct variable length conﬁdence intervals which ha ve coverage
+probability of at least 1 −α over Fk and which simultaneously minimize the
+expected length over each of the parameter spaces Fj . A target for these
+
+[PDF PAGE 14]
+14 T. T. CAI AND M. G. LOW
+expected lengths has been provided by the lower bound given i n Theorem
+1, namely
+L∗
+α (Fj, Fk) ≥
+( 1
+2 −α
+)
+ω+
+( zα√n, Fj, Fk
+)
+(26)
+where ω+(ε, Fj, Fk) is the between class modulus as given in (
+5).
+The major result of this section is to show that adaptive conﬁ dence in-
+tervals exist and to construct such adaptive intervals. As i n Section 2.2 the
+construction of these adaptive conﬁdence procedures relie s on the ordered
+modulusω(ε, Fi, Fj) as given in ( 4). For 1 ≤i,j ≤k setωi,j =ω(
+zα/ 2√n, Fi, Fj)
+and let ˆTi,j be linear estimators with variances and biases bounded as in
+(13)–(15).
+The conﬁdence procedure is built in two steps. In the ﬁrst ste p for each
+1 ≤j ≤k an interval is constructed which controls the coverage prob ability
+over Fk and which also has expected length over Fj within a constant fac-
+tor of the lower bound given by ( 26). In the second step these intervals are
+combined to create a single interval which maintains covera ge while simulta-
+neously attaining an expected length over every Fj within a ﬁxed constant
+factor of the lower bound given in ( 26).
+For the ﬁrst step deﬁne the conﬁdence intervals CI ∗
+j as follows. For 1 ≤
+j ≤k set ξj =ω+(
+zα/ 2
+√n, Fj, Fk) and deﬁne CI ∗
+j by
+CI ∗
+j =
+[ ˆTj,k + ˆTk,j
+2 − {( ˆTj,k − ˆTk,j )+ + 2ξj},
+ˆTj,k + ˆTk,j
+2 + {( ˆTj,k − ˆTk,j )+ + 2ξj}
+]
+.
+(27)
+Lemma
+2 shows that these intervals have guaranteed coverage over Fk and
+near optimal expected length over Fj .
+Remark 4. This interval is designed for 0 <α ≤ 0.2. If 0.2<α ≤ 0.5 all
+subsequent results hold with minor modiﬁcations, as noted i n later remarks,
+when the interval is replaced by
+CI ∗
+j =
+[ ˆTj,k + ˆTk,j
+2 − {( ˆTj,k − ˆTk,j )+ + 3ξj},
+ˆTj,k + ˆTk,j
+2 + {( ˆTj,k − ˆTk,j )+ + 3ξj}
+]
+.
+(28)
+
+[PDF PAGE 15]
+NONPARAMETRIC CONFIDENCE INTER V ALS 15
+Lemma 2. For 0<α ≤ 0.2, the conﬁdence interval CI ∗
+j deﬁned in (
+27)
+has coverage probability of at least 1 − 2
+7α for all f ∈ Fk and satisﬁes
+L(CI ∗
+j, Fj) ≤
+{
+2Φ
+( 1
+2zα/ 2
+)
++ 4√
+2πzα/ 2
+exp
+(
+− 1
+8z2
+α/ 2
+)
++ 4
+}
+·ξj
+≤ 8ω+
+( zα/ 2√n, Fj, Fk
+)
+.
+(29)
+Remark 5. For 0.2<α ≤ 0.5 the interval given in ( 28) satisﬁes the
+same coverage but has expected length bounded by 10 ω+(
+zα/ 2√n, Fj, Fk).
+In the following proof, and throughout the rest of the paper, write Z for
+a standard Normal random variable.
+Proof of Lemma 2. Lemma 2 gives a bound on both coverage proba-
+bility and expected length. First consider coverage probab ility. It is easy to
+see that the interval CI ∗
+j contains the interval CIj deﬁned as
+CIj = [ ˆTk,j − 2ξj, ˆTj,k + 2ξj](30)
+where the interval CIj is taken to be the empty set whenever the left end-
+point of the above interval is larger than the right endpoint . First note that
+for f ∈ Fk, E ˆTk,j −Tf ≤ 1
+2ωk,j and that E ˆTj,k −Tf ≥ − 1
+2ωj,k . Let
+zk,j =
+ˆTk,j −Tf − (1/2)ωk,j
+ωk,j/zα/ 2
+,
+zj,k =
+ˆTj,k −Tf + (1/2)ωj,k
+ωj,k/zα/ 2
+.
+Then for any f ∈ Fk it follows from ( 14) and ( 15) that zk,j has a Normal
+distribution with mean less than or equal to zero and varianc e bounded by
+1, and zj,k has a Normal distribution with mean greater than or equal to
+zero and variance bounded by 1. Note that ξj = max(ωk,j,ωj,k ). Hence for
+f ∈ Fk,
+P (Tf /∈CI ∗
+j ) ≤P (Tf /∈ CIj)
+≤P
+(
+zk,j >
+(
+2 ξj
+ωk,j
+− 1
+2
+)
+zα/ 2
+)
++P
+(
+zj,k ≥
+(
+−2 ξj
+ωj,k
++ 1
+2
+)
+zα/ 2
+)
+≤ 2P
+(
+Z ≥ 3
+2zα/ 2
+)
+.
+Note that for a ﬁxed λ> 1, it is easy to verify that g(z) =P (Z ≥λz)/P (Z ≥
+z) is a strictly decreasing function of z for z> 0 and for α = 0.2,
+2P (Z ≥ 3
+2zα/ 2) ≤ 2
+7α.
+
+[PDF PAGE 16]
+16 T. T. CAI AND M. G. LOW
+Hence, P (Tf /∈ CI ∗
+j ) ≤ 2
+7α and so the claim of the required coverage proba-
+bility has been established.
+Now turn to the bound on expected length given in ( 29) for which the
+following technical lemma is needed.
+Lemma 3. LetX ∼N (µ,σ 2) with µ ≤µ0 and 0<σ ≤σ0. Then
+EX /BD (X> 0) ≤µ0Φ
+( µ0
+σ0
+)
++ σ0√
+2π exp
+(
+− µ2
+0
+2σ2
+0
+)
+.(31)
+Proof. It is easy to check by taking partial derivatives that EX /BD (X>
+0) is an increasing function of both µ and σ. Hence
+Eµ,σ X /BD (X> 0)
+≤Eµ 0,σ 0X /BD (X> 0)
+= 1√
+2πσ0
+∫ ∞
+0
+x exp
+(
+− (x −µ0)2
+2σ2
+0
+)
+dx
+= 1√
+2πσ0
+∫ ∞
+0
+µ0 exp
+(
+− (x −µ0)2
+2σ2
+0
+)
+dx + σ0√
+2π
+∫ ∞
+−µ 0/σ 0
+y exp
+(
+−y2
+2
+)
+dy
+=µ0Φ
+( µ0
+σ0
+)
++ σ0√
+2π exp
+(
+− µ2
+0
+2σ2
+0
+)
+. □
+Now note that for f ∈ Fj,
+E( ˆTj,k − ˆTk,j ) ≤ξj and Var( ˆTj,k − ˆTk,j ) ≤ 4
+z2
+α/ 2
+ξ2
+j,
+and so from Lemma 3 it follows that
+E( ˆTj,k − ˆTk,j )+ ≤
+{
+Φ
+( 1
+2zα/ 2
+)
++ 2√
+2πzα/ 2
+exp
+(
+− 1
+8z2
+α/ 2
+)}
+·ξj ≤ 2ξj(32)
+and hence (
+29) is satisﬁed. □
+Lemma 2 shows that the interval CI ∗
+j has guaranteed coverage over Fk
+and near optimal expected length over Fj . Before turning to the construction
+of an adaptive conﬁdence interval we state a simple prelimin ary lemma. The
+proof is straightforward and not given here.
+Lemma 4. Let 0<ξ 1 ≤ξ2 ≤ · · · ≤ ξk be a sequence of monotonically
+increasing positive numbers. Then there exists a unique subs equence ξj1<
+ξj2< · · ·<ξjm with jm =k, such that for all 1 ≤i ≤m,
+ξji ≥ 2ξji−1 and ξji< 2ξj for all ji−1<j<j i(33)
+where we set j0 = 0 and ξ0 = 0.
+
+[PDF PAGE 17]
+NONPARAMETRIC CONFIDENCE INTER V ALS 17
+The construction of the adaptive conﬁdence interval procee ds as follows.
+Once again for 1 ≤j ≤k, set ξj =ω+(
+zα/ 2√n, Fj, Fk). Let ξj1<ξj2< · · ·<ξjm
+be the subsequence satisfying ( 33). Let ˆj be the index of the shortest interval
+among all the CI ∗
+ji for 1 ≤i ≤m. More precisely,
+ˆj = arg min
+ji, 1≤i≤m
+L(CI ∗
+ji).
+Then the adaptive conﬁdence interval for Tf is deﬁned by
+CI ∗ = CI ∗
+ˆj.(34)
+The following theorem shows that CI ∗ is a 1 −α level adaptive conﬁdence
+interval over the collection {Fj,j = 1,...,k }.
+Theorem 2. The conﬁdence interval CI ∗ deﬁned in (
+34) has coverage
+probability of at least 1 −α for all f ∈ Fk, that is, CI ∗ ∈ Iα, Fk and satisﬁes
+L∗
+α (Fj, Fk) ≤L(CI ∗, Fj) ≤ 16zα/ 2
+(1/2 −α)zα
+L∗
+α (Fj, Fk)(35)
+simultaneously for all 1 ≤j ≤k. Moreover,
+L(CI ∗, Fji) ≤ 8ω+
+( zα/ 2
+√n, Fji, Fk
+)
+(36)
+for all 1 ≤i ≤m, and for all 1 ≤j ≤k
+L(CI ∗, Fj) ≤ 16ω+
+( zα/ 2
+√n, Fj, Fk
+)
+.(37)
+The proof of Theorem 2 rests on the following important technical lemma.
+Recall that Lemma 2 gives a lower bound on coverage over Fk and an upper
+bound on expected length over Fj . Lemma 5 shows, in a precise way, that
+if CI ∗
+j has a large expected length it must have high coverage probab ility.
+Lemma 5. If f ∈ Fk and
+P (Tf /∈ CI ∗
+j )> 2P (Z ≥ 1
+4 (λ + 3)zα/ 2),
+then
+E( ˆTj,k − ˆTk,j ) ≤λξj.
+Proof. First note that
+P (Tf /∈ CI ∗
+j ) ≤P
+(
+Tf ≤
+ˆTj,k + ˆTk,j
+2 − ( ˆTj,k − ˆTk,j + 2ξj)
+)
++P
+(
+Tf ≥
+ˆTj,k + ˆTk,j
+2 + ( ˆTj,k − ˆTk,j + 2ξj)
+)
+.
+
+[PDF PAGE 18]
+18 T. T. CAI AND M. G. LOW
+Now note that
+− 1
+2ξj − 1
+2E( ˆTj,k − ˆTk,j ) ≤E
+ˆTj,k + ˆTk,j
+2 −Tf ≤ 1
+2ξj + 1
+2E( ˆTj,k − ˆTk,j ).
+Let X =
+ˆTj,k + ˆTk,j
+2 −Tf − ( ˆTj,k − ˆTk,j + 2ξj). Suppose that
+E( ˆTj,k − ˆTk,j )>λξj.
+Then
+E(X) ≤ − 1
+2 (λ + 3)ξj and Var( X) ≤ 4
+z2
+α/ 2
+ξ2
+j.
+Hence
+P
+(
+Tf ≤
+ˆTj,k + ˆTk,j
+2 − ( ˆTj,k − ˆTk,j + 2ξj)
+)
+=P (X ≥ 0)
+≤P
+(
+Z ≥ 1
+4 (λ + 3)zα/ 2
+)
+.
+Similarly,
+P
+(
+Tf ≥
+ˆTj,k + ˆTk,j
+2 + ( ˆTj,k − ˆTk,j + 2ξj)
+)
+≤P
+(
+Z ≥ 1
+4 (λ + 3)zα/ 2
+)
+.
+Hence,
+P (Tf /∈ CI ∗
+j ) ≤ 2P (Z ≥ 1
+4 (λ + 3)zα/ 2). □
+Proof of Theorem 2. Note that it suﬃces to prove ( 36) since ( 37)
+follows immediately from ( 36) and ( 35) is a direct consequence of ( 20), ( 7)
+and ( 37). For ( 36) assume without loss of generality that ξj ≥ 2ξj−1 for all
+1 ≤j ≤k; otherwise we can work along the subsequence. First note tha t
+since CI ∗ is the shortest of all the CI ∗
+j conﬁdence intervals Lemma
+2 yields
+that the expected length of CI ∗ satisﬁes
+L(CI ∗, Fj) ≤L(CI ∗
+j, Fj)
+≤
+{
+2Φ
+( 1
+2zα/ 2
+)
++ 4√
+2πzα/ 2
+exp
+(
+− 1
+8z2
+α/ 2
+)
++ 4
+}
+·ξj
+≤ 8ξj.
+(38)
+Now turn to the proof of coverage. Note that
+P (Tf /∈ CI ∗) =
+k∑
+j=1
+P (Tf /∈ CI ∗
+j ∩ ˆj =j)
+≤
+k∑
+j=1
+min{P (Tf /∈ CI ∗
+j ),P (ˆj =j)}.
+(39)
+
+[PDF PAGE 19]
+NONPARAMETRIC CONFIDENCE INTER V ALS 19
+For l ≥ 0, denote d(l) = 2P (Z ≥ 1
+4 (l + 6)zα/ 2). Note that d(0) = 2P (Z ≥
+3
+2zα/ 2) ≤ 2
+7α. For l ≥ 1 let
+Al = {j :d(l)<P (Tf /∈CI ∗
+j ) ≤d(l − 1)}(40)
+and letj(l) = min{j :j ∈Al}. Note that it follows from Lemma
+2 that⋃
+lAl =
+{j ≥ 1}. Then by Lemma 5
+E( ˆTj(l),k − ˆTk,j (l)) ≤ (l + 3)ξj(l).(41)
+Note that Var( ˆTj(l),k − ˆTk,j (l)) ≤ 4
+z2
+α/ 2
+ξ2
+j , so
+P (L(CI ∗
+j(l))> 4ρξj(l)) =P ( ˆTj(l),k − ˆTk,j (l)> 2(ρ − 1)ξj(l))
+≤P (Z ≥ (ρ − 5
+2 − 1
+2l)zα/ 2).
+Since ξj ≥ 2ξj−1, it follows that, for any integer m> 0,
+P (ˆj ≥j(l) +m) ≤P (L(CI ∗
+j(l))> 4ξj(l)+m)
+≤P (L(CI ∗
+j(l))> 4 · 2mξj(l))
+≤P (Z ≥ (2m − 5
+2 − 1
+2l)zα/ 2)
+≡γl,m.
+Let j∗ = min{j(l) : 1 ≤l ≤ 8}. For m = 3 and 1 ≤l ≤ 8, γl,m =P (Z ≥ 1
+2 (11 −
+l)zα/ 2). If j∗ =j(1), then
+k∑
+j=j∗
+min{P (Tf /∈ CI ∗
+j ),P (ˆj =j)} ≤d(0) +d(0) +d(0) +γ1, 3
+≤ 6
+7α +P (Z ≥ 5zα/ 2).
+Similarly, if j∗ =j(l) for some 2 ≤l ≤ 8, then
+k∑
+j=j∗
+min{P (Tf /∈ CI ∗
+j ),P (ˆj =j)} ≤d(l − 1) +d(0) +d(0) +γl, 3
+≤ 6
+7α +P (Z ≥ 5zα/ 2).
+Hence
+k∑
+j=j∗
+min{P (Tf /∈ CI ∗
+j ),P (ˆj =j)} ≤ 6
+7α +P (Z ≥ 5zα/ 2).(42)
+The following simple lemma can be used to bound P (Z ≥ 5zα/ 2).
+
+[PDF PAGE 20]
+20 T. T. CAI AND M. G. LOW
+Lemma 6. Let Z ∼N (0, 1) and let a> 0 and b> 0 be two constants.
+Then
+P (Z ≥a +b) ≤ exp(−(ab + 1
+2b2))P (Z>a ).
+Applying Lemma 6 with a =zα/ 2 and b = 4zα/ 2, it follows that
+P (Z ≥ 5zα/ 2) =P (Z ≥zα/ 2 + 4zα/ 2)
+≤ exp(−12z2
+α/ 2) ·α
+2 ≤ 1
+14α.
+Therefore
+P (Tf /∈ CI ∗) ≤
+k∑
+j=1
+min{P (Tf /∈ CI ∗
+j ),P (ˆj =j)}
+≤ 13
+14α +
+∞∑
+l=9
+∑
+j∈Al
+min{P (Tf /∈ CI ∗
+j ),P (ˆj =j)}.
+Forl ≥ 9, letml be the smallest integer satisfying 2ml ≥ 1
+4 (3l + 7). Thenml ≤
+log2(3l + 7)− 1. Recall that for j ∈Al,P (Tf /∈ CI ∗
+j ) ≤ 2P (Z ≥ 1
+4 (l + 3)zα/ 2).
+Now note that
+P (ˆj ≥j(l) +ml) ≤γl,m l ≤P (Z ≥ 1
+4 (l + 3)zα/ 2).
+So, for l ≥ 9,
+∑
+j∈Al
+min{P (Tf /∈ CI ∗
+j ),P (ˆj =j)}
+≤ml · 2P (Z ≥ 1
+4 (l + 3)zα/ 2) +γl,m l
+≤ (2ml + 1)P (Z ≥ 1
+4 (l + 3)zα/ 2).
+So
+∞∑
+l=9
+∑
+j∈Al
+min{P (Tf /∈ CI ∗
+j ),P (ˆj =j)}
+≤
+∞∑
+l=9
+(2 log2(3l + 7) − 1)P (Z ≥ 1
+4 (l + 3)zα/ 2).
+Lemma 6 yields
+P
+(
+Z ≥ 1
+4 (l + 3)zα/ 2
+)
+≤P
+(
+Z ≥zα/ 2 + 1
+4 (l − 1)zα/ 2
+)
+≤ exp
+(
+−
+( 1
+4 (l − 1) + 1
+32 (l − 1)2
+)
+z2
+α/ 2
+)
+·α
+2.
+
+[PDF PAGE 21]
+NONPARAMETRIC CONFIDENCE INTER V ALS 21
+Hence,
+∞∑
+l=9
+∑
+j∈Al
+min{P (Tf /∈ CI ∗
+j ),P (ˆj =j)}
+≤α
+2
+∞∑
+l=9
+(2 log2(3l + 7) − 1) exp
+(
+−
+( 1
+4 (l − 1) + 1
+32 (l − 1)2
+)
+z2
+α/ 2
+)
+≤α
+2
+∞∑
+l=8
+(2 log2(3l + 10) − 1) exp
+(
+−
+z2
+α/ 2
+32 l2
+)
+exp
+(
+−
+z2
+α/ 2
+4 l
+)
+.
+It is easy to see that for l ≥ 8, (2 log 2(3l + 10) − 1) exp(−(z2
+α/ 2/32)l2) is
+strictly decreasing and
+(2 log2(3l + 10) − 1) exp
+(
+−
+z2
+α/ 2
+32 l2
+)
+≤ 1
+2.
+So,
+∞∑
+l=9
+∑
+j∈Al
+min{P (Tf /∈ CI ∗
+j ),P (ˆj =j)} ≤ 1
+4α
+∞∑
+l=8
+exp
+(
+−
+z2
+α/ 2
+4 l
+)
+≤ 1
+14α.
+Hence,
+P (Tf /∈ CI ∗) ≤ 13
+14α + 1
+14α =α. □
+3.1. Adaptation over nearly nested parameter spaces. In some common
+cases of interest such as H¨ older spaces, Sobolev spaces and Besov spaces, the
+parameter spaces are not exactly nested, but have nested str ucture in terms
+of the moduli of continuity. Theorem 2 can be generalized to such nearly
+nested parameter spaces.
+Denote by C .Hull(F) the convex hull of a parameter set F . Let Fi, i =
+1,...,k , be convex parameter spaces and for any integer 1 ≤m ≤k let Gm =⋃ m
+l=1 Fl. Suppose the following condition, which is trivially satis ﬁed if Fi are
+nested, holds.
+Condition C. For 1 ≤j ≤k and some constants C2 ≥C1> 0,
+ω(ε, C.Hull(Gj), C.Hull(Gk)) ≤C1ω(ε, Gj, Gk) ≤C2ω(ε, Fj, Fk)
+and
+ω(ε, C.Hull(Gk), C.Hull(Gj)) ≤C1ω(ε, Gk, Gj) ≤C2ω(ε, Fk, Fj)
+for all 0 <ε<ε 0.
+
+[PDF PAGE 22]
+22 T. T. CAI AND M. G. LOW
+Similarly to the nested case for 1 ≤i,j ≤k, setω′
+i,j =ω(
+zα/ 2√n, C.Hull(Gi), C.Hull(Gj)),
+and once again Cai and Low ( 2004) give a construction of linear estimators
+ˆT ′
+i,j which have variance bounded by
+Var( ˆT ′
+i,j ) ≤ 1
+z2
+α/ 2
+ω′
+i,j
+2
+and bias which satisﬁes
+inf
+f ∈Fj
+(E( ˆT ′
+i,j ) −Tf ) ≥ − 1
+2ω′
+i,j
+and
+sup
+f ∈Fi
+(E( ˆT ′
+i,j ) −Tf ) ≤ 1
+2ω′
+i,j.
+Set ξ′
+j =ω+(
+zα/ 2√n, C.Hull(Gj), C.Hull(Gk)) and deﬁne the conﬁdence inter-
+vals CI ∗
+j as earlier. When 0 <α ≤ 0.2, let
+CI ∗
+j =
+[ ˆT ′
+j,k + ˆT ′
+k,j
+2 − {( ˆT ′
+j,k − ˆT ′
+k,j )+ + 2ξ′
+j},
+ˆT ′
+j,k + ˆT ′
+k,j
+2 + {( ˆT ′
+j,k − ˆT ′
+k,j )+ + 2ξ′
+j}
+](43)
+and when 0.2<α< 0.5 let
+CI ∗
+j =
+[ ˆT ′
+j,k + ˆT ′
+k,j
+2 − {( ˆT ′
+j,k − ˆT ′
+k,j )+ + 3ξ′
+j},
+ˆT ′
+j,k + ˆT ′
+k,j
+2 + {( ˆT ′
+j,k − ˆT ′
+k,j )+ + 3ξ′
+j}
+]
+.
+(44)
+Following the argument given in the nested case let ξ′
+ji be a subsequence
+of ξ′
+j satisfying (
+33) and let ˆj = arg minji, 1≤i≤mL(CI ∗
+ji) be the index of the
+shortest interval along the subsequence and deﬁne the adapt ive conﬁdence
+interval for Tf by
+CI ∗ = CI ∗
+ˆj.(45)
+As stated precisely in the following result this conﬁdence i nterval is adaptive
+over the parameter spaces {Fj :j = 1,...,k }.
+Proposition 3. Suppose Condition C holds. Then the conﬁdence in-
+terval CI ∗ deﬁned in (
+45) has coverage probability of at least 1 −α for all
+f ∈ F =⋃ k
+j=1 Fj and satisﬁes the lower bound on expected length,
+L∗
+α (Fj, F) ≤L(CI ∗, Fj) ≤C(α)L∗
+α (Fj, F),(46)
+simultaneously for all 1 ≤j ≤k, where the constant C(α) only depends on
+α and is independent of k. In other words, L(CI ∗, Fj) ≍ω+(
+zα/ 2
+√n, Fj, F) for
+all 1 ≤j ≤k.
+
+[PDF PAGE 23]
+NONPARAMETRIC CONFIDENCE INTER V ALS 23
+We omit the proof of Proposition 3 since it essentially follows a similar path
+to that of Theorem 2.
+3.2. Examples. Theorem 2 and Proposition 3 have established general
+adaptation results for collections of nested or nearly nest ed parameter spaces.
+In this section a couple of examples are given which illustra te this general
+theory.
+Suppose that we observe the white noise with drift process ( 1) and that
+the linear functional is point evaluation. For convenience take Tf =f (0).
+Let D be the set of all decreasing functions on [ − 1
+2, 1
+2 ] and let FD(β,M ) =
+F (β,M ) ∩ D be the collection of monotonically decreasing Lipschitz fu nc-
+tions where F (β,M ) is the Lipschitz class deﬁned in ( 22).
+For integer j ≥ 1 let Mj = 2j(2β +1) 1√n and let G =⋃ ∞
+j=1FD(β,Mj ). Stan-
+dard calculations as in, for example, Donoho and Liu (1987), yield
+ω(ε,FD(β,M ), G) =ω(ε, G,FD(β,M ))
+= (2β + 1)1/ (2β +1)M 1/ (2β +1)ε2β/ (2β +1)(47)
+for M ≥ (2β + 1)1/ 2ε. Let ξj =ω(
+zα/ 2
+√n,FD(β,Mj), G). Then it is easy to see
+thatξj+1 = 2ξj and hence the adaptive conﬁdence interval given in ( 34) has
+coverage probability over G of at least 1 −α and satisﬁes
+L(CI ∗,FD(β,Mj)) ≤ 6(2β + 1)1/ (2β +1)M 1/ (2β +1)
+j z2β/ (2β +1)
+α/ 2 n−β/ (2β +1).
+(48)
+Furthermore, for any M >0,
+L(CI ∗,FD(β,M )) ≤ 12(2β + 1)1/ (2β +1)M 1/ (2β +1)z2β/ (2β +1)
+α/ 2 n−β/ (2β +1)(49)
+for all suﬃciently large n.
+Another common problem in function estimation is to adapt ov er smooth-
+ness classes. For ﬁxed M >0, the classes FD(γ1,M ) ⊂FD(γ2,M ) whenever
+0<γ 2<γ 1 ≤ 1. Let G′ =⋃
+0≤γ ≤1FD(γ,M ). Then once again standard cal-
+culations yield
+ω(ε,FD(β,M ), G′) =ω(ε, G′,FD(β,M ))
+= (2β + 1)1/ (2β +1)M 1/ (2β +1)ε2β/ (2β +1).(50)
+Now let 1 = β1>β 2> · · · be the sequence such that
+ω+
+( zα/ 2
+√n,FD(βj+1,M ), G′
+)
+= 2ω+
+( zα/ 2√n,FD(βj,M ), G′
+)
+.
+Then the adaptive conﬁdence interval given in ( 34) has coverage probability
+over G′ of at least 1 −α and satisﬁes
+L(CI ∗,FD(βj,M ))
+≤ 6(2βj + 1)1/ (2β j +1)M 1/ (2β j +1)z2β j/ (2β j +1)
+α/ 2 n−β j/ (2β j +1).(51)
+
+[PDF PAGE 24]
+24 T. T. CAI AND M. G. LOW
+Furthermore, for any 0 <β ≤ 1,
+L(CI ∗,FD(β,M )) ≤ 12(2β + 1)1/ (2β +1)M 1/ (2β +1)z2β/ (2β +1)
+α/ 2 n−β/ (2β +1)(52)
+for all suﬃciently large n.
+4. Adaptation over a general collection of convex parameter spaces. Sec-
+tion
+3 focused on collections of nested parameter spaces. It has be en shown
+that the between class modulus of continuity completely cha racterizes the
+optimal expected length of adaptive conﬁdence intervals. O ne particularly
+interesting feature of the nested case is that the optimal ex pected length of
+the conﬁdence intervals does not depend on the number of para meter spaces
+in the collection.
+The nested case, although interesting, is somewhat special . In this section
+general ﬁnite collections of convex parameter spaces are co nsidered. In this
+general setting the theory is more complicated and in genera l the number of
+parameter spaces, say k, may also play a role in the optimal expected length
+of adaptive conﬁdence intervals. For a ﬁxed and ﬁnite number of parameter
+spaces the optimal expected length of adaptive intervals is still within a
+constant factor of the between class modulus of continuity. However the
+constant factor in this case can depend on the number of param eter spaces.
+We construct adaptive conﬁdence intervals which show that t his constant
+factor does not grow faster than √logk and we give an example which shows
+that this factor is sometimes necessary.
+Let {Fj :j = 1,...,k } be a collection of convex spaces with nonempty
+intersections, that is, Fi ∩ Fj ̸= ∅ for alli, j. The objective is to construct an
+adaptive conﬁdence interval for a linear functional Tf which has guaranteed
+coverage probability of 1 −α over G =⋃ k
+j=1 Fj and rate optimal expected
+length over each of the parameter spaces Fj .
+The adaptive conﬁdence interval given in this section diﬀers substantially
+from that given in the nested case. However, the general stra tegy for con-
+structing adaptive conﬁdence intervals in this setup is sim ilar to that of
+the nested case. In particular, a key step is to ﬁrst construc t an interval
+which has optimal expected length over one of the parameter s paces while
+attaining coverage probability over the union of the parame ter spaces.
+4.1. Constrained optimal expected length conﬁdence intervals. As men-
+tioned above, it is convenient to construct a conﬁdence inte rval which has
+shortest possible expected length over a given Fj while maintaining coverage
+probability over G =⋃ k
+j=1 Fj .
+First note that for any conﬁdence interval CI ∈ Iα, G, Theorem
+1 yields a
+target for the expected length
+L(CI, Fj) ≥
+( 1
+2 −α
+)
+ω+
+( zα√n, Fj, G
+)
+.(53)
+
+[PDF PAGE 25]
+NONPARAMETRIC CONFIDENCE INTER V ALS 25
+As in Section 2.2, for 1 ≤i,j ≤k set ωi,j =ω(
+zα/ 2√n, Fi, Fj) and let ˆTi,j be
+a linear estimator which has variance bounded by 1
+z2
+α/ 2
+ω2
+i,j and bias which
+satisﬁes
+inf
+f ∈Fj
+(E( ˆTi,j ) −Tf ) ≥ − 1
+2ωi,j(54)
+and
+sup
+f ∈Fi
+(E( ˆTi,j ) −Tf ) ≤ 1
+2ωi,j.(55)
+As a ﬁrst step in the construction of adaptive conﬁdence inte rvals, deﬁne
+CI ∗
+j,α by
+CI ∗
+j,α =
+[
+min
+i
+{ ˆTi,j − 3
+2ωi,j }, max
+i
+{ ˆTj,i + 3
+2ωj,i }
+]
+.(56)
+The following result shows that this conﬁdence interval att ains the lower
+bound on the maximum expected length over Fj given in ( 53) and satisﬁes
+the constraint that it has the minimum coverage of 1 −α for all f ∈ G.
+Proposition 4. Let Fj , j = 1,...,k , be convex parameter spaces with
+Fi ∩ Fj ̸= ∅ for all i,j and let G =⋃ k
+j=1 Fj . Let the interval CI ∗
+j,α be de-
+ﬁned as in (
+56). Then CI ∗
+j,α ∈ Iα, G and CI ∗
+j,α has expected length over Fj
+satisfying
+L∗
+α (Fj, G) ≤L(CI ∗
+j,α , Fj) ≤
+{ 8
+√
+log(k + 1) + 4zα/ 2
+(1/2 −α)zα
+}
+·L∗
+α (Fj, G).(57)
+Remark 6. It follows from (
+59) that the expected length of the conﬁ-
+dence interval CI ∗
+j,α is rate optimal as n → ∞ as long as k remains ﬁxed.
+Proof of Proposition 4. First consider the coverage probability of
+the interval CI ∗
+j,α . Suppose f ∈ Fm for some 1 ≤m ≤k. Note that the in-
+terval CI ∗
+j,α contains
+CIm,j = [ ˆTm,j − 3
+2ωm,j, ˆTj,m + 3
+2ωj,m ].
+The derivation below shows that the interval CIm,j has correct coverage
+probability. First note that forf ∈ Fm,E ˆTm,j −Tf ≤ 1
+2ωm,j and thatE ˆTj,m −
+Tf ≥ − 1
+2ωj,m . Let
+Xm,j =
+ˆTi,j −Tf − (1/2)ωm,j
+ωm,j/zα/ 2
+,
+Xj,m =
+ˆTj,m −Tf + (1/2)ωj,m
+ωj,m/zα/ 2
+.
+
+[PDF PAGE 26]
+26 T. T. CAI AND M. G. LOW
+Then for any f ∈ Fm it follows from ( 54) and ( 55) that Xm,j has a Normal
+distribution with mean less than or equal to zero and varianc e bounded by
+1 and Xj,m has a Normal distribution with mean greater than or equal to
+zero and variance bounded by 1. Hence, for f ∈ Fm,
+P (Tf ∈ CI ∗
+j,α ) ≥P (Tf ∈ CIm,j )
+=P (Xm,j ≥ −zα/ 2 and Xj,m ≤zα/ 2)
+≥ 1 −P (Xm,j ≤ −zα/ 2) −P (Xj,m ≥zα/ 2)
+≥ 1 −α.
+So for any f ∈ G, P (Tf ∈ CI ∗
+j,α ) ≥ 1 −α and thus coverage has been estab-
+lished.
+The bounds on the expected length of these intervals can now b e obtained
+by using the following technical lemma from Dudley [(
+1999), pages 56 and
+57].
+Lemma 7. LetX1,X 2,...,X k be normally distributed random variables
+with mean 0 and variance ≤σ2. Then
+E max
+1≤i≤k
+|Xi| ≤σ
+(
+2 + 4 + log 4
+log(3/2)
+) 1/ 2√
+log(k + 1).(58)
+Let
+ξj =ω+
+( zα/ 2√n, Fj, G
+)
+= max
+1≤i≤k
+{ωi,j,ωj,i }.
+It is easy to see that the length of the interval CI ∗
+j,α is bounded by
+L(CI ∗
+j,α ) ≤ max
+i
+( ˆTj,i −Tf )+ + max
+i
+(Tf − ˆTi,j )+ + 3ξj.
+Now note that if f ∈ Fj , then for any i ̸=j,
+aj,i ≡E( ˆTj,i −Tf ) ≤ 1
+2ωj,i
+and
+bi,j ≡E(Tf − ˆTi,j ) ≤ 1
+2ωi,j.
+Also note that for any real numbers x and y, (x +y)+ ≤ (x)+ + (y)+. So
+for f ∈ Fj the expected length of CI ∗
+j,α satisﬁes
+EL(CI ∗
+j,α ) ≤E max
+i
+( ˆTj,i −Tf )+ +E max
+i
+(Tf − ˆTi,j )+ + 3ξj
+≤E
+(
+max
+i
+{(aj,i )+ + ( ˆTj,i −Tf −aj,i )+}
+)
+
+[PDF PAGE 27]
+NONPARAMETRIC CONFIDENCE INTER V ALS 27
++E
+(
+max
+i
+{(bi,j )+ + ( ˆTi,j −Tf −bi,j )+}
+)
++ 3ξj
+≤E
+(
+max
+i
+( ˆTj,i − ˆTf −aj,i )+
+)
++E
+(
+max
+i
+( ˆTi,j − ˆTj −bi,j )+
+)
++ 4ξj.
+It then follows from Lemma 7 that
+Ef (L(CI ∗
+j,α )) ≤ 2
+zα/ 2
+ξj
+(
+2 + 4 + log 4
+log(3/2)
+) 1/ 2√
+log(k + 1) + 4ξj
+≤
+{
+8
+√
+log(k + 1)
+zα/ 2
++ 4
+}
+ξj
+and it follows by taking the supremum over Fj that
+L(CI ∗
+j,α , Fj) ≤
+{
+8
+√
+log(k + 1)
+zα/ 2
++ 4
+}
+ω+
+( zα/ 2√n, Fj, G
+)
+.(59)
+The proposition now follows by combining (
+20), ( 7) and ( 59). □
+4.2. Adaptive conﬁdence intervals. The intervals CI ∗
+j,α constructed in
+the last section have near optimal expected length over Fj but do not con-
+trol the expected length over other Fi. In this section adaptive conﬁdence
+intervals over {Fj : 1 ≤j ≤k} are formed by intersecting such intervals. For
+a ﬁxed k, the resulting interval has rate optimal expected length ov er every
+parameter space Fj for all 1 ≤j ≤k. A Bonferroni approach is applied to
+the intervals of Section
+4.1 to yield an adaptive conﬁdence interval.
+More speciﬁcally, deﬁne the conﬁdence interval CI ∗ by
+CI ∗ =
+k⋂
+j=1
+CI ∗
+j,α/k(60)
+where CI ∗
+j,α are given in (
+56). The following theorem shows that this conﬁ-
+dence interval has guaranteed coverage probability and als o has near optimal
+expected length over Fj for each 1 ≤j ≤k.
+Theorem 3. Let Fj, j = 1,...,k , be convex parameter spaces with Fi ∩
+Fj ̸= ∅ for all i,j and let G =⋃ k
+j=1 Fj. Let the interval CI ∗ be given as in
+(
+60). Then CI ∗ ∈ Iα, G and CI ∗ satisﬁes
+L∗
+α (Fj, G) ≤L(CI ∗
+α, Fj) ≤ 12zα/ 2k
+(1/2 −α)zα
+·L∗
+α (Fj, G)(61)
+for all 1 ≤j ≤k.
+
+[PDF PAGE 28]
+28 T. T. CAI AND M. G. LOW
+Proof. The results follow easily from Proposition 4. For any f ∈ G ,
+Proposition 4 shows that
+P (Tf ∈ CI ∗
+j,α/k ) ≥ 1 −α
+k.
+Hence, for any f ∈ G,
+P (Tf ∈ CI ∗) = 1 −P (Tf /∈ CI ∗) ≥ 1 −
+k∑
+j=1
+P (Tf /∈ CI ∗
+j,α ) ≥ 1 −α.
+For the expected length note that
+L(CI ∗, Fj) ≤L(CI ∗
+j,α/k , Fj) ≤
+{
+8
+√
+log(k + 1)
+zα/ 2k
++ 4
+}
+ω+
+( zα/ 2k√n , Fj, G
+)
+for any 1 ≤j ≤k. For 0 <α< 0.5, calculations show that
+√
+log(k + 1)
+zα/ 2k
+≤ 1
+and hence
+L(CI ∗, Fj) ≤ 12ω+
+( zα/ 2k√n , Fj, G
+)
+.(62)
+The theorem now follows by combining (
+7), ( 20) and ( 62). □
+Remark 7. It follows from Lemma 6 thatzα/ 2k ≤
+√
+2
+z2
+α/ 2
+logk + 1 ·zα/ 2.
+Hence it follows from ( 62) and ( 20) that
+L(CI ∗, Fj) ≤ 12ω+
+( √
+2
+z2
+α/ 2
+logk + 1 ·zα/ 2√n, Fj, G
+)
+≤ 12
+√
+2
+z2
+α/ 2
+logk + 1 ·ω+
+( zα/ 2√n, Fj, G
+)
+.
+The ratio of the upper bound just given to the lower bound in ( 53) is thus
+clearly bounded by a constant multiple of √logk.
+Section 5.2 gives an example of a nearly black object which shows that
+this √logk factor cannot in general be improved.
+5. Minimax conﬁdence interval for nonconvex parameter spac es. As men-
+tioned in the Introduction, Donoho ( 1994) constructed for any convex pa-
+rameter space F ﬁxed length intervals centered at aﬃne estimators which
+have length within a small constant factor of the minimax exp ected length
+
+[PDF PAGE 29]
+NONPARAMETRIC CONFIDENCE INTER V ALS 29
+L∗
+α (F). Although the focus of the present paper is on adaptation th e adap-
+tation theory developed in the previous sections can also be used to yield
+a minimax theory for parameter spaces that are ﬁnite unions o f convex
+parameter spaces. In this section conﬁdence intervals with a speciﬁed cover-
+age probability are given which also have near optimal maxim um expected
+length. It is also shown, in contrast to the theory for convex parameter
+spaces, that optimal conﬁdence intervals centered on aﬃne e stimators can
+have expected length much longer than the expected length of optimal con-
+ﬁdence intervals centered at nonlinear estimators.
+Let Fi, i = 1,...,k , be convex parameter spaces with Fi ∩ Fj ̸= ∅ for
+all i, j and let G =⋃ k
+i=1 Fi. Note that the parameter space G is in general
+nonconvex. The minimax expected length of conﬁdence interv als CI ∈ Iα, G
+can be bounded above and below as follows.
+Set 0 <α< 1
+2 and let CI be a 1 −α level conﬁdence interval for all
+f ∈ G =⋃ k
+i=1 Fi. It follows from Theorem
+1 that the maximum expected
+length of CI ∈ Iα, G is bounded below by
+L(CI, G) ≥
+( 1
+2 −α
+)
+ω
+( zα√n, G
+)
+.(63)
+Upper bounds on the minimax expected length can be obtained b y con-
+sidering the conﬁdence interval CI ∗ as deﬁned in ( 60). As shown in Theorem
+3 this interval has coverage probability of at least 1 −α over G. In addition,
+it follows from ( 61) that the maximum of the expected length of CI ∗ over
+G satisﬁes
+L(CI ∗, G) = max
+1≤j≤k
+L(CI ∗, Fj)
+≤ 12 max
+1≤j≤k
+ω+
+( zα/ 2k√n , Fj, G
+)
+= 12ω
+( zα/ 2k√n , G
+)
+.
+(64)
+Hence, (
+63) and ( 64) together yield the following result on the minimax
+expected length of 1 −α level conﬁdence intervals over G.
+Theorem 4. Let G =⋃ k
+j=1 Fi, where for j = 1,...,k Fj are convex
+spaces with nonempty intersections and suppose 0<α< 1
+2 . Then
+( 1
+2 −α
+)
+ω
+( zα√n, G
+)
+≤L∗
+α (G) ≤ 12ω
+( zα/ 2k
+√n , G
+)
+.(65)
+Hence, the conﬁdence interval CI ∗ attains the optimal rate of convergence
+for the maximum expected length over the parameter spaces G when the
+number of convex subspaces is ﬁxed and ﬁnite.
+
+[PDF PAGE 30]
+30 T. T. CAI AND M. G. LOW
+The example of conﬁdence intervals in Section 5.2 for a linear functional
+of nearly black objects shows that the factor of zα/ 2k ≍ √logk in the upper
+bound of ( 65) cannot be dropped in general when the number k of convex
+subspaces grows with n.
+5.1. Conﬁdence intervals centered at aﬃne estimators. We now consider
+the performance of conﬁdence intervals centered at aﬃne est imators over
+nonconvex parameter spaces. As mentioned earlier, when the parameter
+space F is assumed to be ﬁxed and convex, Donoho ( 1994) and Theorem 1
+given in Section 2 together show that the length of the shortest ﬁxed length
+conﬁdence interval centered on an aﬃne estimator is within a ﬁxed constant
+factor of the maximum expected length of the optimal conﬁden ce interval.
+Hence there is relatively little to gain by looking beyond th e class of ﬁxed
+length conﬁdence intervals centered on aﬃne estimators.
+The following theorem considers the case when the parameter space is
+nonconvex. Once again let C .Hull(F) denote the convex hull of a parameter
+space F .
+Theorem 5. Consider the white noise model (1) or the sequence model
+(2). Let ˆT be an aﬃne estimator of Tf and γ ≥ 0 a nonnegative random
+variable. If CI = [ ˆT −γ, ˆT +γ] is a (variable length ) conﬁdence interval
+centered at ˆT and CI ∈ Iα, F , then
+L(CI, F) ≥C(α)ω
+( 2zα/ 2√n , C.Hull(F)
+)
+(66)
+where C(α)> 0 is a constant depending on α only. In particular, if the
+interval CI is of ﬁxed length, then
+L(CI ) ≥ 1
+2ω
+( 2zα/ 2√n , C.Hull(F)
+)
+.(67)
+Proof. It is shown in Cai and Low ( 2004) that the aﬃne estimator ˆT
+satisﬁes
+sup
+f ∈F
+|E ˆT −Tf | = sup
+f ∈C. Hull(F )
+|E ˆT −Tf |.
+It then follows from Theorem 2 of Low ( 1995) that ˆT must satisfy either
+sup
+f ∈F
+|E ˆT −Tf | ≥ 1
+4ω
+( 2zα/ 2√n , C.Hull(F)
+)
+(68)
+or
+σ ˆT ≥ 1
+4zα/ 2
+ω
+( 2zα/ 2√n , C.Hull(F)
+)
+,(69)
+
+[PDF PAGE 31]
+NONPARAMETRIC CONFIDENCE INTER V ALS 31
+where σ ˆT denotes the standard deviation of the estimator ˆT . We now con-
+sider the two cases separately. If ( 68) holds, then for any ε> 0, there exists
+f ∈ F such that
+Bf ≡ |E ˆT −Tf | ≥ 1
+4ω
+( 2zα/ 2√n , C.Hull(F)
+)
+−ε.(70)
+Since CI = [ ˆT −γ, ˆT +γ] has minimum coverage probability of at least 1 −α
+over F ,
+1 −α ≤Pf (| ˆT −Tf | ≤γ)
+=Pf (| ˆT −Tf | ≤γ andγ ≤Bf ) +Pf (| ˆT −Tf | ≤γ andγ>B f )
+≤Pf (| ˆT −Tf | ≤Bf ) +P (γ>B f ).
+Since ˆT is an aﬃne estimator and thus has a normal distribution, it is easy
+to check that Pf (| ˆT −Tf | ≤Bf ) ≤ 1/2 and hence
+P (γ>B f ) ≥ 1
+2 −α.(71)
+Letting ε → 0 in (
+70), it then follows that
+EfL(CI ) = 2Ef (γ) ≥ 2BfP (γ>B f )
+≥
+( 1
+4 −α
+2
+)
+ω
+( 2zα/ 2√n , C.Hull(F)
+)
+.
+If ( 69) holds, we have, for f ∈ F ,
+1 −α ≤Pf (| ˆT −Tf | ≤γ)
+=P
+(
+− γ
+σ ˆT
+−E ˆT −Tf
+σ ˆT
+≤Z ≤ γ
+σ ˆT
+−E ˆT −Tf
+σ ˆT
+)
+≤P
+(
+|Z| ≤ γ
+σ ˆT
+)
+=P
+(
+|Z| ≤ γ
+σ ˆT
+and γ ≤z0. 25σ ˆT
+)
++P
+(
+|Z| ≤ γ
+σ ˆT
+and γ>z 0. 25σ ˆT
+)
+≤P (|Z| ≤z0. 25) +P (γ>z 0. 25σ ˆT )
+where Z denotes a standard normal random variable. Hence
+P (γ>z 0. 25σ ˆT ) ≥ 1
+2 −α.
+Consequently,
+EfL(CI ) = 2Ef (γ) ≥ 2z0. 25σ ˆTP (γ>z 0. 25σ ˆT )
+≥ (1 − 2α)z0. 25
+4zα/ 2
+ω
+( 2zα/ 2√n , C.Hull(F)
+)
+
+[PDF PAGE 32]
+32 T. T. CAI AND M. G. LOW
+≥ 1 − 2α
+10zα/ 2
+ω
+( 2zα/ 2√n , C.Hull(F)
+)
+.
+Equation ( 66) now follows by taking C(α) = min{ 1
+4 − α
+2, 1−2α
+10zα/ 2
+}. Equation
+(67) for the ﬁxed length case is easier to prove and we omit the pro of here.
+□
+Remark 8. Theorem 5 shows that the minimax expected length of con-
+ﬁdence intervals centered at aﬃne estimators is determined by the modulus
+of continuity over the convex hull of F , not over F itself. In the case that
+ω(ε, C.Hull(F)) ≫ω(ε, F), any conﬁdence intervals centered at aﬃne esti-
+mators will perform poorly. Such is the case in the near black object example
+given in the next section.
+5.2. Nearly black object. In this section an example is given which shows
+that the factor zα/ 2k ≍ √logk in the upper bound of the minimax expected
+length given in Theorem 4 cannot in general be dropped. It is also shown
+that conﬁdence intervals centered at aﬃne estimators are fa r from optimal.
+Consider the Gaussian sequence model ( 2) with the index set M = {1, 2,...,n },
+namely
+Y (i) =f (i) +n−1/ 2zi, i = 1,...,n,(72)
+wherezi
+i. i. d.∼ N (0, 1). The size of the vector, n, is assumed large. We assume
+that the vector f is sparse: only a small fraction of components are nonzero,
+and the indices or locations of the nonzero components are no t known in
+advance.
+Denote the ℓ0 quasi-norm by ∥f ∥0 = Card({i :f (i) ̸= 0}). Fix mn. The
+collection of vectors with at most mn nonzero entries is
+G =ℓ0(mn) = {f ∈ Rn : ∥f ∥0 ≤mn}.
+Assume that mn is known and mn ≤nγ where γ< 1
+2.
+Such an example is considered in Cai and Low ( 2004) in the context of
+minimax estimation. The model, which arises naturally in wa velet analysis,
+has also been studied in Donoho, Johnstone, Hoch and Stern ( 1992) and
+Abramovich, Benjamini, Donoho and Johnstone ( 2000) for estimating the
+whole object.
+Let the linear functional Tf be given by
+Tf =
+n∑
+i=1
+f (i),
+and following Cai and Low ( 2004) let I(mn,n ) be the class of all subsets of
+{1,...,n } of mn elements and for I ∈ I(mn,n ) let
+FI = {f ∈ Rn :f (j) = 0 ∀j /∈I}.
+
+[PDF PAGE 33]
+NONPARAMETRIC CONFIDENCE INTER V ALS 33
+Note that FI is an mn-dimensional subspace spanned by the coordinates in
+I. These are obviously convex and G = ∪FI where the union is taken over
+I in the set I(mn,n ). From now on we shall assume that I is in the set
+I(mn,n ).
+Simple calculations show that for all I,J ∈ I(mn,n )
+ω(ε, FI, FJ ) =
+√
+Card(I ∪J)ε
+and consequently
+ω(ε, FI, G) =ω(ε, G, FI ) =ω(ε, G) =
+√
+2mnε.
+Remark 9. It is easy to see that C.Hull(G) = Rn and henceω(ε, C.Hull(G)) =√nε. It follows from Theorem 5 and ( 66) that any conﬁdence interval with
+coverage of at least 1 −α centered at an aﬃne estimator must have maximum
+expected length bounded from below by a ﬁxed constant not dep ending on
+n.
+Let k be the number of the mn-dimensional parameter spaces FI . Then
+k is equal to n choose mn and it is easy to see that
+k =
+( n
+mn
+)
+≤nmn.
+The following result gives a lower bound on the expected leng th of any
+conﬁdence interval with a minimum coverage probability of 1 −α over G.
+Proposition 5. Suppose that we observe the Gaussian sequence model
+(72), that n ≥ 4 and mn<nγ with γ< 1
+2 . Let Tf =∑ n
+i=1f (i) and 0<α<
+1
+2 . Suppose that CI (Y ) is a conﬁdence interval for Tf based on (72) and
+CI (Y ) ∈ Iα, G. Then for all suﬃciently large n,
+E0L(CI (Y )) ≥
+( 1
+2 −α
+) mn√n
+√
+1
+2 log
+( n
+m2
+n
+)
+≥
+( 1
+2 −α
+) √
+1
+4 −γ
+2 ·ω
+( √logk√n , G
+)(73)
+where E0 denotes expectation under the Gaussian model (
+72) with f (i) = 0
+for i = 1, 2,...,n .
+Remark 10. It follows immediately from ( 73) that the maximum ex-
+pected length of CI (Y ) over G satisﬁes
+L(CI (Y ), G) ≥Cω
+( √logk√n , G
+)
+.(74)
+
+[PDF PAGE 34]
+34 T. T. CAI AND M. G. LOW
+Comparing the lower bound ( 74) for the maximum expected length with
+the minimax upper bound given in ( 65) shows that the factor √logk in the
+upper bound for the minimax expected length cannot be droppe d in general.
+A similar result also holds for adaptation.
+Proof of Proposition 5. In the following proof the calculation of the
+L1 distance between a mixture of normals and a given normal dist ribution
+follows a similar calculation used in Cai and Low ( 2004). We include the
+details of the calculation here for completeness. In the pro of we will omit the
+subscript inmn and simply write m formn. Letψf be the joint density of the
+Gaussian observations given in ( 72). More speciﬁcally ψf is a multivariate
+normal density with mean ( f (1),f (2),...,f (n)) and covariance matrix 1
+nAn
+whereAn is the n ×n identity matrix. Fix a constant ρ> 0. For I ∈ I(m,n )
+let fI be deﬁned by fI(j) = ρ√n
+/BD (j ∈I) and let f0 be the sequence deﬁned
+byf0(j) = 0 for j = 1, 2,...,n . Finally let
+ψ∗ = 1( n
+m
+)
+∑
+I∈I(m,n )
+ψfI.
+Note that a similar mixture prior was used in Baraud ( 2002) to give lower
+bounds in a nonparametric testing problem. Note that for all fI ,TfI =m ρ√n
+and that Tf 0 = 0. Note also that if
+Pψ fI
+(
+m ρ√n ∈ CI (Y )
+)
+≥ 1 −α
+for all I ∈ I(m,n ) then it follows that
+Pψ ∗
+(
+m ρ√n ∈ CI (Y )
+)
+= 1( n
+m
+)
+∑
+I∈I(m,n )
+ψfIPψ fI
+(
+m ρ√n ∈ CI (Y )
+)
+≥ 1 −α.
+Note that
+∫ ψ2
+∗
+ψf0
+= 1
+( n
+m
+) 2
+∑
+I∈I(m,n )
+∑
+I ′∈I(m,n )
+∫ ψfIψfI′
+ψf0
+,
+and simple calculations show that
+∫ ψfIψfI′
+ψf0
+= exp(jρ2),
+where j is the number of points in the set I ∩I ′. It follows that
+∫ ψ2
+∗
+ψf0
+=E exp(Jρ 2),
+
+[PDF PAGE 35]
+NONPARAMETRIC CONFIDENCE INTER V ALS 35
+where J has a hypergeometric distribution,
+P (J =j) =
+( m
+j
+)( n−m
+m−j
+)
+( n
+m
+) .
+Now note that from Feller [( 1968), page 59],
+P (J =j) ≤
+( m
+j
+)( m
+n
+) j(
+1 −m
+n
+) m−j(
+1 −m
+n
+) −m
+.
+Now suppose that n ≥ 4 and that m<n 1/ 2. Then
+(
+1 −m
+n
+) −m
+≤ 4m2/n
+and hence
+P (J =j) ≤ 4m2/n
+( m
+j
+)( m
+n
+) j(
+1 −m
+n
+) m−j
+.
+It now follows that if n ≥ 4 and m<n γ with γ< 1
+2 , then
+∫ ψ2
+∗
+ψf0
+=E exp(Jρ 2)
+≤ 4m2/n
+(
+1 −m
+n +m
+n exp(ρ2)
+) m
+≤ 4m2/n
+(
+1 +m
+n exp(ρ2)
+) m
+.
+Now take ρ =
+√
+1
+2 log n
+m2 . Then
+∫ ψ2
+∗
+ψf0
+≤ 4n−(1−2γ )
+(
+1 + 1
+n1/ 2
+) nγ
+↓ 1.
+Hence we can bound the L1 distance by
+∫
+|ψ∗ −ψf0| ≤
+( ∫ (ψ∗ −ψf0)2
+ψf0
+) 1/ 2
+=
+( ∫ ψ2
+∗
+ψf0
+− 1
+) 1/ 2
+≤
+(
+4n−(1−2γ )
+(
+1 + 1
+n1/ 2
+) nγ
+− 1
+) 1/ 2
+↓ 0.
+So for any 0 <ε< 1 − 2α there exists nε such that for all n ≥nε,
+∫
+|ψ∗ −
+ψf0| ≤ε.
+It follows from the fact that CI has minimum coverage probability of
+1 −α and that the L1 distance between ψf0 and ψ∗ is bounded above by ε
+that
+Pψ f0
+(
+m ρ√n ∈ CI
+)
+≥Pψ ∗
+(
+m ρ√n ∈ CI
+)
+−ε ≥ 1 −α −ε.
+
+[PDF PAGE 36]
+36 T. T. CAI AND M. G. LOW
+Hence
+Pψ f0
+(
+0 ∈ CI and m ρ√n ∈ CI
+)
+≥ 1 − 2α −ε.
+Since CI is an interval the length of this interval must be at least m ρ√n when
+both 0 and m ρ√n are in the interval. Hence for n ≥nε,
+Eψ f0
+L(CI (Y )) ≥ (1 − 2α −ε) m√n
+√
+1
+2 log
+( n
+m2
+)
+.
+Now take ε = 1
+2 −α. Then for all suﬃciently large n,
+Eψ f0
+L(CI (Y )) ≥
+( 1
+2 −α
+) m√n
+√
+1
+2 log
+( n
+m2
+)
+≥
+( 1
+2 −α
+) √
+1
+4 −γ
+2 ·ω
+( √logk√n , G
+)
+,
+where k is the number of convex parameter spaces in G. □
+Remark 11. It follows immediately from Proposition 5 that
+L∗
+α (FI ) ≥
+( 1
+2 −α
+) √
+1
+4 −γ
+2 ·ω+
+( √logk√n , FI, G
+)
+.
+Hence the factor of zα/ 2k ≍ √logk for adaptation in the upper bound of The-
+orem 3 and the same factor for minimax conﬁdence procedures in Theo rem
+4 cannot in general be removed.
+Acknowledgment. We thank one of the referees for very thorough and
+useful comments which have helped to improve the presentati on of the paper.
+In particular, some of the notation used in the paper is based on suggestions
+made by this referee.
+REFERENCES
+Abramovich, F., Benjamini, Y., Donoho, D. and Johnstone, I. (2000). Adapting
+to unknown sparsity by controlling the false discovery rate . Technical Report 2000-19,
+Dept. Statistics, Stanford Univ.
+Baraud, Y. (2002). Non-asymptotic minimax rates of testing in signal d etection.
+Bernoulli 8 577–606. MR1935648
+Beran, R. and D¨umbgen, L. (1998). Modulation of estimators and conﬁdence sets. Ann.
+Statist. 26 1826–1856. MR1673280
+Brown, L. D. and Low, M. G. (1996). Asymptotic equivalence of nonparametric regres-
+sion and white noise. Ann. Statist. 24 2384–2398. MR1425958
+Cai, T. and Low, M. (2002). On modulus of continuity and adaptability in nonpar ametric
+functional estimation. Technical report, Dept. Statistic s, Univ. Pennsylvania.
+
+[PDF PAGE 37]
+NONPARAMETRIC CONFIDENCE INTER V ALS 37
+Cai, T. and Low, M. (2003). Adaptive estimation and conﬁdence intervals for co nvex
+functions and monotone functions. Technical report, Dept. Statistics, Univ. Pennsylva-
+nia.
+Cai, T. and Low, M. (2004). Minimax estimation of linear functionals over nonc onvex
+parameter spaces. Ann. Statist. 32 552–576. MR2060169
+Donoho, D. L. (1994). Statistical estimation and optimal recovery. Ann. Statist. 22 238–
+270. MR1272082
+Donoho, D. L., Johnstone, I. M., Hoch, J. C. and Stern, A. S. (1992). Maximum
+entropy and the nearly black object (with discussion). J. Roy. Statist. Soc. Ser. B. 54
+41–81. MR1157714
+Donoho, D. L. and Liu, R. C. (1987). Geometrizing rates of convergence. I. Technical
+Report 137, Dept. Statistics, Univ. California, Berkeley.
+Donoho, D. L. and Liu, R. C. (1991). Geometrizing rates of convergence. III. Ann.
+Statist. 19 668–701. MR1105839
+Dudley, R. (1999). Uniform Central Limit Theorems . Cambridge Univ. Press.
+MR1720712
+D¨umbgen, L. (1998). New goodness-of-ﬁt tests and their application to n onparametric
+conﬁdence sets. Ann. Statist. 26 288–314. MR1611768
+Feller, W. (1968). An Introduction to Probability Theory and Its Applications 1, 3rd ed.
+Wiley, New York. MR228020
+Genovese, C. R. and W asserman, L.(2002). Conﬁdence sets for nonparametric wavelet
+regression. Technical report, Dept. Statistics, Carnegie Mellon Univ.
+Hall, P. (1992). Eﬀect of bias estimation on coverage accuracy of boo tstrap conﬁdence
+intervals for a probability density. Ann. Statist. 20 675–694. MR1165587
+Ha¨rdle, W. and Marron, J. S. (1991). Bootstrap simultaneous error bars for nonpara-
+metric regression. Ann. Statist. 19 778–796. MR1105844
+Hengartner, N. W. and Stark, P. B. (1995). Finite-sample conﬁdence envelopes for
+shape-restricted densities. Ann. Statist. 23 525–550. MR1332580
+Ibragimov, I. A. and Hasminskii, R. Z. (1984). Nonparametric estimation of the value of
+a linear functional in Gaussian white noise. Theory Probab. Appl. 29 18–32. MR739497
+Li, K.-C. (1989). Honest conﬁdence regions for nonparametric regres sion. Ann. Statist.
+17 1001–1008. MR1015135
+Low, M. G. (1995). Bias-variance tradeoﬀs in functional estimation p roblems. Ann.
+Statist. 23 824–835. MR1345202
+Low, M. G. (1997). On nonparametric conﬁdence intervals. Ann. Statist. 25 2547–2554.
+MR1604412
+Picard, D. and Tribouley, K. (2000). Adaptive conﬁdence interval for pointwise curve
+estimation. Ann. Statist. 28 298–335. MR1762913
+Pratt, J. W. (1961). Length of conﬁdence intervals. J. Amer. Statist. Assoc. 56 549–567.
+MR125678
+Stark, P. B. (1992). Aﬃne minimax conﬁdence intervals for a bounded norm al mean.
+Statist. Probab. Lett. 13 39–44. MR1147637
+Zeytinoglu, M. and Mintz, M. (1984). Optimal ﬁxed size conﬁdence procedures for a
+restricted parameter space. Ann. Statist. 12 945–957. MR751284
+Department of Statistics
+The Wharton School
+University of Pennsylvania
+Philadelphia, Pennsylvania 19104
+USA
+e-mail:
+tcai@wharton.upenn.edu

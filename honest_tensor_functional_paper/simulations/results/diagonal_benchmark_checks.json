@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "enumerated_support_pairs": 3136,
+  "enumeration_moment": 1.2650280716038331,
+  "hypergeometric_moment": 1.2650280716038333,
+  "grid_cases": 24,
+  "max_log_second_moment": 0.24850908383527515,
+  "universal_log_bound": 0.25,
+  "scope": "Diagonal observations only; full-tensor likelihood has overlap power K."
+}

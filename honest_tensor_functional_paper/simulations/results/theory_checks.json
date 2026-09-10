@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "seed": 20260909,
+  "scalar_grid_points": 101101,
+  "random_tensors_per_format": 120,
+  "max_diagonal_bound_ratio": {
+    "tucker": 0.8236760684064787,
+    "tt": 0.8079857846416494
+  },
+  "max_tt_squared_weight_error": 8.881784197001252e-15,
+  "max_exact_mixture_second_moment": 1.069002428955863,
+  "mixture_bound": 1.0690449676496976,
+  "exact_diagonal_image_max_error": 5.551115123125783e-17,
+  "interpretation": "Supplementary numerical checks, not proof verification"
+}

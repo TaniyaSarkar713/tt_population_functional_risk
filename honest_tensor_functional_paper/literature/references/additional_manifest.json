@@ -1,0 +1,27 @@
+[
+  {
+    "name": "fan2023",
+    "url": "https://arxiv.org/pdf/2012.03436",
+    "status": "link available; download failed",
+    "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+  },
+  {
+    "name": "friedlandlim2018",
+    "url": "https://arxiv.org/pdf/1410.6072",
+    "status": "link available; download failed",
+    "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+  },
+  {
+    "name": "delathauwer2000",
+    "url": "https://www.math.ucdavis.edu/~saito/data/tensor/lathauwer-etal_mulilinear-SVD.pdf",
+    "status": "link available; download failed",
+    "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+  },
+  {
+    "name": "collier2017",
+    "url": "https://arxiv.org/pdf/1502.00665",
+    "status": "Full primary PDF inspected via browser; no local PDF downloaded in this revision",
+    "inspected": "Theorems 2–3; Lemma 1 and proof; sparse Gaussian functional setup",
+    "version": "Accessible arXiv PDF v1, 2015; journal publication 2017"
+  }
+]

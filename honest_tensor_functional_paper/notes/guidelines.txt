@@ -1,0 +1,388 @@
+Assume you are a senior researcher in statistics, machine learning, and theoretical computer science with experience publishing in venues such as JASA, Annals of Statistics, JRSS-B, Biometrika, NeurIPS, ICML, and COLT.
+I will provide a research idea below.
+Your task is to develop this idea into a complete research project and draft paper, with the theoretical statistical contribution as the primary focus.
+Create a new project folder for this work and organize all files, notes, derivations, simulations, references, and manuscript drafts inside it.
+Research idea
+[PASTE THE RESEARCH IDEA HERE]
+
+1. First determine whether the idea is actually research-worthy
+Before writing the paper, critically examine the proposed idea.
+Do not assume that the proposed contribution is novel or correct.
+Conduct a thorough literature review and determine:
+the closest existing papers;
+what those papers prove;
+what assumptions they require;
+what theoretical guarantees already exist;
+whether essentially the same estimator/model/problem has already been studied under different terminology;
+whether the proposed contribution is genuinely new.
+Search broadly across:
+statistics;
+machine learning;
+theoretical computer science;
+optimization;
+information theory;
+high-dimensional statistics;
+empirical process theory;
+relevant application-specific literature.
+Include recent work through 2026, including both peer-reviewed papers and relevant arXiv preprints.
+For each closely related paper, explicitly state:
+mathematical setup;
+estimator/method;
+assumptions;
+main theoretical result;
+convergence rate or statistical guarantee;
+how our proposed work would differ.
+Be skeptical and actively attempt to disprove the novelty of the proposed idea.
+If the idea in its current form is not sufficiently novel, do not abandon the project immediately. Instead, identify the nearest mathematically meaningful modification that would create a stronger and defensible research gap.
+
+2. Define the precise research problem
+Rewrite the research idea as a rigorous statistical problem.
+Define all relevant objects mathematically.
+For example, specify:
+(Xi,Yi),i=1,…,n,(X_i,Y_i), \qquad i=1,\ldots,n,
+the data-generating distribution
+(Xi,Yi)∼Pθ⋆,(X_i,Y_i)\sim P_{\theta^\star},
+parameter space
+θ⋆∈Θ,\theta^\star\in\Theta,
+estimator
+θ^,\widehat\theta,
+loss function
+ℓ(θ;X,Y),\ell(\theta;X,Y),
+population risk
+R(θ)=E[ℓ(θ;X,Y)],R(\theta) = \mathbb E[\ell(\theta;X,Y)],
+and empirical risk
+Rn(θ)=1n∑i=1nℓ(θ;Xi,Yi),R_n(\theta) = \frac1n\sum_{i=1}^n \ell(\theta;X_i,Y_i),
+or whatever mathematical framework is appropriate.
+Explicitly define:
+observed variables;
+latent variables;
+dimensions;
+structured parameters;
+parameter space;
+sampling mechanism;
+dependence structure;
+contamination/noise model;
+asymptotic regime;
+estimand;
+estimator;
+evaluation metric.
+Do not use informal phrases such as “high dimensional,” “robust,” or “low rank” without defining what they mathematically mean.
+
+3. Identify the exact theoretical gap
+Express the research gap as a precise mathematical statement.
+For example:
+Existing work proves consistency under
+p=o(n),p=o(n),
+whereas the theoretically unresolved regime is
+pn→γ∈(0,∞).\frac{p}{n}\rightarrow\gamma\in(0,\infty).
+or
+Existing methods achieve
+∥Θ^−Θ⋆∥F=Op(r(p1+p2)n)\|\widehat\Theta-\Theta^\star\|_F = O_p\left( \sqrt{\frac{r(p_1+p_2)}{n}} \right)
+under sub-Gaussian errors, but no comparable guarantee is known under
+P=(1−ϵ)PΘ⋆+ϵQ.P=(1-\epsilon)P_{\Theta^\star}+\epsilon Q.
+or
+Existing asymptotic normality results assume independent observations, while our setting contains dependence induced by
+Cov⁡(Xi,Xj)≠0.\operatorname{Cov}(X_i,X_j)\neq0.
+I want the gap stated at this level of mathematical specificity.
+
+4. Determine the strongest possible theoretical contribution
+Before designing simulations, determine what can potentially be proved.
+Consider whether the paper can establish one or more of the following:
+identifiability;
+consistency;
+finite-sample bounds;
+nonasymptotic concentration bounds;
+oracle inequalities;
+excess-risk bounds;
+asymptotic normality;
+asymptotic distribution;
+minimax upper bounds;
+minimax lower bounds;
+optimal convergence rates;
+efficiency;
+robustness guarantees;
+influence functions;
+breakdown points;
+uniform convergence;
+generalization bounds;
+phase transitions;
+support recovery;
+rank recovery;
+uncertainty quantification;
+valid confidence intervals;
+hypothesis-testing guarantees;
+impossibility results.
+Prioritize results that make the contribution interesting to statistics researchers beyond the immediate application.
+
+5. Formulate explicit candidate theorems
+Before attempting a full proof, state the main results that the paper should ideally establish.
+Write them in theorem form.
+For example:
+Theorem 1 — Estimation error
+Under Assumptions A1–A5,
+∥θ^−θ⋆∥2≤Cslog⁡pn\|\widehat\theta-\theta^\star\|_2 \le C \sqrt{ \frac{s\log p}{n} }
+with probability at least
+1−δn.1-\delta_n.
+Theorem 2 — Asymptotic distribution
+Under additional regularity conditions,
+n(ψ^−ψ⋆)⟶dN(0,V).\sqrt n \left( \widehat\psi-\psi^\star \right) \overset{d}{\longrightarrow} N(0,V).
+Theorem 3 — Minimax optimality
+For the parameter class
+Θ(s,R),\Theta(s,R),
+show that
+inf⁡θ~sup⁡θ∈Θ(s,R)Eθ[∥θ~−θ∥22]≥cslog⁡(p/s)n,\inf_{\widetilde\theta} \sup_{\theta\in\Theta(s,R)} \mathbb E_\theta \left[ \|\widetilde\theta-\theta\|_2^2 \right] \ge c\frac{s\log(p/s)}{n},
+and demonstrate that the proposed estimator achieves the same rate up to constants or logarithmic factors.
+These are examples only.
+Derive theorem statements appropriate to the actual research problem.
+Do not fabricate convergence rates or theorem statements simply to make the paper look complete.
+If a rate is currently unknown, state the most plausible candidate rate and clearly label it as a conjecture requiring proof.
+
+6. Work through the theory before writing claims
+For every proposed theorem:
+state the assumptions precisely;
+explain why every assumption is needed;
+identify whether it is standard or restrictive;
+identify which assumptions might be weakened;
+derive the proof step by step;
+identify the key technical lemma;
+verify every nontrivial inequality;
+identify possible failure points.
+Use appropriate tools such as:
+concentration inequalities;
+empirical process theory;
+covering numbers;
+Rademacher complexity;
+VC theory;
+matrix/tensor perturbation theory;
+random matrix theory;
+M-estimation;
+U-statistics;
+martingale theory;
+Le Cam's method;
+Fano's inequality;
+Assouad's lemma;
+semiparametric theory;
+influence-function arguments;
+robust statistics;
+optimization theory;
+Gaussian comparison;
+chaining;
+PAC-Bayes;
+stability arguments.
+Do not write “the result follows by standard arguments” unless those arguments are explicitly identified and verified.
+
+7. Separate established results from conjectures
+Maintain three labels throughout the project:
+PROVED
+The result has a complete derivation and has been checked carefully.
+PARTIAL
+Important components are established, but one or more steps remain unresolved.
+CONJECTURED
+The result appears plausible but has not yet been established.
+Never present a conjectured result in the manuscript as a theorem.
+If a theorem cannot currently be proved, determine whether:
+the assumptions need strengthening;
+the claimed rate is too ambitious;
+an intermediate theorem can be proved instead;
+a counterexample exists.
+
+8. Compare theoretically against existing methods
+Identify the strongest relevant baseline methods.
+Compare our method theoretically whenever possible.
+For example, determine whether the proposed estimator improves:
+error rate,sample complexity,dependence on dimension,dependence on rank,\text{error rate}, \qquad \text{sample complexity}, \qquad \text{dependence on dimension}, \qquad \text{dependence on rank}, robustness to contamination,computational complexity,coverage accuracy,\text{robustness to contamination}, \qquad \text{computational complexity}, \qquad \text{coverage accuracy},
+or some other theoretically meaningful quantity.
+Do not claim that the method is “better” unless the comparison is mathematically justified.
+If the contribution is not an improved rate, clearly explain what the new theoretical contribution actually is.
+For example:
+weaker assumptions;
+a previously untreated asymptotic regime;
+robustness;
+inference rather than estimation;
+adaptation;
+dependence;
+misspecification;
+computational-statistical tradeoff;
+optimality;
+a new impossibility result.
+
+9. Design simulations only after the theory is clear
+The simulation study should be designed to validate specific theoretical predictions.
+Do not begin by running arbitrary benchmark comparisons.
+For each theorem, identify an empirical implication.
+Examples:
+If the theory predicts
+∥θ^−θ⋆∥≍n−1/2,\|\widehat\theta-\theta^\star\| \asymp n^{-1/2},
+run simulations across increasing nn and examine whether log-error versus log-nn has approximately the predicted slope.
+If the theory predicts dependence on rank,
+Error⁡≍r(p1+p2)n,\operatorname{Error} \asymp \sqrt{ \frac{r(p_1+p_2)}{n} },
+vary rr, p1p_1, p2p_2, and nn systematically.
+If robustness theory predicts tolerance up to contamination level ϵ\epsilon, vary
+ϵ∈{0,0.05,0.10,0.20,…}.\epsilon\in \{0,0.05,0.10,0.20,\ldots\}.
+If the theory predicts a phase transition, design the simulation specifically to identify it.
+
+10. Simulation design
+Develop a comprehensive simulation study containing:
+Controlled synthetic experiments
+Systematically vary:
+sample size nn;
+dimension pp;
+rank rr;
+sparsity ss;
+signal-to-noise ratio;
+contamination;
+dependence;
+model misspecification;
+tuning parameters.
+Baselines
+Compare against the strongest statistically relevant competing methods.
+Metrics
+Use metrics directly linked to the theory, such as:
+∥θ^−θ⋆∥2,\|\widehat\theta-\theta^\star\|_2, ∥Θ^−Θ⋆∥F,\|\widehat\Theta-\Theta^\star\|_F,
+prediction risk,
+R(θ^)−R(θ⋆),R(\widehat\theta)-R(\theta^\star),
+coverage probability,
+type-I error,
+power,
+rank recovery,
+support recovery,
+or whatever is appropriate.
+Monte Carlo uncertainty
+Use enough simulation replications to report:
+Monte Carlo mean;
+standard error;
+confidence intervals where useful.
+
+11. Real-data or modern-AI demonstration
+If appropriate, identify a real dataset or modern AI/LLM setting where the theoretical phenomenon naturally appears.
+The real-data experiment should demonstrate the practical relevance of the statistical problem rather than serve merely as an application.
+Avoid forcing an LLM application onto a general statistical method if the connection is superficial.
+
+12. Build the project reproducibly
+Organize the new project folder approximately as:
+project_name/
+│
+├── paper/
+│   ├── main.tex
+│   ├── appendix.tex
+│   ├── references.bib
+│   └── figures/
+│
+├── theory/
+│   ├── assumptions.md
+│   ├── theorem_statements.md
+│   ├── proofs.md
+│   ├── lemmas.md
+│   └── open_questions.md
+│
+├── literature/
+│   ├── literature_review.md
+│   ├── novelty_matrix.md
+│   └── references/
+│
+├── simulations/
+│   ├── simulation_design.md
+│   ├── code/
+│   ├── results/
+│   └── figures/
+│
+├── real_data/
+│
+├── notes/
+│
+└── README.md
+
+Modify the structure if needed.
+Keep the code modular and reproducible.
+Use fixed random seeds where appropriate.
+
+13. Draft the manuscript as a real research paper
+Produce a full manuscript containing:
+Abstract
+Clearly state:
+statistical problem;
+proposed methodology;
+theoretical contribution;
+empirical findings.
+1. Introduction
+Explain:
+why the problem matters;
+precise deficiency in existing literature;
+main methodological idea;
+theoretical contribution.
+End the introduction with a concise list of contributions.
+2. Related Work
+Organize by mathematical relationship rather than simply listing papers.
+Clearly distinguish the proposed contribution.
+3. Problem Formulation
+Give the full mathematical setup.
+4. Proposed Method
+Define the estimator/procedure rigorously.
+5. Statistical Theory
+Include:
+assumptions;
+lemmas;
+main theorems;
+interpretation;
+comparison with prior results.
+6. Simulations
+Design experiments around the theoretical results.
+7. Real-Data / LLM Experiment
+If appropriate.
+8. Discussion
+Include:
+limitations;
+implications;
+possible extensions.
+Appendix
+Include complete proofs and technical lemmas.
+
+14. Maintain a novelty matrix
+Create a table of the form:
+Paper
+Setting
+Method
+Assumptions
+Main theorem
+Rate
+Our difference
+
+Update this continuously while developing the project.
+If at any point a newly discovered paper substantially eliminates our proposed novelty, stop making the old novelty claim and revise the research direction.
+
+15. Explicitly assess publication potential
+At the end of the theoretical development, evaluate the project for:
+Annals of Statistics;
+JASA;
+JRSS-B;
+Biometrika;
+Bernoulli;
+Statistica Sinica;
+relevant ML theory venues.
+For each, explain what is currently missing for the paper to reach that level.
+Be particularly strict about Annals of Statistics: an LLM application alone is not sufficient; the paper should make a general and substantial contribution to statistical theory.
+
+16. Final decision checkpoint
+Before considering the draft complete, answer explicitly:
+Novelty
+What exactly is new?
+Mathematical contribution
+What theorem did we establish that was not previously known?
+Improvement
+Do we improve an existing theoretical guarantee?
+If yes, state explicitly:
+Existing result⟶Our result.\text{Existing result} \quad\longrightarrow\quad \text{Our result}.
+Generality
+Does the theory apply beyond the motivating AI/LLM example?
+Simulation validation
+Which theoretical predictions are verified empirically?
+Remaining weakness
+What would a skeptical reviewer at JASA/JRSS-B/Biometrika/AoS criticize?
+Go / No-Go recommendation
+Classify the project as:
+Strong — proceed with full paper
+Promising — theory requires further work
+Incremental — reformulate the contribution
+Not sufficiently novel — pivot
+The objective is not to produce a polished-looking paper at all costs.
+The objective is to determine whether the idea can support a genuine, defensible theoretical statistics contribution and, only if it can, develop it into a rigorous research paper.

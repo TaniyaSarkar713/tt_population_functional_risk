@@ -1,0 +1,41 @@
+{
+  "revision_date": "2026-09-09",
+  "source_project": "../honest_tensor_functional_inference",
+  "status": "Complete paper draft; further theoretical work recommended before submission",
+  "preserved_original": true,
+  "changes": [
+    "Manuscript restructuring and explicit assumption/comparison/status tables",
+    "Classical diagonal-information proposition and complete proof, with novelty attribution",
+    "Center-accuracy table from existing simulations; diagonal lower curve added to analytic figure",
+    "Literature matrix and theorem ledger synchronized",
+    "Publication checkpoint, guidelines map, visual and mechanical audits"
+  ],
+  "monte_carlo": "Original 175-configuration run reused without algorithm or output changes; original run manifest retained",
+  "new_numerical_work": "Exact support enumeration and 24 hypergeometric proof checks; no new stochastic benchmark run",
+  "artifact_sha256": {
+    "README.md": "96ab9fb818e2cecf920dfdc6668174380d27463208038733eeafca30a0b8176b",
+    "paper/main.tex": "b2802b4127e3cd9f3da0b51bbb8e9d48cad8298f39018aed882a5e0847108217",
+    "paper/appendix.tex": "151d647b00d9cb7d08b41868e19d409dbcd5756b53a79dbe54b58fd44773a7a1",
+    "paper/main.pdf": "b5fe6a9cdc230f5fa5dd43b850739550688240b526eff9adb9d73ab793947c8f",
+    "paper/references.bib": "feabc4e46871e12244b31bcb979e21c24019425a4f7754d493046335b88d11bb",
+    "paper/precision_table.tex": "e0a24a33a760dd74125f750c74546f9804f33f3d64da87c056f584b64bd85713",
+    "paper/coverage_table.tex": "562694a671900a13d028fd074681fa3f0fea131e8e2c0bbb4ea833b815b5dc78",
+    "paper/stress_table.tex": "32b42a4484f3403691679b8c2ee8b3cc65f1143c84ea36902e68500738098046",
+    "paper/figures/theoretical_comparison.pdf": "d5710e8b6fdc4a7eb26f0723afecb7a6894b440d17eb03dc9ac778047e106fca",
+    "paper/figures/weak_rank_coverage.pdf": "63f2e9d57bbe64c3dfa4a616a09c75c02f628304a57aa9095c8b7263ba108788",
+    "theory/diagonal_minimax.md": "ad4fca89f03f1fa40eefc9bb1eca5bc2727ddd6682e5cfb8ccb001093ce9e738",
+    "theory/theorem_statements.md": "8d925f9d1b29ebfe2c1e2f3f44973a5704c97a3efffea61e6681fd0d9305be4b",
+    "literature/literature_review.md": "00e53fe89e360b86480de194d80a38072bc707cc44aa276a3e61f6992486499b",
+    "literature/novelty_matrix.json": "84cb553bd9bf7e671135aa864d3e4d01d73fe904a51e82d16945ce9bad451b51",
+    "simulations/results/summary.csv": "98ceba7fbeb90c46949427713c8b0436fbaa7dadcab4265e9c8b82613ddb67d5",
+    "simulations/results/diagonal_benchmark.csv": "e6b248b8ced6f1710a29eff4a1ea8730ad596399f8cf5b3a1db9b89025029ce6",
+    "simulations/results/diagonal_benchmark_checks.json": "c8a3354526fb6e762af08b784ceac343ef987bce007245bf7ac06fc6e2b5ac4e",
+    "simulations/results/run_manifest.json": "43ec18bb588307489003c02d1e16d5713c11615d7a0f2478881d07a468ade065",
+    "simulations/results/analysis_manifest.json": "dee77df5e61fedc66e001930ca50410d3b2f9db8135d6f44d9163260b6402543",
+    "notes/decision_checkpoint.md": "71ca7f46039d9955444c6c6988c492c5e463a3ddc7d528892642e7e7dd36b671",
+    "notes/final_audit.md": "15bfcc7e07a94b240b1424c82c4ec2c4a2f0fc79f2182291694fa36d43edf68d",
+    "notes/guideline_compliance.md": "292ab2f96b8e66a884a684f5dfcb8400921a04ab0355cc5d51b1c28719a6a917",
+    "notes/guidelines.txt": "be2d6ebc01feb2df1d3e9153abdf91c137703134cc0ed30d4f84b3e2d57afe4c",
+    "notes/verification.json": "1b4e3e90ab8c7b772f3e1e3d8cef72efe45e9749fe687ae40ee2514f28e04315"
+  }
+}

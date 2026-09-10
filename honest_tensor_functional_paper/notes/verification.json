@@ -1,0 +1,50 @@
+{
+  "verified_utc": "2026-09-09T20:12:40.363608+00:00",
+  "status": "PASS",
+  "pdf_pages": 22,
+  "counts": {
+    "theorems": 6,
+    "propositions": 1,
+    "lemmas": 5,
+    "proofs": 12,
+    "figures": 2,
+    "tables": 6,
+    "bibliography_entries": 44,
+    "cited_references": 29,
+    "closest_papers": 20
+  },
+  "build_issues": [],
+  "missing_citations": [],
+  "missing_references": [],
+  "unreferenced_equations": [],
+  "simulation": {
+    "configurations": 175,
+    "method_rows": 817,
+    "repetitions": 2000,
+    "iid_gaussian_configs": 172,
+    "original_result_hash_matches": true,
+    "scientific_code_hashes_match": true,
+    "coverage_uncertainty_consistent": true,
+    "width_mcse_zero": true
+  },
+  "diagonal_benchmark_checks": {
+    "status": "PASS",
+    "enumerated_support_pairs": 3136,
+    "enumeration_moment": 1.2650280716038331,
+    "hypergeometric_moment": 1.2650280716038333,
+    "grid_cases": 24,
+    "max_log_second_moment": 0.24850908383527515,
+    "universal_log_bound": 0.25,
+    "scope": "Diagonal observations only; full-tensor likelihood has overlap power K."
+  },
+  "reused_unchanged": {
+    "simulations/code/intervals.py": true,
+    "simulations/code/run_simulations.py": true,
+    "simulations/results/summary.csv": true,
+    "simulations/results/configurations.json": true
+  },
+  "theory_checker_note": "Original simulation-time checker predates its exact-image addition; the prior-stage audit records that change. The scientific simulation algorithm is unchanged.",
+  "analysis_source_and_artifact_hashes_match": true,
+  "pdf_sha256": "b5fe6a9cdc230f5fa5dd43b850739550688240b526eff9adb9d73ab793947c8f",
+  "limits": "Mechanical and numerical checks are not independent peer review, a proof certificate, or a novelty guarantee."
+}

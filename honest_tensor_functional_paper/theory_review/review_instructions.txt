@@ -1,0 +1,1008 @@
+Theory review
+
+Assume you are a senior theoretical statistician, probabilist, machine-learning theorist, and mathematical referee with expertise in asymptotic theory, high-dimensional statistics, empirical processes, concentration inequalities, random matrix theory, robust statistics, optimization, semiparametric inference, and statistical learning theory.
+The manuscript already contains a set of theoretical results.
+Your task is to perform a complete, adversarial mathematical audit of every theoretical result in the paper.
+The goals are to:
+verify that every theorem is mathematically correct;
+verify that every assumption is actually sufficient;
+identify assumptions that are unnecessary or stronger than needed;
+determine whether stronger results can be established under weaker assumptions;
+determine whether convergence rates can be sharpened;
+identify missing intermediate lemmas;
+produce a complete step-by-step proof of every theorem;
+verify all external mathematical results used in the proofs;
+search for counterexamples when assumptions are removed;
+clearly distinguish proved results from plausible conjectures.
+Treat the existing manuscript as a draft mathematical argument, not as authoritative truth.
+Do not assume that a theorem is correct merely because it appears in the paper.
+Do not preserve an assumption merely because it was used in an earlier proof.
+Do not claim a stronger theorem unless you can actually prove it.
+The objective is to obtain the strongest rigorously defensible version of the theory.
+
+1. Reconstruct the complete mathematical framework
+Before checking any proof, reconstruct the statistical model independently.
+Define precisely:
+Z1,…,Zn,Z_1,\ldots,Z_n,
+the probability law
+Zi∼Pθ⋆,Z_i\sim P_{\theta^\star},
+parameter space
+θ⋆∈Θ,\theta^\star\in\Theta,
+estimator
+θ^=A(Z1,…,Zn),\widehat\theta = \mathcal A(Z_1,\ldots,Z_n),
+loss
+L(θ^,θ⋆),L(\widehat\theta,\theta^\star),
+and all relevant dimensions such as
+n,p,d,r,s,T.n,\quad p,\quad d,\quad r,\quad s,\quad T.
+Explicitly identify:
+observed variables;
+latent variables;
+probability space;
+parameter space;
+nuisance parameters;
+structural constraints;
+identifiability conditions;
+asymptotic regime;
+dependence structure;
+tail conditions;
+smoothness conditions;
+contamination model;
+tuning parameters.
+Write the full setup in one mathematically coherent section before analyzing individual results.
+
+2. Create a complete theorem inventory
+List every:
+theorem;
+proposition;
+lemma;
+corollary;
+technical claim used inside proofs.
+Create:
+ID
+Result
+Main conclusion
+Assumptions
+Depends on
+Current status
+
+Use status labels:
+VERIFIED
+Complete proof checked.
+CORRECT BUT NOT SHARP
+Proof is valid, but result can likely be strengthened.
+REQUIRES REVISION
+Statement or assumptions need modification.
+INCOMPLETE
+Proof has unresolved steps.
+FALSE AS STATED
+Counterexample or proof failure found.
+CONJECTURED
+Plausible but not established.
+Do not leave any major theoretical result unclassified.
+
+3. Build a dependency graph
+Construct the logical structure:
+A1,…,AkA_1,\ldots,A_k ⇓\Downarrow Lemma 1→Lemma 2→Proposition 1\text{Lemma 1} \rightarrow \text{Lemma 2} \rightarrow \text{Proposition 1} ⇓\Downarrow Theorem 1→Corollary 1.\text{Theorem 1} \rightarrow \text{Corollary 1}.
+Identify which results are foundational.
+A mistake in an early lemma may invalidate several downstream results.
+Use this dependency graph throughout the audit.
+
+4. Audit every assumption individually
+For every assumption AjA_j, answer:
+Exact statement
+Write it mathematically.
+Where is it used?
+Identify the exact proof step.
+Why is it needed?
+Explain the mathematical role.
+Is it actually necessary?
+Determine whether the proof still works without it.
+Can it be weakened?
+Find a weaker condition Aj′A_j' such that
+Aj  ⟹  Aj′A_j \implies A_j'
+but not conversely.
+Is there a counterexample without it?
+Attempt to construct one.
+Is the assumption standard?
+Compare with closely related theory.
+Does it conflict with another assumption?
+Check compatibility.
+Create:
+Assumption
+Used in
+Necessary?
+Can weaken?
+Candidate weaker assumption
+Counterexample without it
+
+
+5. Avoid keeping assumptions merely because they simplify proofs
+For each assumption, distinguish:
+STRUCTURAL
+Needed for identifiability or existence.
+TECHNICAL BUT PROBABLY NECESSARY
+Required for a central probabilistic argument.
+PROOF CONVENIENCE
+Used because it makes the proof easy.
+LIKELY REDUNDANT
+Appears unnecessary.
+Prioritize removing or weakening assumptions in the last two categories.
+
+6. Check identifiability before consistency
+For every parameter or estimand, verify identifiability.
+Determine whether
+Pθ1=Pθ2P_{\theta_1} = P_{\theta_2}
+can occur when
+θ1≠θ2.\theta_1\neq\theta_2.
+If the model is identifiable only up to an equivalence class,
+θ1∼θ2,\theta_1\sim\theta_2,
+then reformulate the loss and theorem.
+Examples include:
+sign;
+rotation;
+permutation;
+scaling;
+label switching.
+Do not prove consistency for an unidentifiable object.
+
+7. Re-derive every theorem independently
+For each theorem:
+ignore the existing proof initially;
+determine what mathematical machinery should prove the result;
+derive the proof independently;
+compare with the manuscript proof;
+reconcile differences.
+This helps detect arguments that look plausible only because earlier derivations were followed mechanically.
+
+8. Produce step-by-step proofs
+For every major theorem, write a complete proof.
+Do not write:
+“The result follows from standard arguments.”
+Instead explicitly state the argument.
+A proof should have the structure:
+Step 1 — Establish event
+Define
+En\mathcal E_n
+such that
+P(En)≥1−δn.P(\mathcal E_n) \ge 1-\delta_n.
+Step 2 — Control stochastic term
+Derive
+sup⁡θ∈Θ∣(Pn−P)fθ∣≤rn.\sup_{\theta\in\Theta} |(P_n-P)f_\theta| \le r_n.
+Step 3 — Use structural condition
+Apply convexity, restricted eigenvalue condition, rank constraint, etc.
+Step 4 — Derive deterministic inequality
+For example,
+c∥θ^−θ⋆∥22≤2rn∥θ^−θ⋆∥1.c\|\widehat\theta-\theta^\star\|_2^2 \le 2r_n\|\widehat\theta-\theta^\star\|_1.
+Step 5 — Simplify
+Obtain final rate.
+Step 6 — Verify probability statement
+Conclude
+P(∥θ^−θ⋆∥≤Crn)≥1−δn.P \left( \|\widehat\theta-\theta^\star\| \le Cr_n \right) \ge 1-\delta_n.
+Use whatever structure is appropriate to the actual theorem.
+
+9. Explicitly justify every inequality
+Whenever a proof uses
+a≤b,a\le b,
+identify the reason.
+Examples:
+Cauchy–Schwarz;
+Hölder;
+Jensen;
+triangle inequality;
+Weyl's inequality;
+Davis–Kahan;
+Bernstein;
+Hoeffding;
+Hanson–Wright;
+matrix Bernstein;
+Markov;
+Chebyshev;
+Slutsky;
+continuous mapping;
+symmetrization;
+contraction;
+peeling;
+covering-number bounds.
+Do not allow unexplained transitions.
+
+10. Verify the conditions of every external theorem
+Whenever using an external result, write:
+External result
+The exact theorem.
+Required assumptions
+List them.
+Mapping to our notation
+Identify each object.
+Verification
+Show every required assumption holds.
+For example:
+Matrix Bernstein requires independent mean-zero random matrices XiX_i with
+∥Xi∥op≤L.\|X_i\|_{\mathrm{op}}\le L.
+We verify mean-zero by ...
+We verify boundedness by ...
+Do not invoke a theorem unless all assumptions are checked.
+
+11. Search for hidden assumptions
+Look for assumptions introduced implicitly inside proofs.
+Examples:
+invertibility;
+compactness;
+uniqueness of optimizer;
+differentiability;
+bounded eigenvalues;
+positive eigengap;
+finite variance;
+independence;
+continuity;
+exchangeability.
+If a proof requires it, it must be explicitly stated or derived.
+
+12. Check whether independence is truly needed
+If the theory assumes
+Z1,…,Zn∼iidP,Z_1,\ldots,Z_n \stackrel{iid}{\sim} P,
+ask whether independence can be replaced by:
+martingale differences;
+mixing;
+exchangeability;
+clustered observations;
+weak dependence.
+Determine exactly which proof step uses independence.
+If only concentration is required, investigate appropriate dependent concentration inequalities.
+
+13. Relax tail assumptions where possible
+If the paper assumes sub-Gaussian variables, examine whether results can hold under:
+Sub-exponential tails
+∥X∥ψ1<∞.\|X\|_{\psi_1}<\infty.
+Finite qq-th moments
+E∣X∣q<∞.E|X|^q<\infty.
+Finite variance
+EX2<∞.E X^2<\infty.
+Heavy tails with robustification
+Determine how the rate changes under weaker tails.
+For example, assess whether
+log⁡pn\sqrt{\frac{\log p}{n}}
+becomes
+(log⁡pn)1−1/q\left(\frac{\log p}{n}\right)^{1-1/q}
+or another form.
+Do not guess the rate; derive it.
+
+14. Relax boundedness assumptions
+If the proof assumes
+∣Xi∣≤M|X_i|\le M
+almost surely, determine whether this can be replaced by moment or Orlicz-norm control.
+Boundedness is often stronger than necessary.
+Identify which concentration inequality should replace the bounded version.
+
+15. Relax Gaussian assumptions
+If
+Xi∼N(0,Σ)X_i\sim N(0,\Sigma)
+is assumed, determine whether the proof really needs Gaussianity or only:
+isotropy;
+sub-Gaussianity;
+elliptical symmetry;
+finite fourth moment;
+concentration of quadratic forms.
+If Gaussianity is used only through a concentration inequality, seek a more general result.
+
+16. Investigate covariance assumptions
+If the theory assumes
+cI⪯Σ⪯CI,cI \preceq \Sigma \preceq CI,
+determine whether both bounds are required.
+Could the result instead depend explicitly on
+λmin⁡(Σ),λmax⁡(Σ),κ(Σ)?\lambda_{\min}(\Sigma), \qquad \lambda_{\max}(\Sigma), \qquad \kappa(\Sigma)?
+A theorem with explicit condition-number dependence may be more general.
+
+17. Investigate rank assumptions
+If
+rank⁡(Θ⋆)=r\operatorname{rank}(\Theta^\star)=r
+is assumed exactly, determine whether the theorem can extend to approximate low rank.
+For example,
+∑j>rσj(Θ⋆)\sum_{j>r}\sigma_j(\Theta^\star)
+may produce an approximation-error term.
+Seek a result of the form
+∥Θ^−Θ⋆∥F≤rn⏟estimation+ar(Θ⋆)⏟approximation.\|\widehat\Theta-\Theta^\star\|_F \le \underbrace{r_n}_{\text{estimation}} + \underbrace{a_r(\Theta^\star)}_{\text{approximation}}.
+This can substantially strengthen generality.
+
+18. Investigate exact sparsity assumptions
+If
+∥θ⋆∥0=s,\|\theta^\star\|_0=s,
+consider approximate sparsity such as
+θ⋆∈ℓq(R),0<q<1.\theta^\star\in\ell_q(R), \qquad 0<q<1.
+Determine whether the result extends to an oracle inequality or approximation-error bound.
+
+19. Investigate known structural parameters
+If theory assumes known:
+rank rr;
+sparsity ss;
+noise level σ\sigma;
+contamination fraction ϵ\epsilon;
+ask whether the procedure can adapt to unknown values.
+A stronger result may establish adaptation without degrading the rate substantially.
+
+20. Investigate tuning-parameter dependence
+If the theorem requires
+λ=Cσlog⁡pn,\lambda = C\sigma \sqrt{\frac{\log p}{n}},
+ask:
+is CC known?
+is σ\sigma known?
+can λ\lambda be chosen data-adaptively?
+does the theorem survive approximate tuning?
+Seek results such as:
+c1λn≤λ≤c2λn.c_1\lambda_n \le \lambda \le c_2\lambda_n.
+This is often more practical than requiring one exact tuning value.
+
+21. Check whether asymptotic results can become finite-sample results
+If the manuscript proves only
+θ^⟶pθ⋆,\widehat\theta \overset p\longrightarrow \theta^\star,
+ask whether a nonasymptotic statement can be established:
+P(∥θ^−θ⋆∥≤r(n,p,δ))≥1−δ.P \left( \|\widehat\theta-\theta^\star\| \le r(n,p,\delta) \right) \ge 1-\delta.
+Prefer explicit finite-sample results when feasible.
+They can often imply consistency as a corollary.
+
+22. Check whether consistency can be upgraded to a rate
+If
+θ^−θ⋆=op(1),\widehat\theta-\theta^\star=o_p(1),
+determine whether the proof machinery yields
+∥θ^−θ⋆∥=Op(rn).\|\widehat\theta-\theta^\star\| = O_p(r_n).
+Do not stop at qualitative consistency if a quantitative rate is available.
+
+23. Check whether a rate can be upgraded to asymptotic distribution
+If
+ψ^−ψ⋆=Op(n−1/2),\widehat\psi-\psi^\star = O_p(n^{-1/2}),
+investigate whether
+n(ψ^−ψ⋆)⟶dN(0,V).\sqrt n (\widehat\psi-\psi^\star) \overset d\longrightarrow N(0,V).
+Identify:
+linear expansion;
+influence function;
+stochastic remainder;
+variance estimator.
+If feasible, derive:
+ψ^−ψ⋆=1n∑i=1nϕ(Zi)+op(n−1/2).\widehat\psi-\psi^\star = \frac1n \sum_{i=1}^n \phi(Z_i) + o_p(n^{-1/2}).
+24. Check whether asymptotic normality can be made uniform
+Instead of only pointwise
+n(ψ^−ψ)⇒N(0,V),\sqrt n (\widehat\psi-\psi) \Rightarrow N(0,V),
+ask whether a uniform result holds over
+P∈P.P\in\mathcal P.
+For example,
+sup⁡P∈Psup⁡t∣P(n(ψ^−ψ(P))σ^≤t)−Φ(t)∣→0.\sup_{P\in\mathcal P} \sup_t \left| P \left( \frac{\sqrt n(\widehat\psi-\psi(P))} {\widehat\sigma} \le t \right) -\Phi(t) \right| \to0.
+A uniform result is considerably stronger for inference.
+
+25. Investigate Berry–Esseen-type bounds
+If asymptotic normality is proved, determine whether finite-sample normal approximation can be bounded:
+sup⁡t∣P(Zn≤t)−Φ(t)∣≤Crn.\sup_t \left| P(Z_n\le t)-\Phi(t) \right| \le C r_n.
+This can strengthen the inferential contribution.
+
+26. Investigate confidence intervals and testing
+If asymptotic normality exists, determine whether the paper can derive:
+CI1−α=ψ^±z1−α/2σ^n.CI_{1-\alpha} = \widehat\psi \pm z_{1-\alpha/2} \frac{\widehat\sigma}{\sqrt n}.
+Prove coverage:
+P{ψ⋆∈CI1−α}→1−α.P \{ \psi^\star\in CI_{1-\alpha} \} \to 1-\alpha.
+If feasible, derive hypothesis tests and local power.
+
+27. Investigate minimax optimality
+For every estimator rate
+rn,r_n,
+ask whether the rate is optimal over the relevant parameter class.
+Seek a lower bound:
+inf⁡θ~sup⁡θ∈ΘEθL(θ~,θ)≥crn.\inf_{\widetilde\theta} \sup_{\theta\in\Theta} E_\theta L(\widetilde\theta,\theta) \ge c r_n.
+Use:
+Fano;
+Le Cam;
+Assouad;
+testing reductions;
+packing arguments.
+Compare the lower bound to the estimator's upper bound.
+
+28. Verify parameter classes in minimax arguments
+Ensure the lower-bound class is the same as—or appropriately nested relative to—the upper-bound class.
+Do not claim minimax optimality if:
+lower bound uses a larger parameter class;
+loss differs;
+rank differs;
+noise assumptions differ;
+contamination model differs.
+
+29. Investigate oracle inequalities
+If the method uses structural regularization, consider proving
+R(θ^)−R(θ⋆)≤Cinf⁡θ∈Θ{R(θ)−R(θ⋆)+pen⁡(θ)}.R(\widehat\theta)-R(\theta^\star) \le C \inf_{\theta\in\Theta} \left\{ R(\theta)-R(\theta^\star) + \operatorname{pen}(\theta) \right\}.
+An oracle inequality may provide stronger adaptivity than a single fixed-class result.
+
+30. Investigate misspecification
+Do not assume the model is exactly correct unless necessary.
+If
+P0∉{Pθ:θ∈Θ},P_0\notin \{P_\theta:\theta\in\Theta\},
+define a pseudo-true target
+θ†=arg⁡min⁡θ∈ΘEP0ℓ(θ;Z).\theta^\dagger = \arg\min_{\theta\in\Theta} E_{P_0}\ell(\theta;Z).
+Determine whether consistency/rates can be proved for
+θ^→θ†.\widehat\theta\to\theta^\dagger.
+This can make the theory much more robust.
+
+31. Investigate contamination robustness
+If observations follow
+Pϵ=(1−ϵ)Pθ⋆+ϵQ,P_\epsilon = (1-\epsilon)P_{\theta^\star} + \epsilon Q,
+derive explicit dependence on ϵ\epsilon.
+Seek bounds such as
+∥θ^−θ⋆∥≲rn+ϵα.\|\widehat\theta-\theta^\star\| \lesssim r_n+\epsilon^\alpha.
+Determine whether the contamination term is minimax optimal.
+
+32. Investigate adversarial versus stochastic contamination
+If the theory handles random outliers, determine whether it extends to adversarial contamination.
+Clearly distinguish:
+Huber contamination\text{Huber contamination}
+from
+deterministic adversarial corruption.\text{deterministic adversarial corruption}.
+Do not conflate them.
+
+33. Investigate dependence on condition numbers and eigengaps
+If bounds contain
+1Δ\frac{1}{\Delta}
+or
+κ(Σ),\kappa(\Sigma),
+determine whether these factors are necessary.
+Construct near-degenerate examples to see whether dependence is unavoidable.
+
+34. Check dimensional regimes
+If the theorem assumes
+p=o(n),p=o(n),
+ask whether it can be extended to:
+p/n→γ∈(0,∞),p/n\to\gamma\in(0,\infty),
+or
+p≫n.p\gg n.
+Identify the exact proof obstruction.
+If the obstruction is only matrix invertibility, investigate regularized alternatives.
+
+35. Check whether logarithmic factors can be removed
+Suppose the rate is
+slog⁡pn.\sqrt{\frac{s\log p}{n}}.
+Ask whether the log⁡p\log p term is fundamental or proof-induced.
+Inspect:
+union bounds;
+covering numbers;
+entropy integrals.
+A crude union bound may introduce unnecessary logarithmic factors.
+Try sharper empirical-process or chaining arguments.
+
+36. Check whether union bounds are unnecessarily crude
+Whenever a proof uses
+P(⋃j=1pAj)≤∑j=1pP(Aj),P \left( \bigcup_{j=1}^p A_j \right) \le \sum_{j=1}^pP(A_j),
+determine whether:
+maximal inequalities;
+chaining;
+Gaussian comparison;
+entropy bounds;
+could yield sharper dependence.
+
+37. Check covering-number calculations
+If the proof uses
+N(ϵ,F,∥⋅∥),N(\epsilon,\mathcal F,\|\cdot\|),
+verify the covering-number bound carefully.
+Check:
+metric;
+radius;
+dimensional dependence;
+compactness;
+constants.
+Do not import a covering bound for the wrong norm.
+
+38. Check empirical-process arguments
+If using
+sup⁡f∈F∣(Pn−P)f∣,\sup_{f\in\mathcal F} |(P_n-P)f|,
+verify:
+measurability;
+envelope;
+entropy;
+stochastic equicontinuity;
+symmetrization conditions.
+Determine whether Donsker assumptions are really needed or whether modern high-dimensional Gaussian approximation is more suitable.
+
+39. Check stochastic equicontinuity
+Whenever a proof replaces
+θ^\widehat\theta
+with
+θ⋆\theta^\star
+inside a stochastic process, verify that the replacement is justified uniformly.
+Do not infer uniform behavior from pointwise convergence.
+
+40. Check Taylor expansions carefully
+For expansions such as
+∇Ln(θ^)=∇Ln(θ⋆)+∇2Ln(θ~)(θ^−θ⋆),\nabla L_n(\widehat\theta) = \nabla L_n(\theta^\star) + \nabla^2L_n(\widetilde\theta) (\widehat\theta-\theta^\star),
+verify:
+differentiability;
+location of θ~\widetilde\theta;
+invertibility of Hessian;
+uniform remainder control.
+If using higher-order expansions, bound every remainder.
+
+41. Check matrix perturbation arguments
+For eigenvector/subspace results, verify use of:
+Weyl;
+Davis–Kahan;
+Wedin;
+sin-Θ\Theta bounds.
+Explicitly define eigengap.
+For example,
+Δ=λr(M)−λr+1(M).\Delta = \lambda_r(M)-\lambda_{r+1}(M).
+A perturbation result may become vacuous if Δ→0\Delta\to0.
+
+42. Check tensor perturbation arguments
+For tensor decompositions, verify:
+identifiability;
+uniqueness;
+mode ordering;
+rank assumptions;
+factor normalization;
+spectral gaps.
+Do not assume matrix perturbation results transfer directly to tensors.
+
+43. Check optimization-statistics interaction
+If the estimator is defined by a nonconvex objective, separate:
+Statistical result
+Property of global minimizer.
+Computational result
+Whether the algorithm reaches it.
+If only a stationary point is guaranteed, determine whether the statistical theorem applies to stationary points.
+A stronger paper may need a joint statistical-computational guarantee.
+
+44. Investigate computational-statistical tradeoffs
+Ask whether achieving the statistical optimum requires computationally infeasible optimization.
+If so, characterize:
+statistically optimal rate\text{statistically optimal rate}
+versus
+polynomial-time achievable rate.\text{polynomial-time achievable rate}.
+This may itself be a theoretical contribution.
+
+45. Check initialization dependence
+If a computational theorem requires
+∥θ(0)−θ⋆∥≤R,\|\theta^{(0)}-\theta^\star\| \le R,
+determine whether this initialization is obtainable from data.
+An oracle initialization is not a practical guarantee.
+
+46. Audit probability statements
+Check distinctions among:
+almost surely,\text{almost surely}, in probability,\text{in probability}, in distribution,\text{in distribution}, with high probability.\text{with high probability}.
+Do not interchange them.
+For high-probability results, state explicit probability:
+1−δ1-\delta
+or
+1−c1e−c2t.1-c_1e^{-c_2t}.
+47. Audit OO, OpO_p, oo, and opo_p notation
+Check every asymptotic expression.
+For example,
+Xn=Op(an)X_n=O_p(a_n)
+does not imply
+EXn=O(an).EX_n=O(a_n).
+Check whether stochastic orders are combined correctly.
+
+48. Audit constants
+Whenever a theorem states
+∥θ^−θ⋆∥≤Crn,\|\widehat\theta-\theta^\star\| \le Cr_n,
+determine what CC depends on.
+Specify whether it depends on:
+covariance bounds;
+eigengap;
+moment constants;
+contamination;
+smoothness;
+rank.
+A “constant” must not silently depend on nn or pp.
+
+49. Check edge and boundary cases
+Test theorem statements at boundaries.
+Examples:
+r=1,r=1, s=1,s=1, p=1,p=1, ϵ=0,\epsilon=0, ϵ→ϵ⋆,\epsilon\to\epsilon^\star, λmin⁡(Σ)→0.\lambda_{\min}(\Sigma)\to0.
+The result should reduce sensibly to simpler cases.
+
+50. Compare with known special cases
+If the proposed theory generalizes known work, verify that under special assumptions it recovers the classical result.
+For example:
+ϵ=0\epsilon=0
+should reduce a robust estimator bound to the uncontaminated case.
+This is an important sanity check.
+
+51. Search actively for counterexamples
+For every weakened assumption, attempt to find a failure example.
+For example:
+Without eigengap
+Can eigenvectors become unidentifiable?
+Without restricted eigenvalue
+Can sparse regression become non-identifiable?
+Without finite variance
+Can asymptotic normality fail?
+Without smoothness
+Can the estimator lose its rate?
+Document these.
+A counterexample can justify why an assumption is genuinely necessary.
+
+52. Distinguish sufficient from necessary assumptions
+The theorem may require
+A1,A2,A3,A_1,A_2,A_3,
+but only A1,A2A_1,A_2 may be essential.
+Explicitly classify assumptions as:
+necessary;
+close to necessary;
+sufficient but probably not necessary;
+technical convenience.
+Do not imply necessity unless proved.
+
+53. Search for weaker theorem formulations
+Sometimes a strong target result requires restrictive assumptions, while a weaker but useful result holds much more generally.
+For example:
+Strong result
+n(θ^−θ⋆)⇒N(0,V)\sqrt n (\widehat\theta-\theta^\star) \Rightarrow N(0,V)
+under strong conditions.
+General result
+θ^→pθ⋆\widehat\theta \to_p \theta^\star
+under much weaker conditions.
+Consider presenting both.
+
+54. Build a hierarchy of results
+Where possible organize theory as:
+Theorem 1 — Identification
+Theorem 2 — Consistency under weak assumptions
+Theorem 3 — Nonasymptotic rate under stronger assumptions
+Theorem 4 — Asymptotic normality
+Theorem 5 — Minimax lower bound
+Corollary — Valid confidence interval
+This makes assumption/result tradeoffs transparent.
+
+55. Investigate whether results can hold uniformly over model classes
+Instead of a single fixed parameter θ⋆\theta^\star, seek:
+sup⁡θ∈ΘnPθ(L(θ^,θ)>Crn)→0.\sup_{\theta\in\Theta_n} P_\theta \left( L(\widehat\theta,\theta)>Cr_n \right) \to0.
+Uniform theory is generally stronger than pointwise theory.
+
+56. Investigate adaptivity
+If the optimal rate depends on unknown smoothness/rank/sparsity, determine whether the method adapts.
+For example,
+rn(s)r_n(s)
+with unknown ss.
+Can a data-driven procedure achieve
+rn(s)r_n(s)
+simultaneously over a range of ss?
+
+57. Investigate robustness–efficiency tradeoffs
+For robust estimators, determine whether stronger robustness reduces efficiency under the clean model.
+Quantify both if possible.
+For example:
+ARE⁡=VefficientVrobust.\operatorname{ARE} = \frac{V_{\text{efficient}}} {V_{\text{robust}}}.
+This can strengthen interpretation.
+
+58. Check semiparametric efficiency where relevant
+If estimating a low-dimensional functional
+ψ(P),\psi(P),
+investigate:
+tangent space;
+influence function;
+efficient influence function;
+semiparametric efficiency bound.
+Determine whether the proposed estimator attains that bound.
+
+59. Check bootstrap validity where relevant
+If bootstrap inference is used or proposed, prove its validity.
+For example:
+sup⁡t∣P∗(Tn∗≤t)−P(Tn≤t)∣→p0.\sup_t \left| P^\ast(T_n^\ast\le t) - P(T_n\le t) \right| \to_p0.
+Do not assume bootstrap validity automatically in high-dimensional or nonregular problems.
+
+60. Investigate nonregular cases
+Ask whether:
+parameter lies on boundary;
+eigengap can vanish;
+rank changes;
+support changes;
+nuisance is unidentified under null.
+Standard asymptotic normality may fail.
+Identify such cases explicitly.
+
+61. Check whether theorem conditions are observable
+Distinguish assumptions involving unknown theoretical quantities from conditions practitioners can diagnose.
+If an assumption is not testable, explain its theoretical role and practical limitation.
+
+62. Compare assumptions with closest literature
+For each major competing theorem, build:
+Paper
+Result
+Assumptions
+Rate
+Our assumptions
+Our rate
+
+Determine whether our result genuinely improves:
+rate;
+assumptions;
+dimensional regime;
+robustness;
+inference;
+adaptivity.
+Do not claim improvement when assumptions are stronger.
+
+63. Explicitly search for Pareto improvements
+A truly stronger theorem might simultaneously achieve:
+weaker assumptions+same rate\text{weaker assumptions} + \text{same rate}
+or
+same assumptions+better rate.\text{same assumptions} + \text{better rate}.
+But sometimes improvement in one dimension requires sacrifice in another.
+Clearly state the tradeoff.
+
+64. Do not over-strengthen results
+If weakening an assumption worsens the rate, report both versions.
+For example:
+Strong-tail theorem
+rn(1).r_n^{(1)}.
+Weak-moment theorem
+rn(2)>rn(1).r_n^{(2)}>r_n^{(1)}.
+This is preferable to pretending one theorem dominates in every regime.
+
+65. Produce proof sketches before full proofs
+For each theorem, first give a short proof roadmap:
+main decomposition;
+core stochastic bound;
+deterministic argument;
+conclusion.
+Then provide the complete proof.
+This makes hidden logical gaps easier to identify.
+
+66. Write every lemma needed for completeness
+If a proof depends on a result not sufficiently standard or not directly available from the literature, state and prove a new lemma.
+Do not bury essential mathematical steps inside paragraphs.
+
+67. Verify every lemma independently
+A lemma is not automatically correct because it is “technical.”
+For each lemma:
+check assumptions;
+derive proof;
+test edge cases;
+inspect constants;
+identify dependencies.
+
+68. Verify corollaries truly follow
+For every corollary, explicitly substitute the additional assumptions into the parent theorem.
+Do not state a corollary that requires another hidden argument.
+
+69. Check theorem numbering and logical order
+Order results so that prerequisites appear before dependent results.
+A reader should not need a later lemma to understand an earlier theorem unless clearly indicated.
+
+70. Check proof modularity
+If the same probabilistic bound is used repeatedly, isolate it as a lemma.
+Avoid reproving similar results inconsistently in multiple places.
+
+71. Produce a theorem-strengthening matrix
+For each theorem create:
+Aspect
+Current theorem
+Possible stronger version
+Provable?
+Required new argument
+
+Include:
+weaker tails;
+weaker dependence;
+approximate sparsity/rank;
+finite-sample result;
+uniformity;
+adaptivity;
+minimax optimality;
+inference.
+
+72. Produce an assumption-relaxation matrix
+For each assumption:
+Current assumption
+Proposed relaxation
+Result under relaxation
+Rate change
+Proof difficulty
+
+This should make clear which assumptions can be safely weakened.
+
+73. Produce a counterexample appendix
+For assumptions that cannot be removed, provide concise counterexamples where possible.
+Example structure:
+Without A3A_3, choose PP such that ...
+Then
+θ1≠θ2\theta_1\neq\theta_2
+but
+Pθ1=Pθ2,P_{\theta_1}=P_{\theta_2},
+so consistent estimation is impossible.
+This greatly strengthens the theoretical justification.
+
+74. Produce explicit theorem comparisons
+For every strengthened theorem, state:
+Original
+Assumptions A⇒Result R.\text{Assumptions } A \Rightarrow \text{Result } R.
+Revised
+Assumptions A′⇒Result R′.\text{Assumptions } A' \Rightarrow \text{Result } R'.
+Then explain whether:
+A′⊊AA'\subsetneq A
+or
+R′ is stronger than R.R'\text{ is stronger than }R.
+Be mathematically precise.
+
+75. Separate verified improvements from research opportunities
+Classify strengthening ideas as:
+PROVED IMPROVEMENT
+Complete proof available.
+LIKELY PROVABLE
+Strong proof strategy exists but technical work remains.
+OPEN QUESTION
+Interesting but unresolved.
+FALSE
+Counterexample found.
+Only PROVED IMPROVEMENT should replace the theorem in the manuscript immediately.
+
+76. Perform an adversarial referee attack on each theorem
+For every main theorem, imagine a skeptical theoretical-statistics referee asking:
+Why is this assumption needed?
+Is the result sharp?
+Why not allow heavier tails?
+What happens under misspecification?
+Is the rate minimax?
+Is the result uniform?
+Is the dimensional regime meaningful?
+Does the theorem actually apply to the motivating data?
+Is the result just a corollary of known theory?
+Answer each question mathematically.
+
+77. Determine which results are genuinely publication-level
+Classify each main theorem as:
+FOUNDATIONAL
+Central new theory.
+SUBSTANTIAL
+Meaningful theoretical contribution.
+SUPPORTING
+Useful but not itself major.
+ROUTINE
+Mostly standard consequence.
+A paper should not present a routine lemma as a central theoretical contribution.
+
+78. Identify the strongest theorem in the paper
+State:
+The strongest theoretical contribution is: ________.
+Explain:
+why it is new;
+what assumptions it relaxes;
+what rate/guarantee it establishes;
+why existing theory does not immediately imply it.
+
+79. Identify the weakest main theorem
+State:
+The weakest theoretical claim currently presented as a main contribution is: ________.
+Determine whether it should be:
+strengthened;
+demoted;
+removed;
+moved to appendix.
+
+80. Identify the theorem most worth strengthening
+Rank potential improvements by:
+Scientific impact×Technical feasibility.\text{Scientific impact} \times \text{Technical feasibility}.
+For each give:
+proposed stronger result;
+proof strategy;
+missing technical step;
+expected publication value.
+
+81. Update the manuscript theory only after verification
+Once proofs are complete:
+update assumptions;
+update theorem statements;
+update corollaries;
+update proof appendix;
+update theorem interpretations;
+update Abstract/Introduction claims;
+update simulations if theoretical predictions changed.
+Do not leave earlier stronger claims elsewhere in the manuscript.
+
+82. Produce complete polished proofs
+The final proof of every theorem should contain:
+Statement
+Assumptions
+Definitions
+Proof roadmap
+Detailed proof
+External results invoked
+Verification of external assumptions
+Final conclusion
+Optional remarks on sharpness
+Avoid logical gaps and undefined notation.
+
+83. Final theorem audit table
+Produce:
+Theorem
+Correct?
+Complete proof?
+Assumptions minimal?
+Rate sharp?
+Can strengthen?
+Final status
+
+
+84. Final assumption audit
+Produce:
+Assumption
+Needed?
+Used where?
+Weakened?
+Final version
+Justification
+
+No assumption should remain unexplained.
+
+85. Final proof-dependency audit
+Produce:
+Result
+Depends on
+Dependency verified?
+External theorem
+External assumptions verified?
+
+
+86. Final theoretical contribution comparison
+Construct:
+Topic
+Previous theory
+Original manuscript
+Final verified theory
+Improvement
+
+Use mathematical notation.
+This should show exactly what the final paper establishes.
+
+87. Final unresolved theory list
+Clearly separate:
+RESOLVED
+Proof complete.
+PARTIAL
+Some technical issue remains.
+OPEN PROBLEM
+Potential stronger result not proved.
+COUNTEREXAMPLE FOUND
+Proposed extension is false.
+Do not blur these categories.
+
+88. Final theoretical verdict
+Classify the theory as:
+A — RIGOROUS AND STRONG
+Main results verified, assumptions justified, proofs complete, and theoretical contribution is substantial.
+B — RIGOROUS BUT CAN BE STRENGTHENED
+Current theory is valid, while additional stronger results remain optional.
+C — IMPORTANT THEORETICAL REVISION REQUIRED
+One or more main results or assumptions need substantial revision.
+D — CENTRAL THEOREM NOT ESTABLISHED
+A major proof gap remains.
+E — CENTRAL CLAIM FALSE
+A counterexample or contradiction invalidates the main theory.
+Explain the verdict precisely.
+
+89. Final deliverables
+Produce all of the following:
+Reconstructed mathematical framework
+Complete theorem inventory
+Dependency graph
+Assumption-by-assumption audit
+Identifiability analysis
+Step-by-step proof of every theorem
+Step-by-step proof of every essential lemma
+Verification of every external theorem used
+Counterexamples for assumptions that cannot be removed
+Theorem-strengthening matrix
+Assumption-relaxation matrix
+Rate-sharpness assessment
+Minimax analysis where applicable
+Finite-sample strengthening where possible
+Inference strengthening where possible
+Uniform/adaptive theory assessment
+Comparison with closest theoretical literature
+Revised theorem statements
+Revised assumption set
+Publication-ready proofs
+Remaining open mathematical problems
+Final theoretical verdict
+
+Final principle
+The objective is not to defend the theory already written in the manuscript.
+The objective is to determine the strongest theorem that can actually be proved.
+For every result ask:
+Is it correct?Are all assumptions necessary?Can the assumptions be weakened?Can the conclusion be strengthened?Is the rate sharp?Can optimality be established?Does the proof contain any hidden gap?\boxed{ \begin{array}{c} \text{Is it correct?}\\[2mm] \text{Are all assumptions necessary?}\\[2mm] \text{Can the assumptions be weakened?}\\[2mm] \text{Can the conclusion be strengthened?}\\[2mm] \text{Is the rate sharp?}\\[2mm] \text{Can optimality be established?}\\[2mm] \text{Does the proof contain any hidden gap?} \end{array} }
+The preferred outcome is not necessarily the theorem with the most impressive statement.
+The preferred outcome is the strongest mathematically correct, fully proved, transparent, and defensible result that can survive scrutiny from an expert theoretical-statistics referee.
+Never upgrade a conjecture into a theorem merely because it appears plausible.
+Never preserve a stronger rate or weaker assumption unless the proof actually supports it.

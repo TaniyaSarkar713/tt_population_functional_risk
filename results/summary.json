@@ -1,0 +1,11 @@
+{
+  "mode": "full",
+  "seed": 20260907,
+  "geometry_all_match": true,
+  "mean_n_risk_over_d": 0.5794129824250519,
+  "exact_correct_max_risk": 0.0,
+  "oracle_ratio_mean": 1.0620973910562794,
+  "misordering_all_reversed": true,
+  "misordering_min_exact_improvement": 1.294196799801915,
+  "misordering_max_exact_improvement": 20.70714879683064
+}

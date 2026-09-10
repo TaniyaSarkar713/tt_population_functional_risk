@@ -1,0 +1,120 @@
+{
+  "status": "PASS",
+  "seed": 20260910,
+  "alpha_counterexample": {
+    "alpha": 0.9,
+    "t": 0.6,
+    "h": 0.1,
+    "worst_coverage": 0.1062091577623438,
+    "asserted_lower": 0.11163334976914029
+  },
+  "affine_optima": [
+    {
+      "a": 0.1,
+      "t": 0.0,
+      "radius": 0.1
+    },
+    {
+      "a": 1,
+      "t": 0.0,
+      "radius": 1
+    },
+    {
+      "a": 2,
+      "t": 0.7714485949246738,
+      "radius": 1.7425932410195013
+    },
+    {
+      "a": 10,
+      "t": 0.9900705266867427,
+      "radius": 1.9502232033934834
+    }
+  ],
+  "cubic_mixture": [
+    {
+      "p": 1,
+      "sign_pairs": 4,
+      "second_moment": 1.0000250003125026,
+      "cubic_mgf": 1.0000250003125026,
+      "norm_divided_by_cap": 0.005,
+      "target_over_tau": 0.005
+    },
+    {
+      "p": 2,
+      "sign_pairs": 16,
+      "second_moment": 1.0000312514767784,
+      "cubic_mgf": 1.000054766700332,
+      "norm_divided_by_cap": 0.00735733678362835,
+      "target_over_tau": 0.005303300858899106
+    },
+    {
+      "p": 4,
+      "sign_pairs": 256,
+      "second_moment": 1.000035593241611,
+      "cubic_mgf": 1.000084738181875,
+      "norm_divided_by_cap": 0.009926980673142616,
+      "target_over_tau": 0.005208333333333332
+    },
+    {
+      "p": 6,
+      "sign_pairs": 4096,
+      "second_moment": 1.0000372886296307,
+      "cubic_mgf": 1.0001024699246366,
+      "norm_divided_by_cap": 0.011425054284736514,
+      "target_over_tau": 0.005001041558182322
+    },
+    {
+      "p": 8,
+      "sign_pairs": 65536,
+      "second_moment": 1.0000381901414013,
+      "cubic_mgf": 1.0001145904841817,
+      "norm_divided_by_cap": 0.012457545048688528,
+      "target_over_tau": 0.0048045380400264515
+    },
+    {
+      "p": 10,
+      "sign_pairs": 1048576,
+      "second_moment": 1.0000387493145055,
+      "cubic_mgf": 1.0001236395342397,
+      "norm_divided_by_cap": 0.013233397051447502,
+      "target_over_tau": 0.004631105438433096
+    }
+  ],
+  "rank_one_profiles": 120,
+  "approximation_cases": 10000,
+  "max_approximation_excess": -0.11979173284687206,
+  "gaussian_thresholds": [
+    {
+      "m": 1,
+      "exact": 1.9599639845400545,
+      "original": 2.716203031481239,
+      "event_coverage": 0.9500000000000001
+    },
+    {
+      "m": 2,
+      "exact": 2.236476644557792,
+      "original": 2.9604143746015965,
+      "event_coverage": 0.95
+    },
+    {
+      "m": 128,
+      "exact": 3.5396562098881996,
+      "original": 4.133015779798948,
+      "event_coverage": 0.95
+    },
+    {
+      "m": 8192,
+      "exact": 4.517365789278421,
+      "original": 5.039800155044489,
+      "event_coverage": 0.9499999999999998
+    }
+  ],
+  "geometry_cases": 200,
+  "refined_geometry_max_ratio": 0.5610582516652753,
+  "finite_variance_counterexample": {
+    "single_outlier_probability": 0.09048479112691021,
+    "bad_center": 3.106595209145614,
+    "selected_radius": 0.48111560830316624
+  },
+  "limits": "Finite checks supplement the complete proofs. No full exponential scan benchmark or claim of independent formal verification."
+}

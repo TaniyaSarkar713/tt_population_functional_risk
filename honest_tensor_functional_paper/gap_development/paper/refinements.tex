@@ -1,0 +1,247 @@
+
+\section{Supporting refinements}\label{app:refinements}
+
+These separately calibrated extensions do not change the observation model of a lower bound by implication. The simulations retain the original Gaussian procedure.
+
+\subsection{Diagonal geometry}
+\begin{proposition}[Smaller rank coefficient]\label{prop:budget}
+In $\sum_i|a_i|^{2/K}\le D M^{2/K}$ one may take
+\[
+ D_{\Tu}=\min\left\{J_{\Tu}^{1-1/K},m^{1-1/K},
+                  (\prod_k\bar r_k)^{1/K}\right\}.
+\]
+For TT caps put $\bar r_0=\bar r_K=1$ and
+$\rho_k=\min(p_k,\bar r_{k-1}\bar r_k)$; one may take
+\[
+ D_{\TT}=\min\left\{J_{\TT}^{1-1/K},m^{1-1/K},
+                  (\prod_k\rho_k)^{1/K}\right\}.
+\]
+The nonlinear radius remains valid with coefficient $D$.
+\end{proposition}
+\noindent\emph{Roadmap.} Add ambient and mode-subspace bounds to the original expansion bound.
+\begin{proof}
+Bessel gives $\sum_i|a_i|^2\le M^2$; H\"older in dimension $m$ gives the second coefficient. For Tucker mode projectors $P_k$ put $\ell_{ki}=\norm{P_kv_{ki}}_2^2$. Projection leaves $A$ unchanged, so Cauchy--Schwarz and H\"older give
+\[
+ \sum_i|a_i|^{2/K}
+ \le M^{2/K}\sum_i\prod_k\ell_{ki}^{1/K}
+ \le M^{2/K}\prod_k(\sum_i\ell_{ki})^{1/K}
+ \le M^{2/K}\prod_k\bar r_k^{1/K}.
+\]
+The last step uses $\sum_i v_{ki}^\top P_kv_{ki}\le\operatorname{tr}P_k$.
+For TT cores, fixing the two bond indices of core $k$ expresses its physical fibers through at most $\bar r_{k-1}\bar r_k$ vectors. The mode rank is therefore at most $\rho_k$; the Tucker argument applies. Theorem~\ref{thm:diagonal} gives the first coefficient.
+\end{proof}
+For equal Tucker caps $r$ this supplies coefficient $r$, instead of $r^{(K-1)^2/K}$; optimal rank dependence is not established.
+For unit loading vectors with frame bounds $\sum_i v_{ki}v_{ki}^\top\preceq F_kI$, the original proof instead gives coefficient $J^{1-1/K}\prod_kF_k^{1/K}$. This follows by replacing each Bessel inequality by its frame bound. The direct variance must use the actual $\norm L_F^2$; the orthogonal structural formula is not asserted for these frames.
+
+\subsection{Exact affine benchmark}
+Let $Q_\alpha(\mu,v)$ be the smallest $h\ge0$ such that
+$\PP\{|N(\mu,v^2)|\le h\}\ge1-\alpha$, for $\mu,v\ge0$, with
+$Q_\alpha(\mu,0)=\mu$.
+
+\begin{proposition}[Structural range and fixed affine optimum]\label{prop:affine_exact}
+The range of $\psi$ on either cap class under \eqref{eq:loading} is exactly $[-h_0,h_0]$. Under \eqref{eq:equalL} and $0<\alpha<1/2$, set
+$a_0=M\sqrt{s_{\rm cap}/p}$. Among all honest full-data fixed-radius affine intervals, the optimal radius is
+\[
+ h_{\rm aff}^*=\min_{0\le t\le1}Q_\alpha(a_0(1-t),\tau t).
+\]
+Center $t\ip LZ$ attains the optimum. If $a_0\le z_{1-\alpha}\tau$, then $h_{\rm aff}^*=a_0$.
+\end{proposition}
+\noindent\emph{Roadmap.} Attain the structural bound, force bias and variance for any affine center, and reduce to a scalar optimization.
+\begin{proof}
+Let $T$ index the $s_{\rm cap}$ largest weights. The tensor
+$M\sum_{i\in T}w_iV_i/(\sum_{i\in T}w_i^2)^{1/2}$ has norm $M$, all constrained ranks at most $s_{\rm cap}$, and target $h_0$. Its signed scalar multiples attain the full interval; Lemma~\ref{lem:structural} gives the reverse inclusion.
+
+For center $\ip WZ+b$ put $t=\ip WL$ and $g_i=\ip W{E_i}-p^{-1/2}$.
+All $s_{\rm cap}$-sparse diagonal tensors of norm at most $M$ belong to the class. Opposite such tensors force an absolute mean error at least
+\[
+ |b|+M(\sum_{i=1}^{s_{\rm cap}}g_{(i)}^2)^{1/2}\ge a_0|1-t|.
+\]
+Indeed, the top-square sum is at least $s_{\rm cap}/p$ times the full sum, and
+$\norm g_2\ge|\sum_i g_i|/\sqrt p=|t-1|$.
+The noise standard deviation is $\tau\norm W_F\ge\tau|t|$.
+Confidence greater than one half forces $h$ to be at least the absolute mean error, by the normal median argument.
+For $h\ge\mu\ge0$ the probability
+$F(h;\mu,v)=\Phi((h-\mu)/v)+\Phi((h+\mu)/v)-1$
+decreases with $\mu$ and with $v>0$. For $\mu$, compare the normal densities. For $v$, its derivative is
+\[
+ -\{(h-\mu)\phi((h-\mu)/v)+(h+\mu)\phi((h+\mu)/v)\}/v^2\le0.
+\]
+Thus $h\ge Q_\alpha(a_0|1-t|,\tau|t|)$; zero variance follows directly.
+For $t<0$ this is at least $a_0$, and for $t>1$ it is at least
+$z_{1-\alpha/2}\tau$. Both endpoints are achievable. On $[0,1]$, center $t\ip LZ$ has exactly the asserted maximum bias and variance and attains the quantile bound. Continuity, including the zero-variance limit, gives a minimum.
+Finally $F(h;\mu,v)\le\Phi((h-\mu)/v)$ implies
+$Q_\alpha(\mu,v)\ge\mu+z_{1-\alpha}v$.
+If $a_0\le z_{1-\alpha}\tau$, every $t\in[0,1]$ requires radius at least $a_0$, attained at $t=0$.
+\end{proof}
+At cap one, $M=\tau\sqrt p$ and $\alpha=0.05$, the exact affine length is $2\tau$.
+The scalar bounded-normal-mean mechanism is classical \citep{stark1992}; the tensor reduction is proved above.
+
+\subsection{Noise envelopes and approximate ranks}
+Define $\Theta^\eta=\{A:\exists B\in\Theta(M,\bar r),\ \norm{A-B}_F\le\eta\}$ for supplied $\eta\ge0$.
+\begin{proposition}[Envelope and approximation calibration]\label{prop:envelope}
+Suppose $d_i=a_i+e_i$ and, uniformly over the asserted class,
+$\PP(\max_i|e_i|\le\lambda_0)\ge1-\alpha$.
+For any measurable $\Lambda\ge\lambda_0$, the threshold center has an honest radius
+\[
+ \norm w_\infty D M^{2/K}(2\Lambda)^{1-2/K}+\eta
+\]
+on $\Theta^\eta$. The structural radius is $h_0+\eta$.
+Data-dependent selection between these two intervals is valid.
+A direct Gaussian alternative needs its own calibration and deterministic selection or joint error allocation.
+\end{proposition}
+\noindent\emph{Roadmap.} Use one event for every allowed threshold and a residual Lipschitz bound.
+\begin{proof}
+On the envelope event, Lemma~\ref{lem:soft} holds simultaneously for all $\Lambda\ge\lambda_0$, proving the assertion at $\eta=0$.
+For fixed $e$, the residual map
+$f_e(x)=\soft_\Lambda(x+e)-x=e-\operatorname{clip}(x+e,[-\Lambda,\Lambda])$
+is one-Lipschitz. For $a_i=\ip A{V_i}$ and $b_i=\ip B{V_i}$,
+\[
+ |\sum_iw_i\{f_{e_i}(a_i)-f_{e_i}(b_i)\}|
+ \le\norm w_2\norm{a-b}_2\le\norm{A-B}_F.
+\]
+The last step is Bessel. Add the threshold error at $B$.
+Also $|\psi(A)-\psi(B)|\le\norm L_F\norm{A-B}_F\le\eta$.
+Both intervals cover on the same event, proving the selection assertion.
+\end{proof}
+For iid Gaussian errors the exact threshold is
+$\tau\Phi^{-1}(\{1+(1-\alpha)^{1/m}\}/2)$,
+by multiplying the $m$ probabilities $2\Phi(\lambda_0/\tau)-1$.
+Dependent Gaussian margins with variances at most $\tau^2$ admit
+$\tau\Phi^{-1}(1-\alpha/(2m))$ by Bonferroni.
+Marginal bounds $\E e^{te_i}\le e^{t^2v^2/2}$ give
+$v\sqrt{2\log(2m/\alpha)}$ by Chernoff and a union bound.
+Bounds $\E|e_i|^a\le v^a$ give $v(m/\alpha)^{1/a}$ by Markov and a union bound.
+Independence is unnecessary for these three union-bound calibrations.
+
+Writing $\mathcal D_L A=(\ip A{V_i})_i$, the same proof gives
+\[
+ |\widehat\psi-\psi(A)|\le\inf_B\left\{
+ \norm w_\infty D_B\norm B_F^{2/K}(2\Lambda)^{1-2/K}
+ +\norm{\mathcal D_L(A-B)}_2\right\}.
+\]
+The infimum ranges over tensors with their indicated valid budget $D_B$.
+Its unknown value is not an adaptive confidence radius.
+
+For Tucker approximation let $P_k$ be any leading mode singular-space projector of dimension $\min(\bar r_k,p_k)$ and put $B=(\bigotimes_kP_k)A$.
+The lifted projections commute. The identity
+$I-\prod_kP_k=\sum_k(\prod_{\ell<k}P_\ell)(I-P_k)$
+has summands with mutually orthogonal ranges.
+Their squared residual norms add, each at most $\norm{(I-P_k)A}_F^2$.
+Thus
+\[
+ \norm{A-B}_F^2\le\sum_k\sum_{j>\bar r_k}\sigma_j(A_{(k)})^2,
+ \qquad \norm B_F\le\norm A_F.
+\]
+This holds without a spectral gap, including ties.
+The distance-class proposition also covers TT approximation.
+
+\subsection{Finite variance and bounded row corruption}
+\begin{proposition}[Replicate median calibration]\label{prop:mom}
+Let clean tensor replicates be independent with common mean $A$, and every prescribed contraction have variance at most known $v^2$. Allow at most $c$ adversarial replacements of entire replicates. Coordinates within a replicate may be dependent. Choose an odd block count $b$ with
+\[
+ b\ge8c,\qquad b\ge32\log(m/\alpha),\qquad n\ge2b,
+ \qquad k=\lfloor n/b\rfloor.
+\]
+Partition the first $bk$ replicates into fixed disjoint blocks.
+For coordinatewise medians $d_i$ of the block means,
+\[
+ \PP(\max_i|d_i-a_i|>2v/\sqrt k)\le\alpha.
+\]
+Thus Proposition~\ref{prop:envelope} applies. For the smallest admissible odd $b$,
+the threshold has order
+\[
+ O\{v\sqrt{c/n+\log(m/\alpha)/n}\}.
+\]
+\end{proposition}
+\noindent\emph{Roadmap.} Bound clean-block errors, count corrupted blocks deterministically and concentrate the original bad-block count.
+\begin{proof}
+Chebyshev bounds a clean block's error probability at $2v/\sqrt k$ by $1/4$.
+For a fixed coordinate let $I_j$ be its original clean-block error indicators.
+They are independent and $\sum_j\E I_j\le b/4$.
+At most $c$ summaries change even for an adaptive adversary.
+If the final median errs, $\sum_j I_j\ge b/2-c\ge3b/8$.
+For a Bernoulli $I$, $h(t)=\log\E e^{t(I-\E I)}$ satisfies
+$h(0)=h'(0)=0$ and $h''(t)\le1/4$, the variance of a tilted Bernoulli.
+Hence $h(t)\le t^2/8$.
+Independence and Markov give
+\[
+ \PP\{\sum_j(I_j-\E I_j)\ge b/8\}
+ \le e^{-tb/8+bt^2/8}=e^{-b/32}\quad(t=1/2).
+\]
+A union bound over $m$ coordinates proves the claim. Since $k\ge n/(2b)$,
+the rate follows, including the fixed rounding constants in $b$.
+\end{proof}
+Median-of-means calibration is classical \citep{devroye2016}.
+For independent Bernoulli replacements of probability $\epsilon$, let
+$c=\lceil2n\epsilon+2\log(1/\delta)\rceil$.
+Their count satisfies $\E2^N=(1+\epsilon)^n\le e^{n\epsilon}$, giving
+$\PP(N>c)\le e^{n\epsilon-c\log2}\le\delta$.
+With envelope error budget $\alpha_0$, coverage is at least
+$1-\alpha_0-\delta$ when the block conditions hold.
+These sufficient corruption conditions are not a sharp breakdown or contamination-minimax result.
+
+\subsection{Unknown Gaussian variance}
+\begin{proposition}[Independent residual calibration]\label{prop:variance}
+Retain $n\ge2$ iid Gaussian full-tensor replicates with unknown noise standard deviation $\sigma>0$.
+Let $d_{ji}=\ip{W_j}{V_i}$, $\bar d_i=n^{-1}\sum_jd_{ji}$, $\nu=m(n-1)$, and
+\[
+ S^2=\nu^{-1}\sum_i\sum_j(d_{ji}-\bar d_i)^2,\qquad
+ \sigma_U=S\sqrt{\nu/\chi^2_{\nu,\delta}},\quad 0<\delta<\alpha.
+\]
+The denominator is the lower $\delta$ chi-square quantile.
+Compute the original three intervals with $\tau_U=\sigma_U/\sqrt n$ and
+$\alpha_0=\alpha-\delta$, choosing the smallest using only $S$ and supplied quantities.
+The selected interval is honest at level $1-\alpha$.
+For fixed $\delta$ and $\nu\to\infty$, $\sigma_U/\sigma\to1$ in probability,
+and the nonlinear expected-length order is preserved.
+\end{proposition}
+\noindent\emph{Roadmap.} Orthogonally separate means and residuals, then condition on a conservative scale estimate.
+\begin{proof}
+An orthogonal transformation in the replicate index separates each sample mean from its $n-1$ residual coordinates. Joint Gaussianity and loading orthonormality give independence of all residual and mean coordinates.
+Therefore $\nu S^2/\sigma^2\sim\chi^2_\nu$, independent of the vector of means, and
+$\PP(\sigma_U\ge\sigma)=1-\delta$.
+Conditional on $S$ with $\sigma_U\ge\sigma$, both stochastic intervals have failure at most $\alpha_0$ and the selected index is fixed. The structural interval covers surely. Integrating conditional failure and adding $\delta$ proves honesty.
+
+The normalized chi-square has mean one and variance $2/\nu$.
+Chebyshev gives convergence to one and convergence of its fixed-$\delta$ quantile to one. Thus $\sigma_U/\sigma\to1$ and
+$\E(\sigma_U/\sigma)^2=\nu/\chi^2_{\nu,\delta}\to1$.
+The second-moment bound gives uniform integrability for powers at most one.
+Since the nonlinear radius is proportional to $\tau_U^{1-2/K}$, its expected order is preserved.
+\end{proof}
+Retained residuals are essential to this construction; it is not an estimate of variance from $Z$ alone.
+
+\subsection{Confidence levels and covariance}
+\begin{proposition}[Calibrated lower bounds]\label{prop:levels}
+The fixed-confidence rates of Theorems~\ref{thm:jointlower}, \ref{thm:unfolding}
+and Proposition~\ref{prop:diagonal_minimax} extend to every $0<\alpha<1/2$
+after changing constants.
+If known Gaussian covariance satisfies $\Sigma\succeq s_0^2I$ with $s_0>0$,
+all-procedure isotropic lower bounds transfer with $\tau=s_0$.
+\end{proposition}
+\noindent\emph{Roadmap.} Tune the mixture distance below $1-2\alpha$; compare covariance models by adding independent noise.
+\begin{proof}
+Fix $0<\eta<1-2\alpha$. For the coordinate mixture use
+$a=\min\{M,\tau\sqrt{\log(1+4\eta^2p)}\}$, giving $\chi^2\le4\eta^2$.
+For the unfolding mixture use $\theta=\min(M,c_\eta\tau\sqrt p)$ with
+$c_\eta^2=\{1-(1+4\eta^2)^{-2}\}/2$.
+Its second-moment bound is at most $1+4\eta^2$.
+For the diagonal support mixture use
+\[
+ b_s=\min\{Ms^{-K/2},\
+ \tau\sqrt{\log[1+\log(1+4\eta^2)p/s^2]}\}.
+\]
+The factorial-moment bound again gives second moment at most $1+4\eta^2$.
+Total variation is at most $\eta$ in each case; the interval lemma has positive factor $1-2\alpha-\eta$. The fixed-$\alpha$ rates are unchanged.
+
+Add independent $N(0,\Sigma-s_0^2I)$ noise to $N(A,s_0^2I)$.
+Applying any $\Sigma$-procedure to the result gives an isotropic randomized procedure with the same coverage and length distributions.
+The isotropic all-procedure lower bound therefore applies.
+\end{proof}
+Upper envelope calibration uses the marginal variances
+$\operatorname{vec}(V_i)^\top\Sigma\operatorname{vec}(V_i)$;
+the direct radius uses
+$z_{1-\alpha/2}\sqrt{\operatorname{vec}(L)^\top\Sigma\operatorname{vec}(L)}$.
+A lower covariance bound is needed for a universal positive noise lower scale:
+if $\Sigma=\tau^2(I-\operatorname{vec}(L)\operatorname{vec}(L)^\top)$,
+the target is observed without noise.
+Cross terms $B^\top\Sigma^{-1}C$ cannot in general be ordered by a covariance bound; the randomization proof avoids that invalid step.

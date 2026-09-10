@@ -1,0 +1,210 @@
+[
+  {
+    "Assumption": "A1a Full observation",
+    "Needed?": "Essential to current lower bounds and S7",
+    "Used where": "Gaussian likelihood on all entries; subtensor scan",
+    "Weakened?": "No completion/regression transfer",
+    "Final version": "Retain full Z, or calibrated replicates",
+    "Justification/counterexample": "The diagonal marginal is not a sufficient experiment for full-data optimality; D1 cannot be transferred."
+  },
+  {
+    "Assumption": "A1b Gaussian law",
+    "Needed?": "Not needed for threshold geometry/coverage",
+    "Used where": "T2 direct alternative; T3\u2013T6 and S7\u2013S8 likelihood/tails",
+    "Weakened?": "S3 envelope; S4 finite variance",
+    "Final version": "Envelope for nonlinear upper bound; explicit Gaussian model for current lower bounds",
+    "Justification/counterexample": "C3 gives finite-variance failure of unchanged Gaussian calibration."
+  },
+  {
+    "Assumption": "A1c Coordinate independence",
+    "Needed?": "Not needed for nonlinear union bound",
+    "Used where": "Exact direct variance and isotropic likelihood",
+    "Weakened?": "S3 dependent margins; S6 known covariance",
+    "Final version": "Use marginal envelope plus actual direct variance",
+    "Justification/counterexample": "C4: perfectly correlated errors make direct variance p times too small."
+  },
+  {
+    "Assumption": "A1d Replicate independence",
+    "Needed?": "Needed by current S4/S5 proofs",
+    "Used where": "Block concentration; Gaussian mean/residual factorization",
+    "Weakened?": "Within-replicate dependence allowed in S4",
+    "Final version": "Independent clean replicate vectors",
+    "Justification/counterexample": "Serial/martingale versions require a replacement block-tail argument; not proved."
+  },
+  {
+    "Assumption": "A1e Known noise scale",
+    "Needed?": "Needed for stated original radius",
+    "Used where": "All original calibrations",
+    "Weakened?": "S5 estimates a conservative scale from independent residuals",
+    "Final version": "Known scale OR retained n>=2 Gaussian replicates with error split",
+    "Justification/counterexample": "Cannot insert a same-data scale estimate without recalibration."
+  },
+  {
+    "Assumption": "A1f Isotropic covariance",
+    "Needed?": "Not needed for envelope upper bound",
+    "Used where": "Original affine and mixture laws",
+    "Weakened?": "S6 positive-semidefinite experiment comparison",
+    "Final version": "Known marginal upper variances; covariance floor for transferred lower bound",
+    "Justification/counterexample": "C8 makes target noiseless if no lower covariance condition is imposed."
+  },
+  {
+    "Assumption": "A2a Known norm cap M",
+    "Needed?": "Defines the outer class and useful threshold budget",
+    "Used where": "T1/T2 structural and nonlinear radii; lower alternatives",
+    "Weakened?": "Known outer bound, or approximation class; no automatic estimation",
+    "Final version": "Retain supplied M",
+    "Justification/counterexample": "C6: wrong M can select a deterministic interval with zero coverage. The unconstrained diagonal image is all of R^p."
+  },
+  {
+    "Assumption": "A2b Positive supplied rank caps",
+    "Needed?": "Essential to current geometry and honesty class",
+    "Used where": "L1; T1; h0; class inclusion in lower bounds",
+    "Weakened?": "Smaller actual ranks allowed; S1 improves cap coefficient",
+    "Final version": "Retain upper caps and fixed TT mode order",
+    "Justification/counterexample": "C6: underspecified cap can force zero coverage. Zero caps give trivial class and violate rank-one-inclusion lower bounds."
+  },
+  {
+    "Assumption": "A2c Exact low rank",
+    "Needed?": "Not essential for upper bound",
+    "Used where": "Membership in geometric class",
+    "Weakened?": "S3 distance class with known eta",
+    "Final version": "dist_F(A,Theta(M,caps))<=eta; radius plus eta",
+    "Justification/counterexample": "Proved residual Lipschitz bound gives eta, not 2eta; C12 shows constant one can be necessary."
+  },
+  {
+    "Assumption": "A2d Minimum singular value",
+    "Needed?": "Absent and unnecessary here",
+    "Used where": "No inverse perturbation anywhere",
+    "Weakened?": "No strengthening needed",
+    "Final version": "No signal floor",
+    "Justification/counterexample": "Canonical factorizations are exact algebra; they do not estimate weak factors."
+  },
+  {
+    "Assumption": "A2e Incoherence/condition number",
+    "Needed?": "Absent",
+    "Used where": "No leverage upper bound or condition-number denominator required",
+    "Weakened?": "No strengthening needed",
+    "Final version": "Allow coherent and ill-conditioned tensors",
+    "Justification/counterexample": "Coordinate mixtures deliberately include maximally coherent rank-one tensors."
+  },
+  {
+    "Assumption": "A3a Modewise orthonormal loading",
+    "Needed?": "Sufficient; strict form needed for original constants",
+    "Used where": "Bessel geometry, h0, direct variance, image lemma",
+    "Weakened?": "S1 frame factor product(F_k)^(1/K)",
+    "Final version": "Retain orthogonality in main statements; explicit frame variant only for diagonal budget",
+    "Justification/counterexample": "C5 repeated directions destroy the dimension-free bound."
+  },
+  {
+    "Assumption": "A3b Fixed loading",
+    "Needed?": "Essential to unadjusted guarantees",
+    "Used where": "Noise law and selection",
+    "Weakened?": "Independent training sample permitted by conditioning",
+    "Final version": "Loading fixed or independent of inference sample",
+    "Justification/counterexample": "C7 data-selected maximum coordinate has coverage (1-alpha)^p at zero."
+  },
+  {
+    "Assumption": "A3c Weight normalization",
+    "Needed?": "Normalization only",
+    "Used where": "||L||=1 and approximation Lipschitz coefficient",
+    "Weakened?": "Rescale target/radius for any nonzero fixed w",
+    "Final version": "||w||_2=1 for stated formulas",
+    "Justification/counterexample": "Zero loading gives exact zero; unnormalized direct and approximation radii scale by ||w||_2."
+  },
+  {
+    "Assumption": "A3d Equal loading and equal modes",
+    "Needed?": "Needed for stated p-rate and lower mixtures",
+    "Used where": "T3\u2013T8; D1",
+    "Weakened?": "General orthogonal loading allowed in T1/T2/S1/S3\u2013S5",
+    "Final version": "Repeat equal-loading condition explicitly in T6 and T8",
+    "Justification/counterexample": "Arbitrary weights do not have the same sparse-mixture target or rate."
+  },
+  {
+    "Assumption": "A4a Uniform finite-sample honesty",
+    "Needed?": "Defining requirement",
+    "Used where": "All lower-bound alternatives and every upper bound",
+    "Weakened?": "None: changing it changes the question",
+    "Final version": "inf_A coverage >=1-alpha",
+    "Justification/counterexample": "Pointwise regular-stratum confidence cannot establish this requirement."
+  },
+  {
+    "Assumption": "A4b Interval-valued output",
+    "Needed?": "Needed by common-target length argument",
+    "Used where": "L5: both targets imply length at least their distance",
+    "Weakened?": "Convex hull diameter alternative possible but different loss",
+    "Final version": "Measurable intervals; independent randomization allowed",
+    "Justification/counterexample": "Disconnected sets can contain two points with zero Lebesgue measure; interval assumption matters."
+  },
+  {
+    "Assumption": "A4c Selection independent of centers",
+    "Needed?": "Sufficient, not universally necessary",
+    "Used where": "Original min-radius choice",
+    "Weakened?": "S3 common-event selection; S5 residual conditioning; S7 intersection with error split",
+    "Final version": "Use exactly the stated selection/calibration rule",
+    "Justification/counterexample": "C7 choosing between individually valid intervals can under-cover."
+  },
+  {
+    "Assumption": "A4d Confidence level alpha",
+    "Needed?": "Specific constants have restricted domains",
+    "Used where": "T3 alpha<1/2; T4/T5/T6/D1 alpha<1/4",
+    "Weakened?": "S6 all fixed alpha<1/2 after recalibration",
+    "Final version": "Explicit 0<alpha<1/4 in T5",
+    "Justification/counterexample": "C1 gives a literal counterexample at alpha=.9; no issue at the original .05."
+  },
+  {
+    "Assumption": "A5a Fixed K>=3",
+    "Needed?": "Needed for original asymptotic separation",
+    "Used where": "Positive beta=(K-2)/(2K); S7 summability",
+    "Weakened?": "Finite-sample T1/T2 hold K>=2",
+    "Final version": "K fixed for rate constants; K3 and K>=4 distinguished",
+    "Justification/counterexample": "At K2 joint and one-cut geometry coincide; no claimed vanishing ratio."
+  },
+  {
+    "Assumption": "A5b Fixed caps",
+    "Needed?": "Not needed for finite-sample coverage",
+    "Used where": "Treats cap factors as asymptotic constants",
+    "Weakened?": "S1 condition D(log p/p)^beta ->0",
+    "Final version": "Track D or J explicitly for growing caps",
+    "Justification/counterexample": "No uniform-in-rank constant is claimed for S7/S8 rate comparison."
+  },
+  {
+    "Assumption": "A5c M=tau sqrt(p)",
+    "Needed?": "A comparison regime, not necessary for coverage",
+    "Used where": "Displayed sharp/split rates",
+    "Weakened?": "All original nonasymptotic radii retain M,tau,p",
+    "Final version": "Keep explicit norm-noise scaling for rates",
+    "Justification/counterexample": "General ratio u=M/(tau sqrt(p)) changes phase boundaries; C11 records sufficient gain condition."
+  },
+  {
+    "Assumption": "S7 Finite predetermined nets",
+    "Needed?": "Needed by present scan proof",
+    "Used where": "Measurability, cardinality, Gaussian union bound",
+    "Weakened?": "Countable measurable nets also possible with a new calibration",
+    "Final version": "Fixed epsilon=1/(2K) nets; all subset sizes",
+    "Justification/counterexample": "No unmeasurable supremum or unverified entropy theorem; finite volume argument provided."
+  },
+  {
+    "Assumption": "S7 gamma shrinking with p",
+    "Needed?": "Needed for current zero-point expected-length rate",
+    "Used where": "Controls rejection-width contribution ell_* gamma",
+    "Weakened?": "Other gamma possible if contribution controlled",
+    "Final version": "gamma=alpha/(2p) in asymptotic corollary",
+    "Justification/counterexample": "High-probability width alone does not imply short expectation."
+  },
+  {
+    "Assumption": "S4 Known variance bound and count c",
+    "Needed?": "Needed by robust construction",
+    "Used where": "Chebyshev threshold and number of spoiled blocks",
+    "Weakened?": "Stochastic Bernoulli count conversion proved",
+    "Final version": "b>=8c, b>=32log(m/alpha), n>=2b",
+    "Justification/counterexample": "Sufficient and conservative; no optimal breakdown claim."
+  },
+  {
+    "Assumption": "S5 Retained residuals and n>=2",
+    "Needed?": "Needed by that scale estimator",
+    "Used where": "chi-square law and conditional selection",
+    "Weakened?": "No Z-only variance theorem claimed",
+    "Final version": "nu=m(n-1); independent residual calibration",
+    "Justification/counterexample": "Gaussian mean is sufficient for A with known sigma, not for the joint unknown-variance experiment."
+  }
+]

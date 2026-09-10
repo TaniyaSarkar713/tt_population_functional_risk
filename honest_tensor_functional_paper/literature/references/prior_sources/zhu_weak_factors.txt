@@ -1,0 +1,3833 @@
+
+[PDF PAGE 1]
+arXiv:1910.10382v3  [math.ST]  6 Nov 2019
+How well can we learn large factor models without assuming
+strong factors? ∗
+Yinchu Zhu†
+University of Oregon
+November 6, 2019
+Abstract
+In this paper, we consider the problem of learning models wit h a latent factor structure.
+The focus is to ﬁnd what is possible and what is impossible if t he usual strong factor condition
+is not imposed. We study the minimax rate and adaptivity issu es in two problems: pure factor
+models and panel regression with interactive ﬁxed eﬀects. F or pure factor models, if the number
+of factors is known, we develop adaptive estimation and infe rence procedures that attain the
+minimax rate. However, when the number of factors is not spec iﬁed a priori, we show that there
+is a tradeoﬀ between validity and eﬃciency: any conﬁdence in terval that has uniform validity
+for arbitrary factor strength has to be conservative; in par ticular its width is bounded away
+from zero even when the factors are strong. Conversely, any d ata-driven conﬁdence interval
+that does not require as an input the exact number of factors ( including weak ones) and has
+shrinking width under strong factors does not have uniform c overage and the worst-case coverage
+probability is at most 1/2. For panel regressions with inter active ﬁxed eﬀects, the tradeoﬀ is
+much better. We ﬁnd that the minimax rate for learning the reg ression coeﬃcient does not
+depend on the factor strength and propose a simple estimator that achieves this rate. However,
+when weak factors are allowed, uncertainty in the number of f actors can cause a great loss
+of eﬃciency although the rate is not aﬀected. In most cases, w e ﬁnd that the strong factor
+condition (and/or exact knowledge of number of factors) imp roves eﬃciency, but this condition
+needs to be imposed by faith and cannot be veriﬁed in data for i nference purposes.
+1 Introduction
+Models with hidden factors have been a popular tool for analy zing economic data. These models
+provide a convenient framework in describing datasets that are big in both cross-sectional and time
+series dimensions. The basic formulation is
+Xi,t =Mi,t +ui,t, (1)
+∗First version October 23, 2019.
+†Email: yzhu6@uoregon.edu
+1
+
+[PDF PAGE 2]
+where M ∈ Rn×T is a low-rank matrix and ui,t ∼ N (0, 1) is i.i.d across (i,t ). The low rank
+property of M is another way of describing the factor structure: if M = LF ′ with L ∈ Rn×k and
+F ∈ RT ×k, then rankM ≤k. For this reason, we view factor models as a low-rank matrix p lus an
+error matrix. Throughout the paper, all the idiosyncratic t erms are assumed to be i.i.d and have a
+normal distribution.
+Most of the results in the literature on factor models assume the strong factor condition or
+spiked eigenvalue condition, see ( Bai, 2003; Fan et al. , 2011; Wang and Fan, 2017) among many
+others. This condition states that the largest k singular values of M grow at the rate
+√
+nT or
+at least faster than
+√
+n +T . Besides the obvious question of whether such an assumption c an be
+checked in the data, perhaps a more relevant question is whet her we can assess the factor strength
+well enough for the purpose of estimation and inference. It i s important to know how well we can
+possibly learn the factor models when the factor strength is also learned from the data. In this
+paper, we can answer this question in pure factor models and p anel regression with interactive ﬁxed
+eﬀects. We study the problem of learning scalar (low-dimens ional) components, e.g., entries of large
+matrices or regression coeﬃcients.
+The conceptual tools we use are minimax rates and adaptivity . We mainly examine two issues.
+• Minimax rates. What is minimax expected length of conﬁdence intervals for diﬀerent levels of
+factor strengths? In particular, whether robust conﬁdence intervals (i.e., those with validity
+for arbitrary factor strengths) and non-robust conﬁdence i ntervals (i.e., those with validity
+only under strong factors) have diﬀerent rates overall. It t urns out that the answer depends
+on the problem (pure factor models or panel regressions with interactive ﬁxed eﬀects).
+• Adaptivity. In terms of eﬃciency, can robust conﬁdence inte rvals match non-robust conﬁ-
+dence intervals when the factors are actually strong? To stu dy this problem, we consider
+the minimax optimal performance of robust conﬁdence interv als over a parameter space in
+which factors are strong. In general, we ﬁnd that robust conﬁ dence intervals have much worse
+eﬃciency than non-robust conﬁdence intervals when all the f actors are strong. Therefore,
+requiring robustness (i.e., validity under arbitrary fact or strengths) leads to eﬃciency loss
+even in situations with only strong factors. This robustnes s-eﬃciency tradeoﬀ implies that in
+order to improve eﬃciency, the strong factor condition (and /or exact knowledge of number of
+factors) needs to be imposed by faith and is impossible to ver ify in data for inference purpose;
+if we have to learn the factor strengths from the data, there i s necessarily eﬃciency loss.
+In a pure factor model, the task is to learn entries in M , say M1, 1, where X1, 1 is potentially missing.
+We characterize the impact of factor strength on estimation and inference. The main ﬁndings are
+summarized as follows.
+When the number of factors is known, the minimax rate for esti mation of M1, 1 depends on
+the factor strength (singular values of M ). If the singular values of M does not grow faster than√
+n +T , then it is impossible to achieve consistency in estimating M1, 1. Moreover, the rate of
+2
+
+[PDF PAGE 3]
+convergence for M1, 1 can be learned from the data: one can construct conﬁdence int ervals that are
+valid for arbitrary factor strength and automatically achi eve the optimal rate in their widths.
+When the number of factor is not given a priori, there is a trad eoﬀ between validity and eﬃciency.
+Any conﬁdence interval that is valid for arbitrary factor st rength cannot have widths that shrink
+to zero even when applied to strong factor settings. Convers ely, if a conﬁdence interval learns the
+number of factors from the data and has widths shrinking to ze ro when the all the factors are strong,
+then this conﬁdence interval cannot have uniform coverage f or all factor strengths and the worst-case
+coverage probability is below 1/ 2. This tradeoﬀ only applies to inference. Achieving the mini max
+rate via a data-driven estimator is entirely possible. The k ey insight is that although ignoring weak
+factors does not reduce the rate in estimation, it is quite da maging for inference valdity.
+In a panel regression with interactive ﬁxed eﬀects, the situ ation is much better. The ﬁxed eﬀects
+in these models have a factor structure and the task is to lear n the regression coeﬃcient. We show
+that even if the exact number of factors is unknown, it is poss ible to learn the regression coeﬃcient
+at the rate (nT )−1/ 2, regardless of the factor strengths in the ﬁxed eﬀects. Howe ver, when factors
+are allowed to be weak, uncertainty in the number of factors c an cause a great loss of eﬃciency.
+This is in drastic contrast with existing results that under the strong factor condition, it is not
+important to know the exact number of factors, see Moon and Weidner (2015).
+Our work is related to the literature on weak factors. Proble ms of weak factors have been docu-
+mented in simulations (e.g., Boivin and Ng , 2006; Bai and Ng , 2008) that study the performance of
+standard asymptotic theories. Theoretically, the inconsi stency of PCA (principal component anal-
+ysis) has been pointed out by Johnstone and Lu (2009) and Onatski (2012) among others. Onatski
+(2012) also derived detailed asymptotic distribution of PCA when the factors are weak. Inconsis-
+tency under weak factors is one of the main motivations drivi ng developments in the sparse PCA
+literature. There sparsity is imposed on factor loadings to achieve consistent estimation of the factor
+structure, see ( Amini and Wainwright , 2008; Berthet et al. , 2013; Cai et al. , 2013; Birnbaum et al. ,
+2013) among many others. It turns out that even when the factors ar e observed, estimation and
+inference could encounter non-standard diﬃculties if the f actors are only weakly inﬂuential, (e.g.,
+Kleibergen, 2009; Gospodinov et al. , 2017; Anatolyev and Mikusheva , 2018). The situation is more
+complicated if there are potentially missing factors. We wi ll now proceed to analysis of diﬀerent
+models. Additional discussion on related literature will b e presented in Sections 2 and 3 regarding
+pure factor models (with missing values) and panel regressi ons, respectively.
+Notations. For a matrix A,σ1(A) ≥σ2(A) ≥ · · · denote the singular values of A in decreasing
+order. For matrix A, ∥A∥∞ = max i,j |Ai,j |, ∥A∥ =σ1(A) denotes the spectral norm, ∥A∥F denotes
+the Frobenius norm and ∥A∥∗ denotes the nuclear norm (sum of all singular values of A). For a
+vector a, ∥a∥2 denotes the Euclidean norm. In model ( 1), the distribution of the data is indexed
+byM ; the probability measure and expectation under M are denoted by PM and EM , respectively.
+For two positive sequences Xn,Y n, we use Xn ≲ Yn to denote Xn ≤ CY n for a constant. We use
+Xn ≳ Yn to denote Yn ≲ Xn and Xn ≍ Yn means that Xn ≲ Yn and Xn ≳ Yn. We use 1{·} for
+3
+
+[PDF PAGE 4]
+the indicator function. For a matrix A ∈ Rn×T , A−1, −1 denotes the matrix A with its (1,1) entry
+replaced by zero. For a vector a = (a1,...,a k)′, we denote a−1 = (a2,...,a k)′.
+2 Entry-wise learning: missing data and synthetic control
+In this section, we work with the following the parameter spa ce:
+M =
+{
+A ∈ Rn×T : ∥A∥∞ ≤κ and rankA ≤ 2
+}
+,
+where κ > 0 is a constant. The set M corresponds to factor models with at most two factors.
+We assume that entries of the factor structure are bounded so the factor strength would be a
+meaningful quantity. This is related to the incoherence con dition; see
+Bai and Ng (2019) for an
+excellent discussion on the relation between incoherence a nd factor strength. Here, we impose
+bounded ∥A∥∞ simply to rule out the situations in which the entire factor s tructure concentrates
+on a few entries. For M ∈ Rn×T withMi,t =nT 1{(i,t ) = (1, 1)}, the strong factor condition holds
+σ1(M ) ≍
+√
+nT but clearly the standard asymptotic theory for principal co mponent analysis (PCA)
+in Bai (2003) does not hold even if all entries are observed; entries in X−1, −1 obviously have no
+information on M1, 1.
+We deﬁne the set of one-factor models with factor strength τ:
+M(τ) = {A ∈ M : σ1(A) ≥τ and σ2(A) = 0 }.
+Our analysis of the case with known number of factors will dea l with M(τ) and later discussion
+on unknown number of factors mainly focuses on whether the nu mber of factors is one or two.
+Restricting the analysis to at most two factors is for simpli city and the results can be extended to
+any ﬁxed number of factors with extra (but perhaps unnecessa ry) complications in notations and
+proofs. In this section, we assume that the idiosyncratic te rms are i.i.d standard normal variables
+for simplicity.1
+One example that involves missing data is related to the synt hetic control problem. This is a fast
+growing literature since the seminal papers by ( Abadie and Gardeazabal , 2003; Abadie et al. , 2015)
+and has attracted much attention in applied research. One of the leading models for synthetic control
+is to use a factor model for the counterfactuals, see ( Abadie et al. , 2015; Gobillon and Magnac , 2016;
+Li, 2017; Athey et al. , 2017; Xu, 2017; Chernozhukov et al. , 2017; Li, 2018) among many others.
+We consider a simple formulation.
+Example 1 (Synthetic control) . There are n units observed over T time periods. The potential
+outcome without treatment is denoted by Y N
+i,t for unit i in time period t. We assume that Y N
+i,t =
+1The assumption of unit variance is not too restrictive since the quantity (nT )−1 ∑ n
+i=1
+∑ T
+t=1 u2
+i,t can always
+be consistently estimated at the rate max{n−1, T −1}, regardless of the factor strength. To see this, consider th e
+PCA estimator ˆM with rank ¯k, assuming ¯k ≥ k. Since ∥X − ˆM ∥ ≤ ∥ u∥, we have ∥ ˆM − M ∥ ≤ 2∥u∥. Since
+rank ( ˆM − M ) ≤ 2¯k, we have ∥ ˆM − M ∥F ≤ 2
+√
+2¯k∥u∥ = OP (
+√
+n + T ) due to results from random matrix theory.
+4
+
+[PDF PAGE 5]
+LiFt +ui,t and the treatment is allocated to the ﬁrst unit in the last tim e period. In other words,
+the observed data is Yi,t =Y N
+i,t +Di,tγ for 1 ≤i ≤n and 1 ≤t ≤T , where Di,t = 1{(i,t ) = (1,T )}.
+The object of interest is the treatment eﬀect γ.
+Like other causal inference problems, learning γ is primarily the task of learning the counter-
+factual Y N
+1,T , which is unobserved. If Y N
+1,T were known, then the obvious 95% conﬁdence interval
+for γ is [Y1,T −Y N
+1,T − 1. 96,Y 1,T −Y N
+1,T + 1. 96]. Since Y N
+1,T is unobserved, we can replace it with a
+consistent estimate. However, there is no guarantee that su ch an estimate exists when the factors
+are not strong. If consistent estimation for Y N
+1,T is impossible, then a 95% conﬁdence interval for γ
+needs to have a width larger than 1. 96 × 2. To formally investigate the estimation and inference for
+Y N
+1,T , we consider the following problem.
+Example 2 (Missing one entry) . Suppose that the model in ( 1) holds. We observe all the entries
+ofX ∈ Rn×T except one entry. Without loss of generality, we assume that X1, 1 is missing and thus
+the observed data is X−1, −1. The goal is to estimate M1, 1 and conduct inference.
+The main feature of Example 2 is that the missing pattern is non-random. Since there is onl y
+one entry missing, we essentially observe the entire data. F or this reason, the problem is very closely
+related to the following one.
+Example 3 (Full observation) . We observe X ∈ Rn×T from the model in (
+1). The goal is to
+estimate M1, 1 and conduct inference.
+Example 3 corresponds to the problem of estimation and inference in st andard large factor mod-
+els. Many classical results are developed by Bai (2003) and the references therein. In fact, the prob-
+lem missing data in factor models also has a long history dati ng back to at least Stock and Watson
+(2002). Very recently, works by Su et al. (2019); Bai and Ng (2019); Xiong and Pelger (2019) pro-
+vided extensive asymptotic theories for various missing da ta problems under the strong factor con-
+dition. However, when the factors are not assumed to be stron g, it is still unclear what can be done
+and what is impossible.
+Example 4 (Missing at random) . We observe ˜X, Ξ ∈ Rn×T with ˜Xi,t =Xi,t Ξ i,t , where Xi,t is from
+the model in (
+1) and Ξ i,t ∈ {0, 1} is i.i.d Bernoulli with P(Ξ i,t = 1) = π . We assume that X and Ξ
+are independent. The goal is to estimate M1, 1 and conduct inference.
+Example 4 is also called the matrix completion problem. This literatu re aims to estimate M from
+( ˜X, Ξ) and most of the results are stated in terms of the overall risk in Frobenius norm: construct
+an estimate ˆM and provide bound on ∥ ˆM −M ∥F , see ( Candès and Recht , 2009; Candès and Tao ,
+2010; Recht et al. , 2010; Keshavan et al. , 2010; Candès and Plan , 2011; Rohde and Tsybakov , 2011;
+Koltchinskii et al. , 2011) among others.
+5
+
+[PDF PAGE 6]
+These results might seem quite encouraging in that they deri ve the bounds without the strong
+factor condition. In particular, one can construct an estim ate ˆM and guarantee
+(nT )−1
+n∑
+i=1
+T∑
+t=1
+( ˆMi,t −Mi,t )2 =oP (1)
+without any assumption on the factor strength. Since the ave rage (across entries) squared errors
+tends to zero, one might expect the estimation error for a typ ical entry to be small without the
+strong factor condition, e.g., ˆM1, 1 −M1, 1 =oP (1). We now show that this is not true.
+2.1 Optimal rates: known number of factors
+We focus on the analysis of Example
+2. When the number of factors is known to be one, we consider
+the problem of how the strength of this factor aﬀects the eﬃci ency of estimation and inference for
+M1, 1. The basic problem of our analysis is to distinguish between
+Mnull(τ) := {M ∈ M(τ) : M1, 1 = 0}
+and
+Mρ(τ) := {M ∈ M(τ) : |M1, 1| ≥ ρ}
+for ρ >0. When the factors are strong, i.e., τ ≳
+√
+nT , results in Bai and Ng (2019) suggest that
+non-trivial power can be achieved when ρ ≳ min{n−1/ 2,T −1/ 2}. Our goal in this subsection is to
+answer the following questions:
+• for a given τ, how large does ρ need to be to guarantee non-trivial power in testing Mnull(τ)
+versus Mρ(τ)?
+• if τ is not given, do we need a larger ρ to distinguish between Mnull(τ) and Mρ(τ)?
+In this section, we ﬁx α ∈ (0, 1). We ﬁrst give an impossibility result concerning the ﬁrst qu estion.
+Theorem 1. Assume τ ≤ κ
+√
+nT/ 12. Let ψ be a measurable function taking values in [0, 1] such
+that
+sup
+M ∈Mnull(τ)
+EMψ (X−1, −1) ≤α. (2)
+Then
+inf
+M ∈Mρ (τ)
+EMψ (X−1, −1) ≤ 2α, (3)
+whereρ =C min{1,
+√
+n +T/τ }and C >0 is a constant that depends only on κ and α .
+In Theorem 1, ψ is a test for H0 : M ∈ M null(τ) versus H1 : M ∈ M ρ(τ). A test is a
+measurable function that maps the data X−1, −1 to {0, 1}, where 1 denotes rejection of H0. We
+allow for random tests by extending {0, 1} to the interval [0, 1]. The requirement in ( 2) ensures
+6
+
+[PDF PAGE 7]
+size control uniformly in the null space Mnull(τ). The conclusion of Theorem 1 states that when
+ρ ≲ min{1,
+√
+n +T/τ }, no test can guarantee non-trivial power in distinguishing Mnull(τ) and
+Mρ(τ).
+As a consequence, it is impossible to achieve consistency in estimating M1, 1 if τ ≲
+√
+n +T . To
+see this, notice that in this case, there exists a constant ρ0 > 0 such that no test can have high
+power in testing H0 : M1, 1 = 0 against H1 : |M1, 1| ≥ ρ0. Hence, if a consistent estimator ˆM1, 1
+exists, then the simple test of 1{| ˆM1, 1| ≤ ρ0/ 2} would have both Type I error and Type II error
+tending to zero for H0 : M1, 1 = 0 againstH1 : |M1, 1| ≥ ρ0. However, since such a test is impossible
+(due to Theorem 1), a consistent estimator for M1, 1 does not exist.
+Another consequence of Theorem 1 is that the factor strength has a direct impact on the rate of
+learningM1, 1. In order to obtain the usual rate of min{n−1/ 2,T −1/ 2}, the strong factor assumption
+of τ ≍
+√
+nT is necessary. If τ ≪
+√
+nT , the rate for M1, 1 is strictly worse than min{n−1/ 2,T −1/ 2}.
+We now present an implication of Theorem 1 on conﬁdence intervals. Although this implication
+is immediate, the notations we introduce will be very useful in discussing later issues, especially
+with unknown number of factors. For a given parameter space M(1) ⊆ M , we deﬁne the set of
+valid 1 −α conﬁdence intervals as measurable functions that map the da ta X−1, −1 to an interval
+such that this interval covers M1, 1 with probability at least 1 −α for all parameters in M(1). In
+other words, we deﬁne
+Φ( M(1)) =
+{
+CI (·) = [l(·),u (·)] : inf
+M ∈M(1)
+PM (M1, 1 ∈CI (X−1, −1)) ≥ 1 −α
+}
+.
+The minimax expected length of conﬁdence intervals over M(1) is
+L(M(1)) = inf
+CI ∈Φ( M(1))
+sup
+M ∈M(1)
+EM |CI (X−1, −1)|,
+where |CI | denotes the length of the conﬁdence interval CI , i.e., |CI (·)| = u(·) −l(·) for CI (·) =
+[l(·),u (·)]. Minimax rate for the length of conﬁdence intervals is a comm on way of examining the
+eﬃciency for inference in high-dimensional models 2, (see e.g., Cai and Guo , 2017; Bradic et al. ,
+2018). Theorem 1 has the following simple implication; we omit the proof for b revity.
+Corollary 1. Assume τ ≤κ
+√
+nT/ 12. Then
+L(M(τ)) ≳ min{1,
+√
+n +T/τ }.
+Corollary 1 states a lower bound for L(M(τ)). We now show that this lower bound is also
+optimal. Since consistency is impossible when τn ≲
+√
+n +T , we focus on τn ≫
+√
+n +T . (If
+τ ≲
+√
+n +T , we can simply use the simple conﬁdence interval [−κ,κ ] assuming κ is known.) We
+2Compared to stating results in terms of size and power, discu ssing length of conﬁdence intervals brings simplicity
+mainly because we do not need a notation on the hypothesized v alue in the null.
+7
+
+[PDF PAGE 8]
+ﬁrst construct an estimator that has the rate of convergence
+√
+n +T/τ when τn ≳
+√
+n +T . The
+idea is based on the following the observation:
+M1, 1 = L1L′
+−1M−1, 1
+∥L−1∥2
+2
+,
+where M−1, 1 = (M2, 1,...,M n, 1)′ ∈ Rn−1. Hence, a plug-in estimator would be
+ˆM1, 1 =
+ˆL1 ˆL′
+−1X−1, 1
+∥ ˆL−1∥2
+2
+, (4)
+where X−1, 1 = (X2, 1,...,X n, 1)′ ∈ Rn−1. Here, ˆL = ( ˆL1, ˆL′
+−1)′ ∈ Rn is the PCA estimator for L
+using data X, −1 = {Xi,t }1≤i≤n, 2≤t≤T . This estimator can be viewed as a version of the tall-wide
+estimator by
+Bai and Ng (2019). The proof in our case is signiﬁcantly complicated by the fa ct that
+the factor strengths might not be strong. This leads to diﬃcu lties in bounding certain terms; we use
+a novel construction that allows us to apply a decoupling arg ument, see Lemma 4 in the appendix.
+The following result establishes its rate of convergence un der any given factor strength.
+Theorem 2. Consider ˆM1, 1 in ( 4). Assume that τ ≥ 4 max{
+√
+10κ, 2}
+√
+3(n +T ). Then for any
+α ∈ (0, 1), there exists a constant C >0 such that
+sup
+M ∈M(τ)
+PM
+(
+| ˆM1, 1 −M1, 1|>C
+√
+n +T/τ
+)
+≤α.
+Fortunately, distinguishing between τ ≫
+√
+n +T and τ ≲
+√
+n +T is not diﬃcult, thanks to
+bounds in random matrix theory. Since ∥M−1, −1∥2
+F = ∥M ∥2
+F −M 2
+1, 1 ≥τ2 −κ2, ∥M−1, −1∥F and τ
+have the same rate. Since M−1, −1 has rank at most 2, ∥M−1, −1∥F ≥ ∥M−1, −1∥ ≥ ∥M−1, −1∥F/
+√
+2.
+Therefore, ∥X−1, −1∥ ≳ ∥M−1, −1∥ − ∥u−1, −1∥ = OP (|τ −
+√
+n +T |) by Corollary 5.35 of Vershynin
+(2010). Hence, the following estimator always has the optimal rat e of convergence:
+ˆM1, 11
+{
+∥X−1, −1∥> 4 max{
+√
+10¯κ, 2}
+√
+3(n +T )
+}
+, (5)
+where ¯κ > 0 is a constant that upper bounds κ. The idea is that if ∥X−1, −1∥ is smaller than the
+above threshold, we can safely conclude τ ≲
+√
+n +T and thus no estimator is consistent for M1, 1,
+which means that the estimator zero would have the optimal “r ate” too (since M1, 1 is bounded).
+Therefore, we have the following result.
+Corollary 2. L(M(τ)) ≍ min{1,
+√
+n +T/τ }.
+Notice that the estimator in ( 5) is adaptive in that it automatically achieves the optimal r ate
+min{1,
+√
+n +T/τ } without prior knowledge ofτ. Since we can learn the rate for τ from ∥X−1, −1∥, we
+can estimate the rate min{1,
+√
+n +T/τ } from the data and thereby construct a conﬁdence interval
+centered around the estimator in ( 5): simply choose a width of C0 min{
+√
+n +T/ ∥X−1, −1∥, 1} for a
+8
+
+[PDF PAGE 9]
+universal constant C0 (which can be explicitly determined). Therefore, the lengt h of the conﬁdence
+interval is also adaptive since it automatically adjusts to have the optimal rate. Unfortunately, this
+turns out to be true only when the number of factors is known. W e will now see that when we do
+not know the exact number of factors (including weak ones), s uch adaptivity is impossible.
+2.2 Adaptivity: unknown number of factors
+The previous analysis already establishes the optimal rate under knowledge of the exact number of
+factors. Now we aim to answer the following questions:
+• Is it possible to achieve the same rate as established before if the number of factors is not
+known?
+• Do we pay a price if we cannot determine the number of weak fact ors?
+These questions arise naturally in practice as the research er is typically not given the exact number
+of factors. In these cases, one often needs to estimate the nu mber of factors from the data and then
+proceeds using this estimate.
+Although such a strategy makes intuitive sense, it is still f ar from clear whether lack of knowledge
+on the number of factors has any cost. This problem is particu larly tricky for inference since uniform
+size control (or coverage) is a concern; we do not have a notio n of uniform validity for estimation.
+Suppose that we know there are either one or two factors. Idea lly, we would like to construct a
+conﬁdence interval that has 1 −α coverage probability uniformly over all one-factor models and all
+two-factor models, regardless of factor strengths. Proced ures that involve a pre-estimation of the
+number of factors are intended to have such robustness. If th ere is one factor, then hopefully the
+procedure will ﬁnd out that there is one factor and construct s the conﬁdence interval accordingly; if
+there are two factors, then the procedure is supposed to dete ct that and constructs a valid conﬁdence
+interval based on that ﬁnding. This leads to a conﬁdence inte rval summarized in Figure
+1. Even for
+methods, such as nuclear-norm-regularized approaches, wh ich do not need the number of factors as
+an input, we still hope that there is a data-driven procedure that would provide valid inference no
+matter what the true number of factors is. In light of this rob ustness requirement, we are interested
+in ﬁnding out whether these uniformly valid procedures lose any eﬃciency, compared to the situation
+with known number of factors.
+We would not expect any loss of eﬃciency if the number of facto rs can be consistently estimated.
+Unfortunately, determining the number of weak factors is qu ite diﬃcult (if not impossible) since
+typical methods (e.g., Bai and Ng , 2002; Onatski, 2009; Ahn and Horenstein , 2013) only promise
+success in detecting strong factors. If we run these pre-tes ts and ignore potential weak factors, do
+we pay a price in terms of validity or eﬃciency?
+To formally answer this question, we introduce the notion of inference adaptivity. Consider the
+9
+
+[PDF PAGE 10]
+Figure 1: Pre-tests + PCA
+A priori knowledge: the number of factors k ∈ {1, 2}.
+Pre-test: produce ˆk ∈ {1, 2} from the data.
+ˆk = 1
+PCA estimate: keep the ﬁrst PC
+Compute standard error:
+asymptotic normality with rate n− 1/2 +T − 1/2
+ˆk = 2
+PCA estimate: keep the ﬁrst two PC’s
+Compute standard error:
+asymptotic normality with rate n− 1/2 +T − 1/2
+The rate n− 1/2 +T − 1/2 and the asymptotic normality under strong factors are estab lished in Bai (2003).
+Here, the term PC refers to principal component.
+class of one-factor models with factor strength τ0:
+M(1) = M(τ0).
+From the previous analysis, we know that a conﬁdence interva l for M1, 1 with validity over M(1)
+can have shrinking length only if τ0 ≫
+√
+n +T . Since we do not know for sure that there is only
+one factor, we would like to consider a conﬁdence interval th at has validity over a larger space. For
+example, given τ1 ≥τ2> 0, we deﬁne
+M(2) = M(τ1,τ 2) := {A ∈ M : σ1(A) ≥τ1, σ 2(A) ≤τ2},
+where τ1 ≤τ0. Clearly, M(1) ⊂ M (2).
+The primary setting is τ1,τ 0 ≫
+√
+n +T and τ2 ≲
+√
+n +T . In this setting, M(2) allows for
+a second weak factor. The exercise is to consider all the conﬁ dence intervals that have uniform
+coverage over M(2) and then choose the one that has the best eﬃciency over M(1) (in terms of
+expected length). The questions listed in the two bullet poi nts above now become an issue of
+adaptivity. If there is a conﬁdence interval that is valid ov er M(2) and has length automatically
+achieves the rate of
+√
+n +T/τ 0 over M(1), then (at least for the rate) lack of knowledge on the
+number of factors does not have a cost and in particular we do n ot pay a price in terms of size
+and power for failing to detect weak factors. If any conﬁdenc e interval that has validity over M(2)
+necessarily has a length greater than O(
+√
+n +T/τ 0) over M(1), then allowing for the extra validity
+10
+
+[PDF PAGE 11]
+on M(2)\M(1) causes an eﬃciency loss. In particular, we are interested in the following quantity
+L(M(1), M(2)) = inf
+CI ∈Φ( M(2))
+sup
+M ∈M(1)
+EM |CI (Y−1, −1)|.
+The above quantity is the best guaranteed expected length ov er M(1) among all the conﬁdence
+intervals with uniform validity on M(2). The minimax rate L(M(1)) deﬁned before is a special case
+since L(M(1)) = L(M(1), M(1)). Notice that by construction, we have L(M(1), M(2)) ≥ L (M(1)).
+If L(M(1), M(2)) ≫ L(M(1)), then the additional validity requirement on M(2)\M(1) has a negative
+impact on the eﬃciency on M(1). If L(M(1), M(2)) ≍ L (M(1)), then we say that it is possible to
+achieve adaptive inference; the procedure can automatical ly recognize that the parameter is in the
+“fast-rate-region” M(1) and constructs the conﬁdence interval accordingly.
+Remark 1. Examples of adaptive inference can be found in other econome tric models. Consider the
+linear IV model with one endogenous regressor and one instru mental variable (IV). We know that
+when the IV is strong, the conﬁdence interval for the regress ion coeﬃcient shrinks at the parametric
+rate n−1/ 2; when the IV is weak, the conﬁdence interval might not shrink to zero. One can invert
+an identiﬁcation-robust test 3 to obtain a conﬁdence interval. Clearly, such an interval is valid for
+any identiﬁcation strength. On the other hand, this interva l will shrink at the rate n−1/ 2 when the
+IV is strong. In this example, M(1) corresponds to the parameter space with strong IV and M(2)
+represents all parameter values (i.e., the identiﬁcation m ay or may not be strong).
+We now show that such adaptivity is unfortunately impossible for factor models when the number
+of factors is unknown.
+Theorem 3. Assume that τ1,τ 0 ≤κ
+√
+nT/ 12 and τ2 ≥κ1. There exists a constant C >0 such that
+L(M(1), M(2)) ≥C.
+In this paper, conﬁdence intervals with validity over M(2) will be referred to as robust conﬁdence
+intervals (or weak-factor-robust conﬁdence intervals). T heorem 3 has a striking implication when
+τ1,τ 0 ≍
+√
+nT and τ2 is bounded away from zero. In this case, no robust conﬁdence i ntervals can
+guarantee to have shrinking width when there is actually onl y one factor and this factor is strong;
+recall that in this case, L(M(1)) ≍
+√
+n +T/τ 0 ≍ min{n−1/ 2,T −1/ 2}. Hence, L(M(1), M(2)) ≫
+L(M(1)). In other words, robustness necessarily causes eﬃciency lo ss. Unlike the adaptivity in
+Remark 1 for linear IV models, no conﬁdence intervals valid over M(2) can adapt its eﬃciency on
+M(1). When τ0,τ 1,τ 2 ≍
+√
+nT , robust conﬁdence intervals will have lengths tending to ze ro only if
+there are two factors and both are strong, but in this case we a re back to the situation with known
+number of factors.
+3For example, the Anderson-Rubin test, Lagrange multiplier test by Kleibergen (2005) or conditional likelihood
+ratio test by Moreira (2003).
+11
+
+[PDF PAGE 12]
+The other side of this coin is the observation that any conﬁde nce interval that has shrinking
+width and ignores weak factor necessarily lacks uniform cov erage. We state an explicit result below.
+Theorem 4. Let I∗(X−1, −1) = [ l∗(X−1, −1),u ∗(X−1, −1)] be a random interval. Suppose that for
+some sequences τ0 ≳ 1, we have supM ∈M(1) EM |I∗(X−1, −1)| =o(1). If τ2 ≳ 1, then
+lim sup
+n,T →∞
+inf
+M ∈M(2)
+PM (M1, 1 ∈ I ∗(X−1, −1)) ≤ 1
+2.
+Theorem 4 reveals the danger of some popular methods in practice. Cons ider the case with
+τ0,τ 1,τ 2 ≍
+√
+nT (so τ0,τ 2 ≳ 1 is satisﬁed). Recall the procedure in Figure 1 under the simpliﬁed
+assumption that the number of factors is either one or two. By c lassical results, the PCA estimate
+is asymptotically normal over M(1) with a standard error shrinking to zero. Hence, the overall
+procedure in Figure 1, which uses these standard errors, produces a random interv al with shrinking
+length on M(1). However, Theorem 4 indicates that precisely due to its shrinking width on M(1),
+the procedure in Figure 1 cannot have uniform coverage over M(2) unless the number of factors
+(including weak ones) can be consistently determined. Sinc e this result holds regardless of which
+pre-test is used, developing better tests for the number of f actors might not signiﬁcantly improve
+inference quality. Moreover, using methods that do not requ ire the number of factors as an input
+(e.g., nuclear-norm penalized methods) does not solve the p roblem either since Theorem 4 does
+not assume a speciﬁc form for I∗. In this regard, Theorem 4 also serves as a simple check on the
+uniform validity of a given procedure: if there exists two di ﬀerent numbers k1 andk2 such that the
+procedure under consideration gives shrinking conﬁdence i ntervals in both cases ((1) when there are
+k1 strong factors and no weak factors and (2) when there are k2 strong factors and no weak factors),
+then this procedure does not have uniform validity.
+Theorems 3 and 4 indicate an inherent tradeoﬀ between eﬃciency and validity . On one hand,
+Theorem 3 states that procedures with validity over M(2) cannot provide accurate inference on M(1).
+On the other hand, Theorem 4 makes the equivalent claim that procedures that provide acc urate
+inference on M(1) cannot guarantee uniform validity on M(2). Therefore, requiring validity on
+M(2)\M(1) necessarily reduces the inference eﬃciency.
+Since Theorem 3 only involves the worst-case width (or power) on M(1). One might wonder
+whether robust procedures could still have decent eﬃciency on average over M(1) despite the bad
+worst-case performance. We now show that this is not the case : lack of eﬃciency occurs at many
+points in M(1).
+Theorem 5. For any η ∈ (0, 1), deﬁne
+M(1)
+∗ =
+{
+A ∈ Rn×T : ∥A∥∞ ≤κ(1 −η), σ 1(A) ≥τ0(1 +η), σ 2(A) = 0
+}
+.
+Then
+inf
+CI ∈Φ( M(2))
+inf
+M ∈M(1)
+∗
+EM |CI (X−1, −1)| ≥ (1 − 2α ) min{κη,τ 0η,τ 2}.
+12
+
+[PDF PAGE 13]
+Since η can be chosen arbitrarily, M(1)
+∗ represents quite many (if not most) points in M(1).
+Theorem
+5 states that the eﬃciency is bad at every point in M(1)
+∗ for any robust conﬁdence interval.
+Therefore, the impossibility result in Theorem
+3 is not driven by only a few unlucky points in M(1).
+This means that there is fundamental diﬃculty in entry-wise learning when the number of factors
+is unknown. Hence, in order to achieve eﬃcient inference, th e number of factors needs to be given
+a priori.
+Remark 2 (Estimation adaptivity vs inference adaptivity) . We note that the lack of adaptivity
+implied by Theorems
+3, 4 and 5 is only about inference. It is entirely possible to have adap tive
+estimation when the number of factors is unknown. For exampl e, consider the procedure in Figure
+1. This procedure (after proper truncation if needed) still p rovides an estimate with the optimal
+rate4 and hence is an adaptive estimator. However, lack of adaptiv ity for inference reﬂects the fact
+that we cannot learn from the data what this optimal rate is.
+3 Panel regression with interactive ﬁxed eﬀects
+3.1 Can we achieve the optimal rate without assuming strong f actors?
+The panel data model with interactive ﬁxed eﬀects (e.g.,
+Pesaran, 2006; Bai, 2009) assumes
+Yi,t =L′
+iFt +Xi,tβ +εi,t,
+where the observed data is {(Yi,t,X i,t )}1≤i≤n, 1≤t≤T . Here, εi,t is i.i.d across (i,t ) followingN (0,σ 2
+ε )
+and the factor structure L′
+iFt is the ﬁxed eﬀect with Li,F t ∈ Rr0. For simplicity, here Xi,t and β
+are scalars. The main requirement of Xi,t is that it cannot be absorbed by the ﬁxed eﬀects. Since
+the ﬁxed eﬀects have a factor structure, we assume that Xi,t is a factor structure plus non-negligible
+noise:
+Xi,t =α ′
+igt +ui,t,
+where α i,g t ∈ Rr1 and ui,t is i.i.d across (i,t ) following N (0,σ 2
+u). We assume that u and ε are
+mutually independent. Factor structures in the regressor Xi,t have been a common assumption (see
+e.g.,
+Pesaran, 2006; Moon and Weidner , 2015; Zhu, 2017; Chernozhukov et al. , 2018a). Under these
+assumptions, we can write the model as
+Y =M +Xβ +ε and X =D +u, (6)
+4When all the factors are strong (e.g., M(1) with τ0 ≍
+√
+nT ), ignoring the weak factors leads to the best rate.
+When there are weak factors, no consistency is possible anyw ay due to results in Section 2.1; hence, one can simply
+use zero as the estimate via truncation (similar to ( 5)) in this case.
+13
+
+[PDF PAGE 14]
+where M,D,ε,u ∈ Rn×T , rankM ≤ r0 and rankD ≤ r1. The distribution of the data (Y,X ) is
+thus indexed by θ = (M,D,σ ε,σ u,β ). We consider the following parameter space:
+Θ =
+{
+θ = (M,D,σ ε,σ u,β ) : rank M ≤r0, rankD ≤r1, {σε,σ u} ⊂ [κ−1,κ ], |β | ≤ κ
+}
+,
+whereκ> 0 is a constant and r1,r 2 > 0 are ﬁxed. The requirement of {σε,σ u} ⊂ [κ−1,κ ] is merely
+saying that σε andσu are bounded away from zero and inﬁnity. For simplicity, we sh all also require
+that β be bounded. Notice that we do not require boundedness of ∥M ∥∞ and ∥D∥∞; it turns out
+that such a requirement will not be needed. We note that r0 and r1 are only upper bounds on the
+number of factors, instead of the exact number of factors. Mo reover, there is no requirement on the
+relative magnitude between n and T .
+The most important feature of Θ is that there is no assumption at all regarding the strength o f the
+factors. For estimating β , Bai (2009) showed that when all the factors are strong and the number of
+factors is known (or consistently estimable), one can achie ve the rate (nT )−1/ 2. Moon and Weidner
+(2015) showed that when all the factors are strong, overstating th e number of factors does not have
+any impact on the rate for estimating β . These results still leave two open questions that are quite
+relevant in practice:
+• If the number of factors is known and some factors might be wea k, would this create a problem
+for learning β ?
+• Furthermore, if there are uncertainties regarding both the number of factors and factor
+strengths, would there be additional diﬃculties learning β ?
+We now provide an estimator that achieves the rate (nT )−1/ 2 uniformly over Θ . As a result, lack
+of knowledge on the number of factors and potentially weak fa ctors do not create any problem for
+the rate on learning β . Notice that the rate (nT )−1/ 2 is minimax optimal by a simple two-point
+argument.
+The basic idea of our estimator is as follows. The assumption in ( 6) implies a factor structure
+in Y :
+Y = (M +Dβ ) +V,
+where rank (M +Dβ ) ≤r0+r1 andV =uβ +ε. Thus, we can identify β asβ = Etrace (V ′u)/ (nTσ 2
+u).
+Since both V and u are idiosyncratic parts in Y andX, respectively, we can estimate them by the
+typical low-rank estimation strategies.
+Without loss of generality, we assume that T ≥ n; if T < n, then we ﬂip our data from
+(Y,X ) to (Y ′,X ′). For any matrix A ∈ Rn×r, we deﬁne Π A = In −PA and PA = A(A′A)†A′,
+where † denoting the Moore-Penrose pseudo-inverse. Let ˆα ∈ arg minA∈Rn×r1 trace (X ′Π AX) and
+ˆΛ ∈ arg minA∈Rn×k trace (Y ′Π AY ) withk =r0 +r1, Notice that ˆα and ˆΛ are simply the eigenvectors
+corresponding to the largest r1 andk eigenvalues ofXX ′ andYY ′, respectively. Then the estimator
+14
+
+[PDF PAGE 15]
+is deﬁned as
+ˆβ := ˆβ (X,Y ) = n −r1
+n − ˆr · trace (Y ′Π ˆΛ Π ˆαX)
+trace (X ′Π ˆαX) , (7)
+where ˆr =k +r1 − trace (PˆΛPˆα ).
+We make three comments on the estimator. First, due to the ide ntiﬁcation condition of
+β = Etrace (V ′u)/ (nTσ 2
+u), we can view the estimation problem as learning the expected condi-
+tional covariance (e.g., Newey and Robins , 2018a; Chernozhukov et al. , 2018c,b) and thus construct
+a solution in a similar spirit. The means of X and Y are high-dimensional structures: A and
+M +Dβ . Since the trace operation deﬁnes an inner product, trace (EV ′u) is a linear functional of
+the covariance E[Y −(M +Dβ )]′[X −A]. The simple plug-in approach is to construct an estimate for
+M +Dβ andA and replace E(·) with (nT )−1trace (·). Under PCA, the estimate for Y − (M +Dβ )
+and X −D are Π ˆΛY and Π ˆαX, respectively.
+Second, the quantity (n −r1) acts as bias correction for trace (X ′Π ˆαX) in ( 7). Although the
+random matrix theory can gives us trace (X ′Π ˆαX) = σ 2
+unT +OP (n +T ), this bound is not enough
+as it only yields
+(nT )−1trace (X ′Π ˆαX) = σ 2
+u +OP (min{n−1,T −1}).
+To achieve the rate (nT )−1/ 2, we would need an estimate for σ 2
+u at the rate OP ((nT )−1/ 2), which
+is faster than OP (min{n−1,T −1}) unless n ≍ T . We derive a more accurate characterization by
+showing
+[(n −r1)T ]−1trace (X ′Π ˆαX) = σ 2
+u +OP ((nT )−1/ 2).
+Therefore, [T (n − r1)]−1trace (X ′Π ˆαX) has a strictly smaller remainder term unless T ≍ n.
+Similarly, the quantity n − ˆr acts as bias correction for trace (Y ′Π ˆΛ Π ˆαX) since one can show
+trace (Y ′Π ˆΛ Π ˆαX) = (n − ˆr)Tσ 2
+uβ +OP (
+√
+nT ).
+Third, a key step in analyzing the numerator in ( 7) is to show ∥Π ˆαD∥2
+F =OP ((nT )1/ 2) regardless
+of the factor strength. To see why this is crucial, we note tha t the best guaranteed rate for ∥D− ˆD∥2
+F
+is max{n,T } for any estimator ˆD, (see e.g.,
+Rohde and Tsybakov , 2011; Candès and Plan , 2011).
+This rate is worse than (nT )1/ 2 unlessT ≍n. One novelty of our analysis is to show that although
+∥Π ˆαX∥2
+F = ∥Π ˆα (D +u)∥2
+F =OP (max{n,T }), we can separate it into ∥Π ˆαD∥2
+F =OP ((nT )1/ 2) and
+∥Π ˆαu∥2
+F =OP (max{n,T }).
+The condition T ≥ n is motivated by the following insight. Under our factor stru cture, it
+suﬃces to estimate either the factors or the factor loadings , not both. Hence, perhaps we should
+estimate the one with lower dimensionality. If T ≫n, then the factor loading whose dimensionality
+is proportional to n would be easier to estimate, compared to factors whose dimen sionality scales
+with T .
+Theorem 6. Consider the estimator ˆβ in (
+7). Assume that T ≥n. Then for any η ∈ (0, 1), there
+15
+
+[PDF PAGE 16]
+exists a constant Cη > 0 such that
+sup
+θ∈Θ
+Pθ
+(√
+nT
+⏐
+⏐
+⏐ˆβ −β
+⏐
+⏐
+⏐>C η
+)
+≤η.
+We note that the requirement of T ≥ n is completely innocuous and can be removed if we
+consider the following estimator
+˜β =
+
+
+
+ˆβ (X,Y ) if T ≥n
+ˆβ (X ′,Y ′) otherwise.
+Theorem
+6 formally establishes the uniform rate of (nT )−1/ 2 over Θ . Hence, whether factors
+are strong or weak and whether the number of factors is exactl y known would not prevent us from
+achieving the rate (nT )−1/ 2.
+3.2 Can the currently known asymptotic variance hold withou t strong factors?
+Since the minimax rate of learning β does not depend on the strong factor assumption, the natural
+question is whether the strong factor assumption is not impo rtant at all for estimation and inference.
+Unfortunately, the answer is no. We shall show that (1) the eﬃ ciency of inference on β crucially
+depends on the strong factor condition and (2) there is lack o f adaptivity in the factor strength,
+resulting in a tradeoﬀ between eﬃciency and robustness.
+From the perspective of semiparametric estimation, there i s a good reason to suspect that the
+strong factor condition might aﬀect the inference eﬃciency . We shall view the panel regression
+problem in ( 6) as a semiparametric problem, which would yield a natural se miparametric lower
+bound for the asymptotic variance in estimating β . However, we then realize that the typical
+asymptotic variance in the literature (e.g., Bai, 2009; Moon and Weidner , 2015) assuming strong
+factors can be much smaller than this lower bound. This leads us to suspect that the strong factor
+condition might play a role similar to strong parametric res trictions on nonparametric components
+of semiparametric models.
+To provide an analogy, consider the partial linear model wit h observations (Yi,Z i,W i) generated
+byYi =f (Wi)+Ziβ +εi andZi =g(Wi)+ui; under regularity conditions, the asymptotic variance of
+estimatingβ is bounded below by Eε2
+i/ Eu2
+i whenf andg are nonparametric functions or functions
+with high-dimensional parameters, see e.g., (
+Chernozhukov et al. , 2018b; Newey and Robins , 2018b;
+Jankova and Van De Geer , 2018). Now we recall the model in ( 6): Y =M +Xβ +ε andX =D +u,
+where M,D ∈ Rn×T are high-dimensional nuisance parameters. We can view M and D as f (Wi)
+and g(Wi) in the partial linear model, respectively. From this perspe ctive, we would expect the
+asymptotic variance for estimating β to be at least σ 2
+εσ −2
+u in general. However, the asymptotic
+16
+
+[PDF PAGE 17]
+variance derived in Bai (2009) and Moon and Weidner (2015) is
+σ 2
+ε
+σ 2u + trace (Π M ′D′Π MD)/ (nT ),
+where Π M =In −M (M ′M )†M ′ and Π M ′ =IT −M ′(MM ′)†M .
+To formally address the eﬃciency problem, we again adopt the framework of adaptivity. For
+simplicity, we assume that σu =σε = 1 in ( 6). We consider the parameter space
+Θ (2) = {θ = (M,D, 1, 1,β ) : rank M ≤ 2, rankD = 1, |β | ≤ 1}.
+Then we focus on adaptivity on a smaller space in which the str ong factor condition holds:
+Θ (1) =
+{
+θ = (M,D, 1, 1,β ) ∈ Θ (2) : rank M = 1, M ′D = 0, MD ′ = 0,
+∥M ∥F ≥κ1
+√
+nT, ∥D∥F ≥κ2
+√
+nT
+}
+,
+where κ1,κ 2 > 0 are constants. The diﬀerence between Θ (1) and Θ (2) is that Θ (2) allows for
+potentially weak factors and uncertainty in the number of fa ctors ( rankM can be either 1 or 2),
+while Θ (1) only considers known number of factors and assumes all the fa ctors are strong. Our
+analysis will focus on the question of whether robust conﬁde nce intervals (uniform validity on Θ (2))
+has worse eﬃciency on Θ (1) than non-robust conﬁdence intervals (uniform validity onl y on Θ (1)).
+By Bai (2009) and Moon and Weidner (2015) (among others), the least-square estimator ˆβLS
+(i.e., ( ˆβLS, ˆA) = arg min β ∈R, A ∈Rn×T , rank A≤2 ∥Y −A −Xβ ∥2
+F ) satisﬁes
+√
+nT ( ˆβLS(X,Y ) −β )
+σ (θ)
+d→N (0, 1),
+overθ ∈ Θ (1), where for θ = (M,D,σ ε,σ u,β ),
+σ (θ) := σε√
+σ 2u + trace (Π M ′D′Π MD)/ (nT )
+.
+Forθ ∈ Θ (1), we have that
+σ (θ) = σε√
+σu + trace (Π M ′D′Π MD)/ (nT )
+= 1√
+1 + ∥D∥2
+F/ (nT )
+≤ 1
+√
+1 +κ2
+2
+.
+Therefore, a natural 95%-conﬁdence interval for parameter s in Θ (1) is
+CI ∗(X,Y ) =
+[
+ˆβLS(X,Y ) − 1. 96(nT )−1/ 2(1 +κ2
+2)−1/ 2,
+ˆβLS(X,Y ) + 1. 96(nT )−1/ 2(1 +κ2
+2)−1/ 2
+]
+. (8)
+17
+
+[PDF PAGE 18]
+Existing results imply that
+lim inf
+n,T →∞
+inf
+θ∈Θ (1)
+Pθ (β ∈CI ∗(X,Y )) ≥ 95%.
+In other words, we have that
+lim sup
+n,T →∞
+L(Θ (1))
+3. 92(nT )−1/ 2(1 +κ2
+2)−1/ 2 ≤ 1, (9)
+where the quantity L(Θ (1)) is deﬁned as before: L(Θ (1)) = inf CI ∈Φ 0. 95(Θ (1)) supθ∈Θ (1) Eθ|CI (X,Y )| is
+the minimax expected length of conﬁdence intervals on Θ (1) and Φ 0. 95(Θ (1)) = {CI (·) = [l(·),u (·)] :
+inf θ∈Θ (1) Pθ(β ∈CI (X,Y )) ≥ 0. 95} is the set of 95%-conﬁdence intervals. We also consider robu st
+conﬁdence intervals, which have uniform validity over Θ (2) and form the set Φ 0. 95(Θ (2)). To study
+the impact of the robustness requirement on eﬃciency, we rev isit the concept of adaptivity by
+studying
+L(Θ (1), Θ (2)) = inf
+CI ∈Φ 0. 95(Θ (2))
+sup
+θ∈Θ (1)
+Eθ|CI (X,Y )|.
+Both L(Θ (1)) and L(Θ (1), Θ (2)) measure performance of conﬁdence intervals on Θ (1). The former
+considers non-robust conﬁdence intervals (ones with valid ity over Θ (1)), whereas the latter consid-
+ers robust conﬁdence intervals (with validity over the larg er set Θ (2)). If L(Θ (1), Θ (2))/ L(Θ (1))
+is asymptotically larger than one, then the extra robustnes s on Θ (2)\Θ (1) decreases the eﬃciency
+even on Θ (1); if L(Θ (1), Θ (2))/ L(Θ (1)) converges to one, then one can gain extra robustness without
+sacriﬁcing eﬃciency. To characterize L(Θ (1), Θ (2)), we ﬁrst derive the following result.
+Theorem 7. LetCI (·) = [l(·),u (·)] be a (1 −α ) conﬁdence interval that has validity over Θ (2), i.e.,
+inf θ∈Θ (2) Pθ(β ∈CI (X,Y )) ≥ 1 −α with α ∈ (0, 1/ 2). Then for any c ∈ (0, 4), we have
+sup
+θ∈Θ (1)
+Pθ
+(
+|CI (X,Y )| ≥ c(nT )−1/ 2
+)
+≥ 1 − 2α −c.
+Moreover,
+sup
+θ∈Θ (1)
+Eθ|CI (X,Y )| ≥ (nT )−1/ 2 (1 − 2α )2/ 2.
+Notice that the above lower bound does not depend on κ2. On the other hand,√
+nT |CI ∗(X,Y )| ≍ (1 + κ2
+2)−1/ 2 decreases with κ2. Thus, for large enough κ2, CI ∗ in (
+8) vio-
+lates the lower bound in Theorem 7. Since the lower bound is satisﬁed by any conﬁdence interval
+with uniform validity over Θ (2), it follows that any robust conﬁdence interval will be wider than
+CI ∗ on Θ (1). Equivalently, we can state the result in terms of robustnes s (coverage guarantee for
+CI ∗).
+18
+
+[PDF PAGE 19]
+Corollary 3. LetCI (·) = [l(·),u (·)] be a random interval. Assume that for any η ∈ (0, 1),
+lim sup
+n,T →∞
+sup
+θ∈Θ (1)
+Pθ
+(
+|CI (X,Y )|> 3. 92(nT )−1/ 2(1 +κ2
+2)−1/ 2(1 +η)
+)
+= 0. (10)
+Then
+lim inf
+n,T →∞
+inf
+θ∈Θ (2)
+Pθ (β ∈CI (X,Y )) ≤ 1
+2 + 1. 96(1 +κ2
+2)−1/ 2.
+Notice that CI ∗ satisﬁes (
+10) since |CI ∗(X,Y )| = 3. 92(nT )−1/ 2(1 +κ2
+2)−1/ 2. By Corollary
+3,
+any conﬁdence interval that has a width similar to (or shorte r than) that of CI ∗ on Θ (1) will have
+coverage probability close to 1/2 on Θ (2). Finally, we compare L(Θ (1), Θ (2)) and L(Θ (1)). Applying
+Theorem 7 with α = 0. 05, we obtain obtain
+L(Θ (1), Θ (2)) ≥ (nT )−1/ 2 (1 − 2α )2/ 2 = 0. 405(nT )−1/ 2.
+In light of ( 9), this means
+lim inf
+n,T →∞
+L(Θ (1), Θ (2))
+L(Θ (1)) ≥ 0. 405
+3. 92
+√
+1 +κ2
+2 >
+√
+1 +κ2
+2
+9. 7 .
+Therefore, any robust conﬁdence interval is asymptoticall y wider than any non-robust conﬁdence
+interval whenever κ2 > 9. 65. In other words, requiring validity on Θ (2)\Θ (1) (allowing for weak
+factors and unknown number of factors) would lead to eﬃcienc y loss on Θ (1) if κ2 > 9. 65.
+Although the constant of 9.65 is not the optimal constant, th e analysis highlights the lack of
+adaptivity in inference. Without strong factor in the ﬁxed e ﬀects, strong factor components in
+X would result in a stark loss of eﬃciency. This can be explaine d. When the ﬁxed eﬀects M
+have strong factors, the projections Π M and Π M ′ can be estimated well and thus we can safely
+identify components in X that cannot be absorbed by the ﬁxed eﬀects; as a result, the va riations
+in Π MDΠ M ′ +u can be used to learn β . However, when M does not have strong factors, it is quite
+diﬃcult to learn projections Π M and Π M ′ and hence we cannot clearly tell which part of X is left
+after removing components correlated with the ﬁxed eﬀects; consequently, we will not be sure that
+any part of D can be used to learn β and instead will only consider variations in u simply to be on
+the safe side (ensure coverage probability in all cases), re sulting in a conﬁdence interval with length
+unrelated to κ2 (representing factor strength in D).
+Another implication is that when there are potential weak fa ctors, uncertainty in the number of
+factors leads to eﬃciency loss. This is in contrast with resu lts in Moon and Weidner (2015), who
+established that when all the factors are strong, uncertain ty in the number of factors does not cause
+eﬃciency loss.
+19
+
+[PDF PAGE 20]
+A Proofs
+A.1 Proof of Theorem
+1
+Lemma 1. Letgµ (·) denote the pdf of N (µ,I ). Then
+∫ gµ 1 (x)gµ 2 (x)
+gµ 0(x) dx = exp(δ′
+1δ2),
+whereδ1 =µ 1 −µ 0 and δ2 =µ 2 −µ 0.
+Proof of Lemma 1. Recall that gµ (x) = (2π )−k/ 2 exp(−∥x −µ ∥2
+2/ 2). Notice that
+∫ gµ 1 (x)gµ 2 (x)
+gµ 0(x) dx
+= (2π )−k/ 2
+∫
+exp
+[
+− 1
+2
+(
+∥x −µ 1∥2
+2 + ∥x −µ 2∥2
+2 − ∥x −µ 0∥2
+2
+)]
+dx
+= (2π )−k/ 2
+∫
+exp
+[
+− 1
+2
+(
+2∥x∥2
+2 − 2x′(µ 1 +µ 2) + ∥µ 1∥2
+2 + ∥µ 2∥2
+2 −
+(
+∥µ 0∥2
+2 + ∥x∥2
+2 − 2x′µ 0
+))]
+dx
+= (2π )−k/ 2
+∫
+exp
+[
+− 1
+2
+(
+∥x∥2
+2 − 2x′(µ 1 +µ 2 −µ 0) + ∥µ 1∥2
+2 + ∥µ 2∥2
+2 − ∥µ 0∥2
+2
+)]
+dx
+= exp
+[
+− 1
+2
+(
+∥µ 1∥2
+2 + ∥µ 2∥2
+2 − ∥µ 0∥2
+2 − ∥µ 1 +µ 2 −µ 0∥2
+2
+)]
+×
+(2π )−k/ 2
+∫
+exp
+[
+− 1
+2
+(
+∥x∥2
+2 − 2x′(µ 1 +µ 2 −µ 0) + ∥µ 1 +µ 2 −µ 0∥2
+2
+)]
+dx
+= exp
+[
+− 1
+2
+(
+∥µ 1∥2
+2 + ∥µ 2∥2
+2 − ∥µ 0∥2
+2 − ∥µ 1 +µ 2 −µ 0∥2
+2
+)]
+= exp
+[
+− 1
+2
+(
+∥µ 0 +δ1∥2
+2 + ∥µ 0 +δ2∥2
+2 − ∥µ 0∥2
+2 − ∥µ 0 +δ1 +δ2∥2
+2
+)]
+= exp(δ′
+1δ2)
+Lemma 2. Suppose that we observe Y−1, −1 =M−1, −1 +ε−1, −1, where M ∈ Rn×T is a non-random
+matrix and ε ∈ Rn×T is a matrix of i.i.d N (0, 1) random variables. Let PM denote the probability
+measure of the distribution for Y−1, −1 and EM denote the expectation under PM . Then
+EM
+⏐
+⏐
+⏐
+⏐
+dP ˜M
+dPM
+− 1
+⏐
+⏐
+⏐
+⏐ ≤
+√
+exp
+(
+∥ ˜M−1, −1 −M−1, −1∥2
+F
+)
+− 1.
+Proof of Lemma
+2. Notice that
+EM
+⏐
+⏐
+⏐
+⏐
+dP ˜M
+dPM
+− 1
+⏐
+⏐
+⏐
+⏐ ≤
+√
+EM
+(dP ˜M
+dPM
+− 1
+)2
+=
+
+
+
+√
+EM
+[ (dP ˜M
+dPM
+)2
+− 2dP ˜M
+dPM
++ 1
+]
+=
+
+
+
+√
+EM
+[ (dP ˜M
+dPM
+)2]
+− 1.
+20
+
+[PDF PAGE 21]
+We also observe that PM is the multivariate normal distribution with mean vec (M−1, −1) and
+covariance matrix InT −1. Let gµ denote the density of N (µ,I ). Therefore, by Lemma 1, we have
+that
+EM
+[ (dP ˜M
+dPM
+)2]
+=
+∫ [
+gvec ( ˜M )(x)
+] 2
+ggvec ( M )(x) dx = exp
+(
+∥vec ( ˜M−1, −1 −M−1, −1)∥2
+2
+)
+.
+The result follows.
+Proof of Theorem 1. We deﬁne c1 = 2 τ(nT )−1/ 2 and c2 = q min{1/ 2,
+√
+T/τ }, where q =√
+log(α 2 + 1)/ 2. We deﬁne
+¯M =
+(
+κ/ 2
+c11n−1
+)(
+0 1′
+T −1
+)
+=
+(
+0 1
+2κ1′
+T −1
+0 c11n−11′
+T −1
+)
+and
+˜M =
+(
+κ/ 2
+c11n−1
+)(
+c2 1′
+T −1
+)
+=
+(
+1
+2c2κ 1
+2κ1′
+T −1
+c1c21n−1 c11n−11′
+T −1
+)
+.
+Then
+∥ ¯M−1, −1 − ˜M−1, −1∥2
+F =c2
+1c2
+2(n − 1).
+We observe that
+⏐
+⏐E ˜Mψ − E ¯Mψ
+⏐
+⏐ =
+⏐
+⏐
+⏐
+⏐E ¯M
+(
+ψ · dP ˜M
+dP ¯M
+)
+− E ¯Mψ
+⏐
+⏐
+⏐
+⏐
+=
+⏐
+⏐
+⏐
+⏐E ¯Mψ ·
+(dP ˜M
+dP ¯M
+− 1
+)⏐
+⏐
+⏐
+⏐
+(i)
+≤ E ¯M
+⏐
+⏐
+⏐
+⏐
+dP ˜M
+dP ¯M
+− 1
+⏐
+⏐
+⏐
+⏐
+(ii)
+≤
+√
+exp
+(
+∥ ˜M−1, −1 − ¯M−1, −1∥2
+F
+)
+− 1
+=
+√
+exp
+(
+c2
+1c2
+2(n − 1)
+)
+− 1
+≤
+√
+exp(4q2) − 1 = α, (11)
+where (i) follows by |ψ | ≤ 1 and (ii) follows by Lemma 2. Notice that
+∥ ¯M ∥∞ = max{c1,κ/ 2} ≤ c1 +κ/ 2
+and
+∥ ˜M ∥∞ = max{c1,κ/ 2,c 1c2,c 2κ/ 2} ≤ c1 +κ/ 2 +c1c2 +c2κ/ 2.
+The assumption of τ ≤ κ
+√
+nT/ 12 implies c1 ≤ κ/ 6. The choice of c2 implies that c2 ≤ 1/ 2
+(since q <1 for any α ≤ 1). Therefore, the above two displays imply max{∥ ¯M ∥∞, ∥ ˜M ∥∞} ≤ κ.
+21
+
+[PDF PAGE 22]
+Since both ¯M has rank 1, its largest singular value is equal to its Frobeni us norm. Therefore,
+we have
+σ1( ¯M ) = ∥ ˜M ∥F =
+√
+c2
+1(n − 1)(T − 1) +κ2(T − 1)/ 4
+≥c1
+√
+(n − 1)(T − 1)
+(i)
+≥ 1
+2c1
+√
+nT =τ,
+where (i) follows by n − 1 ≥n/ 2 and T − 1 ≥T/ 2 (due to n,T ≥ 2). Similarly,
+σ1( ˜M ) = ∥ ˜M ∥F =
+√
+∥ ˜M ∥2
+F +c2
+1c2
+2(n − 1) +c2
+2κ2/ 4 ≥ ∥ ˜M ∥F ≥τ.
+Therefore, we have proved that ¯M ∈ M null(τ) and ˜M ∈ M c2κ/ 2(τ).
+Deﬁne ρ1 =
+√
+log(α 2 + 1)κ min{1,
+√
+T/τ }/ 8. Notice that ρ1 ≤c2κ/ 2, which means Mc2κ/ 2(τ) ⊂
+Mρ1(τ). By ¯M ∈ M null(τ), we have E ¯Mψ ≤α . Then ( 11) implies E ˜Mψ ≤ 2α . It follows that
+inf
+M ∈Mρ 1 (τ)
+EMψ ≤ inf
+M ∈Mc2κ/ 2(τ)
+EMψ ≤ E ˜Mψ ≤ 2α. (12)
+Let ρ2 =
+√
+log(α 2 + 1)κ min{1, √n/τ }/ 8. Since n and T play symmetric roles, we can simply
+switch the role of n andT . Hence, by the same analysis, we can show that the desired res ult holds
+for
+inf
+M ∈Mρ 2 (τ)
+EMψ ≤ 2α. (13)
+Since ( 12) and ( 13) both hold, we have that
+inf
+M ∈Mρ 1 (τ) ⋃ Mρ 2 (τ)
+EMψ ≤ 2α.
+The desired result follows once we notice that Mρ1(τ)⋃ Mρ2(τ) = Mmax{ρ1,ρ 2}(τ) ⊂
+M(ρ1+ρ2)/ 2(τ) and min{1, √n/τ } + min{1,
+√
+T/τ } ≳ min{1,
+√
+n +T/τ }.
+A.2 Proof of Theorem 2
+We shall use the notation X ≲ P Y to denote X = OP (Y ). For simplicity, we shall write P and
+E instead of PM and EM . However, all the results (including OP notations) hold uniformly in
+M ∈ M(τ) with τ ≥ 4 max{
+√
+10κ, 2}
+√
+3(n +T ).
+In this section, we deﬁne
+W =
+
+
+
+
+
+
+
+X1, 2 X1, 3 · · · X1,T
+X2, 2 X2, 3 · · · X2,T
+.
+.
+. .
+.
+. . . . .
+.
+.
+Xn, 2 Xn, 3 · · · Xn,T
+
+
+
+
+
+
+
+∈ Rn×(T −1).
+22
+
+[PDF PAGE 23]
+Therefore, X = (X, 1,W ) ∈ Rn×T with X, 1 = (X1, 1,X ′
+−1, 1)′ = (X1, 1,...,X n, 1)′ ∈ Rn. We use
+the notation W =LF ′ +ε with L ∈ Rn, F ∈ RT −1 and ε ∈ Rn×(T −1). Let ε = (ε(1),...,ε (n))′ with
+ε(i) ∈ RT −1.
+We denote ¯τ = ∥LF ′∥F = ∥L∥2∥F ∥2. Clearly, ¯τ2 = ∥L∥2
+2∥F ∥2
+2 = τ2 −∑ n
+i=1M 2
+i, 1 ≥ τ2 −nκ 2.
+Sinceτ2 ≥ 12(n +T ) max{40κ2, 16}, we have τ2 −nκ 2 ≥ 11τ2/ 12. Therefore, ¯τ2 ≥ 11τ2/ 12, which
+implies that ¯τ ≥
+√
+11/ 12τ >0. 95τ.
+Clearly ˆM1, 1 does not depend on the normalization of ˆL: if we replace ˆL with c ˆL for c ̸= 0, we
+obtain the same estimate ˆM1, 1. Thus, without loss of generality, we assume ∥ ˆL∥2 = ∥L∥2 = ¯τ/
+√
+T ,
+which means ∥F ∥2 =
+√
+T . Deﬁne H =F ′W ′ ˆLˆτ−2
+n and ∆ L =εW ′ ˆLˆτ−2
+n , where ˆτn =σ1(W ). Since
+ˆL is the PCA estimate using W , it means that WW ′ ˆL = ˆτ2
+n ˆL. Notice that
+ˆτ2
+n ˆL =WW ′ ˆL = (LF ′ +ε)W ′ ˆL =L · (F ′W ′ ˆL) +εW ′ ˆL.
+Therefore, we have ˆL =LH + ∆ L.
+A.2.1 Preliminary results
+Lemma 3. We have the following:
+(1) ¯τ ≥ max{13, 20. 8κ}
+√
+n +T .
+(2) with probability approaching one, ∥ε∥ ≤ 3
+√
+n +T, ˆτn ≥ 3¯τ/ 4, |H| ≤ 4 and ∥∆ L∥2 ≤ 8
+√
+1 +n/T .
+Proof of Lemma 3. Notice that ¯τ ≥ 0. 95τ > 0. 95
+√
+12 × 16(n +T ) > 13
+√
+n +T . Moreover,
+¯τ ≥ 0. 95τ >0. 95
+√
+12 × 40(n +T )κ> 20. 8κ
+√
+n +T . This is the ﬁrst claim.
+For the second claim, deﬁne the event A =
+{
+∥ε∥ ≤ 3
+√
+n +T
+}
+. We ﬁrst observe that
+P(Ac) = P(∥ε∥> 3
+√
+n +T ) ≤ P(∥ε∥> 2√n +
+√
+T − 1)
+(i)
+≤ 2 exp(−n/ 2) = o(1),
+where (i) follows by Corollary 5.35 of Vershynin (2010). On the event A, ∥ε∥ ≤ 3
+√
+n +T ≤ 3¯τ/ 13,
+which means
+ˆτn = ∥W ∥ ≥ ∥LF ′∥ − ∥ε∥ = ¯τ − ∥ε∥ ≥ ¯τ − 3¯τ/ 13> 3¯τ/ 4. (14)
+We also notice that on the event A,
+|H| = |F ′(FL ′ +ε′) ˆLˆτ−2
+n |
+= |∥F ∥2
+2L′ ˆLˆτ−2
+n +F ′ε′ ˆLˆτ−2
+n |
+≤ ∥F ∥2
+2 · ∥L∥2 · ∥ ˆL∥2 ˆτ−2
+n + ∥F ∥2 · ∥ε∥ · ∥ ˆL∥2ˆτ−2
+n
+= ∥F ∥2
+2 · ∥L∥2
+2 ˆτ−2
+n + ∥F ∥2 · ∥ε∥ · ∥L∥2 ˆτ−2
+n
+≤ ¯τ2ˆτ−2
+n + ¯τ · 3
+√
+n +T · ˆτ−2
+n
+(i)
+≤ 16/ 9 + (16/ 9) · 3
+√
+n +T/ ¯τ <4,
+23
+
+[PDF PAGE 24]
+where (i) follows by ( 14) and ¯τ ≥ 13
+√
+n +T . Also observe that on the event A,
+∥∆ L∥2 = ∥εFL ′ ˆLˆτ−2
+n +εε′ ˆLˆτ−2
+n ∥2
+≤ ∥εF ∥2 · ∥L∥2 · ∥ ˆL∥2 ˆτ−2
+n + ∥ε∥2 · ∥ ˆL∥2 ˆτ−2
+n
+= ∥εF ∥2 · ∥L∥2
+2 ˆτ−2
+n + ∥ε∥2 · ∥L∥2 ˆτ−2
+n
+≤ ∥εF ∥2 · ¯τ2T −1ˆτ−2
+n + 9(n +T ) · ¯τT −1/ 2 ˆτ−2
+n
+≤ ∥εF ∥2 ·T −1 · (4/ 3)2 + 9(n +T ) · (4/ 3)2 ·T −1/ 2¯τ−1
+= ∥εF ∥2 ·T −1 · (16/ 9) + 16(n +T ) ·T −1/ 2 ¯τ−1
+≤ ∥εF ∥2 ·T −1 · (16/ 9) + 16(n +T ) ·T −1/ 2/ (13
+√
+n +T )
+Since ∥F ∥2 =
+√
+T ,εFT −1/ 2 ∼N (0,I n). By Lemma 1 of Laurent and Massart (2000), we have that
+P(∥εF ∥2
+2T −1 −n >2(√
+nx +x)) ≤ exp(−x) for any x ≥ 0. Taking x = n, this means that with
+probability approaching one, ∥εF ∥2
+2T −1 ≤ 5n, which means ∥εF ∥2 ≤
+√
+5Tn . Therefore, the above
+display implies that with probability approaching one, we h ave
+∥∆ L∥2 ≤
+√
+5Tn ·T −1 · (16/ 9) + 16(n +T ) ·T −1/ 2/ (13
+√
+n +T )< 8
+√
+1 +n/T.
+The proof is complete.
+Lemma 4. |ε′
+(1)ε′∆ L| ≲ P (n +T )T −1/ 2 + ¯τ−2(n +T )T · |L1|.
+Proof of Lemma
+4. Deﬁne Q = ∑ n
+j=2ε(j)ε′
+(j). Then ε′ε = Q +ε(1)ε′
+(1). By Corollary 5.35 of
+Vershynin (2010), with probability at least 1 − 2 exp(−(n − 1)/ 2),
+√
+∥Q∥ ≤ 2√n − 1 +
+√
+T − 1 ≤
+3
+√
+n +T . Thus, with probability approaching one, ∥Q∥ ≤ 9(n +T ). By Lemma 3, ∥ˆτ−2
+n Q∥ ≤
+16/ 132 < 0. 1 with probability approaching one. We now deﬁne the followin g event
+A = {∥Q∥ ≤ 9(n +T )}
+⋂ {
+∥ˆτ−2
+n Q∥ ≤ 0. 1
+}⋂
+{ˆτn ≥ 3¯τ/ 4}
+⋂
+{∥ε∥ ≤ ˆτn/ 2}.
+By Lemma 3, P(A) → 1. We proceed in three steps.
+Step 1: write ε′∆ L as a power series.
+Notice that
+ε′∆ L =ε′εW ′ ˆLˆτ−2
+n
+=ε′εW ′LH ˆτ−2
+n +ε′εW ′∆ Lˆτ−2
+n
+=ε′εW ′LH ˆτ−2
+n +ε′εFL ′∆ Lˆτ−2
+n +ε′εε′∆ Lˆτ−2
+n
+=ε′εW ′LH ˆτ−2
+n +ε′εFL ′∆ Lˆτ−2
+n +ε(1)ε′
+(1)ε′∆ Lˆτ−2
+n +Qε′∆ Lˆτ−2
+n .
+Therefore,
+(I − ˆτ−2
+n Q)ε′∆ L =ε′εW ′LH ˆτ−2
+n +ε′εFL ′∆ Lˆτ−2
+n +ε(1)ε′
+(1)ε′∆ Lˆτ−2
+n .
+24
+
+[PDF PAGE 25]
+Since ∥ˆτ−2
+n Q∥ ≤ 0. 1 on the event A, we have that
+ε′∆ L =
+∞∑
+i=0
+(ˆτ−2
+n Q)i
+(
+ε′εW ′LH ˆτ−2
+n +ε′εFL ′∆ Lˆτ−2
+n +ε(1)ε′
+(1)ε′∆ Lˆτ−2
+n
+)
+and thus
+ε′
+(1)ε′∆ L =ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)i
+(
+ε′εW ′LH ˆτ−2
+n +ε′εFL ′∆ Lˆτ−2
+n +ε(1)ε′
+(1)ε′∆ Lˆτ−2
+n
+)
+=ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)i(
+ε′εW ′LH ˆτ−2
+n +ε′εFL ′∆ Lˆτ−2
+n
+)
++
+[
+ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iε(1) ˆτ−2
+n
+]
+ε′
+(1)ε′∆ L.
+On the event A, it follows that
+ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iε(1)ˆτ−2
+n ≤ ∥ε(1)∥2
+2 ˆτ−2
+n
+∞∑
+i=0
+∥ˆτ−2
+n Q∥i = ∥ε(1)∥2
+2ˆτ−2
+n
+1 − ∥ˆτ−2n Q∥ ≤ ∥ε∥2 ˆτ−2
+n
+0. 9 ≤ 2−2
+0. 9 ≤ 0. 3.
+The above two displays imply that on the event A,
+0. 7
+⏐
+⏐
+⏐ε′
+(1)ε′∆ L
+⏐
+⏐
+⏐ ≤
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+ˆτ−2
+n ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iε′εW ′LH
+
+ 
+S1
++ ˆτ−2
+n ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iε′εFL ′∆ L
+
+ 
+S2
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+. (15)
+Step 2: bound S2.
+We will repeatedly use the following fact: if ξ is independent of ε(1), then |ξ′ε(1)| ≲ P ∥ξ∥2.
+Notice that
+|S2| = |L′∆ L| · ˆτ−2
+n
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)i(Q +ε(1)ε′
+(1))F
+⏐
+⏐
+⏐
+⏐
+⏐. (16)
+Deﬁne the constant C0 = E|ξ|, where ξ ∼N (0, 1). Hence C0 = 2 · (2π )−1∫ ∞
+0 x exp(−x2/ 2)dx<
+1. We deﬁne
+R :=
+∞∑
+i=0
+⏐
+⏐
+⏐ε′
+(1)(16¯τ−2Q/ 9)iQF
+⏐
+⏐
+⏐.
+Since ε(1) ∼ N (0,I T −1) is independent of Q and F , we have that ε′
+(1)(16¯τ−2Q/ 9)iQF given
+(Q,F ) has a normal distribution with mean zero and standard deviat ion ∥(16¯τ−2Q/ 9)iQF ∥2. There-
+fore,
+E
+{⏐
+⏐
+⏐ε′
+(1)(16¯τ−2Q/ 9)iQF
+⏐
+⏐
+⏐ |Q,F
+}
+=C0∥(16¯τ−2Q/ 9)iQF ∥2 ≤ ∥16¯τ−2Q/ 9∥i · ∥Q∥ · ∥F ∥2.
+25
+
+[PDF PAGE 26]
+Consider the event A0 = {16¯τ−2∥Q∥/ 9 ≤ 16/ 132}⋂ {∥Q∥ ≤ 9(n +T )}. Then on the event A0,
+E(R |Q,F ) ≤
+∞∑
+i=0
+∥16¯τ−2Q/ 9∥i · ∥Q∥ · ∥F ∥2 = ∥Q∥ · ∥F ∥2
+1 − ∥16¯τ−2Q/ 9∥ ≤ 9(n +T ) ·
+√
+T
+1 − 16/ 132 ≤ 10(n +T )
+√
+T.
+Since P(A0) → 1 (due to Lemma 3), it follows that
+R ≲ P (n +T )
+√
+T.
+Now we observe that on the event A,
+⏐
+⏐
+⏐ε′
+(1)(16¯τ−2Q/ 9)iQF
+⏐
+⏐
+⏐ ≥
+⏐
+⏐
+⏐ε′
+(1)(ˆτ−2
+n Q)iQF
+⏐
+⏐
+⏐ and thus
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iQF
+⏐
+⏐
+⏐
+⏐
+⏐ ≤
+∞∑
+i=0
+⏐
+⏐
+⏐ε′
+(1)(ˆτ−2
+n Q)iQF
+⏐
+⏐
+⏐ ≤
+∞∑
+i=0
+⏐
+⏐
+⏐ε′
+(1)(16¯τ−2Q/ 9)iQF
+⏐
+⏐
+⏐ =R ≲ P (n+T )
+√
+T. (17)
+Therefore, we have that on the event A,
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)i(Q +ε(1)ε′
+(1))F
+⏐
+⏐
+⏐
+⏐
+⏐
+≤
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iQF
+⏐
+⏐
+⏐
+⏐
+⏐+
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iε(1)ε′
+(1)F
+⏐
+⏐
+⏐
+⏐
+⏐
+≲ P (n +T )
+√
+T +
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iε(1)ε′
+(1)F
+⏐
+⏐
+⏐
+⏐
+⏐
+≤ (n +T )T 1/ 2 +
+( ∞∑
+i=0
+⏐
+⏐
+⏐ε′
+(1)(ˆτ−2
+n Q)iε(1)
+⏐
+⏐
+⏐
+)
+· |ε′
+(1)F |
+≤ (n +T )T 1/ 2 +
+∞∑
+i=0
+(0. 1)i · ∥ε(1)∥2
+2 · |ε′
+(1)F |
+≲ (n +T )T 1/ 2 + ∥ε(1)∥2
+2 · ∥ε′
+(1)F ∥2
+(i)
+≲ P (n +T )T 1/ 2 +n ·
+√
+T ≲ (n +T )T 1/ 2, (18)
+where (i) follows by ε′
+(1)F ∼ N (0, ∥F ∥2
+2) and ∥F ∥2 =
+√
+T as well as E∥ε(1)∥2
+2 = n. Therefore, by
+(
+16), we have that
+|S2| ≲ P |L′∆ L| · ˆτ−2
+n · (n +T )T 1/ 2 ≤ ∥L∥2 · ∥∆ L∥2 · ˆτ−2
+n · (n +T )T 1/ 2
+(i)
+≲ P (n +T )
+√
+1 +n/T ¯τ−1.
+where (i) follows by ∥L∥2 = ¯τT −1/ 2 and bounds for ∥∆ L∥2 and ˆτn in Lemma 3.
+Step 3: bound S1
+Notice that
+ˆτ−2
+n
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iε′εW ′L
+⏐
+⏐
+⏐
+⏐
+⏐ = ˆτ−2
+n
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iε′ε(FL ′ +ε′)L
+⏐
+⏐
+⏐
+⏐
+⏐
+26
+
+[PDF PAGE 27]
+≤ ˆτ−2
+n
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iε′εF
+⏐
+⏐
+⏐
+⏐
+⏐∥L∥2
+2 + ˆτ−2
+n
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iε′εε′L
+⏐
+⏐
+⏐
+⏐
+⏐.
+In (
+18), we have proved that
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iε′εF
+⏐
+⏐
+⏐
+⏐
+⏐ ≲ P (n +T )T 1/ 2.
+Therefore, by ∥L∥2 = ¯τ/
+√
+T , we have
+ˆτ−2
+n
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iε′εW ′L
+⏐
+⏐
+⏐
+⏐
+⏐ ≲ P (n +T )T −1/ 2 + ¯τ−2
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iε′εε′L
+⏐
+⏐
+⏐
+⏐
+⏐. (19)
+Observe that on the event A,
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iε′εε′L
+⏐
+⏐
+⏐
+⏐
+⏐
+=
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)i(Q +ε(1)ε′
+(1))ε′L
+⏐
+⏐
+⏐
+⏐
+⏐
+≤
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iQε′L
+⏐
+⏐
+⏐
+⏐
+⏐+
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iε(1)
+⏐
+⏐
+⏐
+⏐
+⏐· |ε′
+(1)ε′L|
+≤
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iQε′L
+⏐
+⏐
+⏐
+⏐
+⏐+
+( ∞∑
+i=0
+∥ˆτ−2
+n Q∥i
+)
+· ∥ε(1)∥2
+2 · |ε′
+(1)ε′L|
+≤
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iQε′L
+⏐
+⏐
+⏐
+⏐
+⏐+ 1
+1 − 0. 1 · ∥ε(1)∥2
+2 · |ε′
+(1)ε′L|
+≤
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iQε(1)L1
+⏐
+⏐
+⏐
+⏐
+⏐+
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iQ
+n∑
+j=2
+ε(j)Lj
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
++ 2∥ε(1)∥2
+2 · |ε′
+(1)ε′L|.
+By the same argument as in (
+17) with F replaced by ∑ n
+j=2ε(j)Lj, we can show that
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iQ
+n∑
+j=2
+ε(j)Lj
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+≲ P ∥Q∥ ·
+
+
+
+
+
+
+n∑
+j=2
+ε(j)Lj
+
+
+
+
+
+
+2
+≲ P ∥Q∥ ·
+√
+T − 1 · ∥L−1∥2 ≤ ∥Q∥ ·
+√
+T · ∥L∥2 ≲ P (n +T )¯τ.
+On the event A,
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iQε(1)L1
+⏐
+⏐
+⏐
+⏐
+⏐ ≤
+∞∑
+i=0
+∥ˆτ−2
+n Q∥i · ∥Q∥ · ∥ε(1)∥2
+2 · |L1|
+≲ P ∥Q∥ · ∥ε(1)∥2
+2 · |L1| ≲ P (n +T )T · |L1|.
+27
+
+[PDF PAGE 28]
+Finally, we notice that
+|ε′
+(1)ε′L| =
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+ε′
+(1)ε(1)L1 +
+n∑
+j=2
+ε′
+(1)ε(j)Lj
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+≤ ∥ε(1)∥2
+2 · |L1| +
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+n∑
+j=2
+ε′
+(1)ε(j)Lj
+⏐
+⏐
+⏐
+⏐
+⏐
+⏐
+(i)
+≲ P T |L1| +
+
+
+
+
+
+
+n∑
+j=2
+ε(j)Lj
+
+
+
+
+
+
+2
+≲ P T |L1| +
+√
+T − 1 · ∥L−1∥2 ≤T |L1| +
+√
+T · ∥L∥2 =T |L1| + ¯τ,
+where (i) follows again by the fact that ∑ n
+j=2ε′
+(1)ε(j)Lj given {ε(j)}2≤j≤n is normal with mean zero
+and standard deviation ∥∑ n
+j=2ε(j)Lj∥2. The above four displays imply that
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iε′εε′L
+⏐
+⏐
+⏐
+⏐
+⏐ ≲ P (n +T )T · |L1| + (n +T )¯τ. (20)
+Now we combine (
+19) and ( 20), obtaining
+ˆτ−2
+n
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)
+∞∑
+i=0
+(ˆτ−2
+n Q)iε′εW ′L
+⏐
+⏐
+⏐
+⏐
+⏐ ≲ P (n +T )T −1/ 2 + ¯τ−2 [(n +T )T · |L1| + (n +T )¯τ]
+≲ P (n +T )T −1/ 2 + ¯τ−2(n +T )T · |L1|.
+Since H =OP (1) (due to Lemma
+3), we have
+|S1| ≲ P (n +T )T −1/ 2 + ¯τ−2(n +T )T · |L1|.
+The proof is complete by combining ( 15) with the bounds for S1 andS2 as well as the fact that√
+n +T ≲ ¯τ.
+Lemma 5. |∆ L, 1| ≲ P T −1/ 2 + |L1| · ¯τ−2T , where ∆ L, 1 is the ﬁrst entry of ∆ L = (∆ L, 1,..., ∆ L,n )′ ∈
+Rn.
+Proof of Lemma 5. We ﬁrst derive the following bound
+⏐
+⏐
+⏐ε′
+(1)ε′L
+⏐
+⏐
+⏐ =
+⏐
+⏐
+⏐
+⏐
+⏐ε′
+(1)ε(1)L1 +
+n∑
+i=2
+ε′
+(1)ε(i)Li
+⏐
+⏐
+⏐
+⏐
+⏐
+(i)
+≲ P T |L1| +
+⏐
+⏐
+⏐
+⏐
+⏐
+n∑
+i=2
+ε′
+(1)ε(i)Li
+⏐
+⏐
+⏐
+⏐
+⏐
+(ii)
+≲ P T |L1| +
+√
+nT ∥L−1∥2 ≤T |L1| +
+√
+nT ∥L∥2 =T |L1| + √n¯τ, (21)
+28
+
+[PDF PAGE 29]
+where (i) follows by Eε′
+(1)ε(1) =T − 1 and (ii) follows by computing the second moment
+E
+( n∑
+i=2
+ε′
+(1)ε(i)Li
+)2
+=
+n∑
+i=2
+E(ε′
+(1)ε(i)Li)2 =
+n∑
+i=2
+(T − 1)L2
+i =n(T − 1)∥L−1∥2
+2.
+We use the deﬁnition ∆ L =εW ′ ˆLˆτ−2
+n and obtain
+|∆ L, 1| =
+⏐
+⏐
+⏐ε′
+(1)FL ′ ˆLˆτ−2
+n +ε′
+(1)ε′ ˆLˆτ−2
+n
+⏐
+⏐
+⏐
+=
+⏐
+⏐
+⏐ε′
+(1)FL ′ ˆLˆτ−2
+n +ε′
+(1)ε′LH ˆτ−2
+n +ε′
+(1)ε′∆ Lˆτ−2
+n
+⏐
+⏐
+⏐
+≤ |ε′
+(1)F | · ∥L∥2 · ∥ ˆL∥2ˆτ−2
+n + |ε′
+(1)ε′L| · |H|ˆτ−2
+n + |ε′
+(1)ε′∆ L| · ˆτ−2
+n
+(i)
+≲ P
+√
+T · ¯τ2T −1 · ¯τ−2 + |ε′
+(1)ε′L| · ¯τ−2 + |ε′
+(1)ε′∆ L| · ¯τ−2
+(ii)
+≲ P T −1/ 2 +T ¯τ−2|L1| + √
+n¯τ−1 + |ε′
+(1)ε′∆ L| · ¯τ−2
+(iii)
+≲ P T −1/ 2 +T ¯τ−2|L1| + √
+n¯τ−1 +
+{
+(n +T )T −1/ 2 + ¯τ−2(n +T )T · |L1|
+}
+¯τ−2
+(iv)
+≤ T −1/ 2 + |L1| · ¯τ−2T,
+where (i) follows by the bounds for H and ˆτn (Lemma 3), ∥L∥2 = ∥ ˆL∥2 = ¯τ/
+√
+T as well as
+ε′
+(1)F ∼N (0,T −1), (ii) follows by (
+21), (iii) follows by Lemma 4 and (iv) follows by
+√
+n +T ≲ ¯τ.
+A.2.2 Proof of Theorem 2
+Proof of Theorem 2. We observe that X−1, 1 = M−1, 1 +u−1, 1, where u−1, 1 = (u2, 1,...,u n, 1) ∈
+Rn−1 and M−1, 1 =L−1f1 for some f1 ∈ R. We also have M1, 1 =L1f1.
+Notice that
+ˆM1, 1 −M1, 1 =
+ˆL1 ˆL′
+−1L−1f1
+∥ ˆL−1∥2
+2
+−L1f1
+
+ 
+Q1
++
+ˆL1 ˆL′
+−1u−1, 1
+∥ ˆL−1∥2
+2
+ 
+Q2
+. (22)
+Since ∥L∥∞ · ∥F ∥∞ ≤ ∥M ∥∞ ≤κ and ∥L∥2 = ¯τT −1/ 2, we have that
+∥L∥∞ ≤ κ
+∥F ∥∞
+(i)
+≤ κ
+√
+T − 1
+∥F ∥2
+= κ
+√
+T − 1∥L∥2
+∥F ∥2∥L∥2
+≤ κ
+√
+T − 1∥L∥2
+¯τ ≤κ, (23)
+where (i) follows by ∥F ∥2 ≤
+√
+T − 1∥F ∥∞.
+By Lemma 3, ˆτn ≥ 3¯τ/ 4, |H| ≤ 4 and ∥∆ L∥2 ≤ 8
+√
+1 +n/T with probability approaching one.
+The rest of the proof proceeds in two steps.
+Step 1: Bound Q2
+Since u−1, 1 is independent of W and ˆL−1 is computed from W , we have that u−1, 1 and ˆL−1
+are independent. Due to the Gaussian distribution of u−1, 1, it follows that | ˆL′
+−1u−1, 1| ≲ P ∥ ˆL−1∥2.
+29
+
+[PDF PAGE 30]
+Hence, |Q2| ≲ P | ˆL1|/ ∥ ˆL−1∥2.
+Since ˆL1 =L1H + ∆ L, 1, we have that with probability approaching one,
+| ˆL1| ≤ |L1| · |H| + |∆ L, 1|
+(i)
+≤ 4κ + ∥∆ L∥2
+(ii)
+≤ 4κ + 8
+√
+1 +n/T,
+where (i) follows by ( 23) and the bound for H and (ii) follows by the bound for ∥∆ L∥2. Using
+∥ ˆL∥2 = ∥L∥2 = ¯τ/
+√
+T , we obtain that with probability approaching one,
+| ˆL1| · ∥ ˆL∥−1
+2 = | ˆL1| · ∥L∥−1
+2 ≤ 4κ
+√
+T ¯τ−1 + 8
+√
+1 +n/T
+¯τ/
+√
+T
+= 4κ
+√
+T
+¯τ + 8
+√
+T +n
+¯τ .
+By Lemma 3, ¯τ ≥ max{13, 20. 8κ}
+√
+n +T . Hence, we have proved that with probability approaching
+one,
+| ˆL1| · ∥ ˆL∥−1
+2 ≤ 4κ
+√
+T
+20. 8κ
+√
+n +T + 8
+√
+T +n
+13
+√
+n +T < 12/ 13 (24)
+and thus
+| ˆL1| · ∥ ˆL−1∥−1
+2 =
+
+
+
+
+
+√
+(
+| ˆL1| · ∥ ˆL∥−1
+2
+)2
+1 −
+(
+| ˆL1| · ∥ ˆL∥−1
+2
+)2 ≤
+
+
+
+
+√
+(
+12√n+T
+¯τ
+)2
+1 − (12/ 13)2 < 32
+√
+n +T/ ¯τ.
+Hence, |Q|2 ≲ P | ˆL1| · ∥ ˆL−1∥−1
+2 ≲ P ¯τ−1√
+n +T.
+Step 2: Bound Q1
+Let ∆ L = (∆ L, 1, ∆ L, 2,..., ∆ L,n )′ and ∆ L, −1 = (∆ L, 2,..., ∆ L,n )′ ∈ Rn−1. We ﬁrst notice that
+Q1 =
+ˆL1 ˆL′
+−1L−1f1
+∥ ˆL−1∥2
+2
+−L1f1
+= (∆ L, 1 +L1H) ˆL′
+−1L−1f1 −L1f1∥ ˆL−1∥2
+2
+∥ ˆL−1∥2
+2
+= ∆ L, 1 ˆL′
+−1L−1f1
+∥ ˆL−1∥2
+2
++ H ˆL′
+−1L−1 − ∥ ˆL−1∥2
+2
+∥ ˆL−1∥2
+2
+×L1f1. (25)
+We start with the second term. Since L−1 = ( ˆL−1 − ∆ L, −1)H −1, we have that with probability
+approaching one,
+⏐
+⏐
+⏐
+⏐
+⏐
+H ˆL′
+−1L−1 − ∥ ˆL−1∥2
+2
+∥ ˆL−1∥2
+2
+×L1f1
+⏐
+⏐
+⏐
+⏐
+⏐ ≤
+⏐
+⏐
+⏐
+⏐
+⏐
+ˆL′
+−1( ˆL−1 − ∆ L, −1) − ∥ ˆL−1∥2
+2
+∥ ˆL−1∥2
+2
+⏐
+⏐
+⏐
+⏐
+⏐·κ
+=κ∥ ˆL∥−2
+2
+⏐
+⏐
+⏐ˆL′
+−1∆ L, −1
+⏐
+⏐
+⏐
+≤κ∥∆ L, −1∥2/ ∥ ˆL−1∥2
+≤κ∥∆ L∥2/ ∥ ˆL−1∥2
+30
+
+[PDF PAGE 31]
+(i)
+≲ P ∥∆ L∥2/ ∥ ˆL∥2
+(ii)
+≲ P
+√
+1 +n/T/ (¯τT −1/ 2) =
+√
+n +T/ ¯τ, (26)
+where (i) follows by ∥ ˆL−1∥2
+2 · ∥ˆL∥−2
+2 = 1 − (| ˆL1| · ∥ˆL∥−1
+2 )2 ≥ 1 − (12/ 13)2 due to (
+24) and (ii) follows
+by ∥ ˆL∥2 = ∥L∥2 = ¯τ/
+√
+T and the bound for ∥∆ L∥2 from Lemma 3.
+We notice that
+| ˆL′
+−1L−1f1| ≤ ∥ ˆL∥2∥L∥2|f1| = ¯τ2T −1|f1|
+and
+| ˆL′
+−1L−1f1| ≤ ∥ ˆL−1∥2∥L−1f1∥2 ≤ ∥ ˆL∥2∥M−1, 1∥2 ≲ ¯τT −1/ 2√
+n.
+Thus,
+| ˆL′
+−1L−1f1| ≲ ¯τT −1/ 2 min
+{
+¯τT −1/ 2|f1|, √
+n
+}
+.
+Hence, we now obtain that
+⏐
+⏐
+⏐∆ L, 1 ˆL′
+−1L−1f1
+⏐
+⏐
+⏐
+∥ ˆL−1∥2
+2
+=
+⏐
+⏐
+⏐∆ L, 1 ˆL′
+−1L−1f1
+⏐
+⏐
+⏐
+∥ ˆL∥2
+2
+· ∥ ˆL∥2
+2
+∥ ˆL−1∥2
+2
+(i)
+≲ P
+⏐
+⏐
+⏐∆ L, 1 ˆL′
+−1L−1f1
+⏐
+⏐
+⏐
+∥ ˆL∥2
+2
+(ii)
+≲ P
+T −1/ 2 + |L1| · ¯τ−2T
+¯τ2T −1 × ¯τT −1/ 2 min
+{
+¯τT −1/ 2|f1|, √n
+}
+≤ T −1/ 2 · √n + |L1| · ¯τ−2T · ¯τT −1/ 2|f1|
+¯τ2T −1 × ¯τT −1/ 2
+(iii)
+≲ √n¯τ−1 +T ¯τ−2, (27)
+where (i) follows by ∥ ˆL−1∥2
+2 · ∥ ˆL∥−2
+2 = 1 − (| ˆL1| · ∥ ˆL∥−1
+2 )2 ≥ 1 − (12/ 13)2 due to (
+24), (ii) follows
+by Lemma 5 and ∥ ˆL∥2 = ∥L∥2 = ¯τ/
+√
+T and (iii) follows by the fact that |L1f1| = |M1, 1| ≤ κ.
+Therefore, we combine ( 25) with ( 26) and ( 27), obtaining
+|Q1| ≲ P
+√
+n +T ¯τ−1 + (
+√
+T ¯τ−1)2
+(i)
+≲
+√
+n +T ¯τ−1,
+where (i) holds by ¯τ ≳
+√
+n +T (Lemma 3). The proof is complete by combining ( 22) with the
+bounds for Q1 and Q2.
+A.3 Proof of Theorems 3, 4 and 5
+Proof of Theorem 3. Theorem 3 follows by Theorem 5 by choosing η = 1/ 2.
+Proof of Theorem 4. We invoke Theorem 5. Let cn,T = inf M ∈M(2) PM (M1, 1 ∈ I ∗(X−1, −1)) and
+31
+
+[PDF PAGE 32]
+α n,T = 1 −cn,T . Fix η = 1/ 2. Then by Theorem 5 (applied with α =α n,T ), it follows that
+sup
+M ∈M(1)
+EM |I∗(X−1, −1)| ≥ inf
+M ∈M(1)
+∗
+EM |I∗(X−1, −1)| ≥ (1 − 2α n,T ) min{κ/ 2,τ 0/ 2,τ 2}.
+By supM ∈M(1) EM |I∗(X−1, −1)| =o(1), we have (1 − 2α n,T ) min{κη,τ 0η,τ 2} ≤ o(1). Since τ0,τ 2
+are bounded away from zero, min{κ/ 2,τ 0/ 2,τ 2} is bounded below by a positive constant. Hence,
+1 − 2α n,T ≤ o(1), which means α n,T ≥ 1/ 2 −o(1). Since cn,T = 1 −α n,T , we have proved that
+cn,T ≤ 1/ 2 +o(1).Proof of Theorem 5. Fix an arbitrary ¯M ∈ M (1)
+∗ . Deﬁne
+˜M = ¯M +
+(
+c0 0
+0 0
+)
+,
+where c0 = min{κη,τ 0η,τ 2}. Therefore,
+σ1( ˜M ) = ∥ ˜M ∥ ≥ ∥ ¯M ∥ − ∥ ¯M − ˜M ∥ ≥ τ0(1 +η) −c0 ≥τ0 ≥τ1.
+By Fact 6(b) in Chapter 17.4 of
+Hogben (2006), we have that σ2( ˜M ) ≤σ2( ¯M ) +σ1( ˜M − ¯M ).
+This means that σ2( ˜M ) ≤c0 ≤τ2. Moreover,
+∥ ˜M ∥∞ = max{∥ ¯M−1, −1∥∞, | ¯M1, 1 +c0|} ≤ max{κ(1 −η),κ (1 −η) +c0} =κ(1 −η) +c0 ≤κ.
+Therefore, ˜M ∈ M (2). We notice that ˜M−1, −1 = ¯M−1, 1, which means that P ˜M and P ¯M are
+identical (because P ˜M and P ¯M are the distribution of the data X−1, −1). Fix an arbitrary CI (·) =
+[l(·),u (·)] ∈ Φ( M(2)). By ˜M, ¯M ∈ M (2), we have that
+P ˜M ( ˜M1, 1 ∈CI (X−1, −1)) ≥ 1 −α
+and
+P ¯M ( ¯M1, 1 ∈CI (X−1, −1)) ≥ 1 −α.
+Since P ˜M and P ¯M are identical, it follows that
+P ¯M ( ˜M1, 1 ∈CI (X−1, −1)) ≥ 1 −α.
+Thus,
+P ¯M
+({ ¯M1, 1 ∈CI (X−1, −1)
+}⋂ {
+˜M1, 1 ∈CI (X−1, −1)
+})
+≥ 1 − 2α.
+We notice that
+{ ¯M1, 1 ∈CI (X−1, −1)
+}⋂ {
+˜M1, 1 ∈CI (X−1, −1)
+}
+32
+
+[PDF PAGE 33]
+=
+{
+l(X−1, −1) ≤ ¯M1, 1 ≤u(X−1, −1)
+}⋂ {
+l(X−1, −1) ≤ ¯M1, 1 +c0 ≤u(X−1, −1)
+}
+⊂
+{
+l(X−1, −1) ≤ ¯M1, 1 ≤u(X−1, −1) −c0
+}
+⊂ {l(X−1, −1) ≤u(X−1, −1) −c0}.
+Therefore, the above two displays imply
+P ¯M (|CI (X−1, −1)| ≥ c0) = P ¯M (u(X−1, −1) −l(X−1, −1) ≥c0) ≥ 1 − 2α
+and thus E ¯M |CI (X−1, −1)| ≥ c0(1 − 2α ). Since the choice of ¯M ∈ M (1)
+∗ is arbitrary, we have
+inf
+M ∈M(1)
+∗
+EM |CI (X−1, −1)| ≥ c0(1 − 2α ).
+Since the choice of CI ∈ Φ( M(2)) is arbitrary, the proof is complete.
+A.4 Proof of Theorem 6
+Recall that for a matrix A ∈ Rn×r, PA = A(A′A)†A′ and Π A = In −PA, where † denotes the
+Moore-Penrose pseudo-inverse. We shall heavily use the fac t that ∥PA∥∗ = rank (A); to see this
+result, simply recall that the eigenvalues of PA are 1 (repeated rank (A) times) and 0 (repeated
+n − rank (A) times). Similarly, we have tracePA = rankA and trace (Π A) = n − rankA.
+We shall also frequently use the following property called t race duality (e.g.,
+Rohde and Tsybakov (2011)): for A,B ∈ Rn1×n2
+|trace (A′B)| ≤ ∥A∥ · ∥B∥∗.
+The proof is elementary. Let B =∑ m
+i=1µ iviu′
+i be a singular value decomposition. Then
+|trace (A′B)| =
+⏐
+⏐
+⏐
+⏐
+⏐
+m∑
+i=1
+µ iu′
+iA′vi
+⏐
+⏐
+⏐
+⏐
+⏐ ≤
+m∑
+i=1
+|µ i| · max
+1≤i≤k
+|u′
+iA′vi| ≤
+m∑
+i=1
+|µ i| · ∥A∥ = ∥A∥ · ∥B∥∗.
+Since trace (A′B) = trace (BA′), we also have |trace (A′B)| ≤ ∥B∥ · ∥A∥∗. Therefore, we have
+|trace (A′B)| ≤ min {∥A∥ · ∥B∥∗, ∥A∥∗ · ∥B∥}.
+We ﬁx an arbitrary θ = (M,D,σ ε,σ u,β ) ∈ Θ . We shall write P and E instead of Pθ and Eθ.
+All the constants do not depend on θ and thus all the results hold uniformly in θ. Let D = αg ′
+with α ∈ Rn×r∗ and g ∈ RT ×r∗, where r∗ = rank (α ) = rank (g) = rank (D) ≤ r1. We impose the
+normalization g′g/T =Ir∗. Similarly, let k∗ = rank (M +Dβ ). We can write M +Dβ = ΛΓ ′ with
+Λ ∈ Rn×k∗ and Γ ∈ RT ×k∗, where Γ ′Γ/T =Ik∗. We recall k :=r1 +r0. Hence, k ≥k∗.
+33
+
+[PDF PAGE 34]
+A.4.1 Preliminary results
+Lemma 6. For any η ∈ (0, 1), there exists a constant Cη > 0 such that P(∥ug∥F > Cη
+√
+nT ) ≤η.
+Moreover, ifT ≥n, then for any η ∈ (0, 1), there exists a constant Cη > 0 such that ∥uu′−Tσ 2
+uIn∥ ≤
+Cη
+√
+nT and |trace (uu′ −Tσ 2
+uIn)| ≤ Cη
+√
+nT .
+Proof of Lemma 6. Notice that
+E∥ug∥2
+F = Etrace (g′u′ug) = trace (g′E(u′u)g) = n · trace (g′g) = n∥g∥2
+F =nT.
+The ﬁrst claim follows by Markov’s inequality. The second cl aim follows by Proposition 2.1 of
+Vershynin (2012) and the central limit theorem ( trace (uu′ −Tσ 2
+uIn) =∑ n
+i=1
+∑ T
+t=1(u2
+i,t −σ 2
+u)).
+Lemma 7. Let ˆα ∈ arg mina∈Rn×r1 trace (X ′Π aX). Assume that T ≥n. For any η> 0, there exists
+a constantCη > 0 such that with probability at least 1−η, |trace (X ′Π ˆαX)−T (n−r1)σ 2
+u| ≤ Cηr1
+√
+nT
+and ∥Π ˆααg ′∥2
+F ≤Cηr1
+√
+nT .
+Proof of Lemma 7. We ﬁx an arbitrary η ∈ (0, 1). By Lemma 6, there exists a constant C1 > 0
+such that P(A) ≥ 1 −η, where
+A =
+{
+∥ug∥F ≤C
+√
+nT
+}⋂ {
+∥uu′ −Tσ 2
+uIn∥ ≤ C
+√
+nT
+}⋂ {
+|trace (uu′ −Tσ 2
+uIn)| ≤ C
+√
+nT
+}
+.
+The rest of the proof proceeds in three steps.
+Step 1: show that on the event A, trace (X ′Π ˆαX) ≤ (n −r1)Tσ 2
+u +C
+√
+nT (1 +r1).
+Recall r∗ = rank (α ). We deﬁne ¯α as follows. If r∗ =r1, then ¯α =α . If r∗ <r 1, then we deﬁne
+¯α = (α,ϕ ) ∈ Rn×r1, where ϕ ∈ Rn×(r1−r∗) satisﬁes ϕ ′α = 0 and rank ( ¯α ) = r1. With probability
+one, rank ( ˆα ) = r1. Hence, by construction, the following holds with probabil ity one
+trace (X ′Π ˆαX) ≤ trace (X ′Π ¯αX). (28)
+We note that Π ¯αα = 0 and trace (Π ¯α ) = n −r1. Therefore, on the event A, we have
+trace (X ′Π ¯αX) = trace (u′Π ¯αu)
+= trace (Π ¯αuu′)
+= trace (Π ¯αTσ 2
+uIn) + trace (Π ¯α (uu′ −Tσ 2
+uIn))
+= (n −r1)Tσ 2
+u + trace (Π ¯α (uu′ −Tσ 2
+uIn))
+= (n −r1)Tσ 2
+u + trace (uu′ −Tσ 2
+uIn) − trace (P¯α (uu′ −Tσ 2
+uIn))
+≤ (n −r1)Tσ 2
+u +C
+√
+nT − trace (P¯α (uu′ −Tσ 2
+uIn))
+(i)
+≤ (n −r1)Tσ 2
+u +C
+√
+nT + ∥P¯α ∥∗ · ∥uu′ −Tσ 2
+uIn∥
+(ii)
+= (n −r1)Tσ 2
+u +C
+√
+nT (1 +r1), (29)
+34
+
+[PDF PAGE 35]
+where (i) follows by trace duality and (ii) follows by ∥P¯α ∥∗ =r1. Combining the above displays, we
+obtain that on the event A,
+trace (X ′Π ˆαX) ≤ (n −r1)Tσ 2
+u +C
+√
+nT (1 +r1). (30)
+Step 2: prove the ﬁrst claim.
+Recall the normalization g′g/T =Ir∗. We have that on the event A,
+trace (gα ′Π ˆααg ′) + 2trace (u′Π ˆααg ′)
+= trace (α ′Π ˆααg ′g) + 2trace (Π ˆααg ′u′)
+=T · trace (α ′Π ˆαα ) + 2trace (Π ˆααg ′u′)
+≥T · trace (α ′Π ˆαα ) − 2∥Π ˆαα ∥F · ∥ug∥F
+≥T · trace (α ′Π ˆαα ) − 2∥Π ˆαα ∥F ·C
+√
+nT
+=T · ∥Π ˆαα ∥2
+F − 2∥Π ˆαα ∥F ·C
+√
+nT
+≥ min
+x∈R
+(
+Tx 2 − 2C
+√
+nTx
+)(i)
+≥ −C 2n, (31)
+where (i) follows by the elementary result minx∈R(ax2 −bx) = −b2/ (4a) fora> 0. We now observe
+that on the event A,
+trace (X ′Π ˆαX)
+= trace (gα ′Π ˆααg ′) + trace (u′Π ˆαu) + 2trace (u′Π ˆααg ′)
+= trace (Π ˆαuu′) + trace (gα ′Π ˆααg ′) + 2trace (u′Π ˆααg ′)
+(i)
+≥ trace (Π ˆαuu′) −C 2n
+= trace (Π ˆαTσ 2
+uIn) + trace (Π ˆα (uu′ −Tσ 2
+uIn)) −C 2n
+= trace (Π ˆαTσ 2
+uIn) + trace (uu′ −Tσ 2
+uIn) − trace (Pˆα (uu′ −σ 2
+uIn)) −C 2n
+(ii)
+≥ (n −r1)Tσ 2
+u −C
+√
+nT − ∥Pˆα ∥∗ · ∥uu′ −σ 2
+uIn∥ −C 2n
+(iii)
+= (n −r1)Tσ 2
+u −C
+√
+nT −r1 ·C
+√
+nT −C 2n
+(iv)
+≥ (n −r1)Tσ 2
+u − (1 +r1 +C)C
+√
+nT (32)
+where (i) follows by ( 31), (ii) follows by trace duality, (iii) follows by ∥Pˆα ∥∗ =r1 with probability
+one and (iv) holds by T ≥n. Therefore, ( 30) and ( 32) imply that on the event A,
+⏐
+⏐trace (X ′Π ˆαX) − (n −r1)Tσ 2
+u
+⏐
+⏐ ≤ (1 +r1 +C)C
+√
+nT. (33)
+The ﬁrst claim follows.
+35
+
+[PDF PAGE 36]
+Step 3: prove the second claim.
+In ( 32), we have proved that on the event A,
+trace (Π ˆαuu′) ≥ trace (Π ˆαTσ 2
+uIn) + trace (uu′ −Tσ 2
+uIn) − trace (Pˆα (uu′ −σ 2
+uIn))
+≥ (n −r1)Tσ 2
+u − (1 +r1)C
+√
+nT.
+By simple algebra, we have
+trace (Π ˆαuu′) = trace (X ′Π ˆαX) −
+(
+trace (gα ′Π ˆααg ′) + 2trace (u′Π ˆααg ′)
+)
+The above two displays imply that on the event A,
+trace (gα ′Π ˆααg ′) + 2trace (u′Π ˆααg ′)
+≤ trace (X ′Π ˆαX) − (n −r1)Tσ 2
+u + (1 +r1)C
+√
+nT
+(i)
+≤ 2C
+√
+nT (1 +r1),
+where (i) follows by ( 30). In ( 31), we have proved that on A,
+trace (gα ′Π ˆααg ′) + 2trace (u′Π ˆααg ′)
+=T ∥Π ˆαα ∥2
+F + 2trace (u′Π ˆααg ′) ≥T ∥Π ˆαα ∥2
+F − 2∥Π ˆαα ∥F ·C
+√
+nT.
+The above two displays imply that on the event A,
+T ∥Π ˆαα ∥2
+F − 2C
+√
+nT ∥Π ˆαα ∥F − 2C
+√
+nT (1 +r1) ≤ 0.
+This is a quadratic inequality in ∥Π ˆαα ∥F . Thus, ∥Π ˆαα ∥F is smaller than the larger root of the
+corresponding quadratic equation. In other words,
+∥Π ˆαα ∥F ≤
+2C
+√
+nT +
+√
+4C 2nT + 8TC
+√
+nT (1 +r1)
+2T .
+Hence, there exists a constant C1> 0 depending only on C such that on the event A,
+∥Π ˆαα ∥F ≤C1
+(
+n1/ 2T −1/ 2 +n1/ 4T −1/ 4(1 +r1)1/ 2
+) (i)
+≤ 2C1(1 +r1)1/ 2n1/ 4T −1/ 4,
+where (i) holds by T ≥n. Recall the normalization of g′g/T =Ir∗. We have
+∥Π ˆααg ′∥2
+F = trace (gα ′Π ˆααg ′) = trace (α ′Π ˆααg ′g) = T ∥Π ˆαα ∥2
+F.
+The second claim follows. The proof is complete.
+36
+
+[PDF PAGE 37]
+Lemma 8. Let ˆΛ ∈ arg minA∈Rn×k trace (Y ′Π AY ). Assume that T ≥n. For any η >0, there exists
+a constant Cη > 0 such that with probability at least 1−η, |trace (Y ′Π ˆΛY )−T (n −k)σ 2
+V | ≤ Cηk
+√
+nT
+and ∥Π ˆΛ ΛΓ ′∥2
+F ≤Cηk
+√
+nT .
+Proof of Lemma 8. The proof is analogous to that of Lemma 7.
+Lemma 9. Assume that T ≥n. We have the following:
+P
+(
+∥uε′∥ ≤ 19σεσu
+√
+nT
+)
+→ 1.
+Proof of Lemma 9. Without loss of generality, we only need to prove the result a ssuming σu =
+σε = 1. Let G = {A ∈ Rn×n : rank A ≤ 1, ∥A∥F = 1}. Notice that ∥uε′∥ = ∥εu′∥ =Z, where
+Z = sup
+A∈G
+|trace (A′εu′)|.
+The rest of the proof proceeds in two steps. The ﬁrst step uses a covering argument and the
+second step establishes an exponential bound.
+Step 1: construct a covering argument
+Letη = 1/ 3. By Lemma 3.1 of Candès and Plan (2011), there exists an η-net {A1,...,A K } ⊂ G
+such that supA∈G min1≤j≤K ∥A −Aj∥F ≤η and K ≤ (9/η )(2n+1).
+For an arbitrary A ∈ G , there exists 1 ≤j0 ≤K with ∥A −Aj0∥F ≤η. Thus,
+|trace (A′εu′)| ≤ | trace (A′
+j0εu′)| + |trace ((A −Aj0)′εu′)|
+≤ max
+1≤j≤K
+|trace (A′
+jεu′)| + ∥A −Aj0∥F ·
+⏐
+⏐
+⏐
+⏐trace
+(( A −Aj0
+∥A −Aj0∥F
+)′
+εu′
+)⏐
+⏐
+⏐
+⏐
+(i)
+≤ max
+1≤j≤K
+|trace (A′
+jεu′)| + 2ηZ,
+where (i) follows by the fact that ∥A −Aj0∥−1
+F (A −Aj0) is a matrix of rank at most two and
+with Frobenius norm 1 (this means that there exist two matric es G1,G 2 of rank 1 such that ∥A −
+Aj0∥−1
+F (A −Aj0) = G1 +G2 and ∥G1∥F, ∥G2∥F ≤ 1). Since the left-hand size does not depend on
+A, we can take a supreme and obtain
+Z ≤ max
+1≤j≤K
+|trace (A′
+jεu′)| + 2ηZ.
+Since η = 1/ 3, we have that Z ≤ 3 max1≤j≤K |trace (A′
+jεu′)| and K ≤ 272n+1.
+Step 2: derive an exponential bound.
+For any 1 ≤ j ≤ K, there exists aj,b j ∈ Rn such that Aj = ajb′
+j and ∥aj∥2 = ∥bj∥2 = 1 .
+Therefore,
+trace (A′
+jεu′) = trace (bja′
+jεu′) = a′
+jεu′bj.
+37
+
+[PDF PAGE 38]
+We recall that ε and u are independent. For any x ∈ (0, 1/ 2], we have that
+E exp
+(
+xa′
+jεu′bj
+)
+= E
+{
+E
+[(
+xa′
+jεu′bj
+)
+|ε
+]}
+(i)
+= E
+{
+exp
+(1
+2x2∥ε′aj∥2
+2
+)}
+(ii)
+=
+(
+1 −x2)−T / 2 (iii)
+≤ exp(Tx 2),
+where (i) follows by the moment generating function of multi variate normal distributions and the
+fact that u′bj ∼N (0,I T ), (ii) follows by the fact that ∥ε′aj∥2
+2 has a chi-squared distribution with T
+degrees of freedom and its moment generating function and ﬁn ally (iii) follows by the elementary
+inequality (1 −a)−q ≤ exp(2qa) for any a ∈ (0, 0. 6) and q >0.
+Now we can derive an exponential bound. For any z ∈ (0, 4T ), we take x =z/ 2T and obtain
+P
+(
+a′
+jεu′bj >z
+)
+= P
+(
+exp
+(
+xa′
+jεu′bj
+)
+> exp(xz)
+)
+≤ exp(−xz)E exp
+(
+xa′
+jεu′bj
+)
+≤ exp(Tx 2 −xz) = exp
+(
+−z2
+4T
+)
+.
+An analogous argument would establish the same bound for P(−a′
+jεu′bj > z). Hence, we have
+showed that for any z ∈ (0, 4T ),
+P
+(⏐
+⏐a′
+jεu′bj
+⏐
+⏐>z
+)
+≤ 2 exp
+(
+−z2
+4T
+)
+.
+By the union bound, we have that for z = 3
+√
+(log 27)(2n + 1)T (notice that this choice is within
+(0, 4T ) due to T ≥n),
+P
+(
+max
+1≤j≤K
+|trace (A′
+jεu′)|>z
+)
+≤ 2K exp
+(
+−z2
+4T
+)
+≤ 2 exp
+(
+(2n + 1) log 27 −z2/ (4T )
+)
+=o(1).
+Since Z ≤ 3 max1≤j≤K |trace (A′
+jεu′)| and 9
+√
+3 log(27)< 19, the proof is complete.
+A.4.2 Proof of Theorem 6
+Proof of Theorem 6. We ﬁrst observe that
+ˆβ = n −r1
+n − ˆr · J1 +J2 +J3 +J4
+trace (X ′Π ˆαX) , (34)
+where J1 = trace (F Λ ′Π ˆΛ Π ˆααg ′), J2 = trace (V ′Π ˆΛ Π ˆααg ′), J3 = trace (F Λ ′Π ˆΛ Π ˆαu) and J4 =
+trace (V ′Π ˆΛ Π ˆαu). By Lemmas 7 and 8, we have
+|J1| ≤ ∥ Π ˆΛ ΛF ′∥F · ∥Π ˆααg ′∥F =OP (
+√
+nT ).
+38
+
+[PDF PAGE 39]
+Due to the normalization g′g/T =Ir∗ and Γ ′Γ/T =Ik∗. Lemmas 7 and 8 imply
+max{∥Π ˆαα ∥F, ∥Π ˆΛ Λ ∥F } =OP ((n/T )1/ 4),
+since ∥Π ˆααg ′∥2
+F = trace (α ′Π ˆααg ′g) = T ∥Π ˆαα ∥2
+F and similarly ∥Π ˆΛ ΛF ′∥2
+F =T ∥Π ˆΛ Λ ∥2
+F . For J2, we
+notice that
+|J2| = |trace (g′V ′Π ˆΛ Π ˆαα )|
+≤ ∥Vg ∥F ∥Π ˆΛ Π ˆαα ∥F
+≤ ∥Vg ∥F ∥Π ˆαα ∥F
+(i)
+=OP (
+√
+nT ) · ∥Π ˆαα ∥F =OP (
+√
+nT · (nT −1)1/ 4)
+(ii)
+= OP (
+√
+nT ),
+where (i) follows by a similar argument as in Lemma 6 (with u replaced by V ) and (ii) follows by
+T ≥n. Similarly, we can show that J3 =OP (
+√
+nT ).
+Finally, for J4, we notice that
+J4 = trace (V ′[I −PˆΛ −Pˆα +PˆΛPα ]u)
+= trace (V ′u) − trace (uV ′PˆΛ ) − trace (uV ′Pˆα ) + trace (uV ′PˆΛPˆα ).
+Since V =uβ +ε, we have
+trace (uV ′PˆΛ ) = β trace (uu′PˆΛ ) + trace (uε′PˆΛ )
+(i)
+=β trace (uu′PˆΛ ) +OP (∥PˆΛ ∥∗ · ∥uε′∥)
+(ii)
+= β trace (uu′PˆΛ ) +OP (
+√
+nT )
+=β trace (Tσ 2
+uInPˆΛ ) +β trace ((uu′ −Tσ 2
+uIn)PˆΛ ) +OP (
+√
+nT )
+(iii)
+= β trace (Tσ 2
+uInPˆΛ ) +βO P (∥uu′ −Tσ 2
+uIn∥ · ∥PˆΛ ∥∗) +OP (
+√
+nT )
+(iv)
+= β trace (Tσ 2
+uInPˆΛ ) +OP (
+√
+nT ),
+where (i) follows by trace duality, (ii) follows by Lemma 9 and ∥PˆΛ ∥∗ = k, (iii) follows by trace
+duality and (iv) follows by ∥uu′ −Tσ 2
+uIn∥ =OP (
+√
+nT ) (due to Lemma 6). Similar bounds can be
+obtained for trace (uV ′Pˆα ) and trace (uV ′PˆΛPˆα ). Clearly, trace (V ′u) = trace (u′u)β + trace (ε′u) =
+nTσ 2
+uβ +OP (
+√
+nT ). Since ˆr =r1 +k − trace (PˆΛPˆα ), it follows that
+J4 =Tσ 2
+uβ
+(
+n − trace (PˆΛ ) − trace (Pˆα ) + trace (PˆΛPˆα )
+)
++OP (
+√
+nT )
+=Tσ 2
+uβ
+(
+n −r1 −k + trace (PˆΛPˆα )
+)
++OP (
+√
+nT )
+=Tσ 2
+uβ (n − ˆr) +OP (
+√
+nT ).
+39
+
+[PDF PAGE 40]
+The bounds for J1, J2, J3 andJ4 as well as ( 34) imply
+ˆβ = n −r1
+n − ˆr · Tσ 2
+uβ (n − ˆr) +OP (
+√
+nT )
+trace (X ′Π ˆαX) .
+By Lemma 7, we have trace (X ′Π ˆαX) = T (n −r1)σ 2
+u +OP (
+√
+nT ). Therefore,
+ˆβ = n −r1
+n − ˆr · Tσ 2
+uβ (n − ˆr) +OP (
+√
+nT )
+T (n −r1)σ 2u +OP (
+√
+nT )
+=
+βσ 2
+u +OP
+(√
+n/T
+n−ˆr
+)
+σ 2u +OP
+(√
+n/T
+n−r1
+)
+= βσ 2
+u +OP
+(
+(nT )−1/ 2)
+σ 2u +OP
+(
+(nT )−1/ 2) =β +OP ((nT )−1/ 2).
+The proof is complete.
+A.5 Proof of Theorem 7 and Corollary 3
+We ﬁrst prove the following result.
+Lemma 10. For j ∈ { 1, 2}, let Pj denote the Gaussian distribution N (µ j, Σ j) in Rk. Then the
+Kullback–Leibler divergence is
+KL(P2, P1) :=
+∫ (
+logdP2
+dP1
+)
+dP2
+= 1
+2
+[
+(µ 1 −µ 2)′Σ −1
+1 (µ 1 −µ 2) + trace (Σ −1
+1 Σ 2) −k + log det Σ 1
+det Σ 2
+]
+.
+Proof. Let X be a random vector with distribution P2. We notice that
+KL(P2, P1) =
+∫ (
+logdP2
+dP1
+)
+dP2
+= E
+[(
+logdP2
+dP1
+)
+(X)
+]
+= E
+{
+log (2π )−k/ 2[det Σ 2]−1/ 2 exp
+(
+−(X −µ 2)′Σ −1
+2 (X −µ 2)/ 2
+)
+(2π )−k/ 2[det Σ 1]−1/ 2 exp
+(
+−(X −µ 1)′Σ −1
+1 (X −µ 1)/ 2
+)
+}
+= − 1
+2 log det Σ 2
+det Σ 1
++ 1
+2 E
+[
+(X −µ 1)′Σ −1
+1 (X −µ 1) − (X −µ 2)′Σ −1
+2 (X −µ 2)
+]
+= − 1
+2 log det Σ 2
+det Σ 1
++ 1
+2
+{
+trace
+[
+Σ −1
+1 E(X −µ 1)(X −µ 1)′]
+− trace
+(
+Σ −1
+2 E(X −µ 2)(X −µ 2)′)}
+= − 1
+2 log det Σ 2
+det Σ 1
++ 1
+2
+{
+trace
+[
+Σ −1
+1 (Σ 2 +µ 2µ ′
+2 −µ 2µ ′
+1 −µ 1µ ′
+2 +µ 1µ ′
+1)
+]
+− trace
+(
+Σ −1
+2 Σ 2
+)}
+40
+
+[PDF PAGE 41]
+= − 1
+2 log det Σ 2
+det Σ 1
++ 1
+2
+{
+trace
+[
+Σ −1
+1 (µ 1 −µ 2)(µ 1 −µ 2)′]
++ trace (Σ −1
+1 Σ 2) −k
+}
+= − 1
+2 log det Σ 2
+det Σ 1
++ 1
+2
+{
+(µ 1 −µ 2)′Σ −1
+1 (µ 1 −µ 2) + trace (Σ −1
+1 Σ 2) −k
+}
+.
+The proof is complete.
+Proof of Theorem 7. Fix a pointθ1 = (M1,D 1, 1, 1, 0) ∈ Θ (1). Deﬁne θ2 = (M1−δD1,D 1, 1, 1,δ ),
+where δ =c(nT )−1/ 2. Clearly, θ2 ∈ Θ (2).
+We write the data as z = ( y′, x′)′ ∈ R2nT with y = vec (Y ) and x = vec (X). Notice that for
+j ∈ {1, 2}, z followsN (µ j, Σ j) under Pθj , where
+µ 1 =µ 2 =
+(
+vec (M1)
+vec (D1)
+)
+, Σ 1 =I2nT and Σ 2 =
+(
+δ2 + 1 δ
+δ 1
+)
+⊗InT.
+Using Lemma 10, we compute the Kullback–Leibler divergence:
+KL(Pθ2, Pθ1) = 1
+2
+(
+trace (Σ −1
+1 Σ 2) − 2nT + log det Σ 1
+det Σ 2
+)
+= 1
+2δ2nT = 1
+2c2.
+Let ψ (X,Y ) = 1{δ /∈CI (X,Y )}. Then
+Eθ1ψ (X,Y ) − Eθ2ψ (X,Y ) = Eθ2ψ
+(dPθ1
+dPθ2
+− 1
+)
+≤ Eθ2
+⏐
+⏐
+⏐
+⏐
+dPθ1
+dPθ2
+− 1
+⏐
+⏐
+⏐
+⏐
+(i)
+≤
+√
+2KL(Pθ2, Pθ1) ≤c,
+where (i) follows by the ﬁrst Pinsker’s inequality (Lemma 2. 5 of Tsybakov (2009)). Since
+Eθ2ψ (X,Y ) ≤α , we have that Eθ1ψ (X,Y ) ≤α +c. This means
+Pθ1 ({l(X,Y ) ≤δ ≤u(X,Y )}) = 1 − Eθ1ψ (X,Y ) ≥ 1 − (α +c).
+Notice that
+Pθ1 (l(X,Y ) ≤ 0 ≤u(X,Y )) ≥ 1 −α.
+Therefore,
+Pθ1 (u(X,Y ) −l(X,Y ) ≥δ)
+≥ Pθ1
+(
+{l(X,Y ) ≤δ ≤u(X,Y )}
+⋂
+{l(X,Y ) ≤ 0 ≤u(X,Y )}
+)
+≥ 1 − 2α −c. (35)
+This proves the ﬁrst claim. To obtain the second claim, we obs erve that
+Eθ1|CI (X,Y )| =
+∫ ∞
+0
+Pθ1(|CI (X,Y )|>z )dz
+≥
+∫ (1−2α )/
+√
+nT
+0
+Pθ1(|CI (X,Y )|>z )dz
+41
+
+[PDF PAGE 42]
+(i)
+≥
+∫ (1−2α )/
+√
+nT
+0
+(
+1 − 2α −
+√
+nTz
+)
+dz
+= (1 − 2α )2/ (2
+√
+nT ),
+where (i) follows by ( 35). The proof is complete.
+Proof of Corollary 3. Deﬁne α n,T = 1 − infθ∈Θ (2) Pθ (β ∈CI (X,Y )). We consider two cases: (1)
+lim supn,T α n,T ≥ 1/ 2 and (2) lim supn,T α n,T < 1/ 2. In the ﬁrst case, the desired result follows
+since lim infn,T →∞ inf θ∈Θ (2) Pθ (β ∈CI (X,Y )) = 1 − lim supn,T →∞α n,T . Therefore, we only need
+to consider the case with lim supn,T α n,T < 1/ 2.
+Since lim supn,T α n,T < 1/ 2, we have that for large enough (n,T ), α n,T < 1/ 2. Thus, we can
+apply Theorem 7 and obtain that for any c ∈ (0, 4), we have
+sup
+θ∈Θ (1)
+Pθ
+(
+|CI (X,Y )| ≥ c(nT )−1/ 2
+)
+≥ 1 − 2α n,T −c.
+Fix an arbitrary η ∈ (0, 0. 01) and take c = 3. 92(1 + 2η)/
+√
+1 +κ2
+2 ∈ (0, 4). It follows that
+sup
+θ∈Θ (1)
+Pθ
+(
+|CI (X,Y )| ≥ 3. 92(nT )−1/ 2(1 +κ2
+2)−1/ 2(1 + 2η)
+)
+≥ 1 − 2α n,T − 3. 92(1 +κ2
+2)−1/ 2(1 + 2η).
+On the other hand, by assumption, we have that for large (n,T ),
+sup
+θ∈Θ (1)
+Pθ
+(
+|CI (X,Y )|> 3. 92(nT )−1/ 2(1 +κ2
+2)−1/ 2(1 +η)
+)
+≤η.
+Combining the above two displays, we obtain that for large (n,T ),
+1 − 2α n,T − 3. 92(1 +κ2
+2)−1/ 2(1 + 2η) ≤η.
+Rearranging the terms, we obtain that for large (n,T ),
+α n,T ≥ 1
+2
+(
+1 −η − 3. 92(1 +κ2
+2)−1/ 2(1 + 2η)
+)
+.
+Taking the limsup and using the fact that η ∈ (0, 0. 01) is arbitrary, we have that
+lim sup
+n,T →∞
+α n,T ≥ 1
+2 − 1. 96(1 +κ2
+2)−1/ 2.
+The proof is complete since lim infn,T →∞ infθ∈Θ (2) Pθ (β ∈CI (X,Y )) = 1 − lim supn,T →∞α n,T .
+42
+
+[PDF PAGE 43]
+References
+Abadie, A., Diamond, A., and Hainmueller, J. (2015). Compar ative politics and the synthetic
+control method. American Journal of Political Science , 59(2):495–510.
+Abadie, A. and Gardeazabal, J. (2003). The economic costs of conﬂict: A case study of the basque
+country. The American Economic Review , 93(1):113–132.
+Ahn, S. C. and Horenstein, A. R. (2013). Eigenvalue ratio tes t for the number of factors. Econo-
+metrica, 81(3):1203–1227.
+Amini, A. A. and Wainwright, M. J. (2008). High-dimensional analysis of semideﬁnite relaxations
+for sparse principal components. In 2008 IEEE International Symposium on Information Theory ,
+pages 2454–2458. IEEE.
+Anatolyev, S. and Mikusheva, A. (2018). Factor models with m any assets: strong factors, weak
+factors, and the two-pass procedure. arXiv:1807.04094.
+Athey, S., Bayati, M., Doudchenko, N., Imbens, G., and Khosra vi, K. (2017). Matrix completion
+methods for causal panel data models.
+Bai, J. (2003). Inferential theory for factor models of large dimensions. Econometrica, 71(1):135–171.
+Bai, J. (2009). Panel data models with interactive ﬁxed eﬀect s. Econometrica, 77(4):1229–1279.
+Bai, J. and Ng, S. (2002). Determining the number of factors in approximate factor models. Econo-
+metrica, 70(1):191–221.
+Bai, J. and Ng, S. (2008). Large dimensional factor analysis. Foundations and Trends R⃝ in Econo-
+metrics, 3(2):89–163.
+Bai, J. and Ng, S. (2019). Matrix completion, counterfactual s, and factor analysis of missing data.
+arXiv:1910.06677.
+Berthet, Q., Rigollet, P., et al. (2013). Optimal detection o f sparse principal components in high
+dimension. The Annals of Statistics , 41(4):1780–1815.
+Birnbaum, A., Johnstone, I. M., Nadler, B., and Paul, D. (2013) . Minimax bounds for sparse pca
+with noisy high-dimensional data. Annals of statistics , 41(3):1055.
+Boivin, J. and Ng, S. (2006). Are more data always better for fa ctor analysis? Journal of Econo-
+metrics, 132(1):169–194.
+Bradic, J., Fan, J., and Zhu, Y. (2018). Testability of high-d imensional linear models with non-sparse
+structures. arXiv:1802.09117.
+Cai, T. T. and Guo, Z. (2017). Conﬁdence intervals for high-d imensional linear regression: Minimax
+rates and adaptivity. The Annals of statistics , 45(2):615–646.
+Cai, T. T., Ma, Z., and Wu, Y. (2013). Sparse pca: Optimal rate s and adaptive estimation. The
+Annals of Statistics , 41(6):3074–3110.
+Candès, E. J. and Plan, Y. (2011). Tight oracle inequalities for low-rank matrix recovery from
+a minimal number of noisy random measurements. IEEE Transactions on Information Theory ,
+57(4):2342–2359.
+43
+
+[PDF PAGE 44]
+Candès, E. J. and Recht, B. (2009). Exact matrix completion vi a convex optimization. Foundations
+of Computational mathematics , 9(6):717.
+Candès, E. J. and Tao, T. (2010). The power of convex relaxati on: Near-optimal matrix completion.
+IEEE Transactions on Information Theory , 56(5):2053–2080.
+Chernozhukov, V., Hansen, C., Liao, Y., and Zhu, Y. (2018a). Inference for heterogeneous eﬀects
+using low-rank estimation of factor slopes. arXiv:1812.08089.
+Chernozhukov, V., Newey, W., Robins, J., and Singh, R. (2018 b). Double/de-biased machine
+learning of global and local parameters using regularized r iesz representers. arXiv:1802.08667.
+Chernozhukov, V., Newey, W. K., and Singh, R. (2018c). Learn ing l2 continuous regression func-
+tionals via regularized riesz representers. arXiv preprint arXiv:1809.05224 .
+Chernozhukov, V., Wuthrich, K., and Zhu, Y. (2017). An exact and robust conformal inference
+method for counterfactual and synthetic controls. arXiv:1712.09089.
+Fan, J., Liao, Y., and Mincheva, M. (2011). High dimensional covariance matrix estimation in
+approximate factor models. Annals of statistics , 39(6):3320.
+Gobillon, L. and Magnac, T. (2016). Regional policy evaluat ion: Interactive ﬁxed eﬀects and
+synthetic controls. The Review of Economics and Statistics , 98(3):535–551.
+Gospodinov, N., Kan, R., and Robotti, C. (2017). Spurious in ference in reduced-rank asset-pricing
+models. Econometrica, 85(5):1613–1628.
+Hogben, L. (2006). Handbook of linear algebra . CRC Press.
+Jankova, J. and Van De Geer, S. (2018). Semiparametric eﬃcie ncy bounds for high-dimensional
+models. The Annals of Statistics , 46(5):2336–2359.
+Johnstone, I. M. and Lu, A. Y. (2009). On consistency and spar sity for principal components
+analysis in high dimensions. Journal of the American Statistical Association , 104(486):682–693.
+Keshavan, R. H., Montanari, A., and Oh, S. (2010). Matrix com pletion from noisy entries. Journal
+of Machine Learning Research , 11(Jul):2057–2078.
+Kleibergen, F. (2005). Testing parameters in gmm without as suming that they are identiﬁed.
+Econometrica, 73(4):1103–1123.
+Kleibergen, F. (2009). Tests of risk premia in linear factor models. Journal of econometrics ,
+149(2):149–173.
+Koltchinskii, V., Lounici, K., and Tsybakov, A. B. (2011). Nu clear-norm penalization and optimal
+rates for noisy low-rank matrix completion. The Annals of Statistics , 39(5):2302–2329.
+Laurent, B. and Massart, P. (2000). Adaptive estimation of a q uadratic functional by model selec-
+tion. Annals of Statistics , pages 1302–1338.
+Li, K. (2018). Inference for factor model based average trea tment eﬀects.
+Li, K. T. (2017). Statistical inference for average treatme nt eﬀects estimated by synthetic control
+methods.
+Moon, H. R. and Weidner, M. (2015). Linear regression for pan el with unknown number of factors
+as interactive ﬁxed eﬀects. Econometrica, 83(4):1543–1579.
+44
+
+[PDF PAGE 45]
+Moreira, M. J. (2003). A conditional likelihood ratio test f or structural models. Econometrica,
+71(4):1027–1048.
+Newey, W. K. and Robins, J. R. (2018a). Cross-ﬁtting and fast remainder rates for semiparametric
+estimation. arXiv:1801.09138.
+Newey, W. K. and Robins, J. R. (2018b). Cross-ﬁtting and fast remainder rates for semiparametric
+estimation. arXiv preprint arXiv:1801.09138 .
+Onatski, A. (2009). Testing hypotheses about the number of f actors in large factor models. Econo-
+metrica, 77(5):1447–1479.
+Onatski, A. (2012). Asymptotics of the principal component s estimator of large factor models with
+weakly inﬂuential factors. Journal of Econometrics , 168(2):244–258.
+Pesaran, M. H. (2006). Estimation and inference in large het erogeneous panels with a multifactor
+error structure. Econometrica, 74(4):967–1012.
+Recht, B., Fazel, M., and Parrilo, P. A. (2010). Guaranteed mi nimum-rank solutions of linear matrix
+equations via nuclear norm minimization. SIAM review, 52(3):471–501.
+Rohde, A. and Tsybakov, A. B. (2011). Estimation of high-dime nsional low-rank matrices. The
+Annals of Statistics , 39(2):887–930.
+Stock, J. H. and Watson, M. W. (2002). Macroeconomic forecas ting using diﬀusion indexes. Journal
+of Business & Economic Statistics , 20(2):147–162.
+Su, L., Miao, K., and Jin, S. (2019). On factor models with ran dom missing: Em estimation,
+inference, and cross validation. Singapore Management University, SMU Economics and Statis tics
+Working Paper.
+Tsybakov, A. B. (2009). Introduction to nonparametric estimation. Revised and ext ended from the
+2004 French original. Translated by Vladimir Zaiats . Springer Series in Statistics. Springer, New
+York.
+Vershynin, R. (2010). Introduction to the non-asymptotic a nalysis of random matrices. arXiv
+preprint arXiv:1011.3027 .
+Vershynin, R. (2012). How close is the sample covariance mat rix to the actual covariance matrix?
+Journal of Theoretical Probability , 25(3):655–686.
+Wang, W. and Fan, J. (2017). Asymptotics of empirical eigens tructure for high dimensional spiked
+covariance. The Annals of Statistics , 45(3):1342–1374.
+Xiong, R. and Pelger, M. (2019). Large dimensional latent fa ctor modeling with missing observations
+and applications to causal inference. arXiv:1910.08273.
+Xu, Y. (2017). Generalized synthetic control method: Causa l inference with interactive ﬁxed eﬀects
+models. Political Analysis, 25(1):57–76.
+Zhu, Y. (2017). High-dimensional panel data with time heter ogeneity: estimation and inference.
+Available at SSRN 2665374 .
+45

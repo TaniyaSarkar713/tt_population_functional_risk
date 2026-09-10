@@ -1,0 +1,23 @@
+ID,Number,Result,Dependencies,Status
+L1,Lemma 1,Controlled squared component weights,Exact mode bases; sequential orthogonal factorizations,PROVED
+L2,Lemma 2,Exact rank-one diagonal image,T1; signed product construction,PROVED
+L3,Lemma 3,Scalar threshold envelope,Scalar sign cases,PROVED
+L4,Lemma 4,Matrix functional bound,Cauchy–Schwarz; spectral projection,PROVED
+L5,Lemma 5,Common-target mixture interval bound,Probability union bound; total variation,PROVED
+T1,Theorem 1,Diagonal compressibility,L1; Holder; Bessel; q-subadditivity,PROVED
+T2,Theorem 2,Finite-sample honest interval,T1; L3; L4; Gaussian tails,PROVED
+T3,Theorem 3,Fixed affine lower bound,Normal median and variance bound,PROVED
+T4,Theorem 4,Single-unfolding class lower bound,L5; Gaussian LR; cosh/Gaussian-square calculation,PROVED
+T5,Theorem 5,Strict separations,T2; T3; T4,PROVED after explicit domain repair
+T6,Theorem 6,Within-class coordinate lower bound,L5; orthogonal Gaussian shifts,PROVED
+D1,Proposition 1,Diagonal-only minimax benchmark,L2; L5; hypergeometric factorial moments; T2,PROVED
+S1,Proposition 2,Refined diagonal budget,Bessel; mode leverage trace; TT mode-rank bound,PROVED
+S2,Proposition 3,Exact structural range and affine optimum,Sparse diagonal witnesses; normal quantile monotonicity,PROVED
+S3,Proposition 4,Envelope and approximation calibration,Scalar envelope; residual Lipschitz; Bessel,PROVED
+S4,Proposition 5,Finite variance and row-corruption calibration,Chebyshev; independent clean block indicators; S3,PROVED
+S5,Proposition 6,Unknown Gaussian variance with residuals,Orthogonal residual transform; chi-square; conditional selection,PROVED
+S6,Proposition 7,Confidence-level and covariance comparison,Retuned mixture constants; Gaussian noise addition,PROVED
+S7,Theorem 7,Full-data scan; sharp L0 for K>=4,L1; T1; L6; T2; T6; finite Gaussian union bound,PROVED
+S8,Theorem 8,Cubic harmonic lower bound,L7; full likelihood identity; Holder; L5,PROVED
+L6,Lemma 6,Finite nets and injective norm,Volume packing; product telescoping; L1,PROVED
+L7,Lemma 7,Uniform cubic moment of weighted signs,Head/tail split; Chernoff; Tonelli,PROVED
