@@ -199,7 +199,7 @@ The latest manuscript supplies matching upper and lower bounds on the best possi
 $$
 \boxed{
 \begin{cases}
-\tau(\log p)^{3/2}/\sqrt p,&K=3,\\[2mm]
+\tau(\log p)^{3/2}/\sqrt p,&K=3,\\
 \tau\sqrt{\log p/p},&K\ge4.
 \end{cases}
 }
