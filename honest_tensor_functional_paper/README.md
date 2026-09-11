@@ -1,6 +1,8 @@
+**Latest update (2026-09-11):** See [robustness and adaptation](robust_adaptive_extension/README.md) for relaxed-noise/approximate-rank proofs, certified arbitrary-loading intervals, separated rank adaptation, and 106 new experiment configurations. The previous stages below are preserved; general weak-signal efficient minimax inference remains open.
+
 # Honest inference for tensor contrasts
 
-**Latest theory update (2026-09-11):** [norm_loading_extension/](norm_loading_extension/README.md) contains the current [full manuscript](norm_loading_extension/paper/main.pdf), [progress report](norm_loading_extension/progress_report.md), and [remaining requirements](norm_loading_extension/theory/remaining_requirements.md). It supplies sharp equal-diagonal rates for every positive norm budget and noise level, matching squared risk, and flat orthogonal-loading rates. The earlier [gap_development/](gap_development/README.md) stage is preserved. The description below documents the earlier complete-paper revision and its then-current gaps.
+**Previous theory update (2026-09-11):** [norm_loading_extension/](norm_loading_extension/README.md) preserves that stage's [full manuscript](norm_loading_extension/paper/main.pdf), [progress report](norm_loading_extension/progress_report.md), and [remaining requirements](norm_loading_extension/theory/remaining_requirements.md). It supplies sharp equal-diagonal rates for every positive norm budget and noise level, matching squared risk, and flat orthogonal-loading rates. The earlier [gap_development/](gap_development/README.md) stage is preserved. The description below documents the earlier complete-paper revision and its then-current gaps.
 
 **Manuscript:** *Honest Inference for Tensor Contrasts under Tucker and Tensor-Train Rank Bounds.*
 

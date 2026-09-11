@@ -1,0 +1,153 @@
+\section{Proofs for robustness, loading transfer, and adaptation}\label{app:robust_adaptive}
+
+\subsection{Proof of Theorem~\ref{thm:sg_full}}
+\noindent\emph{Roadmap.} Identify the tail inequalities actually used by the upper proofs, then use a Gaussian subfamily for family-wise minimax lower bounds.
+\begin{proof}
+For every unit net direction, Chernoff applied to \eqref{eq:joint_sg} gives
+$\PP(|\ip UE|>t)\le2e^{-t^2/(2v^2)}$.
+The finite union bound proving scan coverage and the additive-slack bound proving Lemma~\ref{lem:residual_fit} use no independence between directions. Both therefore hold with $v$ replacing $\tau$. All subsequent diameter and squared-error inequalities are deterministic functions of these events and moments. Orthogonal changes of coordinates preserve \eqref{eq:joint_sg}. The weighted proofs apply unchanged. The unknown-law family includes $E\sim N(0,v^2I)$. Honesty over the family implies honesty over that subexperiment, and the worst-case risk or expected length over the family is at least its Gaussian value. The Gaussian lower bounds give the matching order.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:mom_full}}
+\noindent\emph{Roadmap.} Control every median by a binomial tail, obtain a common excess-tail moment, and reuse the ordered-difference argument.
+\begin{proof}
+For a direction at level $s$, each block average has variance at most $\sigma^2/k_s$. Chebyshev gives a block-error probability at most $\sigma^2/(k_st^2)$. If the median errs by more than $t$, at least half its blocks err. Independence of blocks, followed by a union over their subsets, gives
+\[
+ \PP(|d_U-\ip UA|>\lambda_s^{\rm mom}+t)
+ \le 2^{-b_s}(1+t/\lambda_s^{\rm mom})^{-b_s},\quad t\ge0.
+\]
+This follows by substituting $\lambda_s^{\rm mom}=4\sigma/\sqrt{k_s}$ into
+$2^{b_s}\{\sigma^2/[k_s(\lambda_s^{\rm mom}+t)^2]\}^{b_s/2}$.
+There are at most $e^{H_s}$ directions at level $s$. By the definition of $b_s$,
+$\sum_s e^{H_s}2^{-b_s}\le\beta$.
+Thus all constraints cover the true tensor with probability at least $1-\beta$.
+
+Since $k_s\ge n/(2b_s)$,
+$\lambda_s^{\rm mom}\le4\sqrt2\tau\sqrt{b_s}$.
+Define
+$T_0=\max_U(|d_U-\ip UA|-\lambda_{s(U)}^{\rm mom})_+$.
+For $a\ge0$, the function $b\log(1+a/\sqrt b)$ is increasing for $b>0$: its derivative is
+$\log(1+u)-u/[2(1+u)]\ge0$, $u=a/\sqrt b$.
+Because every $b_s\ge9$, the union bound yields
+\begin{equation}\label{eq:mom_excess}
+ \PP(T_0>t)\le\beta(1+t/(12\sqrt2\tau))^{-9},\qquad
+ \E T_0^2\le\frac{72}{7}\beta\tau^2.
+\end{equation}
+For the moment, integrate $2t$ times the tail and use
+$\int_0^\infty u(1+u)^{-9}du=1/(8\cdot7)$.
+
+For two feasible tensors every directional difference is at most $2\lambda_s^{\rm mom}$. The net comparison, doubled caps and norm bound prove exactly the previous norm-sensitive diameter. Medians are measurable finite order statistics. The extrema of their compact feasible sections are Borel by the same compact-section argument as before, now treating $(d_U)_U$ as the finite observation vector. The smallest-odd-integer rule gives
+$b_s\le11+[H_s+\log(p/\beta)]/\log2\le C_{K,\beta}s\ell_p$.
+The sum lemma therefore bounds the diameter by $C\mathfrak r_K$.
+
+For estimation, $F$ is continuous and one-Lipschitz in $B$. Selecting the first dense-sequence element with value at most $\inf_jF(B_j)+\tau$ is measurable. Its comparison with $A$ gives directional differences at most $2\lambda_s^{\rm mom}+2T_0+\tau$. Lemma~\ref{lem:residual_fit}'s deterministic argument gives
+\[
+ |\widehat\psi-\psi(A)|\le U^{\rm mom}
+       +Q_2z_K(T_0+\tau/2)/\sqrt p,
+ \qquad |\widehat\psi-\psi(A)|\le2h_0.
+\]
+Equation~\eqref{eq:mom_excess} and the small-$M$ structural bound prove risk $O(\mathfrak r_K^2)$ exactly as in Theorem~\ref{thm:all_norm_mse}. For the lower bound restrict the replicate family to iid Gaussian errors with covariance $\sigma^2I$. Orthogonal transformation in the replicate index separates the sample mean, whose noise level is $\sigma/\sqrt n$, from mean-independent residuals. Thus the full replicate likelihood second moments equal the sample-mean ones. The earlier Gaussian lower bounds apply to any procedure using all replicates, including randomized ones. Finally, $H_s$ is increasing in $s$, so the replicate condition has the stated sufficient order $p$ for fixed $K,\beta$.
+\end{proof}
+
+\subsection{Proof of Proposition~\ref{prop:noise_limits}}
+\noindent\emph{Roadmap.} Exhibit exact scalar recovery and a correlated direction with inflated variance.
+\begin{proof}
+If $|A|<v$, then $\operatorname{sign}(A+v\xi)=\xi$. The estimator
+$Z-v\operatorname{sign}(Z)$ is identically $A$, proving (i). The Rademacher moment-generating function obeys $\cosh(tv)\le e^{t^2v^2/2}$.
+For (ii), take the unit product tensor with every entry $p^{-K/2}$. Its contraction with $E$ is $v\xi p^{K/2}$, with variance $v^2p^K$. Each individual entry still has variance and sub-Gaussian proxy $v^2$.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:approx_sharp}}
+\noindent\emph{Roadmap.} Inflate scan constraints for a bounded approximation residual, then combine two nested lower-bound subclasses.
+\begin{proof}
+Write $A=B_0+R$, $B_0\in\Theta$, $\norm R_F\le\eta$; compactness ensures such a decomposition exists. On the Gaussian scan event every residual contraction of $Z-B_0$ is at most $\lambda_s+\eta$, so $B_0$ is feasible. Inflate its projected target interval by $\eta$ on both sides. If the feasible set is empty use a singleton; this cannot occur on the coverage event. Since $\norm L_F=1$, the enlarged interval covers $\psi(A)$.
+For feasible differences the diameter argument gives
+\[
+ |C|\le U_{K,p}(M;\alpha)
+       +\{Q_2z_K/\sqrt p+2\}\eta,
+\]
+using $\min(a,b+c)\le\min(a,b)+c$. It also gives $|C|\le2h_0+2\eta$.
+Choose between this procedure and the direct Gaussian interval using their deterministic length bounds. This proves the upper order
+$\min\{\tau,\mathfrak r_K+\eta\}$.
+
+The class contains $\Theta$, giving lower bound $c\mathfrak r_K$ at zero. It also contains $\{tL:|t|\le\eta\}$ because $0\in\Theta$. Comparing zero with $tL$ for $t=\min(\eta,\tau/2)$ gives total variation at most
+$\tfrac12\sqrt{e^{1/4}-1}<1/2$ and target difference $t$. Hence the lower bound is also $c_\alpha\min(\eta,\tau)$. Finally
+$\min(\tau,r+\eta)\le r+\min(\tau,\eta)\le2\max\{r,\min(\tau,\eta)\}$
+for every $r\ge0$. This establishes both criteria up to fixed constants.
+\end{proof}
+
+\subsection{Proof of Proposition~\ref{prop:growing_caps}}
+\noindent\emph{Roadmap.} Embed sparse diagonal tensors of rank $s$, then compare with the full norm ball.
+\begin{proof}
+For a uniform size-$s$ support $S$, set
+$A_S=b\sum_{i\in S}E_i$ with
+\[
+ b=\min\{M/\sqrt s,\tau\sqrt{\log(1+p/(4s^2))}\}.
+\]
+All constrained ranks are $s$, its norm is $b\sqrt s\le M$, and its target is $sb/\sqrt p$. The full tensor inner product is $b^2|S\cap T|$; the hypergeometric factorial-moment inequality gives
+$1+\chi^2(Q,P_0)\le\exp\{(s^2/p)(e^{b^2/\tau^2}-1)\}\le e^{1/4}$.
+The common-target lemma proves the lower bound for every $s\le r_*$. Maximize over $s$.
+If there are no rank restrictions, the line $\{tL:|t|\le M\}$ belongs to the Frobenius ball. The two-point argument with $t=\min(M,\tau/2)$ gives lower order $\min(M,\tau)$. The direct interval and $[-M,M]$, chosen deterministically by radius, give the matching upper bound for every mean in that ball. No asymptotic fixed-cap argument applies to this enlarged class.
+\end{proof}
+
+\subsection{Proof of Proposition~\ref{prop:loading_transfer}}
+\noindent\emph{Roadmap.} Add an independently calibrated error event, without assuming stochastic independence.
+\begin{proof}
+On the intersection of $\ip{L_0}A\in C_0$ and $|\ip RE|\le q_R$, adding the second target contribution gives the asserted interval. A union bound controls failure by $\alpha_0+\alpha_1$. The length is the displayed sum. Chernoff or the Gaussian distribution of $\ip RE$ supplies the calibrations. For a prescribed partition, repeat the argument over blocks using the sum of their allocated failures; their centers may be dependent. Selecting among complete constructions from deterministic diameter bounds uses no data and retains its own coverage guarantee. Applying the result with $L_0=0$ also covers every $L$, although it then reduces to the direct interval.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:efficient_regimes}}
+\noindent\emph{Roadmap.} Match elementary constructive upper bounds with the existing small-budget lower bound and a product-direction two-point test.
+\begin{proof}
+In (i), the rate formula has $x\le1$ and is $M/\sqrt p$. The structural radius is $M\sqrt{s_{\rm cap}/p}$, with fixed cap factor. Theorem~\ref{thm:all_norm_rates} gives the matching lower bound.
+For (ii), choose the sign of $U$ so that $\ip LU\ge c\norm L_F$ and compare zero with $tU$, $t=\min(M,\tau/2)$. The full likelihood second moment is $e^{t^2/\tau^2}\le e^{1/4}$ and the target difference is at least $ct\norm L_F$. The common-target lemma gives the lower order at zero. Cauchy--Schwarz supplies structural radius $M\norm L_F$, while the direct Gaussian radius is $z_{1-\alpha/2}\tau\norm L_F$. Their deterministic selection controls worst-case length and is polynomial in the number of observed coordinates. The cap class is used only for the lower inclusion; fixed rank caps are unnecessary here.
+\end{proof}
+
+\subsection{Proof of Proposition~\ref{prop:convex_loss}}
+\noindent\emph{Roadmap.} Find a one-dimensional Gaussian submodel inside every such convex relaxation.
+\begin{proof}
+The average of $ME_i$, $i=1,\ldots,p$, is $(M/\sqrt p)L$. Both signs and zero belong to the convex hull, hence so does the asserted line segment. Compare zero with $tL$ for $t=\min(M/\sqrt p,\tau/2)$ and apply the same two-point calculation. At $M=\tau\sqrt p$ it forces order $\tau$. The previous minimax rates divided by $\tau$ tend to zero for each fixed $K\ge3$. This argument changes the honesty class and makes no complexity assumption.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:shifted_adaptation}}
+\noindent\emph{Roadmap.} Shift the full-data hard mixtures into an unused orthogonal block.
+\begin{proof}
+Embed the dimension-$m$ rank-one alternatives from Theorem~\ref{thm:all_norm_rates}, with norm budget $M_0$, in coordinates $\{q+1,\ldots,p\}^K$. Denote them by $B$. Their supports are disjoint from $A_0$, so
+$\norm{A_0+B}_F^2=\norm{A_0}_F^2+\norm B_F^2\le M^2$.
+Unfolding rank subadditivity shows $A_0+B$ is in the outer cap class. Translation of Gaussian likelihoods by $A_0$ leaves their second moments unchanged. All alternatives have a common increment in the normalized $p$-diagonal target equal to $\sqrt{m/p}$ times their dimension-$m$ target. Their total variation from the law at $A_0$ is bounded by a fixed constant less than $1-2\alpha$. Apply the common-target lemma with baseline target $\psi(A_0)$, or translate the interval by that fixed number. This proves the lower bound.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:adaptive_tangent}}
+\noindent\emph{Roadmap.} Recover ranks on one spectral event, bound a second-order projection residual, and condition on the independent pilot.
+\begin{proof}
+For each unfolding use $1/4$-nets of its two unit spheres, of total cardinality at most $9^{p_k+d_k}$. Product telescoping bounds its operator norm by twice the maximum net contraction. Chernoff and a union bound over the $K$ unfoldings give an event $\mathcal E$ of probability at least $1-\delta$ on which every pilot error operator norm is at most $\eta_k$. No independence between unfoldings is used.
+The singular-value perturbation inequality
+$|\sigma_j(Z^{(1)}_{(k)})-\sigma_j(A_{(k)})|\le\eta_k$
+follows from the variational characterization of singular values: for every unit vector the two image norms differ by at most $\eta_k$, and taking the relevant min/max over subspaces preserves this bound. Thus zero singular values produce observed values at most $\eta_k$, while nonzero values exceeding $2\eta_k$ produce observed values greater than $\eta_k$. All selected ranks are exact on $\mathcal E$. If any is zero then $A=0$ and the singleton covers.
+
+For a positive selected rank $r_k$, write $A_{(k)}=U_kS_kV_k^\top$ using its true nonzero singular values. Because $Q_k$ is the leading observed rank-$r_k$ projector,
+\[
+ \norm{(I-Q_k)A_{(k)}}_{\rm op}
+ \le\sigma_{r_k+1}(Z^{(1)}_{(k)})+\eta_k\le2\eta_k.
+\]
+For full row rank the residual is zero, and the same inequality holds. Right multiplication by $V_kS_k^{-1}$ gives
+\[
+ \norm{(I-Q_k)U_k}_{\rm op}
+ \le\frac{2\eta_k}{\sigma_{r_k}(A_{(k)})}
+ \le\frac{2\eta_k}{\sigma_{r_k}(Z^{(1)}_{(k)})-\eta_k}.
+\]
+Clipping at one yields $d_k^*$. This calculation uses the gap only on the stated separated class, with a strictly positive observed denominator.
+
+Expand the identity into the $2^K$ mutually orthogonal products of $Q_k$ and $I-Q_k$. The projector $T$ retains exactly the terms with at most one complement. Each term discarded by $T$ appears in at least one product $(I-Q_k)(I-Q_\ell)$. Orthogonality therefore implies
+\[
+ \norm{(I-T)A}_F^2
+ \le\sum_{k<\ell}\norm{(I-Q_k)(I-Q_\ell)A}_F^2
+ \le M^2\sum_{k<\ell}(d_k^*d_\ell^*)^2.
+\]
+The last inequality uses $A=(\bigotimes_kU_k)G$ with $\norm G_F=\norm A_F$ and the operator norm of a product of mode maps. Also $\norm{(I-T)A}_F\le M$. Since $T$ is orthogonal, Cauchy--Schwarz bounds
+$|\ip L{(I-T)A}|$ by $B_L$.
+
+Condition on the pilot. The vector $TL$ is now deterministic, and independence makes the second error contraction sub-Gaussian with proxy $v_2\norm{TL}_F$. Conditional on any pilot in $\mathcal E$, the projected interval has error at most $\alpha-\delta$. The direct alternative has the same conditional failure bound and the structural alternative never fails. A choice determined by the pilot thus also has conditional failure at most $\alpha-\delta$. Intersecting with a surely valid structural interval preserves coverage; empty intersections may be replaced by a singleton. Integrating and adding $\PP(\mathcal E^c)\le\delta$ proves honesty. SVDs, finite sums, and tensor matrix products give the stated arithmetic complexity.
+
+For Gaussian artificial splitting the two centered errors are jointly Gaussian with zero cross covariance, each of covariance $2\tau^2I$, hence independent. Zero covariance would not suffice for non-Gaussian errors. No minimax length conclusion on the original unseparated class follows from this proof.
+\end{proof}

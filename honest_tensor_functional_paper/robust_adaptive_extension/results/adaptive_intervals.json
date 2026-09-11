@@ -1,0 +1,2594 @@
+[
+  {
+    "noise": "gaussian",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 0,
+    "strength_over_eta": 0,
+    "amplitude": 0.0,
+    "M": 3628.741922192031,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 0.0,
+    "length_mcse": 0.0,
+    "length_to_direct": 0.0,
+    "mean_bias_certificate": 0.0,
+    "center_rmse": 0.0,
+    "median_seconds": 8.137499999999465e-05
+  },
+  {
+    "noise": "gaussian",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 0.25,
+    "amplitude": 9.071854805480077,
+    "M": 9.979040286028086,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": false,
+    "coverage": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "rank_recovery": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 0.0,
+    "length_mcse": 0.0,
+    "length_to_direct": 0.0,
+    "mean_bias_certificate": 0.0,
+    "center_rmse": 3.207385025447365,
+    "median_seconds": 7.787500000000502e-05
+  },
+  {
+    "noise": "gaussian",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 3,
+    "amplitude": 108.86225766576092,
+    "M": 119.74848343233703,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 480,
+      "repetitions": 500,
+      "rate": 0.96,
+      "mcse": 0.008763560920082661,
+      "ci95": [
+        0.9388973906117553,
+        0.9753986879144546
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 4.1074978212636495,
+    "length_mcse": 0.0,
+    "length_to_direct": 1.000000000000001,
+    "mean_bias_certificate": 112.01445479035682,
+    "center_rmse": 0.9832383672713695,
+    "median_seconds": 0.0002049585000000187
+  },
+  {
+    "noise": "gaussian",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 100,
+    "amplitude": 3628.741922192031,
+    "M": 3991.6161144112343,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 481,
+      "repetitions": 500,
+      "rate": 0.962,
+      "mcse": 0.008550555537507495,
+      "ci95": [
+        0.9412927095367715,
+        0.9769692291937524
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 4.107497821263678,
+    "length_mcse": 0.0,
+    "length_to_direct": 1.000000000000008,
+    "mean_bias_certificate": 2.6393713348255328,
+    "center_rmse": 1.0124343512615894,
+    "median_seconds": 0.00020412499999999945
+  },
+  {
+    "noise": "gaussian",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 1000,
+    "amplitude": 36287.41922192031,
+    "M": 39916.161144112346,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 496,
+      "repetitions": 500,
+      "rate": 0.992,
+      "mcse": 0.003983967871356396,
+      "ci95": [
+        0.979644367406256,
+        0.9978160918916578
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "mean_length": 1.9706283165326894,
+    "length_mcse": 1.3009951843418833e-06,
+    "length_to_direct": 0.4797636912504651,
+    "mean_bias_certificate": 0.25920426748521014,
+    "center_rmse": 0.3461179664014883,
+    "median_seconds": 0.00020566599999999324
+  },
+  {
+    "noise": "gaussian",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 0.25,
+    "amplitude": 9.071854805480077,
+    "M": 14.11249411196841,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": false,
+    "coverage": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "rank_recovery": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 0.0,
+    "length_mcse": 0.0,
+    "length_to_direct": 0.0,
+    "mean_bias_certificate": 0.0,
+    "center_rmse": 6.41477005089473,
+    "median_seconds": 7.71669999999336e-05
+  },
+  {
+    "noise": "gaussian",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 3,
+    "amplitude": 108.86225766576092,
+    "M": 169.34992934362091,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 479,
+      "repetitions": 500,
+      "rate": 0.958,
+      "mcse": 0.00897061870775924,
+      "ci95": [
+        0.9365130594670811,
+        0.9738164232238529
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 4.1074978212636495,
+    "length_mcse": 0.0,
+    "length_to_direct": 1.000000000000001,
+    "mean_bias_certificate": 146.66135637621522,
+    "center_rmse": 0.9486508327702059,
+    "median_seconds": 0.0002096664999999831
+  },
+  {
+    "noise": "gaussian",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 100,
+    "amplitude": 3628.741922192031,
+    "M": 5644.997644787364,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 474,
+      "repetitions": 500,
+      "rate": 0.948,
+      "mcse": 0.009929350431926557,
+      "ci95": [
+        0.9247336289693778,
+        0.9657543019172321
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 4.107497821263678,
+    "length_mcse": 0.0,
+    "length_to_direct": 1.000000000000008,
+    "mean_bias_certificate": 3.457404719465949,
+    "center_rmse": 1.0429369492837888,
+    "median_seconds": 0.0002193959999998718
+  },
+  {
+    "noise": "gaussian",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 1000,
+    "amplitude": 36287.41922192031,
+    "M": 56449.97644787364,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 494,
+      "repetitions": 500,
+      "rate": 0.988,
+      "mcse": 0.004869496893930627,
+      "ci95": [
+        0.974065072734663,
+        0.9955838277141984
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "mean_length": 2.732536946298278,
+    "length_mcse": 1.2978743906360294e-06,
+    "length_to_direct": 0.6652558480134825,
+    "mean_bias_certificate": 0.33939401783321543,
+    "center_rmse": 0.5266820766069843,
+    "median_seconds": 0.0002115000000000311
+  },
+  {
+    "noise": "gaussian",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 0,
+    "strength_over_eta": 0,
+    "amplitude": 0.0,
+    "M": 3628.741922192031,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 0.0,
+    "length_mcse": 0.0,
+    "length_to_direct": 0.0,
+    "mean_bias_certificate": 0.0,
+    "center_rmse": 0.0,
+    "median_seconds": 8.243749999992112e-05
+  },
+  {
+    "noise": "gaussian",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 0.25,
+    "amplitude": 9.071854805480077,
+    "M": 9.979040286028086,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": false,
+    "coverage": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "rank_recovery": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 0.0,
+    "length_mcse": 0.0,
+    "length_to_direct": 0.0,
+    "mean_bias_certificate": 0.0,
+    "center_rmse": 3.0596503098119294,
+    "median_seconds": 8.05000000001499e-05
+  },
+  {
+    "noise": "gaussian",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 3,
+    "amplitude": 108.86225766576092,
+    "M": 119.74848343233703,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 484,
+      "repetitions": 500,
+      "rate": 0.968,
+      "mcse": 0.007870959280799264,
+      "ci95": [
+        0.9485532317083544,
+        0.9816008146763601
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 4.1074978212636495,
+    "length_mcse": 0.0,
+    "length_to_direct": 1.000000000000001,
+    "mean_bias_certificate": 112.73128451688879,
+    "center_rmse": 0.984076454358823,
+    "median_seconds": 0.00020816700000003685
+  },
+  {
+    "noise": "gaussian",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 100,
+    "amplitude": 3628.741922192031,
+    "M": 3991.6161144112343,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 482,
+      "repetitions": 500,
+      "rate": 0.964,
+      "mcse": 0.008331146379700699,
+      "ci95": [
+        0.9436998237982089,
+        0.9785271434139067
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 4.107497821263678,
+    "length_mcse": 0.0,
+    "length_to_direct": 1.000000000000008,
+    "mean_bias_certificate": 2.6562646068029347,
+    "center_rmse": 0.9709990323511306,
+    "median_seconds": 0.0002059160000000837
+  },
+  {
+    "noise": "gaussian",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 1000,
+    "amplitude": 36287.41922192031,
+    "M": 39916.161144112346,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 499,
+      "repetitions": 500,
+      "rate": 0.998,
+      "mcse": 0.001997998998998749,
+      "ci95": [
+        0.9889075231010312,
+        0.9999493656659926
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "mean_length": 1.9070593201965311,
+    "length_mcse": 1.238356561226843e-06,
+    "length_to_direct": 0.46428736013543076,
+    "mean_bias_certificate": 0.2608649703460585,
+    "center_rmse": 0.3200863863644662,
+    "median_seconds": 0.00020562499999998707
+  },
+  {
+    "noise": "gaussian",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 0.25,
+    "amplitude": 9.071854805480077,
+    "M": 14.11249411196841,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": false,
+    "coverage": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "rank_recovery": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 0.0,
+    "length_mcse": 0.0,
+    "length_to_direct": 0.0,
+    "mean_bias_certificate": 0.0,
+    "center_rmse": 6.119300619623859,
+    "median_seconds": 7.899999999994023e-05
+  },
+  {
+    "noise": "gaussian",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 3,
+    "amplitude": 108.86225766576092,
+    "M": 169.34992934362091,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 477,
+      "repetitions": 500,
+      "rate": 0.954,
+      "mcse": 0.009368457717255283,
+      "ci95": [
+        0.9317745721187621,
+        0.9706198246075972
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 4.1074978212636495,
+    "length_mcse": 0.0,
+    "length_to_direct": 1.000000000000001,
+    "mean_bias_certificate": 139.91524052519688,
+    "center_rmse": 1.0258111079240224,
+    "median_seconds": 0.00020566699999990945
+  },
+  {
+    "noise": "gaussian",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 100,
+    "amplitude": 3628.741922192031,
+    "M": 5644.997644787364,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 472,
+      "repetitions": 500,
+      "rate": 0.944,
+      "mcse": 0.010282412168358165,
+      "ci95": [
+        0.9200786993956399,
+        0.9624695555249778
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 4.107497821263678,
+    "length_mcse": 0.0,
+    "length_to_direct": 1.000000000000008,
+    "mean_bias_certificate": 3.298139128612248,
+    "center_rmse": 1.0568784631661128,
+    "median_seconds": 0.00020612500000005696
+  },
+  {
+    "noise": "gaussian",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 1000,
+    "amplitude": 36287.41922192031,
+    "M": 56449.97644787364,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 494,
+      "repetitions": 500,
+      "rate": 0.988,
+      "mcse": 0.004869496893930627,
+      "ci95": [
+        0.974065072734663,
+        0.9955838277141984
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "mean_length": 2.9619817478232724,
+    "length_mcse": 1.2895759820022197e-06,
+    "length_to_direct": 0.7211158414959398,
+    "mean_bias_certificate": 0.3237621354295056,
+    "center_rmse": 0.5889745993485068,
+    "median_seconds": 0.00020491700000002666
+  },
+  {
+    "noise": "rademacher",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 0,
+    "strength_over_eta": 0,
+    "amplitude": 0.0,
+    "M": 3628.741922192031,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 0.0,
+    "length_mcse": 0.0,
+    "length_to_direct": 0.0,
+    "mean_bias_certificate": 0.0,
+    "center_rmse": 0.0,
+    "median_seconds": 7.899999999994023e-05
+  },
+  {
+    "noise": "rademacher",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 0.25,
+    "amplitude": 9.071854805480077,
+    "M": 9.979040286028086,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": false,
+    "coverage": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "rank_recovery": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 0.0,
+    "length_mcse": 0.0,
+    "length_to_direct": 0.0,
+    "mean_bias_certificate": 0.0,
+    "center_rmse": 3.207385025447365,
+    "median_seconds": 7.829100000034117e-05
+  },
+  {
+    "noise": "rademacher",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 3,
+    "amplitude": 108.86225766576092,
+    "M": 119.74848343233703,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 496,
+      "repetitions": 500,
+      "rate": 0.992,
+      "mcse": 0.003983967871356396,
+      "ci95": [
+        0.979644367406256,
+        0.9978160918916578
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 5.594299245073074,
+    "length_mcse": 0.0,
+    "length_to_direct": 1.0,
+    "mean_bias_certificate": 112.0144549251341,
+    "center_rmse": 0.9423375191511806,
+    "median_seconds": 0.0001659160000000437
+  },
+  {
+    "noise": "rademacher",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 100,
+    "amplitude": 3628.741922192031,
+    "M": 3991.6161144112343,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 498,
+      "repetitions": 500,
+      "rate": 0.996,
+      "mcse": 0.002822764602300377,
+      "ci95": [
+        0.9856259214377997,
+        0.99951521382371
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 5.594299245073216,
+    "length_mcse": 0.0,
+    "length_to_direct": 1.0000000000000253,
+    "mean_bias_certificate": 2.639355503902333,
+    "center_rmse": 1.006479011206848,
+    "median_seconds": 0.0001654170000002786
+  },
+  {
+    "noise": "rademacher",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 1000,
+    "amplitude": 36287.41922192031,
+    "M": 39916.161144112346,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "mean_length": 2.4962917471184554,
+    "length_mcse": 1.2800993557406828e-06,
+    "length_to_direct": 0.4462206324262956,
+    "mean_bias_certificate": 0.2592041405147273,
+    "center_rmse": 0.35355339085081144,
+    "median_seconds": 0.00016804150000004903
+  },
+  {
+    "noise": "rademacher",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 0.25,
+    "amplitude": 9.071854805480077,
+    "M": 14.11249411196841,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": false,
+    "coverage": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "rank_recovery": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 0.0,
+    "length_mcse": 0.0,
+    "length_to_direct": 0.0,
+    "mean_bias_certificate": 0.0,
+    "center_rmse": 6.41477005089473,
+    "median_seconds": 7.816699999985133e-05
+  },
+  {
+    "noise": "rademacher",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 3,
+    "amplitude": 108.86225766576092,
+    "M": 169.34992934362091,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 498,
+      "repetitions": 500,
+      "rate": 0.996,
+      "mcse": 0.002822764602300377,
+      "ci95": [
+        0.9856259214377997,
+        0.99951521382371
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 5.594299245073074,
+    "length_mcse": 0.0,
+    "length_to_direct": 1.0,
+    "mean_bias_certificate": 146.66136271367782,
+    "center_rmse": 1.0074720839805,
+    "median_seconds": 0.00016495800000004834
+  },
+  {
+    "noise": "rademacher",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 100,
+    "amplitude": 3628.741922192031,
+    "M": 5644.997644787364,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 498,
+      "repetitions": 500,
+      "rate": 0.996,
+      "mcse": 0.002822764602300377,
+      "ci95": [
+        0.9856259214377997,
+        0.99951521382371
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 5.5942992450727616,
+    "length_mcse": 0.0,
+    "length_to_direct": 0.9999999999999442,
+    "mean_bias_certificate": 3.4572289929552125,
+    "center_rmse": 0.9726253132631164,
+    "median_seconds": 0.00016281250000016456
+  },
+  {
+    "noise": "rademacher",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 1000,
+    "amplitude": 36287.41922192031,
+    "M": 56449.97644787364,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "mean_length": 3.475940384461079,
+    "length_mcse": 1.3926094434830174e-06,
+    "length_to_direct": 0.6213361552874306,
+    "mean_bias_certificate": 0.33939538096220223,
+    "center_rmse": 0.503984126518578,
+    "median_seconds": 0.0001642289999999047
+  },
+  {
+    "noise": "rademacher",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 0,
+    "strength_over_eta": 0,
+    "amplitude": 0.0,
+    "M": 3628.741922192031,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 0.0,
+    "length_mcse": 0.0,
+    "length_to_direct": 0.0,
+    "mean_bias_certificate": 0.0,
+    "center_rmse": 0.0,
+    "median_seconds": 7.89170000001782e-05
+  },
+  {
+    "noise": "rademacher",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 0.25,
+    "amplitude": 9.071854805480077,
+    "M": 9.979040286028086,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": false,
+    "coverage": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "rank_recovery": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 0.0,
+    "length_mcse": 0.0,
+    "length_to_direct": 0.0,
+    "mean_bias_certificate": 0.0,
+    "center_rmse": 3.0596503098119294,
+    "median_seconds": 7.745799999980818e-05
+  },
+  {
+    "noise": "rademacher",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 3,
+    "amplitude": 108.86225766576092,
+    "M": 119.74848343233703,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 497,
+      "repetitions": 500,
+      "rate": 0.994,
+      "mcse": 0.0034536936748935927,
+      "ci95": [
+        0.9825663262740865,
+        0.9987609424564593
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 5.594299245073074,
+    "length_mcse": 0.0,
+    "length_to_direct": 1.0,
+    "mean_bias_certificate": 112.73124772532682,
+    "center_rmse": 1.026535708533207,
+    "median_seconds": 0.0001672080000001408
+  },
+  {
+    "noise": "rademacher",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 100,
+    "amplitude": 3628.741922192031,
+    "M": 3991.6161144112343,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 499,
+      "repetitions": 500,
+      "rate": 0.998,
+      "mcse": 0.001997998998998749,
+      "ci95": [
+        0.9889075231010312,
+        0.9999493656659926
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 5.594299245073216,
+    "length_mcse": 0.0,
+    "length_to_direct": 1.0000000000000253,
+    "mean_bias_certificate": 2.6562626639457503,
+    "center_rmse": 0.9671010526153337,
+    "median_seconds": 0.0001650419999998931
+  },
+  {
+    "noise": "rademacher",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 1000,
+    "amplitude": 36287.41922192031,
+    "M": 39916.161144112346,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "mean_length": 2.4085102615304566,
+    "length_mcse": 1.2875280097803403e-06,
+    "length_to_direct": 0.43052939358788195,
+    "mean_bias_certificate": 0.26086484313757635,
+    "center_rmse": 0.3372688697794665,
+    "median_seconds": 0.000165874999999982
+  },
+  {
+    "noise": "rademacher",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 0.25,
+    "amplitude": 9.071854805480077,
+    "M": 14.11249411196841,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": false,
+    "coverage": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "rank_recovery": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 0.0,
+    "length_mcse": 0.0,
+    "length_to_direct": 0.0,
+    "mean_bias_certificate": 0.0,
+    "center_rmse": 6.119300619623859,
+    "median_seconds": 7.73334999999431e-05
+  },
+  {
+    "noise": "rademacher",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 3,
+    "amplitude": 108.86225766576092,
+    "M": 169.34992934362091,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 497,
+      "repetitions": 500,
+      "rate": 0.994,
+      "mcse": 0.0034536936748935927,
+      "ci95": [
+        0.9825663262740865,
+        0.9987609424564593
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 5.594299245073074,
+    "length_mcse": 0.0,
+    "length_to_direct": 1.0,
+    "mean_bias_certificate": 139.91540106908798,
+    "center_rmse": 0.9750689433336477,
+    "median_seconds": 0.00016531250000006992
+  },
+  {
+    "noise": "rademacher",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 100,
+    "amplitude": 3628.741922192031,
+    "M": 5644.997644787364,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 497,
+      "repetitions": 500,
+      "rate": 0.994,
+      "mcse": 0.0034536936748935927,
+      "ci95": [
+        0.9825663262740865,
+        0.9987609424564593
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 5.5942992450727616,
+    "length_mcse": 0.0,
+    "length_to_direct": 0.9999999999999442,
+    "mean_bias_certificate": 3.2981561929969514,
+    "center_rmse": 1.007907347561832,
+    "median_seconds": 0.00016370850000013704
+  },
+  {
+    "noise": "rademacher",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 1000,
+    "amplitude": 36287.41922192031,
+    "M": 56449.97644787364,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "mean_length": 3.7997506922005706,
+    "length_mcse": 1.293951899593923e-06,
+    "length_to_direct": 0.6792183481330623,
+    "mean_bias_certificate": 0.3237615805437491,
+    "center_rmse": 0.5901342212305725,
+    "median_seconds": 0.000164333000000072
+  },
+  {
+    "noise": "correlated_gaussian",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 0,
+    "strength_over_eta": 0,
+    "amplitude": 0.0,
+    "M": 3628.741922192031,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 0.0,
+    "length_mcse": 0.0,
+    "length_to_direct": 0.0,
+    "mean_bias_certificate": 0.0,
+    "center_rmse": 0.0,
+    "median_seconds": 8.1395500000081e-05
+  },
+  {
+    "noise": "correlated_gaussian",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 0.25,
+    "amplitude": 9.071854805480077,
+    "M": 9.979040286028086,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": false,
+    "coverage": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "rank_recovery": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 0.0,
+    "length_mcse": 0.0,
+    "length_to_direct": 0.0,
+    "mean_bias_certificate": 0.0,
+    "center_rmse": 3.207385025447365,
+    "median_seconds": 7.816699999985133e-05
+  },
+  {
+    "noise": "correlated_gaussian",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 3,
+    "amplitude": 108.86225766576092,
+    "M": 119.74848343233703,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 4.1074978212636495,
+    "length_mcse": 0.0,
+    "length_to_direct": 1.000000000000001,
+    "mean_bias_certificate": 112.01445184978743,
+    "center_rmse": 0.7064226582628524,
+    "median_seconds": 0.00020935449999992528
+  },
+  {
+    "noise": "correlated_gaussian",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 100,
+    "amplitude": 3628.741922192031,
+    "M": 3991.6161144112343,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 497,
+      "repetitions": 500,
+      "rate": 0.994,
+      "mcse": 0.0034536936748935927,
+      "ci95": [
+        0.9825663262740865,
+        0.9987609424564593
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 4.107497821263678,
+    "length_mcse": 0.0,
+    "length_to_direct": 1.000000000000008,
+    "mean_bias_certificate": 2.6393781317351426,
+    "center_rmse": 0.6842900725615703,
+    "median_seconds": 0.00020766649999970355
+  },
+  {
+    "noise": "correlated_gaussian",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 1000,
+    "amplitude": 36287.41922192031,
+    "M": 39916.161144112346,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "mean_length": 1.9706285326329307,
+    "length_mcse": 9.689633296771836e-07,
+    "length_to_direct": 0.479763743861629,
+    "mean_bias_certificate": 0.2592043755353017,
+    "center_rmse": 0.23744849033096,
+    "median_seconds": 0.00020691699999986213
+  },
+  {
+    "noise": "correlated_gaussian",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 0.25,
+    "amplitude": 9.071854805480077,
+    "M": 14.11249411196841,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": false,
+    "coverage": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "rank_recovery": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 0.0,
+    "length_mcse": 0.0,
+    "length_to_direct": 0.0,
+    "mean_bias_certificate": 0.0,
+    "center_rmse": 6.41477005089473,
+    "median_seconds": 7.645800000011249e-05
+  },
+  {
+    "noise": "correlated_gaussian",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 3,
+    "amplitude": 108.86225766576092,
+    "M": 169.34992934362091,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 495,
+      "repetitions": 500,
+      "rate": 0.99,
+      "mcse": 0.0044497190922574,
+      "ci95": [
+        0.9768186119303404,
+        0.9967452785929758
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 4.1074978212636495,
+    "length_mcse": 0.0,
+    "length_to_direct": 1.000000000000001,
+    "mean_bias_certificate": 146.66134225336438,
+    "center_rmse": 0.7236547939823575,
+    "median_seconds": 0.00020491700000002666
+  },
+  {
+    "noise": "correlated_gaussian",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 100,
+    "amplitude": 3628.741922192031,
+    "M": 5644.997644787364,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 498,
+      "repetitions": 500,
+      "rate": 0.996,
+      "mcse": 0.002822764602300377,
+      "ci95": [
+        0.9856259214377997,
+        0.99951521382371
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 4.107497821263678,
+    "length_mcse": 0.0,
+    "length_to_direct": 1.000000000000008,
+    "mean_bias_certificate": 3.4568637619890366,
+    "center_rmse": 0.7202242276237768,
+    "median_seconds": 0.0002050205000001526
+  },
+  {
+    "noise": "correlated_gaussian",
+    "loading": "diagonal",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 1000,
+    "amplitude": 36287.41922192031,
+    "M": 56449.97644787364,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "mean_length": 2.732529677727303,
+    "length_mcse": 9.296521595501326e-07,
+    "length_to_direct": 0.6652540784274009,
+    "mean_bias_certificate": 0.33939038354775775,
+    "center_rmse": 0.37123316620604146,
+    "median_seconds": 0.0002041249999997774
+  },
+  {
+    "noise": "correlated_gaussian",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 0,
+    "strength_over_eta": 0,
+    "amplitude": 0.0,
+    "M": 3628.741922192031,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 0.0,
+    "length_mcse": 0.0,
+    "length_to_direct": 0.0,
+    "mean_bias_certificate": 0.0,
+    "center_rmse": 0.0,
+    "median_seconds": 7.887499999981173e-05
+  },
+  {
+    "noise": "correlated_gaussian",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 0.25,
+    "amplitude": 9.071854805480077,
+    "M": 9.979040286028086,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": false,
+    "coverage": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "rank_recovery": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 0.0,
+    "length_mcse": 0.0,
+    "length_to_direct": 0.0,
+    "mean_bias_certificate": 0.0,
+    "center_rmse": 3.0596503098119294,
+    "median_seconds": 7.883299999988935e-05
+  },
+  {
+    "noise": "correlated_gaussian",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 3,
+    "amplitude": 108.86225766576092,
+    "M": 119.74848343233703,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 499,
+      "repetitions": 500,
+      "rate": 0.998,
+      "mcse": 0.001997998998998749,
+      "ci95": [
+        0.9889075231010312,
+        0.9999493656659926
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 4.1074978212636495,
+    "length_mcse": 0.0,
+    "length_to_direct": 1.000000000000001,
+    "mean_bias_certificate": 112.73176602265612,
+    "center_rmse": 0.7158474570228321,
+    "median_seconds": 0.00020979099999962614
+  },
+  {
+    "noise": "correlated_gaussian",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 100,
+    "amplitude": 3628.741922192031,
+    "M": 3991.6161144112343,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 495,
+      "repetitions": 500,
+      "rate": 0.99,
+      "mcse": 0.0044497190922574,
+      "ci95": [
+        0.9768186119303404,
+        0.9967452785929758
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 4.107497821263678,
+    "length_mcse": 0.0,
+    "length_to_direct": 1.000000000000008,
+    "mean_bias_certificate": 2.6564000096684053,
+    "center_rmse": 0.7323245530054677,
+    "median_seconds": 0.00021164600000034284
+  },
+  {
+    "noise": "correlated_gaussian",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 1,
+    "strength_over_eta": 1000,
+    "amplitude": 36287.41922192031,
+    "M": 39916.161144112346,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "mean_length": 1.9070599887489808,
+    "length_mcse": 9.021009872790355e-07,
+    "length_to_direct": 0.46428752289935143,
+    "mean_bias_certificate": 0.2608653048082698,
+    "center_rmse": 0.23915537294988815,
+    "median_seconds": 0.0002083125000003072
+  },
+  {
+    "noise": "correlated_gaussian",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 0.25,
+    "amplitude": 9.071854805480077,
+    "M": 14.11249411196841,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": false,
+    "coverage": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "rank_recovery": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 0.0,
+    "length_mcse": 0.0,
+    "length_to_direct": 0.0,
+    "mean_bias_certificate": 0.0,
+    "center_rmse": 6.119300619623859,
+    "median_seconds": 7.725000000036175e-05
+  },
+  {
+    "noise": "correlated_gaussian",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 3,
+    "amplitude": 108.86225766576092,
+    "M": 169.34992934362091,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 498,
+      "repetitions": 500,
+      "rate": 0.996,
+      "mcse": 0.002822764602300377,
+      "ci95": [
+        0.9856259214377997,
+        0.99951521382371
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 4.1074978212636495,
+    "length_mcse": 0.0,
+    "length_to_direct": 1.000000000000001,
+    "mean_bias_certificate": 139.91081794247322,
+    "center_rmse": 0.7461566416534287,
+    "median_seconds": 0.00020679200000017772
+  },
+  {
+    "noise": "correlated_gaussian",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 100,
+    "amplitude": 3628.741922192031,
+    "M": 5644.997644787364,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 498,
+      "repetitions": 500,
+      "rate": 0.996,
+      "mcse": 0.002822764602300377,
+      "ci95": [
+        0.9856259214377997,
+        0.99951521382371
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 0,
+      "repetitions": 500,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.007350610051907784
+      ]
+    },
+    "mean_length": 4.107497821263678,
+    "length_mcse": 0.0,
+    "length_to_direct": 1.000000000000008,
+    "mean_bias_certificate": 3.2977237805189743,
+    "center_rmse": 0.7390112919445146,
+    "median_seconds": 0.00020704199999954653
+  },
+  {
+    "noise": "correlated_gaussian",
+    "loading": "general",
+    "p": 8,
+    "K": 3,
+    "rank": 2,
+    "strength_over_eta": 1000,
+    "amplitude": 36287.41922192031,
+    "M": 56449.97644787364,
+    "eta": 36.28741922192031,
+    "theorem_assumptions": true,
+    "coverage": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "rank_recovery": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "projected_selection": {
+      "successes": 500,
+      "repetitions": 500,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9926493899480923,
+        1.0
+      ]
+    },
+    "mean_length": 2.9619728951872677,
+    "length_mcse": 8.862282224822963e-07,
+    "length_to_direct": 0.7211136862577899,
+    "mean_bias_certificate": 0.32375770837241513,
+    "center_rmse": 0.37920715009419714,
+    "median_seconds": 0.00020574999999967147
+  }
+]

@@ -1,0 +1,182 @@
+\section{Proofs for norm budgets and loading geometry}\label{app:norm_loading}
+
+\subsection{Proof of Theorem~\ref{thm:norm_diameter}}
+\noindent\emph{Roadmap.} Bound each ordered diagonal difference twice, then take the minimum before summing.
+\begin{proof}
+The coverage, compactness, and measurable-extrema argument of Theorem~\ref{thm:full_minimax} applies for every finite $M>0$. For two feasible tensors put $\Delta=B-B'$. Then $\norm\Delta_F\le2M$ and every constrained unfolding rank is at most twice its original cap. Writing $a_i=\Delta_{i,\ldots,i}$ and $q=2/K$, Theorem~\ref{thm:diagonal} gives
+\[
+ s|a|_{(s)}^q\le\sum_i|a_i|^q
+       \le J_2^{1-1/K}(2M)^q.
+\]
+The norm argument and the residual-scan proof give, respectively,
+\[
+|a|_{(s)}\le P_2M s^{-K/2},\qquad
+|a|_{(s)}\le Q_2\lambda_s(\alpha)s^{-K/2}.
+\]
+Both inequalities hold for the same ordered entry. Summing their minimum bounds $|\psi(B)-\psi(B')|$ by \eqref{eq:norm_diameter}. The structural range gives $2h_0$. Empty feasible sets produce a singleton and therefore length zero.
+\end{proof}
+
+\begin{lemma}[A norm-sensitive harmonic sum]\label{lem:norm_sum}
+For $p\ge1$, $x>0$ and $K\ge3$, put
+\[
+ S_{K,p}(x)=\sum_{s=1}^p\min\{x s^{-K/2},s^{-(K-1)/2}\}.
+\]
+Then $S_{3,p}(x)\le4g_p(x)$, and $S_{K,p}(x)\le3\min(x,1)$ for $K\ge4$.
+For fixed $K$ and $0<\alpha<1$,
+$U_{K,p}(M;\alpha)\le C_{K,\bar r,\alpha}\mathfrak r_K(p,M,\tau)$ uniformly in $p,M,\tau$.
+\end{lemma}
+\noindent\emph{Roadmap.} Split the cubic sum at $s=x^2$ and use summability in higher order.
+\begin{proof}
+For $K\ge3$, $S_{K,p}(x)\le x\sum_{s\ge1}s^{-3/2}\le3x$. For $K\ge4$ the second term gives $S_{K,p}(x)\le\sum_{s\ge1}s^{-3/2}\le3$.
+
+For $K=3$, $S_{3,p}(x)\le H_p\le\ell_p$. If $x\le1$, the bound $3x$ suffices for $g_p(x)=x$. If $1<x<\sqrt p$, put $n=\lfloor x^2\rfloor$. Since $n\ge x^2/2$,
+\[
+ S_{3,p}(x)\le H_n+x\sum_{s>n}s^{-3/2}
+ \le1+2\log x+2x/\sqrt n
+ \le4(1+\log x).
+\]
+If $x\ge\sqrt p$, the bound $H_p\le1+\log p\le2(1+\log x)$ gives the same conclusion. Together with $3x$ and $\ell_p$, this proves the first statement.
+
+The threshold satisfies
+\[
+ \lambda_s(\alpha)\le c_{K,\alpha}\tau\sqrt{s\ell_p},\qquad
+ c_{K,\alpha}=\{2[2+K\log(1+4K)+\log(2/\alpha)]\}^{1/2}.
+\]
+Indeed, bound $\log(ep/s)\le\ell_p$, $\log p\le\ell_p$, $s\ge1$, and $\ell_p\ge1$ in \eqref{eq:scan_threshold}. The inequality
+$\min(au,bv)\le\max(a,b)\min(u,v)$ for nonnegative arguments shows
+\[
+ U_{K,p}(M;\alpha)\le
+ \max(P_2,Q_2c_{K,\alpha})\frac{\tau\sqrt{\ell_p}}{\sqrt p}
+ S_{K,p}(x).
+\]
+The established sum bounds prove the claim.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:all_norm_rates}}
+\noindent\emph{Roadmap.} Combine the new diameter with a coordinate mixture and a norm-tuned harmonic support mixture.
+\begin{proof}
+The upper bound follows from Theorem~\ref{thm:norm_diameter} and Lemma~\ref{lem:norm_sum}. Since the upper diameter is deterministic it controls both expected-length criteria.
+
+For the lower bound put $a=\min\{M,\tau\sqrt{\log(1+p/4)}\}$ and mix uniformly over $aE_i$, $i=1,\ldots,p$. These rank-one alternatives have target $a/\sqrt p$. The full Gaussian likelihood identity gives
+\[
+ \chi^2(Q,P_0)=\frac{e^{a^2/\tau^2}-1}{p}\le\tfrac14,
+ \qquad\TV(Q,P_0)\le\tfrac14.
+\]
+The common-target interval lemma implies
+\begin{equation}\label{eq:norm_coordinate_lower}
+ \E_0|C|\ge(3/4-2\alpha)\frac{\min\{M,\tau\sqrt{\log(1+p/4)}\}}{\sqrt p}.
+\end{equation}
+For $p\ge1$, $\log(1+p/4)\ge\ell_p/5$. To verify this, the difference is positive at one and its derivative is
+$1/(p+4)-1/(5p)\ge0$. Thus \eqref{eq:norm_coordinate_lower} is at least a constant times
+$\tau\sqrt{\ell_p}\min(x,1)/\sqrt p$. This proves the lower bound for every $K\ge4$, and for $K=3$ when $x\le1$.
+
+For the remaining cubic case assume first $p\ge256$ and $x>1$, and take
+\[
+ u=\min(p^{1/4},x^2),\qquad m=\lfloor u\rfloor\ge1.
+\]
+Use the sparse harmonic mixture of Theorem~\ref{thm:sparse_harmonic}, with the original general-budget coefficient $b_m$. Since $m\le x^2$,
+$M/\sqrt m\ge\tau\sqrt{\ell_p}$. Also $m\le p^{1/4}$ implies
+\[
+ \log(1+p/(4m^2))\ge\tfrac14\log p\ge\ell_p/5,
+\]
+where the first inequality holds for $p\ge256$ and the second for $\log p\ge4$. Hence
+$b_m\ge\tau\sqrt{\ell_p}/\sqrt{135}$.
+Furthermore $H_m\ge1$ and $H_m\ge\log(m+1)\ge\log u$.
+Writing $t=\log x$, if $2t\le(\log p)/4$ then
+$H_m\ge\max(1,2t)\ge(1+t)/2$. Otherwise
+$H_m\ge(\log p)/4\ge\ell_p/5$.
+In both cases
+\[
+ H_m\ge\tfrac15\min(1+\log x,\ell_p)
+       =\tfrac15 g_p(x),
+\]
+where $1+\log x\le x$ for $x\ge1$ was used. Consequently
+\begin{equation}\label{eq:norm_cubic_lower}
+ \E_0|C|\ge\frac{c_{\alpha,d}}{5\sqrt{135}}
+            \mathfrak r_3(p,M,\tau).
+\end{equation}
+All likelihoods here are for the full tensor; the support-mixture proof holds for the newly chosen $m$ and $b_m$ without modification.
+
+For $p<256$, $\ell_p<7$ and $g_p(x)\le7\min(x,1)$, so the coordinate mixture suffices with a changed absolute constant. Finally $\mathcal L_0\le\mathcal L_{\max}$ completes the proof. Every lower alternative has rank one; higher supplied caps enter only the upper constants.
+\end{proof}
+
+\begin{lemma}[Residual fit and its noise tail]\label{lem:residual_fit}
+The estimator in \eqref{eq:residual_fit} is Borel measurable. With $T_0=T(\tau G)$ and $\beta=1/8$,
+\[
+ \PP(T_0>t)\le\beta e^{-t^2/(2\tau^2)}\quad(t\ge0),
+ \qquad \E T_0^2\le2\beta\tau^2.
+\]
+Put $z_K=\sum_{s=1}^{\infty}s^{-K/2}\le3$. Then
+\begin{equation}\label{eq:residual_error}
+ |\widehat\psi-\psi(A)|\le U_{K,p}(M;\beta)
+              +\frac{Q_2z_K}{\sqrt p}(T_0+\tau/2),
+ \qquad |\widehat\psi-\psi(A)|\le2h_0.
+\end{equation}
+\end{lemma}
+\noindent\emph{Roadmap.} Use a Gaussian union bound with a common additive slack, then compare an approximate residual minimizer to the truth.
+\begin{proof}
+Each unit net contraction is one-Lipschitz in the Frobenius norm; finite maxima and the positive part preserve this property. Thus $T$ is continuous and one-Lipschitz. Density of $(B_j)$ implies
+$d(Z)=\min_{B\in\Theta}T(Z-B)$, although the estimator only uses a positive tolerance. The function $d$ is one-Lipschitz as an infimum of functions with the same Lipschitz constant. The sets $\{Z:T(Z-B_j)\le d(Z)+\tau\}$ are Borel, and their union is the entire observation space. Selecting the first such index is measurable. Hence so is $\widehat\psi$.
+
+For $t\ge0$, apply the same finite Gaussian union bound as for the original scan at thresholds $\lambda_s(\beta)+t$. Since
+\[
+ e^{-(\lambda_s+t)^2/(2\tau^2)}
+ \le e^{-\lambda_s^2/(2\tau^2)}e^{-t^2/(2\tau^2)},
+\]
+the total probability is at most $\beta e^{-t^2/(2\tau^2)}$. Integrating the tail of $T_0^2$ proves its moment bound.
+
+For $\widehat A=B_{j(Z)}$, comparison with $A$ gives
+$T(Z-\widehat A)\le d(Z)+\tau\le T_0+\tau$. Therefore for every support,
+\[
+ N_S(\widehat A-A)\le2\lambda_s(\beta)+2T_0+\tau.
+\]
+The net comparison and doubled-rank argument bound its ordered diagonal entry by
+$Q_2(\lambda_s(\beta)+T_0+\tau/2)s^{-K/2}$.
+It is also bounded by $P_2M s^{-K/2}$. Use
+$\min(a,b+c)\le\min(a,b)+c$, sum, and divide by $\sqrt p$ to obtain \eqref{eq:residual_error}. Both tensors belong to the original cap class, so their targets lie in $[-h_0,h_0]$, giving the second bound.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:all_norm_mse}}
+\noindent\emph{Roadmap.} Control residual-fit tails without an $M$-dependent failure event and reuse the same full-data mixtures for the lower bound.
+\begin{proof}
+Lemma~\ref{lem:residual_fit} and $(a+b)^2\le2a^2+2b^2$ give
+\begin{equation}\label{eq:norm_mse_finite}
+ \sup_A\E_A(\widehat\psi-\psi(A))^2
+ \le\min\left\{4h_0^2,
+ 2U_{K,p}(M;\beta)^2
+ +(8\beta+1)Q_2^2z_K^2\frac{\tau^2}{p}\right\}.
+\end{equation}
+If $x\le1$, use $h_0^2\le s_{\rm cap}M^2/p$ and
+$\mathfrak r_K=M/\sqrt p$. If $x>1$, then
+$\mathfrak r_K\ge\tau\sqrt{\ell_p}/\sqrt p\ge\tau/\sqrt p$; Lemma~\ref{lem:norm_sum} absorbs both terms in the second bound into a constant times $\mathfrak r_K^2$.
+
+The lower constructions in Theorem~\ref{thm:all_norm_rates} have common target $\delta\ge c\mathfrak r_K$ and total variation bounded by a constant below one, independently of $p,M,\tau$. For any estimator with worst-case risk $R$, the test $\mathbf1\{\widetilde\psi\ge\delta/2\}$ has total null-plus-mixture error at most $8R/\delta^2$ by Markov's inequality. Testing error is at least $1-\TV(P_0,Q)$. Thus
+$R\ge\delta^2(1-\TV)/8\gtrsim\mathfrak r_K^2$.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:weighted_bounds}}
+\noindent\emph{Roadmap.} Rearrange weights against ordered diagonal bounds; equalize the target of a hard mixture by a contraction in one mode.
+\begin{proof}
+Extend each prescribed orthonormal loading family to an orthonormal mode basis. Mode transformations preserve Gaussian isotropy and every constrained unfolding rank; restriction to the loading block cannot increase rank or Frobenius norm. Apply residual projection to that $m^K$ block. Every pair of feasible block tensors satisfies the ordered-entry bound from Theorem~\ref{thm:norm_diameter}, with $p=m$. The rearrangement inequality gives
+\[
+ |\psi(B)-\psi(B')|
+ \le\sum_{s=1}^m w_s^*|\operatorname{diag}(B-B')|_{(s)}\le U_w.
+\]
+The structural bound and the earlier measurable-extrema argument give the other assertions about this interval.
+
+For the lower bound fix $d\le m$ and work in the coordinates corresponding to the $d$ largest absolute weights. These weights are nonzero. Take whichever coordinate or nonnegative cubic harmonic mixture supplies the lower rate in dimension $d$ in Theorem~\ref{thm:all_norm_rates}. Its common normalized diagonal target is at least $c\mathfrak r_K(d,M,\tau)$. In the first tensor mode apply the diagonal linear map with multipliers $w_d^*/w_i$ on these coordinates. Its operator norm is at most one, so every alternative remains rank one with Frobenius norm at most $M$. Its weighted target is now the same for every alternative and equals $w_d^*\sqrt d$ times the original normalized target.
+
+For each pair of alternatives, the first-mode factor inner product becomes
+\[
+ \sum_i (w_d^*/w_i)^2 u_i v_i\le\sum_i u_i v_i,
+\]
+because the original factors are nonnegative. The other factor inner products are unchanged and nonnegative. Thus the full tensor inner product does not increase. The Gaussian likelihood second moment is no larger than that of the original hard mixture. Embedding these alternatives in the full ambient tensor adds only independent mean-zero noise coordinates and leaves the likelihood second moment unchanged. The common-target interval lemma therefore gives
+$\E_0|C|\ge c_{K,\alpha}w_d^*\sqrt d\,\mathfrak r_K(d,M,\tau)$.
+Maximize over the finite set of $d$ to obtain \eqref{eq:weighted_lower}.
+\end{proof}
+
+\subsection{Proof of Proposition~\ref{prop:flat_loading}}
+\noindent\emph{Roadmap.} Rotate to the loading block, absorb known signs, and apply the matching dimension-$m$ theorem.
+\begin{proof}
+Replace each first-mode loading vector by $\epsilon_i v_{1i}$, preserving orthonormality. The loading now has equal positive weights $m^{-1/2}$. The reduced $m^K$ Gaussian tensor has the same norm and cap constraints, so Theorems~\ref{thm:all_norm_rates} and \ref{thm:all_norm_mse} give the upper bounds. For the lower bounds embed their rank-one alternatives in the loading block and set all other mean entries to zero. The extra independent noise carries no parameter information; the full likelihood second moments equal the reduced ones. Equivalently, the interval lower bound follows by taking $d=m$ in Theorem~\ref{thm:weighted_bounds}, and the same mixtures give the squared-risk lower bound. This includes $m=1$ and arbitrary ambient dimensions at least $m$.
+\end{proof}

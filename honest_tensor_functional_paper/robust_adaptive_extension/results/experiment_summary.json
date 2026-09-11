@@ -1,0 +1,31 @@
+{
+  "adaptive_configurations": 54,
+  "adaptive_valid_configurations": 42,
+  "adaptive_invalid_configurations": 12,
+  "adaptive_repetitions": 500,
+  "adaptive_min_valid_coverage": {
+    "successes": 472,
+    "repetitions": 500,
+    "rate": 0.944,
+    "mcse": 0.010282412168358165,
+    "ci95": [
+      0.9200786993956399,
+      0.9624695555249778
+    ]
+  },
+  "adaptive_min_valid_coverage_setting": {
+    "noise": "gaussian",
+    "loading": "general",
+    "rank": 2,
+    "strength_over_eta": 100
+  },
+  "loading_configurations": 36,
+  "loading_repetitions": 1000,
+  "loading_min_coverage": 0.998,
+  "robust_configurations": 4,
+  "robust_repetitions": 400,
+  "approximation_configurations": 12,
+  "approximation_repetitions": 1000,
+  "approximation_min_coverage": 0.944,
+  "total_monte_carlo_repetitions": 76600
+}

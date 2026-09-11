@@ -1,0 +1,194 @@
+[
+  {
+    "noise": "gaussian",
+    "p": 2,
+    "K": 3,
+    "n": 128,
+    "full_scan": true,
+    "directions": {
+      "1": 2,
+      "2": 6859
+    },
+    "parameters": {
+      "1": {
+        "b": 9,
+        "k": 14,
+        "threshold": 1.0690449676496976
+      },
+      "2": {
+        "b": 19,
+        "k": 6,
+        "threshold": 1.6329931618554523
+      }
+    },
+    "finite_variance_assumptions": true,
+    "gaussian_proxy_one_valid": true,
+    "robust_envelope": {
+      "successes": 400,
+      "repetitions": 400,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9908201954163347,
+        1.0
+      ]
+    },
+    "sample_mean_gaussian_envelope": {
+      "successes": 399,
+      "repetitions": 400,
+      "rate": 0.9975,
+      "mcse": 0.002496873044429746,
+      "ci95": [
+        0.9861502300379867,
+        0.9999367074830952
+      ]
+    },
+    "maximum_threshold_ratio": 0.3913130023025695,
+    "mean_excess_squared_over_tau_squared": 0.0,
+    "median_seconds": 0.0016049790000005615
+  },
+  {
+    "noise": "rademacher",
+    "p": 2,
+    "K": 3,
+    "n": 128,
+    "full_scan": true,
+    "directions": {
+      "1": 2,
+      "2": 6859
+    },
+    "parameters": {
+      "1": {
+        "b": 9,
+        "k": 14,
+        "threshold": 1.0690449676496976
+      },
+      "2": {
+        "b": 19,
+        "k": 6,
+        "threshold": 1.6329931618554523
+      }
+    },
+    "finite_variance_assumptions": true,
+    "gaussian_proxy_one_valid": true,
+    "robust_envelope": {
+      "successes": 400,
+      "repetitions": 400,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9908201954163347,
+        1.0
+      ]
+    },
+    "sample_mean_gaussian_envelope": {
+      "successes": 399,
+      "repetitions": 400,
+      "rate": 0.9975,
+      "mcse": 0.002496873044429746,
+      "ci95": [
+        0.9861502300379867,
+        0.9999367074830952
+      ]
+    },
+    "maximum_threshold_ratio": 0.40089186286863654,
+    "mean_excess_squared_over_tau_squared": 0.0,
+    "median_seconds": 0.0016279580000002625
+  },
+  {
+    "noise": "student_t3",
+    "p": 2,
+    "K": 3,
+    "n": 128,
+    "full_scan": true,
+    "directions": {
+      "1": 2,
+      "2": 6859
+    },
+    "parameters": {
+      "1": {
+        "b": 9,
+        "k": 14,
+        "threshold": 1.0690449676496976
+      },
+      "2": {
+        "b": 19,
+        "k": 6,
+        "threshold": 1.6329931618554523
+      }
+    },
+    "finite_variance_assumptions": true,
+    "gaussian_proxy_one_valid": false,
+    "robust_envelope": {
+      "successes": 400,
+      "repetitions": 400,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9908201954163347,
+        1.0
+      ]
+    },
+    "sample_mean_gaussian_envelope": {
+      "successes": 390,
+      "repetitions": 400,
+      "rate": 0.975,
+      "mcse": 0.007806247497998001,
+      "ci95": [
+        0.95450572070122,
+        0.9879478798868141
+      ]
+    },
+    "maximum_threshold_ratio": 0.3138895873336035,
+    "mean_excess_squared_over_tau_squared": 0.0,
+    "median_seconds": 0.0016319170000000938
+  },
+  {
+    "noise": "rare_outliers",
+    "p": 2,
+    "K": 3,
+    "n": 128,
+    "full_scan": true,
+    "directions": {
+      "1": 2,
+      "2": 6859
+    },
+    "parameters": {
+      "1": {
+        "b": 9,
+        "k": 14,
+        "threshold": 1.0690449676496976
+      },
+      "2": {
+        "b": 19,
+        "k": 6,
+        "threshold": 1.6329931618554523
+      }
+    },
+    "finite_variance_assumptions": true,
+    "gaussian_proxy_one_valid": false,
+    "robust_envelope": {
+      "successes": 400,
+      "repetitions": 400,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9908201954163347,
+        1.0
+      ]
+    },
+    "sample_mean_gaussian_envelope": {
+      "successes": 349,
+      "repetitions": 400,
+      "rate": 0.8725,
+      "mcse": 0.016676611616272652,
+      "ci95": [
+        0.8357879415626543,
+        0.9035749266956374
+      ]
+    },
+    "maximum_threshold_ratio": 0.12927367886041907,
+    "mean_excess_squared_over_tau_squared": 0.0,
+    "median_seconds": 0.0016394999999995719
+  }
+]

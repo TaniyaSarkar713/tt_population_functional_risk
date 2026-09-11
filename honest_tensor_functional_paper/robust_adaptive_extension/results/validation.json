@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "scope": "Artifact/provenance validation, not independent mathematical review",
+  "baseline_files_preserved": 34,
+  "result_counts": {
+    "theorem": 21,
+    "proposition": 15,
+    "lemma": 9,
+    "proof": 45
+  },
+  "labels": 132,
+  "local_links": 9,
+  "pdf_pages": {
+    "paper/main.pdf": 55,
+    "progress_report.pdf": 3
+  },
+  "latex_diagnostics": [],
+  "experiment_configurations": 106,
+  "monte_carlo_repetitions": 76600,
+  "environment": {
+    "python": "3.9.6",
+    "numpy": "2.0.2",
+    "scipy": "1.13.1",
+    "pypdf": "6.14.2"
+  }
+}

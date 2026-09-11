@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "scope": "Finite mathematical corroboration, not a formal proof or minimax-optimizer experiment",
+  "seed": 2026091108,
+  "projector_and_bias_cases": 200,
+  "maximum_projector_error": 5.953590176832633e-16,
+  "maximum_bias_ratio": 0.3553166343322988,
+  "mom_tail_comparisons": 26595,
+  "mom_normalized_second_moment": 10.285714285714288,
+  "growing_rank_support_pairs": 112086,
+  "largest_mixture_second_moment": 1.2744293212890625,
+  "shifted_block_checks": 100,
+  "approximation_configurations": 12,
+  "source_sha256": "fda8c588093f433119ffc2ec99be99b40eeaef6ccb59011cd118834acdabc924"
+}

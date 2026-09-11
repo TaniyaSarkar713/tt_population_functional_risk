@@ -1,0 +1,145 @@
+
+\section{Proofs of the full-data refinements}\label{app:full_data_proofs}
+
+\begin{lemma}[Finite product nets and injective norm]\label{lem:net_scan}
+The nets used in \eqref{eq:scan_threshold} exist and satisfy
+$\rho(B)\le2N_S(B)$ for any tensor on $S^K$.
+Furthermore, a tensor $B$ in either rank-cap class satisfies
+$\norm B_F\le\sqrt J\,\rho(B)$.
+\end{lemma}
+\noindent\emph{Roadmap.} Use a volume bound and product telescoping, then apply the canonical squared-weight identity.
+\begin{proof}
+A maximal $\varepsilon$-separated subset of the unit sphere is an $\varepsilon$-net. Balls of radius $\varepsilon/2$ around its points are disjoint and contained in the ball of radius $1+\varepsilon/2$. The ratio of their Euclidean volumes bounds the cardinality by $(1+2/\varepsilon)^s$. Compactness gives a finite maximal set. Take $\varepsilon=1/(2K)$.
+
+Approximate each factor of any unit product direction by a net point. Telescoping the product one factor at a time, each contraction difference has magnitude at most $\varepsilon\rho(B)$, by multilinearity and the definition of $\rho$. The sum is at most $K\varepsilon\rho(B)=\rho(B)/2$. Taking the supremum gives $\rho(B)\le N_S(B)+\rho(B)/2$.
+
+For the second assertion use Lemma~\ref{lem:cp}, writing its product terms as $X_j$. Then
+\[
+ \norm B_F^2
+ =\sum_j\ip B{X_j}
+ \le\rho(B)\sum_j\norm{X_j}_F
+ \le\rho(B)\sqrt J
+       \left(\sum_j\norm{X_j}_F^2\right)^{1/2}
+ =\rho(B)\sqrt J\,\norm B_F.
+\]
+The middle inequality is Cauchy--Schwarz, and the last identity is the squared-weight conclusion of Lemma~\ref{lem:cp}. Divide when $B\ne0$; the zero case is immediate.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:scan}}
+\noindent\emph{Roadmap.} A finite Gaussian union bound controls every net contraction. Test acceptance on that event bounds each ordered diagonal coordinate. Summation gives the interval and intersection gives the two expected-length guarantees.
+\begin{proof}
+There are at most $(ep/s)^s$ subsets of size $s$, since
+$\binom ps\le p^s/s!$ and
+$\log(s!)\ge\int_1^s\log x\,dx\ge s\log s-s$.
+Each unit product contraction of $\tau G$ has distribution $N(0,\tau^2)$. Therefore the Gaussian Chernoff bound gives
+\begin{align*}
+ \PP\{\exists S:N_S(\tau G)>\lambda_{|S|}^{\rm scan}\}
+ &\le\sum_{s=1}^p
+ 2(ep/s)^s(1+4K)^{Ks}
+     \exp\{-(\lambda_s^{\rm scan})^2/(2\tau^2)\}\\
+ &\le\gamma.
+\end{align*}
+Let $\mathcal E_\gamma$ be the complementary event. No independence between the scanned contractions is required.
+
+On $\mathcal E_\gamma$, if the test accepts, the triangle inequality for the finite maximum implies $N_S(A)\le2\lambda_s^{\rm scan}$. Lemma~\ref{lem:net_scan} gives $\rho(A_{S,\ldots,S})\le4\lambda_s^{\rm scan}$. Coordinate restriction cannot increase any constrained unfolding rank, because it multiplies an unfolding by selection matrices. Theorem~\ref{thm:diagonal} and Lemma~\ref{lem:net_scan} thus imply
+\[
+ \sum_{i\in S}|A_{i,\ldots,i}|^q
+ \le J^{1-q/2}\norm{A_{S,\ldots,S}}_F^q
+ \le J\,\rho(A_{S,\ldots,S})^q.
+\]
+Let $|a|_{(s)}$ be the $s$th largest absolute diagonal entry. Choose $S$ to contain the $s$ largest entries. It follows that
+\[
+ s|a|_{(s)}^q\le J(4\lambda_s^{\rm scan})^q,
+ \qquad
+ |a|_{(s)}\le4J^{K/2}\lambda_s^{\rm scan}s^{-K/2}.
+\]
+Summing these inequalities and using
+$|\psi(A)|\le p^{-1/2}\sum_i|a_i|$
+proves the bound $|\psi(A)|\le R_\gamma$ in \eqref{eq:scan_radius}. On rejection the structural interval covers surely. Therefore $C_{\rm scan}$ covers on $\mathcal E_\gamma$ and is honest at level $1-\gamma$.
+
+Both intersected intervals cover with probability at least $1-\alpha_0-\gamma$. On that event the intersection is nonempty and covers; replacing empty intersections by $\{0\}$ preserves this argument. Its length is always at most $\ell_*$. At zero, the rejection probability is at most $\gamma$, and on acceptance the intersection has length at most $2R_\gamma$. This gives \eqref{eq:scan_expectation}, without independence between the intervals.
+
+For the specified $\gamma$, elementary logarithm bounds give
+$\lambda_s^{\rm scan}\le C_K\tau\sqrt{s\log(2p/\alpha)}$.
+For example, use $s\log(ep/s)\le s(1+\log p)$,
+$\log(2p/\gamma)\le2\log(2p/\alpha)$ and $s\ge1$.
+Equation~\eqref{eq:scan_radius} now proves \eqref{eq:scan_rate}; the extra term $\ell_*\gamma$ is smaller in order by Theorem~\ref{thm:separation}.
+If $K\ge4$, the sum is at most $1+2/(K-3)$ by integration of $x^{-(K-1)/2}$ over $[1,\infty)$. If $K=3$, it is at most $1+\log p$. Combining the upper bound for $K\ge4$ with Theorem~\ref{thm:jointlower} proves \eqref{eq:zero_sharp}.
+\end{proof}
+
+\begin{lemma}[Uniform cubic moment for a weighted sign sum]\label{lem:cubic_moment}
+For independent uniform signs $\epsilon_i$, let
+$S_p=\sum_{i=1}^p i^{-2/3}\epsilon_i$. Then, uniformly in $p\ge1$,
+\[
+ \PP(|S_p|>x)\le2e^{-x^3/192}\quad(x\ge12),
+ \qquad
+ \E\exp\{|S_p|^3/40000\}\le20/19+1/100<5/4.
+\]
+\end{lemma}
+\noindent\emph{Roadmap.} Split the weighted sign sum into a bounded head and a sub-Gaussian tail, then integrate its cubic tail probability.
+\begin{proof}
+For $x\ge12$, put $m=\lfloor(x/6)^3\rfloor$. If $m\ge p$, then
+$|S_p|\le3p^{1/3}\le x/2$.
+Otherwise, the first $m$ terms have absolute sum at most
+$3m^{1/3}\le x/2$. The remaining independent sign sum has variance proxy
+\[
+ V_m=\sum_{i>m}i^{-4/3}\le3m^{-1/3}\le24/x.
+\]
+Here $m\ge(x/6)^3/2$ and $18\cdot2^{1/3}<24$.
+The product inequality $\prod_i\cosh(ti^{-2/3})\le\exp(t^2V_m/2)$
+and Chernoff optimization give a two-sided tail bound
+$2\exp\{-(x/2)^2/(2V_m)\}\le2e^{-x^3/192}$.
+
+Put $u=1/40000$ and $Y=|S_p|^3$. Tonelli's theorem applied to
+$e^{uY}=1+\int_0^Y ue^{ut}\,dt$ yields
+\[
+ \E e^{uY}
+ \le e^{1728u}
+ +\frac{2u}{1/192-u}
+       e^{-(1/192-u)1728}
+ \le \frac{20}{19}+\frac1{100}.
+\]
+The last step uses $1728u<1/20$, $e^x\le(1-x)^{-1}$ for $0\le x<1$,
+and $1/192-u\ge1/200$. The exponential factor in the second term is at most one. These estimates are uniform in $p$.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:harmonic}}
+\noindent\emph{Roadmap.} Couple three rank-one factor signs so that the diagonal is deterministic and harmonic. Control the full likelihood mixture by the cubic moment lemma and H\"older, without assuming independence of the three inner-product sums.
+\begin{proof}
+For independent uniform sign vectors $u,v\in\{-1,1\}^p$, define
+\[
+ (x_u)_i=u_i i^{-1/3},\qquad
+ A_{u,v}=\frac{\tau}{200}x_u\otimes x_v\otimes x_{uv},
+\]
+where $(uv)_i=u_iv_i$. Every alternative is rank one and
+\[
+ \norm{A_{u,v}}_F
+ =\frac{\tau}{200}\left(\sum_i i^{-2/3}\right)^{3/2}
+ \le\frac{3^{3/2}}{200}\tau\sqrt p\le M.
+\]
+The sum bound follows from
+$1+\int_1^p x^{-2/3}\,dx\le3p^{1/3}$.
+Its diagonal is $\tau/(200i)$, so the common target is
+$\delta=\tau H_p/(200\sqrt p)$.
+
+Let $Q$ mix the full Gaussian laws over $u,v$. For independent copies
+$u',v'$, set $\epsilon_i=u_iu_i'$ and $\eta_i=v_iv_i'$.
+The full tensor inner product divided by $\tau^2$ is
+$S_1S_2S_3/40000$, where
+\[
+ S_1=\sum_i i^{-2/3}\epsilon_i,\quad
+ S_2=\sum_i i^{-2/3}\eta_i,\quad
+ S_3=\sum_i i^{-2/3}\epsilon_i\eta_i.
+\]
+Each has the marginal distribution in Lemma~\ref{lem:cubic_moment}.
+They are dependent. The likelihood identity \eqref{eq:LR}, the arithmetic--geometric mean inequality and H\"older give, with $u_0=1/40000$,
+\begin{align*}
+ 1+\chi^2(Q,P_0)
+ &=\E e^{u_0S_1S_2S_3}\\
+ &\le\E e^{u_0(|S_1|^3+|S_2|^3+|S_3|^3)/3}\\
+ &\le\prod_{j=1}^3\{\E e^{u_0|S_j|^3}\}^{1/3}<5/4.
+\end{align*}
+Thus $\TV(Q,P_0)<1/4$. Lemma~\ref{lem:mixture} gives
+$\E_0|C|\ge(3/4-2\alpha)\delta$, proving \eqref{eq:harmonic_lower}.
+Since $H_p\asymp\log p$, this also proves the claimed obstruction to the earlier zero-point conjecture.
+\end{proof}

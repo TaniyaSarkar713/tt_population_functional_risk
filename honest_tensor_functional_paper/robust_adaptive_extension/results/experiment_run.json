@@ -1,0 +1,15 @@
+{
+  "seed": 2026091107,
+  "seconds": 9.864686875,
+  "sources": {
+    "run_experiments.py": "7ff13b58758353d0ae9e099d5f435ce331d23350195c7f105abe6680433d8593",
+    "methods.py": "96a413953f5f13a2961ad96514ab1725de195db0bda98a45b90d083ac2d3e2b2"
+  },
+  "environment": {
+    "python": "3.9.6",
+    "numpy": "2.0.2",
+    "scipy": "1.13.1",
+    "platform": "macOS-15.6-arm64-arm-64bit",
+    "blas_threads": "1"
+  }
+}

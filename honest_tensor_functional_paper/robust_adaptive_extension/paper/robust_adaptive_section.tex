@@ -1,0 +1,147 @@
+\section{Robust noise, computation, and rank adaptation}\label{sec:robust_adaptive}
+
+This section separates extensions of validity from sharp minimax claims. It also separates adaptation on a spectrally separated class from honesty on the original class containing arbitrarily weak components. Lower-bound comparisons use a fixed error level below $1/4$. All statements have proofs in Appendix~\ref{app:robust_adaptive}.
+
+\subsection{Beyond Gaussian observations}
+
+For a centered error tensor $E$, the following joint directional condition is sufficient:
+\begin{equation}\label{eq:joint_sg}
+ \E\exp(t\ip UE)\le\exp(t^2v^2\norm U_F^2/2)
+ \quad(U\text{ deterministic},\ t\in\R).
+\end{equation}
+It allows dependence and nonidentical coordinates. Independent centered sub-Gaussian coordinates with common proxy $v$ satisfy it, as does Gaussian covariance bounded above by $v^2I$. Marginal coordinate bounds alone do not imply it.
+
+\begin{theorem}[Full-data robustness under directional tails]\label{thm:sg_full}
+In $Z=A+E$, replace $\tau$ by a known $v>0$ in the scan thresholds and residual-fit tolerance. Under \eqref{eq:joint_sg}, the norm-sensitive diameter, uniform squared-risk upper bound, and orthogonal-loading upper bounds remain valid. For fixed order/caps, their equal-diagonal orders are $\mathfrak r_K(p,M,v)$ and its square. If the noise law is an unknown member of the family satisfying \eqref{eq:joint_sg}, these rates are minimax when coverage and the supremum risk/length range over that family. This lower-bound statement need not hold for each fixed non-Gaussian law separately.
+\end{theorem}
+
+For a finite-variance extension retain independent identically distributed full-tensor replicates $W_1,\ldots,W_n$, with mean $A$ and
+$\operatorname{Cov}(\operatorname{vec}W_j)\preceq\sigma^2I$ for known $\sigma>0$.
+Put $\tau=\sigma/\sqrt n$, and let
+\[
+ H_s=s\log(ep/s)+Ks\log(1+4K).
+\]
+For a desired error $0<\beta<1/4$, choose $b_s$ as the smallest odd integer at least
+\begin{equation}\label{eq:mom_blocks}
+ \max\{9,[H_s+\log(p/\beta)]/\log2\},\qquad n\ge2\max_s b_s.
+\end{equation}
+For each unit product-net direction $U$ supported on $S^K$, $|S|=s$, let $d_U$ be the median of its $b_s$ disjoint block averages, using block size $k_s=\lfloor n/b_s\rfloor$. The block partitions may differ across $s$ but are deterministic. Set $\lambda_s^{\rm mom}=4\sigma/\sqrt{k_s}$.
+
+\begin{theorem}[Full scans with only finite-variance replicates]\label{thm:mom_full}
+Use the feasible constraints
+$|d_U-\ip UB|\le\lambda_s^{\rm mom}$ in place of the Gaussian residual constraints. Their projection onto the equal-diagonal target is honest at level $1-\beta$, with the norm-sensitive diameter using $\lambda_s^{\rm mom}$. For fixed $K$, caps and confidence, both minimax expected-length criteria, with a supremum over all the stated replicate laws, have order $\mathfrak r_K(p,M,\sigma/\sqrt n)$ whenever \eqref{eq:mom_blocks} holds.
+
+For squared error use $\beta=1/8$ and approximately minimize
+\[
+ F(B)=\max\bigl(0,\max_U\{|d_U-\ip UB|-\lambda_{s(U)}^{\rm mom}\}\bigr)
+\]
+over a fixed countable dense cap-class sequence, within tolerance $\tau$. The resulting scalar estimator has minimax squared risk of order $\mathfrak r_K^2$ over the same family. This is an existence construction. The sufficient replicate count is $n\ge C_{K,\beta}p$, and the full directional search remains exponential.
+\end{theorem}
+
+The moments $d_U$ need not be contractions of a single tensor estimate. Their separate linear constraints suffice. No Gaussian likelihood is used for the robust upper bounds; the lower bounds use the Gaussian subfamily of replicate distributions. This is a finite-direction use of the classical median-of-means principle \citep{devroye2016}.
+
+\begin{proposition}[Two limits of a noise relaxation]\label{prop:noise_limits}
+(i) In one dimension, known noise taking values $\pm v$ with equal probabilities permits exact recovery of every mean $|A|\le M<v$, although it has variance $v^2$ and satisfies \eqref{eq:joint_sg}. Thus a Gaussian lower bound cannot be transferred to every noise law from a variance bound alone.
+(ii) For $E=v\xi\mathbf1$ with one Rademacher sign $\xi$, every coordinate has proxy $v$, but a flat unit product contraction on a $p^K$ block has variance $v^2p^K$. Coordinatewise calibration cannot certify a full scan or a dense rotated loading.
+\end{proposition}
+
+\subsection{Approximate ranks and growing caps}
+
+\begin{theorem}[Sharp length under a Frobenius approximation allowance]\label{thm:approx_sharp}
+In the original Gaussian experiment let
+$\Theta^\eta=\Theta(M,\bar r)+\eta\mathbb B_F$, $\eta\ge0$. For the equal diagonal, fixed $K\ge3$, fixed positive caps and fixed $0<\alpha<1/4$,
+\[
+ \mathcal L_0(\Theta^\eta)\asymp\mathcal L_{\max}(\Theta^\eta)
+ \asymp \min\{\tau,\mathfrak r_K(p,M,\tau)+\eta\}.
+\]
+The upper interval inflates every scan threshold by $\eta$ and both projected endpoints by $\eta$, with a deterministically selected direct Gaussian fallback. Thus approximate low rank is allowed, but the original rate requires $\eta=O(\mathfrak r_K)$.
+\end{theorem}
+
+\begin{proposition}[A growing-rank lower bound and the unrestricted endpoint]\label{prop:growing_caps}
+Let $r_*$ be the minimum supplied cap, truncated at $p$. Under equal loading every honest interval obeys
+\[
+ \E_0|C|\ge\frac{c_\alpha}{\sqrt p}
+ \max_{1\le s\le r_*}
+ \min\{M\sqrt s,\tau s\sqrt{\log(1+p/(4s^2))}\}.
+\]
+The finite upper envelopes of the preceding sections remain valid for dimension-dependent supplied caps with their displayed cap constants; these constants are not uniformly bounded. If all rank restrictions are removed, then for any prescribed unit loading both length criteria have order $\min(M,\tau)$, attained in polynomial time. The vanishing tensor rate therefore does not persist under unrestricted ranks.
+\end{proposition}
+
+\subsection{Arbitrary loading tensors and efficient regimes}
+
+For a nonzero, otherwise arbitrary deterministic tensor $L$, a useful sufficient description is a certified decomposition $L=L_0+R$, where $L_0$ has a tractable orthogonal loading representation and the remainder $R$ is known exactly. Normalization is not required in this subsection.
+
+\begin{proposition}[A confidence interval for any certified loading decomposition]\label{prop:loading_transfer}
+Suppose $C_0=[a_0,b_0]$ is honest for $\ip{L_0}A$ at error $\alpha_0$, and
+$\PP(|\ip RE|>q_R)\le\alpha_1$ uniformly. Then
+\[
+ C_L=[a_0+\ip RZ-q_R,\ b_0+\ip RZ+q_R]
+\]
+is honest at error $\alpha_0+\alpha_1$ and has length $|C_0|+2q_R$.
+Under \eqref{eq:joint_sg}, one may take
+\[
+ q_R=v\norm R_F\sqrt{2\log(2/\alpha_1)}.
+\]
+For Gaussian noise use the normal quantile. No independence between the two terms is required. A decomposition or partition selected from loading and supplied constants alone needs no selection penalty. Selection using $Z$ does require simultaneous calibration.
+
+This also supplies additional unequal-weight upper bounds: partition the orthogonal terms into prescribed blocks, apply their separate weighted bounds with error budgets summing to $\alpha$, and add the intervals. Include the unsplit construction among the choices. The minimum among their deterministic diameter bounds is achievable by choosing the construction before observing data.
+\end{proposition}
+
+\begin{theorem}[Two efficiently attained minimax regimes]\label{thm:efficient_regimes}
+(i) For the equal diagonal, fixed order/caps and $M\le\tau\sqrt{\log(ep)}$, the structural interval is minimax up to fixed constants, with length of order $M/\sqrt p$.
+(ii) Let a parameter class contained in $\{A:\norm A_F\le M\}$ contain every rank-one tensor of Frobenius norm at most $M$. If a supplied unit product tensor $U$ certifies
+$|\ip LU|\ge c\norm L_F$ for a fixed $c>0$, then under Gaussian observations both length criteria have order $\norm L_F\min(M,\tau)$. Choose between the norm-only structural interval and the direct Gaussian interval. The algorithm uses a contraction and scalar comparisons, without rank recovery or tensor optimization. This covers arbitrary loadings with a certified constant product overlap, regardless of supplied rank caps.
+\end{theorem}
+
+The general loading transfer is a valid upper bound, not a characterization of the optimum for every tensor $L$. The near-flat difficult contrasts do not satisfy a dimension-independent product-overlap condition.
+
+\begin{proposition}[Why full convexification loses the weak-signal gain]\label{prop:convex_loss}
+Any convex parameter set containing the rank-one Frobenius ball of radius $M$ also contains $\{tL:|t|\le M/\sqrt p\}$ for the equal diagonal loading. Consequently, every interval honest on that convex set satisfies
+\[
+ \E_0|C|\ge c_\alpha\min(M/\sqrt p,\tau).
+\]
+At $M=\tau\sqrt p$ this is order $\tau$, exceeding the original full-data rate by an unbounded factor as $p\to\infty$. The conclusion concerns procedures guaranteeing coverage on the whole convex outer class; it is not a computational lower bound for every algorithm using a convex subroutine.
+\end{proposition}
+
+\subsection{Actual rank: an obstruction and a computable separated case}
+
+\begin{theorem}[An adaptation obstruction at nonzero tensors]\label{thm:shifted_adaptation}
+Suppose $A_0$ is supported on $\{1,\ldots,q\}^K$, $q<p$, has norm $a<M$, and every supplied unfolding cap is at least its actual rank plus one. Put $m=p-q$ and $M_0=(M^2-a^2)^{1/2}$. For the equal diagonal every interval honest on the outer cap class satisfies
+\[
+ \E_{A_0}|C|\ge c_{K,\alpha}\sqrt{m/p}\,
+           \mathfrak r_K(m,M_0,\tau).
+\]
+Thus arbitrarily weak extra components obstruct shortening at some nonzero lower-rank tensors, not only at zero. This is a lower bound, not a complete characterization of adaptation on all rank subclasses.
+\end{theorem}
+
+An explicit positive result uses two independent observations
+$Z^{(j)}=A+E^{(j)}$, with directional proxies $v_j$ as in \eqref{eq:joint_sg}. Let $d_k=\prod_{\ell\ne k}p_\ell$, choose $0<\delta<\alpha$, and set
+\begin{equation}\label{eq:pilot_eta}
+ \eta_k=2v_1\sqrt{2\{(p_k+d_k)\log9+\log(2K/\delta)\}}.
+\end{equation}
+The allowed class has $\norm A_F\le M$ and, in each mode, either rank zero or smallest nonzero singular value strictly greater than $2\eta_k$. No ranks or rank caps are supplied to the algorithm. Separation is a model assumption; observed singular values alone cannot certify the absence of undetected weak components.
+Compute $\widehat r_k=\#\{j:\sigma_j(Z^{(1)}_{(k)})>\eta_k\}$ and let $Q_k$ project onto those left singular vectors. If any $\widehat r_k=0$, return $\{0\}$. Otherwise put
+\[
+ d_k^*=\min\left\{1,\frac{2\eta_k}{\sigma_{\widehat r_k}(Z^{(1)}_{(k)})-\eta_k}\right\}.
+\]
+Here $d_k^*$ is an error bound, distinct from the unfolding column dimension $d_k$.
+For the commuting mode projectors define the orthogonal projector
+\[
+ T=\bigotimes_k Q_k+
+       \sum_k (I-Q_k)\otimes\bigotimes_{\ell\ne k}Q_\ell.
+\]
+The tensor factors in this expression occupy their respective modes. This first-order product-space projector may be larger than the exact Tucker manifold tangent projector at ranks above one. Set
+\begin{align}
+ B_L&=M\norm{(I-T)L}_F
+      \min\left\{1,\left(\sum_{k<\ell}(d_k^*d_\ell^*)^2\right)^{1/2}\right\},\label{eq:adaptive_bias}\\
+ h_T&=B_L+v_2\norm{TL}_F\sqrt{2\log(2/(\alpha-\delta))}.
+\end{align}
+
+\begin{theorem}[Finite-sample rank calibration with a computable bias correction]\label{thm:adaptive_tangent}
+The interval centered at $\ip{TL}{Z^{(2)}}$ with radius $h_T$ is honest at level $1-\alpha$ on the separated class just specified, for any prescribed loading $L$. One may choose, using only the pilot and known quantities, the shortest-radius option among it, the direct second-observation interval with error $\alpha-\delta$, and the norm-only structural interval. It may also be intersected with the structural interval. For Gaussian second-observation noise the square-root logarithm can be replaced by $z_{1-(\alpha-\delta)/2}$.
+
+With probability at least $1-\delta$, all selected mode ranks equal the actual ranks and \eqref{eq:adaptive_bias} bounds the functional bias. The method consists of unfolding SVDs and tensor projections and is polynomial in the explicit input size. Its noise radius depends on $\norm{TL}_F$, and its additional cost is the displayed bias term. General minimax optimality and adaptation without the spectral separation are not asserted.
+\end{theorem}
+
+For one Gaussian observation, independent artificial $G'$ gives
+$Z^{(1)}=Z+\tau G'$ and $Z^{(2)}=Z-\tau G'$, with independent errors of scale $\sqrt2\tau$. For non-Gaussian errors, this trick need not give independence; genuinely independent replicate groups suffice. The rank statement concerns Tucker mode ranks, and applies to TT tensors meeting the mode-gap conditions, but does not identify their TT bond ranks. Subspace projection is established methodology \citep{xu2025}; the present contribution is an explicit conservative finite-sample certificate in this setting.

@@ -1,0 +1,350 @@
+[
+  {
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "eta": 0,
+    "signal": "zero",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uninflated_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 0.78265061086334,
+    "selected": "inflated_threshold"
+  },
+  {
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "eta": 0,
+    "signal": "coordinate",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uninflated_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 0.78265061086334,
+    "selected": "inflated_threshold"
+  },
+  {
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "eta": 0,
+    "signal": "diffuse",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uninflated_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 0.78265061086334,
+    "selected": "inflated_threshold"
+  },
+  {
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "eta": 0.1,
+    "signal": "zero",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uninflated_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 0.9826506108633399,
+    "selected": "inflated_threshold"
+  },
+  {
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "eta": 0.1,
+    "signal": "coordinate",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uninflated_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 0.9826506108633399,
+    "selected": "inflated_threshold"
+  },
+  {
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "eta": 0.1,
+    "signal": "diffuse",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uninflated_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 0.9826506108633399,
+    "selected": "inflated_threshold"
+  },
+  {
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "eta": 0.5,
+    "signal": "zero",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uninflated_coverage": {
+      "successes": 0,
+      "repetitions": 1000,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.003682083896865671
+      ]
+    },
+    "length": 1.78265061086334,
+    "selected": "inflated_threshold"
+  },
+  {
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "eta": 0.5,
+    "signal": "coordinate",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uninflated_coverage": {
+      "successes": 0,
+      "repetitions": 1000,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.003682083896865671
+      ]
+    },
+    "length": 1.78265061086334,
+    "selected": "inflated_threshold"
+  },
+  {
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "eta": 0.5,
+    "signal": "diffuse",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uninflated_coverage": {
+      "successes": 0,
+      "repetitions": 1000,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.003682083896865671
+      ]
+    },
+    "length": 1.78265061086334,
+    "selected": "inflated_threshold"
+  },
+  {
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "eta": 2,
+    "signal": "zero",
+    "coverage": {
+      "successes": 956,
+      "repetitions": 1000,
+      "rate": 0.956,
+      "mcse": 0.006485676526007139,
+      "ci95": [
+        0.9413795807936691,
+        0.9678505029891286
+      ]
+    },
+    "uninflated_coverage": {
+      "successes": 0,
+      "repetitions": 1000,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.003682083896865671
+      ]
+    },
+    "length": 3.919927969080108,
+    "selected": "direct"
+  },
+  {
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "eta": 2,
+    "signal": "coordinate",
+    "coverage": {
+      "successes": 945,
+      "repetitions": 1000,
+      "rate": 0.945,
+      "mcse": 0.007209368904418752,
+      "ci95": [
+        0.9290084844579425,
+        0.958301204920464
+      ]
+    },
+    "uninflated_coverage": {
+      "successes": 0,
+      "repetitions": 1000,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.003682083896865671
+      ]
+    },
+    "length": 3.919927969080108,
+    "selected": "direct"
+  },
+  {
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "eta": 2,
+    "signal": "diffuse",
+    "coverage": {
+      "successes": 944,
+      "repetitions": 1000,
+      "rate": 0.944,
+      "mcse": 0.007270763371201131,
+      "ci95": [
+        0.9278922537167472,
+        0.9574244503133829
+      ]
+    },
+    "uninflated_coverage": {
+      "successes": 0,
+      "repetitions": 1000,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.003682083896865671
+      ]
+    },
+    "length": 3.919927969080108,
+    "selected": "direct"
+  }
+]

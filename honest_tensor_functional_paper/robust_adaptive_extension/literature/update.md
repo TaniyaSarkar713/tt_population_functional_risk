@@ -1,0 +1,11 @@
+# Primary-source positioning of the extension
+
+Primary sources were checked on 2026-09-11. This is focused positioning, not an exhaustive priority review. The eight curated downloads remain in the repository's [reference collection](../../../references/README.md).
+
+- [Devroye, Lerasle, Lugosi, and Oliveira, *Sub-Gaussian mean estimators*](https://arxiv.org/abs/1509.05845): classical finite-variance robust mean estimation and its limitations. The new median argument is a finite-direction specialization, with explicit simultaneous scan counts and an integrated excess-tail bound; median-of-means itself is not a novelty claim.
+- [Xu, Chen, and Han, *Statistical Inference for Low-Rank Tensor Models*](https://arxiv.org/abs/2501.16223): tensor functional inference through debiasing and tangent projection under signal conditions, including general loadings. The new adaptive routine uses established subspace ideas with a conservative finite-sample bias certificate and explicit separation. It is not asserted to improve their efficiency or signal thresholds.
+- [Cai and Low, *An adaptation theory for nonparametric confidence intervals*](https://arxiv.org/abs/math/0503662): outer-class honesty and between-class expected-length lower bounds. The shifted tensor mixture is a specialized instance of that testing principle, not a new generic adaptation theory.
+- [Carpentier, Klopp, Löffler, and Nickl, *Adaptive confidence sets for matrix completion*](https://arxiv.org/abs/1608.04861): adaptation depends on observation design and noise information. Its matrix-completion conclusions do not directly settle the fully observed tensor-functional experiment.
+- [Choo and d'Orsi, *The Complexity of Sparse Tensor PCA*](https://arxiv.org/abs/2106.06308): computational tradeoffs and low-degree evidence in a related tensor problem. Neither those results nor this stage's convex-hull obstruction establishes hardness for every efficient honest interval in the present model.
+
+The manuscript already contains bibliographic entries for these works. Its new claims are the displayed specialized bounds with supplied proofs and stated scope. Independent assessment of both correctness and priority remains required.

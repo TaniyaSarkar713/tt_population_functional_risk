@@ -1,0 +1,1154 @@
+[
+  {
+    "noise": "gaussian",
+    "p": 256,
+    "K": 4,
+    "M": 16.0,
+    "epsilon": 0,
+    "signal": "coordinate",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 1.4926199382706788,
+    "center_rmse": 0.28179552012655773,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 6.858300000001094e-05
+  },
+  {
+    "noise": "gaussian",
+    "p": 256,
+    "K": 4,
+    "M": 16.0,
+    "epsilon": 0,
+    "signal": "diffuse",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 1.4926199382706788,
+    "center_rmse": 0.003931857720274964,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 6.870800000013944e-05
+  },
+  {
+    "noise": "gaussian",
+    "p": 256,
+    "K": 4,
+    "M": 16.0,
+    "epsilon": 0,
+    "signal": "off_diagonal",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 1.4926199382706788,
+    "center_rmse": 2.532078363076985e-05,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 6.904200000068528e-05
+  },
+  {
+    "noise": "gaussian",
+    "p": 256,
+    "K": 4,
+    "M": 16.0,
+    "epsilon": 0.03,
+    "signal": "coordinate",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 1.6264322717589392,
+    "center_rmse": 0.2835665989762401,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 6.760449999987372e-05
+  },
+  {
+    "noise": "gaussian",
+    "p": 256,
+    "K": 4,
+    "M": 16.0,
+    "epsilon": 0.03,
+    "signal": "diffuse",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 1.6264322717589392,
+    "center_rmse": 0.029884454676065108,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 6.920800000020932e-05
+  },
+  {
+    "noise": "gaussian",
+    "p": 256,
+    "K": 4,
+    "M": 16.0,
+    "epsilon": 0.03,
+    "signal": "off_diagonal",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 1.6264322717589392,
+    "center_rmse": 0.029649606942325546,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 6.812500000030752e-05
+  },
+  {
+    "noise": "gaussian",
+    "p": 256,
+    "K": 4,
+    "M": 16.0,
+    "epsilon": 0.3,
+    "signal": "coordinate",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 2.76871030849591,
+    "center_rmse": 0.40458162460616093,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 6.768750000007984e-05
+  },
+  {
+    "noise": "gaussian",
+    "p": 256,
+    "K": 4,
+    "M": 16.0,
+    "epsilon": 0.3,
+    "signal": "diffuse",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 2.76871030849591,
+    "center_rmse": 0.302327200021842,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 6.812499999941934e-05
+  },
+  {
+    "noise": "gaussian",
+    "p": 256,
+    "K": 4,
+    "M": 16.0,
+    "epsilon": 0.3,
+    "signal": "off_diagonal",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 0,
+      "repetitions": 1000,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.003682083896865671
+      ]
+    },
+    "length": 2.76871030849591,
+    "center_rmse": 0.30635505059752166,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 6.879199999954011e-05
+  },
+  {
+    "noise": "gaussian",
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "epsilon": 0,
+    "signal": "coordinate",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 0.7937096568522781,
+    "center_rmse": 0.0806391827731328,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 8.837499999980736e-05
+  },
+  {
+    "noise": "gaussian",
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "epsilon": 0,
+    "signal": "diffuse",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 0.7937096568522781,
+    "center_rmse": 0.000244140625,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 8.658300000075059e-05
+  },
+  {
+    "noise": "gaussian",
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "epsilon": 0,
+    "signal": "off_diagonal",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 0.7937096568522781,
+    "center_rmse": 0.00029948671283147154,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 8.704199999964857e-05
+  },
+  {
+    "noise": "gaussian",
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "epsilon": 0.03,
+    "signal": "coordinate",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 0.9278365707637048,
+    "center_rmse": 0.08753888628512471,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 8.679200000027976e-05
+  },
+  {
+    "noise": "gaussian",
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "epsilon": 0.03,
+    "signal": "diffuse",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 0.9278365707637048,
+    "center_rmse": 0.03038773529171284,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 8.704099999956583e-05
+  },
+  {
+    "noise": "gaussian",
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "epsilon": 0.03,
+    "signal": "off_diagonal",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 0,
+      "repetitions": 1000,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.003682083896865671
+      ]
+    },
+    "length": 0.9278365707637048,
+    "center_rmse": 0.030327220167306927,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 8.68330000001194e-05
+  },
+  {
+    "noise": "gaussian",
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "epsilon": 0.3,
+    "signal": "coordinate",
+    "coverage": {
+      "successes": 998,
+      "repetitions": 1000,
+      "rate": 0.998,
+      "mcse": 0.0014127986409959495,
+      "ci95": [
+        0.9927941610885425,
+        0.9997576988831227
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 2.1019923927775483,
+    "center_rmse": 0.3096920900977548,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 8.654200000002277e-05
+  },
+  {
+    "noise": "gaussian",
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "epsilon": 0.3,
+    "signal": "diffuse",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 2.1019923927775483,
+    "center_rmse": 0.311047113228465,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 8.650000000010039e-05
+  },
+  {
+    "noise": "gaussian",
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "epsilon": 0.3,
+    "signal": "off_diagonal",
+    "coverage": {
+      "successes": 999,
+      "repetitions": 1000,
+      "rate": 0.999,
+      "mcse": 0.0009994998749374613,
+      "ci95": [
+        0.9944410757201734,
+        0.9999746825125088
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 0,
+      "repetitions": 1000,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.003682083896865671
+      ]
+    },
+    "length": 2.1019923927775483,
+    "center_rmse": 0.2933790550546747,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 8.675000000035737e-05
+  },
+  {
+    "noise": "rademacher",
+    "p": 256,
+    "K": 4,
+    "M": 16.0,
+    "epsilon": 0,
+    "signal": "coordinate",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 1.4926199382706788,
+    "center_rmse": 0.28541641835813564,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 1.1916000000056215e-05
+  },
+  {
+    "noise": "rademacher",
+    "p": 256,
+    "K": 4,
+    "M": 16.0,
+    "epsilon": 0,
+    "signal": "diffuse",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 1.4926199382706788,
+    "center_rmse": 0.00390625,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 1.1832999999406013e-05
+  },
+  {
+    "noise": "rademacher",
+    "p": 256,
+    "K": 4,
+    "M": 16.0,
+    "epsilon": 0,
+    "signal": "off_diagonal",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 1.4926199382706788,
+    "center_rmse": 0.0,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 1.179100000037181e-05
+  },
+  {
+    "noise": "rademacher",
+    "p": 256,
+    "K": 4,
+    "M": 16.0,
+    "epsilon": 0.03,
+    "signal": "coordinate",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 1.6695729705787383,
+    "center_rmse": 0.285699773588508,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 1.1417000000513156e-05
+  },
+  {
+    "noise": "rademacher",
+    "p": 256,
+    "K": 4,
+    "M": 16.0,
+    "epsilon": 0.03,
+    "signal": "diffuse",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 1.6695729705787383,
+    "center_rmse": 0.03007438542691998,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 1.1375000000590774e-05
+  },
+  {
+    "noise": "rademacher",
+    "p": 256,
+    "K": 4,
+    "M": 16.0,
+    "epsilon": 0.03,
+    "signal": "off_diagonal",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 1.6695729705787383,
+    "center_rmse": 0.030000000000000027,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 1.1457999999464619e-05
+  },
+  {
+    "noise": "rademacher",
+    "p": 256,
+    "K": 4,
+    "M": 16.0,
+    "epsilon": 0.3,
+    "signal": "coordinate",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 3.2001172966939,
+    "center_rmse": 0.4118841234361736,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 1.1541999999309382e-05
+  },
+  {
+    "noise": "rademacher",
+    "p": 256,
+    "K": 4,
+    "M": 16.0,
+    "epsilon": 0.3,
+    "signal": "diffuse",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 3.2001172966939,
+    "center_rmse": 0.29993370337120695,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 1.1416000000430415e-05
+  },
+  {
+    "noise": "rademacher",
+    "p": 256,
+    "K": 4,
+    "M": 16.0,
+    "epsilon": 0.3,
+    "signal": "off_diagonal",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 0,
+      "repetitions": 1000,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.003682083896865671
+      ]
+    },
+    "length": 3.2001172966939,
+    "center_rmse": 0.29999999999999977,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 1.1624999999959584e-05
+  },
+  {
+    "noise": "rademacher",
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "epsilon": 0,
+    "signal": "coordinate",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 0.7937096568522781,
+    "center_rmse": 0.08080148442984675,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 3.054100000010607e-05
+  },
+  {
+    "noise": "rademacher",
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "epsilon": 0,
+    "signal": "diffuse",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 0.7937096568522781,
+    "center_rmse": 0.000244140625,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 3.0479499999902515e-05
+  },
+  {
+    "noise": "rademacher",
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "epsilon": 0,
+    "signal": "off_diagonal",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 0.7937096568522781,
+    "center_rmse": 0.0,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 3.0250000000009436e-05
+  },
+  {
+    "noise": "rademacher",
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "epsilon": 0.03,
+    "signal": "coordinate",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 0.9709772695835038,
+    "center_rmse": 0.08610161779675372,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 2.9957999999830065e-05
+  },
+  {
+    "noise": "rademacher",
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "epsilon": 0.03,
+    "signal": "diffuse",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 0.9709772695835038,
+    "center_rmse": 0.030000504450961432,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 3.008300000040265e-05
+  },
+  {
+    "noise": "rademacher",
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "epsilon": 0.03,
+    "signal": "off_diagonal",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 0,
+      "repetitions": 1000,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.003682083896865671
+      ]
+    },
+    "length": 0.9709772695835038,
+    "center_rmse": 0.030000000000000027,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 2.9792000000306018e-05
+  },
+  {
+    "noise": "rademacher",
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "epsilon": 0.3,
+    "signal": "coordinate",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 2.533399380975538,
+    "center_rmse": 0.3094899703548497,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 2.9916999999990423e-05
+  },
+  {
+    "noise": "rademacher",
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "epsilon": 0.3,
+    "signal": "diffuse",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "length": 2.533399380975538,
+    "center_rmse": 0.30000195355652,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 2.9957999999830065e-05
+  },
+  {
+    "noise": "rademacher",
+    "p": 4096,
+    "K": 4,
+    "M": 64.0,
+    "epsilon": 0.3,
+    "signal": "off_diagonal",
+    "coverage": {
+      "successes": 1000,
+      "repetitions": 1000,
+      "rate": 1.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.9963179161031344,
+        1.0
+      ]
+    },
+    "uncorrected_coverage": {
+      "successes": 0,
+      "repetitions": 1000,
+      "rate": 0.0,
+      "mcse": 0.0,
+      "ci95": [
+        0.0,
+        0.003682083896865671
+      ]
+    },
+    "length": 2.533399380975538,
+    "center_rmse": 0.30000000000000077,
+    "selected": "surrogate_plus_residual",
+    "median_seconds": 3.0208000000087054e-05
+  }
+]
