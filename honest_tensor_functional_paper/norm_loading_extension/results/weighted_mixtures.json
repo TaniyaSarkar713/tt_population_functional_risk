@@ -1,0 +1,1298 @@
+[
+  {
+    "p": 2,
+    "d": 1,
+    "m": 1,
+    "M": 0.03,
+    "support_pairs": 1,
+    "common_target": 0.004916639859782304,
+    "second_moment": 1.0000333338888951
+  },
+  {
+    "p": 2,
+    "d": 1,
+    "m": 1,
+    "M": 1.0,
+    "support_pairs": 1,
+    "common_target": 0.07741753039139605,
+    "second_moment": 1.0082988218601838
+  },
+  {
+    "p": 2,
+    "d": 1,
+    "m": 1,
+    "M": 30.0,
+    "support_pairs": 1,
+    "common_target": 0.07741753039139605,
+    "second_moment": 1.0082988218601838
+  },
+  {
+    "p": 2,
+    "d": 2,
+    "m": 1,
+    "M": 0.03,
+    "support_pairs": 4,
+    "common_target": 0.003026546847899958,
+    "second_moment": 1.0000114912350135
+  },
+  {
+    "p": 2,
+    "d": 2,
+    "m": 1,
+    "M": 1.0,
+    "support_pairs": 4,
+    "common_target": 0.06423960911914657,
+    "second_moment": 1.0052093093564227
+  },
+  {
+    "p": 2,
+    "d": 2,
+    "m": 1,
+    "M": 30.0,
+    "support_pairs": 4,
+    "common_target": 0.06423960911914657,
+    "second_moment": 1.0052093093564227
+  },
+  {
+    "p": 2,
+    "d": 2,
+    "m": 2,
+    "M": 0.03,
+    "support_pairs": 1,
+    "common_target": 0.0032101376995932462,
+    "second_moment": 1.0000446741499271
+  },
+  {
+    "p": 2,
+    "d": 2,
+    "m": 2,
+    "M": 1.0,
+    "support_pairs": 1,
+    "common_target": 0.05193483745876633,
+    "second_moment": 1.0117613818346176
+  },
+  {
+    "p": 2,
+    "d": 2,
+    "m": 2,
+    "M": 30.0,
+    "support_pairs": 1,
+    "common_target": 0.05193483745876633,
+    "second_moment": 1.0117613818346176
+  },
+  {
+    "p": 4,
+    "d": 1,
+    "m": 1,
+    "M": 0.03,
+    "support_pairs": 1,
+    "common_target": 0.004380262703501319,
+    "second_moment": 1.0000333338888951
+  },
+  {
+    "p": 4,
+    "d": 1,
+    "m": 1,
+    "M": 1.0,
+    "support_pairs": 1,
+    "common_target": 0.06897172268900471,
+    "second_moment": 1.0082988218601838
+  },
+  {
+    "p": 4,
+    "d": 1,
+    "m": 1,
+    "M": 30.0,
+    "support_pairs": 1,
+    "common_target": 0.06897172268900471,
+    "second_moment": 1.0082988218601838
+  },
+  {
+    "p": 4,
+    "d": 2,
+    "m": 1,
+    "M": 0.03,
+    "support_pairs": 4,
+    "common_target": 0.0026963679781993742,
+    "second_moment": 1.0000114912350135
+  },
+  {
+    "p": 4,
+    "d": 2,
+    "m": 1,
+    "M": 1.0,
+    "support_pairs": 4,
+    "common_target": 0.05723143690344651,
+    "second_moment": 1.0052093093564227
+  },
+  {
+    "p": 4,
+    "d": 2,
+    "m": 1,
+    "M": 30.0,
+    "support_pairs": 4,
+    "common_target": 0.05723143690344651,
+    "second_moment": 1.0052093093564227
+  },
+  {
+    "p": 4,
+    "d": 2,
+    "m": 2,
+    "M": 0.03,
+    "support_pairs": 1,
+    "common_target": 0.002859930122938558,
+    "second_moment": 1.0000446741499271
+  },
+  {
+    "p": 4,
+    "d": 2,
+    "m": 2,
+    "M": 1.0,
+    "support_pairs": 1,
+    "common_target": 0.046269045124470436,
+    "second_moment": 1.0117613818346176
+  },
+  {
+    "p": 4,
+    "d": 2,
+    "m": 2,
+    "M": 30.0,
+    "support_pairs": 1,
+    "common_target": 0.046269045124470436,
+    "second_moment": 1.0117613818346176
+  },
+  {
+    "p": 4,
+    "d": 3,
+    "m": 1,
+    "M": 0.03,
+    "support_pairs": 9,
+    "common_target": 0.002030089942028974,
+    "second_moment": 1.0000065988004812
+  },
+  {
+    "p": 4,
+    "d": 3,
+    "m": 1,
+    "M": 1.0,
+    "support_pairs": 9,
+    "common_target": 0.05062196555434267,
+    "second_moment": 1.004135884165185
+  },
+  {
+    "p": 4,
+    "d": 3,
+    "m": 1,
+    "M": 30.0,
+    "support_pairs": 9,
+    "common_target": 0.05062196555434267,
+    "second_moment": 1.004135884165185
+  },
+  {
+    "p": 4,
+    "d": 3,
+    "m": 2,
+    "M": 0.03,
+    "support_pairs": 9,
+    "common_target": 0.002153235546640939,
+    "second_moment": 1.000015629609445
+  },
+  {
+    "p": 4,
+    "d": 3,
+    "m": 2,
+    "M": 1.0,
+    "support_pairs": 9,
+    "common_target": 0.042078512295352796,
+    "second_moment": 1.0060090406192983
+  },
+  {
+    "p": 4,
+    "d": 3,
+    "m": 2,
+    "M": 30.0,
+    "support_pairs": 9,
+    "common_target": 0.042078512295352796,
+    "second_moment": 1.0060090406192983
+  },
+  {
+    "p": 4,
+    "d": 3,
+    "m": 3,
+    "M": 0.03,
+    "support_pairs": 1,
+    "common_target": 0.002148800453267563,
+    "second_moment": 1.0000521084025904
+  },
+  {
+    "p": 4,
+    "d": 3,
+    "m": 3,
+    "M": 1.0,
+    "support_pairs": 1,
+    "common_target": 0.03509912947785882,
+    "second_moment": 1.0139997208780904
+  },
+  {
+    "p": 4,
+    "d": 3,
+    "m": 3,
+    "M": 30.0,
+    "support_pairs": 1,
+    "common_target": 0.03509912947785882,
+    "second_moment": 1.0139997208780904
+  },
+  {
+    "p": 4,
+    "d": 4,
+    "m": 1,
+    "M": 0.03,
+    "support_pairs": 16,
+    "common_target": 0.0016598091863411436,
+    "second_moment": 1.0000045646233522
+  },
+  {
+    "p": 4,
+    "d": 4,
+    "m": 1,
+    "M": 1.0,
+    "support_pairs": 16,
+    "common_target": 0.04606272639100752,
+    "second_moment": 1.0035488845224656
+  },
+  {
+    "p": 4,
+    "d": 4,
+    "m": 1,
+    "M": 30.0,
+    "support_pairs": 16,
+    "common_target": 0.04606272639100752,
+    "second_moment": 1.0035488845224656
+  },
+  {
+    "p": 4,
+    "d": 4,
+    "m": 2,
+    "M": 0.03,
+    "support_pairs": 36,
+    "common_target": 0.001760493496706323,
+    "second_moment": 1.000008507114468
+  },
+  {
+    "p": 4,
+    "d": 4,
+    "m": 2,
+    "M": 1.0,
+    "support_pairs": 36,
+    "common_target": 0.039203093512682086,
+    "second_moment": 1.0042494885739501
+  },
+  {
+    "p": 4,
+    "d": 4,
+    "m": 2,
+    "M": 30.0,
+    "support_pairs": 36,
+    "common_target": 0.039203093512682086,
+    "second_moment": 1.0042494885739501
+  },
+  {
+    "p": 4,
+    "d": 4,
+    "m": 3,
+    "M": 0.03,
+    "support_pairs": 16,
+    "common_target": 0.0017568673476520335,
+    "second_moment": 1.0000220495825023
+  },
+  {
+    "p": 4,
+    "d": 4,
+    "m": 3,
+    "M": 1.0,
+    "support_pairs": 16,
+    "common_target": 0.03292435590700013,
+    "second_moment": 1.0077897982737452
+  },
+  {
+    "p": 4,
+    "d": 4,
+    "m": 3,
+    "M": 30.0,
+    "support_pairs": 16,
+    "common_target": 0.03292435590700013,
+    "second_moment": 1.0077897982737452
+  },
+  {
+    "p": 6,
+    "d": 1,
+    "m": 1,
+    "M": 0.03,
+    "support_pairs": 1,
+    "common_target": 0.004162583292562944,
+    "second_moment": 1.0000333338888951
+  },
+  {
+    "p": 6,
+    "d": 1,
+    "m": 1,
+    "M": 1.0,
+    "support_pairs": 1,
+    "common_target": 0.06554413740870942,
+    "second_moment": 1.0082988218601838
+  },
+  {
+    "p": 6,
+    "d": 1,
+    "m": 1,
+    "M": 30.0,
+    "support_pairs": 1,
+    "common_target": 0.06554413740870942,
+    "second_moment": 1.0082988218601838
+  },
+  {
+    "p": 6,
+    "d": 2,
+    "m": 1,
+    "M": 0.03,
+    "support_pairs": 4,
+    "common_target": 0.0025623705828608776,
+    "second_moment": 1.0000114912350135
+  },
+  {
+    "p": 6,
+    "d": 2,
+    "m": 1,
+    "M": 1.0,
+    "support_pairs": 4,
+    "common_target": 0.05438729117165266,
+    "second_moment": 1.0052093093564227
+  },
+  {
+    "p": 6,
+    "d": 2,
+    "m": 1,
+    "M": 30.0,
+    "support_pairs": 4,
+    "common_target": 0.05438729117165266,
+    "second_moment": 1.0052093093564227
+  },
+  {
+    "p": 6,
+    "d": 2,
+    "m": 2,
+    "M": 0.03,
+    "support_pairs": 1,
+    "common_target": 0.0027178044225807793,
+    "second_moment": 1.0000446741499271
+  },
+  {
+    "p": 6,
+    "d": 2,
+    "m": 2,
+    "M": 1.0,
+    "support_pairs": 1,
+    "common_target": 0.043969681097896174,
+    "second_moment": 1.0117613818346176
+  },
+  {
+    "p": 6,
+    "d": 2,
+    "m": 2,
+    "M": 30.0,
+    "support_pairs": 1,
+    "common_target": 0.043969681097896174,
+    "second_moment": 1.0117613818346176
+  },
+  {
+    "p": 6,
+    "d": 3,
+    "m": 1,
+    "M": 0.03,
+    "support_pairs": 9,
+    "common_target": 0.0019292035768391524,
+    "second_moment": 1.0000065988004812
+  },
+  {
+    "p": 6,
+    "d": 3,
+    "m": 1,
+    "M": 1.0,
+    "support_pairs": 9,
+    "common_target": 0.048106280905199625,
+    "second_moment": 1.004135884165185
+  },
+  {
+    "p": 6,
+    "d": 3,
+    "m": 1,
+    "M": 30.0,
+    "support_pairs": 9,
+    "common_target": 0.048106280905199625,
+    "second_moment": 1.004135884165185
+  },
+  {
+    "p": 6,
+    "d": 3,
+    "m": 2,
+    "M": 0.03,
+    "support_pairs": 9,
+    "common_target": 0.0020462293972084607,
+    "second_moment": 1.000015629609445
+  },
+  {
+    "p": 6,
+    "d": 3,
+    "m": 2,
+    "M": 1.0,
+    "support_pairs": 9,
+    "common_target": 0.039987398955896244,
+    "second_moment": 1.0060090406192983
+  },
+  {
+    "p": 6,
+    "d": 3,
+    "m": 2,
+    "M": 30.0,
+    "support_pairs": 9,
+    "common_target": 0.039987398955896244,
+    "second_moment": 1.0060090406192983
+  },
+  {
+    "p": 6,
+    "d": 3,
+    "m": 3,
+    "M": 0.03,
+    "support_pairs": 1,
+    "common_target": 0.002042014708084401,
+    "second_moment": 1.0000521084025904
+  },
+  {
+    "p": 6,
+    "d": 3,
+    "m": 3,
+    "M": 1.0,
+    "support_pairs": 1,
+    "common_target": 0.03335486016198358,
+    "second_moment": 1.0139997208780904
+  },
+  {
+    "p": 6,
+    "d": 3,
+    "m": 3,
+    "M": 30.0,
+    "support_pairs": 1,
+    "common_target": 0.03335486016198358,
+    "second_moment": 1.0139997208780904
+  },
+  {
+    "p": 6,
+    "d": 4,
+    "m": 1,
+    "M": 0.03,
+    "support_pairs": 16,
+    "common_target": 0.0015773241140042632,
+    "second_moment": 1.0000045646233522
+  },
+  {
+    "p": 6,
+    "d": 4,
+    "m": 1,
+    "M": 1.0,
+    "support_pairs": 16,
+    "common_target": 0.04377361548014932,
+    "second_moment": 1.0035488845224656
+  },
+  {
+    "p": 6,
+    "d": 4,
+    "m": 1,
+    "M": 30.0,
+    "support_pairs": 16,
+    "common_target": 0.04377361548014932,
+    "second_moment": 1.0035488845224656
+  },
+  {
+    "p": 6,
+    "d": 4,
+    "m": 2,
+    "M": 0.03,
+    "support_pairs": 36,
+    "common_target": 0.001673004865712216,
+    "second_moment": 1.000008507114468
+  },
+  {
+    "p": 6,
+    "d": 4,
+    "m": 2,
+    "M": 1.0,
+    "support_pairs": 36,
+    "common_target": 0.03725487559050554,
+    "second_moment": 1.0042494885739501
+  },
+  {
+    "p": 6,
+    "d": 4,
+    "m": 2,
+    "M": 30.0,
+    "support_pairs": 36,
+    "common_target": 0.03725487559050554,
+    "second_moment": 1.0042494885739501
+  },
+  {
+    "p": 6,
+    "d": 4,
+    "m": 3,
+    "M": 0.03,
+    "support_pairs": 16,
+    "common_target": 0.0016695589200026902,
+    "second_moment": 1.0000220495825023
+  },
+  {
+    "p": 6,
+    "d": 4,
+    "m": 3,
+    "M": 1.0,
+    "support_pairs": 16,
+    "common_target": 0.031288163083763205,
+    "second_moment": 1.0077897982737452
+  },
+  {
+    "p": 6,
+    "d": 4,
+    "m": 3,
+    "M": 30.0,
+    "support_pairs": 16,
+    "common_target": 0.031288163083763205,
+    "second_moment": 1.0077897982737452
+  },
+  {
+    "p": 6,
+    "d": 5,
+    "m": 1,
+    "M": 0.03,
+    "support_pairs": 25,
+    "common_target": 0.0013492236144750428,
+    "second_moment": 1.0000034708720538
+  },
+  {
+    "p": 6,
+    "d": 5,
+    "m": 1,
+    "M": 1.0,
+    "support_pairs": 25,
+    "common_target": 0.04049994379642088,
+    "second_moment": 1.0031612156202256
+  },
+  {
+    "p": 6,
+    "d": 5,
+    "m": 1,
+    "M": 30.0,
+    "support_pairs": 25,
+    "common_target": 0.04049994379642088,
+    "second_moment": 1.0031612156202256
+  },
+  {
+    "p": 6,
+    "d": 5,
+    "m": 2,
+    "M": 0.03,
+    "support_pairs": 100,
+    "common_target": 0.0014310677506984902,
+    "second_moment": 1.000005594538124
+  },
+  {
+    "p": 6,
+    "d": 5,
+    "m": 2,
+    "M": 1.0,
+    "support_pairs": 100,
+    "common_target": 0.03517916008812706,
+    "second_moment": 1.0034071385906949
+  },
+  {
+    "p": 6,
+    "d": 5,
+    "m": 2,
+    "M": 30.0,
+    "support_pairs": 100,
+    "common_target": 0.03517916008812706,
+    "second_moment": 1.0034071385906949
+  },
+  {
+    "p": 6,
+    "d": 5,
+    "m": 3,
+    "M": 0.03,
+    "support_pairs": 100,
+    "common_target": 0.001428120131192637,
+    "second_moment": 1.0000126225093293
+  },
+  {
+    "p": 6,
+    "d": 5,
+    "m": 3,
+    "M": 1.0,
+    "support_pairs": 100,
+    "common_target": 0.029734765325443387,
+    "second_moment": 1.0055030737231356
+  },
+  {
+    "p": 6,
+    "d": 5,
+    "m": 3,
+    "M": 30.0,
+    "support_pairs": 100,
+    "common_target": 0.029734765325443387,
+    "second_moment": 1.0055030737231356
+  },
+  {
+    "p": 6,
+    "d": 6,
+    "m": 1,
+    "M": 0.03,
+    "support_pairs": 36,
+    "common_target": 0.0011875641029152765,
+    "second_moment": 1.0000027932719038
+  },
+  {
+    "p": 6,
+    "d": 6,
+    "m": 1,
+    "M": 1.0,
+    "support_pairs": 36,
+    "common_target": 0.03789242970845396,
+    "second_moment": 1.0028779882785106
+  },
+  {
+    "p": 6,
+    "d": 6,
+    "m": 1,
+    "M": 30.0,
+    "support_pairs": 36,
+    "common_target": 0.03789242970845396,
+    "second_moment": 1.0028779882785106
+  },
+  {
+    "p": 6,
+    "d": 6,
+    "m": 2,
+    "M": 0.03,
+    "support_pairs": 225,
+    "common_target": 0.0012596019453976666,
+    "second_moment": 1.0000040809832305
+  },
+  {
+    "p": 6,
+    "d": 6,
+    "m": 2,
+    "M": 1.0,
+    "support_pairs": 225,
+    "common_target": 0.03350813346733899,
+    "second_moment": 1.0029115340983892
+  },
+  {
+    "p": 6,
+    "d": 6,
+    "m": 2,
+    "M": 30.0,
+    "support_pairs": 225,
+    "common_target": 0.03350813346733899,
+    "second_moment": 1.0029115340983892
+  },
+  {
+    "p": 6,
+    "d": 6,
+    "m": 3,
+    "M": 0.03,
+    "support_pairs": 400,
+    "common_target": 0.0012570074999131305,
+    "second_moment": 1.0000083462791114
+  },
+  {
+    "p": 6,
+    "d": 6,
+    "m": 3,
+    "M": 1.0,
+    "support_pairs": 400,
+    "common_target": 0.028493773237700765,
+    "second_moment": 1.0043128369398084
+  },
+  {
+    "p": 6,
+    "d": 6,
+    "m": 3,
+    "M": 30.0,
+    "support_pairs": 400,
+    "common_target": 0.028493773237700765,
+    "second_moment": 1.0043128369398084
+  },
+  {
+    "p": 8,
+    "d": 1,
+    "m": 1,
+    "M": 0.03,
+    "support_pairs": 1,
+    "common_target": 0.004038528502280821,
+    "second_moment": 1.0000333338888951
+  },
+  {
+    "p": 8,
+    "d": 1,
+    "m": 1,
+    "M": 1.0,
+    "support_pairs": 1,
+    "common_target": 0.06359076767434581,
+    "second_moment": 1.0082988218601838
+  },
+  {
+    "p": 8,
+    "d": 1,
+    "m": 1,
+    "M": 30.0,
+    "support_pairs": 1,
+    "common_target": 0.06359076767434581,
+    "second_moment": 1.0082988218601838
+  },
+  {
+    "p": 8,
+    "d": 2,
+    "m": 1,
+    "M": 0.03,
+    "support_pairs": 4,
+    "common_target": 0.002486005901858622,
+    "second_moment": 1.0000114912350135
+  },
+  {
+    "p": 8,
+    "d": 2,
+    "m": 1,
+    "M": 1.0,
+    "support_pairs": 4,
+    "common_target": 0.05276642174367829,
+    "second_moment": 1.0052093093564227
+  },
+  {
+    "p": 8,
+    "d": 2,
+    "m": 1,
+    "M": 30.0,
+    "support_pairs": 4,
+    "common_target": 0.05276642174367829,
+    "second_moment": 1.0052093093564227
+  },
+  {
+    "p": 8,
+    "d": 2,
+    "m": 2,
+    "M": 0.03,
+    "support_pairs": 1,
+    "common_target": 0.0026368074469110157,
+    "second_moment": 1.0000446741499271
+  },
+  {
+    "p": 8,
+    "d": 2,
+    "m": 2,
+    "M": 1.0,
+    "support_pairs": 1,
+    "common_target": 0.042659280996805854,
+    "second_moment": 1.0117613818346176
+  },
+  {
+    "p": 8,
+    "d": 2,
+    "m": 2,
+    "M": 30.0,
+    "support_pairs": 1,
+    "common_target": 0.042659280996805854,
+    "second_moment": 1.0117613818346176
+  },
+  {
+    "p": 8,
+    "d": 3,
+    "m": 1,
+    "M": 0.03,
+    "support_pairs": 9,
+    "common_target": 0.001871708764527794,
+    "second_moment": 1.0000065988004812
+  },
+  {
+    "p": 8,
+    "d": 3,
+    "m": 1,
+    "M": 1.0,
+    "support_pairs": 9,
+    "common_target": 0.04667260038291199,
+    "second_moment": 1.004135884165185
+  },
+  {
+    "p": 8,
+    "d": 3,
+    "m": 1,
+    "M": 30.0,
+    "support_pairs": 9,
+    "common_target": 0.04667260038291199,
+    "second_moment": 1.004135884165185
+  },
+  {
+    "p": 8,
+    "d": 3,
+    "m": 2,
+    "M": 0.03,
+    "support_pairs": 9,
+    "common_target": 0.0019852469397058474,
+    "second_moment": 1.000015629609445
+  },
+  {
+    "p": 8,
+    "d": 3,
+    "m": 2,
+    "M": 1.0,
+    "support_pairs": 9,
+    "common_target": 0.03879568024596336,
+    "second_moment": 1.0060090406192983
+  },
+  {
+    "p": 8,
+    "d": 3,
+    "m": 2,
+    "M": 30.0,
+    "support_pairs": 9,
+    "common_target": 0.03879568024596336,
+    "second_moment": 1.0060090406192983
+  },
+  {
+    "p": 8,
+    "d": 3,
+    "m": 3,
+    "M": 0.03,
+    "support_pairs": 1,
+    "common_target": 0.0019811578582486235,
+    "second_moment": 1.0000521084025904
+  },
+  {
+    "p": 8,
+    "d": 3,
+    "m": 3,
+    "M": 1.0,
+    "support_pairs": 1,
+    "common_target": 0.0323608067361513,
+    "second_moment": 1.0139997208780904
+  },
+  {
+    "p": 8,
+    "d": 3,
+    "m": 3,
+    "M": 30.0,
+    "support_pairs": 1,
+    "common_target": 0.0323608067361513,
+    "second_moment": 1.0139997208780904
+  },
+  {
+    "p": 8,
+    "d": 4,
+    "m": 1,
+    "M": 0.03,
+    "support_pairs": 16,
+    "common_target": 0.0015303161388078663,
+    "second_moment": 1.0000045646233522
+  },
+  {
+    "p": 8,
+    "d": 4,
+    "m": 1,
+    "M": 1.0,
+    "support_pairs": 16,
+    "common_target": 0.042469058596451094,
+    "second_moment": 1.0035488845224656
+  },
+  {
+    "p": 8,
+    "d": 4,
+    "m": 1,
+    "M": 30.0,
+    "support_pairs": 16,
+    "common_target": 0.042469058596451094,
+    "second_moment": 1.0035488845224656
+  },
+  {
+    "p": 8,
+    "d": 4,
+    "m": 2,
+    "M": 0.03,
+    "support_pairs": 36,
+    "common_target": 0.0016231453786653845,
+    "second_moment": 1.000008507114468
+  },
+  {
+    "p": 8,
+    "d": 4,
+    "m": 2,
+    "M": 1.0,
+    "support_pairs": 36,
+    "common_target": 0.03614459251541994,
+    "second_moment": 1.0042494885739501
+  },
+  {
+    "p": 8,
+    "d": 4,
+    "m": 2,
+    "M": 30.0,
+    "support_pairs": 36,
+    "common_target": 0.03614459251541994,
+    "second_moment": 1.0042494885739501
+  },
+  {
+    "p": 8,
+    "d": 4,
+    "m": 3,
+    "M": 0.03,
+    "support_pairs": 16,
+    "common_target": 0.0016198021302575754,
+    "second_moment": 1.0000220495825023
+  },
+  {
+    "p": 8,
+    "d": 4,
+    "m": 3,
+    "M": 1.0,
+    "support_pairs": 16,
+    "common_target": 0.030355702100555045,
+    "second_moment": 1.0077897982737452
+  },
+  {
+    "p": 8,
+    "d": 4,
+    "m": 3,
+    "M": 30.0,
+    "support_pairs": 16,
+    "common_target": 0.030355702100555045,
+    "second_moment": 1.0077897982737452
+  },
+  {
+    "p": 8,
+    "d": 5,
+    "m": 1,
+    "M": 0.03,
+    "support_pairs": 25,
+    "common_target": 0.0013090135716306308,
+    "second_moment": 1.0000034708720538
+  },
+  {
+    "p": 8,
+    "d": 5,
+    "m": 1,
+    "M": 1.0,
+    "support_pairs": 25,
+    "common_target": 0.03929295004254712,
+    "second_moment": 1.0031612156202256
+  },
+  {
+    "p": 8,
+    "d": 5,
+    "m": 1,
+    "M": 30.0,
+    "support_pairs": 25,
+    "common_target": 0.03929295004254712,
+    "second_moment": 1.0031612156202256
+  },
+  {
+    "p": 8,
+    "d": 5,
+    "m": 2,
+    "M": 0.03,
+    "support_pairs": 100,
+    "common_target": 0.0013884185597478622,
+    "second_moment": 1.000005594538124
+  },
+  {
+    "p": 8,
+    "d": 5,
+    "m": 2,
+    "M": 1.0,
+    "support_pairs": 100,
+    "common_target": 0.03413073822595532,
+    "second_moment": 1.0034071385906949
+  },
+  {
+    "p": 8,
+    "d": 5,
+    "m": 2,
+    "M": 30.0,
+    "support_pairs": 100,
+    "common_target": 0.03413073822595532,
+    "second_moment": 1.0034071385906949
+  },
+  {
+    "p": 8,
+    "d": 5,
+    "m": 3,
+    "M": 0.03,
+    "support_pairs": 100,
+    "common_target": 0.0013855587862486663,
+    "second_moment": 1.0000126225093293
+  },
+  {
+    "p": 8,
+    "d": 5,
+    "m": 3,
+    "M": 1.0,
+    "support_pairs": 100,
+    "common_target": 0.028848599255655312,
+    "second_moment": 1.0055030737231356
+  },
+  {
+    "p": 8,
+    "d": 5,
+    "m": 3,
+    "M": 30.0,
+    "support_pairs": 100,
+    "common_target": 0.028848599255655312,
+    "second_moment": 1.0055030737231356
+  },
+  {
+    "p": 8,
+    "d": 6,
+    "m": 1,
+    "M": 0.03,
+    "support_pairs": 36,
+    "common_target": 0.0011521718944285547,
+    "second_moment": 1.0000027932719038
+  },
+  {
+    "p": 8,
+    "d": 6,
+    "m": 1,
+    "M": 1.0,
+    "support_pairs": 36,
+    "common_target": 0.03676314601840482,
+    "second_moment": 1.0028779882785106
+  },
+  {
+    "p": 8,
+    "d": 6,
+    "m": 1,
+    "M": 30.0,
+    "support_pairs": 36,
+    "common_target": 0.03676314601840482,
+    "second_moment": 1.0028779882785106
+  },
+  {
+    "p": 8,
+    "d": 6,
+    "m": 2,
+    "M": 0.03,
+    "support_pairs": 225,
+    "common_target": 0.0012220628394644726,
+    "second_moment": 1.0000040809832305
+  },
+  {
+    "p": 8,
+    "d": 6,
+    "m": 2,
+    "M": 1.0,
+    "support_pairs": 225,
+    "common_target": 0.032509512135854055,
+    "second_moment": 1.0029115340983892
+  },
+  {
+    "p": 8,
+    "d": 6,
+    "m": 2,
+    "M": 30.0,
+    "support_pairs": 225,
+    "common_target": 0.032509512135854055,
+    "second_moment": 1.0029115340983892
+  },
+  {
+    "p": 8,
+    "d": 6,
+    "m": 3,
+    "M": 0.03,
+    "support_pairs": 400,
+    "common_target": 0.001219545714568586,
+    "second_moment": 1.0000083462791114
+  },
+  {
+    "p": 8,
+    "d": 6,
+    "m": 3,
+    "M": 1.0,
+    "support_pairs": 400,
+    "common_target": 0.027644591656237935,
+    "second_moment": 1.0043128369398084
+  },
+  {
+    "p": 8,
+    "d": 6,
+    "m": 3,
+    "M": 30.0,
+    "support_pairs": 400,
+    "common_target": 0.027644591656237935,
+    "second_moment": 1.0043128369398084
+  },
+  {
+    "p": 8,
+    "d": 7,
+    "m": 1,
+    "M": 0.03,
+    "support_pairs": 49,
+    "common_target": 0.0010343190517491446,
+    "second_moment": 1.000002334122115
+  },
+  {
+    "p": 8,
+    "d": 7,
+    "m": 1,
+    "M": 1.0,
+    "support_pairs": 49,
+    "common_target": 0.03447730172497149,
+    "second_moment": 1.0026270195673124
+  },
+  {
+    "p": 8,
+    "d": 7,
+    "m": 1,
+    "M": 30.0,
+    "support_pairs": 49,
+    "common_target": 0.03467670913177563,
+    "second_moment": 1.0026578934252377
+  },
+  {
+    "p": 8,
+    "d": 7,
+    "m": 2,
+    "M": 0.03,
+    "support_pairs": 441,
+    "common_target": 0.0010970610231033895,
+    "second_moment": 1.0000031757495493
+  },
+  {
+    "p": 8,
+    "d": 7,
+    "m": 2,
+    "M": 1.0,
+    "support_pairs": 441,
+    "common_target": 0.031154536894353088,
+    "second_moment": 1.0025826719772784
+  },
+  {
+    "p": 8,
+    "d": 7,
+    "m": 2,
+    "M": 30.0,
+    "support_pairs": 441,
+    "common_target": 0.031154536894353088,
+    "second_moment": 1.0025826719772784
+  },
+  {
+    "p": 8,
+    "d": 7,
+    "m": 3,
+    "M": 0.03,
+    "support_pairs": 1225,
+    "common_target": 0.0010948013687514327,
+    "second_moment": 1.000006017318559
+  },
+  {
+    "p": 8,
+    "d": 7,
+    "m": 3,
+    "M": 1.0,
+    "support_pairs": 1225,
+    "common_target": 0.026643754039974495,
+    "second_moment": 1.0035841864445052
+  },
+  {
+    "p": 8,
+    "d": 7,
+    "m": 3,
+    "M": 30.0,
+    "support_pairs": 1225,
+    "common_target": 0.026643754039974495,
+    "second_moment": 1.0035841864445052
+  },
+  {
+    "p": 8,
+    "d": 8,
+    "m": 1,
+    "M": 0.03,
+    "support_pairs": 64,
+    "common_target": 0.0009420200824724342,
+    "second_moment": 1.0000020031897663
+  },
+  {
+    "p": 8,
+    "d": 8,
+    "m": 1,
+    "M": 1.0,
+    "support_pairs": 64,
+    "common_target": 0.03140066941574781,
+    "second_moment": 1.002254251315419
+  },
+  {
+    "p": 8,
+    "d": 8,
+    "m": 1,
+    "M": 30.0,
+    "support_pairs": 64,
+    "common_target": 0.03291251976875897,
+    "second_moment": 1.002479670244441
+  },
+  {
+    "p": 8,
+    "d": 8,
+    "m": 2,
+    "M": 0.03,
+    "support_pairs": 784,
+    "common_target": 0.0009991631824952535,
+    "second_moment": 1.0000025819496365
+  },
+  {
+    "p": 8,
+    "d": 8,
+    "m": 2,
+    "M": 1.0,
+    "support_pairs": 784,
+    "common_target": 0.02999210234713788,
+    "second_moment": 1.0023465446487791
+  },
+  {
+    "p": 8,
+    "d": 8,
+    "m": 2,
+    "M": 30.0,
+    "support_pairs": 784,
+    "common_target": 0.02999210234713788,
+    "second_moment": 1.0023465446487791
+  },
+  {
+    "p": 8,
+    "d": 8,
+    "m": 3,
+    "M": 0.03,
+    "support_pairs": 3136,
+    "common_target": 0.0009971051716954043,
+    "second_moment": 1.0000045967273672
+  },
+  {
+    "p": 8,
+    "d": 8,
+    "m": 3,
+    "M": 1.0,
+    "support_pairs": 3136,
+    "common_target": 0.02578827657874336,
+    "second_moment": 1.003092536941119
+  },
+  {
+    "p": 8,
+    "d": 8,
+    "m": 3,
+    "M": 30.0,
+    "support_pairs": 3136,
+    "common_target": 0.02578827657874336,
+    "second_moment": 1.003092536941119
+  }
+]

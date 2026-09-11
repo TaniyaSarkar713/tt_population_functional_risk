@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "scope": "Artifact and provenance validation, not formal mathematical proof verification",
+  "baseline_files_preserved": 34,
+  "result_counts": {
+    "theorem": 15,
+    "proposition": 11,
+    "lemma": 9,
+    "proof": 35
+  },
+  "labels": 112,
+  "local_links": 19,
+  "pdf_pages": {
+    "paper/main.pdf": 43,
+    "progress_report.pdf": 2
+  },
+  "latex_diagnostics": [],
+  "environment": {
+    "python": "3.9.6",
+    "numpy": "2.0.2",
+    "scipy": "1.13.1",
+    "pypdf": "6.14.2"
+  }
+}

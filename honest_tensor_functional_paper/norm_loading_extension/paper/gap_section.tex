@@ -1,0 +1,161 @@
+
+\subsection{Sharp full-data rates, including worst-case length}\label{sec:sharp_full}
+
+A sparse harmonic profile strengthens the cubic lower bound. Inverting the residual scan then turns the zero-point construction into an interval with uniformly controlled length.
+
+\begin{theorem}[Sparse harmonic lower bound]\label{thm:sparse_harmonic}
+Under \eqref{eq:model} and \eqref{eq:equalL}, let $K=3$ and $0<\alpha<1/4$.
+For every integer $1\le m\le p$, put
+\[
+ b_m=\min\left\{\frac{M}{\sqrt{27m}},
+       \frac{\tau}{\sqrt{27}}\sqrt{\log(1+p/(4m^2))}\right\},
+ \qquad c_{\alpha,d}=1-2\alpha-\tfrac12\sqrt{e^{1/4}-1}.
+\]
+Every interval honest on a class containing the rank-one Frobenius ball satisfies
+\begin{equation}\label{eq:sparse_harmonic}
+ \E_0|C|\ge c_{\alpha,d}\frac{b_mH_m}{\sqrt p}.
+\end{equation}
+If $M=\tau\sqrt p$, then for $p\ge256$ and $m=\lfloor p^{1/4}\rfloor$,
+\[
+ \E_0|C|\ge\frac{c_{\alpha,d}}{16\sqrt{27}}\,
+                  \frac{\tau(\log p)^{3/2}}{\sqrt p}.
+\]
+\end{theorem}
+
+The profile weights, rather than additional rank components, produce the harmonic sum. The alternatives are nonnegative rank-one tensors. Their full likelihood overlap is bounded linearly in the support intersection, permitting the classical hypergeometric calculation.
+
+Write $\lambda_s(\gamma)=\lambda_s^{\rm scan}$ for the threshold in
+\eqref{eq:scan_threshold} at error budget $\gamma$.
+Use the product nets above with thresholds $\lambda_s(\alpha)$. Define
+\[
+ {\cal F}(Z)=\{B\in\Theta(M,\bar r):
+        N_S(Z-B)\le\lambda_{|S|}(\alpha)\text{ for every nonempty }S\}.
+\]
+Let $C_F$ be the interval between the minimum and maximum of $\psi$ on
+$\mathcal F(Z)$, and set $C_F=\{0\}$ when this set is empty.
+Write $J_2=J(2\bar r)$, the expansion constant with doubled caps, and put
+\[
+ W_\alpha=\frac{4J_2^{K/2}}{\sqrt p}
+           \sum_{s=1}^p\lambda_s(\alpha)s^{-K/2}.
+\]
+
+\begin{theorem}[Uniform diameter and full-data minimax length]\label{thm:full_minimax}
+Under \eqref{eq:model}, \eqref{eq:equalL}, $0<\alpha<1$ and either positive cap class,
+$C_F$ is measurable and honest at level $1-\alpha$, and for every observation
+\begin{equation}\label{eq:diameter}
+ |C_F|\le\min(2h_0,W_\alpha).
+\end{equation}
+For fixed $0<\alpha<1/4$, fixed $K\ge3$, fixed positive caps and $M=\tau\sqrt p$,
+\begin{equation}\label{eq:full_rates}
+ \calL_0(\Theta)\asymp\calL_{\max}(\Theta)\asymp r_K(p),
+ \qquad
+ r_K(p)=
+ \begin{cases}
+ \tau(\log p)^{3/2}/\sqrt p,&K=3,\\
+ \tau\sqrt{\log p/p},&K\ge4.
+ \end{cases}
+\end{equation}
+Constants may depend on $K$, the caps and $\alpha$.
+\end{theorem}
+
+Differences of feasible tensors obey doubled unfolding caps; the proof does not assume that a rank class is closed under subtraction. Computing the confidence-set extrema is not claimed to be efficient.
+
+\begin{proposition}[Squared-error consequence]\label{prop:mse_sharp}
+In the regime of \eqref{eq:full_rates},
+\[
+ \inf_{\widehat\psi}\sup_{A\in\Theta}
+          \E_A(\widehat\psi-\psi(A))^2\asymp r_K(p)^2.
+\]
+The midpoint of $C_F$ with error level $\alpha_p=p^{-2}$ attains the upper order for $p\ge2$.
+\end{proposition}
+
+\subsection{Computation: a certified hierarchy and a restricted lower bound}\label{sec:computation}
+
+The exact residual projection supplies the statistical benchmark. A truncated zero test is computable with an explicit search budget. It does not compute the extrema defining $C_F$.
+
+\begin{proposition}[Truncated scans]\label{prop:truncated}
+For $1\le t\le p$, test zero using only supports of sizes at most $t$, retaining thresholds calibrated simultaneously over all sizes. Write $\lambda_s=\lambda_s(\gamma)$ and put
+\[
+ q=2/K,\quad B_q=J^{1-1/K}M^q,\quad
+ a_t=4J^{K/2}\lambda_t t^{-K/2},
+\]
+\[
+ R_t=\frac{4J^{K/2}}{\sqrt p}\sum_{s=1}^t\lambda_s s^{-K/2}
+       +\mathbf1_{\{t<p\}}\frac{B_q}{\sqrt p}a_t^{1-q}.
+\]
+On acceptance use radius $\min(h_0,R_t)$ centered at zero; on rejection use the structural interval.
+Intersect with $C_*(\alpha_0)$, where $0<\alpha_0,\gamma<1$,
+$\alpha_0+\gamma\le\alpha$, and $\gamma$ is the scan error budget, using the singleton convention.
+The resulting $C_t$ is honest, has length at most $\ell_*=|C_*(\alpha_0)|$, and
+\[
+ \E_0|C_t|\le\min(\ell_*,2R_t+\ell_*\gamma).
+\]
+For fixed $K\ge3$, fixed caps and fixed $0<\alpha<1$, with $M=\tau\sqrt p$, $\alpha_0=\alpha/2$ and $\gamma=\alpha/(2p)$,
+\begin{align}\label{eq:trunc_rate}
+ R_t\lesssim{}&
+ \frac{\tau\sqrt{\log p}}{\sqrt p}
+       \sum_{s=1}^t s^{-(K-1)/2}\\
+ &+\mathbf1_{\{t<p\}}\tau(\log p/p)^\beta
+                t^{-(K-1)\beta},\qquad
+ \beta=(K-2)/(2K).\nonumber
+\end{align}
+\end{proposition}
+
+Explicit normalized grid nets have at most $(3+4K\sqrt s)^s$ directions per mode.
+Using their cardinalities in the Gaussian thresholds preserves \eqref{eq:trunc_rate}.
+The arithmetic cost through level $t$ is bounded by
+\[
+ O\left\{\sum_{s=1}^t\binom ps
+             (3+4K\sqrt s)^{Ks}s^K\right\}.
+\]
+For fixed $t,K$ this is polynomial in $p$. Fixed $t$ does not close the power gap in the tail term of \eqref{eq:trunc_rate}. Completed levels share one noise event, so successive intersections remain honest even if the decision to compute another complete level uses the data.
+
+A complementary obstruction holds for polynomial estimators under squared-error loss. This is the restricted low-degree framework used in sparse tensor PCA \citep{choo2021,fu2026}; it does not characterize all polynomial-time computation.
+
+\begin{theorem}[A low-degree estimation separation]\label{thm:low_degree}
+Let $K\ge3$, $1\le s\le\sqrt p$, and mix uniformly over
+\[
+ x_S=s^{-1/2}\mathbf1_S,\qquad
+ A_S=\tau\lambda x_S^{\otimes K},\qquad |S|=s.
+\]
+Assume $0<\tau\lambda\le M$, and write
+\[
+ \delta=\frac{\tau\lambda s^{1-K/2}}{\sqrt p},\quad
+ \mu=s^2/p,\quad B_D=\frac{\lambda^2}{s^K}(KD)^K,
+\]
+where $D\ge1$ is the polynomial degree. If $B_D<1$, the centered likelihood ratio projected onto polynomials of degree at most $D$ has squared null norm at most
+\[
+ \eta_D^2=\mu e^\mu B_D/(1-B_D).
+\]
+Every scalar polynomial estimator $T(Z)$ of degree at most $D$ satisfies
+\begin{equation}\label{eq:lowdegree_risk}
+ \sup_{A\in\Theta}\E_A(T-\psi(A))^2
+       \ge\frac{\delta^2}{(2+\eta_D)^2}
+\end{equation}
+on any parameter class containing zero and these alternatives.
+In particular, let $M=\tau\sqrt p$, $\lambda=\sqrt p$,
+$s=\lfloor p^a\rfloor$, and $D=\lfloor p^b\rfloor$, where
+\[
+ \frac1K<a<\min\left(\frac12,\frac1{K-2}\right),
+ \qquad 0<b<a-\frac1K.
+\]
+Then $\eta_D\to0$ and the lower order in \eqref{eq:lowdegree_risk} is polynomially larger than the unrestricted rate in Proposition~\ref{prop:mse_sharp}.
+\end{theorem}
+
+This theorem includes $K=3$ and uses nonnegative sparse factors. It does not imply the same limitation for arbitrary interval endpoints or arbitrary thresholded algorithms.
+
+\begin{proposition}[What an efficient short interval would imply]\label{prop:ci_detection}
+Let $Q$ be supported on parameters with common target $\delta>0$, and let the null target be zero.
+An interval honest at level $1-\alpha$ at the null and these alternatives defines
+$\phi(Z)=\mathbf1\{\delta\in C(Z)\}$ with
+\[
+ Q(\phi=0)\le\alpha,\qquad
+ P_0(\phi=1)\le\alpha+\E_0|C|/\delta.
+\]
+A computational hypothesis excluding polynomial-time tests with total error below $c>2\alpha$ therefore excludes polynomial-time honest intervals with
+$\E_0|C|<(c-2\alpha)\delta$ for that prior.
+\end{proposition}
+
+The last implication is conditional on a testing-hardness hypothesis.
+Theorem~\ref{thm:low_degree} alone does not establish that hypothesis.
+Efficient minimax confidence intervals remain open, with a proved restricted estimation obstruction and an explicit computable hierarchy.

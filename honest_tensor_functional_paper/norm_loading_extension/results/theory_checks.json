@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "seed": 20260911,
+  "interpretation": "Finite algebraic/numerical checks, not formal proof verification or minimax-estimator simulations.",
+  "rate_grid_configurations": 3267,
+  "min_lower_target_to_rate": 0.07410022739358256,
+  "max_normalized_sum": 2.6045628784876986,
+  "random_doubled_cap_differences": 240,
+  "max_ordered_norm_envelope_ratio": 0.04904857585812887,
+  "weighted_mixture_configurations": 144,
+  "weighted_support_pairs": 23268,
+  "max_weighted_mixture_second_moment": 1.0139997208780904,
+  "residual_tail_checks": 90,
+  "rotated_loading_checks": 60,
+  "max_rotation_target_error": 1.5543122344752192e-15,
+  "source_sha256": "856ac94728129537a2907c55a3055f40a759dec83092eee41709dbedfff1da59"
+}

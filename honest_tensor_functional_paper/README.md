@@ -1,5 +1,7 @@
 # Honest inference for tensor contrasts
 
+**Latest theory update (2026-09-11):** [norm_loading_extension/](norm_loading_extension/README.md) contains the current [full manuscript](norm_loading_extension/paper/main.pdf), [progress report](norm_loading_extension/progress_report.md), and [remaining requirements](norm_loading_extension/theory/remaining_requirements.md). It supplies sharp equal-diagonal rates for every positive norm budget and noise level, matching squared risk, and flat orthogonal-loading rates. The earlier [gap_development/](gap_development/README.md) stage is preserved. The description below documents the earlier complete-paper revision and its then-current gaps.
+
 **Manuscript:** *Honest Inference for Tensor Contrasts under Tucker and Tensor-Train Rank Bounds.*
 
 **Decision:** Promising — theory requires further work. The complete draft treats a restricted, mathematically specified problem. It does not claim that optimal full-tensor inference or adaptation to actual unknown rank has been solved.
