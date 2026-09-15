@@ -1,0 +1,16 @@
+{
+  "seed": 2026091477,
+  "replications": 4000,
+  "a_values": [
+    0.0,
+    2.0,
+    5.0,
+    10.0,
+    30.0,
+    100.0,
+    1000.0
+  ],
+  "tau": 1.0,
+  "M_rule": "max(1, 2*a)",
+  "scope": "prespecified rank-one minor; target zero at axis means"
+}

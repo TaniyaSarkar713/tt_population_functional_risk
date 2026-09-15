@@ -1,0 +1,755 @@
+[PAGE 1]
+Honest Tensor-Functional Inference:
+Full-Data Minimax Rates and Computational Limits
+Revised September 13, 2026
+Abstract
+We study honest confidence intervals for a prescribed linear functional of a Gaussian tensor
+mean under supplied Tucker or tensor-train rank caps and a Frobenius norm bound. For a
+normalized flat orthogonal loading and fixed positive caps, we characterize full-data minimax
+expected length at zero and in the worst case for every positive norm and noise budget, together
+with the corresponding squared-risk rate. At M = τ√p, the length scale is τ{log(ep)}3/2/√p
+for order three and τ
+p
+log(ep)/p for higher orders. Residual scans and full-likelihood mixtures
+explain the distinction from the diagonal observation experiment. We also delimit matched
+growing-cap and loading regimes, adaptation obstructions, and efficient strong saturated pointwise
+inference. A separate scalar companion gives uniform noise-scale risk without changing the
+intervals. Controlled simulations examine supplied-budget sensitivity, component ablations,
+scale calibration and computational gaps. General efficient fixed-cap weak-signal computation,
+arbitrary-loading rates and complete pointwise adaptation remain open.
+Keywords: honest confidence intervals; nonconvex parameter spaces; tensor mean; Tucker rank;
+tensor train; minimax inference.
+1
+Introduction
+A tensor rank bound restricts several unfoldings of the same mean. For inference, the useful question
+is how much these simultaneous restrictions shorten a confidence interval when the actual rank
+is unknown. Consider a cubic p × p × p tensor A, a supplied rank cap one, and the normalized
+diagonal contrast ψ(A) = p−1/2 P
+i Aiii. Observing Z = A + τG gives a direct Gaussian interval of
+length proportional to τ. An interval honest under the cap must cover at zero, at every smaller-rank
+mean, and along signals too weak to recover a factor reliably. Can the full tensor still yield a shorter
+interval?
+Classical nonconvex functional inference supplies general geometric and testing tools [Cai and
+Low, 2004b,a], and sparse Gaussian sequence theory gives sharp rates for diagonal observations
+[Collier et al., 2017]. Tensor functional inference on regular strata instead uses subspace estimation,
+debiasing and tangent projections under quantitative signal and remainder conditions [Xu et al.,
+2025]. These results concern different experiments or honesty requirements. In particular, a lower
+bound for the diagonal marginal does not establish a lower bound for procedures using every tensor
+entry.
+We study the full Gaussian location experiment with a prescribed loading, known noise scale,
+supplied Frobenius budget and supplied Tucker or tensor-train (TT) rank caps. Our central goal
+is to determine honest expected length at zero and in the worst case for every positive norm
+budget. The corresponding squared-error problem requires a separate risk argument. The target is
+1
+
+
+[PAGE 2]
+a linear functional of the tensor itself; nonuniqueness of its factor coordinates does not create an
+identifiability problem.
+Three difficulties determine the analysis. First, uniform geometry at rank boundaries cannot
+divide by an unknown minimum singular value. Second, indistinguishability must be established
+under the full tensor likelihood, including off-diagonal entries.
+Third, the norm budget must
+remain inside the ordered-coordinate argument to recover the intermediate cubic regime. Statistical
+existence, computational implementation and pointwise adaptation then require distinct conclusions.
+Canonical tensor expansions yield a diagonal compressibility envelope. Finite residual scans
+use the remaining tensor entries to constrain ordered diagonal discrepancies. A sparse harmonic
+mixture matches the cubic logarithmic multiplier under the full likelihood; for higher orders the
+relevant series is summable. Integrating residual excess tails gives the squared-risk bound uniformly
+over the norm budget. This analysis identifies a difference between the tensor experiment and its
+classical sequence marginal, while crediting the latter as an essential benchmark.
+Our contributions are threefold. First, we give sharp all-budget length and squared-risk rates
+for flat orthogonal loadings under fixed positive Tucker or TT caps, including weak signals and
+zero (Theorem 1). Second, we identify matched growing-cap and decaying-loading regimes and
+distinguish these from unresolved arbitrary profiles and general efficient computation (Section 4).
+Third, we connect an executable cap-valid interval to a strong saturated pointwise theorem, add a
+separately proved scalar-risk companion, and test the actual assumptions and numerical limitations
+in controlled experiments (Sections 5–7). The general weak-signal minimax optimizer remains
+an ideal statistical construction; the implemented exponential search is a restricted binary-model
+benchmark.
+2
+Experiment, honesty and the central result
+Let K ≥3, let pk be the mode sizes and put Damb = Q
+k pk. Observe
+Z = A + τG ∈Rp1×···×pK,
+vec(G) ∼N(0, IDamb),
+τ > 0.
+(1)
+The scale τ is known. Equivalently, Z is the mean of n independent full Gaussian tensors with
+coordinate variance σ2, with τ = σ/√n. This equivalence does not cover scalar-response tensor
+regression, completion or dependent replicates.
+Write A(k) for the mode-k unfolding and A⟨k⟩for the unfolding joining the first k modes against
+the remainder. For supplied positive integer caps define
+ΘTu(M, ¯r) = {A : ∥A∥F ≤M, rank(A(k)) ≤¯rk for every k},
+ΘTT(M, ¯r) = {A : ∥A∥F ≤M, rank(A⟨k⟩) ≤¯rk for k < K}.
+The known M > 0 and caps define the outer honesty class. Actual ranks may be zero and nonzero
+singular values may approach zero. No incoherence restriction is imposed. Different means in this
+Gaussian location family give different distributions, so ψ(A) is identifiable even though factors can
+have sign, scaling or rotation ambiguity.
+For the central theorem, pk = p and L = p−1/2 Pp
+i=1 Ei, where Ei = e⊗K
+i
+. Thus ∥L∥F = 1 and
+ψ(A) = ⟨L, A⟩. Let Cα(Θ) contain all measurable intervals, with independent randomization allowed,
+satisfying
+inf
+A∈Θ PA{ψ(A) ∈C(Z)} ≥1 −α.
+Define
+L0 = inf
+C∈Cα E0|C|,
+Lmax = inf
+C∈Cα sup
+A∈Θ
+EA|C|,
+R = inf
+b
+ψ
+sup
+A∈Θ
+EA( bψ −ψ(A))2.
+2
+
+
+[PAGE 3]
+10−1
+101
+103
+M/(τ√log(ep))
+10−3
+10−2
+10−1
+Rate scale / τ
+All budgets, fixed p = 4096
+Order 3
+Order 4 and above
+101
+102
+103
+104
+105
+106
+Mode size p
+10−2
+10−1
+100
+Rate scale / τ
+M = τ√p, fixed caps
+Full, order 3
+Full, order 4
+Diagonal, order 3
+Direct
+Figure 1: Final analytic rate scales, with unspecified multiplicative constants set to one. Left: all-
+budget dependence at p = 4096. Right: full-data and diagonal-information scales at M = τ√p. These
+curves display theorem orders; they are not empirical attainment or leading-constant comparisons.
+Set ℓp = log(ep), x = M/(τ
+pℓp) and log+ x = max(0, log x). The rate function is
+rK(p, M, τ) = τ
+s
+ℓp
+p
+(
+min{x, 1 + log+ x, ℓp},
+K = 3,
+min{x, 1},
+K ≥4.
+(2)
+Theorem 1 (Full-data minimax rates for every budget). Fix K ≥3, positive Tucker or TT caps
+and 0 < α < 1/4. Uniformly over p ≥1 and M, τ > 0,
+L0 ≍Lmax ≍rK(p, M, τ),
+R ≍rK(p, M, τ)2.
+Constants depend only on the fixed order, caps and confidence level. The lower bounds already
+hold on the rank-one class. The upper bounds use a residual confidence projection for length and a
+minimum-residual construction for squared risk.
+Complete proofs are given in Supplement Theorems 13 and 14. Constants in this theorem are
+not uniform in growing caps. At p = 1 the rate reduces to min(M, τ). At larger p, the small-budget
+branch is structural, M/√p. The cubic intermediate multiplier increases logarithmically with the
+budget, whereas for K ≥4 the rate saturates at τ
+p
+log(ep)/p. These are order statements, not
+exact transition constants.
+At the benchmark M = τ√p, the cubic rate is τℓ3/2
+p
+/√p and the higher-order rate is τ
+q
+ℓp/p.
+Both improve on the direct noise scale as p →∞. With M = σ = 1 and n = p, the corresponding
+scales are ℓ3/2
+p
+/p and
+pℓp/p. When varying n at fixed M, p, one must instead substitute τ = σ/√n
+into the full budget formula; remaining on one branch is not automatic.
+3
+
+
+[PAGE 4]
+3
+Why the full tensor changes the rate
+3.1
+The diagonal benchmark and its limits
+For an orthogonal product loading L = Pm
+i=1 wiVi, with orthonormal mode factors and ∥w∥2 = 1,
+the contractions di = ⟨Z, Vi⟩have independent Gaussian errors. Put qK = 2/K and
+JTu = min
+k
+Y
+l̸=k
+¯rl,
+JTT =
+Y
+k<K
+¯rk.
+Canonical expansions and generalized Hölder give
+X
+i
+|⟨A, Vi⟩|qK ≤J1−1/KM2/K.
+(3)
+For TT, the needed squared-weight identity is a prefix-weight identity; the expanded product terms
+are not assumed orthogonal. At rank one the diagonal image is exactly an ℓ2/K ball. This image
+identity connects the marginal experiment to Collier et al. [2017]; the exponent also appears in
+tensor norm and factor geometry [Friedland and Lim, 2018, Fan et al., 2023].
+With λ = τ
+p
+2 log(2m/α), soft thresholding satisfies, on the simultaneous noise event,
+| softλ(ai + τgi) −ai| ≤min(|ai|, 2λ) ≤|ai|qK(2λ)1−qK.
+Consequently the center P
+i wi softλ(di) with radius ∥w∥∞J1−1/KM2/K(2λ)1−2/K is honest. One
+can deterministically choose the smallest of this radius, the direct Gaussian radius and the valid
+structural radius. This is an executable conservative interval, requiring only m coordinate entries
+when the factors are coordinate vectors. Dense contractions have additional input cost.
+For rank one and M = τ√p, the flat-loading diagonal rate is
+τ(ℓp/p)(K−2)/(2K).
+This rate is sharp for the marginal experiment, but exceeds the full-data rate in Theorem 1. Write
+H = |S ∩T| for the overlap of two equally sized sparse supports. Diagonal alternatives have inner
+product proportional to H. Tensor product alternatives can have full inner product proportional to
+HK. Replacing one likelihood overlap by the other would invalidate the lower bound.
+3.2
+Residual scans and the norm-budget transition
+For each nonempty coordinate set S of size s, choose a finite 1/(2K) net of each unit sphere in RS,
+with cardinality at most (1 + 4K)s. Define NS(R) as the largest absolute contraction of R over
+products of these net vectors. A union bound gives simultaneous thresholds
+λs(α) = τ
+q
+2{s log(ep/s) + Ks log(1 + 4K) + log(2p/α)}.
+Project the confidence set
+{B ∈Θ : NS(Z −B) ≤λ|S|(α) for every nonempty S}
+onto ψ, with a fixed singleton convention if empty. This set contains the true mean with probability
+at least 1 −α.
+4
+
+
+[PAGE 5]
+For two feasible tensors their difference has doubled caps. Write J2 = J(2¯r), P2 = 2J(K−1)/2
+2
+and Q2 = 4JK/2
+2
+. The deterministic diameter bound is
+|CF (Z)| ≤min
+(
+2h0, 1
+√p
+p
+X
+s=1
+min{P2M, Q2λs(α)} s−K/2
+)
+,
+(4)
+where h0 = M
+p
+r/p and r is the smallest constrained cap, truncated at p. Imposing both constraints
+before summation is essential. For K = 3 the scan contribution has a harmonic factor; for K ≥4
+the corresponding sum converges. Evaluating the split sum gives (2).
+The cubic lower bound uses sparse factors with magnitudes proportional to j−1/3 on a support
+of size m. With scale b, their diagonal target is bHm/√p, while their tensor norm is bounded
+by b
+√
+27m, where Hm = Pm
+j=1 j−1. Suitable support mixing controls the full Gaussian likelihood
+second moment. Choosing m within the norm constraint and the indistinguishability constraint
+recovers the intermediate logarithm as well as the saturated cubic branch. The construction and its
+hypergeometric overlap bound appear in Supplement Theorem 13 and its proof; these, rather than
+the diagonal image identity alone, establish full-data optimality.
+For squared risk let
+T(R) = max
+ 0, max
+S̸=∅{NS(R) −λ|S|(1/8)}
+.
+A measurable τ-approximate minimizer of T(Z −B) over B ∈Θ exists by a fixed countable dense
+sequence. Its excess error can be integrated over the full noise tail. A fixed-confidence midpoint
+bound would instead leave a possible αM2 contribution, which is not uniform in M/τ.
+This
+distinction also explains the scalar-estimation correction in Section 5.
+3.3
+Comparison with neighboring inference problems
+At M = τ√p, an honest fixed-radius affine interval on the same rank-one class has radius at least
+a constant times τ. An arbitrary interval required to be honest on a single-unfolding relaxation
+likewise has expected length at zero at least order τ (Supplement Theorems 3 and 4). Matricization
+retains the data; the second comparison enlarges the parameter class over which coverage is required.
+Neither assertion rules out regular-stratum pointwise gains.
+The novelty claim is therefore specific: an ordered residual argument and a full-likelihood
+harmonic mixture yield the cubic all-budget phase diagram under simultaneous tensor constraints.
+General nonlinear inference on nonconvex sets and honest-adaptation obstructions are established
+subjects [Cai and Low, 2004b,a, Juditsky and Nemirovski, 2020]. The geometric exponent and the
+sparse marginal benchmark are also precedents, not separate claims of new general principles.
+4
+Computation, growing caps and loading geometry
+4.1
+What is implemented
+The residual projection and minimum-residual estimator are statistical constructions. Finite nets do
+not make the optimization efficient: the number of support/direction constraints can be exponential,
+and fitting the nonconvex cap class is a second obstacle. A certified residual fit must return a feasible
+tensor with objective excess at most cτ on every observation to inherit the stated squared-risk
+order. A bound only on successful runs is insufficient. For confidence projection, conservative outer
+endpoints preserve validity even when the requested endpoint tolerance is not attained; achieved
+precision must be reported separately. Supplement C1 gives the exact optimization contracts.
+5
+
+
+[PAGE 6]
+Procedure
+Statistical guarantee
+Computational status
+Residual scan / fit
+Fixed-cap flat-loading minimax length
+/ risk
+Ideal global nonconvex optimization;
+general implementation open.
+Binary rank-one search
+Outer projection for its finite-net
+confidence set
+Implemented for mode size two, low
+order; exponential benchmark with
+guarded float64 bounds.
+Diagonal threshold
+Cap-uniform finite-sample coverage
+Explicit contractions and thresholding;
+generally above the full-data minimax
+rate.
+Structural/direct selection
+Sharp when minimum cap r ≳√p
+O(p) coordinate accesses; dense
+contraction cost additional.
+Cap-valid tangent interval
+Outer-class honesty; P1 pointwise
+length under stated conditions
+Full-tensor economy SVD and
+projection, polynomial for fixed order.
+R1 companion
+Uniform noise-scale squared-risk
+bound
+Separate scalar output with constant
+additional work.
+Table 1: Procedure, guarantee and implementation are kept distinct. Global float64 diagnostics
+are not formal interval arithmetic. Input storage of a full tensor is O(pK) even when a coordinate
+procedure reads only p entries.
+Fixed-depth truncated scans have polynomial cost for fixed order and depth, but leave a
+nonvanishing gap from the ideal rate in the relevant asymptotic comparison. Low-degree polynomial
+estimators also have a proved separation from unrestricted squared risk in specified sparse-prior
+regimes [Choo and d’Orsi, 2021]. This is a restriction on a particular estimator class; it is not a
+lower bound for every polynomial-time interval procedure. A general computational lower bound
+would require an additional testing hypothesis and reduction.
+4.2
+Growing-cap regimes
+Theorem 2 (Matched large-cap regime). Let r = min(p, mink ¯rk) for the constrained unfoldings.
+For a fixed c > 0, if r ≥c√p, then for flat loading
+L0 ≍α,c Lmax ≍α,c min{M
+q
+r/p, τ},
+R ≍α,c min{M2r/p, τ 2}.
+Constants are independent of growing ranks and order. Deterministic structural/direct selection
+attains the upper orders.
+Supplement G1 supplies the proof. Its lower bound mixes AS = b P
+i∈S Ei over size-r supports,
+with
+b = min{M/√r, τ
+q
+log(1 + p/(4r2))}.
+For every 1 ≤r ≤p, this gives the lower scale
+min
+(
+M
+q
+r/p, τr
+√p
+q
+log(1 + p/(4r2))
+)
+.
+(5)
+Combining this with the structural/direct upper bound matches when r ≳√p. For 1 ≪r ≪√p
+these envelopes can be far apart. The fixed-cap constants of Theorem 1 cannot be extrapolated to
+resolve that gap. The retained intermediate-cap experiments display it as an analytic upper/lower
+comparison, not evidence for a new exponent.
+6
+
+
+[PAGE 7]
+4.3
+Loading-dependent rates and the unresolved profiles
+For an arbitrary prescribed L, let ρ(L) = sup∥uk∥2=1 |⟨L, N
+k uk⟩| be its product overlap. At fixed
+positive caps and M ≤τ, the minimax length scale is Mρ(L) and squared risk has its square
+(Supplement L1). Canonical expansions bound the structural functional radius by
+√
+JMρ(L); a
+two-point product alternative gives the lower bound. Computing ρ(L) can itself be difficult, so this
+is not a blanket efficient algorithm.
+For an orthogonal product loading with decreasing absolute weights, fixed β > 0 and C0 < ∞,
+assume |wi| ≤C0|w1|i−β. At fixed positive caps and order, Supplement W2 proves, for every budget,
+L0 ≍Lmax ≍|w1| min(M, τ),
+R ≍|w1|2 min(M, τ)2.
+A dyadic block construction yields an upper bound involving P
+j aj(j + 1)νK, with block maximum
+aj and ν3 = 3/2, νK = 1/2 for K ≥4. Polynomial decay makes this sum finite relative to |w1|. A
+product alternative on the largest weight gives the matching lower bound. The upper construction
+still uses ideal block fits.
+Constants deteriorate as β ↓0; dimension-dependent decay approaching zero is not covered
+uniformly. Known nonorthogonal perturbations R with ∥R∥F ≤ϵ|w1|, fixed ϵ < 1, retain these
+orders with a direct residual correction. Completely arbitrary unequal profiles at larger budgets
+remain unresolved. Flat loadings, fixed decay and small budgets for every loading are different
+matched regimes, not a complete loading theory.
+5
+Adaptation and an executable pointwise result
+Positive fixed outer caps allow rate adaptation to smaller positive fixed caps because Theorem 1
+has the same order, with constants allowed to depend on the outer cap. This assertion is neither
+rank recovery nor uniform adaptation as the outer caps grow. At M = τ√p and outer minimum
+cap r ≳√p, every outer-honest interval has expected length at zero at least order τ. The known
+fixed-cap oracle rate is o(τ). Since zero is in every positive inner cap class, simultaneous minimax
+adaptation across these classes is impossible (Supplement G2). A translated disjoint-block mixture
+gives a related obstruction at nonzero means when extra weak rank fits within the caps and norm
+budget.
+A different conclusion holds at strong means saturating the supplied Tucker mode caps. The
+following result does not substitute TT bond caps for Tucker mode caps.
+Theorem 3 (Strong saturated pointwise length). Let all Tucker mode caps equal r, and let
+A0 = P
+i∈S aiEi, |S| = r, a = mini∈S |ai| > 0. Assume, for fixed c0 > 1,
+∥A0∥F + τ ≤M ≤c0a√r.
+Set v =
+√
+2τ, δ = αr/(8p) and
+η = 2v
+q
+2{(p + pK−1) log 9 + log(2K/δ)}.
+If a ≥4η and a ≥η2√p/τ, a polynomial interval honest on the entire unseparated Tucker cap class
+satisfies
+EA0|C| ≍K,α,c0 τ
+q
+r/p.
+This matches the best expected length at A0 under the same outer honesty class.
+7
+
+
+[PAGE 8]
+The proof is Supplement P1. The support and amplitudes are not supplied to the algorithm. The
+sufficient amplitude is of order τpK−1/2 at fixed confidence and order; it is conservative and is not an
+optimal signal threshold. Norm comparability prevents a loose outer budget from overwhelming the
+local bias certificate. Saturation removes unused weak rank in the coordinate family. The theorem
+is a length result, not a pointwise squared-risk theorem.
+For clarity, the executable procedure uses an artificial split Z(1) = Z + τG′ and Z(2) = Z −τG′,
+giving independent errors of scale v. Let Qk be the pilot top-r mode projector and bskr the pilot rth
+singular value. Set
+ek =
+(
+min{1, 2η/(bskr −η)},
+bskr > η,
+1,
+otherwise,
+with ek = 0 for full mode cap. With an identity in each omitted mode, put
+TQ =
+X
+k
+O
+l̸=k
+Ql −(K −1)
+O
+l
+Ql,
+B = M∥(I −TQ)L∥F min
+
+
+1,
+sX
+k<l
+e2
+ke2
+l
+
+
+.
+Conditional on the pilot, choose the smallest-radius candidate among tangent, split-direct and
+structural intervals. Their centers are ⟨TQL, Z(2)⟩, ⟨L, Z(2)⟩, 0, and their radii are B + zvalv∥TQL∥F ,
+zvalv, h = M
+p
+r/p, where zval = z1−(α/2−δ)/2. Intersect with [⟨L, Z⟩−d, ⟨L, Z⟩+ d] and [−h, h],
+with d = z1−α/4τ, reporting {0} if empty. This retains outer-class honesty and bounds length by 2d
+even on pilot failure.
+The original implementation also reported the midpoint of this interval as an estimate. A zero
+sentinel on a rare empty intersection can give an error comparable to the signal itself. The following
+separate output repairs that defect without changing the reported interval.
+Proposition 1 (R1: scalar companion). Suppose Y = ψ + τg, g ∼N(0, 1), |ψ| ≤h, and an
+arbitrary candidate is intersected with [Y −d, Y + d] and [−h, h], where d = z1−α/4τ. Define bψ = 0
+if h ≤τ. Otherwise use the midpoint of a nonempty intersection and Π[−h,h]Y if empty. Then
+E( bψ −ψ)2 ≤
+
+
+
+h2,
+h ≤τ,
+τ 2{1 + 2z1−α/4
+p
+2/π + z2
+1−α/4},
+h > τ.
+Replacing an exactly zero singleton by the same clipped direct estimate is also valid for this scalar
+output.
+Proof. The first branch has error at most h. On a nonempty intersection the midpoint differs from Y
+by at most d. Projection onto [−h, h], which contains ψ, cannot increase its distance from ψ. Thus
+the second branch has pathwise error at most τ|g| + d. Integrating with Eg2 = 1 and E|g| =
+p
+2/π
+gives the result. No successful-pilot conditioning or candidate independence is used.
+This bound is uniform over the budget and removes the arbitrary sentinel’s M2 loss. It does
+not establish the ideal weak-signal minimax risk or the smaller P1 pointwise squared-risk rate.
+For a general prescribed loading use noise scale τ∥L∥F and a valid structural radius. The public
+implementation returns the interval and this estimator separately, with the midpoint retained as a
+diagnostic.
+8
+
+
+[PAGE 9]
+6
+Noise, supplied bounds and calibration
+The baseline noise model has separate upper- and lower-bound roles. Joint sub-Gaussian directional
+control permits the residual-scan upper bounds with a known proxy. Marginal coordinate bounds
+alone do not calibrate all product directions. Gaussian likelihood identities give the lower bounds; a
+minimax lower bound over a noise family containing Gaussians does not prove an identical lower
+bound for each fixed non-Gaussian law.
+With independent full replicates and a known covariance upper bound, directional block medians
+yield finite-variance scan bounds when the number of independent replicates exceeds the required
+scan complexity. Replicate independence is needed for concentration across blocks. Arbitrary
+dependence cannot be repaired by interpreting the total number of recorded tensors as independent
+sample size. A simpler coordinate refinement allows a known number c of corrupted whole replicates:
+choose an odd number of blocks b > max{8c, 32 log(m/α)}, require n ≥2b, and use threshold
+Λ = 2¯σ/
+p
+⌊n/b⌋. Median contraction errors are then simultaneously bounded with the stated
+probability (Supplement Proposition 13). This is a coordinate-envelope calibration, not a sharp
+general contamination minimax theorem.
+Unknown scale has a finite-sample solution in the independent Gaussian replicate setting. With
+m orthogonal contractions, n ≥2 and residual variance S2, the degrees of freedom are ν = m(n −1).
+The bound
+σU = S
+q
+ν/χ2
+ν,δ
+is independent of the sample mean and exceeds σ with probability 1 −δ. Conditional interval
+selection at level 1 −α0 using σU is honest unconditionally at least at level 1 −α0 −δ (Supplement
+Proposition 14). This argument does not justify a same-data plug-in normal quantile under arbitrary
+noise.
+A supplied Frobenius approximation allowance εA adds its size, up to the direct-noise ceiling,
+to the flat-loading interval scale; an uncharged loading residual can similarly invalidate coverage.
+Data-selected loadings are outside the prescribed-loading theory unless selection is made independent
+or calibrated uniformly. Missing-entry experiments, dependent replicates without a concentration
+model and fully unknown directional scale remain separate problems. The supplement retains the
+complete assumptions and counterexamples for these distinctions.
+7
+Experiments linked to the guarantees
+The revision retains the original 1,084,640 saved Monte Carlo datasets and re-evaluates all 303
+interval-producing cases under the corrected numerical and scalar definitions; no new noise is
+drawn for that reevaluation. It adds 87,200 independently seeded datasets across 55 pre-specified
+configurations. V01 uses 1,000 paired datasets at each of ten signal levels, V02 uses 50 observations
+at each of four amplitudes shared across three search budgets, V03 uses 1,000 datasets in each of
+19 corruption/noise cases, V04 uses 3,000 in each of 18 variance cases, and V05 uses 1,000 in each
+of four larger pointwise cases. Tables and figures are generated from raw endpoints and estimates.
+The empirical supplement contains the full configuration registry, paired differences, failures, Wilson
+coverage intervals, length standard errors and estimator identities.
+Coverage comparisons allow only four representable endpoint steps for rounding, retain strict
+counts, and have no target-scaled statistical tolerance. Re-evaluation changes two 90% rows for
+the same observation: the known-noise XCH and oracle counts in S03_007 change from 134/150
+to 133/150. An exact-noise replay distinguishes that genuine miss from the harmless one-ULP
+9
+
+
+[PAGE 10]
+0100 101102103104105
+Signal amplitude (symlog)
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+Coverage (Wilson 95% bars)
+Cap, fixed M
+Cap, norm-comparable M
+Direct
+XCH, known noise
+0100 101102103104105
+Signal amplitude (symlog)
+0
+1
+2
+3
+4
+Mean length
+Cap, fixed M
+Cap, norm-comparable M
+Direct
+XCH, known noise
+Figure 2: Paired fixed-budget and norm-comparable signal sweeps at p = 16, cap one and τ = 1,
+with 1,000 new datasets per amplitude. The fixed budget is 342023.69 throughout. Bars are Wilson
+95% coverage intervals or 1.96 standard errors for mean length. XCH is not guaranteed over the
+weak-signal cap union.
+structural-boundary discrepancies. Two power-of-two rescalings per saved interval case preserve the
+revised events. These numerical checks do not constitute formal interval arithmetic.
+Supplied budgets and controlled ablations.
+V01 holds the outer budget fixed while varying
+the signal, with a paired norm-comparable budget branch. All comparisons use the same observation
+and pilot. Bias-only removal freezes the original candidate choice; fallback-only removal forces the
+tangent candidate and retains both intersections; quantile-only removal changes only the validation
+critical value. A separate no-intersection diagnostic and the historical combined diagnostic are also
+retained. At weak signals, bias-only removal changes no reported interval because the fallback is
+selected. Thus the old combined failure cannot be attributed to bias alone. Reducing the validation
+quantile can lower coverage while preserving the other protections. At amplitude two, fixed-budget
+cap coverage is 0.960 and the regular XCH comparator has coverage 0.001. At the largest amplitude,
+cap coverage is 0.966 with mean length 1.936. These are finite-sample observations, not uniform
+performance guarantees. The norm-comparable sweep answers a different question because its
+supplied class changes.
+Pointwise precision and scalar loss.
+In the four new p = 32, 64 cases, cap coverage ranges from
+0.965 to 0.978; normalized mean lengths range from 7.20 to 8.01 times τ
+p
+r/p. This supports the
+stated finite-grid behavior under deliberately strong P1 conditions, without identifying a limiting
+slope or optimal signal threshold. Regular XCH and the support oracle have smaller constants here.
+The saved S03_002 midpoint MSE is 12,084,661.379, with one sentinel event among 500 draws.
+The R1 companion on the same observations has MSE 0.148 (standard error 0.025), below its
+uniform theoretical bound 9.601. All sentinel observations remain in the loss calculation, and every
+interval endpoint is unchanged. The old midpoint is retained as a diagnostic, never relabeled as the
+R1 estimator.
+10
+
+
+[PAGE 11]
+32/1
+32/6
+64/1
+64/8
+Mode size / supplied cap
+100
+102
+104
+106
+108
+1010
+Unconditional empirical MSE
+Original midpoint
+R1 companion
+32/1
+32/6
+64/1
+64/8
+Mode size / supplied cap
+4
+5
+6
+7
+8
+Mean length / {τ√r/p}
+Cap-valid
+XCH
+Support oracle
+Figure 3: Strong saturated cases with 1,000 new datasets each. Left: unconditional empirical MSE
+including rare sentinel losses; the scalar correction leaves confidence intervals unchanged. Right:
+length divided by τ
+p
+r/p, with 1.96 standard errors. The logarithmic MSE display does not assert
+precise estimation of rare-loss expectations; all raw losses and their uncertainty are retained.
+Calibration and assumption violations.
+All 18 within-cap whole-replicate corruption cases
+have median-interval coverage 1.000 in 1,000 trials each, with conservative lengths; the deliberately
+violated 120-row/zero-supplied-cap case has coverage 0.000. For m = 1, n = 2, σ = 1, independent
+upper-scale calibration has coverage 0.995 versus 0.703 for the naive plug-in. Gaussian residual
+independence and the chi-square degrees of freedom are part of the experiment, not assumed for
+arbitrary noise. Fourth-moment-based MSE error bars are not asserted for the heavy-tail cases.
+Optimization and input cost.
+V02 fixes the arbitrary loading, signal direction, norm budget,
+noise and tolerance across all budgets. Of 600 solves, 7 meet endpoint tolerance 0.05, all at the
+largest budget and strongest amplitude; 593 remain unresolved. Mean gaps at 3,000 nodes range
+from 0.127 to 0.353. All feasible-witness gaps are finite and retained, including failures. These
+guarded float64 outer bounds do not implement the ideal high-dimensional minimax estimator.
+Fresh timings of the revised public scalar/interval interface use one thread, one warmup and ten
+calls per dimension; p = 64 requires 2,097,152 input bytes and averages 0.0876 seconds per call.
+Traced allocations exclude the preallocated input and potentially untraced native workspace.
+The XCH comparison is a local implementation of the tensor-PCA procedure in Section 4.2 of
+Xu et al. [2025]: HOSVD initialization and two simultaneous projection updates, with known-noise
+and residual plug-in scales. Its regular-stratum theorem requires more than correct rank. Zero
+and rank-mismatched cases are explicitly outside the specified model; initialization, alignment and
+remainder constants are not certified for the other individual cases. No inference of finite-sample
+cap-uniform coverage or leading-constant dominance is made from these comparisons.
+8
+Discussion and remaining problems
+The full tensor contains useful functional information beyond its diagonal marginal even when
+the class permits arbitrarily weak signals. For flat orthogonal loadings and fixed positive caps,
+the residual geometry and full-likelihood mixtures determine all-budget minimax rates. The cubic
+11
+
+
+[PAGE 12]
+logarithmic transition is the main tensor-specific statistical conclusion. The rank-one image identity,
+soft-thresholding benchmark and generic adaptation logic have classical antecedents and are not
+presented as new general principles.
+Four substantial extensions remain. First, no general efficient optimizer is implemented or proved
+minimax for the original fixed-cap diffuse-loading weak-signal class. The binary search illustrates
+a rigorous real-arithmetic contract with numerical bounds, not a scalable resolution.
+Second,
+intermediate growing caps can leave a substantial gap between (5) and available upper bounds.
+Third, arbitrary loading profiles beyond the matched flat, fixed-decay and small-budget regimes
+lack a complete sharp theory. Fourth, P1 covers strong saturated coordinate Tucker means with a
+norm-comparable outer class; complete pointwise geometry, optimal signal thresholds, nonsaturated
+means and TT-specific pointwise results are open. General growing-cap adaptation is already
+impossible in the stated G2 comparison, so a universal positive adaptation theorem would be false.
+The new scalar companion supplies noise-scale risk control with unchanged intervals.
+Its
+simplicity should not be mistaken for pointwise minimax squared risk. The simulations reveal
+conservative constants, sensitivity to supplied budgets, weak-signal failure of out-of-domain regular
+comparators, and unresolved optimization gaps. Full-tensor SVD computation costs O(KpK+1)
+arithmetic with O(pK + p2) working storage at fixed order; diagonal coordinate access and dense
+rotated contraction costs must be reported separately.
+This is a theory and simulation paper.
+No repeated-tensor application with a defensible
+independent sampling unit and prescribed contrast was established in the available project materials.
+A real-data study should identify that unit, dependence structure, noise calibration and norm/cap
+justification before attaching practical interpretation to these intervals. Neither empirical success
+on simulated cases nor a broader robustness paragraph substitutes for those requirements.
+References
+T. Tony Cai and Mark G. Low. An adaptation theory for nonparametric confidence intervals.
+The Annals of Statistics, 32(5):1805–1840, 2004a.
+doi: 10.1214/009053604000000049.
+URL
+https://arxiv.org/abs/math/0503662.
+T. Tony Cai and Mark G. Low. Minimax estimation of linear functionals over nonconvex parameter
+spaces. The Annals of Statistics, 32(2):552–576, 2004b. doi: 10.1214/009053604000000094. URL
+https://arxiv.org/abs/math/0406427.
+Davin Choo and Tommaso d’Orsi. The complexity of sparse tensor PCA. In Advances in Neural
+Information Processing Systems, volume 34, 2021. URL https://arxiv.org/abs/2106.06308.
+Olivier Collier, Laëtitia Comminges, and Alexandre B. Tsybakov. Minimax estimation of linear and
+quadratic functionals on sparsity classes. The Annals of Statistics, 45(3):923–958, 2017. URL
+https://arxiv.org/abs/1502.00665.
+Jicong Fan, Lijun Ding, Chengrun Yang, Zhao Zhang, and Madeleine Udell. Euclidean-norm-
+induced schatten-p quasi-norm regularization for low-rank tensor completion and tensor robust
+principal component analysis. Transactions on Machine Learning Research, 2023. URL https:
+//arxiv.org/abs/2012.03436.
+Shmuel Friedland and Lek-Heng Lim. Nuclear norm of higher-order tensors. Mathematics of
+Computation, 87(311):1255–1281, 2018. doi: 10.1090/mcom/3239. URL https://arxiv.org/
+abs/1410.6072.
+12
+
+
+[PAGE 13]
+Anatoli Juditsky and Arkadi Nemirovski. Near-optimal recovery of linear and N-convex functions
+on unions of convex sets. Information and Inference: A Journal of the IMA, 9(2):423–453, 2020.
+doi: 10.1093/imaiai/iaz011. URL https://arxiv.org/abs/1804.00355.
+Ke Xu, Elynn Chen, and Yuefeng Han. Statistical Inference for Low-Rank Tensor Models, 2025.
+URL https://arxiv.org/abs/2501.16223.
+13

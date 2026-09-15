@@ -1,0 +1,194 @@
+[
+  {
+    "case": "V02_000",
+    "amplitude": 0.0,
+    "budget": 100,
+    "solves": 50,
+    "certified": 0,
+    "certificate_fraction": 0.0,
+    "certificate_wilson": [
+      0.0,
+      0.07134759913335874
+    ],
+    "missing_finite_gap": 0,
+    "mean_gap": 1.3571716504555347,
+    "gap_se": 0.02047628351286559,
+    "mean_seconds": 0.12943359924000075
+  },
+  {
+    "case": "V02_000",
+    "amplitude": 0.0,
+    "budget": 600,
+    "solves": 50,
+    "certified": 0,
+    "certificate_fraction": 0.0,
+    "certificate_wilson": [
+      0.0,
+      0.07134759913335874
+    ],
+    "missing_finite_gap": 0,
+    "mean_gap": 0.8681317583250907,
+    "gap_se": 0.008617941880978782,
+    "mean_seconds": 0.7367066000399999
+  },
+  {
+    "case": "V02_000",
+    "amplitude": 0.0,
+    "budget": 3000,
+    "solves": 50,
+    "certified": 0,
+    "certificate_fraction": 0.0,
+    "certificate_wilson": [
+      0.0,
+      0.07134759913335874
+    ],
+    "missing_finite_gap": 0,
+    "mean_gap": 0.35256412884124894,
+    "gap_se": 0.005511881641197957,
+    "mean_seconds": 3.643683975699999
+  },
+  {
+    "case": "V02_001",
+    "amplitude": 0.2,
+    "budget": 100,
+    "solves": 50,
+    "certified": 0,
+    "certificate_fraction": 0.0,
+    "certificate_wilson": [
+      0.0,
+      0.07134759913335874
+    ],
+    "missing_finite_gap": 0,
+    "mean_gap": 1.4000370675960574,
+    "gap_se": 0.027248760712468012,
+    "mean_seconds": 0.11818701247999855
+  },
+  {
+    "case": "V02_001",
+    "amplitude": 0.2,
+    "budget": 600,
+    "solves": 50,
+    "certified": 0,
+    "certificate_fraction": 0.0,
+    "certificate_wilson": [
+      0.0,
+      0.07134759913335874
+    ],
+    "missing_finite_gap": 0,
+    "mean_gap": 0.8703750554579657,
+    "gap_se": 0.013212393199721591,
+    "mean_seconds": 0.6796836690999981
+  },
+  {
+    "case": "V02_001",
+    "amplitude": 0.2,
+    "budget": 3000,
+    "solves": 50,
+    "certified": 0,
+    "certificate_fraction": 0.0,
+    "certificate_wilson": [
+      0.0,
+      0.07134759913335874
+    ],
+    "missing_finite_gap": 0,
+    "mean_gap": 0.3498124044382353,
+    "gap_se": 0.00871139687868398,
+    "mean_seconds": 3.471304154939994
+  },
+  {
+    "case": "V02_002",
+    "amplitude": 1.0,
+    "budget": 100,
+    "solves": 50,
+    "certified": 0,
+    "certificate_fraction": 0.0,
+    "certificate_wilson": [
+      0.0,
+      0.07134759913335874
+    ],
+    "missing_finite_gap": 0,
+    "mean_gap": 1.41752590124905,
+    "gap_se": 0.03001829770511801,
+    "mean_seconds": 0.09293616251999083
+  },
+  {
+    "case": "V02_002",
+    "amplitude": 1.0,
+    "budget": 600,
+    "solves": 50,
+    "certified": 0,
+    "certificate_fraction": 0.0,
+    "certificate_wilson": [
+      0.0,
+      0.07134759913335874
+    ],
+    "missing_finite_gap": 0,
+    "mean_gap": 0.852923240221923,
+    "gap_se": 0.014603578628937682,
+    "mean_seconds": 0.6313010374599992
+  },
+  {
+    "case": "V02_002",
+    "amplitude": 1.0,
+    "budget": 3000,
+    "solves": 50,
+    "certified": 0,
+    "certificate_fraction": 0.0,
+    "certificate_wilson": [
+      0.0,
+      0.07134759913335874
+    ],
+    "missing_finite_gap": 0,
+    "mean_gap": 0.32577033021125273,
+    "gap_se": 0.01020391295011292,
+    "mean_seconds": 3.0005215507999994
+  },
+  {
+    "case": "V02_003",
+    "amplitude": 2.5,
+    "budget": 100,
+    "solves": 50,
+    "certified": 0,
+    "certificate_fraction": 0.0,
+    "certificate_wilson": [
+      0.0,
+      0.07134759913335874
+    ],
+    "missing_finite_gap": 0,
+    "mean_gap": 1.3674839720299952,
+    "gap_se": 0.036177484133692456,
+    "mean_seconds": 0.06900515077999671
+  },
+  {
+    "case": "V02_003",
+    "amplitude": 2.5,
+    "budget": 600,
+    "solves": 50,
+    "certified": 0,
+    "certificate_fraction": 0.0,
+    "certificate_wilson": [
+      0.0,
+      0.07134759913335874
+    ],
+    "missing_finite_gap": 0,
+    "mean_gap": 0.5054847422875531,
+    "gap_se": 0.029660823020280662,
+    "mean_seconds": 0.4302589525399981
+  },
+  {
+    "case": "V02_003",
+    "amplitude": 2.5,
+    "budget": 3000,
+    "solves": 50,
+    "certified": 7,
+    "certificate_fraction": 0.14,
+    "certificate_wilson": [
+      0.06950833427016288,
+      0.26186193710585537
+    ],
+    "missing_finite_gap": 0,
+    "mean_gap": 0.12745808403675768,
+    "gap_se": 0.010890864743563659,
+    "mean_seconds": 2.116019090839998
+  }
+]

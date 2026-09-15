@@ -1,0 +1,140 @@
+{
+  "case": {
+    "id": "S13_000",
+    "suite": "S13",
+    "p": 64,
+    "B": 10000,
+    "target": 0.0,
+    "reason": "Independent exact direct-Gaussian confirmation; original S03 results retained"
+  },
+  "methods": [
+    "direct_confirmation"
+  ],
+  "alpha": [
+    0.1,
+    0.05,
+    0.01
+  ],
+  "target": 0.0,
+  "extra": {
+    "post_hoc": true,
+    "primary_case": "S03_007",
+    "source": "New fixed seed, exact diagonal observations; does not replace primary outcomes"
+  },
+  "records": [
+    {
+      "case": "S13_000",
+      "suite": "S13",
+      "method": "direct_confirmation",
+      "alpha": 0.1,
+      "repetitions": 10000,
+      "target": 0.0,
+      "covered": 9029,
+      "coverage": 0.9029,
+      "coverage_mcse": 0.0029609388713717133,
+      "coverage_wilson_95": [
+        0.8969410055497107,
+        0.9085495685631981
+      ],
+      "length": 3.289707253902946,
+      "length_se": 4.46260158218606e-18,
+      "mse": 1.0038947611261555,
+      "mse_se": 0.014212028015892246,
+      "bias": 0.004803830769644489,
+      "bias_se": 0.0100198407250028,
+      "reject_count": 971,
+      "rejection": 0.0971,
+      "rejection_wilson_95": [
+        0.0914504314368019,
+        0.10305899445028932
+      ],
+      "seconds": 0.0,
+      "seconds_se": 0.0,
+      "paired_reference": "direct_confirmation",
+      "paired_length": 0.0,
+      "paired_length_se": 0.0,
+      "paired_coverage": 0.0,
+      "paired_coverage_se": 0.0,
+      "paired_mse": 0.0,
+      "paired_mse_se": 0.0,
+      "guarantee": "finite_sample",
+      "status": "NEEDS CHECK"
+    },
+    {
+      "case": "S13_000",
+      "suite": "S13",
+      "method": "direct_confirmation",
+      "alpha": 0.05,
+      "repetitions": 10000,
+      "target": 0.0,
+      "covered": 9492,
+      "coverage": 0.9492,
+      "coverage_mcse": 0.0021958907076628374,
+      "coverage_wilson_95": [
+        0.9447210117704369,
+        0.9533340040933472
+      ],
+      "length": 3.9199279690801077,
+      "length_se": 1.3356092454300574e-17,
+      "mse": 1.0038947611261555,
+      "mse_se": 0.014212028015892246,
+      "bias": 0.004803830769644489,
+      "bias_se": 0.0100198407250028,
+      "reject_count": 508,
+      "rejection": 0.0508,
+      "rejection_wilson_95": [
+        0.04666599590665271,
+        0.05527898822956312
+      ],
+      "seconds": 0.0,
+      "seconds_se": 0.0,
+      "paired_reference": "direct_confirmation",
+      "paired_length": 0.0,
+      "paired_length_se": 0.0,
+      "paired_coverage": 0.0,
+      "paired_coverage_se": 0.0,
+      "paired_mse": 0.0,
+      "paired_mse_se": 0.0,
+      "guarantee": "finite_sample",
+      "status": "NEEDS CHECK"
+    },
+    {
+      "case": "S13_000",
+      "suite": "S13",
+      "method": "direct_confirmation",
+      "alpha": 0.01,
+      "repetitions": 10000,
+      "target": 0.0,
+      "covered": 9895,
+      "coverage": 0.9895,
+      "coverage_mcse": 0.0010193012312363777,
+      "coverage_wilson_95": [
+        0.9873057978310227,
+        0.991318267764085
+      ],
+      "length": 5.151658607097801,
+      "length_se": 9.11067265759944e-18,
+      "mse": 1.0038947611261555,
+      "mse_se": 0.014212028015892246,
+      "bias": 0.004803830769644489,
+      "bias_se": 0.0100198407250028,
+      "reject_count": 105,
+      "rejection": 0.0105,
+      "rejection_wilson_95": [
+        0.008681732235914952,
+        0.012694202168977434
+      ],
+      "seconds": 0.0,
+      "seconds_se": 0.0,
+      "paired_reference": "direct_confirmation",
+      "paired_length": 0.0,
+      "paired_length_se": 0.0,
+      "paired_coverage": 0.0,
+      "paired_coverage_se": 0.0,
+      "paired_mse": 0.0,
+      "paired_mse_se": 0.0,
+      "guarantee": "finite_sample",
+      "status": "NEEDS CHECK"
+    }
+  ]
+}

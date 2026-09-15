@@ -1,0 +1,112 @@
+{
+  "case": {
+    "id": "V04_001",
+    "suite": "V04",
+    "m": 1,
+    "n": 2,
+    "sigma": 3.0,
+    "M": 4.0,
+    "signal": "boundary",
+    "B": 3000
+  },
+  "records": [
+    {
+      "case": "V04_001",
+      "suite": "V04",
+      "method": "known_sigma",
+      "alpha": 0.05,
+      "repetitions": 3000,
+      "target": 4.0,
+      "coverage": 1.0,
+      "covered": 3000,
+      "coverage_wilson_95": [
+        0.9987211512746742,
+        1.0000000000000002
+      ],
+      "coverage_mcse": 0.0,
+      "length": 8.0,
+      "length_se": 0.0,
+      "mse": 16.0,
+      "mse_se": 0.0,
+      "bias": -4.0,
+      "bias_se": 0.0,
+      "paired_length": 0.0,
+      "paired_length_se": 0.0,
+      "paired_coverage": 0.0,
+      "paired_coverage_se": 0.0,
+      "estimator_id": "known_sigma_scalar",
+      "estimator_alpha": null,
+      "coverage_policy": "four endpoint ULPs",
+      "status": "COMPLETED"
+    },
+    {
+      "case": "V04_001",
+      "suite": "V04",
+      "method": "independent_upper_sigma",
+      "alpha": 0.05,
+      "repetitions": 3000,
+      "target": 4.0,
+      "coverage": 0.9956666666666667,
+      "covered": 2987,
+      "coverage_wilson_95": [
+        0.9925997876540877,
+        0.9974657803095393
+      ],
+      "coverage_mcse": 0.0011992435887613385,
+      "length": 7.9626865552906745,
+      "length_se": 0.00814015642193316,
+      "mse": 15.897553435751002,
+      "mse_se": 0.02218390946672315,
+      "bias": -3.958240715311718,
+      "bias_se": 0.008755199006099562,
+      "paired_length": -0.037313444709324926,
+      "paired_length_se": 0.00814015642193316,
+      "paired_coverage": -0.004333333333333333,
+      "paired_coverage_se": 0.0011994435126751702,
+      "estimator_id": "independent_upper_sigma_scalar",
+      "estimator_alpha": null,
+      "coverage_policy": "four endpoint ULPs",
+      "status": "COMPLETED"
+    },
+    {
+      "case": "V04_001",
+      "suite": "V04",
+      "method": "naive_plugin_sigma",
+      "alpha": 0.05,
+      "repetitions": 3000,
+      "target": 4.0,
+      "coverage": 0.6873333333333334,
+      "covered": 2062,
+      "coverage_wilson_95": [
+        0.6705139570741022,
+        0.7036735676034757
+      ],
+      "coverage_mcse": 0.0084637702832371,
+      "length": 5.086277794542909,
+      "length_se": 0.0505068021084118,
+      "mse": 8.443755109563694,
+      "mse_se": 0.13743174125572685,
+      "bias": -1.3195445045343277,
+      "bias_se": 0.04727505452454902,
+      "paired_length": -2.9137222054570913,
+      "paired_length_se": 0.0505068021084118,
+      "paired_coverage": -0.31266666666666665,
+      "paired_coverage_se": 0.008465181264372722,
+      "estimator_id": "naive_plugin_sigma_scalar",
+      "estimator_alpha": null,
+      "coverage_policy": "four endpoint ULPs",
+      "status": "COMPLETED"
+    }
+  ],
+  "extra": {
+    "event_coverage": 0.9896666666666667,
+    "event_wilson": [
+      0.985370258715706,
+      0.9927106554326248
+    ],
+    "mean_scale": 62.80675393699941,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation."
+  },
+  "seed": 2026091309
+}

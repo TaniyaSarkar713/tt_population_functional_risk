@@ -1,0 +1,801 @@
+Run simulation and real-data analysis 
+Assume you are a senior researcher in statistics, machine learning, scientific computing, and empirical methodology, with experience developing reproducible simulation studies and real-data analyses for papers in venues such as JASA, Annals of Statistics, JRSS-B, Biometrika, Bernoulli, NeurIPS, ICML, and AISTATS.
+The theoretical development of this research project is now substantially complete.
+Your task is to design, implement, run, validate, and document a complete simulation study and real-data analysis that directly test and illustrate the theoretical results developed in the paper.
+Review all relevant files in the project folder before beginning, especially:
+mathematical formulation;
+assumptions;
+theorem statements;
+proofs;
+theoretical rates;
+limiting distributions;
+robustness guarantees;
+phase-transition results;
+minimax results;
+methodological definitions;
+earlier literature review;
+competing methods identified in the literature.
+Do not begin with arbitrary experiments or generic benchmark comparisons.
+The empirical work should be designed around the question:
+What observable behavior should occur if the theoretical results are correct?
+The order of work should be:
+Theory→Testable predictions→Simulation design→Implementation validation→Simulation execution→Real-data analysis→Interpretation\boxed{ \text{Theory} \rightarrow \text{Testable predictions} \rightarrow \text{Simulation design} \rightarrow \text{Implementation validation} \rightarrow \text{Simulation execution} \rightarrow \text{Real-data analysis} \rightarrow \text{Interpretation} }
+1. Extract all empirically testable consequences of the theory
+Before writing simulation code, review every main theorem and identify its empirical implication.
+Create a table:
+Theorem / Result
+Mathematical prediction
+Quantity to vary
+Quantity to measure
+Appropriate experiment
+
+For example, suppose theory gives
+∥θ^−θ⋆∥2=Op(slog⁡pn).\|\widehat\theta-\theta^\star\|_2 = O_p \left( \sqrt{\frac{s\log p}{n}} \right).
+Then simulations should separately investigate:
+n,p,s.n,\qquad p,\qquad s.
+The empirical quantity
+En,p,s=∥θ^−θ⋆∥2E_{n,p,s} = \|\widehat\theta-\theta^\star\|_2
+should be compared with
+slog⁡pn.\sqrt{\frac{s\log p}{n}}.
+Do not simply show that the proposed estimator has lower error than a baseline.
+Test whether the specific functional dependence predicted by the theory is visible empirically.
+
+2. Translate asymptotic rates into simulation hypotheses
+For every theoretical rate, derive an empirical hypothesis.
+For example, if
+En≍n−1/2,E_n \asymp n^{-1/2},
+then
+log⁡En=−12log⁡n+C.\log E_n = -\frac12\log n + C.
+Therefore run experiments across a sufficiently wide range of nn and estimate the empirical slope in
+log⁡Enversuslog⁡n.\log E_n \quad\text{versus}\quad \log n.
+Compare the fitted slope with
+−12.-\frac12.
+If theory predicts
+E≍r(p1+p2)n,E \asymp \sqrt{ \frac{r(p_1+p_2)}{n} },
+vary:
+r,p1,p2,nr,\qquad p_1,\qquad p_2,\qquad n
+systematically.
+Do not vary many parameters simultaneously unless the experiment is explicitly studying interaction effects.
+
+3. Separate theorem validation from method comparison
+Design the simulation section in two parts.
+Part A — Theory validation
+Experiments designed specifically to test:
+convergence rates;
+sample complexity;
+asymptotic distributions;
+coverage;
+type-I error;
+power;
+robustness;
+breakdown behavior;
+dimensional scaling;
+rank/sparsity dependence;
+phase transitions;
+dependence on signal strength.
+Part B — Comparative performance
+Experiments comparing the proposed method against strong existing alternatives.
+Do not let benchmark comparisons replace theoretical validation.
+
+4. Design the synthetic data-generating mechanisms
+Construct synthetic models that align exactly with the assumptions of the theory.
+Define every simulation mathematically.
+For example:
+Yi=Xi⊤θ⋆+ϵi,Y_i = X_i^\top\theta^\star + \epsilon_i,
+with
+Xi∼N(0,Σ),ϵi∼N(0,σ2),X_i\sim N(0,\Sigma), \qquad \epsilon_i\sim N(0,\sigma^2),
+or the appropriate tensor, matrix, sequential, nonparametric, LLM-related, or structured model.
+Explicitly define:
+sample size nn;
+dimension pp;
+rank rr;
+sparsity ss;
+signal strength;
+covariance;
+noise distribution;
+contamination;
+dependence;
+smoothness;
+latent structure.
+Every synthetic experiment must be reproducible directly from its mathematical specification.
+
+5. Include both ideal and non-ideal regimes
+The first experiments should validate theory under the assumptions of the theorem.
+Then deliberately violate assumptions one at a time.
+For example:
+Tail assumption
+Theory:
+ϵi sub-Gaussian.\epsilon_i \text{ sub-Gaussian}.
+Compare:
+ϵi∼N(0,1),\epsilon_i\sim N(0,1), ϵi∼t5,\epsilon_i\sim t_5, ϵi∼t3,\epsilon_i\sim t_3,
+and perhaps a contaminated distribution.
+Dependence
+If theory assumes independence, gradually introduce correlation.
+For example:
+Cov⁡(Xi,Xj)=ρ∣i−j∣.\operatorname{Cov}(X_i,X_j) = \rho^{|i-j|}.
+Vary
+ρ∈{0,0.2,0.5,0.8}.\rho\in\{0,0.2,0.5,0.8\}.
+Rank misspecification
+If
+rank⁡(Θ⋆)=r,\operatorname{rank}(\Theta^\star)=r,
+fit with
+r^<r,r^=r,r^>r.\widehat r<r,\qquad \widehat r=r,\qquad \widehat r>r.
+This shows where the theoretical method is robust and where it fails.
+
+6. Explicitly test robustness guarantees
+If the theory studies contamination such as
+Pϵ=(1−ϵ)Pθ⋆+ϵQ,P_\epsilon = (1-\epsilon)P_{\theta^\star} + \epsilon Q,
+construct several types of contamination.
+Do not use only one convenient outlier distribution.
+Consider:
+Random contamination
+Outliers sampled from a broad distribution.
+Mean-shift contamination
+Q=N(μQ,ΣQ)Q=N(\mu_Q,\Sigma_Q)
+with large ∥μQ∥\|\mu_Q\|.
+Variance contamination
+Very high-variance observations.
+Adversarial contamination
+Outliers designed to maximally affect the estimator.
+Vary
+ϵ∈{0,0.01,0.05,0.10,0.15,0.20,…}\epsilon \in \{0,0.01,0.05,0.10,0.15,0.20,\ldots\}
+up to the theoretically relevant region.
+Plot error as a function of ϵ\epsilon.
+If a breakdown point is derived theoretically, explicitly test behavior around that threshold.
+
+7. Validate asymptotic normality
+If theory establishes
+n(ψ^−ψ0)⟶dN(0,V),\sqrt n \left( \widehat\psi-\psi_0 \right) \overset d\longrightarrow N(0,V),
+simulate the standardized statistic
+Zn=n(ψ^−ψ0)V^.Z_n = \frac{ \sqrt n(\widehat\psi-\psi_0) }{ \widehat{\sqrt V} }.
+Evaluate:
+empirical mean;
+empirical variance;
+histogram;
+QQ plot;
+Kolmogorov-type discrepancy if useful;
+confidence-interval coverage.
+Check whether
+Zn≈N(0,1)Z_n\approx N(0,1)
+as nn increases.
+
+8. Validate confidence intervals
+If confidence intervals are proposed, estimate empirical coverage.
+For a nominal
+1−α1-\alpha
+interval, estimate
+Coverage⁡^=1B∑b=1B1{ψ⋆∈CIb}.\widehat{\operatorname{Coverage}} = \frac1B \sum_{b=1}^B \mathbf 1 \{ \psi^\star \in CI_b \}.
+Compare against nominal levels such as:
+90%,95%,99%.90\%,\qquad95\%,\qquad99\%.
+Also report:
+average interval length;
+Monte Carlo standard error;
+coverage under difficult regimes;
+coverage when assumptions are mildly violated.
+Do not report coverage alone.
+Very wide intervals can attain nominal coverage while being practically useless.
+
+9. Validate hypothesis-testing theory
+If the method proposes a test
+H0:ψ=ψ0vs.H1:ψ≠ψ0,H_0:\psi=\psi_0 \qquad\text{vs.}\qquad H_1:\psi\neq\psi_0,
+evaluate:
+Type-I error
+Under H0H_0,
+P(reject H0).P(\text{reject }H_0).
+Power
+Construct local alternatives such as
+ψn=ψ0+cn\psi_n = \psi_0+\frac{c}{\sqrt n}
+when theoretically relevant.
+Generate power curves as a function of effect size.
+Compare empirical behavior with theoretical predictions.
+
+10. Validate minimax or optimal-rate theory
+If the paper derives a minimax rate
+rn,r_n,
+test whether the proposed estimator behaves approximately at that rate.
+Where possible, compare:
+Error⁡(θ^)rn\frac{ \operatorname{Error}(\widehat\theta) }{ r_n }
+across nn.
+If the theory is correct and finite-sample effects are moderate, this ratio should remain relatively stable.
+Be careful not to claim that simulations “prove minimax optimality.”
+Use simulations only as empirical support.
+
+11. Explore phase transitions
+If theory predicts successful recovery when
+n≳C slog⁡pn \gtrsim C\,s\log p
+or another threshold, design experiments around the normalized quantity
+κ=nslog⁡p.\kappa = \frac{n}{s\log p}.
+Plot recovery probability versus κ\kappa.
+Look for a transition between:
+P(successful recovery)≈0P(\text{successful recovery})\approx0
+and
+P(successful recovery)≈1.P(\text{successful recovery})\approx1.
+Do not hide unsuccessful regimes.
+
+12. Choose parameter grids strategically
+Do not use arbitrary grids.
+For each theoretical quantity, select values that include:
+easy regime;
+moderate regime;
+boundary regime;
+difficult regime;
+assumption-violation regime.
+Use enough scale variation to distinguish asymptotic trends from finite-sample noise.
+Avoid only using values where the proposed method performs well.
+
+13. Determine Monte Carlo replication size
+Use enough simulation repetitions
+BB
+to make Monte Carlo uncertainty small relative to the reported differences.
+For each reported quantity compute uncertainty.
+For a Monte Carlo mean,
+Tˉ=1B∑b=1BTb,\bar T = \frac1B\sum_{b=1}^B T_b,
+report
+SE(Tˉ)=sTB.SE(\bar T) = \frac{s_T}{\sqrt B}.
+For coverage p^\widehat p,
+SE(p^)=p^(1−p^)B.SE(\widehat p) = \sqrt{ \frac{\widehat p(1-\widehat p)}{B} }.
+Choose BB based on these precision requirements, not convention alone.
+
+14. Implement the proposed method faithfully
+Implement exactly the estimator defined in the theory.
+Maintain a clear distinction between:
+Theoretical estimator
+θ^=arg⁡min⁡θ∈ΘQn(θ).\widehat\theta = \arg\min_{\theta\in\Theta} Q_n(\theta).
+Numerical algorithm
+The computational method actually used to approximate it.
+Document:
+initialization;
+optimization method;
+stopping criteria;
+tolerances;
+numerical stability procedures;
+random seeds;
+tuning parameter selection;
+maximum iterations.
+If theory assumes a global optimum but the implementation provides only a local optimum, explicitly investigate this discrepancy.
+
+15. Verify implementation before large simulation runs
+Create small controlled tests where the expected answer is known.
+Examples:
+noiseless recovery;
+identity covariance;
+rank-one parameter;
+orthogonal design;
+zero contamination;
+very large sample size.
+Check whether the method behaves as expected.
+If not, debug before running large experiments.
+Include unit tests for critical numerical operations.
+
+16. Compare against strong baselines
+Use the literature review to identify the strongest relevant competing methods.
+Include:
+Classical baseline
+A simple, widely understood estimator.
+Closest methodological competitor
+The method most similar to ours.
+Strong modern competitor
+If applicable.
+Oracle benchmark
+Where useful, include a method with access to information unavailable in practice.
+Do not include weak baselines simply to make the proposed method look good.
+
+17. Make baseline comparisons fair
+For every method ensure:
+same data;
+same train/test split;
+same Monte Carlo replicate;
+comparable preprocessing;
+appropriate tuning;
+comparable computational budget where relevant.
+Do not use default settings for competitors if the proposed method is heavily tuned.
+Document tuning rules for every method.
+
+18. Evaluate appropriate statistical metrics
+Choose metrics that correspond to the theoretical targets.
+Examples:
+Parameter estimation
+∥θ^−θ⋆∥2.\|\widehat\theta-\theta^\star\|_2.
+Matrix/tensor estimation
+∥Θ^−Θ⋆∥F.\|\widehat\Theta-\Theta^\star\|_F.
+Relative error:
+∥Θ^−Θ⋆∥F∥Θ⋆∥F.\frac{ \|\widehat\Theta-\Theta^\star\|_F }{ \|\Theta^\star\|_F }.
+Subspace recovery
+Principal-angle or projection distance.
+Prediction
+R(θ^)−R(θ⋆).R(\widehat\theta)-R(\theta^\star).
+Support recovery
+false-positive rate;
+false-negative rate;
+precision;
+recall.
+Rank recovery
+P(r^=r).P(\widehat r=r).
+Inference
+coverage;
+interval width;
+type-I error;
+power.
+Use several metrics only when they answer distinct scientific questions.
+
+19. Include computational performance if relevant
+Measure:
+runtime;
+memory;
+number of iterations;
+convergence failures.
+Study scaling with
+n,p,r,Tn,\qquad p,\qquad r,\qquad T
+if computational complexity is part of the contribution.
+Do not claim scalability solely because one experiment runs successfully.
+
+20. Use plots that reveal theoretical behavior
+Prioritize plots such as:
+Error versus nn
+Log-error versus log-nn
+Error versus dimension
+Error versus rank
+Error versus contamination
+Coverage versus nn
+Type-I error versus nominal level
+Power curves
+Recovery probability versus theoretical phase-transition parameter
+Runtime versus dimension
+Include theoretical reference lines when meaningful.
+For example, if theory predicts
+n−1/2,n^{-1/2},
+include a reference curve proportional to
+n−1/2.n^{-1/2}.
+21. Fit empirical scaling laws where appropriate
+For a predicted rate
+En≍n−α,E_n \asymp n^{-\alpha},
+estimate
+log⁡En=β0−α^log⁡n+ε.\log E_n = \beta_0-\widehat\alpha\log n+\varepsilon.
+Report:
+α^\widehat\alpha
+and compare it with the theoretical α\alpha.
+Treat this as descriptive empirical validation, not proof.
+
+22. Run sensitivity analyses
+Study sensitivity to:
+tuning parameters;
+initialization;
+assumed rank;
+assumed sparsity;
+contamination level;
+noise variance;
+covariance condition number;
+model misspecification.
+Determine whether conclusions depend heavily on one tuning choice.
+
+23. Run ablation studies when the method has multiple components
+If the proposed procedure has components
+M1,…,Mk,M_1,\ldots,M_k,
+compare the full method against carefully chosen ablations.
+For example:
+Full\text{Full}
+versus
+without robust weighting,\text{without robust weighting}, without structural penalty,\text{without structural penalty}, without low-rank refinement.\text{without low-rank refinement}.
+Ablations should answer a scientific question.
+Do not create unnecessary variants only to increase the number of experiments.
+
+24. Search for failure modes
+Actively try to make the proposed method fail.
+Consider:
+low signal;
+small nn;
+high dimension;
+extreme rank;
+ill-conditioned covariance;
+heavy tails;
+dependence;
+contamination;
+incorrect tuning;
+structural misspecification.
+Identify the practical boundary of usefulness.
+Do not suppress negative results.
+They may illuminate the theoretical assumptions and improve the paper.
+
+25. Select a real dataset based on the theory
+Do not choose a dataset merely because it is popular.
+The real-data setting should exhibit the structural phenomenon addressed by the theory.
+For example, if the paper concerns:
+robustness → choose data with plausible contamination/outliers;
+low-rank structure → choose data with meaningful matrix/tensor structure;
+high-dimensional inference → choose pp comparable to or larger than nn;
+repeated/dependent observations → use data with genuine within-unit dependence;
+LLM-generated observations → use repeated outputs, representations, evaluator scores, etc.;
+distribution shift → use natural train/test domains.
+Explain explicitly why the chosen dataset is scientifically relevant to the theory.
+
+26. Use more than one real dataset if scientifically justified
+Do not add datasets merely to increase experimental volume.
+Use additional datasets when they demonstrate meaningfully different regimes.
+For example:
+one moderate-dimensional setting;
+one genuinely high-dimensional setting;
+one contaminated setting;
+one AI/LLM setting.
+
+27. Define the real-data problem mathematically
+For the real dataset, clearly define:
+X,Y,θ,θ^,X,\qquad Y,\qquad \theta,\qquad \widehat\theta,
+and the inferential/predictive target.
+State:
+sample size;
+dimension;
+outcome;
+predictors;
+groups/clusters;
+tensor/matrix structure;
+missingness;
+repeated measurements;
+data splitting;
+preprocessing.
+Do not treat the real-data section as detached from the statistical model.
+
+28. Analyze dependence and effective sample size
+If observations are clustered, repeated, sequential, or generated from common prompts/models, identify the actual independent sampling units.
+For example:
+Yij=generation j from prompt i.Y_{ij} = \text{generation }j \text{ from prompt }i.
+The nominal number of generations
+∑imi\sum_i m_i
+may not equal the effective sample size.
+Ensure the analysis matches the theoretical dependence assumptions.
+
+29. Prevent information leakage
+For every preprocessing step ask whether it uses test-set information.
+Procedures such as:
+normalization;
+feature selection;
+imputation;
+dimension reduction;
+tuning;
+representation selection;
+must be fitted using training data only when appropriate.
+Explicitly verify this in code.
+
+30. Choose real-data evaluation procedures appropriately
+Depending on the task, use:
+train/validation/test split;
+nested cross-validation;
+repeated cross-validation;
+temporal split;
+group-wise split;
+leave-one-cluster-out validation.
+The split should respect the dependence structure.
+For example, repeated observations from one subject or prompt should generally not be split independently across training and test sets.
+
+31. Quantify uncertainty in real-data comparisons
+Do not report only a single performance number.
+Where appropriate report:
+standard errors;
+confidence intervals;
+bootstrap intervals;
+repeated-split variability.
+For method differences, estimate uncertainty in
+Δ=Performance⁡proposed−Performance⁡baseline.\Delta = \operatorname{Performance}_{\text{proposed}} - \operatorname{Performance}_{\text{baseline}}.
+Do not claim meaningful superiority when uncertainty is large.
+
+32. Connect real-data results back to theory
+For every major empirical finding, explain which theoretical property it illustrates.
+For example:
+The proposed estimator becomes increasingly advantageous as contamination increases, consistent with the dependence of the theoretical bound on ϵ\epsilon.
+or:
+Performance deteriorates as the empirical eigengap shrinks, consistent with the perturbation term appearing in Theorem 3.
+Avoid saying that real-data analysis “verifies” a theorem.
+Real data may illustrate consistency with the theoretical mechanism, but cannot prove the theorem.
+
+33. If the application involves LLMs, define the model and extraction procedure completely
+Record:
+model name;
+model version;
+model size;
+tokenizer;
+layer(s);
+representation extracted;
+prompt template;
+decoding parameters;
+temperature;
+top-pp;
+maximum tokens;
+number of generations per prompt;
+random seeds if available.
+If using hidden states,
+Hi(ℓ)∈RTi×d,H_i^{(\ell)} \in \mathbb R^{T_i\times d},
+state exactly how these are transformed into the statistical object used by the method.
+For example,
+Xi=1Ti∑t=1TiHit(ℓ).X_i = \frac1{T_i} \sum_{t=1}^{T_i} H_{it}^{(\ell)}.
+Do not leave representation extraction implicit.
+
+34. If using tensor or matrix LLM representations, preserve structure explicitly
+For example, attention may have structure
+Ai∈RL×H×T×T,A_i \in \mathbb R^{L\times H\times T\times T},
+where:
+LL = number of layers;
+HH = number of heads;
+TT = sequence length.
+If the method exploits tensor structure, do not flatten the data without a strong justification.
+Explain exactly which modes correspond to which scientific dimensions.
+
+35. Compare theory-compliant and realistic LLM regimes
+For AI/LLM applications, consider two empirical settings:
+Controlled setting
+Designed to approximate theoretical assumptions.
+Realistic setting
+Using actual LLM outputs or representations where assumptions may fail.
+This helps distinguish:
+validity under theory\text{validity under theory}
+from
+practical robustness outside ideal assumptions.\text{practical robustness outside ideal assumptions}.
+36. Keep an experiment registry
+Before running the final experiments, create a table:
+Experiment ID
+Question
+Theory tested
+Parameters varied
+Metric
+Baselines
+Expected result
+
+Use this as the experiment plan.
+Do not silently add/remove experiments based only on whether results are favorable.
+Record failed or unexpected experiments.
+
+37. Maintain a result-status system
+Label results:
+VALIDATED
+Implementation and result checked.
+NEEDS CHECK
+Result produced but requires verification.
+FAILED
+Experiment failed computationally or methodologically.
+CONTRADICTS EXPECTATION
+Result appears inconsistent with theoretical expectation.
+Do not hide the latter category.
+Investigate whether the cause is:
+coding error;
+finite-sample effect;
+theorem assumptions violated;
+incorrect interpretation;
+theoretical problem.
+
+38. Investigate theory–simulation disagreements
+If simulations disagree with theory, do not force the empirical story.
+Check sequentially:
+implementation;
+theorem assumptions;
+finite-sample constants;
+asymptotic regime;
+tuning;
+approximation error;
+proof/theorem itself.
+Document the finding.
+A disagreement may expose an important theoretical limitation.
+
+39. Create publication-quality tables
+For every simulation table include enough information to interpret uncertainty.
+A useful format is:
+Method
+Mean error
+Monte Carlo SE
+Runtime
+
+Avoid excessive decimals.
+Highlight the best result only when differences are meaningful.
+
+40. Create publication-quality figures
+Figures should:
+answer one primary scientific question;
+have clear axes;
+include meaningful legends;
+show uncertainty where appropriate;
+use comparable scales;
+be interpretable without reading code.
+Generate both publication-quality and reproducible source files.
+
+41. Produce complete simulation documentation
+Create/update project files such as:
+simulations/
+│
+├── README.md
+├── simulation_design.md
+├── experiment_registry.md
+├── code/
+├── configs/
+├── results/
+├── tables/
+├── figures/
+└── logs/
+
+Use a structure appropriate to the project.
+The README should explain exactly how to regenerate all simulation results.
+
+42. Produce complete real-data documentation
+Organize the analysis approximately as:
+real_data/
+│
+├── README.md
+├── data_description.md
+├── preprocessing.md
+├── code/
+├── results/
+├── tables/
+├── figures/
+└── logs/
+
+Document all preprocessing and exclusion rules.
+Do not modify raw data.
+
+43. Make all results reproducible
+Use:
+fixed random seeds;
+configuration files;
+saved hyperparameters;
+documented package versions;
+deterministic preprocessing where possible.
+Create one main script or reproducible workflow that regenerates each table and figure.
+
+44. Write the Simulation section
+After completing the analysis, draft a publication-quality simulation section containing:
+Simulation objectives
+State which theoretical results are being investigated.
+Data-generating process
+Define mathematically.
+Competing methods
+Explain why each baseline is included.
+Metrics
+Define them.
+Results
+Report patterns rather than simply listing numbers.
+Connection to theory
+Explain how empirical behavior relates to theoretical predictions.
+Failure regimes
+Mention important limitations honestly.
+
+45. Write the Real-Data Analysis section
+Draft a publication-quality section containing:
+Scientific context
+Why this dataset is appropriate.
+Data
+Sample size, variables, structure, preprocessing.
+Statistical task
+Define precisely.
+Methods
+Proposed method and baselines.
+Evaluation
+Explain splitting/tuning/metrics.
+Results
+Report estimates and uncertainty.
+Interpretation
+Explain what the results demonstrate.
+Limitations
+Avoid overstating conclusions.
+
+46. Do not write results before running experiments
+This is a strict requirement.
+Never write fabricated sentences such as:
+“Our estimator consistently outperforms all competitors.”
+before the corresponding experiment has been executed and verified.
+Separate:
+EXPECTED
+Based on theory.
+OBSERVED
+Actually produced by simulations/data analysis.
+INTERPRETED
+Scientific/statistical conclusion drawn after reviewing results.
+
+47. Do not manipulate the design to obtain desired conclusions
+Do not:
+remove difficult parameter settings because performance is poor;
+choose only favorable random seeds;
+change baselines after observing their performance without documenting it;
+tune the proposed method using test data;
+report only subsets where it wins;
+suppress failed experiments.
+Unexpected results should be investigated and reported if scientifically relevant.
+
+48. Compare empirical and theoretical quantities explicitly
+Create a final table:
+Theoretical prediction
+Empirical experiment
+Expected behavior
+Observed behavior
+Agreement?
+
+Examples:
+En=O(n−1/2)E_n=O(n^{-1/2})
+→ estimated empirical rate.
+P(ψ⋆∈CI)→0.95P(\psi^\star\in CI)\to0.95
+→ empirical coverage.
+ϵ<ϵ⋆\epsilon<\epsilon^\star
+→ stable robustness below the predicted threshold.
+This should show exactly how the experiments support or challenge the theory.
+
+49. Reviewer-style empirical audit
+After running everything, act as a skeptical reviewer and ask:
+Were the right experiments performed?
+Were favorable regimes selectively chosen?
+Are the baselines strong enough?
+Is tuning fair?
+Are uncertainty estimates adequate?
+Does simulation really support the theorem?
+Is the real-data example compelling?
+Are conclusions stronger than evidence?
+Are important failure modes omitted?
+Would another dataset materially strengthen the paper?
+Identify likely reviewer requests before finalizing the section.
+
+50. Determine whether additional theory is suggested by the experiments
+Use empirical findings to identify possible extensions.
+For example:
+an apparent faster rate;
+unexpected robustness;
+phase transition not captured by theory;
+dependence on rank not reflected in the bound;
+systematic failure under weak signals.
+Do not claim these as theoretical results.
+Record them as:
+CONJECTURE / FUTURE THEORY
+if they could motivate further mathematical investigation.
+
+51. Final empirical deliverables
+At the end produce:
+A. Theory-to-experiment map
+Every main theorem linked to an empirical test.
+B. Simulation design
+Complete mathematical specification of every synthetic experiment.
+C. Reproducible implementation
+All code necessary to rerun the study.
+D. Full simulation results
+Including uncertainty and failure regimes.
+E. Real-data analysis
+Complete preprocessing, fitting, evaluation, and interpretation.
+F. Figures and tables
+Publication ready.
+G. Theory-versus-empirical comparison
+Explain which theoretical predictions were:
+strongly supported;
+approximately supported;
+inconclusive;
+contradicted in finite samples.
+H. Unexpected findings
+Document scientifically interesting deviations.
+I. Draft Simulation section
+Ready for inclusion in the paper.
+J. Draft Real-Data Analysis section
+Ready for inclusion in the paper.
+K. Reproducibility report
+Explain how every result can be regenerated.
+L. Reviewer-risk assessment
+Identify empirical weaknesses likely to be raised in peer review.
+
+52. Final decision checkpoint
+Before considering the empirical analysis complete, answer explicitly:
+Theory validation
+Do the simulations behave consistently with the mathematical predictions?
+Rate validation
+Do empirical scaling patterns approximately match theoretical rates?
+Inference validation
+If applicable, are coverage and type-I error close to nominal levels?
+Robustness validation
+Does performance degrade in a manner consistent with the robustness theory?
+Competitive performance
+Does the proposed method provide meaningful improvement over strong baselines?
+Real-data relevance
+Does the real dataset actually exhibit the structure motivating the theory?
+Practical value
+Does the method offer a tangible empirical advantage?
+Failure modes
+Where does the method fail?
+Theory–practice gap
+Which assumptions appear most problematic in realistic data?
+Additional work
+What simulations, datasets, or theoretical results are still necessary before submission?
+
+Final principle
+The objective is not to produce simulations that make the proposed method look successful.
+The objective is to determine whether the theoretical predictions are visible in finite samples, understand where they succeed or fail, compare the method fairly with strong alternatives, and demonstrate whether the theoretical contribution has meaningful practical consequences.
+The empirical work should strengthen the scientific argument:
+Theory⟶Prediction⟶Experiment⟶Evidence⟶Scientific interpretation.\boxed{ \text{Theory} \longrightarrow \text{Prediction} \longrightarrow \text{Experiment} \longrightarrow \text{Evidence} \longrightarrow \text{Scientific interpretation}. }
+

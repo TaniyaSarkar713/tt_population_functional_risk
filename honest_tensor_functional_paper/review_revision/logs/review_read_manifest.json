@@ -1,0 +1,34 @@
+{
+  "report.md": {
+    "words": 6506,
+    "sha256": "e67c1efd087dfad8377fa6591c21a10b78016bd22fd090cdd21484aa50f62eab"
+  },
+  "theorem_audit.md": {
+    "words": 5227,
+    "sha256": "626e5a438ce95d92300336e3b188f379d1cc51ce8a3ccb313354f5dc4f734df2"
+  },
+  "assumption_audit.md": {
+    "words": 1715,
+    "sha256": "c10f1f9307f6d5eb58ae7385a5c5b528ac339cc5fda2006c472b25fd9fdc1ea1"
+  },
+  "simulation_and_claims.md": {
+    "words": 1885,
+    "sha256": "6fe5205e96878682898dd42cee7ece648bce8d0b6ccfbb0ffe90cfbe83ca9085"
+  },
+  "presentation_audit.md": {
+    "words": 1634,
+    "sha256": "d2122ad92810997528b846519d8e54f27286a8c69e629db84367d8dc11a96f85"
+  },
+  "revision_plan.md": {
+    "words": 1328,
+    "sha256": "a9a4530416589d9388c022fa604f048deb050dff6db15e26a918a2b2dc5bacea"
+  },
+  "proposed_abstract.md": {
+    "words": 209,
+    "sha256": "92aa8f73e377e6dabc348b6d4c0d78a518e91fa04c486a8aa91ac667a2b9563f"
+  },
+  "guideline_coverage.md": {
+    "words": 910,
+    "sha256": "8f629c019bf3bc3af8e8276f3e4b149ad854f0f112e05f6602c651e0cdb0e7d5"
+  }
+}

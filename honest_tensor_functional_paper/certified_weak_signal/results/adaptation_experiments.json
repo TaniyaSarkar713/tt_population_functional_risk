@@ -1,0 +1,205 @@
+{
+  "seed": 2026091102,
+  "cases": [
+    {
+      "amplitude": 0.0,
+      "weak_extra": 0.0,
+      "supplied_mode_cap": 1,
+      "M": 2.0,
+      "repetitions": 1000,
+      "covered": 979,
+      "coverage_wilson_95": [
+        0.9681097049387625,
+        0.9862242604320758
+      ],
+      "mean_width": 3.438217380239259,
+      "zero_width_count": 0,
+      "pilot_choices": {
+        "structural": 1000
+      },
+      "old_covered": 1000,
+      "old_coverage_wilson_95": [
+        0.996173241514445,
+        1.0
+      ],
+      "old_mean_width": 0.0,
+      "comparator_scope": "Previous method requires separation; weak cases deliberately violate it.",
+      "seconds": 0.3059959411621094
+    },
+    {
+      "amplitude": 0.5,
+      "weak_extra": 0.0,
+      "supplied_mode_cap": 1,
+      "M": 2.0,
+      "repetitions": 1000,
+      "covered": 970,
+      "coverage_wilson_95": [
+        0.9574965858524128,
+        0.9789062611711653
+      ],
+      "mean_width": 3.4036864590324667,
+      "zero_width_count": 0,
+      "pilot_choices": {
+        "structural": 1000
+      },
+      "old_covered": 0,
+      "old_coverage_wilson_95": [
+        2.168404344971009e-19,
+        0.003826758485555125
+      ],
+      "old_mean_width": 0.0,
+      "comparator_scope": "Previous method requires separation; weak cases deliberately violate it.",
+      "seconds": 0.30548095703125
+    },
+    {
+      "amplitude": 2.0,
+      "weak_extra": 0.0,
+      "supplied_mode_cap": 1,
+      "M": 2.1,
+      "repetitions": 1000,
+      "covered": 976,
+      "coverage_wilson_95": [
+        0.9645370943883885,
+        0.9838198315333629
+      ],
+      "mean_width": 3.171021903219911,
+      "zero_width_count": 2,
+      "pilot_choices": {
+        "structural": 1000
+      },
+      "old_covered": 0,
+      "old_coverage_wilson_95": [
+        2.168404344971009e-19,
+        0.003826758485555125
+      ],
+      "old_mean_width": 0.0,
+      "comparator_scope": "Previous method requires separation; weak cases deliberately violate it.",
+      "seconds": 0.30344200134277344
+    },
+    {
+      "amplitude": 2000.0,
+      "weak_extra": 0.0,
+      "supplied_mode_cap": 1,
+      "M": 2100.0,
+      "repetitions": 1000,
+      "covered": 964,
+      "coverage_wilson_95": [
+        0.9505643395327921,
+        0.9738844285926127
+      ],
+      "mean_width": 4.3371841194452525,
+      "zero_width_count": 0,
+      "pilot_choices": {
+        "direct": 1000
+      },
+      "old_covered": 958,
+      "old_coverage_wilson_95": [
+        0.9437155747733968,
+        0.9687791144538346
+      ],
+      "old_mean_width": 5.808879126248939,
+      "comparator_scope": "Previous method requires separation; weak cases deliberately violate it.",
+      "seconds": 0.41130495071411133
+    },
+    {
+      "amplitude": 2000.0,
+      "weak_extra": 0.5,
+      "supplied_mode_cap": 2,
+      "M": 2100.000065624999,
+      "repetitions": 1000,
+      "covered": 962,
+      "coverage_wilson_95": [
+        0.9482730796686497,
+        0.9721909954906974
+      ],
+      "mean_width": 4.343472526350479,
+      "zero_width_count": 0,
+      "pilot_choices": {
+        "direct": 1000
+      },
+      "old_covered": 962,
+      "old_coverage_wilson_95": [
+        0.9482730796686497,
+        0.9721909954906974
+      ],
+      "old_mean_width": 5.808879126248939,
+      "comparator_scope": "Previous method requires separation; weak cases deliberately violate it.",
+      "seconds": 0.43282389640808105
+    },
+    {
+      "amplitude": 2000.0,
+      "weak_extra": 0.0,
+      "supplied_mode_cap": 2,
+      "M": 2100.0,
+      "repetitions": 1000,
+      "covered": 972,
+      "coverage_wilson_95": [
+        0.9598298168024069,
+        0.9805577231872291
+      ],
+      "mean_width": 4.347966477781415,
+      "zero_width_count": 0,
+      "pilot_choices": {
+        "direct": 1000
+      },
+      "old_covered": 959,
+      "old_coverage_wilson_95": [
+        0.9448520067923587,
+        0.9696350289179017
+      ],
+      "old_mean_width": 5.808879126248939,
+      "comparator_scope": "Previous method requires separation; weak cases deliberately violate it.",
+      "seconds": 0.40892481803894043
+    },
+    {
+      "amplitude": 200000.0,
+      "weak_extra": 0.0,
+      "supplied_mode_cap": 1,
+      "M": 210000.0,
+      "repetitions": 1000,
+      "covered": 954,
+      "coverage_wilson_95": [
+        0.9391877960583809,
+        0.9653375072367351
+      ],
+      "mean_width": 3.0175077905574437,
+      "zero_width_count": 0,
+      "pilot_choices": {
+        "tangent": 1000
+      },
+      "old_covered": 968,
+      "old_coverage_wilson_95": [
+        0.9551752619162314,
+        0.9772428921412891
+      ],
+      "old_mean_width": 2.955198113862338,
+      "comparator_scope": "Previous method requires separation; weak cases deliberately violate it.",
+      "seconds": 0.40686583518981934
+    },
+    {
+      "amplitude": 200000.0,
+      "weak_extra": 0.0,
+      "supplied_mode_cap": 2,
+      "M": 210000.0,
+      "repetitions": 1000,
+      "covered": 955,
+      "coverage_wilson_95": [
+        0.9403171620637766,
+        0.9662004877143683
+      ],
+      "mean_width": 4.349416878092525,
+      "zero_width_count": 0,
+      "pilot_choices": {
+        "direct": 1000
+      },
+      "old_covered": 965,
+      "old_coverage_wilson_95": [
+        0.9517133776255466,
+        0.9747277369828871
+      ],
+      "old_mean_width": 2.955198116412241,
+      "comparator_scope": "Previous method requires separation; weak cases deliberately violate it.",
+      "seconds": 0.4040958881378174
+    }
+  ]
+}

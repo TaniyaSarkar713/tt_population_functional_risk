@@ -1,0 +1,93 @@
+{
+  "status": "PASSED",
+  "stages": [
+    {
+      "script": "analyze_results.py",
+      "exit_code": 0,
+      "seconds": 6.976851958
+    },
+    {
+      "script": "plot_results.py",
+      "exit_code": 0,
+      "seconds": 60.267101999999994
+    },
+    {
+      "script": "build_report.py",
+      "exit_code": 0,
+      "seconds": 17.496374208999995
+    },
+    {
+      "script": "validate_artifacts.py",
+      "exit_code": 0,
+      "seconds": 2.2836688750000036
+    }
+  ],
+  "comparisons": [
+    {
+      "file": "tables/loading_bounds.csv",
+      "same_bytes": true
+    },
+    {
+      "file": "tables/loading_bounds.json",
+      "same_bytes": true
+    },
+    {
+      "file": "tables/normal_diagnostics.csv",
+      "same_bytes": true
+    },
+    {
+      "file": "tables/normal_diagnostics.json",
+      "same_bytes": true
+    },
+    {
+      "file": "tables/pointwise_geometry.csv",
+      "same_bytes": true
+    },
+    {
+      "file": "tables/pointwise_geometry.json",
+      "same_bytes": true
+    },
+    {
+      "file": "tables/slopes.csv",
+      "same_bytes": true
+    },
+    {
+      "file": "tables/slopes.json",
+      "same_bytes": true
+    },
+    {
+      "file": "tables/solver.csv",
+      "same_bytes": true
+    },
+    {
+      "file": "tables/solver.json",
+      "same_bytes": true
+    },
+    {
+      "file": "tables/summary.csv",
+      "same_bytes": true
+    },
+    {
+      "file": "tables/summary.json",
+      "same_bytes": true
+    },
+    {
+      "file": "report.md",
+      "same_bytes": true
+    },
+    {
+      "file": "theory_comparison.md",
+      "same_bytes": true
+    },
+    {
+      "file": "manuscript/empirical_sections.md",
+      "same_bytes": true
+    },
+    {
+      "file": "figures/captions.md",
+      "same_bytes": true
+    }
+  ],
+  "scope": "New isolated rebuild of analysis, plots, reports and validation from saved observations. Does not rerun the million-draw study or exponential solver.",
+  "pdf_comparison": "PDFs are rebuilt and validated; creation metadata prevents a byte-identity claim."
+}

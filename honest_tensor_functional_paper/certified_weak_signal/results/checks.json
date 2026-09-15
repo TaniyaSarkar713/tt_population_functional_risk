@@ -1,0 +1,90 @@
+{
+  "seed": 2026091101,
+  "passed": true,
+  "checks": {
+    "cosine_ranges": 1000,
+    "box_containment_points": 1800,
+    "optimizer_contract_cases": 5,
+    "weighted_mixture_identities": 120,
+    "unseparated_bias_certificates": 250,
+    "cap_safe_tangent_certificates": 180
+  },
+  "optimizer_examples": {
+    "analytic_fit": {
+      "lower": 5.044211692252339,
+      "upper": 5.044211693552339,
+      "gap": 1.3000001075624823e-09,
+      "certified_to_tolerance": true,
+      "parameters": [
+        2.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "nodes": 0,
+      "active_cells": 1,
+      "scan_directions": 1002,
+      "tolerance": 0.01,
+      "arithmetic": "float64 with conservative guards; not formal interval arithmetic"
+    },
+    "full_class_projection": {
+      "lo": -1.5080687283873828,
+      "hi": 1.5080687283873828,
+      "inner_lo": -1.414213562373095,
+      "inner_hi": 1.414213562373095,
+      "empty_certified": false,
+      "endpoint_gap": 0.0938551660142879,
+      "certified_to_tolerance": true,
+      "nodes": 423,
+      "active_cells": 0,
+      "scan_directions": 1002,
+      "arithmetic": "float64 with conservative guards; not formal interval arithmetic"
+    },
+    "budget_stop": {
+      "lo": -2.0000000004999996,
+      "hi": 2.0000000004999996,
+      "inner_lo": -1.414213562373095,
+      "inner_hi": 1.414213562373095,
+      "empty_certified": false,
+      "endpoint_gap": 0.5857864381269047,
+      "certified_to_tolerance": false,
+      "nodes": 1,
+      "active_cells": 2,
+      "scan_directions": 1002,
+      "arithmetic": "float64 with conservative guards; not formal interval arithmetic"
+    },
+    "incompatible_fit": {
+      "lower": 8.831630812061979,
+      "upper": 8.926524250273438,
+      "gap": 0.09489343821145901,
+      "certified_to_tolerance": true,
+      "parameters": [
+        19.999999995078532,
+        0.7853981641961091,
+        0.7853981643790803,
+        0.7853981644872755
+      ],
+      "nodes": 243,
+      "active_cells": 56,
+      "scan_directions": 1002,
+      "tolerance": 0.1,
+      "arithmetic": "float64 with conservative guards; not formal interval arithmetic"
+    },
+    "empty_projection": {
+      "lo": 0.0,
+      "hi": 0.0,
+      "empty_certified": true,
+      "certified_to_tolerance": true,
+      "endpoint_gap": 0.0,
+      "nodes": 19,
+      "active_cells": 0,
+      "scan_directions": 1002
+    }
+  },
+  "seconds": 3.949986219406128,
+  "source_hashes": {
+    "check_results.py": "566a1f6f45d97f5024bd7a60b7f79a4b6678735b9a8a3838c930130b685b63c5",
+    "certified_optimizer.py": "57eb05070ea8e62726ae5f29ad447ada44cac6670a0a8eb2f1328fdfa3c72158",
+    "loading_and_adaptation.py": "f3bd3ac85f155c4db6e11b38b9467d21bc68c55b8d4c4099d95f1eed95c77acd"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "seed": 2026091203,
+  "suite": "S05",
+  "started_utc": "2026-09-13T00:48:10Z",
+  "source_hashes": {
+    "empirical_study/code/run_study.py": "3948484d02447e31adbe02b442f752455c836083876404ac50efc39d71c0f8dd",
+    "empirical_study/code/build_configs.py": "e2125cdeaaf77f8ea07ed4021796f209396ea22fbad6532b77842f16d46bcf56",
+    "empirical_study/code/runtime_study.py": "9aaff9021f1b2b5ae585ed409aad3e152f9952a3743eaed71f4eda1e746982cc",
+    "empirical_study/code/common.py": "c18d6068076cd44e8264c4c7f597843d2722af1ad3b14f4697ed408d6b33424e",
+    "empirical_study/code/tensor_methods.py": "f7e994c3c383f7b6ea4324614597f56e9d1f9c9448ee2f85dbfa0432444607c5",
+    "empirical_study/code/check_implementation.py": "29bf952e29de737fffe92e61e456cef9b374178b5a82127ceeaddbc5b00c7d18",
+    "empirical_study/code/run_all.py": "df5cf13048d69b0c1780494f77e3804fa0c7d1de8138ea6f56e526d2c73c50c5",
+    "empirical_study/configs/runtime.json": "660267b6fe32fe9e78088299950fd1dd53e8706ba62fcc2e9bd45f85187ad188",
+    "empirical_study/configs/cases.json": "858bd2902ecb11852094111c2483b50a30d730500e7dcbd038556d9ef0629125",
+    "empirical_study/simulation_design.md": "71b400f74b626572c40dff779abb0ca4106a2905a7934d569a494ba5702bcd83",
+    "empirical_study/theorem_experiment_map.md": "8b37566c9764d0fe930b57b8afa8deeeb22622d8fff91c923efbc0d19ebe7938",
+    "empirical_study/experiment_registry.md": "9b18bd41b4974877fdd6777c87ec33d38622d33cb9c1bebc8cb155eb564d9056",
+    "high_dimensional_extension/code/methods.py": "2a52a7a469ca1d30eadd3d14bc61606a90f3293e840d25b14c7e905dbcdab4f2",
+    "robust_adaptive_extension/code/methods.py": "96a413953f5f13a2961ad96514ab1725de195db0bda98a45b90d083ac2d3e2b2",
+    "simulations/code/intervals.py": "e491ce25e40bff37e8c772e32fb49bb92740e893b1871079817ed7cd4401c0fd",
+    "certified_weak_signal/code/certified_optimizer.py": "57eb05070ea8e62726ae5f29ad447ada44cac6670a0a8eb2f1328fdfa3c72158"
+  },
+  "python": "3.9.6",
+  "numpy": "2.0.2",
+  "scipy": "1.13.1",
+  "registered_cases": [
+    "S05_000",
+    "S05_001",
+    "S05_002",
+    "S05_003",
+    "S05_004",
+    "S05_005",
+    "S05_006",
+    "S05_007",
+    "S05_008",
+    "S05_009"
+  ],
+  "status": "COMPLETED",
+  "threadpools": [
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 1,
+      "prefix": "libopenblas",
+      "filepath": "/Users/taniyamac/Library/Python/3.9/lib/python/site-packages/scipy/.dylibs/libopenblas.0.dylib",
+      "version": "0.3.27",
+      "threading_layer": "pthreads",
+      "architecture": "neoversen1"
+    }
+  ],
+  "seconds": 1.73563814163208
+}

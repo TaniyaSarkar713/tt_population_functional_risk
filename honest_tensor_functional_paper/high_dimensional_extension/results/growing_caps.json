@@ -1,0 +1,725 @@
+{
+  "seed": 2026091202,
+  "cases": [
+    {
+      "p": 64,
+      "cap": 8,
+      "M": 0.7071067811865476,
+      "signal": "zero",
+      "target": 0.0,
+      "repetitions": 200,
+      "covered": 200,
+      "coverage_wilson_95": [
+        0.9811546736227335,
+        1.0
+      ],
+      "mean_length": 0.5000000000000001,
+      "empirical_mse": 0.0,
+      "theoretical_mse_upper": 0.06250000000000003,
+      "length_lower": 0.1583824562465265,
+      "minimax_rate": 0.25000000000000006,
+      "seconds": 0.010022163391113281,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 64,
+      "cap": 8,
+      "M": 0.7071067811865476,
+      "signal": "boundary",
+      "target": 0.25,
+      "repetitions": 200,
+      "covered": 200,
+      "coverage_wilson_95": [
+        0.9811546736227335,
+        1.0
+      ],
+      "mean_length": 0.5000000000000001,
+      "empirical_mse": 0.0625,
+      "theoretical_mse_upper": 0.06250000000000003,
+      "length_lower": 0.1583824562465265,
+      "minimax_rate": 0.25000000000000006,
+      "seconds": 0.010145902633666992,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 64,
+      "cap": 8,
+      "M": 5.656854249492381,
+      "signal": "zero",
+      "target": 0.0,
+      "repetitions": 200,
+      "covered": 191,
+      "coverage_wilson_95": [
+        0.9167032959981803,
+        0.976147456998507
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 0.9978800131236264,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.2992672793521793,
+      "minimax_rate": 1.0,
+      "seconds": 0.009850740432739258,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 64,
+      "cap": 8,
+      "M": 5.656854249492381,
+      "signal": "boundary",
+      "target": 2.0,
+      "repetitions": 200,
+      "covered": 193,
+      "coverage_wilson_95": [
+        0.9295293884777092,
+        0.9829444579914328
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 0.8993498080696781,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.2992672793521793,
+      "minimax_rate": 1.0,
+      "seconds": 0.010022163391113281,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 64,
+      "cap": 8,
+      "M": 22.627416997969522,
+      "signal": "zero",
+      "target": 0.0,
+      "repetitions": 200,
+      "covered": 186,
+      "coverage_wilson_95": [
+        0.8859451911438936,
+        0.9578478281716571
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 1.1555768468102101,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.2992672793521793,
+      "minimax_rate": 1.0,
+      "seconds": 0.009858131408691406,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 64,
+      "cap": 8,
+      "M": 22.627416997969522,
+      "signal": "boundary",
+      "target": 8.0,
+      "repetitions": 200,
+      "covered": 191,
+      "coverage_wilson_95": [
+        0.9167032959981803,
+        0.976147456998507
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 1.0261293231816426,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.2992672793521793,
+      "minimax_rate": 1.0,
+      "seconds": 0.009707212448120117,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 64,
+      "cap": 32,
+      "M": 0.3535533905932738,
+      "signal": "zero",
+      "target": 0.0,
+      "repetitions": 200,
+      "covered": 200,
+      "coverage_wilson_95": [
+        0.9811546736227335,
+        1.0
+      ],
+      "mean_length": 0.5000000000000001,
+      "empirical_mse": 0.0,
+      "theoretical_mse_upper": 0.06250000000000003,
+      "length_lower": 0.1583824562465265,
+      "minimax_rate": 0.25000000000000006,
+      "seconds": 0.009919881820678711,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 64,
+      "cap": 32,
+      "M": 0.3535533905932738,
+      "signal": "boundary",
+      "target": 0.25,
+      "repetitions": 200,
+      "covered": 200,
+      "coverage_wilson_95": [
+        0.9811546736227335,
+        1.0
+      ],
+      "mean_length": 0.5000000000000001,
+      "empirical_mse": 0.0625,
+      "theoretical_mse_upper": 0.06250000000000003,
+      "length_lower": 0.1583824562465265,
+      "minimax_rate": 0.25000000000000006,
+      "seconds": 0.009481191635131836,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 64,
+      "cap": 32,
+      "M": 2.8284271247461903,
+      "signal": "zero",
+      "target": 0.0,
+      "repetitions": 200,
+      "covered": 191,
+      "coverage_wilson_95": [
+        0.9167032959981803,
+        0.976147456998507
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 1.0546097601847533,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.3155379131582449,
+      "minimax_rate": 1.0,
+      "seconds": 0.009882688522338867,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 64,
+      "cap": 32,
+      "M": 2.8284271247461903,
+      "signal": "boundary",
+      "target": 2.0,
+      "repetitions": 200,
+      "covered": 190,
+      "coverage_wilson_95": [
+        0.9104218518612239,
+        0.972617354399236
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 0.8965088377485222,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.3155379131582449,
+      "minimax_rate": 1.0,
+      "seconds": 0.009415864944458008,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 64,
+      "cap": 32,
+      "M": 11.313708498984761,
+      "signal": "zero",
+      "target": 0.0,
+      "repetitions": 200,
+      "covered": 192,
+      "coverage_wilson_95": [
+        0.923067931799067,
+        0.9795943679338476
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 0.8427001962831308,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.3155379131582449,
+      "minimax_rate": 1.0,
+      "seconds": 0.009844064712524414,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 64,
+      "cap": 32,
+      "M": 11.313708498984761,
+      "signal": "boundary",
+      "target": 8.0,
+      "repetitions": 200,
+      "covered": 187,
+      "coverage_wilson_95": [
+        0.891980920700931,
+        0.9616236453508471
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 0.9467707751644745,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.3155379131582449,
+      "minimax_rate": 1.0,
+      "seconds": 0.009693145751953125,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 1024,
+      "cap": 32,
+      "M": 1.4142135623730951,
+      "signal": "zero",
+      "target": 0.0,
+      "repetitions": 200,
+      "covered": 200,
+      "coverage_wilson_95": [
+        0.9811546736227335,
+        1.0
+      ],
+      "mean_length": 0.5000000000000001,
+      "empirical_mse": 0.0,
+      "theoretical_mse_upper": 0.06250000000000003,
+      "length_lower": 0.1583824562465265,
+      "minimax_rate": 0.25000000000000006,
+      "seconds": 0.011545181274414062,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 1024,
+      "cap": 32,
+      "M": 1.4142135623730951,
+      "signal": "boundary",
+      "target": 0.25,
+      "repetitions": 200,
+      "covered": 200,
+      "coverage_wilson_95": [
+        0.9811546736227335,
+        1.0
+      ],
+      "mean_length": 0.5000000000000001,
+      "empirical_mse": 0.0625,
+      "theoretical_mse_upper": 0.06250000000000003,
+      "length_lower": 0.1583824562465265,
+      "minimax_rate": 0.25000000000000006,
+      "seconds": 0.011451959609985352,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 1024,
+      "cap": 32,
+      "M": 11.313708498984761,
+      "signal": "zero",
+      "target": 0.0,
+      "repetitions": 200,
+      "covered": 193,
+      "coverage_wilson_95": [
+        0.9295293884777092,
+        0.9829444579914328
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 0.9290024376062703,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.2992672793521793,
+      "minimax_rate": 1.0,
+      "seconds": 0.011451959609985352,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 1024,
+      "cap": 32,
+      "M": 11.313708498984761,
+      "signal": "boundary",
+      "target": 2.0,
+      "repetitions": 200,
+      "covered": 191,
+      "coverage_wilson_95": [
+        0.9167032959981803,
+        0.976147456998507
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 0.9235614979804727,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.2992672793521793,
+      "minimax_rate": 1.0,
+      "seconds": 0.01138615608215332,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 1024,
+      "cap": 32,
+      "M": 45.254833995939045,
+      "signal": "zero",
+      "target": 0.0,
+      "repetitions": 200,
+      "covered": 194,
+      "coverage_wilson_95": [
+        0.9361057075454807,
+        0.9861796856598887
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 0.8527521506914796,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.2992672793521793,
+      "minimax_rate": 1.0,
+      "seconds": 0.011764049530029297,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 1024,
+      "cap": 32,
+      "M": 45.254833995939045,
+      "signal": "boundary",
+      "target": 8.0,
+      "repetitions": 200,
+      "covered": 189,
+      "coverage_wilson_95": [
+        0.9042130012276914,
+        0.9690146582965411
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 1.007089345508428,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.2992672793521793,
+      "minimax_rate": 1.0,
+      "seconds": 0.011693954467773438,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 1024,
+      "cap": 128,
+      "M": 0.7071067811865476,
+      "signal": "zero",
+      "target": 0.0,
+      "repetitions": 200,
+      "covered": 200,
+      "coverage_wilson_95": [
+        0.9811546736227335,
+        1.0
+      ],
+      "mean_length": 0.5000000000000001,
+      "empirical_mse": 0.0,
+      "theoretical_mse_upper": 0.06250000000000003,
+      "length_lower": 0.1583824562465265,
+      "minimax_rate": 0.25000000000000006,
+      "seconds": 0.011198997497558594,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 1024,
+      "cap": 128,
+      "M": 0.7071067811865476,
+      "signal": "boundary",
+      "target": 0.25,
+      "repetitions": 200,
+      "covered": 200,
+      "coverage_wilson_95": [
+        0.9811546736227335,
+        1.0
+      ],
+      "mean_length": 0.5000000000000001,
+      "empirical_mse": 0.0625,
+      "theoretical_mse_upper": 0.06250000000000003,
+      "length_lower": 0.1583824562465265,
+      "minimax_rate": 0.25000000000000006,
+      "seconds": 0.011567115783691406,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 1024,
+      "cap": 128,
+      "M": 5.656854249492381,
+      "signal": "zero",
+      "target": 0.0,
+      "repetitions": 200,
+      "covered": 189,
+      "coverage_wilson_95": [
+        0.9042130012276914,
+        0.9690146582965411
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 1.059193370221684,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.3155379131582449,
+      "minimax_rate": 1.0,
+      "seconds": 0.011459112167358398,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 1024,
+      "cap": 128,
+      "M": 5.656854249492381,
+      "signal": "boundary",
+      "target": 2.0,
+      "repetitions": 200,
+      "covered": 191,
+      "coverage_wilson_95": [
+        0.9167032959981803,
+        0.976147456998507
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 0.9513505765897682,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.3155379131582449,
+      "minimax_rate": 1.0,
+      "seconds": 0.011567831039428711,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 1024,
+      "cap": 128,
+      "M": 22.627416997969522,
+      "signal": "zero",
+      "target": 0.0,
+      "repetitions": 200,
+      "covered": 190,
+      "coverage_wilson_95": [
+        0.9104218518612239,
+        0.972617354399236
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 1.0808848340053003,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.3155379131582449,
+      "minimax_rate": 1.0,
+      "seconds": 0.011384725570678711,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 1024,
+      "cap": 128,
+      "M": 22.627416997969522,
+      "signal": "boundary",
+      "target": 8.0,
+      "repetitions": 200,
+      "covered": 193,
+      "coverage_wilson_95": [
+        0.9295293884777092,
+        0.9829444579914328
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 0.9056375712424432,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.3155379131582449,
+      "minimax_rate": 1.0,
+      "seconds": 0.011738777160644531,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 16384,
+      "cap": 128,
+      "M": 2.8284271247461903,
+      "signal": "zero",
+      "target": 0.0,
+      "repetitions": 200,
+      "covered": 200,
+      "coverage_wilson_95": [
+        0.9811546736227335,
+        1.0
+      ],
+      "mean_length": 0.5000000000000001,
+      "empirical_mse": 0.0,
+      "theoretical_mse_upper": 0.06250000000000003,
+      "length_lower": 0.1583824562465265,
+      "minimax_rate": 0.25000000000000006,
+      "seconds": 0.029204130172729492,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 16384,
+      "cap": 128,
+      "M": 2.8284271247461903,
+      "signal": "boundary",
+      "target": 0.25,
+      "repetitions": 200,
+      "covered": 200,
+      "coverage_wilson_95": [
+        0.9811546736227335,
+        1.0
+      ],
+      "mean_length": 0.5000000000000001,
+      "empirical_mse": 0.0625,
+      "theoretical_mse_upper": 0.06250000000000003,
+      "length_lower": 0.1583824562465265,
+      "minimax_rate": 0.25000000000000006,
+      "seconds": 0.028886079788208008,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 16384,
+      "cap": 128,
+      "M": 22.627416997969522,
+      "signal": "zero",
+      "target": 0.0,
+      "repetitions": 200,
+      "covered": 194,
+      "coverage_wilson_95": [
+        0.9361057075454807,
+        0.9861796856598887
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 0.858957068636568,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.2992672793521793,
+      "minimax_rate": 1.0,
+      "seconds": 0.02929997444152832,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 16384,
+      "cap": 128,
+      "M": 22.627416997969522,
+      "signal": "boundary",
+      "target": 2.0,
+      "repetitions": 200,
+      "covered": 189,
+      "coverage_wilson_95": [
+        0.9042130012276914,
+        0.9690146582965411
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 1.0272804813168066,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.2992672793521793,
+      "minimax_rate": 1.0,
+      "seconds": 0.030347824096679688,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 16384,
+      "cap": 128,
+      "M": 90.50966799187809,
+      "signal": "zero",
+      "target": 0.0,
+      "repetitions": 200,
+      "covered": 193,
+      "coverage_wilson_95": [
+        0.9295293884777092,
+        0.9829444579914328
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 0.9015483980641161,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.2992672793521793,
+      "minimax_rate": 1.0,
+      "seconds": 0.03220820426940918,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 16384,
+      "cap": 128,
+      "M": 90.50966799187809,
+      "signal": "boundary",
+      "target": 8.0,
+      "repetitions": 200,
+      "covered": 188,
+      "coverage_wilson_95": [
+        0.8980683070423372,
+        0.9653478057456681
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 1.064901980269739,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.2992672793521793,
+      "minimax_rate": 1.0,
+      "seconds": 0.031844139099121094,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 16384,
+      "cap": 512,
+      "M": 1.4142135623730951,
+      "signal": "zero",
+      "target": 0.0,
+      "repetitions": 200,
+      "covered": 200,
+      "coverage_wilson_95": [
+        0.9811546736227335,
+        1.0
+      ],
+      "mean_length": 0.5000000000000001,
+      "empirical_mse": 0.0,
+      "theoretical_mse_upper": 0.06250000000000003,
+      "length_lower": 0.1583824562465265,
+      "minimax_rate": 0.25000000000000006,
+      "seconds": 0.03195786476135254,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 16384,
+      "cap": 512,
+      "M": 1.4142135623730951,
+      "signal": "boundary",
+      "target": 0.25,
+      "repetitions": 200,
+      "covered": 200,
+      "coverage_wilson_95": [
+        0.9811546736227335,
+        1.0
+      ],
+      "mean_length": 0.5000000000000001,
+      "empirical_mse": 0.0625,
+      "theoretical_mse_upper": 0.06250000000000003,
+      "length_lower": 0.1583824562465265,
+      "minimax_rate": 0.25000000000000006,
+      "seconds": 0.031853675842285156,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 16384,
+      "cap": 512,
+      "M": 11.313708498984761,
+      "signal": "zero",
+      "target": 0.0,
+      "repetitions": 200,
+      "covered": 192,
+      "coverage_wilson_95": [
+        0.923067931799067,
+        0.9795943679338476
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 0.9788157556969534,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.3155379131582449,
+      "minimax_rate": 1.0,
+      "seconds": 0.03183484077453613,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 16384,
+      "cap": 512,
+      "M": 11.313708498984761,
+      "signal": "boundary",
+      "target": 2.0,
+      "repetitions": 200,
+      "covered": 195,
+      "coverage_wilson_95": [
+        0.942821659593358,
+        0.9892752803482386
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 0.8901721844783814,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.3155379131582449,
+      "minimax_rate": 1.0,
+      "seconds": 0.03162789344787598,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 16384,
+      "cap": 512,
+      "M": 45.254833995939045,
+      "signal": "zero",
+      "target": 0.0,
+      "repetitions": 200,
+      "covered": 186,
+      "coverage_wilson_95": [
+        0.8859451911438936,
+        0.9578478281716571
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 1.076245043742548,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.3155379131582449,
+      "minimax_rate": 1.0,
+      "seconds": 0.03184199333190918,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    },
+    {
+      "p": 16384,
+      "cap": 512,
+      "M": 45.254833995939045,
+      "signal": "boundary",
+      "target": 8.0,
+      "repetitions": 200,
+      "covered": 187,
+      "coverage_wilson_95": [
+        0.891980920700931,
+        0.9616236453508471
+      ],
+      "mean_length": 3.9199279690801085,
+      "empirical_mse": 1.0059493497086762,
+      "theoretical_mse_upper": 1.0,
+      "length_lower": 0.3155379131582449,
+      "minimax_rate": 1.0,
+      "seconds": 0.03182578086853027,
+      "simulated_coordinates": "Only the diagonal used by this exact O(p)-access procedure."
+    }
+  ]
+}

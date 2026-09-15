@@ -1,0 +1,18 @@
+{
+  "status": "COMPLETED",
+  "seed": 2026091203,
+  "source_hashes": {
+    "empirical_study/code/run_followups.py": "25dd5c98dbb7e979dc7ac0dfc1bea7b0cbc2827a17ace0adf5b46df85eea2326",
+    "empirical_study/code/common.py": "c18d6068076cd44e8264c4c7f597843d2722af1ad3b14f4697ed408d6b33424e",
+    "empirical_study/code/run_study.py": "3948484d02447e31adbe02b442f752455c836083876404ac50efc39d71c0f8dd",
+    "empirical_study/code/tensor_methods.py": "f7e994c3c383f7b6ea4324614597f56e9d1f9c9448ee2f85dbfa0432444607c5",
+    "empirical_study/configs/followup_cases.json": "20712c860503d6c8b7d57753ced294eca761e451edd39c982db337d6185911e6",
+    "high_dimensional_extension/code/methods.py": "2a52a7a469ca1d30eadd3d14bc61606a90f3293e840d25b14c7e905dbcdab4f2"
+  },
+  "registered_cases": [
+    "S13_000"
+  ],
+  "seconds": 5.163809776306152,
+  "timing_scope": "Combined follow-up wall time; do not sum twice",
+  "post_hoc_registered": true
+}

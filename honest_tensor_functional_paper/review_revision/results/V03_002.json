@@ -1,0 +1,87 @@
+{
+  "case": {
+    "id": "V03_002",
+    "suite": "V03",
+    "law": "gaussian",
+    "n": 512,
+    "m": 16,
+    "M": 20.0,
+    "supplied_c": 20,
+    "actual_c": 20,
+    "B": 1000
+  },
+  "records": [
+    {
+      "case": "V03_002",
+      "suite": "V03",
+      "method": "naive_gaussian",
+      "alpha": 0.05,
+      "repetitions": 1000,
+      "target": 5.0,
+      "coverage": 0.0,
+      "covered": 0,
+      "coverage_wilson_95": [
+        2.168404344971009e-19,
+        0.003826758485555125
+      ],
+      "coverage_mcse": 0.0,
+      "length": 0.17323797804374408,
+      "length_se": 0.0,
+      "mse": 2441408.0310636796,
+      "mse_se": 4.196732582918356,
+      "bias": 1562.5005693637236,
+      "bias_se": 0.0013429530969230692,
+      "paired_length": 0.0,
+      "paired_length_se": 0.0,
+      "paired_coverage": 0.0,
+      "paired_coverage_se": 0.0,
+      "estimator_id": "naive_gaussian_scalar",
+      "estimator_alpha": null,
+      "coverage_policy": "four endpoint ULPs",
+      "status": "COMPLETED"
+    },
+    {
+      "case": "V03_002",
+      "suite": "V03",
+      "method": "bounded_row_median",
+      "alpha": 0.05,
+      "repetitions": 1000,
+      "target": 5.0,
+      "coverage": 1.0,
+      "covered": 1000,
+      "coverage_wilson_95": [
+        0.996173241514445,
+        1.0
+      ],
+      "coverage_mcse": 0.0,
+      "length": 5.2100073095869135,
+      "length_se": 0.0,
+      "mse": 0.10659028954805637,
+      "mse_se": 0.000379684763932096,
+      "bias": -0.3259660697647904,
+      "bias_se": 0.0005802996276148984,
+      "paired_length": 5.036769331543169,
+      "paired_length_se": 0.0,
+      "paired_coverage": 1.0,
+      "paired_coverage_se": 0.0,
+      "estimator_id": "bounded_row_median_scalar",
+      "estimator_alpha": null,
+      "coverage_policy": "four endpoint ULPs",
+      "status": "COMPLETED"
+    }
+  ],
+  "extra": {
+    "event_coverage": 1.0,
+    "event_wilson": [
+      0.996173241514445,
+      1.0
+    ],
+    "mean_scale": 1.4142135623730956,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation.",
+    "blocks": 185,
+    "block_size": 2,
+    "threshold": 1.414213562373095
+  },
+  "seed": 2026091309
+}

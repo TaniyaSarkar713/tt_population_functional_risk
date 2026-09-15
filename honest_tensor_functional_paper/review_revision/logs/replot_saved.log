@@ -1,0 +1,4 @@
+/Users/taniyamac/.matplotlib is not a writable directory
+Matplotlib created a temporary cache directory at /var/folders/w9/k336b2295t5d0_h6n1cs55m40000gn/T/matplotlib-5tw2ll2l because there was an issue with the default path (/Users/taniyamac/.matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+Matplotlib is building the font cache; this may take a moment.
+Generated 10 figures in PDF, SVG and inspection PNG formats.

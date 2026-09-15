@@ -1,0 +1,7 @@
+{
+  "tests": 91,
+  "holm_rejections": 0,
+  "min_raw_p": 0.08673217838486172,
+  "excluded": "deliberately misspecified diagonal model and uncorrected projection diagnostic",
+  "interpretation": "A screen for discrepancies, not verification of uniform coverage."
+}

@@ -1,0 +1,105 @@
+# Scientific revision summary
+
+**Verdict: B — Near ready as a focused theory paper.** Thirteen of 19 tracked concerns are resolved, one is partially resolved and five remain unresolved. All identified P0/P1 review items have concrete scientific or manuscript remedies. The remaining four general theory problems and real-data extension are not marked solved. The complete response matrix, technical dependency audit and second adversarial review accompany this summary.
+
+## A. Complete review registry
+
+The registry was created after reading the full review and before scientific edits. It preserves F01–F10, adds the cross-cutting novelty, precision, data and input-cost concerns, and separately tracks T01–T05. See [issue registry](issue_registry.md), [full machine-readable matrix](tables/issue_registry.csv) and [individual responses](response_to_review.md). The [40-item crosswalk](guideline_coverage.md) records every instruction in the revision protocol.
+
+## B. Critical fixes
+
+**F01: coverage evaluation.** A target-scaled tolerance counted a genuine 90% miss. The new policy permits only four representable endpoint steps, retains strict counts and distinguishes evaluation rounding from statistical slack. All 303 saved interval-producing cases were reevaluated. The two affected XCH/oracle rows in S03_007 change from 134/150 to 133/150; they share one underlying observation. All original endpoints remain unchanged. The earlier exact-noise replay and the new scale checks support the correction.
+
+**F03: one current submission.** The revised main paper presents final all-budget rates, the tensor-specific mechanism and current limitations. A complete technical supplement contains all retained proofs and R1. A current empirical report contains corrected saved results and new experiments. The reading order and status ledger distinguish this revision from all preserved earlier drafts.
+
+## C. Major fixes
+
+- **F02:** controlled component comparisons replace the confounded causal interpretation. Pure bias removal has no effect when fallback is selected; pure fallback removal retains intersections. The original combined diagnostic remains visible under an accurate name.
+- **F04:** R1 introduces a separate scalar companion with a complete risk proof. The saved S03_002 MSE falls from 12,084,661.379 to 0.147776 on the same 500 observations, with unchanged intervals. Old rare-event losses remain available. This does not establish P1 minimax squared risk.
+- **F05:** a ten-level fixed-M sweep separates increasing signal from a changing supplied class, with a paired norm-comparable branch.
+- **F06:** the XCH method is mapped to its tensor-PCA source, and case applicability is separate from guarantee type. Unknown regularity constants remain explicitly unverified; shorter regular-signal comparator intervals are retained.
+- **F07:** the ideal residual optimizer, binary float64 search and executable conservative methods are explicitly distinguished. A fixed-loading study has 7/600 endpoint certificates and retains 593 unresolved solves.
+- **N01:** the paper's novelty rests on the full tensor likelihood, cubic harmonic lower bound and ordered all-budget residual argument. Classical sparse-functional and honest-adaptation contributions are credited.
+
+## D. Theory changes
+
+No central theorem rate or original assumption was silently changed. The status ledger contains **59 retained PROVED results plus one new PROVED proposition, R1**. These are complete internally checked supplied proofs, not formal verification or external peer review.
+
+R1 assumes a direct Gaussian scalar observation with valid structural range and uses the existing direct/structural intersection. It bounds unconditional squared risk by C_alpha min(h²,tau²), without pilot-success conditioning, separation or candidate independence. At h≤tau it uses zero; otherwise it uses the intersection midpoint, with clipped direct estimation for an empty/zero sentinel. The complete pointwise tau² r/p risk claim remains open.
+
+The assumption audit explains which arguments survive joint sub-Gaussian errors, finite-variance independent replicates, known row corruption and independent Gaussian residual scale. It also identifies where arbitrary dependence, unknown directional calibration, selected loadings and underestimated bounds fail. The independent-scale and row-corruption theorems were already available; implementing and testing them is an empirical revision, not a new robustness theorem.
+
+## E. New simulations and reevaluation
+
+There are **87,200 new independent datasets in 55 registered configurations**: 10,000 fixed-budget/ablation draws; 200 binary-model observations shared across three budgets, giving 600 solves; 19,000 row-corruption/noise draws; 54,000 variance-calibration draws; and 4,000 larger pointwise draws. The new summaries contain 612 method/level rows.
+
+The original **1,084,640 saved datasets are preserved**, not recounted as new. All 303 interval cases were reevaluated under the new event/estimator definitions. The 15 remaining stochastic cases measure calibration events and have no affected intervals. The original study's 84 analytic-only configurations are still labeled analytic. All ten saved-study figures were regenerated; six new vector figures display the final rates and revision experiments. Numerical main-text statements and tables are generated from checked outputs.
+
+Negative findings remain: conservative calibrated intervals, weak-signal XCH failure outside certified regularity, severe corruption-cap failure, raw catastrophic midpoint losses, and 593 unresolved optimizer searches. Heavy-tail MSE sample diagnostics are not used as justified fourth-moment error bars. Larger pointwise results are reported with Wilson intervals and rate-normalized lengths rather than an invented exact asymptotic slope.
+
+## F. Real-data changes
+
+No defensible repeated-tensor dataset, independent sampling unit, prescribed contrast and noise/bound calibration were established from the supplied materials. No real-data or LLM inference result was fabricated. The focused manuscript remains theoretical with simulations. The broader application request remains unresolved and requires a scientifically justified dataset/model design.
+
+## G. Manuscript and artifact changes
+
+Read [main paper](paper/main.pdf), [complete technical supplement](paper/technical_supplement.pdf) and [empirical supplement](empirical_report.pdf). The main text follows the final logical argument; preliminary bounds and full proofs are in the supplement. The abstract was generated after the scientific fixes and new results stabilized. The notation dictionary separates dimension, degree, diagonal-envelope coefficients, approximation error and pilot bounds. The current API returns interval and scalar estimate separately.
+
+The original project, review, simulations and prior uncommitted work are preserved. The new stage is isolated in review_revision; the root README and requirements ledger are updated to point to the final state. No commit, push, external message or submission was made.
+
+## H. Remaining limitations
+
+| Remaining issue | Classification | Status |
+|---|---|---|
+| General efficient fixed-cap diffuse weak-signal minimax computation | FUTURE WORK; SUBMISSION RISK if advertised as a computational method | NOT RESOLVED |
+| Intermediate growing-cap sharp rates | FUTURE WORK | NOT RESOLVED |
+| Arbitrary loading profiles beyond matched regimes | FUTURE WORK | NOT RESOLVED |
+| Complete pointwise/TT adaptation and optimal SNR | FUTURE WORK | NOT RESOLVED |
+| Broader unknown-scale/dependent/selected-loading calibration | FUTURE WORK | PARTIALLY RESOLVED through available special-case calibration only |
+| A valid real-data application | ACCEPTABLE LIMITATION for a theory paper; unresolved broader task | NOT RESOLVED |
+| Breadth and external novelty priority | SUBMISSION RISK | Requires specialist/latest-version assessment |
+| Conservative constants, finite Monte Carlo precision and numerical arithmetic | ACCEPTABLE LIMITATION | Explicitly measured and reported |
+
+No known blocking correctness issue remains for the focused claims. This is not a statement that a complete efficient arbitrary-loading adaptive theory has been achieved.
+
+## I. Revised mathematical contribution
+
+For a normalized flat orthogonal contrast in the full Gaussian tensor mean experiment, fixed order K≥3, positive fixed Tucker or TT caps, known tau and supplied M, write ell=log(ep) and x=M/(tau sqrt(ell)). Honest expected length at zero and worst case both have order
+
+$$\tau\sqrt{\ell/p}\min\{x,1+\log_+x,\ell\}\quad(K=3),$$
+
+and $\tau\sqrt{\ell/p}\min\{x,1\}$ for K≥4; minimax squared risk is the square of the length rate. The tensor-specific content is the full-data residual and harmonic-mixture argument. Special growing-cap/loading results and adaptation boundaries broaden this claim within explicit limits. R1 repairs the estimator output of an executable interval while asserting only its proved noise-scale risk.
+
+## J. Journal recommendation
+
+**Bernoulli is the best current target in my assessment**, provided a specialist confirms the novelty and significance of the full-data cubic/all-budget argument. Its stated emphasis on theoretical mathematical statistics is consistent with this focused formulation. This is a fit judgment, not an acceptance prediction. [Bernoulli aims and scope](https://www.bernoullisociety.org/publications/bernoulli-journal/bernoulli-journal-aims-and-scope).
+
+**Electronic Journal of Statistics is a credible alternative** for the combination of detailed theory, explicit computational scope and reproducible simulations; it publishes theoretical, computational and applied statistics. [IMS description of EJS](https://imstat.org/journals-and-publications/electronic-journal-of-statistics/).
+
+The other requested venue assessments are editorial judgments about this manuscript rather than statements of journal policy:
+
+| Venue | Current fit assessment |
+|---|---|
+| Annals of Statistics | Possible but ambitious; breadth and priority of the mathematical mechanism would need especially persuasive specialist support. The long auxiliary theory should not obscure the central advance. |
+| JASA — Theory and Methods | Greater risk from lack of a general implementable optimal method or a defensible application. A stronger computational result would materially improve fit. |
+| JRSS-B | Similar concern about broadly usable methodology and scientific relevance; current theory-led framing is narrower. |
+| Biometrika | A sharply distilled main theorem and mechanism could fit a concise theoretical contribution, but the broad multi-extension narrative should remain in supplements. |
+| Bernoulli | Strongest match to the present specialized theoretical emphasis, conditional on novelty/significance. |
+| EJS | Natural alternative with room for technical detail and transparent reproducibility. |
+
+## Scientific before → after
+
+| Component | Before revision | After revision |
+|---|---|---|
+| Coverage evaluation | Target-scaled tolerance counted one real miss twice across paired methods | Bounded-ULP policy, strict counts, all affected observations reevaluated |
+| Scalar estimation | Midpoint could incur order-M² sentinel loss | Separate R1 estimator with unconditional noise-scale bound; raw losses retained |
+| Pointwise theorem | Expected length only | Same expected-length theorem; no unsupported MSE upgrade |
+| Ablation | Bias, fallback/intersection and allocation changed together | Paired isolated interventions and accurately named combined diagnostic |
+| Signal sweep | Signal amplitude and supplied M changed together | Fixed-M sweep plus paired norm-comparable branch |
+| Computational benchmark | Loading/tolerance changes confounded budget comparisons | Same loading, direction, class and tolerance; all 600 gaps recorded |
+| Robust refinements | Row-corruption and residual-scale propositions lacked direct tests | 73,000 new datasets testing those propositions and explicit violations |
+| Large-p precision | 150–300 draws at largest dimensions | 1,000 new independent draws in each larger case; Wilson uncertainty |
+| Submission structure | Chronological main draft plus later supplements | One focused main paper, complete proof supplement and current empirical report |
+| Theory scope | Four broad open problems remained | Still open; now separated from resolved review defects and the new R1 proposition |
+
+The [second adversarial review](second_review.md) contains the full readiness checkpoint and strongest remaining skeptical objection. The [validation log](logs/final_validation.json) records newly run checks separately from preserved prior evidence.

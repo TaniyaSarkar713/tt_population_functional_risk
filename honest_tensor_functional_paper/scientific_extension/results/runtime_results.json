@@ -1,0 +1,199 @@
+{
+  "seed": 2026091498,
+  "calls": 36,
+  "warmups": 0,
+  "results": [
+    {
+      "geometry": "tucker",
+      "order": 3,
+      "p": 32,
+      "rank": 1,
+      "entries": 32768,
+      "input_tensor_mebibytes": 0.25,
+      "seconds": [
+        0.004988207999999994,
+        0.00430333300000002,
+        0.004798250000000004
+      ],
+      "median_seconds": 0.004798250000000004,
+      "selected": "structural",
+      "scope": "Full public API including loading SVDs and artificial splitting; fixed observation per shape, one library thread; not a weak-minimax benchmark."
+    },
+    {
+      "geometry": "tucker",
+      "order": 3,
+      "p": 32,
+      "rank": 4,
+      "entries": 32768,
+      "input_tensor_mebibytes": 0.25,
+      "seconds": [
+        0.004444666999999958,
+        0.004278375000000001,
+        0.004292374999999959
+      ],
+      "median_seconds": 0.004292374999999959,
+      "selected": "structural",
+      "scope": "Full public API including loading SVDs and artificial splitting; fixed observation per shape, one library thread; not a weak-minimax benchmark."
+    },
+    {
+      "geometry": "tucker",
+      "order": 3,
+      "p": 64,
+      "rank": 1,
+      "entries": 262144,
+      "input_tensor_mebibytes": 2.0,
+      "seconds": [
+        0.050706209,
+        0.04639016700000004,
+        0.047288708999999984
+      ],
+      "median_seconds": 0.047288708999999984,
+      "selected": "structural",
+      "scope": "Full public API including loading SVDs and artificial splitting; fixed observation per shape, one library thread; not a weak-minimax benchmark."
+    },
+    {
+      "geometry": "tucker",
+      "order": 3,
+      "p": 64,
+      "rank": 4,
+      "entries": 262144,
+      "input_tensor_mebibytes": 2.0,
+      "seconds": [
+        0.04617983400000003,
+        0.04551462500000003,
+        0.04487724999999998
+      ],
+      "median_seconds": 0.04551462500000003,
+      "selected": "structural",
+      "scope": "Full public API including loading SVDs and artificial splitting; fixed observation per shape, one library thread; not a weak-minimax benchmark."
+    },
+    {
+      "geometry": "tucker",
+      "order": 3,
+      "p": 128,
+      "rank": 1,
+      "entries": 2097152,
+      "input_tensor_mebibytes": 16.0,
+      "seconds": [
+        0.743293333,
+        0.7507174159999999,
+        0.6881559159999999
+      ],
+      "median_seconds": 0.743293333,
+      "selected": "structural",
+      "scope": "Full public API including loading SVDs and artificial splitting; fixed observation per shape, one library thread; not a weak-minimax benchmark."
+    },
+    {
+      "geometry": "tucker",
+      "order": 3,
+      "p": 128,
+      "rank": 4,
+      "entries": 2097152,
+      "input_tensor_mebibytes": 16.0,
+      "seconds": [
+        0.71029425,
+        0.6831493339999999,
+        0.6199558330000006
+      ],
+      "median_seconds": 0.6831493339999999,
+      "selected": "structural",
+      "scope": "Full public API including loading SVDs and artificial splitting; fixed observation per shape, one library thread; not a weak-minimax benchmark."
+    },
+    {
+      "geometry": "tt",
+      "order": 4,
+      "p": 8,
+      "rank": 1,
+      "entries": 4096,
+      "input_tensor_mebibytes": 0.03125,
+      "seconds": [
+        0.0010989590000001215,
+        0.0009591659999994562,
+        0.0008647920000006692
+      ],
+      "median_seconds": 0.0009591659999994562,
+      "selected": "structural",
+      "scope": "Full public API including loading SVDs and artificial splitting; fixed observation per shape, one library thread; not a weak-minimax benchmark."
+    },
+    {
+      "geometry": "tt",
+      "order": 4,
+      "p": 8,
+      "rank": 4,
+      "entries": 4096,
+      "input_tensor_mebibytes": 0.03125,
+      "seconds": [
+        0.0010678750000003845,
+        0.0010770000000004387,
+        0.001064000000000398
+      ],
+      "median_seconds": 0.0010678750000003845,
+      "selected": "structural",
+      "scope": "Full public API including loading SVDs and artificial splitting; fixed observation per shape, one library thread; not a weak-minimax benchmark."
+    },
+    {
+      "geometry": "tt",
+      "order": 4,
+      "p": 16,
+      "rank": 1,
+      "entries": 65536,
+      "input_tensor_mebibytes": 0.5,
+      "seconds": [
+        0.021901333000000633,
+        0.02153387499999937,
+        0.020972666999999667
+      ],
+      "median_seconds": 0.02153387499999937,
+      "selected": "structural",
+      "scope": "Full public API including loading SVDs and artificial splitting; fixed observation per shape, one library thread; not a weak-minimax benchmark."
+    },
+    {
+      "geometry": "tt",
+      "order": 4,
+      "p": 16,
+      "rank": 4,
+      "entries": 65536,
+      "input_tensor_mebibytes": 0.5,
+      "seconds": [
+        0.02409012499999985,
+        0.022958749999999917,
+        0.021623167000000443
+      ],
+      "median_seconds": 0.022958749999999917,
+      "selected": "structural",
+      "scope": "Full public API including loading SVDs and artificial splitting; fixed observation per shape, one library thread; not a weak-minimax benchmark."
+    },
+    {
+      "geometry": "tt",
+      "order": 4,
+      "p": 24,
+      "rank": 1,
+      "entries": 331776,
+      "input_tensor_mebibytes": 2.53125,
+      "seconds": [
+        0.13765533300000055,
+        0.13937812500000035,
+        0.26954845900000013
+      ],
+      "median_seconds": 0.13937812500000035,
+      "selected": "structural",
+      "scope": "Full public API including loading SVDs and artificial splitting; fixed observation per shape, one library thread; not a weak-minimax benchmark."
+    },
+    {
+      "geometry": "tt",
+      "order": 4,
+      "p": 24,
+      "rank": 4,
+      "entries": 331776,
+      "input_tensor_mebibytes": 2.53125,
+      "seconds": [
+        0.15280387500000003,
+        0.1531608749999993,
+        0.1589666249999997
+      ],
+      "median_seconds": 0.1531608749999993,
+      "selected": "structural",
+      "scope": "Full public API including loading SVDs and artificial splitting; fixed observation per shape, one library thread; not a weak-minimax benchmark."
+    }
+  ]
+}

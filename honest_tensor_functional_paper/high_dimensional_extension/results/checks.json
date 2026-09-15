@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "seed": 2026091201,
+  "checks": {
+    "exact_hypergeometric_moments": 60,
+    "attained_structural_bounds": 9,
+    "dyadic_profiles_and_tail_bounds": 32,
+    "pointwise_bias_and_allocation_cases": 60,
+    "economy_projection_equivalences": 50,
+    "weighted_low_degree_moments": 9,
+    "strong_pointwise_geometry": 4
+  },
+  "growing_target_ratio_range": [
+    0.47238072707743883,
+    1.0
+  ],
+  "strong_examples": [
+    {
+      "p": 8,
+      "cap": 1,
+      "width": 2.874088819276949,
+      "rate": 0.3535533905932738
+    },
+    {
+      "p": 8,
+      "cap": 3,
+      "width": 4.425571294239489,
+      "rate": 0.6123724356957945
+    },
+    {
+      "p": 16,
+      "cap": 1,
+      "width": 1.9981423325953074,
+      "rate": 0.25
+    },
+    {
+      "p": 16,
+      "cap": 4,
+      "width": 4.0128589335836296,
+      "rate": 0.5
+    }
+  ],
+  "seconds": 0.03516221046447754,
+  "source_hashes": {
+    "methods.py": "2a52a7a469ca1d30eadd3d14bc61606a90f3293e840d25b14c7e905dbcdab4f2",
+    "check_results.py": "21bb09bd435cce7739d8ff21dff5d677e8350914b7cee62ee1f6d43a13544af1"
+  }
+}

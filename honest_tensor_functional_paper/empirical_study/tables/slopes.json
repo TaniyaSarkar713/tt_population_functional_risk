@@ -1,0 +1,195 @@
+[
+  {
+    "label": "G1 fixed-M structural length vs p",
+    "reference_exponent": -0.25,
+    "cases": [
+      "S01_048",
+      "S01_049",
+      "S01_050",
+      "S01_051",
+      "S01_052",
+      "S01_053"
+    ],
+    "x": [
+      64,
+      256,
+      1024,
+      4096,
+      16384,
+      65536
+    ],
+    "y": [
+      0.7071067811865478,
+      0.5,
+      0.3535533905932739,
+      0.25,
+      0.17677669529663695,
+      0.125
+    ],
+    "slope": -0.25000000000000017,
+    "slope_se": null,
+    "uncertainty": "Descriptive fit to deterministic curve"
+  },
+  {
+    "label": "G1 noise-branch length vs n",
+    "reference_exponent": -0.5,
+    "cases": [
+      "S01_039",
+      "S01_041",
+      "S01_043",
+      "S01_045",
+      "S01_047"
+    ],
+    "x": [
+      4,
+      16,
+      64,
+      256,
+      1024
+    ],
+    "y": [
+      1.9599639845400547,
+      0.9799819922700274,
+      0.4899909961350137,
+      0.24499549806750665,
+      0.12249774903375332
+    ],
+    "slope": -0.5000000000000003,
+    "slope_se": null,
+    "uncertainty": "Descriptive fit to deterministic curve"
+  },
+  {
+    "label": "G1 noise-branch RMSE vs n",
+    "reference_exponent": -0.5,
+    "cases": [
+      "S01_039",
+      "S01_041",
+      "S01_043",
+      "S01_045",
+      "S01_047"
+    ],
+    "x": [
+      4,
+      16,
+      64,
+      256,
+      1024
+    ],
+    "y": [
+      0.49456447770149475,
+      0.25506472904548355,
+      0.12621036558860776,
+      0.06198032362723789,
+      0.03177956220175568
+    ],
+    "slope": -0.4979694173697114,
+    "slope_se": 0.002269365920715981,
+    "uncertainty": "Delta-method weighted log regression using independent-case Monte Carlo mean SEs; descriptive finite-grid slope"
+  },
+  {
+    "label": "P1 length vs p: cap 1",
+    "reference_exponent": -0.5,
+    "cases": [
+      "S03_000",
+      "S03_002",
+      "S03_004",
+      "S03_006"
+    ],
+    "x": [
+      8,
+      16,
+      32,
+      64
+    ],
+    "y": [
+      2.6792046422630738,
+      1.951695232793165,
+      1.3888999028197335,
+      1.0010657057461019
+    ],
+    "slope": -0.4744701319735823,
+    "slope_se": 0.005280311141068086,
+    "uncertainty": "Delta-method weighted log regression using independent-case Monte Carlo mean SEs; descriptive finite-grid slope"
+  },
+  {
+    "label": "P1 length vs p: cap ceil(sqrt(p))",
+    "reference_exponent": -0.25,
+    "cases": [
+      "S03_001",
+      "S03_003",
+      "S03_005",
+      "S03_007"
+    ],
+    "x": [
+      8,
+      16,
+      32,
+      64
+    ],
+    "y": [
+      3.8404375867914204,
+      3.4202431323990456,
+      3.047463148290602,
+      2.5729607543349267
+    ],
+    "slope": -0.17908369139106148,
+    "slope_se": 0.007104268948087671,
+    "uncertainty": "Delta-method weighted log regression using independent-case Monte Carlo mean SEs; descriptive finite-grid slope"
+  },
+  {
+    "label": "Threshold raw length vs p, K=3 (log factor retained)",
+    "reference_exponent": -0.16666666666666666,
+    "cases": [
+      "S02_002",
+      "S02_005",
+      "S02_008",
+      "S02_011",
+      "S02_014"
+    ],
+    "x": [
+      256,
+      1024,
+      4096,
+      16384,
+      65536
+    ],
+    "y": [
+      1.6258123703531888,
+      1.3208438575105907,
+      1.0700119244513575,
+      0.8648769524970832,
+      0.6978150433408762
+    ],
+    "slope": -0.1525690731978198,
+    "slope_se": null,
+    "uncertainty": "Descriptive fit to deterministic curve"
+  },
+  {
+    "label": "Threshold raw length vs p, K=4 (log factor retained)",
+    "reference_exponent": -0.25,
+    "cases": [
+      "S02_024",
+      "S02_027",
+      "S02_030",
+      "S02_033",
+      "S02_036"
+    ],
+    "x": [
+      256,
+      1024,
+      4096,
+      16384,
+      65536
+    ],
+    "y": [
+      1.4658537340339495,
+      1.073401563367233,
+      0.7826506108633402,
+      0.5687435549677085,
+      0.41218814196601533
+    ],
+    "slope": -0.22885360979672956,
+    "slope_se": null,
+    "uncertainty": "Descriptive fit to deterministic curve"
+  }
+]

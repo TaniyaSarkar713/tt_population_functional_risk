@@ -1,0 +1,1 @@
+{'status': 'PASS', 'checks': 4024, 'failures': [], 'baseline': {'files': 1514, 'unchanged': 1512, 'changed': ['requirements.md', 'README.md']}, 'new_datasets': 87200, 'new_summary_rows': 612, 'scope': 'New validations of current artifacts. Prior 59-result mathematical review retained; no formal proof or interval arithmetic claim.'}

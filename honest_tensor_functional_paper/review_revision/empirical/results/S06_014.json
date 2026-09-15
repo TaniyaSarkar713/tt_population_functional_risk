@@ -1,0 +1,157 @@
+{
+  "case": {
+    "id": "S06_014",
+    "suite": "S06",
+    "n": 1024,
+    "law": "ar1",
+    "B": 500
+  },
+  "records": [
+    {
+      "case": "S06_014",
+      "suite": "S06",
+      "method": "directional_mom",
+      "alpha": 0.1,
+      "repetitions": 500,
+      "covered": 500,
+      "coverage": 1.0,
+      "coverage_wilson_95": [
+        0.9923756595384479,
+        1.0
+      ],
+      "coverage_mcse": 0.0,
+      "metric": "Simultaneous full-net feasibility",
+      "guarantee": "outside_tail_or_replication_assumption",
+      "status": "NEEDS CHECK"
+    },
+    {
+      "case": "S06_014",
+      "suite": "S06",
+      "method": "directional_mom",
+      "alpha": 0.05,
+      "repetitions": 500,
+      "covered": 500,
+      "coverage": 1.0,
+      "coverage_wilson_95": [
+        0.9923756595384479,
+        1.0
+      ],
+      "coverage_mcse": 0.0,
+      "metric": "Simultaneous full-net feasibility",
+      "guarantee": "outside_tail_or_replication_assumption",
+      "status": "NEEDS CHECK"
+    },
+    {
+      "case": "S06_014",
+      "suite": "S06",
+      "method": "directional_mom",
+      "alpha": 0.01,
+      "repetitions": 500,
+      "covered": 500,
+      "coverage": 1.0,
+      "coverage_wilson_95": [
+        0.9923756595384479,
+        1.0
+      ],
+      "coverage_mcse": 0.0,
+      "metric": "Simultaneous full-net feasibility",
+      "guarantee": "outside_tail_or_replication_assumption",
+      "status": "NEEDS CHECK"
+    },
+    {
+      "case": "S06_014",
+      "suite": "S06",
+      "method": "gaussian_mean_scan",
+      "alpha": 0.1,
+      "repetitions": 500,
+      "covered": 333,
+      "coverage": 0.666,
+      "coverage_wilson_95": [
+        0.6235325314226418,
+        0.7059361875441229
+      ],
+      "coverage_mcse": 0.02109236828807993,
+      "metric": "Simultaneous full-net feasibility",
+      "guarantee": "outside_tail_or_replication_assumption",
+      "status": "NEEDS CHECK"
+    },
+    {
+      "case": "S06_014",
+      "suite": "S06",
+      "method": "gaussian_mean_scan",
+      "alpha": 0.05,
+      "repetitions": 500,
+      "covered": 361,
+      "coverage": 0.722,
+      "coverage_wilson_95": [
+        0.6811514003636959,
+        0.7594633924713748
+      ],
+      "coverage_mcse": 0.020035768016225385,
+      "metric": "Simultaneous full-net feasibility",
+      "guarantee": "outside_tail_or_replication_assumption",
+      "status": "NEEDS CHECK"
+    },
+    {
+      "case": "S06_014",
+      "suite": "S06",
+      "method": "gaussian_mean_scan",
+      "alpha": 0.01,
+      "repetitions": 500,
+      "covered": 410,
+      "coverage": 0.82,
+      "coverage_wilson_95": [
+        0.7839253300173655,
+        0.851195092087241
+      ],
+      "coverage_mcse": 0.017181385275931625,
+      "metric": "Simultaneous full-net feasibility",
+      "guarantee": "outside_tail_or_replication_assumption",
+      "status": "NEEDS CHECK"
+    }
+  ],
+  "extra": {
+    "scan_directions": 1002,
+    "params": [
+      {
+        "1": {
+          "b": 9,
+          "k": 113,
+          "threshold": 0.3762883473534389
+        },
+        "2": {
+          "b": 15,
+          "k": 68,
+          "threshold": 0.48507125007266594
+        }
+      },
+      {
+        "1": {
+          "b": 9,
+          "k": 113,
+          "threshold": 0.3762883473534389
+        },
+        "2": {
+          "b": 17,
+          "k": 60,
+          "threshold": 0.5163977794943222
+        }
+      },
+      {
+        "1": {
+          "b": 9,
+          "k": 113,
+          "threshold": 0.3762883473534389
+        },
+        "2": {
+          "b": 19,
+          "k": 53,
+          "threshold": 0.5494422557947561
+        }
+      }
+    ],
+    "mean_seconds": 0.006349137047999932,
+    "max_threshold_ratio": 0.641727254195161,
+    "scope": "Full-net event component only; general robust interval optimizer remains unimplemented."
+  }
+}

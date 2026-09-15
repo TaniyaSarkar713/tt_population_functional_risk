@@ -1,0 +1,66 @@
+[
+  {
+    "id": "AB1",
+    "status": "PROVED",
+    "statement_scope": "Fixed caps, all budgets, every prescribed orthogonal profile",
+    "proof": "theory/results.md",
+    "implementation": "code/methods.py::loading_envelope (proxy only)",
+    "novelty_scope": "New derivation within project; independent priority review outstanding"
+  },
+  {
+    "id": "AB2",
+    "status": "PROVED",
+    "statement_scope": "Fixed noncritical logarithmic decay exponent, all budgets",
+    "proof": "theory/results.md",
+    "implementation": "code/methods.py::log_profile_rate (proxy only)",
+    "novelty_scope": "New matched families within project; independent priority review outstanding"
+  },
+  {
+    "id": "P2",
+    "status": "PROVED",
+    "statement_scope": "Uniform noise-scale scalar risk plus conditional strong-pointwise upper risk",
+    "proof": "theory/results.md",
+    "implementation": "code/methods.py::cap_interval, safe_scalar",
+    "novelty_scope": "New safeguard and supplied risk argument"
+  },
+  {
+    "id": "P3",
+    "status": "PROVED",
+    "statement_scope": "Strong aligned saturated Tucker or one saturated TT cut",
+    "proof": "theory/results.md",
+    "implementation": "code/methods.py::cap_interval",
+    "novelty_scope": "New geometry/risk extension; ordinary SVD subspace perturbation"
+  },
+  {
+    "id": "P4",
+    "status": "PROVED",
+    "statement_scope": "Rank-one prescribed minor at a strong axis mean",
+    "proof": "theory/results.md",
+    "implementation": "code/methods.py::rank_one_minor_interval",
+    "novelty_scope": "Rank-one geometric specialization of elementary ratio confidence sets"
+  },
+  {
+    "id": "D2",
+    "status": "PROVED",
+    "statement_scope": "Exact diagonal sparse mean, all caps and budgets",
+    "proof": "theory/results.md",
+    "implementation": "code/methods.py::diagonal_sparse",
+    "novelty_scope": "Classical sparse-functional rate; explicit finite-sample interval specialization"
+  },
+  {
+    "id": "B1",
+    "status": "PROVED",
+    "statement_scope": "Independent bounded subjects, independently selected projection and calibrated bias",
+    "proof": "theory/results.md",
+    "implementation": "code/methods.py::corrected_projection_interval",
+    "novelty_scope": "Application of Maurer-Pontil, not a new concentration inequality"
+  },
+  {
+    "id": "B1a",
+    "status": "PROVED",
+    "statement_scope": "Fixed strata, fixed mixture target, independent held-out subjects",
+    "proof": "theory/results.md",
+    "implementation": "code/analyze_eeg.py",
+    "novelty_scope": "Union-bound corollary of B1"
+  }
+]

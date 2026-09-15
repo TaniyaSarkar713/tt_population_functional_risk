@@ -1,0 +1,62 @@
+{
+  "status": "PASS",
+  "checks": 6205,
+  "baseline_files": 2902,
+  "unchanged_baseline": 2899,
+  "changed_baseline": [
+    "README.md",
+    "requirements.md",
+    "summary.md"
+  ],
+  "missing_baseline": [],
+  "artifact_files": 229,
+  "pdfs": [
+    {
+      "path": "paper/report.pdf",
+      "pages": 10,
+      "sha256": "bb2b9daec37f9b939918858c3884305263fcbfe8938c6f9f40059aab037ef008"
+    },
+    {
+      "path": "paper/technical_supplement.pdf",
+      "pages": 10,
+      "sha256": "32e39a12cbc6003d63697f427f31217d3aaf3a601c641064f5c045c4a383bf1a"
+    },
+    {
+      "path": "figures/computation.pdf",
+      "pages": 1,
+      "sha256": "be7bf33ccb99d134cb242f5e1692fedafa67d32ddb1315a0534fa1b7306144e2"
+    },
+    {
+      "path": "figures/coordinate_hierarchy.pdf",
+      "pages": 1,
+      "sha256": "77fbcb9a1be6635baf7276057ec4c3366eace29af02ad409a98d9514dc07e4b2"
+    },
+    {
+      "path": "figures/spectral_performance.pdf",
+      "pages": 1,
+      "sha256": "11c0bc7cac79dd3c3ac5b72071b3c2be3e64cbb04b4b4a17f1f25667ea3eae75"
+    },
+    {
+      "path": "figures/statistical_frontiers.pdf",
+      "pages": 1,
+      "sha256": "1649da473217e56837ee51f20c9c680d4b91e5d84bb9ebc238962d8b264be811"
+    }
+  ],
+  "absent_ignored_local_files": [],
+  "new_mc_datasets": 320000,
+  "new_finite_theory_checks": 20489,
+  "new_analytic_calculations": 385,
+  "coverage_rounding_changes": [
+    [
+      "F037",
+      "method",
+      2000
+    ],
+    [
+      "F037",
+      "direct",
+      1890
+    ]
+  ],
+  "scope": "No new real-data run. Previously saved scientific results preserved. Finite checks are not formal proof verification."
+}

@@ -1,0 +1,474 @@
+[
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/main.tex",
+    "line": 207,
+    "kind": "theorem",
+    "title": "Orthogonal diagonal compressibility",
+    "label": "thm:diagonal",
+    "statement": "\\label{thm:diagonal}\nFor either class in \\eqref{eq:tucker}--\\eqref{eq:tt}, under loading \\eqref{eq:loading},\n\\begin{equation}\\label{eq:compress}\n \\sum_{i=1}^m|\\ip A{V_i}|^{2/K}\\le J^{1-1/K}M^{2/K}.\n\\end{equation}\nNo minimum singular value is required."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/main.tex",
+    "line": 219,
+    "kind": "theorem",
+    "title": "Finite-sample honest interval",
+    "label": "thm:coverage",
+    "statement": "\\label{thm:coverage}\nFor every $0<\\alpha<1$, each interval in \\eqref{eq:nl}--\\eqref{eq:zero} is honest on the applicable cap class. Consequently, $C_*$ is honest and has deterministic length\n\\begin{equation}\\label{eq:length}\n |C_*|=2\\min\\{h_{\\NL},h_G,h_0\\}.\n\\end{equation}"
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/main.tex",
+    "line": 240,
+    "kind": "theorem",
+    "title": "Fixed-radius affine intervals",
+    "label": "thm:affine",
+    "statement": "\\label{thm:affine}\nSuppose the honesty class contains $0$ and all $\\pm M E_i$. If $0<\\alpha<1/2$ and\n\\[\n C(Z)=[\\ip WZ+b-h,\\ip WZ+b+h]\n\\]\nis honest, with deterministic $W,b,h$, then\n\\begin{equation}\\label{eq:affinelower}\n h\\ge\\frac{(M/\\sqrt p)z\\tau}{M/\\sqrt p+z\\tau}.\n\\end{equation}\nOn the rank-one tensor Frobenius ball, the best radius in this affine class is therefore of order $\\min(M/\\sqrt p,\\tau)$, up to constants depending on $\\alpha$."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/main.tex",
+    "line": 259,
+    "kind": "theorem",
+    "title": "Cost of a single unfolding honesty class",
+    "label": "thm:unfolding",
+    "statement": "\\label{thm:unfolding}\nIf $0<\\alpha<1/4$, every interval honest on $\\Theta_S$ satisfies\n\\begin{equation}\\label{eq:unfoldlower}\n \\E_0|C|\\ge c_\\alpha\\min\\left\\{\\frac M{\\sqrt p},\\frac\\tau4\\right\\},\\qquad\n c_\\alpha=1-2\\alpha-\\frac12\\sqrt{\\sqrt{8/7}-1}>0.\n\\end{equation}\nThe lower order $\\min(M/\\sqrt p,\\tau)$ is attained up to $\\alpha$-dependent constants by the direct/structural choice on $\\Theta_S$."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/main.tex",
+    "line": 270,
+    "kind": "theorem",
+    "title": "Strict length separations",
+    "label": "thm:separation",
+    "statement": "\\label{thm:separation}\nLet $0<\\alpha<1/4$, $K\\ge3$ and the rank caps be fixed. Under \\eqref{eq:equalL} and $M=\\tau\\sqrt p$, $C_*$ is honest on the Tucker or TT class and\n\\begin{equation}\\label{eq:separation}\n |C_*|\\le2\\tau J^{1-1/K}\n \\left\\{\\frac{8\\log(2p/\\alpha)}p\\right\\}^{(K-2)/(2K)}=o(\\tau).\n\\end{equation}\nIn contrast, every fixed-radius affine interval honest on the same class has length at least $2z\\tau/(1+z)$. Every interval honest on a class retaining only one constrained unfolding has expected length at zero at least $c_\\alpha\\tau/4$."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/main.tex",
+    "line": 283,
+    "kind": "theorem",
+    "title": "Within-class lower bound",
+    "label": "thm:jointlower",
+    "statement": "\\label{thm:jointlower}\nUnder \\eqref{eq:model} and \\eqref{eq:equalL}, for $0<\\alpha<1/4$, every interval honest on a class containing the rank-one tensor Frobenius ball of radius $M$ satisfies\n\\begin{equation}\\label{eq:jointlower}\n \\E_0|C|\\ge(3/4-2\\alpha)\n \\frac{\\min\\{M,\\tau\\sqrt{\\log(1+p/4)}\\}}{\\sqrt p}.\n\\end{equation}"
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/main.tex",
+    "line": 310,
+    "kind": "proposition",
+    "title": "Classical diagonal-information benchmark",
+    "label": "prop:diagonal_minimax",
+    "statement": "\\label{prop:diagonal_minimax}\nAssume \\eqref{eq:model}, \\eqref{eq:equalL} and $0<\\alpha<1/4$. For each integer $1\\le s\\le p$, put\n\\[\n b_s=\\min\\left\\{M s^{-K/2},\\\n       \\tau\\sqrt{\\log\\left(1+\\frac{p}{4s^2}\\right)}\\right\\},\n \\qquad\n c_{\\alpha,d}=1-2\\alpha-\\frac12\\sqrt{e^{1/4}-1}>0.\n\\]\nEvery $C\\in\\mathcal C_{\\alpha,d}(\\Theta_1)$ satisfies\n\\begin{equation}\\label{eq:diagonal_lower}\n \\E_0|C|\\ge c_{\\alpha,d}\\frac{s b_s}{\\sqrt p}.\n\\end{equation}\nFor fixed $K\\ge3$ and $M=\\tau\\sqrt p$,\n\\begin{equation}\\label{eq:diagonal_rate}\n \\mathcal L_{0,d}(\\Theta_1)\\asymp\n \\mathcal L_{\\max,d}(\\Theta_1)\\asymp\n \\tau\\left(\\frac{\\log p}{p}\\right)^{(K-2)/(2K)}.\n\\end{equation}\nThe comparison constants depend on $K$ and $\\alpha$."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/full_data_section.tex",
+    "line": 23,
+    "kind": "theorem",
+    "title": "A full-data interval with short expected length at zero",
+    "label": "thm:scan",
+    "statement": "\\label{thm:scan}\nUnder \\eqref{eq:model}, \\eqref{eq:equalL} and either cap class, $C_{\\rm scan}$ is honest at level $1-\\gamma$, and $C_\\dagger$ is honest at level $1-\\alpha$. Moreover,\n\\begin{equation}\\label{eq:scan_expectation}\n \\sup_{A\\in\\Theta}\\E_A|C_\\dagger|\\le\\ell_*,\n \\qquad\n \\E_0|C_\\dagger|\\le\n \\min\\{\\ell_*,\\,2R_\\gamma+\\ell_*\\gamma\\}.\n\\end{equation}\nFor fixed $0<\\alpha<1/4$, fixed $K\\ge3$, fixed positive caps and $M=\\tau\\sqrt p$, choose $\\alpha_0=\\alpha/2$ and $\\gamma=\\alpha/(2p)$. Then\n\\begin{equation}\\label{eq:scan_rate}\n \\E_0|C_\\dagger|\n \\le C_{K,J,\\alpha}\\frac{\\tau\\sqrt{\\log p}}{\\sqrt p}\n       \\sum_{s=1}^p s^{-(K-1)/2}\n\\end{equation}\nfor sufficiently large $p$. Consequently,\n\\begin{equation}\\label{eq:zero_sharp}\n \\calL_0(\\Theta)\\asymp\\tau\\sqrt{\\frac{\\log p}{p}},\n \\qquad K\\ge4.\n\\end{equation}"
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/full_data_section.tex",
+    "line": 46,
+    "kind": "theorem",
+    "title": "A harmonic obstruction in order three",
+    "label": "thm:harmonic",
+    "statement": "\\label{thm:harmonic}\nUnder \\eqref{eq:model} and \\eqref{eq:equalL}, let $K=3$, $M=\\tau\\sqrt p$ and $0<\\alpha<1/4$. Every interval honest on a class containing the rank-one tensor Frobenius ball satisfies\n\\begin{equation}\\label{eq:harmonic_lower}\n \\E_0|C|\\ge\n (3/4-2\\alpha)\\frac{\\tau H_p}{200\\sqrt p},\n \\qquad H_p=\\sum_{i=1}^p i^{-1}.\n\\end{equation}"
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/gap_section.tex",
+    "line": 6,
+    "kind": "theorem",
+    "title": "Sparse harmonic lower bound",
+    "label": "thm:sparse_harmonic",
+    "statement": "\\label{thm:sparse_harmonic}\nUnder \\eqref{eq:model} and \\eqref{eq:equalL}, let $K=3$ and $0<\\alpha<1/4$.\nFor every integer $1\\le m\\le p$, put\n\\[\n b_m=\\min\\left\\{\\frac{M}{\\sqrt{27m}},\n       \\frac{\\tau}{\\sqrt{27}}\\sqrt{\\log(1+p/(4m^2))}\\right\\},\n \\qquad c_{\\alpha,d}=1-2\\alpha-\\tfrac12\\sqrt{e^{1/4}-1}.\n\\]\nEvery interval honest on a class containing the rank-one Frobenius ball satisfies\n\\begin{equation}\\label{eq:sparse_harmonic}\n \\E_0|C|\\ge c_{\\alpha,d}\\frac{b_mH_m}{\\sqrt p}.\n\\end{equation}\nIf $M=\\tau\\sqrt p$, then for $p\\ge256$ and $m=\\lfloor p^{1/4}\\rfloor$,\n\\[\n \\E_0|C|\\ge\\frac{c_{\\alpha,d}}{16\\sqrt{27}}\\,\n                  \\frac{\\tau(\\log p)^{3/2}}{\\sqrt p}.\n\\]"
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/gap_section.tex",
+    "line": 42,
+    "kind": "theorem",
+    "title": "Uniform diameter and full-data minimax length",
+    "label": "thm:full_minimax",
+    "statement": "\\label{thm:full_minimax}\nUnder \\eqref{eq:model}, \\eqref{eq:equalL}, $0<\\alpha<1$ and either positive cap class,\n$C_F$ is measurable and honest at level $1-\\alpha$, and for every observation\n\\begin{equation}\\label{eq:diameter}\n |C_F|\\le\\min(2h_0,W_\\alpha).\n\\end{equation}\nFor fixed $0<\\alpha<1/4$, fixed $K\\ge3$, fixed positive caps and $M=\\tau\\sqrt p$,\n\\begin{equation}\\label{eq:full_rates}\n \\calL_0(\\Theta)\\asymp\\calL_{\\max}(\\Theta)\\asymp r_K(p),\n \\qquad\n r_K(p)=\n \\begin{cases}\n \\tau(\\log p)^{3/2}/\\sqrt p,&K=3,\\\\\n \\tau\\sqrt{\\log p/p},&K\\ge4.\n \\end{cases}\n\\end{equation}\nConstants may depend on $K$, the caps and $\\alpha$."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/gap_section.tex",
+    "line": 63,
+    "kind": "proposition",
+    "title": "Squared-error consequence",
+    "label": "prop:mse_sharp",
+    "statement": "\\label{prop:mse_sharp}\nIn the regime of \\eqref{eq:full_rates},\n\\[\n \\inf_{\\widehat\\psi}\\sup_{A\\in\\Theta}\n          \\E_A(\\widehat\\psi-\\psi(A))^2\\asymp r_K(p)^2.\n\\]\nThe midpoint of $C_F$ with error level $\\alpha_p=p^{-2}$ attains the upper order for $p\\ge2$."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/gap_section.tex",
+    "line": 76,
+    "kind": "proposition",
+    "title": "Truncated scans",
+    "label": "prop:truncated",
+    "statement": "\\label{prop:truncated}\nFor $1\\le t\\le p$, test zero using only supports of sizes at most $t$, retaining thresholds calibrated simultaneously over all sizes. Write $\\lambda_s=\\lambda_s(\\gamma)$ and put\n\\[\n q=2/K,\\quad B_q=J^{1-1/K}M^q,\\quad\n a_t=4J^{K/2}\\lambda_t t^{-K/2},\n\\]\n\\[\n R_t=\\frac{4J^{K/2}}{\\sqrt p}\\sum_{s=1}^t\\lambda_s s^{-K/2}\n       +\\mathbf1_{\\{t<p\\}}\\frac{B_q}{\\sqrt p}a_t^{1-q}.\n\\]\nOn acceptance use radius $\\min(h_0,R_t)$ centered at zero; on rejection use the structural interval.\nIntersect with $C_*(\\alpha_0)$, where $0<\\alpha_0,\\gamma<1$,\n$\\alpha_0+\\gamma\\le\\alpha$, and $\\gamma$ is the scan error budget, using the singleton convention.\nThe resulting $C_t$ is honest, has length at most $\\ell_*=|C_*(\\alpha_0)|$, and\n\\[\n \\E_0|C_t|\\le\\min(\\ell_*,2R_t+\\ell_*\\gamma).\n\\]\nFor fixed $K\\ge3$, fixed caps and fixed $0<\\alpha<1$, with $M=\\tau\\sqrt p$, $\\alpha_0=\\alpha/2$ and $\\gamma=\\alpha/(2p)$,\n\\begin{align}\\label{eq:trunc_rate}\n R_t\\lesssim{}&\n \\frac{\\tau\\sqrt{\\log p}}{\\sqrt p}\n       \\sum_{s=1}^t s^{-(K-1)/2}\\\\\n &+\\mathbf1_{\\{t<p\\}}\\tau(\\log p/p)^\\beta\n                t^{-(K-1)\\beta},\\qquad\n \\beta=(K-2)/(2K).\\nonumber\n\\end{align}"
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/gap_section.tex",
+    "line": 115,
+    "kind": "theorem",
+    "title": "A low-degree estimation separation",
+    "label": "thm:low_degree",
+    "statement": "\\label{thm:low_degree}\nLet $K\\ge3$, $1\\le s\\le\\sqrt p$, and mix uniformly over\n\\[\n x_S=s^{-1/2}\\mathbf1_S,\\qquad\n A_S=\\tau\\lambda x_S^{\\otimes K},\\qquad |S|=s.\n\\]\nAssume $0<\\tau\\lambda\\le M$, and write\n\\[\n \\delta=\\frac{\\tau\\lambda s^{1-K/2}}{\\sqrt p},\\quad\n \\mu=s^2/p,\\quad B_D=\\frac{\\lambda^2}{s^K}(KD)^K,\n\\]\nwhere $D\\ge1$ is the polynomial degree. If $B_D<1$, the centered likelihood ratio projected onto polynomials of degree at most $D$ has squared null norm at most\n\\[\n \\eta_D^2=\\mu e^\\mu B_D/(1-B_D).\n\\]\nEvery scalar polynomial estimator $T(Z)$ of degree at most $D$ satisfies\n\\begin{equation}\\label{eq:lowdegree_risk}\n \\sup_{A\\in\\Theta}\\E_A(T-\\psi(A))^2\n       \\ge\\frac{\\delta^2}{(2+\\eta_D)^2}\n\\end{equation}\non any parameter class containing zero and these alternatives.\nIn particular, let $M=\\tau\\sqrt p$, $\\lambda=\\sqrt p$,\n$s=\\lfloor p^a\\rfloor$, and $D=\\lfloor p^b\\rfloor$, where\n\\[\n \\frac1K<a<\\min\\left(\\frac12,\\frac1{K-2}\\right),\n \\qquad 0<b<a-\\frac1K.\n\\]\nThen $\\eta_D\\to0$ and the lower order in \\eqref{eq:lowdegree_risk} is polynomially larger than the unrestricted rate in Proposition~\\ref{prop:mse_sharp}."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/gap_section.tex",
+    "line": 147,
+    "kind": "proposition",
+    "title": "What an efficient short interval would imply",
+    "label": "prop:ci_detection",
+    "statement": "\\label{prop:ci_detection}\nLet $Q$ be supported on parameters with common target $\\delta>0$, and let the null target be zero.\nAn interval honest at level $1-\\alpha$ at the null and these alternatives defines\n$\\phi(Z)=\\mathbf1\\{\\delta\\in C(Z)\\}$ with\n\\[\n Q(\\phi=0)\\le\\alpha,\\qquad\n P_0(\\phi=1)\\le\\alpha+\\E_0|C|/\\delta.\n\\]\nA computational hypothesis excluding polynomial-time tests with total error below $c>2\\alpha$ therefore excludes polynomial-time honest intervals with\n$\\E_0|C|<(c-2\\alpha)\\delta$ for that prior."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/norm_loading_section.tex",
+    "line": 12,
+    "kind": "theorem",
+    "title": "Diameter using both norm and scan constraints",
+    "label": "thm:norm_diameter",
+    "statement": "\\label{thm:norm_diameter}\nFor every $p\\ge1$, $K\\ge3$, $M,\\tau>0$ and $0<\\alpha<1$, the residual-projection interval $C_F$ is honest and satisfies, for every observation,\n\\[\n |C_F|\\le\\min\\{2h_0,U_{K,p}(M;\\alpha)\\}.\n\\]\nThe bound retains the supplied norm budget inside the ordered-coordinate sum; taking the minimum only after summation can lose the intermediate cubic regime."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/norm_loading_section.tex",
+    "line": 32,
+    "kind": "theorem",
+    "title": "Full-data length for every positive norm budget",
+    "label": "thm:all_norm_rates",
+    "statement": "\\label{thm:all_norm_rates}\nFix $K\\ge3$, positive Tucker or TT caps, and $0<\\alpha<1/4$. For the equal diagonal contrast there are constants $0<c<C<\\infty$, depending only on these fixed quantities, such that for every $p\\ge1$ and every $M,\\tau>0$,\n\\[\n c\\,\\mathfrak r_K(p,M,\\tau)\n \\le\\mathcal L_0(\\Theta)\n \\le\\mathcal L_{\\max}(\\Theta)\n \\le C\\,\\mathfrak r_K(p,M,\\tau).\n\\]\nThe lower bounds already hold when the honesty class is restricted to rank-one tensors. The interval in Theorem~\\ref{thm:norm_diameter} attains the upper order."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/norm_loading_section.tex",
+    "line": 58,
+    "kind": "theorem",
+    "title": "Squared risk uniformly over norm budgets",
+    "label": "thm:all_norm_mse",
+    "statement": "\\label{thm:all_norm_mse}\nUnder the fixed-order, fixed-cap conditions of Theorem~\\ref{thm:all_norm_rates},\n\\[\n \\inf_{\\widetilde\\psi}\\sup_{A\\in\\Theta}\n       \\E_A(\\widetilde\\psi-\\psi(A))^2\n       \\asymp\\mathfrak r_K(p,M,\\tau)^2\n\\]\nuniformly over $p\\ge1$ and $M,\\tau>0$. The measurable estimator in \\eqref{eq:residual_fit} attains the upper bound. It uses neither a failure probability depending on $M$ nor a minimum nonzero singular value."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/norm_loading_section.tex",
+    "line": 83,
+    "kind": "theorem",
+    "title": "Loading-dependent full-data bounds",
+    "label": "thm:weighted_bounds",
+    "statement": "\\label{thm:weighted_bounds}\nFor fixed $K\\ge3$, fixed positive caps and fixed $0<\\alpha<1/4$, an honest interval obtained by residual projection in the rotated block satisfies\n\\[\n |C_w(Z)|\\le\\min(2h_0,U_w)\n\\]\nfor every observation. Conversely every interval honest on the full ambient cap class satisfies\n\\[\n \\E_0|C(Z)|\\ge c_{K,\\alpha}L_w.\n\\]\nThe lower bound allows use of every ambient tensor entry. These bounds are not asserted to match for arbitrary nonuniform weights."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/norm_loading_section.tex",
+    "line": 95,
+    "kind": "proposition",
+    "title": "Sharp rates for a flat orthogonal loading",
+    "label": "prop:flat_loading",
+    "statement": "\\label{prop:flat_loading}\nIf $w_i=\\epsilon_i/\\sqrt m$ with prescribed $\\epsilon_i\\in\\{-1,1\\}$, then both minimax expected-length criteria have order $\\mathfrak r_K(m,M,\\tau)$, and minimax squared error has its square, independently of the larger ambient mode dimensions. The statement includes dense orthogonal rotations of the loading. At $m=1$ it gives the bounded-normal-mean scale $\\min(M,\\tau)$."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/robust_adaptive_section.tex",
+    "line": 14,
+    "kind": "theorem",
+    "title": "Full-data robustness under directional tails",
+    "label": "thm:sg_full",
+    "statement": "\\label{thm:sg_full}\nIn $Z=A+E$, replace $\\tau$ by a known $v>0$ in the scan thresholds and residual-fit tolerance. Under \\eqref{eq:joint_sg}, the norm-sensitive diameter, uniform squared-risk upper bound, and orthogonal-loading upper bounds remain valid. For fixed order/caps, their equal-diagonal orders are $\\mathfrak r_K(p,M,v)$ and its square. If the noise law is an unknown member of the family satisfying \\eqref{eq:joint_sg}, these rates are minimax when coverage and the supremum risk/length range over that family. This lower-bound statement need not hold for each fixed non-Gaussian law separately."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/robust_adaptive_section.tex",
+    "line": 30,
+    "kind": "theorem",
+    "title": "Full scans with only finite-variance replicates",
+    "label": "thm:mom_full",
+    "statement": "\\label{thm:mom_full}\nUse the feasible constraints\n$|d_U-\\ip UB|\\le\\lambda_s^{\\rm mom}$ in place of the Gaussian residual constraints. Their projection onto the equal-diagonal target is honest at level $1-\\beta$, with the norm-sensitive diameter using $\\lambda_s^{\\rm mom}$. For fixed $K$, caps and confidence, both minimax expected-length criteria, with a supremum over all the stated replicate laws, have order $\\mathfrak r_K(p,M,\\sigma/\\sqrt n)$ whenever \\eqref{eq:mom_blocks} holds.\n\nFor squared error use $\\beta=1/8$ and approximately minimize\n\\[\n F(B)=\\max\\bigl(0,\\max_U\\{|d_U-\\ip UB|-\\lambda_{s(U)}^{\\rm mom}\\}\\bigr)\n\\]\nover a fixed countable dense cap-class sequence, within tolerance $\\tau$. The resulting scalar estimator has minimax squared risk of order $\\mathfrak r_K^2$ over the same family. This is an existence construction. The sufficient replicate count is $n\\ge C_{K,\\beta}p$, and the full directional search remains exponential."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/robust_adaptive_section.tex",
+    "line": 43,
+    "kind": "proposition",
+    "title": "Two limits of a noise relaxation",
+    "label": "prop:noise_limits",
+    "statement": "\\label{prop:noise_limits}\n(i) In one dimension, known noise taking values $\\pm v$ with equal probabilities permits exact recovery of every mean $|A|\\le M<v$, although it has variance $v^2$ and satisfies \\eqref{eq:joint_sg}. Thus a Gaussian lower bound cannot be transferred to every noise law from a variance bound alone.\n(ii) For $E=v\\xi\\mathbf1$ with one Rademacher sign $\\xi$, every coordinate has proxy $v$, but a flat unit product contraction on a $p^K$ block has variance $v^2p^K$. Coordinatewise calibration cannot certify a full scan or a dense rotated loading."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/robust_adaptive_section.tex",
+    "line": 50,
+    "kind": "theorem",
+    "title": "Sharp length under a Frobenius approximation allowance",
+    "label": "thm:approx_sharp",
+    "statement": "\\label{thm:approx_sharp}\nIn the original Gaussian experiment let\n$\\Theta^\\eta=\\Theta(M,\\bar r)+\\eta\\mathbb B_F$, $\\eta\\ge0$. For the equal diagonal, fixed $K\\ge3$, fixed positive caps and fixed $0<\\alpha<1/4$,\n\\[\n \\mathcal L_0(\\Theta^\\eta)\\asymp\\mathcal L_{\\max}(\\Theta^\\eta)\n \\asymp \\min\\{\\tau,\\mathfrak r_K(p,M,\\tau)+\\eta\\}.\n\\]\nThe upper interval inflates every scan threshold by $\\eta$ and both projected endpoints by $\\eta$, with a deterministically selected direct Gaussian fallback. Thus approximate low rank is allowed, but the original rate requires $\\eta=O(\\mathfrak r_K)$."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/robust_adaptive_section.tex",
+    "line": 60,
+    "kind": "proposition",
+    "title": "A growing-rank lower bound and the unrestricted endpoint",
+    "label": "prop:growing_caps",
+    "statement": "\\label{prop:growing_caps}\nLet $r_*$ be the minimum supplied cap, truncated at $p$. Under equal loading every honest interval obeys\n\\[\n \\E_0|C|\\ge\\frac{c_\\alpha}{\\sqrt p}\n \\max_{1\\le s\\le r_*}\n \\min\\{M\\sqrt s,\\tau s\\sqrt{\\log(1+p/(4s^2))}\\}.\n\\]\nThe finite upper envelopes of the preceding sections remain valid for dimension-dependent supplied caps with their displayed cap constants; these constants are not uniformly bounded. If all rank restrictions are removed, then for any prescribed unit loading both length criteria have order $\\min(M,\\tau)$, attained in polynomial time. The vanishing tensor rate therefore does not persist under unrestricted ranks."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/robust_adaptive_section.tex",
+    "line": 74,
+    "kind": "proposition",
+    "title": "A confidence interval for any certified loading decomposition",
+    "label": "prop:loading_transfer",
+    "statement": "\\label{prop:loading_transfer}\nSuppose $C_0=[a_0,b_0]$ is honest for $\\ip{L_0}A$ at error $\\alpha_0$, and\n$\\PP(|\\ip RE|>q_R)\\le\\alpha_1$ uniformly. Then\n\\[\n C_L=[a_0+\\ip RZ-q_R,\\ b_0+\\ip RZ+q_R]\n\\]\nis honest at error $\\alpha_0+\\alpha_1$ and has length $|C_0|+2q_R$.\nUnder \\eqref{eq:joint_sg}, one may take\n\\[\n q_R=v\\norm R_F\\sqrt{2\\log(2/\\alpha_1)}.\n\\]\nFor Gaussian noise use the normal quantile. No independence between the two terms is required. A decomposition or partition selected from loading and supplied constants alone needs no selection penalty. Selection using $Z$ does require simultaneous calibration.\n\nThis also supplies additional unequal-weight upper bounds: partition the orthogonal terms into prescribed blocks, apply their separate weighted bounds with error budgets summing to $\\alpha$, and add the intervals. Include the unsplit construction among the choices. The minimum among their deterministic diameter bounds is achievable by choosing the construction before observing data."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/robust_adaptive_section.tex",
+    "line": 90,
+    "kind": "theorem",
+    "title": "Two efficiently attained minimax regimes",
+    "label": "thm:efficient_regimes",
+    "statement": "\\label{thm:efficient_regimes}\n(i) For the equal diagonal, fixed order/caps and $M\\le\\tau\\sqrt{\\log(ep)}$, the structural interval is minimax up to fixed constants, with length of order $M/\\sqrt p$.\n(ii) Let a parameter class contained in $\\{A:\\norm A_F\\le M\\}$ contain every rank-one tensor of Frobenius norm at most $M$. If a supplied unit product tensor $U$ certifies\n$|\\ip LU|\\ge c\\norm L_F$ for a fixed $c>0$, then under Gaussian observations both length criteria have order $\\norm L_F\\min(M,\\tau)$. Choose between the norm-only structural interval and the direct Gaussian interval. The algorithm uses a contraction and scalar comparisons, without rank recovery or tensor optimization. This covers arbitrary loadings with a certified constant product overlap, regardless of supplied rank caps."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/robust_adaptive_section.tex",
+    "line": 98,
+    "kind": "proposition",
+    "title": "Why full convexification loses the weak-signal gain",
+    "label": "prop:convex_loss",
+    "statement": "\\label{prop:convex_loss}\nAny convex parameter set containing the rank-one Frobenius ball of radius $M$ also contains $\\{tL:|t|\\le M/\\sqrt p\\}$ for the equal diagonal loading. Consequently, every interval honest on that convex set satisfies\n\\[\n \\E_0|C|\\ge c_\\alpha\\min(M/\\sqrt p,\\tau).\n\\]\nAt $M=\\tau\\sqrt p$ this is order $\\tau$, exceeding the original full-data rate by an unbounded factor as $p\\to\\infty$. The conclusion concerns procedures guaranteeing coverage on the whole convex outer class; it is not a computational lower bound for every algorithm using a convex subroutine."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/robust_adaptive_section.tex",
+    "line": 108,
+    "kind": "theorem",
+    "title": "An adaptation obstruction at nonzero tensors",
+    "label": "thm:shifted_adaptation",
+    "statement": "\\label{thm:shifted_adaptation}\nSuppose $A_0$ is supported on $\\{1,\\ldots,q\\}^K$, $q<p$, has norm $a<M$, and every supplied unfolding cap is at least its actual rank plus one. Put $m=p-q$ and $M_0=(M^2-a^2)^{1/2}$. For the equal diagonal every interval honest on the outer cap class satisfies\n\\[\n \\E_{A_0}|C|\\ge c_{K,\\alpha}\\sqrt{m/p}\\,\n           \\mathfrak r_K(m,M_0,\\tau).\n\\]\nThus arbitrarily weak extra components obstruct shortening at some nonzero lower-rank tensors, not only at zero. This is a lower bound, not a complete characterization of adaptation on all rank subclasses."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/robust_adaptive_section.tex",
+    "line": 140,
+    "kind": "theorem",
+    "title": "Finite-sample rank calibration with a computable bias correction",
+    "label": "thm:adaptive_tangent",
+    "statement": "\\label{thm:adaptive_tangent}\nThe interval centered at $\\ip{TL}{Z^{(2)}}$ with radius $h_T$ is honest at level $1-\\alpha$ on the separated class just specified, for any prescribed loading $L$. One may choose, using only the pilot and known quantities, the shortest-radius option among it, the direct second-observation interval with error $\\alpha-\\delta$, and the norm-only structural interval. It may also be intersected with the structural interval. For Gaussian second-observation noise the square-root logarithm can be replaced by $z_{1-(\\alpha-\\delta)/2}$.\n\nWith probability at least $1-\\delta$, all selected mode ranks equal the actual ranks and \\eqref{eq:adaptive_bias} bounds the functional bias. The method consists of unfolding SVDs and tensor projections and is polynomial in the explicit input size. Its noise radius depends on $\\norm{TL}_F$, and its additional cost is the displayed bias term. General minimax optimality and adaptation without the spectral separation are not asserted."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/appendix.tex",
+    "line": 7,
+    "kind": "lemma",
+    "title": "Controlled squared component weights",
+    "label": "lem:cp",
+    "statement": "\\label{lem:cp}\nFor a tensor in either cap class there is a finite representation\n\\[\n A=\\sum_{j=1}^{J_A}x_{1j}\\otimes\\cdots\\otimes x_{Kj},\\qquad\n a_j^{\\mathrm{cp}}=\\prod_{k=1}^K\\norm{x_{kj}}_2,\n\\]\nsuch that $J_A\\le J$ and $\\sum_j(a_j^{\\mathrm{cp}})^2=\\norm A_F^2$."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/appendix.tex",
+    "line": 69,
+    "kind": "lemma",
+    "title": "Exact diagonal reduction",
+    "label": "lem:image",
+    "statement": "\\label{lem:image}\nUnder \\eqref{eq:loading}, the image of the rank-one tensor Frobenius ball of radius $M$ under $A\\mapsto(\\ip A{V_i})_{i=1}^m$ is exactly\n\\[\n \\left\\{a\\in\\R^m:\\sum_i|a_i|^{2/K}\\le M^{2/K}\\right\\}.\n\\]"
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/appendix.tex",
+    "line": 94,
+    "kind": "lemma",
+    "title": "Scalar threshold envelope",
+    "label": "lem:soft",
+    "statement": "\\label{lem:soft}\nIf $|e|\\le\\lambda$ and $s=\\soft_\\lambda(x+e)$, then $s$ lies between zero and $x$ and\n\\[\n |s-x|\\le\\min(|x|,2\\lambda).\n\\]\nFor $q\\in(0,1]$, $t,u\\ge0$, one also has $\\min(t,u)\\le t^q u^{1-q}$, with the continuous interpretation at zero."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/appendix.tex",
+    "line": 108,
+    "kind": "lemma",
+    "title": "Matrix functional bound",
+    "label": "lem:structural",
+    "statement": "\\label{lem:structural}\nIf $\\rank(B)\\le r$ and $H$ has singular values $s_1(H)\\ge s_2(H)\\ge\\cdots$, then\n\\[\n |\\ip HB|\\le\\norm B_F\\left(\\sum_{i\\le r}s_i(H)^2\\right)^{1/2}.\n\\]"
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/appendix.tex",
+    "line": 175,
+    "kind": "lemma",
+    "title": "Common-target alternatives",
+    "label": "lem:mixture",
+    "statement": "\\label{lem:mixture}\nLet $P_0$ have target zero and let $Q$ be a mixture of alternatives whose targets all equal $\\delta>0$. If $C$ covers zero under $P_0$ and covers the target at every alternative with probability at least $1-\\alpha$, then\n\\begin{equation}\\label{eq:mixtureCI}\n \\E_0|C|\\ge\\delta\\{1-2\\alpha-\\TV(P_0,Q)\\}.\n\\end{equation}\nIf $Q\\ll P_0$, then $\\TV(P_0,Q)\\le\\frac12\\sqrt{\\chi^2(Q,P_0)}$."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/full_data_proofs.tex",
+    "line": 4,
+    "kind": "lemma",
+    "title": "Finite product nets and injective norm",
+    "label": "lem:net_scan",
+    "statement": "\\label{lem:net_scan}\nThe nets used in \\eqref{eq:scan_threshold} exist and satisfy\n$\\rho(B)\\le2N_S(B)$ for any tensor on $S^K$.\nFurthermore, a tensor $B$ in either rank-cap class satisfies\n$\\norm B_F\\le\\sqrt J\\,\\rho(B)$."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/full_data_proofs.tex",
+    "line": 70,
+    "kind": "lemma",
+    "title": "Uniform cubic moment for a weighted sign sum",
+    "label": "lem:cubic_moment",
+    "statement": "\\label{lem:cubic_moment}\nFor independent uniform signs $\\epsilon_i$, let\n$S_p=\\sum_{i=1}^p i^{-2/3}\\epsilon_i$. Then, uniformly in $p\\ge1$,\n\\[\n \\PP(|S_p|>x)\\le2e^{-x^3/192}\\quad(x\\ge12),\n \\qquad\n \\E\\exp\\{|S_p|^3/40000\\}\\le20/19+1/100<5/4.\n\\]"
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/refinements.tex",
+    "line": 7,
+    "kind": "proposition",
+    "title": "Smaller rank coefficient",
+    "label": "prop:budget",
+    "statement": "\\label{prop:budget}\nIn $\\sum_i|a_i|^{2/K}\\le D M^{2/K}$ one may take\n\\[\n D_{\\Tu}=\\min\\left\\{J_{\\Tu}^{1-1/K},m^{1-1/K},\n                  (\\prod_k\\bar r_k)^{1/K}\\right\\}.\n\\]\nFor TT caps put $\\bar r_0=\\bar r_K=1$ and\n$\\rho_k=\\min(p_k,\\bar r_{k-1}\\bar r_k)$; one may take\n\\[\n D_{\\TT}=\\min\\left\\{J_{\\TT}^{1-1/K},m^{1-1/K},\n                  (\\prod_k\\rho_k)^{1/K}\\right\\}.\n\\]\nThe nonlinear radius remains valid with coefficient $D$."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/refinements.tex",
+    "line": 41,
+    "kind": "proposition",
+    "title": "Structural range and fixed affine optimum",
+    "label": "prop:affine_exact",
+    "statement": "\\label{prop:affine_exact}\nThe range of $\\psi$ on either cap class under \\eqref{eq:loading} is exactly $[-h_0,h_0]$. Under \\eqref{eq:equalL} and $0<\\alpha<1/2$, set\n$a_0=M\\sqrt{s_{\\rm cap}/p}$. Among all honest full-data fixed-radius affine intervals, the optimal radius is\n\\[\n h_{\\rm aff}^*=\\min_{0\\le t\\le1}Q_\\alpha(a_0(1-t),\\tau t).\n\\]\nCenter $t\\ip LZ$ attains the optimum. If $a_0\\le z_{1-\\alpha}\\tau$, then $h_{\\rm aff}^*=a_0$."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/refinements.tex",
+    "line": 81,
+    "kind": "proposition",
+    "title": "Envelope and approximation calibration",
+    "label": "prop:envelope",
+    "statement": "\\label{prop:envelope}\nSuppose $d_i=a_i+e_i$ and, uniformly over the asserted class,\n$\\PP(\\max_i|e_i|\\le\\lambda_0)\\ge1-\\alpha$.\nFor any measurable $\\Lambda\\ge\\lambda_0$, the threshold center has an honest radius\n\\[\n \\norm w_\\infty D M^{2/K}(2\\Lambda)^{1-2/K}+\\eta\n\\]\non $\\Theta^\\eta$. The structural radius is $h_0+\\eta$.\nData-dependent selection between these two intervals is valid.\nA direct Gaussian alternative needs its own calibration and deterministic selection or joint error allocation."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/refinements.tex",
+    "line": 139,
+    "kind": "proposition",
+    "title": "Replicate median calibration",
+    "label": "prop:mom",
+    "statement": "\\label{prop:mom}\nLet clean tensor replicates be independent with common mean $A$, and every prescribed contraction have variance at most known $v^2$. Allow at most $c$ adversarial replacements of entire replicates. Coordinates within a replicate may be dependent. Choose an odd block count $b$ with\n\\[\n b\\ge8c,\\qquad b\\ge32\\log(m/\\alpha),\\qquad n\\ge2b,\n \\qquad k=\\lfloor n/b\\rfloor.\n\\]\nPartition the first $bk$ replicates into fixed disjoint blocks.\nFor coordinatewise medians $d_i$ of the block means,\n\\[\n \\PP(\\max_i|d_i-a_i|>2v/\\sqrt k)\\le\\alpha.\n\\]\nThus Proposition~\\ref{prop:envelope} applies. For the smallest admissible odd $b$,\nthe threshold has order\n\\[\n O\\{v\\sqrt{c/n+\\log(m/\\alpha)/n}\\}.\n\\]"
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/refinements.tex",
+    "line": 184,
+    "kind": "proposition",
+    "title": "Independent residual calibration",
+    "label": "prop:variance",
+    "statement": "\\label{prop:variance}\nRetain $n\\ge2$ iid Gaussian full-tensor replicates with unknown noise standard deviation $\\sigma>0$.\nLet $d_{ji}=\\ip{W_j}{V_i}$, $\\bar d_i=n^{-1}\\sum_jd_{ji}$, $\\nu=m(n-1)$, and\n\\[\n S^2=\\nu^{-1}\\sum_i\\sum_j(d_{ji}-\\bar d_i)^2,\\qquad\n \\sigma_U=S\\sqrt{\\nu/\\chi^2_{\\nu,\\delta}},\\quad 0<\\delta<\\alpha.\n\\]\nThe denominator is the lower $\\delta$ chi-square quantile.\nCompute the original three intervals with $\\tau_U=\\sigma_U/\\sqrt n$ and\n$\\alpha_0=\\alpha-\\delta$, choosing the smallest using only $S$ and supplied quantities.\nThe selected interval is honest at level $1-\\alpha$.\nFor fixed $\\delta$ and $\\nu\\to\\infty$, $\\sigma_U/\\sigma\\to1$ in probability,\nand the nonlinear expected-length order is preserved."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/refinements.tex",
+    "line": 214,
+    "kind": "proposition",
+    "title": "Calibrated lower bounds",
+    "label": "prop:levels",
+    "statement": "\\label{prop:levels}\nThe fixed-confidence rates of Theorems~\\ref{thm:jointlower}, \\ref{thm:unfolding}\nand Proposition~\\ref{prop:diagonal_minimax} extend to every $0<\\alpha<1/2$\nafter changing constants.\nIf known Gaussian covariance satisfies $\\Sigma\\succeq s_0^2I$ with $s_0>0$,\nall-procedure isotropic lower bounds transfer with $\\tau=s_0$."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/norm_loading_proofs.tex",
+    "line": 19,
+    "kind": "lemma",
+    "title": "A norm-sensitive harmonic sum",
+    "label": "lem:norm_sum",
+    "statement": "\\label{lem:norm_sum}\nFor $p\\ge1$, $x>0$ and $K\\ge3$, put\n\\[\n S_{K,p}(x)=\\sum_{s=1}^p\\min\\{x s^{-K/2},s^{-(K-1)/2}\\}.\n\\]\nThen $S_{3,p}(x)\\le4g_p(x)$, and $S_{K,p}(x)\\le3\\min(x,1)$ for $K\\ge4$.\nFor fixed $K$ and $0<\\alpha<1$,\n$U_{K,p}(M;\\alpha)\\le C_{K,\\bar r,\\alpha}\\mathfrak r_K(p,M,\\tau)$ uniformly in $p,M,\\tau$."
+  },
+  {
+    "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/norm_loading_proofs.tex",
+    "line": 103,
+    "kind": "lemma",
+    "title": "Residual fit and its noise tail",
+    "label": "lem:residual_fit",
+    "statement": "\\label{lem:residual_fit}\nThe estimator in \\eqref{eq:residual_fit} is Borel measurable. With $T_0=T(\\tau G)$ and $\\beta=1/8$,\n\\[\n \\PP(T_0>t)\\le\\beta e^{-t^2/(2\\tau^2)}\\quad(t\\ge0),\n \\qquad \\E T_0^2\\le2\\beta\\tau^2.\n\\]\nPut $z_K=\\sum_{s=1}^{\\infty}s^{-K/2}\\le3$. Then\n\\begin{equation}\\label{eq:residual_error}\n |\\widehat\\psi-\\psi(A)|\\le U_{K,p}(M;\\beta)\n              +\\frac{Q_2z_K}{\\sqrt p}(T_0+\\tau/2),\n \\qquad |\\widehat\\psi-\\psi(A)|\\le2h_0.\n\\end{equation}"
+  },
+  {
+    "source": "honest_tensor_functional_paper/certified_weak_signal/theory/results.md",
+    "line": 29,
+    "kind": "supplement result",
+    "title": "A quantitative contract for approximate minimax optimization",
+    "label": "C1",
+    "statement": "Use every support and every direction in the calibrated finite product nets.\nFor their unit directions $U$ and thresholds $\\lambda_{s(U)}$, put\n\n$$F_Z(B)=\\max\\{0,\\max_U(|\\langle U,Z-B\\rangle|-\\lambda_{s(U)})\\}.$$\n\nThis function is 1-Lipschitz in Frobenius norm. Suppose an algorithm returns\n$\\widehat B\\in\\Theta$ and numbers $l\\le\\inf_{B\\in\\Theta}F_Z(B)\\le\nF_Z(\\widehat B)=u$, with $u-l\\le\\varepsilon$. On the simultaneous noise\nevent, the true $A$ is feasible, so $F_Z(A)=0$ and $u\\le\\varepsilon$.\nConsequently, for every support size $s$,\n\n$$N_S(\\widehat B-A)\\le 2\\lambda_s+\\varepsilon.$$\n\nWith $J_2=J(2\\bar r)$, the preceding ordered-diagonal proof gives\n\n$$|\\widehat B_{i,\\ldots,i}-A_{i,\\ldots,i}|_{(s)}\n\\le \\min\\{2J_2^{(K-1)/2}M,\n4J_2^{K/2}(\\lambda_s+\\varepsilon/2)\\}s^{-K/2}.$$\n\nFor known orthogonal loading weights $w_i$, sorted by absolute value, the\nsum of the right side against $w_s^*$ is an honest radius about\n$\\psi_L(\\widehat B)$. It may be intersected with the structural range.\nChoosing $\\varepsilon\\le c\\tau$ retains the existing all-budget minimax\norders for equal/flat loadings. Indeed every $\\lambda_s$ is bounded below\nby a positive constant times $\\tau$, so the added term changes the existing\nminimum by only a fixed factor, including in the norm-limited regime.\n\nFor squared error set the scan error budget to $1/8$. If the optimizer\nguarantees $\\varepsilon\\le c\\tau$ for *every observation*, the same excess\ntail proof as before applies: $F_Z(\\widehat B)\\le F_Z(A)+\\varepsilon$ and\n$N_S(\\widehat B-A)\\le2\\lambda_s+2F_Z(A)+\\varepsilon$. Thus the existing\nall-budget MSE bound follows. A budget-limited run with a larger reported gap\ndoes not establish that MSE guarantee.\n\n**Endpoint version.** Let $\\mathcal F=\\{B\\in\\Theta:F_Z(B)=0\\}$.\nIf certified outer endpoints enclose $\\psi_L(\\mathcal F)$, they define an\nhonest interval, even at an arbitrary computation stop. If feasible\nwitnesses establish each outer endpoint within $\\varepsilon$ of the exact\nendpoint, its length exceeds the ideal projection length by at most\n$2\\varepsilon$. An inner optimization solution alone does not give an\nhonest interval. On a certified empty feasible set use $\\{0\\}$, as before.\n\n**Proof.** Lipschitzness follows from $\\|U\\|_F=1$, the reverse triangle\ninequality, and stability of finite maxima. The objective-gap implication\nuses $F_Z\\ge0$. Rank caps double under subtraction; the norm budget doubles\nas well. The ordered bound is exactly the earlier net comparison and\ndiagonal quasi-norm inequality with $2\\lambda_s$ replaced by\n$2\\lambda_s+\\varepsilon$. The Gaussian union event has probability at least\n$1-\\alpha$. Endpoint containment proves coverage on the same event. For\nthe length assertion, use an inner feasible witness at each end. The\nsquared-risk argument invokes the already supplied excess-tail integration,\nwith only its deterministic tolerance constant changed. No algorithmic\ncomplexity conclusion follows from this contract."
+  },
+  {
+    "source": "honest_tensor_functional_paper/certified_weak_signal/theory/results.md",
+    "line": 85,
+    "kind": "supplement result",
+    "title": "An implemented global solver on the binary rank-one class",
+    "label": "C2",
+    "statement": "For $p=2$ and any fixed order $K\\ge3$, every rank-one tensor of norm at most\n$M$ has a representation\n\n$$B(a,\\theta)=a\\bigotimes_{k=1}^K(\\cos\\theta_k,\\sin\\theta_k),\n\\quad a\\in[-M,M],\\quad\\theta_k\\in[0,\\pi].$$\n\nEach vector is represented up to sign on a semicircle; the product of signs\nis absorbed into $a$. The zero tensor is included. There is no grid\nrestriction on the parameter space.\n\nThe code includes both singleton supports and the full support. For the\nlatter it uses $n_K=\\lceil\\pi K\\rceil$ equally spaced angles in $[0,\\pi)$\nper mode. Every unit vector is within Euclidean distance $1/(2K)$ of a net\npoint up to sign: its angular discrepancy modulo $\\pi$ is at most\n$\\pi/(2n_K)$. Absolute contractions remove the signs. The same telescoping\nproof therefore gives $\\rho\\le2N$. There are $D_1=2$ singleton directions\nand $D_2=n_K^K$ full-support directions. Set\n\n$$\\lambda_s=\\tau\\sqrt{2\\log(4D_s/\\alpha)},\\qquad s=1,2.$$\n\nThe sum of the two Gaussian union bounds is at most $\\alpha$.\n\nFor each parameter box, exact real-arithmetic ranges of cosine and products\nenclose every scanned contraction and tensor entry. If their contraction\nrange is $[b_U^-,b_U^+]$, then\n\n$$l_{\\rm box}=\\max\\{0,\\max_U[\n\\operatorname{dist}(\\langle U,Z\\rangle,[b_U^-,b_U^+])-\\lambda_{s(U)}]\\}$$\n\nis a lower bound for $F_Z$ throughout the box. Centers provide actual\nrank-one upper witnesses. A largest-scaled-side split covers the parent\nwith two children. Branch and bound retains global lower and upper bounds;\nthe objective run ends at its requested gap or reports a budget stop.\nIt implements the ideal residual criterion itself on this class.\n\nFor confidence projection reject a box only when its objective lower bound\nis positive. Loading-entry interval arithmetic bounds every surviving\nbox's target; their hull contains the ideal confidence projection. Feasible\namplitude intervals at fixed central factors supply inner witnesses. An\nendpoint gap is reported only when such witnesses exist. Endpoints need\nnot reach a requested tolerance within a finite node budget, especially\nnear singular feasibility boundaries. This is recorded, not treated as a\nsuccessful exact optimization.\n\nThe code supports arbitrary loadings in the binary tensor, but caps above\none and mode dimensions above two are not implemented. Exhaustive scans\nand global subdivision are exponential. Tests check range containment and\nglobal certificates against independent finite calculations. Floating\npoint evaluations include conservative guards; these are numerical\ncertificates under the derived inequalities, not formal directed-rounding\ninterval proofs. The real-arithmetic method, rather than any particular\nfloating point tolerance, is the mathematical result."
+  },
+  {
+    "source": "honest_tensor_functional_paper/certified_weak_signal/theory/results.md",
+    "line": 140,
+    "kind": "supplement result",
+    "title": "Sharp small-budget rates for every loading tensor",
+    "label": "L1",
+    "statement": "Define the product overlap\n\n$$\\rho(L)=\\sup_{\\|u_k\\|_2=1}|\\langle L,\\bigotimes_k u_k\\rangle|.$$\n\nFor fixed positive caps, fixed $0<\\alpha<1/4$, arbitrary mode dimensions,\nand *every* known loading tensor $L$, if $0<M\\le\\tau$, then\n\n$$\\mathcal L_0(\\Theta;L)\\asymp\\mathcal L_{\\max}(\\Theta;L)\n\\asymp M\\rho(L),\\qquad\n\\inf_{\\widehat\\psi}\\sup_\\Theta\\mathbb E_A\n(\\widehat\\psi-\\psi_L(A))^2\\asymp M^2\\rho(L)^2.$$\n\nConstants depend only on the fixed caps/order and confidence, not on $L$\nor the ambient dimensions. The zero loading has identically zero risk and\nlength. More generally, for all $M,\\tau>0$,\n\n$$c_\\alpha\\rho(L)\\min(M,\\tau)\n\\le \\mathcal L_0\\le\\mathcal L_{\\max}\n\\le 2\\min\\{\\sqrt J M\\rho(L),\\ z_{1-\\alpha/2}\\tau\\|L\\|_F\\}.$$\n\n**Proof.** The canonical expansion and Cauchy--Schwarz give\n$|\\psi_L(A)|\\le\\rho(L)\\sum_j|a_j|\\le\\sqrt J M\\rho(L)$.\nThis gives a deterministic interval and the risk of estimator zero. The\ndirect Gaussian interval gives the other upper bound; choose between the\ntwo using known quantities. Compactness gives a maximizing product $U$;\nchoose its sign so $\\langle L,U\\rangle=\\rho(L)$. Both $0$ and $tU$ belong\nto every positive cap class, for $t=\\min(M,\\tau)/2$. Their Gaussian total\nvariation is $2\\Phi(t/(2\\tau))-1\\le2\\Phi(1/4)-1<1/4$.\nHonesty at both parameters implies\n$\\mathbb E_0|C|\\ge t\\rho(L)(1-2\\alpha-\\mathrm{TV})$.\nThe two-point squared-loss lower bound is a fixed positive multiple of\n$t^2\\rho(L)^2$: classify an estimate by its nearest target. A classification\nerror entails squared error at least $t^2\\rho(L)^2/4$, while the sum of\nthe two testing errors is at least $1-\\mathrm{TV}$. Therefore the larger\nsquared risk is at least $t^2\\rho(L)^2(1-\\mathrm{TV})/8$.\nFor $M\\le\\tau$ the bounds match. This proof is a direct\nspecialization of standard Gaussian two-point reasoning, not a novel\ngeneral inference principle.\n\n**Limits.** Computing $\\rho(L)$ for a general high-order loading is itself\na global optimization problem. A certified upper bound can replace it in\nthe interval; a certified product witness supplies a lower bound. Without\na constant ratio between them, an efficient sharp algorithm has not been\nobtained. This theorem covers all loading tensors in the stated budget\nregime; it does not characterize their larger-budget rates. The flat\nloading small-budget theorem extends to $M\\lesssim\\tau\\sqrt{\\log m}$,\na larger regime than the arbitrary-loading result here."
+  },
+  {
+    "source": "honest_tensor_functional_paper/certified_weak_signal/theory/results.md",
+    "line": 190,
+    "kind": "supplement result",
+    "title": "An optimized common-target lower bound for unequal weights",
+    "label": "L2",
+    "statement": "For an orthogonal product loading with decreasing nonzero absolute weights\n$w_1\\ge\\cdots\\ge w_m>0$, choose $d\\le m$ and $0<\\Delta\\le Mw_d$.\nFor signed original weights $\\widetilde w_i$, set\n$A_i=(\\Delta/\\widetilde w_i)U_i$, $1\\le i\\le d$.\nAll alternatives have target $\\Delta$, satisfy the norm budget, and have\nrank one. They are orthogonal as full tensors. Let\n\n$$v_i=\\exp\\{\\Delta^2/(\\tau^2w_i^2)\\}-1,\\quad\nH_d(\\Delta)=\\sum_{i=1}^d v_i^{-1},\\quad\n\\pi_i=v_i^{-1}/H_d(\\Delta).$$\n\nThe optimal chi-square divergence among mixtures on these alternatives is\n\n$$\\chi^2(Q,P_0)=\\min_{\\pi\\in\\mathcal S_d}\\sum_i\\pi_i^2v_i\n=H_d(\\Delta)^{-1}.$$\n\nThus every interval honest on the full tensor class satisfies\n\n$$\\mathbb E_0|C|\\ge\\Delta\\left[1-2\\alpha-\n\\frac{1}{2\\sqrt{H_d(\\Delta)}}\\right]_+.$$\n\n**Proof.** The Gaussian likelihood identity gives overlap 1 for distinct\northogonal alternatives and $1+v_i$ for equal alternatives. Subtracting 1\nleaves $\\sum\\pi_i^2v_i$. Cauchy--Schwarz bounds this below by\n$(\\sum v_i^{-1})^{-1}$ and the displayed weights attain equality.\nApply $\\mathrm{TV}\\le\\sqrt{\\chi^2}/2$ and the common-target interval lemma.\nThis uses the full observation; there is no diagonal-data restriction.\n\n`weighted_axis_lower` enumerates $d$ and uses scalar root finding for the\nlargest $\\Delta\\le Mw_d$ with $\\chi^2\\le1/4$. Every reported lower bound\nuses the actual recomputed divergence and a feasible prior. This optimizes\nthe prior at each chosen target within the axis family. It is not an\noptimization over all tensor alternatives. For equal weights it recovers\nthe one-spike logarithmic obstruction. It cannot recover the cubic\nharmonic obstruction on its own and is not claimed sharp for all weights."
+  },
+  {
+    "source": "honest_tensor_functional_paper/certified_weak_signal/theory/results.md",
+    "line": 228,
+    "kind": "supplement result",
+    "title": "Unseparated rate adaptation across positive fixed caps",
+    "label": "A1",
+    "statement": "Fix an outer positive Tucker or TT cap vector $\\bar r$. Let $\\mathcal R$\ncontain any collection of positive cap vectors componentwise below it.\nFor equal or flat orthogonal loadings, the *same* full-data outer-class\ninterval satisfies\n\n$$\\sup_{A\\in\\Theta(M,r)}\\mathbb E_A|C_{\\bar r}|\n\\le C_{K,\\bar r,\\alpha}\\,\\mathfrak r_K(m,M,\\tau),\\qquad r\\in\\mathcal R.$$\n\nEvery smaller class contains the rank-one ball, whose lower bound is\n$c_{K,\\alpha}\\mathfrak r_K$. Therefore the interval is simultaneously\nminimax in rate over every such class, uniformly in $m,M,\\tau$, without\nknowing the actual ranks or imposing singular-value separation. The\nanalogous MSE conclusion holds for the outer-class ideal residual fit.\n\n**Proof.** Restrict the existing outer supremum upper bound to each subset\nand apply the same rank-one lower bound inside each smaller class. No\nselection step or new probability argument is required.\n\nThis observation resolves the fixed-positive-cap, rate-only statistical\nadaptation question. It does not give optimal rank-dependent constants,\ngrowing-cap rates, computation, exact-rank selection, or pointwise oracle\nlengths. Rank zero must be excluded: its known-model oracle interval has\nlength zero, whereas outer-class honesty forces positive length at zero.\nThe preceding ledgers used the word adaptation broadly; these distinct\nobjectives must be separated."
+  },
+  {
+    "source": "honest_tensor_functional_paper/certified_weak_signal/theory/results.md",
+    "line": 256,
+    "kind": "supplement result",
+    "title": "A computable projection certificate without separation",
+    "label": "A2",
+    "statement": "Let $Z^{(1)}=A+E^{(1)}$ and $Z^{(2)}=A+E^{(2)}$ have independent iid\nGaussian errors of known scales $\\tau_1,\\tau_2$. Only $\\|A\\|_F\\le M$ is\nassumed here; supplied rank caps are unnecessary. Let $0<\\delta<\\alpha$.\nUse the simultaneous unfolding operator envelopes from the previous stage:\n\n$$\\eta_k=2\\tau_1\\sqrt{2\\{(p_k+\\prod_{l\\ne k}p_l)\\log9+\n\\log(2K/\\delta)\\}}.$$\n\nOn one event of probability at least $1-\\delta$ all\n$\\|E^{(1)}_{(k)}\\|_{op}\\le\\eta_k$. For any pilot-chosen ranks $r_k$, let\n$Q_k$ project onto the first $r_k$ left singular vectors of $Z^{(1)}_{(k)}$.\nSet $d_k=\\sigma_{r_k+1}(Z^{(1)}_{(k)})+\\eta_k$ if $r_k<p_k$, and $d_k=0$\nif $Q_k=I$. Singular values beyond the matrix rank are zero. For\n$P=\\bigotimes_k Q_k$, decompose\n\n$$R=(I-P)L=\\sum_{k=1}^K R_k,\\quad\nR_k=\\left[\\bigotimes_{l<k}Q_l\\right]\\otimes(I-Q_k)\n\\otimes\\left[\\bigotimes_{l>k}I\\right]L.$$\n\nThen the observable bound\n\n$$B=\\min\\left\\{M\\|R\\|_F,\\ \\sum_k d_k\\|(R_k)_{(k)}\\|_*\\right\\}$$\n\nsatisfies $|\\langle R,A\\rangle|\\le B$ on that event. The interval centered\nat $\\langle PL,Z^{(2)}\\rangle$, with radius\n\n$$B+z_{1-(\\alpha-\\delta)/2}\\tau_2\\|PL\\|_F,$$\n\nis honest over the whole norm ball. Any finite set of pilot-selected\nprojection choices can be compared by their radii on this same event;\nchoose the smallest before using validation data. Include $P=I$ for the\ndirect interval and $P=0$ for the structural interval. Intersect with\n$[-M\\|L\\|_F,M\\|L\\|_F]$ and use $\\{0\\}$ for an empty intersection.\n\n**Proof.** Residual SVD optimality and the triangle inequality give\n$\\|(I-Q_k)A_{(k)}\\|_{op}\\le d_k$ on the common event, even for selected\n$r_k$. The definition of $R_k$ gives $(I-Q_k)(R_k)_{(k)}=(R_k)_{(k)}$.\nOperator/nuclear norm duality bounds its contraction with $A$ by\n$d_k\\|(R_k)_{(k)}\\|_*$. Sum and combine with the norm-only bound.\nConditional on the pilot, validation noise in the selected loading is\nGaussian with variance $\\tau_2^2\\|PL\\|_F^2$. No multiplicity correction\nover the candidate ranks is required: all bias certificates hold on one\nuniform pilot event, and the choice precedes validation. The union bound\ngives total error at most $\\alpha$. Unfolding SVDs, tensor projections and\nnuclear norms are polynomial in the explicit input size.\n\nThis algorithm never interprets an undetected component as identically\nzero. It does not certify the actual rank. Its bias term can be large,\nand no weak-signal or pointwise minimax optimality is claimed. Honesty on\nthe full norm ball cannot yield the low-rank weak-signal minimax gain:\nthe earlier unrestricted-class lower bound still applies. Independent\nartificial Gaussian splitting of one observation is valid with\n$\\tau_1=\\tau_2=\\sqrt2\\tau$; using both halves at scale $\\tau$ is invalid.\n\n### Why the first-order repair does not solve the original problem\n\nFor the A2 construction, if $\\min_k\\eta_k\\ge q\\tau_2$, where\n$q=z_{1-(\\alpha-\\delta)/2}$, no projected candidate improves the smaller\nof the untruncated direct and norm-only radii. In fact, nonzero $R_k$\nhave $d_k\\ge\\eta_k$, so triangle inequalities and nuclear/Frobenius norm\ncomparison give $B\\ge\\min(M,\\min_k\\eta_k)\\|R\\|_F$. Hence its radius is at\nleast $\\min(M,q\\tau_2)(\\|PL\\|_F+\\|R\\|_F)$, which is at least\n$\\min(M,q\\tau_2)\\|L\\|_F$. The explicit envelopes meet this condition in\nthe equal-noise experiments below. This is a proved limitation of this\nparticular repair, not a universal computational lower bound."
+  },
+  {
+    "source": "honest_tensor_functional_paper/certified_weak_signal/theory/results.md",
+    "line": 324,
+    "kind": "supplement result",
+    "title": "The adaptation obstruction at an arbitrary orientation",
+    "label": "A3",
+    "statement": "Let a base tensor $A_0$ have norm $a<M$, and leave at least one unused unit\nof every supplied Tucker or TT rank cap. Choose mode subspaces $W_k$ such\nthat $A_0$ is orthogonal to every tensor in\n$\\mathcal W=\\bigotimes_k W_k$. One sufficient choice is to take at least\none $W_k$ orthogonal to the column space of $A_{0,(k)}$. Put\n$M_0=\\sqrt{M^2-a^2}$ and $L_{\\mathcal W}=P_{\\mathcal W}L$.\nThen\n\n$$\\mathbb E_{A_0}|C|\\ge c_\\alpha\\min(M_0,\\tau)\\rho(L_{\\mathcal W})$$\n\nfor every interval honest on the outer class. If the restriction of the\nloading to an $m$-dimensional orthogonal diagonal block in $\\mathcal W$\nequals $b$ times a flat unit loading, the stronger bound is\n\n$$\\mathbb E_{A_0}|C|\\ge c_{K,\\alpha}|b|\\,\n\\mathfrak r_K(m,M_0,\\tau).$$\n\nHere $\\rho$ is taken within the indicated product subspace. The zero\noverlap case gives a zero lower bound and says nothing further.\n\n**Proof.** Add rank-one perturbations $B\\in\\mathcal W$ with norm at most\n$M_0$. Rank subadditivity keeps $A_0+B$ in every outer unfolding cap;\northogonality gives $\\|A_0+B\\|_F^2=a^2+\\|B\\|_F^2\\le M^2$.\nTranslate the Gaussian experiment by $A_0$. The target difference is\n$\\langle L_{\\mathcal W},B\\rangle$. Apply the two-point construction of L1\nor the existing flat-loading mixtures, all of which have rank one.\nUnused observed coordinates contain identical independent Gaussian noise\nunder both hypotheses and do not change the likelihood calculation.\nThis is a rotation-invariant extension of the preceding block-supported\nshifted bound, not a complete characterization at every mean."
+  },
+  {
+    "source": "honest_tensor_functional_paper/certified_weak_signal/theory/results.md",
+    "line": 357,
+    "kind": "supplement result",
+    "title": "A cap-valid tangent interval on the original unseparated class",
+    "label": "A4",
+    "statement": "There is a more useful repair when mode caps $\\bar r_k\\le p_k$ are supplied.\nUse the same independent Gaussian pilot and validation data and envelopes\nas A2. Let $Q_k$ project onto the leading $\\bar r_k$ pilot left singular\nvectors. Define\n\n$$e_k=\\begin{cases}\n0,&\\bar r_k=p_k,\\\\\n\\min\\{1,2\\eta_k/(\\sigma_{\\bar r_k}(Z^{(1)}_{(k)})-\\eta_k)\\},\n&\\bar r_k<p_k,\\ \\sigma_{\\bar r_k}(Z^{(1)}_{(k)})>\\eta_k,\\\\\n1,&\\text{otherwise}.\n\\end{cases}$$\n\nWith the first-order product-space projector from the previous stage,\n\n$$T=\\bigotimes_k Q_k+\\sum_k(I-Q_k)\\otimes\\bigotimes_{l\\ne k}Q_l,$$\n\nput $R=(I-T)L$ and\n\n$$B_T=M\\|R\\|_F\\min\\{1,(\\sum_{k<l}e_k^2e_l^2)^{1/2}\\}.$$\n\nThe interval centered at $\\langle TL,Z^{(2)}\\rangle$, with radius\n$B_T+q\\tau_2\\|TL\\|_F$, is honest on **every** tensor with these supplied\nmode caps and norm bound, including zero, arbitrarily weak signals, and\nactual ranks strictly below the caps. No singular-value separation is\nassumed. Choose the smallest pilot-measurable radius among this candidate,\nthe direct interval, and the structural norm interval, as before.\n\n**Proof.** Let $V_k$ be the actual left singular subspace of $A_{(k)}$.\nOn the simultaneous noise event we claim\n$\\|(I-Q_k)P_{V_k}\\|_{op}\\le e_k$. This is immediate for $e_k=1$ or\n$Q_k=I$. Otherwise $\\sigma_{\\bar r_k}(Z^{(1)}_{(k)})>\\eta_k$ forces\nthe true mode rank to equal the supplied cap: a smaller true rank would\ngive that observed singular value at most $\\eta_k$ by Weyl's inequality.\nThe pilot tail after the cap is at most $\\eta_k$, so\n$\\|(I-Q_k)A_{(k)}\\|_{op}\\le2\\eta_k$. Multiplying by the inverse nonzero\nsingular values and using\n$\\sigma_{\\bar r_k}(A_{(k)})\\ge\n\\sigma_{\\bar r_k}(Z^{(1)}_{(k)})-\\eta_k$ proves the claim.\n\nDecompose $A$ into the mutually orthogonal mode-projector blocks indexed by\nwhich modes fall in $I-Q_k$. The complement of $T$ consists of blocks with\nat least two such modes. Counting each block once is bounded by counting\nit for every contained pair. Consequently\n\n$$\\|(I-T)A\\|_F^2\\le\\sum_{k<l}\n\\|(I-Q_k)(I-Q_l)A\\|_F^2\n\\le M^2\\sum_{k<l}e_k^2e_l^2.$$\n\nThe last inequality restricts each operator to its true mode subspace and\nuses that operators on distinct modes commute. Combine with the trivial\nbound $\\|(I-T)A\\|_F\\le M$ and Cauchy--Schwarz against $R$.\nConditional Gaussian validation and the common pilot event now prove\ncoverage and valid radius selection exactly as in A2.\n\nThis algorithm is polynomial and honest for the original weak-signal\nclass. Strong signals can make the second-order bias correction small,\neven though separation is not a coverage assumption. It is **not** a\npolynomial weak-signal minimax solution or a method of estimating actual\nrank. At smaller actual ranks, the unresolved cap singular values trigger\nconservative error bounds. For a supplied TT cap vector, valid mode caps\nare $\\min(p_k,\\bar r_{k-1}\\bar r_k)$, with boundary TT ranks one;\nthe interval does not estimate TT bond ranks. Artificial splitting must\nuse its increased noise scales.\n\nFor the original single observation, `single_observation_interval` creates\n$Z\\pm\\tau G'$ with independent artificial $G'$, uses scales\n$\\sqrt2\\tau$ and error $\\alpha/2$ for the cap-valid construction, and\nintersects with the direct interval based on $Z$ at error $\\alpha/2$.\nThe union bound proves honesty at error $\\alpha$ despite the dependence\nbetween these two intervals. The direct component caps the reported\nlength at $2z_{1-\\alpha/4}\\tau\\|L\\|_F$. The split is randomization within\nthe original experiment, not an extra observed replicate."
+  },
+  {
+    "source": "honest_tensor_functional_paper/high_dimensional_extension/theory/results.md",
+    "line": 16,
+    "kind": "supplement result",
+    "title": "Sharp growing-cap rates with a polynomial algorithm",
+    "label": "G1",
+    "statement": "Let $r=\\min(p,\\min_k\\bar r_k)$, where the minimum is over the supplied\nconstrained unfoldings (Tucker modes or TT cuts). Suppose\n$r\\ge c\\sqrt p$ for a fixed $c>0$. Uniformly over all remaining caps,\nall $p$, and every $M,\\tau>0$,\n\n$$\\mathcal L_0\\asymp_{\\alpha,c}\\mathcal L_{\\max}\n\\asymp_{\\alpha,c}\\min\\{M\\sqrt{r/p},\\tau\\}.$$\n\nMinimax squared risk has the square of this rate. The constants do not\ndepend on growing ranks or tensor order. Choose deterministically between\nthe structural interval $[-h_0,h_0]$, $h_0=M\\sqrt{r/p}$, and the direct\nGaussian interval centered at $\\psi(Z)$ with radius $z_{1-\\alpha/2}\\tau$.\nThis takes $O(p)$ accessed entries and arithmetic for the coordinate loading.\nFor a rotated flat loading, obtaining the contractions has its additional\npolynomial input-access cost. No factor estimation or exponential scan is\nrequired.\n\n**Upper proof.** An unfolding attaining the smallest cap has loading matrix\nsingular values $1/\\sqrt p$, repeated $p$ times. Matrix singular-value\nduality and Cauchy--Schwarz bound its contraction with any rank-at-most-$r$\nmatrix of norm $M$ by $M\\sqrt{r/p}$. Thus the structural interval covers\nsurely. The direct error is $N(0,\\tau^2)$. Deterministic radius selection\nproves the length upper bound. Choosing estimator zero when $h_0\\le\\tau$\nand the direct estimator otherwise gives squared risk at most\n$\\min(h_0^2,\\tau^2)$.\n\n**Lower proof.** For a uniform size-$r$ subset $S$ of $\\{1,\\ldots,p\\}$ set\n\n$$A_S=b\\sum_{i\\in S}E_i,\\qquad\nb=\\min\\{M/\\sqrt r,\\tau\\sqrt{\\log(1+p/(4r^2))}\\}.$$\n\nAll constrained unfolding ranks are $r$, the norm is at most $M$, and the\ncommon target is $\\Delta=rb/\\sqrt p$. For independent supports $S,T$,\nthe full Gaussian likelihood second moment equals\n$\\mathbb E\\exp\\{b^2|S\\cap T|/\\tau^2\\}$. To bound it, for\n$H=|S\\cap T|$ factorial moments give\n$\\mathbb E\\binom Hj=\\binom rj(r)_j/(p)_j\\le\\binom rj(r/p)^j$.\nExpand $(1+t)^H$ at $t=e^{b^2/\\tau^2}-1$ to obtain\n\n$$1+\\chi^2(Q,P_0)\\le(1+rt/p)^r\\le\\exp(r^2t/p)\\le e^{1/4}.$$\n\nPut $x=p/(4r^2)\\le1/(4c^2)$. Since\n$x/(1+x)\\le\\log(1+x)\\le x$,\n\n$$\\frac{\\tau}{2\\sqrt{1+1/(4c^2)}}\n\\le\\frac{\\tau r}{\\sqrt p}\\sqrt{\\log(1+p/(4r^2))}\\le\\frac\\tau2.$$\n\nConsequently $\\Delta\\asymp_c\\min(M\\sqrt{r/p},\\tau)$.\nTotal variation is at most\n$\\eta=\\sqrt{e^{1/4}-1}/2<1/2$.\nCoverage of both zero and the common target implies\n$\\mathbb E_0|C|\\ge\\Delta(1-2\\alpha-\\eta)$, which is positive for\n$\\alpha<1/4$. The nearest-target testing argument also gives squared risk\nat least $\\Delta^2(1-\\eta)/8$. This proves all claims.\n\nThis closes the large-cap regime using the earlier sparse-diagonal lower\nbound. It is a consequence of that bound with a newly matched upper bound,\nnot a new sparse-mixture technique. Under $M=\\tau\\sqrt p$ the rate is\n$\\tau$, so the vanishing fixed-cap improvement has already disappeared\nby rank order $\\sqrt p$, well below unrestricted rank $p$."
+  },
+  {
+    "source": "honest_tensor_functional_paper/high_dimensional_extension/theory/results.md",
+    "line": 79,
+    "kind": "supplement result",
+    "title": "General adaptation across positive growing caps is impossible",
+    "label": "G2",
+    "statement": "Set $M=\\tau\\sqrt p$ and let the outer smallest cap satisfy\n$r\\ge c\\sqrt p$. Every interval honest on that outer class has\n$\\mathbb E_0|C|\\ge c_{\\alpha,c}\\tau$. For a fixed positive inner cap\nvector, the previously established oracle minimax rate is\n\n$$\\mathfrak r_K(p)=\\frac\\tau{\\sqrt p}\n\\begin{cases}(\\log(ep))^{3/2},&K=3,\\\\\n\\sqrt{\\log(ep)},&K\\ge4.\n\\end{cases}$$\n\nZero belongs to every such inner class. Its worst-case expected length\nunder outer honesty is therefore at least order $\\tau$, a diverging factor\n$\\sqrt p/(\\log(ep))^{3/2}$ or $\\sqrt{p/\\log(ep)}$ larger than its\nknown-class oracle rate. No algorithm, including an exponential one, can\nbe simultaneously minimax in rate over these positive fixed and growing\ncap classes. This is stronger than excluding only the known-rank-zero\noracle. It does not conflict with earlier adaptation across *fixed* outer\ncaps, whose constants were allowed to depend on that outer cap.\n\n**Nonzero version.** Suppose $A_0$ is supported on the first $q$ coordinates\nin every mode, with norm $a<M$ and actual constrained ranks $r_{0,k}$.\nLet $m=p-q$, $s=\\min(m,\\min_k(\\bar r_k-r_{0,k}))$ and\n$M_0=\\sqrt{M^2-a^2}$. If $s\\ge c\\sqrt m$, then\n\n$$\\mathbb E_{A_0}|C|\\gtrsim_{\\alpha,c}\n\\min\\{M_0\\sqrt{s/p},\\tau\\sqrt{m/p}\\}.$$\n\n**Proof.** Add the G1 alternatives on the disjoint remaining block. Norm\nsquares add; every unfolding rank increases by at most $s$. Translation\nby $A_0$ preserves Gaussian likelihood overlaps, and normalization of the\ntarget multiplies the dimension-$m$ lower bound by $\\sqrt{m/p}$.\nThis gives a positive nonzero-base obstruction when weak extra rank fits\ninside the supplied caps. Arbitrarily oriented versions follow by using\northogonal product blocks when the transformed loading is flat on that block."
+  },
+  {
+    "source": "honest_tensor_functional_paper/high_dimensional_extension/theory/results.md",
+    "line": 116,
+    "kind": "supplement result",
+    "title": "A dyadic loading bound using the full weight profile",
+    "label": "W1",
+    "statement": "Return to a prescribed orthogonal product loading\n$L_w=\\sum_{i=1}^m w_i U_i$, with decreasing absolute weights and fixed\npositive caps. The ambient mode dimensions may exceed $m$.\nPartition the ordered indices into $B_0=\\{1\\}$ and\n$B_j=\\{2^{j-1}+1,\\ldots,\\min(2^j,m)\\}$ for $j\\ge1$, stopping when empty.\nLet $a_j=\\max_{i\\in B_j}|w_i|$, $d_j=|B_j|$, and\n$\\alpha_j=\\alpha/2^{j+1}$. Define\n\n$$H_K(w)=\\sum_j a_j(j+1)^{\\nu_K},\\qquad\n\\nu_3=3/2,\\quad \\nu_K=1/2\\ (K\\ge4).$$\n\nThere is a full-data honest interval satisfying the deterministic bound\n\n$$|C_w|\\le C_{K,\\bar r,\\alpha}\n\\min\\{M\\|w\\|_\\infty,\\tau H_K(w)\\}.$$\n\nThe minimax squared risk is at most a constant times the square of the\nsame expression. This is a statistical upper bound using the ideal block\nresidual fits, not a polynomial implementation of those fits.\n\n**Proof.** Rotate the known orthogonal factors into coordinates. Restrict\nthe data to each $d_j^K$ block; this cannot increase its norm or rank caps.\nApply the earlier weighted residual confidence projection at error\n$\\alpha_j$. With $J_2=J(2\\bar r)$, its block diameter is at most\n\n$$4J_2^{K/2}a_j\\sum_{s=1}^{d_j}\\lambda_s^{(j)}s^{-K/2},$$\n\nwhere\n\n$$\\lambda_s^{(j)}=\\tau\\sqrt{2\\{s\\log(ed_j/s)+Ks\\log(1+4K)\n+\\log(2d_j/\\alpha_j)\\}}.$$\n\nFor $s\\ge1$, $\\log(ed_j)$ and $\\log(1/\\alpha_j)$ are bounded by a fixed\nconstant times $j+1$. Thus\n$\\lambda_s^{(j)}\\le C_{K,\\alpha}\\tau\\sqrt{s(j+1)}$.\nThe remaining sum is harmonic for $K=3$, bounded by $C(j+1)$, and bounded\nby a $K$-dependent constant for $K\\ge4$. Add the block intervals and use\n$\\sum_j\\alpha_j\\le\\alpha$. Their lengths sum to at most $C\\tau H_K(w)$.\nThe old structural radius is at most $M\\sqrt{\\min\\bar r_k}\\|w\\|_\\infty$,\nwhich is $O(M\\|w\\|_\\infty)$ for fixed caps. Select the smaller deterministic\nbound before seeing the data.\n\nFor squared error use block residual fits with error budgets\n$\\beta_j=2^{-j-4}$ and deterministic optimization tolerance $\\tau$.\nThe earlier excess-tail proof gives each block error an $L_2$ norm at most\n$C\\tau a_j(j+1)^{\\nu_K}$: the deterministic diameter term has the bound\njust derived, and the excess term has $L_2$ norm $O(\\tau a_j)$ because\n$\\sum_s s^{-K/2}<\\infty$ and $\\mathbb E T_{0,j}^2\\le2\\beta_j\\tau^2$.\nMinkowski's inequality bounds the $L_2$ norm of their summed error by\n$C\\tau H_K(w)$, without requiring independence. Compare with estimator\nzero and its structural risk bound. The finite number of blocks makes\nmeasurability and summation immediate."
+  },
+  {
+    "source": "honest_tensor_functional_paper/high_dimensional_extension/theory/results.md",
+    "line": 171,
+    "kind": "supplement result",
+    "title": "Sharp rates at every budget for polynomially decreasing loadings",
+    "label": "W2",
+    "statement": "Suppose for fixed $\\beta>0$ and $C_0<\\infty$ that the nonzero, decreasing\nweights satisfy\n\n$$|w_i|\\le C_0|w_1|i^{-\\beta},\\qquad i=1,\\ldots,m.$$\n\nFor fixed positive caps and order, uniformly over all $m,M,\\tau>0$,\n\n$$\\mathcal L_0(\\Theta;L_w)\\asymp\\mathcal L_{\\max}(\\Theta;L_w)\n\\asymp |w_1|\\min(M,\\tau),$$\n\nand minimax squared risk is $\\asymp |w_1|^2\\min(M,\\tau)^2$.\nConstants may depend on $\\beta,C_0,K,\\bar r,\\alpha$, but not on dimension\nor budget. This includes all signed power-law weights, whether normalized\nor not. In particular, $0<\\beta<1/2$ permits diffuse unit-Frobenius\nloadings with $|w_1|\\to0$; the result is not limited to a constant product\noverlap with a unit-Frobenius loading.\n\n**Proof.** For $j\\ge1$,\n$a_j\\le C_0|w_1|2^{-\\beta(j-1)}$. The series\n$\\sum_j2^{-\\beta(j-1)}(j+1)^{\\nu_K}$ is finite for every fixed $\\beta>0$.\nW1 therefore gives the matching length and risk upper bounds. For the\nlower bounds compare zero with $tU_1$, where\n$t=\\min(M,\\tau)/2$ and its sign agrees with $w_1$. These rank-one means\nbelong to every positive cap class, their target difference is $t|w_1|$,\nand their total variation is at most $2\\Phi(1/4)-1<1/4$.\nThe common-target interval argument and two-point squared-loss argument\ngive the asserted lower orders. No lower power-envelope assumption on the\nother weights is needed.\n\nAs $\\beta\\downarrow0$ the constants deteriorate: the dyadic sum is of\norder at most $1+\\beta^{-(\\nu_K+1)}$ up to fixed constants. Thus this\ntheorem does not cover a dimension-dependent exponent approaching zero\nuniformly, and does not contradict the extra logarithmic factors for\nflat loadings. Completely arbitrary unequal weight sequences, including\nmany slowly varying profiles, remain uncharacterized.\n\n**Nonorthogonal perturbations.** Suppose $L=L_w+R$, with the same weight\ncondition and a known otherwise arbitrary tensor $R$ satisfying\n$\\|R\\|_F\\le\\epsilon|w_1|$ for a fixed $0\\le\\epsilon<1$.\nThe same sharp rates hold with constants depending also on $1-\\epsilon$.\nFor the lower bound,\n$|\\langle L,U_1\\rangle|\\ge(1-\\epsilon)|w_1|$.\nFor large budgets add a direct interval for $\\langle R,A\\rangle$ at a\nseparate error allocation, costing $O(\\tau\\|R\\|_F)$.\nFor small budgets, $\\rho(L_w)=|w_1|$ by generalized Hölder and\n$\\rho(R)\\le\\|R\\|_F$; the canonical expansion bounds the structural\nradius by $\\sqrt J M(1+\\epsilon)|w_1|$. The same reasoning applies to\nsquared error, using the direct residual estimator and Minkowski.\nThis gives an all-budget result for a class of loadings without an exact\northogonal representation, but is not a theorem for every loading."
+  },
+  {
+    "source": "honest_tensor_functional_paper/high_dimensional_extension/theory/results.md",
+    "line": 224,
+    "kind": "supplement result",
+    "title": "A restricted computational separation for these newly matched loadings",
+    "label": "W3",
+    "statement": "The W2 rate does not automatically have an efficient estimator. To make\nthis distinction precise, let $w_i=w_1i^{-\\beta}>0$ with fixed\n$0<\\beta<1/K$, and set $M=\\tau\\sqrt p$.\nChoose constants\n\n$$\\frac1K<a<\\min\\left\\{\\frac12,\\frac{1-2\\beta}{K-2}\\right\\},\n\\qquad 0<b<a-\\frac1K.$$\n\nFor $s=\\lfloor p^a\\rfloor$ and $D=\\lfloor p^b\\rfloor$, every polynomial\nestimator of total degree at most $D$ in the full observed tensor has\nworst-case squared risk polynomially larger than the unrestricted\n$\\tau^2w_1^2$ rate of W2.\n\n**Finite statement and proof.** For a uniform size-$s$ support $S$, put\n$x_S=s^{-1/2}\\mathbf1_S$ and let $D_w$ be the diagonal map with entries\n$w_p/w_i\\le1$. Use the rank-one alternatives\n\n$$A_S=\\tau\\lambda(D_wx_S)\\otimes x_S^{\\otimes(K-1)},\\qquad\n0<\\tau\\lambda\\le M.$$\n\nThey have norm at most $M$ and common weighted target\n$\\Delta=\\tau\\lambda w_p s^{1-K/2}$.\nAll factors are nonnegative, so for two supports\n$0\\le\\langle A_S,A_T\\rangle/\\tau^2\\le\n\\lambda^2|S\\cap T|^K/s^K$.\nThe full Gaussian Hermite expansion therefore bounds the squared norm of\nthe centered likelihood ratio through degree $D$ by\n\n$$\\chi^2_{\\le D}\\le\\sum_{d=1}^D\n\\frac{\\lambda^{2d}\\mathbb E H^{Kd}}{d!s^{Kd}}\n\\le\\frac{\\mu e^\\mu B_D}{1-B_D}=\\eta_D^2,\n\\quad \\mu=s^2/p,\\quad B_D=\\frac{\\lambda^2(KD)^K}{s^K}<1.$$\n\nFor completeness, counting maps by their nonempty fibers gives\n$H^q=\\sum_{j=1}^q S(q,j)(H)_j$, where $S(q,j)$ counts partitions of $q$\nelements into $j$ nonempty sets. We have $S(q,j)\\le j^q/j!$ and\n$\\mathbb E(H)_j\\le\\mu^j$.\nHence $\\mathbb E H^q\\le q^q(e^\\mu-1)\\le\\mu e^\\mu q^q$.\nSubstitute $q=Kd$ and sum the geometric upper bound to get the display.\nFor a degree-$D$ estimator with worst-case squared risk $R$, orthogonality\nof Hermite polynomials and Cauchy--Schwarz give\n$|\\mathbb E_QT-\\mathbb E_0T|\\le\\sqrt R\\,\\eta_D$.\nThe two target means differ by $\\Delta$ and their estimation biases are\neach at most $\\sqrt R$, so\n\n$$R\\ge\\Delta^2/(2+\\eta_D)^2.$$\n\nSet $\\lambda=\\sqrt p$. Then $\\mu\\to0$ and\n$B_D=O(p^{1-Ka+Kb})\\to0$, whereas\n\n$$\\frac{\\Delta}{\\tau w_1}\n\\asymp p^{1/2-\\beta-a(K-2)/2}\\longrightarrow\\infty$$\n\nat a polynomial rate by the choice of $a$. Such an $a$ exists precisely\nunder the stated sufficient condition $\\beta<1/K$. This proves the\nrestricted separation, using the earlier general low-degree argument with\na new loading-compatible prior. It includes diffuse power-law loadings\nwith sharp all-budget rates from W2.\n\nThis is not a lower bound for all polynomial-time algorithms or all\nconfidence intervals. An interval honest on zero and these alternatives\nwould give the test $\\mathbf1\\{\\Delta\\in C(Z)\\}$ with total error at most\n$2\\alpha+\\mathbb E_0|C|/\\Delta$. Excluding such efficient tests requires\nan additional computational hypothesis; the polynomial-estimator result\nalone does not supply one."
+  },
+  {
+    "source": "honest_tensor_functional_paper/high_dimensional_extension/theory/results.md",
+    "line": 292,
+    "kind": "supplement result",
+    "title": "Efficient pointwise optimality at strong saturated Tucker means",
+    "label": "P1",
+    "statement": "This result concerns **Tucker mode caps all equal to $r$**, $1\\le r\\le p$.\nIt does not substitute TT bond caps for mode caps. Let\n\n$$A_0=\\sum_{i\\in S}a_i E_i,\\qquad |S|=r,\\quad\na=\\min_{i\\in S}|a_i|>0,\\quad\n\\|A_0\\|_F+\\tau\\le M\\le c_0a\\sqrt r,$$\n\nwhere $c_0>1$ is fixed. The support and signed amplitudes are not supplied\nto the algorithm. These means saturate every supplied mode cap.\nThere is a polynomial interval honest on the entire unseparated Tucker\nclass such that, in the strong-signal regime specified below,\n\n$$\\mathbb E_{A_0}|C|\\asymp_{K,\\alpha,c_0}\\tau\\sqrt{r/p},$$\n\nand this matches the infimum expected length at $A_0$ under that *same\nouter-class honesty requirement*. Both $p$ and $r$ may grow. This is\npointwise optimality in rate, not optimal leading constants.\n\n**Algorithm and noise budgets.** Make the valid artificial split\n$Z^{(1)}=Z+\\tau G'$, $Z^{(2)}=Z-\\tau G'$, with independent errors of scale\n$v=\\sqrt2\\tau$. Set $\\delta=\\alpha r/(8p)$ and\n\n$$\\eta=2v\\sqrt{2\\{(p+p^{K-1})\\log9+\\log(2K/\\delta)\\}}.$$\n\nUse the preceding cap-valid tangent interval with pilot failure budget\n$\\delta$ and total failure budget $\\alpha/2$. Its validation quantile is\n$q=z_{1-(\\alpha/2-\\delta)/2}$. Intersect it with the direct interval on\n$Z$ at error $\\alpha/2$ and the structural range. All choices are valid on\nthe unseparated class. The total reported length is bounded by\n$2z_{1-\\alpha/4}\\tau$, including on pilot failure.\n\nA sufficient condition for the pointwise rate is\n\n$$a\\ge 4\\eta,\\qquad a\\ge \\eta^2\\sqrt p/\\tau.$$\n\nFor fixed order/confidence this is satisfied at sufficiently large constant\nmultiple of $\\tau p^{K-1/2}$. This requirement is conservative and much\nstronger than a claim of optimal computational signal strength.\n\n**Upper proof.** On the simultaneous pilot event, the top-$r$ projector\n$Q_k$ satisfies $\\|Q_k-P_k\\|_{op}\\le d=4\\eta/a$, where $P_k$ projects\nonto the coordinates in $S$. The cap-valid certificate has each angle\nbound at most $d$ by Weyl's inequality and $a\\ge4\\eta$.\nWrite $T_Q$ and $T_P$ for their first-order product-space projectors.\nThe representation\n\n$$T_Q=\\sum_k\\bigotimes_{l\\ne k}Q_l-(K-1)\\bigotimes_l Q_l$$\n\nwith an identity in the omitted mode, and product telescoping, gives\n$\\|T_Q-T_P\\|_{op}\\le2K(K-1)d$.\nFor the diagonal loading,\n$T_PL=p^{-1/2}\\sum_{i\\in S}E_i$, so\n\n$$\\|T_QL\\|_F\\le\\sqrt{r/p}+2K(K-1)d.$$\n\nThe cap-valid bias is bounded by\n$M\\sqrt{\\binom K2}d^2\\le\n16c_0\\sqrt{\\binom K2}\\sqrt r\\,\\eta^2/a$.\nThe assumed amplitude makes this $O(\\tau\\sqrt{r/p})$.\nIt also gives $d\\le4\\tau/(\\eta\\sqrt p)=O(\\sqrt{r/p})$, because\n$\\eta\\gtrsim\\tau$ and $r\\ge1$. Thus the selected/intersected interval\nhas length $O(\\tau\\sqrt{r/p})$ on the pilot event. Off that event its\nlength is $O(\\tau)$, with probability at most\n$\\delta=O(r/p)\\le O(\\sqrt{r/p})$. The expected-length upper bound follows.\nThe dimension-dependent failure budget is essential to this argument;\nfixed failure probability would leave an unjustified $O(\\tau)$ term.\n\n**Lower proof.** Put $V=r^{-1/2}\\sum_{i\\in S}E_i$ and compare $A_0$ with\n$A_0+(\\tau/2)V$. Both have mode ranks at most $r$ and norms at most $M$.\nTheir full Gaussian total variation is less than $1/4$ and their target\ndifference is $(\\tau/2)\\sqrt{r/p}$. The common-target interval argument\nat base $A_0$ proves the lower bound. This lower comparison uses the same\nouter class on which the algorithm is honest.\n\n**Computation.** Economy SVDs of the $p\\times p^{K-1}$ unfoldings require\n$O(Kp^{K+1})$ arithmetic and $O(p^K+p^2)$ working storage for fixed $K$.\nTensor projection has polynomial cost of the same order. The new code\nuses economy SVDs; the previous prototype requested full right singular\nmatrices, which could allocate $p^{2K-2}$ entries. Thus the implementation\nnow scales with the explicit tensor rather than that avoidable allocation.\nIt still reads the full tensor and does not claim sublinear access cost."
+  }
+]

@@ -1,0 +1,333 @@
+# Response to the complete scientific review
+
+This is an internal scientific response, not a message sent to referees. The full review was read before changes. All 19 substantive concerns are tracked below; the complete 59-result and 20-assumption audits remain preserved and feed the dependency audit. P0/P1 correctness, methods and experiments were addressed before rewriting the narrative.
+
+## Response matrix
+
+The CSV/JSON matrix includes review location, scientific type, proposed action, actual action, files changed, new result and remaining issue.
+
+| ID / priority | Concern | Status |
+|---|---|---|
+| F01 / P0 | Coverage tolerance counts a genuine miss | RESOLVED |
+| F03 / P0 | No synchronized final submission | RESOLVED |
+| F02 / P1 | No-bias ablation changes three components | RESOLVED |
+| F04 / P1 | Interval midpoint has catastrophic rare-fallback loss | RESOLVED |
+| F05 / P1 | Signal sweep changes supplied norm budget | RESOLVED |
+| F06 / P1 | Comparator guarantee type is not applicability | RESOLVED |
+| F07 / P1 | Ideal high-dimensional fit versus binary computation | RESOLVED |
+| N01 / P1 | Focus the distinct tensor likelihood contribution | RESOLVED |
+| F08 / P2 | Two calibration refinements lack direct experiments | RESOLVED |
+| E01 / P2 | Pointwise precision and finite-grid interpretation | RESOLVED |
+| D01 / P2 | No justified real-data/LLM application | NOT RESOLVED |
+| C01 / P2 | Runtime and memory access models differ | RESOLVED |
+| F09 / P3 | Scalar losses reused across interval levels without identity | RESOLVED |
+| F10 / P3 | Colliding symbols and historical exposition | RESOLVED |
+| T01 / P2 | General fixed-cap weak-signal minimax computation | NOT RESOLVED |
+| T02 / P2 | Intermediate growing-cap minimax matching | NOT RESOLVED |
+| T03 / P2 | Arbitrary loading profiles beyond matched regimes | NOT RESOLVED |
+| T04 / P2 | Complete pointwise and TT adaptation theory | NOT RESOLVED |
+| T05 / P2 | Unknown directional scale, dependent replicates and selected loading | PARTIALLY RESOLVED |
+
+## F01: Coverage tolerance counts a genuine miss
+
+**Review concern:** Coverage tolerance counts a genuine miss. The precise original location is recorded in registry row F01.
+
+**Assessment:** The concern is valid. Its scope must be distinguished from any stronger unproved interpretation.
+
+**Action:** Replaced target-scaled tolerance by four endpoint ULPs, retained strict counts, reevaluated all saved interval observations and regenerated dependent outputs.
+
+**Technical resolution / new evidence:** Exactly two 90% rows for the same S03_007 observation change from 134/150 to 133/150; 606 rescaling checks pass.
+
+**Manuscript and artifact changes:** [numerics.py](empirical/code/numerics.py), [recompute_saved.py](code/recompute_saved.py), [saved_corrections.json](results/saved_corrections.json).
+
+**Remaining issue:** This is numerical evaluation rounding, not formal interval arithmetic.
+
+**Status:** RESOLVED.
+
+## F03: No synchronized final submission
+
+**Review concern:** No synchronized final submission. The precise original location is recorded in registry row F03.
+
+**Assessment:** The concern is valid. Its scope must be distinguished from any stronger unproved interpretation.
+
+**Action:** Created one current main paper, complete technical supplement, empirical supplement and reading order; integrated final rates and open boundaries.
+
+**Technical resolution / new evidence:** All 59 reviewed results plus R1 have an explicit proof-status ledger and complete supplied proofs; the final rate figure replaces the historical gap headline.
+
+**Manuscript and artifact changes:** [main.tex](paper/main.tex), [technical_supplement.tex](paper/technical_supplement.tex), [empirical_report.md](empirical_report.md), [README.md](README.md).
+
+**Remaining issue:** Final venue formatting and targeted citation/priority check remain.
+
+**Status:** RESOLVED.
+
+## F02: No-bias ablation changes three components
+
+**Review concern:** No-bias ablation changes three components. The precise original location is recorded in registry row F02.
+
+**Assessment:** The concern is valid. Its scope must be distinguished from any stronger unproved interpretation.
+
+**Action:** Executed paired isolated bias, quantile and intersection ablations; derived pure fallback removal exactly from every saved tangent candidate. Relabeled the old multicomponent diagnostic.
+
+**Technical resolution / new evidence:** Bias-only removal changes nothing over the first eight V01 levels because fallback is selected. Pure fallback removal retains intersections; the combined failure cannot identify bias alone.
+
+**Manuscript and artifact changes:** [run_revision.py](code/run_revision.py), [analyze_revision.py](code/analyze_revision.py), [revision_summary.csv](tables/revision_summary.csv), [03_controlled_ablations.pdf](figures/03_controlled_ablations.pdf).
+
+**Remaining issue:** These cases do not establish that every correction is necessary at every mean.
+
+**Status:** RESOLVED.
+
+## F04: Interval midpoint has catastrophic rare-fallback loss
+
+**Review concern:** Interval midpoint has catastrophic rare-fallback loss. The precise original location is recorded in registry row F04.
+
+**Assessment:** The empirical concern is valid. The prior P1 theorem asserted expected length, not midpoint MSE, so no false P1 theorem is being repaired. The estimator output nevertheless required a substantive correction.
+
+**Action:** Introduced a separate public scalar output with a complete uniform risk proof; reevaluated all affected original observations and retained old losses.
+
+**Technical resolution / new evidence:** R1 risk is at most C_alpha min(h²,tau²). S03_002 MSE changes from 12,084,661.379 to 0.147776 on the same draws; intervals are unchanged.
+
+**Manuscript and artifact changes:** [scalar_companion.md](theory/scalar_companion.md), [methods.py](code/methods.py), [numerics.py](empirical/code/numerics.py), [scalar_risk_saved.csv](tables/scalar_risk_saved.csv).
+
+**Remaining issue:** P1 pointwise minimax MSE remains unproved; R1 is only a noise-scale bound.
+
+**Status:** RESOLVED.
+
+## F05: Signal sweep changes supplied norm budget
+
+**Review concern:** Signal sweep changes supplied norm budget. The precise original location is recorded in registry row F05.
+
+**Assessment:** The criticism is valid as a design confounding issue. A supplied norm bound chosen for each prescribed simulation class is not data leakage; it simply changes the question being measured.
+
+**Action:** Executed a fixed-M sweep with a paired norm-comparable-M branch, holding the observations and pilot fixed between branches.
+
+**Technical resolution / new evidence:** Ten amplitudes and 10,000 new observations distinguish signal strength from a changing supplied honesty class.
+
+**Manuscript and artifact changes:** [revision_cases.json](configs/revision_cases.json), [run_revision.py](code/run_revision.py), [02_fixed_budget.pdf](figures/02_fixed_budget.pdf).
+
+**Remaining issue:** Both branches still assume the supplied norm/cap bounds are valid.
+
+**Status:** RESOLVED.
+
+## F06: Comparator guarantee type is not applicability
+
+**Review concern:** Comparator guarantee type is not applicability. The precise original location is recorded in registry row F06.
+
+**Assessment:** The concern is valid. Its scope must be distinguished from any stronger unproved interpretation.
+
+**Action:** Mapped the XCH implementation to tensor-PCA Sections 4.2–4.4 and added case-level applicability separately from guarantee type.
+
+**Technical resolution / new evidence:** Zero/rank mismatch explicitly outside the specified regular model; other initialization, alignment and remainder constants not certified. Smaller strong-signal comparator lengths retained.
+
+**Manuscript and artifact changes:** [novelty_and_baselines.md](novelty_and_baselines.md), [recompute_saved.py](code/recompute_saved.py), [analyze_revision.py](code/analyze_revision.py), [empirical_results.tex](paper/empirical_results.tex).
+
+**Remaining issue:** This is a local numerical implementation, not certification of every finite-case regularity constant.
+
+**Status:** RESOLVED.
+
+## F07: Ideal high-dimensional fit versus binary computation
+
+**Review concern:** Ideal high-dimensional fit versus binary computation. The precise original location is recorded in registry row F07.
+
+**Assessment:** The concern is valid. Its scope must be distinguished from any stronger unproved interpretation.
+
+**Action:** Separated ideal residual optimization, executable conservative methods and binary float64 search; fixed loading, direction and tolerance across 600 new solves.
+
+**Technical resolution / new evidence:** 7/600 endpoint certificates, 593 unresolved; all witness gaps and observations retained. The C1 objective-error contract remains explicit.
+
+**Manuscript and artifact changes:** [main.tex](paper/main.tex), [run_revision.py](code/run_revision.py), [solver_trials.csv](tables/solver_trials.csv), [06_fixed_solver.pdf](figures/06_fixed_solver.pdf).
+
+**Remaining issue:** General high-dimensional minimax computation remains open under T01.
+
+**Status:** RESOLVED.
+
+## N01: Focus the distinct tensor likelihood contribution
+
+**Review concern:** Focus the distinct tensor likelihood contribution. The precise original location is recorded in registry row N01.
+
+**Assessment:** The concern is valid. Its scope must be distinguished from any stronger unproved interpretation.
+
+**Action:** Rebuilt the contribution around full-likelihood tensor geometry, the cubic harmonic mixture and all-budget ordered-coordinate bound; explicitly credited classical components.
+
+**Technical resolution / new evidence:** Distinguishes changes in observation experiment, honesty class and estimator restriction. No claim of generic new nonlinear inference or firstness.
+
+**Manuscript and artifact changes:** [novelty_and_baselines.md](novelty_and_baselines.md), [introduction_outline.md](paper/introduction_outline.md), [main.tex](paper/main.tex).
+
+**Remaining issue:** External priority confirmation is a submission risk; this is a focused mathematical positioning audit.
+
+**Status:** RESOLVED.
+
+## F08: Two calibration refinements lack direct experiments
+
+**Review concern:** Two calibration refinements lack direct experiments. The precise original location is recorded in registry row F08.
+
+**Assessment:** The concern is valid. Its scope must be distinguished from any stronger unproved interpretation.
+
+**Action:** Executed the actual row-corruption median and independent Gaussian residual-scale refinements, including assumption violations.
+
+**Technical resolution / new evidence:** 19,000 row/noise datasets and 54,000 variance datasets. The severe cap violation fails; independent scale calibration is conservative and naive plug-in fails at small n.
+
+**Manuscript and artifact changes:** [run_revision.py](code/run_revision.py), [calibration.csv](tables/calibration.csv), [05_calibration.pdf](figures/05_calibration.pdf).
+
+**Remaining issue:** No general contamination-minimax or arbitrary-unknown-noise claim.
+
+**Status:** RESOLVED.
+
+## E01: Pointwise precision and finite-grid interpretation
+
+**Review concern:** Pointwise precision and finite-grid interpretation. The precise original location is recorded in registry row E01.
+
+**Assessment:** The concern is valid. Its scope must be distinguished from any stronger unproved interpretation.
+
+**Action:** Added four p=32/64 cases with 1,000 independent trials each and a 1,000-trial transition grid; report normalized lengths and Wilson uncertainty.
+
+**Technical resolution / new evidence:** Large-case 95% cap coverage 0.965–0.978; rate-normalized length approximately 7.20–8.01. All rare losses retained.
+
+**Manuscript and artifact changes:** [revision_cases.json](configs/revision_cases.json), [revision_summary.csv](tables/revision_summary.csv), [04_scalar_and_pointwise.pdf](figures/04_scalar_and_pointwise.pdf).
+
+**Remaining issue:** Finite grid does not prove a limiting exponent, minimal SNR or general pointwise geometry.
+
+**Status:** RESOLVED.
+
+## D01: No justified real-data/LLM application
+
+**Review concern:** No justified real-data/LLM application. The precise original location is recorded in registry row D01.
+
+**Assessment:** No invalid real-data result existed to repair. Adding an arbitrary dataset would not establish the required sampling model or prescribed target. A real-data extension remains unavailable rather than being marked scientifically resolved.
+
+**Action:** Audited the absence of a justified repeated-tensor dataset and contrast; kept a theory/simulation scope and stated the required independent sampling unit and calibration.
+
+**Technical resolution / new evidence:** No unsupported application was added. A text clarification was requested; no dataset/model specification was received during revision.
+
+**Manuscript and artifact changes:** [README.md](empirical/real_data/README.md), [main.tex](paper/main.tex), [empirical_report.md](empirical_report.md).
+
+**Remaining issue:** A defensible real-data analysis is not yet available. It is not needed for the focused theory claim but remains an open broader project request.
+
+**Status:** NOT RESOLVED.
+
+## C01: Runtime and memory access models differ
+
+**Review concern:** Runtime and memory access models differ. The precise original location is recorded in registry row C01.
+
+**Assessment:** The concern is valid. Its scope must be distinguished from any stronger unproved interpretation.
+
+**Action:** Measured the revised public interval/scalar API with warmup and ten calls per dimension; separated input, coordinate access and traced allocation.
+
+**Technical resolution / new evidence:** Fresh p=8/16/32/64 timings, explicit p^3 entries and 8p^3 input bytes; coordinate access 8p bytes. Economy-SVD cost stated.
+
+**Manuscript and artifact changes:** [check_methods.py](code/check_methods.py), [runtime_revision.json](tables/runtime_revision.json), [empirical_report.md](empirical_report.md).
+
+**Remaining issue:** Trace excludes input and possibly native workspace and is not RSS; no sublinear full-tensor computation claim.
+
+**Status:** RESOLVED.
+
+## F09: Scalar losses reused across interval levels without identity
+
+**Review concern:** Scalar losses reused across interval levels without identity. The precise original location is recorded in registry row F09.
+
+**Assessment:** The concern is valid. Its scope must be distinguished from any stronger unproved interpretation.
+
+**Action:** Added estimator_id and estimator_alpha; distinguish 95% scalar outputs from reused multi-level interval rows and retain midpoint diagnostics separately.
+
+**Technical resolution / new evidence:** All scalar-producing interval summaries identify the estimator; confidence levels are not counted as independent data.
+
+**Manuscript and artifact changes:** [common.py](empirical/code/common.py), [analyze_revision.py](code/analyze_revision.py), [revision_summary.csv](tables/revision_summary.csv).
+
+**Remaining issue:** Event-only records have no scalar estimator and are labeled accordingly in the revision guide.
+
+**Status:** RESOLVED.
+
+## F10: Colliding symbols and historical exposition
+
+**Review concern:** Colliding symbols and historical exposition. The precise original location is recorded in registry row F10.
+
+**Assessment:** The concern is valid. Its scope must be distinguished from any stronger unproved interpretation.
+
+**Action:** Created a notation dictionary, separated ambient dimension, polynomial degree, envelope coefficients and approximation/pilot quantities, and reorganized historical bounds.
+
+**Technical resolution / new evidence:** A focused main argument and complete proof supplement replace the chronological chain of drafts; active reference labels resolve.
+
+**Manuscript and artifact changes:** [notation.md](paper/notation.md), [prepare_theory.py](code/prepare_theory.py), [main.tex](paper/main.tex).
+
+**Remaining issue:** Locally introduced proof aliases are documented; publication style can receive a final copy edit.
+
+**Status:** RESOLVED.
+
+## T01: General fixed-cap weak-signal minimax computation
+
+**Review concern:** General fixed-cap weak-signal minimax computation. The precise original location is recorded in registry row T01.
+
+**Assessment:** The concern identifies an unresolved research extension. The focused manuscript can state the existing results without claiming this extension.
+
+**Action:** Re-examined objective certificates, truncated-scan tradeoffs and restricted computational obstructions; executed fixed-geometry solver diagnostics.
+
+**Technical resolution / new evidence:** The numerical and statistical contracts are concrete; no general polynomial minimax algorithm was obtained.
+
+**Manuscript and artifact changes:** [revision_audit.md](theory/revision_audit.md), [main.tex](paper/main.tex), [solver_summary.csv](tables/solver_summary.csv).
+
+**Remaining issue:** Need a general algorithm with deterministic global error control or a correctly scoped computational lower bound.
+
+**Status:** NOT RESOLVED.
+
+## T02: Intermediate growing-cap minimax matching
+
+**Review concern:** Intermediate growing-cap minimax matching. The precise original location is recorded in registry row T02.
+
+**Assessment:** The concern identifies an unresolved research extension. The focused manuscript can state the existing results without claiming this extension.
+
+**Action:** Compared explicit all-r sparse-mixture lower and structural/direct upper envelopes, retaining rank dependence and the preserved intermediate-cap grid.
+
+**Technical resolution / new evidence:** Large-cap matching is preserved; extrapolating fixed-cap constants does not match intermediate caps.
+
+**Manuscript and artifact changes:** [revision_audit.md](theory/revision_audit.md), [main.tex](paper/main.tex), [10_intermediate_caps.pdf](empirical/figures/10_intermediate_caps.pdf).
+
+**Remaining issue:** Sharp matching rates for 1 << r << sqrt(p) remain open.
+
+**Status:** NOT RESOLVED.
+
+## T03: Arbitrary loading profiles beyond matched regimes
+
+**Review concern:** Arbitrary loading profiles beyond matched regimes. The precise original location is recorded in registry row T03.
+
+**Assessment:** The concern identifies an unresolved research extension. The focused manuscript can state the existing results without claiming this extension.
+
+**Action:** Re-examined dyadic upper and flat-block/largest-atom lower bounds and the deterioration as decay tends to zero.
+
+**Technical resolution / new evidence:** Flat, small-budget arbitrary and fixed-decay regimes are precisely separated.
+
+**Manuscript and artifact changes:** [revision_audit.md](theory/revision_audit.md), [main.tex](paper/main.tex).
+
+**Remaining issue:** General slowly varying, multiscale and nonorthogonal profiles at larger budgets still lack matching theory/computation.
+
+**Status:** NOT RESOLVED.
+
+## T04: Complete pointwise and TT adaptation theory
+
+**Review concern:** Complete pointwise and TT adaptation theory. The precise original location is recorded in registry row T04.
+
+**Assessment:** The concern identifies an unresolved research extension. The focused manuscript can state the existing results without claiming this extension.
+
+**Action:** Checked the role of saturation, norm slack, pilot signal and growing-cap obstructions; added R1 without claiming pointwise minimax risk.
+
+**Technical resolution / new evidence:** P1 length and G2 impossibility remain valid within their original scopes; scalar rare-event loss is repaired.
+
+**Manuscript and artifact changes:** [revision_audit.md](theory/revision_audit.md), [scalar_companion.md](theory/scalar_companion.md), [main.tex](paper/main.tex).
+
+**Remaining issue:** Complete pointwise length/risk, optimal SNR and TT-specific adaptation remain open.
+
+**Status:** NOT RESOLVED.
+
+## T05: Unknown directional scale, dependent replicates and selected loading
+
+**Review concern:** Unknown directional scale, dependent replicates and selected loading. The precise original location is recorded in registry row T05.
+
+**Assessment:** The concern identifies an unresolved research extension. The focused manuscript can state the existing results without claiming this extension.
+
+**Action:** Implemented and tested the available independent Gaussian scale refinement and finite-variance row bound; retained explicit dependence/selection restrictions.
+
+**Technical resolution / new evidence:** Finite-sample calibration directly tested in its real experiment; naive plug-in counterexample retained.
+
+**Manuscript and artifact changes:** [revision_audit.md](theory/revision_audit.md), [calibration.csv](tables/calibration.csv), [main.tex](paper/main.tex).
+
+**Remaining issue:** Unknown arbitrary directional scale, dependent replicates, selected loading and estimated allowances need additional theory.
+
+**Status:** PARTIALLY RESOLVED.

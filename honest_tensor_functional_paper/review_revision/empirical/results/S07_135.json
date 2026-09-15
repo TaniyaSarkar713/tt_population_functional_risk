@@ -1,0 +1,41 @@
+{
+  "case": {
+    "id": "S07_135",
+    "suite": "S07",
+    "p": 16384,
+    "profile": "log",
+    "M": 1000.0,
+    "B": 0
+  },
+  "records": [],
+  "extra": {
+    "bounds": [
+      {
+        "K": 3,
+        "upper_diameter": 3.919927969080109,
+        "block_diameter": 168.62883747277772,
+        "direct_diameter": 3.919927969080109,
+        "structural_diameter": 147.35193412880625,
+        "H": 4.465483290673215,
+        "largest": 0.07367596706440313,
+        "two_point_scale": 0.07367596706440313,
+        "sharp_scale_claim": false,
+        "analytic_only": true
+      },
+      {
+        "K": 4,
+        "upper_diameter": 3.919927969080109,
+        "block_diameter": 889.1822618728492,
+        "direct_diameter": 3.919927969080109,
+        "structural_diameter": 147.35193412880625,
+        "H": 0.662826379179389,
+        "largest": 0.07367596706440313,
+        "two_point_scale": 0.07367596706440313,
+        "sharp_scale_claim": false,
+        "analytic_only": true
+      }
+    ],
+    "status": "NEEDS CHECK",
+    "interpretation": "Analytic envelopes only; no fitted interval or empirical rate attainment."
+  }
+}

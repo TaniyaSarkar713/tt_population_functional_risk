@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "method": "git checkout-index --all into an isolated temporary directory, without .git or ignored local build files",
+  "artifact_checks": 6205,
+  "missing_scientific_files": [],
+  "absent_ignored_local_files": 77,
+  "new_mc_datasets": 320000,
+  "new_finite_theory_checks": 20489,
+  "method_sha256": "4e8d1f2e40a7212c49495c8273da09647f6591af0c97f18792814aaa1e0b4536",
+  "theory_sha256": "1b4627b69c16053c6a786b8e24952d7353f9cf0172c1d9b12c616e3e94cde76d",
+  "interpretation": "Validation of the staged scientific content from a clean file distribution, not a new Monte Carlo run."
+}

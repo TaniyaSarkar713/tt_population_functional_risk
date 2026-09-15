@@ -1,0 +1,22 @@
+Processed 10/122 subjects; 10 eligible
+Processed 20/122 subjects; 20 eligible
+Processed 30/122 subjects; 30 eligible
+Processed 40/122 subjects; 40 eligible
+Processed 50/122 subjects; 50 eligible
+Processed 60/122 subjects; 60 eligible
+Processed 70/122 subjects; 70 eligible
+Processed 80/122 subjects; 80 eligible
+Processed 90/122 subjects; 90 eligible
+Processed 100/122 subjects; 100 eligible
+Processed 110/122 subjects; 110 eligible
+Processed 120/122 subjects; 120 eligible
+{
+  "eligible_subjects": 122,
+  "trial_file_count": 11074,
+  "trial_status_counts": {
+    "included": 10962,
+    "error_flag": 95,
+    "unknown_condition": 17
+  },
+  "processing_seconds": 99.768715875
+}

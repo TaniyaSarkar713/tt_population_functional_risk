@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "cases": 55,
+  "datasets": 87200,
+  "summary_rows": 612,
+  "solver_calls": 600,
+  "checks": 3125,
+  "pure_fallback_ablation": "Exact postprocessing of every saved tangent candidate; same observations, pilot and intersections, no extra draws"
+}

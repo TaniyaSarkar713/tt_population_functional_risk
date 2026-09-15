@@ -1,0 +1,847 @@
+Independent review
+Assume you are a senior statistician, machine learning theorist, and journal referee with extensive experience publishing and reviewing for venues such as JASA, Annals of Statistics, JRSS-B, Biometrika, Bernoulli, Statistical Science, NeurIPS, ICML, AISTATS, and COLT.
+A complete draft of the research paper is now available.
+Your task is to perform a deep, adversarial, end-to-end scientific review of the entire paper, similar to what would be expected from multiple expert referees at a top statistics journal.
+Do not merely proofread the manuscript.
+Evaluate whether the paper is:
+mathematically correct;
+statistically meaningful;
+theoretically substantial;
+genuinely novel;
+internally coherent;
+empirically convincing;
+reproducible;
+clearly written;
+appropriately positioned in the literature;
+ready for submission to a strong statistics journal.
+Review all relevant files in the project folder, including:
+manuscript;
+appendix;
+supplementary material;
+proofs;
+simulation code;
+simulation outputs;
+figures;
+tables;
+real-data analysis;
+bibliography;
+prior literature review;
+novelty analysis;
+theory notes;
+theorem derivations.
+Treat the paper as if you were deciding whether to recommend acceptance, major revision, or rejection at a top-tier statistics journal.
+
+1. First understand the paper independently
+Before critiquing it, reconstruct the paper's contribution from scratch.
+Identify:
+Statistical problem
+What is the precise statistical problem being studied?
+Write the setup mathematically.
+For example,
+Z1,…,Zn∼Pθ⋆,θ⋆∈Θ,Z_1,\ldots,Z_n\sim P_{\theta^\star}, \qquad \theta^\star\in\Theta,
+with estimator
+θ^=A(Z1,…,Zn).\widehat{\theta} = \mathcal A(Z_1,\ldots,Z_n).
+Identify:
+observations;
+parameters;
+latent variables;
+estimator/procedure;
+loss/risk;
+dimensionality;
+structural assumptions;
+dependence;
+contamination;
+asymptotic regime;
+inferential target.
+Main methodological contribution
+What is actually new methodologically?
+Main theoretical contribution
+What are the central theorems?
+Main empirical contribution
+What do the simulations and real-data experiments demonstrate?
+Claimed novelty
+What exactly does the manuscript claim has not been done before?
+Do this independently of the authors' contribution list.
+Then compare your reconstruction with what the manuscript claims.
+Flag any mismatch.
+
+2. Give a one-paragraph referee summary
+Write a concise referee-style summary containing:
+the problem;
+proposed method;
+main theoretical results;
+empirical evidence;
+overall significance.
+This should reflect what the paper actually establishes, not merely what the Abstract claims.
+
+3. Evaluate the statistical contribution
+Determine whether the paper addresses a substantive statistical problem.
+Ask:
+Is the estimand scientifically/statistically meaningful?
+Is the statistical problem well posed?
+Is the estimator natural?
+Is the setting genuinely different from existing statistical problems?
+Does the contribution extend beyond a single AI/LLM application?
+Is there a general statistical principle behind the work?
+Would statisticians care about the theoretical problem even if the AI motivation were removed?
+Distinguish:
+Fundamental statistical contribution
+A new theory, estimator, inferential framework, asymptotic regime, robustness result, optimality result, etc.
+Technically nontrivial extension
+A mathematically difficult but narrower extension of known methods.
+Application-driven contribution
+Existing methods applied to a new problem.
+Incremental contribution
+Only modest differences from existing approaches.
+Explain where the paper lies on this spectrum.
+
+4. Review the mathematical formulation
+Check every major definition.
+Determine whether:
+notation is internally consistent;
+all random variables are properly defined;
+probability spaces are clear;
+dimensions match;
+parameter spaces are specified;
+norms are defined;
+tensor/matrix dimensions are correct;
+latent variables are distinguished from observed variables;
+asymptotic quantities are identified;
+randomness versus conditioning is clear.
+Flag ambiguous statements such as:
+“for sufficiently large dimensions”
+without specifying which dimensions tend to infinity.
+Rewrite important formulations when necessary.
+
+5. Review every assumption
+Create an assumption audit.
+For every assumption A1,A2,…A_1,A_2,\ldots, determine:
+What does it mean mathematically?
+Why is it needed?
+Identify the theorem or proof step requiring it.
+Is it standard?
+Compare with related statistical literature.
+Is it realistic?
+Especially in the motivating AI/LLM setting.
+Is it unnecessarily strong?
+Determine whether it could plausibly be weakened.
+Is it testable or interpretable?
+Is it internally compatible with other assumptions?
+Create a table:
+Assumption
+Purpose
+Standard?
+Restrictiveness
+Used where?
+Could weaken?
+
+Pay special attention to assumptions such as:
+sub-Gaussianity;
+boundedness;
+independence;
+incoherence;
+eigengap;
+sparsity;
+low rank;
+restricted eigenvalue conditions;
+smoothness;
+identifiability;
+strong convexity;
+mixing;
+contamination fraction;
+signal strength.
+Flag assumptions that make the theorem technically correct but practically uninteresting.
+
+6. Audit every theorem
+Review every:
+theorem;
+proposition;
+lemma;
+corollary.
+For each result, verify:
+statement is mathematically meaningful;
+assumptions are sufficient;
+dimensions are consistent;
+probability statements are properly defined;
+rates are dimensionally sensible;
+asymptotic notation is used correctly;
+constants are independent of quantities they should not depend on;
+theorem actually follows from the proof;
+interpretation in the main text matches the theorem;
+result is stronger than—or meaningfully different from—known results.
+Create a theorem audit table:
+Result
+Correct statement?
+Proof complete?
+Novel?
+Strength
+Issue
+
+
+7. Check theorem strength
+For every main theoretical result, ask:
+Is this the strongest meaningful theorem that could reasonably be proved?
+For an error bound such as
+∥θ^−θ⋆∥≤Crn,\|\widehat\theta-\theta^\star\| \le C r_n,
+evaluate:
+dependence on nn;
+dependence on pp;
+dependence on rank rr;
+sparsity ss;
+contamination ϵ\epsilon;
+sequence length TT;
+noise;
+condition numbers;
+eigengaps.
+Determine whether any terms appear suboptimal.
+If logarithmic factors occur, ask whether they are necessary.
+If a rate is claimed optimal, verify that an appropriate lower bound exists.
+
+8. Check minimax and optimality claims
+If the paper claims optimality, carefully compare upper and lower bounds.
+For example, if:
+sup⁡θ∈ΘEθL(θ^,θ)≲rn\sup_{\theta\in\Theta} \mathbb E_\theta L(\widehat\theta,\theta) \lesssim r_n
+and
+inf⁡θ~sup⁡θ∈ΘEθL(θ~,θ)≳rn,\inf_{\widetilde\theta} \sup_{\theta\in\Theta} \mathbb E_\theta L(\widetilde\theta,\theta) \gtrsim r_n,
+verify that:
+parameter spaces match;
+losses match;
+assumptions match;
+regimes match;
+logarithmic factors are acknowledged;
+the lower bound is not proved for a substantially larger or easier class.
+Do not accept the word “optimal” without checking these conditions.
+
+9. Independently audit the proofs
+Treat the proofs adversarially.
+For every main theorem, reconstruct the proof logic.
+Break it into:
+Assumptions→Lemma 1→Lemma 2→⋯→Main Result.\text{Assumptions} \rightarrow \text{Lemma 1} \rightarrow \text{Lemma 2} \rightarrow \cdots \rightarrow \text{Main Result}.
+For each step, verify:
+algebra;
+probability bounds;
+union bounds;
+expectations;
+conditional expectations;
+matrix inequalities;
+tensor operations;
+norm inequalities;
+concentration inequalities;
+asymptotic approximations;
+stochastic-order calculations.
+Do not accept statements such as:
+“By standard arguments…”
+unless those arguments genuinely apply.
+
+10. Look specifically for proof failures
+Search actively for common mistakes such as:
+Dependence treated as independence
+Random quantities treated as deterministic
+Conditioning mistakes
+Incorrect exchange of expectation and optimization
+Uniform convergence inferred from pointwise convergence
+Missing logarithmic factors
+Incorrect union bounds
+Incorrect use of Jensen's inequality
+Incorrect matrix norm conversion
+For example:
+∥A∥F≤r∥A∥op\|A\|_F \le \sqrt r\|A\|_{\mathrm{op}}
+requires rank information.
+Eigengap assumptions hidden in perturbation arguments
+Nonunique optimizer treated as unique
+Invertibility assumed without justification
+Rates derived under conflicting asymptotic regimes
+OpO_p algebra used incorrectly
+Circular arguments
+Probability events changing between lemmas
+Constants depending silently on n,p,rn,p,r
+Flag each issue explicitly.
+
+11. Stress-test the theory
+Attempt to construct counterexamples.
+Ask what happens when:
+signal approaches zero;
+eigengap approaches zero;
+rank is misspecified;
+sparsity increases;
+contamination approaches the breakdown threshold;
+dimension grows faster;
+dependence becomes stronger;
+tails become heavier;
+covariance becomes nearly singular;
+model is misspecified.
+Determine whether the theorem:
+still holds;
+fails gracefully;
+becomes vacuous;
+requires additional assumptions.
+Where useful, formulate explicit counterexamples.
+
+12. Check identifiability
+Before evaluating consistency, verify that the parameter of interest is identifiable.
+Ask whether
+Pθ1=Pθ2P_{\theta_1} = P_{\theta_2}
+can occur for
+θ1≠θ2.\theta_1\neq\theta_2.
+If identifiability holds only up to:
+sign;
+permutation;
+rotation;
+scale;
+equivalence class,
+the loss and theorem statements must reflect this.
+For example, a factorization
+Θ=UV⊤\Theta=UV^\top
+does not identify UU and VV separately without additional constraints.
+Flag any theorem estimating an inherently non-identifiable object.
+
+13. Check computational feasibility
+Determine whether the proposed estimator is actually computable.
+Evaluate:
+optimization problem;
+convexity/nonconvexity;
+computational complexity;
+memory cost;
+dependence on dimensions;
+initialization;
+tuning parameters;
+convergence of the optimization algorithm.
+Distinguish:
+statistical estimator\text{statistical estimator}
+from
+algorithm actually implemented.\text{algorithm actually implemented}.
+If theory assumes a global minimizer but simulations use an approximate local optimizer, state that clearly.
+
+14. Review tuning-parameter theory
+For every tuning parameter such as
+λ,τ,r,s,k,\lambda,\quad \tau,\quad r,\quad s,\quad k,
+check:
+theoretical choice;
+empirical choice;
+dependence on unknown parameters;
+feasibility;
+sensitivity.
+If theory requires
+λ≍σlog⁡pn,\lambda \asymp \sigma\sqrt{\frac{\log p}{n}},
+but σ\sigma is unknown, determine how it is estimated.
+Check whether simulation tuning unfairly favors the proposed method.
+
+15. Review the simulation design
+The simulations should validate the theoretical claims rather than merely show favorable performance.
+For every simulation experiment, identify:
+Question being tested
+Corresponding theorem or hypothesis
+Data-generating process
+Parameters varied
+Competing methods
+Evaluation metric
+Number of Monte Carlo repetitions
+Uncertainty reported
+Determine whether the simulations actually test the important regimes.
+
+16. Check rate validation
+If theory predicts
+Error⁡=O(n−α),\operatorname{Error} = O(n^{-\alpha}),
+check whether simulations vary nn sufficiently to evaluate the predicted rate.
+Recommend plotting, where appropriate,
+log⁡(Error⁡)againstlog⁡n.\log(\operatorname{Error}) \quad\text{against}\quad \log n.
+The empirical slope should be compared with
+−α.-\alpha.
+Similarly verify theoretical dependence on:
+p,r,s,ϵ,T.p,\quad r,\quad s,\quad \epsilon,\quad T.
+17. Review simulation fairness
+Check whether comparisons are fair.
+Verify:
+same train/test splits;
+same preprocessing;
+comparable tuning budgets;
+appropriate hyperparameter searches;
+enough Monte Carlo replications;
+identical contamination/noise;
+no information leakage;
+no baseline intentionally handicapped;
+strongest modern baseline variants are included.
+Flag missing baselines.
+
+18. Check whether uncertainty is reported
+Simulation tables should not contain only averages.
+Where appropriate, require:
+Monte Carlo standard errors;
+standard deviations;
+confidence intervals;
+boxplots/distributions.
+A difference such as
+0.812vs.0.8170.812 \quad \text{vs.} \quad 0.817
+is not meaningful without uncertainty.
+
+19. Review ablation experiments
+If the method contains several components, determine whether the manuscript demonstrates what each contributes.
+For example,
+Full estimator\text{Full estimator}
+versus
+without robustness,\text{without robustness}, without structural penalty,\text{without structural penalty}, without low-rank component.\text{without low-rank component}.
+Require ablations only where they meaningfully illuminate the method.
+
+20. Review the real-data analysis
+Determine whether the real-data analysis actually supports the methodological claims.
+Check:
+dataset description;
+sample selection;
+preprocessing;
+missingness;
+train/test splitting;
+leakage;
+repeated measurements;
+dependence;
+tuning;
+evaluation metrics;
+uncertainty;
+baseline selection.
+Ask whether the dataset is appropriate for the theoretical phenomenon.
+Avoid treating a convenient dataset as sufficient validation.
+
+21. For AI/LLM applications, audit experimental independence
+If LLM-generated observations are used, examine the actual sampling structure.
+For example, if multiple generations are produced from the same prompt,
+Yij,j=1,…,mi,Y_{ij}, \qquad j=1,\ldots,m_i,
+they may be conditionally independent given prompt XiX_i, but not marginally independent.
+Check whether inference incorrectly treats all
+∑imi\sum_i m_i
+generations as independent observations.
+Also inspect dependence across:
+prompts;
+models;
+layers;
+tokens;
+decoding runs;
+evaluators.
+This should match the theoretical sampling model.
+
+22. Check whether empirical results support the claims
+For every conclusion in the Results section, classify it as:
+directly supported;
+weakly supported;
+unsupported;
+contradicted by the results.
+Do not allow claims such as:
+“Our method substantially outperforms all alternatives”
+if improvement is small, inconsistent, or within Monte Carlo uncertainty.
+
+23. Review figures
+Check every figure for:
+clear axis labels;
+units;
+readable legends;
+uncertainty;
+useful scales;
+appropriate log scales;
+sufficient resolution;
+consistency with text;
+meaningful captions.
+Determine whether any figure can be removed.
+Determine whether an important theoretical phenomenon lacks a figure.
+
+24. Review tables
+Check:
+significant digits;
+uncertainty reporting;
+highlighting conventions;
+comparability;
+missing information;
+table captions.
+Avoid excessive precision such as:
+0.83294710.8329471
+when simulation uncertainty is much larger.
+
+25. Review the Abstract
+Evaluate whether the Abstract accurately states:
+problem;
+gap;
+method;
+theoretical result;
+empirical result.
+Flag exaggerated language.
+The Abstract should not claim more than the theorems and experiments establish.
+Provide a rewritten Abstract if major changes are needed.
+
+26. Review the Introduction
+Evaluate:
+Motivation
+Is the problem clearly motivated?
+Gap
+Is the literature gap precise?
+Contribution
+Is it clear what is mathematically new?
+Significance
+Why should statisticians care?
+Organization
+Does the Introduction build logically toward the contribution?
+Review the contribution bullets carefully.
+Each bullet should represent a distinct substantive contribution.
+Remove inflated or redundant claims.
+
+27. Review the Related Work section
+Determine whether it:
+groups literature conceptually;
+identifies closest work;
+distinguishes the current paper mathematically;
+avoids straw-man comparisons;
+does not hide strong competitors;
+includes classical statistical literature where relevant.
+Do not perform the full citation audit here—that belongs to the final pre-submission citation-check stage—but flag any obvious literature omissions or questionable positioning that affect the scientific contribution.
+
+28. Review the Methods section
+Determine whether another researcher could implement the method using only the manuscript.
+Check:
+algorithm definition;
+estimator;
+initialization;
+stopping criteria;
+tuning parameters;
+computational details;
+preprocessing;
+pseudo-code.
+Identify missing information.
+
+29. Review the Theory section as exposition
+Even if the mathematics is correct, evaluate whether the theory is presented effectively.
+Check whether:
+assumptions are interpretable;
+theorem statements are readable;
+implications are explained;
+comparisons with existing theory are clear;
+technical results are separated from key insights.
+Important theorems should not be buried among minor lemmas.
+
+30. Review the Discussion
+Determine whether the Discussion honestly addresses:
+restrictive assumptions;
+computational limitations;
+finite-sample limitations;
+dependence on tuning;
+generality;
+limitations of experiments;
+unresolved theoretical questions.
+Add limitations that a referee would likely identify.
+
+31. Review the Appendix
+Determine whether the appendix is logically organized.
+Check:
+proof order;
+lemma dependencies;
+notation;
+supplementary simulations;
+technical assumptions.
+Every theorem in the main paper should have a complete proof or a clear reference.
+
+32. Check internal consistency
+Cross-check quantities throughout the entire manuscript.
+Examples:
+If the Introduction says
+p≫n,p\gg n,
+but simulations use
+p<n,p<n,
+flag it.
+If Theorem 2 assumes
+r=o(n1/4),r=o(n^{1/4}),
+but Discussion claims arbitrary growing rank, flag it.
+If Abstract says “finite-sample guarantee” but theorem is asymptotic, flag it.
+If one section defines
+λn≍log⁡pn\lambda_n\asymp\sqrt{\frac{\log p}{n}}
+and another uses a different scaling without explanation, flag it.
+
+33. Check notation globally
+Create a notation audit.
+Identify:
+duplicate symbols;
+undefined symbols;
+conflicting notation;
+inconsistent subscripts;
+inconsistent transpose notation;
+inconsistent norms;
+inconsistent expectation operators.
+Recommend a unified notation.
+
+34. Evaluate reproducibility
+Determine whether an independent researcher could reproduce:
+simulations;
+tables;
+figures;
+real-data results.
+Check for:
+random seeds;
+package versions;
+data availability;
+preprocessing code;
+hyperparameters;
+environment information;
+scripts generating each figure/table.
+Recommend missing reproducibility material.
+
+35. Evaluate robustness of conclusions
+Ask whether conclusions remain qualitatively true when:
+random seeds change;
+tuning parameters vary;
+model parameters vary;
+baselines are strengthened;
+contamination structure changes;
+noise distributions change;
+sample size changes.
+Identify conclusions that rely on one narrow setup.
+
+36. Separate fatal issues from fixable issues
+Classify every problem as:
+CRITICAL
+Threatens mathematical correctness, novelty, or validity of the central contribution.
+Examples:
+false theorem;
+non-identifiability;
+incorrect proof;
+fundamentally unfair experiment;
+claimed novelty substantially already known.
+MAJOR
+Requires substantial revision.
+Examples:
+overly strong assumptions;
+incomplete proof;
+missing key experiment;
+insufficient comparison;
+weak theoretical interpretation.
+MODERATE
+Meaningful but fixable.
+MINOR
+Presentation, notation, typography, or clarity.
+Do not bury critical issues among stylistic comments.
+
+37. Produce a skeptical referee report
+Write a realistic report containing:
+Summary
+Strengths
+Only substantive strengths.
+Major concerns
+Ranked by importance.
+Minor concerns
+Questions for the authors
+Required revisions
+Recommendation
+Use one of:
+Accept
+Minor revision
+Major revision
+Reject and resubmit
+Reject
+Give the recommendation appropriate to a strong statistics journal, not a generic venue.
+
+38. Simulate multiple reviewers
+After the main review, evaluate the manuscript from three perspectives.
+Reviewer 1 — Theoretical Statistician
+Focus on:
+theorem significance;
+correctness;
+rates;
+assumptions;
+minimax theory;
+inference.
+Reviewer 2 — Statistical Methodologist
+Focus on:
+practical usefulness;
+estimator;
+simulations;
+robustness;
+interpretability.
+Reviewer 3 — AI/ML Researcher
+Focus on:
+whether AI/LLM motivation is genuine;
+relevance to modern models;
+baselines;
+experimental realism;
+whether the statistical abstraction captures the actual AI phenomenon.
+Identify concerns that only one reviewer type might raise.
+
+39. Give an editor-style assessment
+After the referee reviews, act as the Associate Editor.
+Answer:
+Is the contribution sufficiently important?
+Is it sufficiently novel?
+Is the theory sufficiently deep?
+Are the empirical results convincing?
+Is the paper appropriate for this journal?
+Are the issues repairable without changing the central paper?
+Then give the editorial recommendation.
+
+40. Assess target-journal fit
+Evaluate separately for:
+Annals of Statistics;
+JASA — Theory and Methods;
+JRSS-B;
+Biometrika;
+Bernoulli;
+other appropriate venues.
+For each give:
+Fit score∈{1,2,3,4,5}.\text{Fit score}\in\{1,2,3,4,5\}.
+Explain what would prevent acceptance at that journal.
+Be particularly strict for Annals of Statistics.
+A strong application or empirical improvement is not enough without a substantial general theoretical contribution.
+
+41. Identify the single strongest contribution
+Force a one-sentence answer:
+The strongest contribution of this paper is: ________.
+If this sentence is difficult to write, the paper's contribution may not yet be sufficiently focused.
+
+42. Identify the single biggest weakness
+Force a one-sentence answer:
+The most serious weakness that could lead to rejection is: ________.
+Then explain exactly how to address it.
+
+43. Determine whether any claims should be weakened
+Create a table:
+Current claim
+Evidence
+Too strong?
+Recommended wording
+
+Pay particular attention to:
+“optimal”;
+“robust”;
+“general”;
+“scalable”;
+“state-of-the-art”;
+“significantly better”;
+“first”;
+“novel”;
+“distribution-free”;
+“guaranteed.”
+
+44. Identify missing theoretical results
+Ask:
+What theorem would most strengthen this paper?
+Possible examples:
+minimax lower bound;
+asymptotic normality;
+robustness theorem;
+computational convergence;
+adaptation result;
+lower-dimensional special case;
+impossibility result;
+confidence interval;
+weaker-assumption version.
+Rank missing theory by:
+impact;
+feasibility;
+importance for publication.
+
+45. Identify missing experiments
+Ask:
+What experiment would a skeptical reviewer request immediately?
+Examples:
+rate experiment;
+robustness curve;
+dimension scaling;
+sample-complexity plot;
+ablation;
+stronger baseline;
+sensitivity analysis;
+assumption violation;
+runtime comparison.
+Rank them by importance.
+
+46. Identify unnecessary material
+Recommend anything that should be:
+removed;
+shortened;
+moved to appendix;
+combined;
+rewritten.
+A stronger paper is not necessarily a longer paper.
+
+47. Produce a prioritized revision plan
+Create four tiers.
+Priority 0 — Must resolve before submission
+Anything affecting correctness or validity.
+Priority 1 — Strongly recommended
+Likely reviewer concerns.
+Priority 2 — Improves paper materially
+Useful strengthening.
+Priority 3 — Polish
+Presentation improvements.
+For each item state:
+problem;
+exact location;
+recommended fix;
+expected impact.
+
+48. Final scientific checklist
+Before declaring the manuscript ready, verify:
+Theory
+Statistical target is identifiable.
+Every theorem is correctly stated.
+Every main theorem has a complete proof.
+Assumptions are sufficient and clearly stated.
+No hidden assumptions appear in proofs.
+Claimed rates match the proofs.
+Optimality claims have appropriate lower bounds.
+Theoretical comparisons are fair.
+Simulations
+Simulations directly test theoretical predictions.
+Strong baselines are included.
+Monte Carlo uncertainty is reported.
+Tuning is fair.
+Important regimes are explored.
+Assumption violations are studied where useful.
+Application
+Data preprocessing is clear.
+No leakage exists.
+Dependence is handled correctly.
+Conclusions match the evidence.
+Writing
+Abstract accurately represents the results.
+Introduction clearly identifies the contribution.
+Related Work fairly positions the paper.
+Notation is consistent.
+Limitations are acknowledged.
+Reproducibility
+Code can reproduce all results.
+Random seeds are available.
+Experimental parameters are documented.
+Figures/tables can be regenerated.
+
+49. Final verdict
+At the end, classify the manuscript as:
+A — Submission ready
+The scientific contribution, theory, experiments, and presentation are sufficiently strong.
+B — Near ready
+Only targeted revisions are required.
+C — Major revision required
+Core contribution is viable, but important theoretical or experimental issues remain.
+D — Fundamental revision required
+The central paper needs substantial restructuring or additional theory.
+E — Do not submit in current form
+A correctness, novelty, or validity problem threatens the central contribution.
+Explain the verdict clearly.
+
+50. Final deliverables
+Produce all of the following:
+One-paragraph paper summary
+Overall scientific assessment
+Major strengths
+Critical issues
+Major issues
+Minor issues
+Assumption audit
+Theorem audit
+Proof audit
+Simulation audit
+Real-data / LLM experiment audit
+Writing and structure review
+Reproducibility assessment
+Three simulated referee perspectives
+Associate Editor assessment
+Journal-fit assessment
+Missing-theory recommendations
+Missing-experiment recommendations
+Claims that should be weakened
+Prioritized revision plan
+Final submission-readiness verdict
+The objective is not to make the paper look better than it is.
+The objective is to identify every issue that a strong expert referee could plausibly raise, determine whether the theoretical and empirical claims are actually justified, and strengthen the manuscript until its central contribution can survive serious peer review.
+

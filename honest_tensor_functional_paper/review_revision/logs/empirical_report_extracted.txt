@@ -1,0 +1,566 @@
+[PAGE 1]
+Revised empirical analysis
+September 13, 2026. Canonical report accompanying the revised main paper and technical supplement.
+Data and dependency accounting
+The original study contains 1,084,640 saved datasets in 318 stochastic configurations plus 84 analytic-only con-
+figurations. All 303 interval-producing cases were re-evaluated from their original raw draws with the four-ULP
+policy and R1 scalar estimator. The remaining 15 event-only cases have no affected intervals. This is deterministic
+method reevaluation, not 1,084,640 new draws. All original files are preserved. The revision adds 87,200 new
+independent datasets, 55 configurations, and 600 binary optimizer solves on 200 observations. Three confidence
+levels reuse observations, and their losses reuse an explicitly identified 95% scalar estimate where relevant; they are
+not independent datasets.
+Case-local seeds use master seed 2026091309, SHA-256 case identifiers, trial and stream. Original saved experiments
+retain seed 2026091203. Configurations were registered before execution, with no outcome tuning. One thread was
+used within each independent simulation process; paired procedures share data and pilot randomness. Fixed-M and
+norm-comparable-M branches are labeled separately. Raw new outputs, the exactly derived pure-fallback ablation,
+and independently recomputed summaries are kept separately.
+Coverage and scalar corrections
+Two corrected 90% rows, both S03_007 (known-noise XCH and support oracle), change from 134/150 to 133/150.
+They correspond to one genuine Gaussian miss, not two independent failures.
+Strict coverage and four-ULP
+coverage are both retained; 24 strict/tolerant discrepancies at exact structural boundaries were previously verified
+as harmless algebraic rounding. A target-proportional tolerance is no longer used.
+The S03_002 midpoint MSE changes from 12,084,661.378502 to 0.147776 for the R1 estimator, on exactly the same
+500 observations. Its MSE standard error is 0.024743, and its proved noise-scale bound is 9.600647. One original
+sentinel event is retained, along with all old losses. All 303 cases have unchanged interval endpoints. The R1 bound
+is marked inapplicable when the supplied cap or structural range is violated.
+New experiment design
+Suite | Review issue | Design | New datasets |
+|—|—|—|—:|
+V01 | F02, F05, F06 | Fixed M signal sweep; paired norm-comparable M; isolated bias, fallback, intersection and
+quantile diagnostics; XCH/oracle/direct | 10,000 |
+V02 | F07 | One fixed arbitrary loading and direction; M=3, tau=.5; tolerance .05 at 100/600/3000 nodes | 200 |
+V03 | F08 | 18 valid whole-row corruption/noise cases, one deliberate cap violation; Gaussian, correlated and
+standardized t3 | 19,000 |
+V04 | F08 | Independent residual chi-square bound; m=1/16/64, n=2/4/16, sigma=1/3; alpha0=.04, delta=.01 |
+54,000 |
+V05 | E01, F04 | Four p=32/64 strong saturated cases, fixed and rounded growing caps; 1,000 draws each | 4,000 |
+Findings and interpretation
+Budget and ablation.
+At amplitude two the full fixed-M interval covers 0.960; XCH covers 0.001, outside
+certified regularity conditions. Bias-only removal has no effect over the first eight weak/intermediate signal levels
+because the original fallback is selected. It cannot explain the combined diagnostic failure. Pure fallback removal,
+which preserves the intersections, is conservative and longer in those cases. Changing only the validation quantile
+reduces coverage at several levels. These comparisons isolate different mechanisms; they do not establish that every
+correction is necessary at every mean.
+Pointwise behavior. The four new larger cases have coverage 0.965–0.978 and normalized lengths 7.20–8.01.
+Amplitudes deliberately satisfy the conservative P1 suﬀicient bound. Rounded caps and finite dimensions prevent
+1
+
+
+[PAGE 2]
+fitting an exact asymptotic exponent from these four points. Earlier slopes and their caveats remain in the corrected
+archive; no favorable pooling across different regimes is performed.
+Robustness. Median coverage is 1.000 for every tested within-cap row-contamination case, but interval lengths
+are conservative. The 120-row/zero-supplied-cap violation has coverage 0.000. The uncorrected mean also fails
+with correlated coordinates or row corruption. These tests address a coordinate-envelope proposition, not general
+tensor contamination minimaxity.
+Unknown variance.
+The independent upper bound is conservative across the tested grid.
+For m=1, n=2,
+sigma=1, coverage is 0.9950 versus 0.7033 for the naive plug-in. At larger m, structural intervals often dominate;
+coverage 1 there does not demonstrate accurate variance estimation or eﬀicient interval length. Calibration-event
+probabilities and Wilson intervals are separately reported.
+Computation. 7/600 binary solves meet the common tolerance; 593 remain unresolved. All seven successes are at
+amplitude 2.5 and budget 3,000. Mean endpoint gaps at that budget range from 0.1275 to 0.3526. All observations
+and finite witness gaps remain in coverage, width and gap summaries. This numerical search does not settle general
+weak-signal computation.
+Comparator and uncertainty contracts
+XCH is the published tensor-PCA algorithm locally reimplemented from Xu–Chen–Han, Section 4.2, Algorithm
+3; the related inference statements are in Section 4.3.
+HOSVD and two simultaneous updates use the same
+full observation as the other methods. Known-noise and plug-in variants are both retained. Zero and supplied-
+rank mismatch cases are outside the specified regular class. Other case-level initialization, loading-alignment and
+remainder constants are not certified, even if the signal is very large. The support oracle receives true support and
+is labeled as an information benchmark.
+Coverage error bars are Wilson 95% intervals; coverage MCSE and paired coverage-difference SE are also exported.
+Mean-length and finite-moment loss summaries retain sample standard errors. No normal-theory MSE uncertainty
+is claimed for the t3 experiment: sample diagnostics are retained separately because fourth-moment arguments
+for the naive mean fail. Empty intervals, failures and catastrophic losses are never removed. No claim of uniform
+validity is inferred solely from simulated coverage.
+Figures
+10−1
+101
+103
+M/(τ√log(ep))
+10−3
+10−2
+10−1
+Rate scale / τ
+All budgets, fixed p = 4096
+Order 3
+Order 4 and above
+101
+102
+103
+104
+105
+106
+Mode size p
+10−2
+10−1
+100
+Rate scale / τ
+M = τ√p, fixed caps
+Full, order 3
+Full, order 4
+Diagonal, order 3
+Direct
+Figure 1: Analytic minimax rate scales for the normalized flat loading, with unspecified multiplicative constants
+set to one. Left: all-budget dependence at p=4096. Right: full-data and diagonal-information scales at M=tau
+sqrt(p); the direct line is a noise-scale benchmark. These curves show theorem orders, not attained experimental
+performance or leading-constant comparisons.
+Analytic minimax rate scales for the normalized flat loading, with unspecified multiplicative constants set to one.
+2
+
+
+[PAGE 3]
+Left: all-budget dependence at p=4096. Right: full-data and diagonal-information scales at M=tau sqrt(p); the
+direct line is a noise-scale benchmark. These curves show theorem orders, not attained experimental performance
+or leading-constant comparisons.
+0100 101102103104105
+Signal amplitude (symlog)
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+Coverage (Wilson 95% bars)
+Cap, fixed M
+Cap, norm-comparable M
+Direct
+XCH, known noise
+0100 101102103104105
+Signal amplitude (symlog)
+0
+1
+2
+3
+4
+Mean length
+Cap, fixed M
+Cap, norm-comparable M
+Direct
+XCH, known noise
+Figure 2: Paired signal sweep at p=16, rank cap one and tau=1, with 1,000 new datasets per amplitude. Fixed-M
+inference uses the same M=342023.69 throughout; the norm-comparable branch changes M while retaining the
+same observations and pilot. Bars show Wilson 95% coverage intervals or 1.96 standard errors for mean length.
+XCH is a regular-stratum comparator whose weak-signal conditions are not certified; it is not cap-uniform.
+Paired signal sweep at p=16, rank cap one and tau=1, with 1,000 new datasets per amplitude. Fixed-M inference
+uses the same M=342023.69 throughout; the norm-comparable branch changes M while retaining the same obser-
+vations and pilot. Bars show Wilson 95% coverage intervals or 1.96 standard errors for mean length. XCH is a
+regular-stratum comparator whose weak-signal conditions are not certified; it is not cap-uniform.
+Isolated ablations use the same data, pilot projectors, supplied M and other calibration as the full procedure (1,000
+datasets per amplitude). Removing bias freezes the original candidate choice; removing fallback forces the tangent
+candidate but preserves both intersections. Changing the validation quantile preserves the candidate choice, bias
+and intersections. The historical combined diagnostic removes multiple protections, so its weak-signal failure cannot
+identify the effect of bias alone; all paired differences and uncertainties are retained in the tables.
+Four new strong saturated cases use 1,000 datasets each, increasing precision at p=32 and p=64.
+Left: raw,
+unconditional losses retain all empty-intersection events; the R1 companion changes only the scalar estimate. Full
+MSE standard errors, sentinel counts and paired losses are in the table; a logarithmic axis displays their extreme
+scale difference without treating the rare-loss mean as precisely estimated. Right: finite-grid lengths normalized
+by the P1 rate, with 1.96 standard errors; constants and rounded growing caps preclude reading this as an exact
+slope claim.
+Independent variance calibration uses Gaussian replicate residuals, chi-square error delta=.01 and inference error
+alpha0=.04; the displayed m=1, sigma=1 cases have 3,000 datasets each. Whole-replicate corruption uses the finite-
+variance median envelope with 1,000 datasets per case, m=16 and n=512. The separately marked 120-row case
+supplies a zero corruption cap and deliberately violates the theorem. All coverage bars are Wilson 95% intervals;
+the full m/n/noise grids and conservative lengths appear in the accompanying tables.
+All budgets use the same normalized arbitrary loading, signal direction, M=3, tau=.5 and endpoint tolerance .05 in
+a 2 by 2 by 2 rank-one model. Each amplitude uses 50 new observations shared across the three budgets, giving 600
+solves. Every unresolved global gap is retained; mean-gap bars are 1.96 standard errors, while timing is descriptive.
+Seven of 600 solves meet the requested tolerance, all at the strongest signal and largest budget; guarded float64
+outer bounds are not formal interval arithmetic or a general high-dimensional minimax implementation.
+3
+
+
+[PAGE 4]
+0100 101 102 103 104 105
+Signal amplitude (symlog)
+0.00
+0.25
+0.50
+0.75
+1.00
+Coverage
+Full
+Remove bias only
+Remove fallback only
+Change quantile only
+Combined diagnostic
+0100 101 102 103 104 105
+Signal amplitude (symlog)
+0
+1
+2
+3
+4
+Mean length
+Full
+Remove bias only
+Remove fallback only
+Change quantile only
+Combined diagnostic
+Figure 3: Isolated ablations use the same data, pilot projectors, supplied M and other calibration as the full
+procedure (1,000 datasets per amplitude). Removing bias freezes the original candidate choice; removing fallback
+forces the tangent candidate but preserves both intersections.
+Changing the validation quantile preserves the
+candidate choice, bias and intersections. The historical combined diagnostic removes multiple protections, so its
+weak-signal failure cannot identify the effect of bias alone; all paired differences and uncertainties are retained in
+the tables.
+32/1
+32/6
+64/1
+64/8
+Mode size / supplied cap
+100
+102
+104
+106
+108
+1010
+Unconditional empirical MSE
+Original midpoint
+R1 companion
+32/1
+32/6
+64/1
+64/8
+Mode size / supplied cap
+4
+5
+6
+7
+8
+Mean length / {τ√r/p}
+Cap-valid
+XCH
+Support oracle
+Figure 4: Four new strong saturated cases use 1,000 datasets each, increasing precision at p=32 and p=64. Left:
+raw, unconditional losses retain all empty-intersection events; the R1 companion changes only the scalar estimate.
+Full MSE standard errors, sentinel counts and paired losses are in the table; a logarithmic axis displays their extreme
+scale difference without treating the rare-loss mean as precisely estimated. Right: finite-grid lengths normalized
+by the P1 rate, with 1.96 standard errors; constants and rounded growing caps preclude reading this as an exact
+slope claim.
+4
+
+
+[PAGE 5]
+5
+10
+15
+Independent replicates n
+0.6
+0.7
+0.8
+0.9
+1.0
+Coverage
+Known noise
+Independent upper bound
+Naive plug-in
+0
+50
+100
+Corrupted whole replicates
+0.00
+0.25
+0.50
+0.75
+1.00
+Coverage
+Median, cap violation
+Median, Gaussian
+Median, t3
+Mean, Gaussian
+Mean, correlated
+Figure 5: Independent variance calibration uses Gaussian replicate residuals, chi-square error delta=.01 and infer-
+ence error alpha0=.04; the displayed m=1, sigma=1 cases have 3,000 datasets each. Whole-replicate corruption
+uses the finite-variance median envelope with 1,000 datasets per case, m=16 and n=512. The separately marked
+120-row case supplies a zero corruption cap and deliberately violates the theorem. All coverage bars are Wilson
+95% intervals; the full m/n/noise grids and conservative lengths appear in the accompanying tables.
+102
+103
+Search node budget
+10−1
+100
+Mean endpoint gap
+Amplitude 0
+Amplitude 0.2
+Amplitude 1
+Amplitude 2.5
+102
+103
+Search node budget
+10−1
+100
+Mean solve time (seconds)
+Amplitude 0
+Amplitude 0.2
+Amplitude 1
+Amplitude 2.5
+Figure 6: All budgets use the same normalized arbitrary loading, signal direction, M=3, tau=.5 and endpoint
+tolerance .05 in a 2 by 2 by 2 rank-one model. Each amplitude uses 50 new observations shared across the three
+budgets, giving 600 solves. Every unresolved global gap is retained; mean-gap bars are 1.96 standard errors, while
+timing is descriptive. Seven of 600 solves meet the requested tolerance, all at the strongest signal and largest
+budget; guarded float64 outer bounds are not formal interval arithmetic or a general high-dimensional minimax
+implementation.
+5
+
+
+[PAGE 6]
+Complete 95% coverage and length tables
+All methods and confidence levels, including paired differences and estimator identities, are available in ta-
+bles/revision_summary.csv. The following tables include every configuration at 95% with the principal methods;
+all controlled variants remain in the machine-readable table.
+V01
+Case / method | Coverage [Wilson 95%] | Mean length (SE) |
+|—|—|—|
+V01_000 / direct | 0.946 [0.930, 0.958] | 3.920 (0.0000) |
+V01_000 / cap_fixed | 0.947 [0.931, 0.959] | 4.297 (0.0117) |
+V01_000 / cap_matched | 0.972 [0.960, 0.981] | 1.891 (0.0087) |
+V01_000 / split_unprotected | 0.950 [0.935, 0.962] | 0.584 (0.0022) |
+V01_000 / xch_known | 0.987 [0.978, 0.992] | 0.411 (0.0015) |
+V01_001 / direct | 0.950 [0.935, 0.962] | 3.920 (0.0000) |
+V01_001 / cap_fixed | 0.960 [0.946, 0.970] | 4.313 (0.0109) |
+V01_001 / cap_matched | 0.971 [0.959, 0.980] | 1.845 (0.0110) |
+V01_001 / split_unprotected | 0.088 [0.072, 0.107] | 0.578 (0.0022) |
+V01_001 / xch_known | 0.001 [0.000, 0.006] | 0.411 (0.0014) |
+V01_002 / direct | 0.955 [0.940, 0.966] | 3.920 (0.0000) |
+V01_002 / cap_fixed | 0.955 [0.940, 0.966] | 4.283 (0.0121) |
+V01_002 / cap_matched | 0.955 [0.940, 0.966] | 2.916 (0.0306) |
+V01_002 / split_unprotected | 0.951 [0.936, 0.963] | 1.382 (0.0001) |
+V01_002 / xch_known | 0.944 [0.928, 0.957] | 0.980 (0.0000) |
+V01_003 / direct | 0.945 [0.929, 0.958] | 3.920 (0.0000) |
+V01_003 / cap_fixed | 0.955 [0.940, 0.966] | 4.295 (0.0115) |
+V01_003 / cap_matched | 0.955 [0.940, 0.966] | 4.219 (0.0133) |
+V01_003 / split_unprotected | 0.951 [0.936, 0.963] | 1.386 (0.0000) |
+V01_003 / xch_known | 0.946 [0.930, 0.958] | 0.980 (0.0000) |
+V01_004 / direct | 0.957 [0.943, 0.968] | 3.920 (0.0000) |
+V01_004 / cap_fixed | 0.959 [0.945, 0.970] | 4.278 (0.0120) |
+V01_004 / cap_matched | 0.959 [0.945, 0.970] | 4.278 (0.0120) |
+V01_004 / split_unprotected | 0.957 [0.943, 0.968] | 1.386 (0.0000) |
+V01_004 / xch_known | 0.951 [0.936, 0.963] | 0.980 (0.0000) |
+V01_005 / direct | 0.955 [0.940, 0.966] | 3.920 (0.0000) |
+V01_005 / cap_fixed | 0.964 [0.951, 0.974] | 4.308 (0.0108) |
+V01_005 / cap_matched | 0.964 [0.951, 0.974] | 4.308 (0.0108) |
+V01_005 / split_unprotected | 0.953 [0.938, 0.964] | 1.386 (0.0000) |
+V01_005 / xch_known | 0.949 [0.934, 0.961] | 0.980 (0.0000) |
+V01_006 / direct | 0.956 [0.941, 0.967] | 3.920 (0.0000) |
+6
+
+
+[PAGE 7]
+V01_006 / cap_fixed | 0.957 [0.943, 0.968] | 4.280 (0.0122) |
+V01_006 / cap_matched | 0.957 [0.943, 0.968] | 4.280 (0.0122) |
+V01_006 / split_unprotected | 0.953 [0.938, 0.964] | 1.386 (0.0000) |
+V01_006 / xch_known | 0.948 [0.932, 0.960] | 0.980 (0.0000) |
+V01_007 / direct | 0.939 [0.922, 0.952] | 3.920 (0.0000) |
+V01_007 / cap_fixed | 0.955 [0.940, 0.966] | 4.290 (0.0123) |
+V01_007 / cap_matched | 0.955 [0.940, 0.966] | 4.290 (0.0123) |
+V01_007 / split_unprotected | 0.942 [0.926, 0.955] | 1.386 (0.0000) |
+V01_007 / xch_known | 0.950 [0.935, 0.962] | 0.980 (0.0000) |
+V01_008 / direct | 0.954 [0.939, 0.965] | 3.920 (0.0000) |
+V01_008 / cap_fixed | 0.980 [0.969, 0.987] | 4.231 (0.0130) |
+V01_008 / cap_matched | 0.980 [0.969, 0.987] | 2.747 (0.0137) |
+V01_008 / split_unprotected | 0.958 [0.944, 0.969] | 1.386 (0.0000) |
+V01_008 / xch_known | 0.954 [0.939, 0.965] | 0.980 (0.0000) |
+V01_009 / direct | 0.930 [0.912, 0.944] | 3.920 (0.0000) |
+V01_009 / cap_fixed | 0.966 [0.953, 0.976] | 1.936 (0.0092) |
+V01_009 / cap_matched | 0.966 [0.953, 0.976] | 1.936 (0.0092) |
+V01_009 / split_unprotected | 0.952 [0.937, 0.964] | 1.386 (0.0000) |
+V01_009 / xch_known | 0.945 [0.929, 0.958] | 0.980 (0.0000) |
+V02
+Case / method | Coverage [Wilson 95%] | Mean length (SE) |
+|—|—|—|
+V02_000 / direct | 1.000 [0.929, 1.000] | 1.960 (0.0000) |
+V02_000 / global_100 | 1.000 [0.929, 1.000] | 6.000 (0.0000) |
+V02_000 / global_600 | 1.000 [0.929, 1.000] | 5.545 (0.0198) |
+V02_000 / global_3000 | 1.000 [0.929, 1.000] | 4.631 (0.0072) |
+V02_001 / direct | 0.920 [0.812, 0.968] | 1.960 (0.0000) |
+V02_001 / global_100 | 1.000 [0.929, 1.000] | 6.000 (0.0000) |
+V02_001 / global_600 | 1.000 [0.929, 1.000] | 5.501 (0.0223) |
+V02_001 / global_3000 | 1.000 [0.929, 1.000] | 4.606 (0.0098) |
+V02_002 / direct | 0.960 [0.865, 0.989] | 1.960 (0.0000) |
+V02_002 / global_100 | 1.000 [0.929, 1.000] | 5.999 (0.0005) |
+V02_002 / global_600 | 1.000 [0.929, 1.000] | 5.460 (0.0296) |
+V02_002 / global_3000 | 1.000 [0.929, 1.000] | 4.551 (0.0173) |
+V02_003 / direct | 0.940 [0.838, 0.979] | 1.960 (0.0000) |
+V02_003 / global_100 | 1.000 [0.929, 1.000] | 5.687 (0.0559) |
+V02_003 / global_600 | 1.000 [0.929, 1.000] | 4.671 (0.0739) |
+7
+
+
+[PAGE 8]
+V02_003 / global_3000 | 1.000 [0.929, 1.000] | 4.005 (0.0431) |
+V03
+Case / method | Coverage [Wilson 95%] | Mean length (SE) |
+|—|—|—|
+V03_000 / naive_gaussian | 0.948 [0.932, 0.960] | 0.173 (0.0000) |
+V03_000 / bounded_row_median | 1.000 [0.996, 1.000] | 5.210 (0.0000) |
+V03_001 / naive_gaussian | 0.000 [0.000, 0.004] | 0.173 (0.0000) |
+V03_001 / bounded_row_median | 1.000 [0.996, 1.000] | 5.210 (0.0000) |
+V03_002 / naive_gaussian | 0.000 [0.000, 0.004] | 0.173 (0.0000) |
+V03_002 / bounded_row_median | 1.000 [0.996, 1.000] | 5.210 (0.0000) |
+V03_003 / naive_gaussian | 0.955 [0.940, 0.966] | 0.122 (0.0000) |
+V03_003 / bounded_row_median | 1.000 [0.996, 1.000] | 4.472 (0.0000) |
+V03_004 / naive_gaussian | 0.000 [0.000, 0.004] | 0.122 (0.0000) |
+V03_004 / bounded_row_median | 1.000 [0.996, 1.000] | 4.472 (0.0000) |
+V03_005 / naive_gaussian | 0.000 [0.000, 0.004] | 0.122 (0.0000) |
+V03_005 / bounded_row_median | 1.000 [0.996, 1.000] | 4.472 (0.0000) |
+V03_006 / naive_gaussian | 0.953 [0.938, 0.964] | 0.173 (0.0000) |
+V03_006 / bounded_row_median | 1.000 [0.996, 1.000] | 5.210 (0.0000) |
+V03_007 / naive_gaussian | 0.000 [0.000, 0.004] | 0.173 (0.0000) |
+V03_007 / bounded_row_median | 1.000 [0.996, 1.000] | 5.210 (0.0000) |
+V03_008 / naive_gaussian | 0.000 [0.000, 0.004] | 0.173 (0.0000) |
+V03_008 / bounded_row_median | 1.000 [0.996, 1.000] | 5.210 (0.0000) |
+V03_009 / naive_gaussian | 0.953 [0.938, 0.964] | 0.122 (0.0000) |
+V03_009 / bounded_row_median | 1.000 [0.996, 1.000] | 4.472 (0.0000) |
+V03_010 / naive_gaussian | 0.000 [0.000, 0.004] | 0.122 (0.0000) |
+V03_010 / bounded_row_median | 1.000 [0.996, 1.000] | 4.472 (0.0000) |
+V03_011 / naive_gaussian | 0.000 [0.000, 0.004] | 0.122 (0.0000) |
+V03_011 / bounded_row_median | 1.000 [0.996, 1.000] | 4.472 (0.0000) |
+V03_012 / naive_gaussian | 0.484 [0.453, 0.515] | 0.173 (0.0000) |
+V03_012 / bounded_row_median | 1.000 [0.996, 1.000] | 5.210 (0.0000) |
+V03_013 / naive_gaussian | 0.000 [0.000, 0.004] | 0.173 (0.0000) |
+V03_013 / bounded_row_median | 1.000 [0.996, 1.000] | 5.210 (0.0000) |
+V03_014 / naive_gaussian | 0.000 [0.000, 0.004] | 0.173 (0.0000) |
+V03_014 / bounded_row_median | 1.000 [0.996, 1.000] | 5.210 (0.0000) |
+V03_015 / naive_gaussian | 0.476 [0.445, 0.507] | 0.122 (0.0000) |
+V03_015 / bounded_row_median | 1.000 [0.996, 1.000] | 4.472 (0.0000) |
+V03_016 / naive_gaussian | 0.000 [0.000, 0.004] | 0.122 (0.0000) |
+8
+
+
+[PAGE 9]
+V03_016 / bounded_row_median | 1.000 [0.996, 1.000] | 4.472 (0.0000) |
+V03_017 / naive_gaussian | 0.000 [0.000, 0.004] | 0.122 (0.0000) |
+V03_017 / bounded_row_median | 1.000 [0.996, 1.000] | 4.472 (0.0000) |
+V03_018 / naive_gaussian | 0.000 [0.000, 0.004] | 0.173 (0.0000) |
+V03_018 / bounded_row_median | 0.000 [0.000, 0.004] | 5.210 (0.0000) |
+V04
+Case / method | Coverage [Wilson 95%] | Mean length (SE) |
+|—|—|—|
+V04_000 / known_sigma | 0.946 [0.938, 0.954] | 2.772 (0.0000) |
+V04_000 / independent_upper_sigma | 0.995 [0.992, 0.997] | 7.873 (0.0153) |
+V04_000 / naive_plugin_sigma | 0.703 [0.687, 0.719] | 2.229 (0.0305) |
+V04_001 / known_sigma | 1.000 [0.999, 1.000] | 8.000 (0.0000) |
+V04_001 / independent_upper_sigma | 0.996 [0.993, 0.997] | 7.963 (0.0081) |
+V04_001 / naive_plugin_sigma | 0.687 [0.671, 0.704] | 5.086 (0.0505) |
+V04_002 / known_sigma | 0.951 [0.943, 0.958] | 1.960 (0.0000) |
+V04_002 / independent_upper_sigma | 0.997 [0.994, 0.998] | 7.050 (0.0290) |
+V04_002 / naive_plugin_sigma | 0.840 [0.827, 0.853] | 1.773 (0.0140) |
+V04_003 / known_sigma | 0.952 [0.943, 0.959] | 5.880 (0.0000) |
+V04_003 / independent_upper_sigma | 0.999 [0.998, 1.000] | 7.963 (0.0062) |
+V04_003 / naive_plugin_sigma | 0.854 [0.841, 0.866] | 5.259 (0.0348) |
+V04_004 / known_sigma | 0.949 [0.941, 0.956] | 0.980 (0.0000) |
+V04_004 / independent_upper_sigma | 0.995 [0.992, 0.997] | 1.708 (0.0058) |
+V04_004 / naive_plugin_sigma | 0.932 [0.922, 0.940] | 0.963 (0.0032) |
+V04_005 / known_sigma | 0.942 [0.933, 0.950] | 2.940 (0.0000) |
+V04_005 / independent_upper_sigma | 0.996 [0.993, 0.997] | 5.149 (0.0172) |
+V04_005 / naive_plugin_sigma | 0.923 [0.913, 0.932] | 2.902 (0.0097) |
+V04_006 / known_sigma | 1.000 [0.999, 1.000] | 2.000 (0.0000) |
+V04_006 / independent_upper_sigma | 1.000 [0.999, 1.000] | 2.000 (0.0000) |
+V04_006 / naive_plugin_sigma | 0.993 [0.989, 0.995] | 1.987 (0.0010) |
+V04_007 / known_sigma | 1.000 [0.999, 1.000] | 2.000 (0.0000) |
+V04_007 / independent_upper_sigma | 1.000 [0.999, 1.000] | 2.000 (0.0000) |
+V04_007 / naive_plugin_sigma | 1.000 [0.999, 1.000] | 2.000 (0.0000) |
+V04_008 / known_sigma | 1.000 [0.999, 1.000] | 1.930 (0.0000) |
+V04_008 / independent_upper_sigma | 1.000 [0.999, 1.000] | 1.998 (0.0002) |
+V04_008 / naive_plugin_sigma | 0.967 [0.960, 0.973] | 1.882 (0.0022) |
+V04_009 / known_sigma | 1.000 [0.999, 1.000] | 2.000 (0.0000) |
+V04_009 / independent_upper_sigma | 1.000 [0.999, 1.000] | 2.000 (0.0000) |
+9
+
+
+[PAGE 10]
+V04_009 / naive_plugin_sigma | 1.000 [0.999, 1.000] | 2.000 (0.0000) |
+V04_010 / known_sigma | 0.952 [0.944, 0.959] | 0.980 (0.0000) |
+V04_010 / independent_upper_sigma | 0.976 [0.970, 0.981] | 1.146 (0.0010) |
+V04_010 / naive_plugin_sigma | 0.950 [0.942, 0.958] | 0.978 (0.0008) |
+V04_011 / known_sigma | 1.000 [0.999, 1.000] | 2.000 (0.0000) |
+V04_011 / independent_upper_sigma | 1.000 [0.999, 1.000] | 2.000 (0.0000) |
+V04_011 / naive_plugin_sigma | 1.000 [0.999, 1.000] | 2.000 (0.0000) |
+V04_012 / known_sigma | 1.000 [0.999, 1.000] | 1.000 (0.0000) |
+V04_012 / independent_upper_sigma | 1.000 [0.999, 1.000] | 1.000 (0.0000) |
+V04_012 / naive_plugin_sigma | 1.000 [0.999, 1.000] | 1.000 (0.0000) |
+V04_013 / known_sigma | 1.000 [0.999, 1.000] | 1.000 (0.0000) |
+V04_013 / independent_upper_sigma | 1.000 [0.999, 1.000] | 1.000 (0.0000) |
+V04_013 / naive_plugin_sigma | 1.000 [0.999, 1.000] | 1.000 (0.0000) |
+V04_014 / known_sigma | 1.000 [0.999, 1.000] | 0.997 (0.0000) |
+V04_014 / independent_upper_sigma | 1.000 [0.999, 1.000] | 1.000 (0.0000) |
+V04_014 / naive_plugin_sigma | 1.000 [0.999, 1.000] | 0.991 (0.0002) |
+V04_015 / known_sigma | 1.000 [0.999, 1.000] | 1.000 (0.0000) |
+V04_015 / independent_upper_sigma | 1.000 [0.999, 1.000] | 1.000 (0.0000) |
+V04_015 / naive_plugin_sigma | 1.000 [0.999, 1.000] | 1.000 (0.0000) |
+V04_016 / known_sigma | 1.000 [0.999, 1.000] | 0.791 (0.0000) |
+V04_016 / independent_upper_sigma | 1.000 [0.999, 1.000] | 0.809 (0.0001) |
+V04_016 / naive_plugin_sigma | 1.000 [0.999, 1.000] | 0.791 (0.0001) |
+V04_017 / known_sigma | 1.000 [0.999, 1.000] | 1.000 (0.0000) |
+V04_017 / independent_upper_sigma | 1.000 [0.999, 1.000] | 1.000 (0.0000) |
+V04_017 / naive_plugin_sigma | 1.000 [0.999, 1.000] | 1.000 (0.0000) |
+V05
+Case / method | Coverage [Wilson 95%] | Mean length (SE) |
+|—|—|—|
+V05_000 / direct | 0.937 [0.920, 0.950] | 3.920 (0.0000) |
+V05_000 / cap_fixed | 0.965 [0.952, 0.975] | 1.394 (0.0061) |
+V05_000 / xch_known | 0.946 [0.930, 0.958] | 0.693 (0.0000) |
+V05_000 / oracle | 0.946 [0.930, 0.958] | 0.693 (0.0000) |
+V05_001 / direct | 0.953 [0.938, 0.964] | 3.920 (0.0000) |
+V05_001 / cap_fixed | 0.977 [0.966, 0.985] | 3.118 (0.0159) |
+V05_001 / xch_known | 0.949 [0.934, 0.961] | 1.697 (0.0000) |
+V05_001 / oracle | 0.949 [0.934, 0.961] | 1.697 (0.0000) |
+V05_002 / direct | 0.959 [0.945, 0.970] | 3.920 (0.0000) |
+10
+
+
+[PAGE 11]
+V05_002 / cap_fixed | 0.978 [0.967, 0.985] | 1.002 (0.0041) |
+V05_002 / xch_known | 0.955 [0.940, 0.966] | 0.490 (0.0000) |
+V05_002 / oracle | 0.955 [0.940, 0.966] | 0.490 (0.0000) |
+V05_003 / direct | 0.950 [0.935, 0.962] | 3.920 (0.0000) |
+V05_003 / cap_fixed | 0.966 [0.953, 0.976] | 2.644 (0.0133) |
+V05_003 / xch_known | 0.953 [0.938, 0.964] | 1.386 (0.0000) |
+V05_003 / oracle | 0.953 [0.938, 0.964] | 1.386 (0.0000) |
+Optimizer precision
+Case | Nodes | Certified / 50 | Mean gap (SE) | Seconds |
+|—|—:|—:|—:|—:|
+V02_000 | 100 | 0 | 1.3572 (0.0205) | 0.1294 |
+V02_000 | 600 | 0 | 0.8681 (0.0086) | 0.7367 |
+V02_000 | 3000 | 0 | 0.3526 (0.0055) | 3.6437 |
+V02_001 | 100 | 0 | 1.4000 (0.0272) | 0.1182 |
+V02_001 | 600 | 0 | 0.8704 (0.0132) | 0.6797 |
+V02_001 | 3000 | 0 | 0.3498 (0.0087) | 3.4713 |
+V02_002 | 100 | 0 | 1.4175 (0.0300) | 0.0929 |
+V02_002 | 600 | 0 | 0.8529 (0.0146) | 0.6313 |
+V02_002 | 3000 | 0 | 0.3258 (0.0102) | 3.0005 |
+V02_003 | 100 | 0 | 1.3675 (0.0362) | 0.0690 |
+V02_003 | 600 | 0 | 0.5055 (0.0297) | 0.4303 |
+V02_003 | 3000 | 7 | 0.1275 (0.0109) | 2.1160 |
+Input and allocation accounting
+Fresh timing of the revised public API: one warmup plus ten calls; one BLAS thread. Trace excludes preallocated
+input and may exclude native workspace, so it is not process peak memory. Coordinate-access bytes describe the
+separate diagonal method, not the full-tensor method.
+p | Input bytes | Diagonal access bytes | API seconds (SE) | Peak traced call bytes |
+|—|—:|—:|—:|—:|
+8 | 4096 | 64 | 0.000765 (0.000026) | 44053 |
+16 | 32768 | 128 | 0.001512 (0.000068) | 299013 |
+32 | 262144 | 256 | 0.009218 (0.000173) | 2167429 |
+64 | 2097152 | 512 | 0.087627 (0.001057) | 16848773 |
+Real-data scope
+No suitable repeated-tensor dataset and prescribed scientific contrast was supplied or established. The independent
+unit, dependence, known-bound justification and preprocessing would need a separate defensible design.
+This
+revision makes no real-data or LLM application claim.
+11
+
+
+[PAGE 12]
+Reproducibility
+Run reproduce.sh from this revision directory to rebuild analysis and documents from preserved/new raw draws. Use
+–rerun-new to execute the 55 registered configurations again. The original saved simulations are regenerated only
+by their separately preserved original pipeline; the deterministic correction then applies to all saved observations.
+Source hashes, environment information and validation logs distinguish generation, reevaluation and prior checks.
+12

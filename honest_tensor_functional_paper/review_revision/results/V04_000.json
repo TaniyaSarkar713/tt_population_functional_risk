@@ -1,0 +1,112 @@
+{
+  "case": {
+    "id": "V04_000",
+    "suite": "V04",
+    "m": 1,
+    "n": 2,
+    "sigma": 1.0,
+    "M": 4.0,
+    "signal": "boundary",
+    "B": 3000
+  },
+  "records": [
+    {
+      "case": "V04_000",
+      "suite": "V04",
+      "method": "known_sigma",
+      "alpha": 0.05,
+      "repetitions": 3000,
+      "target": 4.0,
+      "coverage": 0.9463333333333334,
+      "covered": 2839,
+      "coverage_wilson_95": [
+        0.9376833000674456,
+        0.9538417809704134
+      ],
+      "coverage_mcse": 0.004114468598962914,
+      "length": 2.7718076486993573,
+      "length_se": 1.951119022189561e-17,
+      "mse": 0.5141429439795799,
+      "mse_se": 0.013307592904495753,
+      "bias": 0.026075451957262515,
+      "bias_se": 0.013084777748635186,
+      "paired_length": 0.0,
+      "paired_length_se": 0.0,
+      "paired_coverage": 0.0,
+      "paired_coverage_se": 0.0,
+      "estimator_id": "known_sigma_scalar",
+      "estimator_alpha": null,
+      "coverage_policy": "four endpoint ULPs",
+      "status": "COMPLETED"
+    },
+    {
+      "case": "V04_000",
+      "suite": "V04",
+      "method": "independent_upper_sigma",
+      "alpha": 0.05,
+      "repetitions": 3000,
+      "target": 4.0,
+      "coverage": 0.995,
+      "covered": 2985,
+      "coverage_wilson_95": [
+        0.9917663931103022,
+        0.996967546651625
+      ],
+      "coverage_mcse": 0.0012877629181387911,
+      "length": 7.873298867170517,
+      "length_se": 0.01531472937896909,
+      "mse": 15.539731326835584,
+      "mse_se": 0.04836362253127003,
+      "bias": -3.8803652524263956,
+      "bias_se": 0.012684080843117911,
+      "paired_length": 5.101491218471159,
+      "paired_length_se": 0.01531472937896909,
+      "paired_coverage": 0.048666666666666664,
+      "paired_coverage_se": 0.0043327048731610345,
+      "estimator_id": "independent_upper_sigma_scalar",
+      "estimator_alpha": null,
+      "coverage_policy": "four endpoint ULPs",
+      "status": "COMPLETED"
+    },
+    {
+      "case": "V04_000",
+      "suite": "V04",
+      "method": "naive_plugin_sigma",
+      "alpha": 0.05,
+      "repetitions": 3000,
+      "target": 4.0,
+      "coverage": 0.7033333333333334,
+      "covered": 2110,
+      "coverage_wilson_95": [
+        0.6867360271740955,
+        0.7194105743442719
+      ],
+      "coverage_mcse": 0.008339775287851096,
+      "length": 2.2292837836362924,
+      "length_se": 0.030533570239041387,
+      "mse": 0.5546531792001973,
+      "mse_se": 0.019708992261510922,
+      "bias": 0.016235877358859226,
+      "bias_se": 0.013596254798425545,
+      "paired_length": -0.5425238650630636,
+      "paired_length_se": 0.030533570239041387,
+      "paired_coverage": -0.243,
+      "paired_coverage_se": 0.008433177570707901,
+      "estimator_id": "naive_plugin_sigma_scalar",
+      "estimator_alpha": null,
+      "coverage_policy": "four endpoint ULPs",
+      "status": "COMPLETED"
+    }
+  ],
+  "extra": {
+    "event_coverage": 0.9873333333333333,
+    "event_wilson": [
+      0.982662642278329,
+      0.9907575731640531
+    ],
+    "mean_scale": 64.22338586131264,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation."
+  },
+  "seed": 2026091309
+}

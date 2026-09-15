@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "figures_viewed": 16,
+  "pdfs_text_scanned": 6,
+  "representative_pages_viewed": [
+    "main:1,7,10",
+    "technical supplement:27",
+    "empirical report:7",
+    "response:1,4",
+    "revision summary:1"
+  ],
+  "changes_during_QA": [
+    "Shared legends prevent overlap in fixed-budget and ablation figures",
+    "Narrowed long original-location references to registry cross-references",
+    "Corrected Markdown table row spacing and rebuilt real PDF tables",
+    "Removed all main/supplement overfull boxes"
+  ],
+  "limitations": "Representative visual page inspection plus complete text/boundary checks; not manual visual inspection of every page."
+}

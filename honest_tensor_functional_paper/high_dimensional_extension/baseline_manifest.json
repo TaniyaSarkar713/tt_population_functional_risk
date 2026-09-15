@@ -1,0 +1,29 @@
+{
+  "preserved_stage": "certified_weak_signal",
+  "includes_uncommitted_files": true,
+  "sha256": {
+    "honest_tensor_functional_paper/certified_weak_signal/README.md": "a4aa67962acf2e14e2fa2a84b402df24402a605f3f1c7cde5e86008caaa02098",
+    "honest_tensor_functional_paper/certified_weak_signal/baseline_manifest.json": "a47179264bcd65ab2fb21618c224d91cc0db3bea43b0009611bd81c16a3132d6",
+    "honest_tensor_functional_paper/certified_weak_signal/code/certified_optimizer.py": "57eb05070ea8e62726ae5f29ad447ada44cac6670a0a8eb2f1328fdfa3c72158",
+    "honest_tensor_functional_paper/certified_weak_signal/code/check_results.py": "566a1f6f45d97f5024bd7a60b7f79a4b6678735b9a8a3838c930130b685b63c5",
+    "honest_tensor_functional_paper/certified_weak_signal/code/loading_and_adaptation.py": "f3bd3ac85f155c4db6e11b38b9467d21bc68c55b8d4c4099d95f1eed95c77acd",
+    "honest_tensor_functional_paper/certified_weak_signal/code/rebuild.py": "8d45a73d7e1b76d4a80629653dbc7c6591f61eec3b275a097414c83994b2d6e1",
+    "honest_tensor_functional_paper/certified_weak_signal/code/run_experiments.py": "f765b922f796f9b7f821e568c05fb42234fc55396b4e9943efdb163880b11f78",
+    "honest_tensor_functional_paper/certified_weak_signal/code/validate.py": "676cc33325a6b566854209d66a6063a699342018f5c5163c75dce9ad4aa73a06",
+    "honest_tensor_functional_paper/certified_weak_signal/literature/update.md": "a6493d54f05ed8653eb965317ca254c20742d191747b4ab8560ace8d4f158b8f",
+    "honest_tensor_functional_paper/certified_weak_signal/paper/main.pdf": "637840ceac99cae42f701496c314ee244ec1377589c1283a2213b2f8d86136de",
+    "honest_tensor_functional_paper/certified_weak_signal/paper/main.tex": "e75564ba85e62c429115c283b0483e3c1e6bd9bde1ef73475bb7dbc1d04f9b05",
+    "honest_tensor_functional_paper/certified_weak_signal/progress_report.md": "dfae6afe50c5ef1865dcc161f24de25c50afed6d6264dddb6ddc346f07bdda05",
+    "honest_tensor_functional_paper/certified_weak_signal/progress_report.pdf": "5df877b17c439acb59e7ae2092a19ec86bba88513c5ce5926afedcded84aa5fa",
+    "honest_tensor_functional_paper/certified_weak_signal/results/adaptation_experiments.json": "4e1cdc230616dac8afc02f006c4216558673c51711c419643543f2d0eb9b6a87",
+    "honest_tensor_functional_paper/certified_weak_signal/results/checks.json": "76550ae7ae6e47fac39323901f2f9f4831e993a4423daa705ff7e678739c9f3b",
+    "honest_tensor_functional_paper/certified_weak_signal/results/loading_bounds.json": "fa9af2eb635a96d408fa06aa7a3e98231a8c27645aa05ee2603729d990375afe",
+    "honest_tensor_functional_paper/certified_weak_signal/results/optimizer_experiments.json": "bde7342c49a0496d5a26fbbb90b777316f427e2402b9c86bc87ce7622a9346f8",
+    "honest_tensor_functional_paper/certified_weak_signal/results/report_build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "honest_tensor_functional_paper/certified_weak_signal/results/run_manifest.json": "895acb1c70d8574c9cde24c796dce0f4f16a44b3ee473c23856fd5a189504ced",
+    "honest_tensor_functional_paper/certified_weak_signal/results/theory_build.log": "da4758b1eb4754da0f992dd3ab15031d87e09340d081ebfa02268ce0948ee733",
+    "honest_tensor_functional_paper/certified_weak_signal/results/validation.json": "07f1941aee4810f15375e247bb457dbc3d816563e0dfe2d07d079ae70d148269",
+    "honest_tensor_functional_paper/certified_weak_signal/theory/audit.md": "3127d192174382580c0356847d0e61907fe5e1ff45fae7f5beec85603ecb4492",
+    "honest_tensor_functional_paper/certified_weak_signal/theory/results.md": "b397e51befb9c59a68a5203b6bdd536ef88a2d1591efce10f89e9eef175756bf"
+  }
+}

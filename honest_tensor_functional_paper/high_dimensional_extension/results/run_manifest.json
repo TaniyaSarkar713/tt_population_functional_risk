@@ -1,0 +1,11 @@
+{
+  "seed": 2026091202,
+  "source_hashes": {
+    "run_experiments.py": "8e4a4fc7f9607b2d2a75640b3bff304749b2fa0abb588e8825a79ffda9d31a7d",
+    "methods.py": "2a52a7a469ca1d30eadd3d14bc61606a90f3293e840d25b14c7e905dbcdab4f2"
+  },
+  "python": "3.9.6",
+  "numpy": "2.0.2",
+  "scipy": "1.13.1",
+  "seconds": 5.959553956985474
+}

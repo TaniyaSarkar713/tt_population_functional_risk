@@ -1,0 +1,96 @@
+Generated five vector figures and previews.
+Built report, inherited 19-issue registry and theorem ledger: 109,000 MC datasets.
+{
+  "status": "PASS",
+  "artifact_checks": 3442,
+  "by_family": {
+    "historical_preservation": 1,
+    "protocol_hash": 1,
+    "python_parse": 11,
+    "finite_mathematical_checks": 1,
+    "theorem_ledger": 1,
+    "complete_review_registry": 1,
+    "checked_matmul": 1,
+    "checked_matmul_forced_fallback": 1,
+    "checked_matmul_nonfinite_rejection": 1,
+    "main_aggregate_recomputation": 2360,
+    "replicate_lengths": 236,
+    "interval_outputs": 80,
+    "direct_width_cap": 38,
+    "main_configurations": 1,
+    "configuration_lock": 1,
+    "followup_aggregate_recomputation": 70,
+    "retained_negative_control": 1,
+    "minor_aggregate_recomputation": 70,
+    "minor_normalized_width": 7,
+    "MC_counts": 1,
+    "loading_proxies": 504,
+    "runtime_scope": 1,
+    "subject_tensor_schema": 1,
+    "primary_loading": 1,
+    "eligible_subjects": 1,
+    "trial_accounting": 1,
+    "no_duplicate_trial_paths": 1,
+    "stratum_consistent_splits": 6,
+    "independent_subject_splits": 1,
+    "bounded_subject_tensors": 3,
+    "real_primary_mean": 3,
+    "real_individual_contrasts": 3,
+    "real_interval_order": 9,
+    "primary_no_certified_positive_claim": 1,
+    "PDF_readable": 7,
+    "vector_figure": 5,
+    "figure_label_text": 5,
+    "PDF_no_clipped_text": 1,
+    "report_figures": 1,
+    "report_counts": 1,
+    "proof_sections": 1,
+    "repro_script_syntax": 1
+  },
+  "failures": [],
+  "fresh_mathematical_checks": 40553,
+  "MC_datasets": 109000,
+  "MC_configurations": 92,
+  "analytic_calculations": 504,
+  "API_timing_calls": 36,
+  "baseline_files": 2733,
+  "baseline_changed": [
+    "requirements.md",
+    "README.md"
+  ],
+  "baseline_missing": [],
+  "baseline_unchanged": 2731,
+  "new_manifest_files": 168,
+  "PDFs": {
+    "paper/technical_supplement.pdf": {
+      "pages": 12,
+      "bytes": 111859
+    },
+    "paper/report.pdf": {
+      "pages": 14,
+      "bytes": 133852
+    },
+    "figures/diagonal_caps.pdf": {
+      "pages": 1,
+      "bytes": 15885
+    },
+    "figures/minor_pointwise.pdf": {
+      "pages": 1,
+      "bytes": 14552
+    },
+    "figures/loading_envelopes.pdf": {
+      "pages": 1,
+      "bytes": 18202
+    },
+    "figures/eeg_intervals.pdf": {
+      "pages": 1,
+      "bytes": 15474
+    },
+    "figures/pointwise_risk.pdf": {
+      "pages": 1,
+      "bytes": 14677
+    }
+  },
+  "visual_inspection": "Root agent inspected report table pages, EEG figure and corrected full figure page; vector labels/captions readable, no clipping after pagination fix.",
+  "limits": "Internal checks, not formal proofs, independent review, or verification of subject independence. Historical stages were not rerun."
+}

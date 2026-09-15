@@ -1,0 +1,481 @@
+[
+  {
+    "label": "thm:diagonal",
+    "title": "Orthogonal diagonal compressibility",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/main.tex"
+  },
+  {
+    "label": "thm:coverage",
+    "title": "Finite-sample honest interval",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/main.tex"
+  },
+  {
+    "label": "thm:affine",
+    "title": "Fixed-radius affine intervals",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/main.tex"
+  },
+  {
+    "label": "thm:unfolding",
+    "title": "Cost of a single unfolding honesty class",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/main.tex"
+  },
+  {
+    "label": "thm:separation",
+    "title": "Strict length separations",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/main.tex"
+  },
+  {
+    "label": "thm:jointlower",
+    "title": "Within-class lower bound",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/main.tex"
+  },
+  {
+    "label": "prop:diagonal_minimax",
+    "title": "Classical diagonal-information benchmark",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/main.tex"
+  },
+  {
+    "label": "thm:scan",
+    "title": "A full-data interval with short expected length at zero",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/full_data_section.tex"
+  },
+  {
+    "label": "thm:harmonic",
+    "title": "A harmonic obstruction in order three",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/full_data_section.tex"
+  },
+  {
+    "label": "thm:sparse_harmonic",
+    "title": "Sparse harmonic lower bound",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/gap_section.tex"
+  },
+  {
+    "label": "thm:full_minimax",
+    "title": "Uniform diameter and full-data minimax length",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/gap_section.tex"
+  },
+  {
+    "label": "prop:mse_sharp",
+    "title": "Squared-error consequence",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/gap_section.tex"
+  },
+  {
+    "label": "prop:truncated",
+    "title": "Truncated scans",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/gap_section.tex"
+  },
+  {
+    "label": "thm:low_degree",
+    "title": "A low-degree estimation separation",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/gap_section.tex"
+  },
+  {
+    "label": "prop:ci_detection",
+    "title": "What an efficient short interval would imply",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/gap_section.tex"
+  },
+  {
+    "label": "thm:norm_diameter",
+    "title": "Diameter using both norm and scan constraints",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/norm_loading_section.tex"
+  },
+  {
+    "label": "thm:all_norm_rates",
+    "title": "Full-data length for every positive norm budget",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/norm_loading_section.tex"
+  },
+  {
+    "label": "thm:all_norm_mse",
+    "title": "Squared risk uniformly over norm budgets",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/norm_loading_section.tex"
+  },
+  {
+    "label": "thm:weighted_bounds",
+    "title": "Loading-dependent full-data bounds",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/norm_loading_section.tex"
+  },
+  {
+    "label": "prop:flat_loading",
+    "title": "Sharp rates for a flat orthogonal loading",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/norm_loading_section.tex"
+  },
+  {
+    "label": "thm:sg_full",
+    "title": "Full-data robustness under directional tails",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/robust_adaptive_section.tex"
+  },
+  {
+    "label": "thm:mom_full",
+    "title": "Full scans with only finite-variance replicates",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/robust_adaptive_section.tex"
+  },
+  {
+    "label": "prop:noise_limits",
+    "title": "Two limits of a noise relaxation",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/robust_adaptive_section.tex"
+  },
+  {
+    "label": "thm:approx_sharp",
+    "title": "Sharp length under a Frobenius approximation allowance",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/robust_adaptive_section.tex"
+  },
+  {
+    "label": "prop:growing_caps",
+    "title": "A growing-rank lower bound and the unrestricted endpoint",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/robust_adaptive_section.tex"
+  },
+  {
+    "label": "prop:loading_transfer",
+    "title": "A confidence interval for any certified loading decomposition",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/robust_adaptive_section.tex"
+  },
+  {
+    "label": "thm:efficient_regimes",
+    "title": "Two efficiently attained minimax regimes",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/robust_adaptive_section.tex"
+  },
+  {
+    "label": "prop:convex_loss",
+    "title": "Why full convexification loses the weak-signal gain",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/robust_adaptive_section.tex"
+  },
+  {
+    "label": "thm:shifted_adaptation",
+    "title": "An adaptation obstruction at nonzero tensors",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/robust_adaptive_section.tex"
+  },
+  {
+    "label": "thm:adaptive_tangent",
+    "title": "Finite-sample rank calibration with a computable bias correction",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/robust_adaptive_section.tex"
+  },
+  {
+    "label": "lem:cp",
+    "title": "Controlled squared component weights",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/appendix.tex"
+  },
+  {
+    "label": "lem:image",
+    "title": "Exact diagonal reduction",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/appendix.tex"
+  },
+  {
+    "label": "lem:soft",
+    "title": "Scalar threshold envelope",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/appendix.tex"
+  },
+  {
+    "label": "lem:structural",
+    "title": "Matrix functional bound",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/appendix.tex"
+  },
+  {
+    "label": "lem:mixture",
+    "title": "Common-target alternatives",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/appendix.tex"
+  },
+  {
+    "label": "lem:net_scan",
+    "title": "Finite product nets and injective norm",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/full_data_proofs.tex"
+  },
+  {
+    "label": "lem:cubic_moment",
+    "title": "Uniform cubic moment for a weighted sign sum",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/full_data_proofs.tex"
+  },
+  {
+    "label": "prop:budget",
+    "title": "Smaller rank coefficient",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/refinements.tex"
+  },
+  {
+    "label": "prop:affine_exact",
+    "title": "Structural range and fixed affine optimum",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/refinements.tex"
+  },
+  {
+    "label": "prop:envelope",
+    "title": "Envelope and approximation calibration",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/refinements.tex"
+  },
+  {
+    "label": "prop:mom",
+    "title": "Replicate median calibration",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/refinements.tex"
+  },
+  {
+    "label": "prop:variance",
+    "title": "Independent residual calibration",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/refinements.tex"
+  },
+  {
+    "label": "prop:levels",
+    "title": "Calibrated lower bounds",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/refinements.tex"
+  },
+  {
+    "label": "lem:norm_sum",
+    "title": "A norm-sensitive harmonic sum",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/norm_loading_proofs.tex"
+  },
+  {
+    "label": "lem:residual_fit",
+    "title": "Residual fit and its noise tail",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/norm_loading_proofs.tex"
+  },
+  {
+    "label": "C1",
+    "title": "A quantitative contract for approximate minimax optimization",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/certified_weak_signal/theory/results.md"
+  },
+  {
+    "label": "C2",
+    "title": "An implemented global solver on the binary rank-one class",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/certified_weak_signal/theory/results.md"
+  },
+  {
+    "label": "L1",
+    "title": "Sharp small-budget rates for every loading tensor",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/certified_weak_signal/theory/results.md"
+  },
+  {
+    "label": "L2",
+    "title": "An optimized common-target lower bound for unequal weights",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/certified_weak_signal/theory/results.md"
+  },
+  {
+    "label": "A1",
+    "title": "Unseparated rate adaptation across positive fixed caps",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/certified_weak_signal/theory/results.md"
+  },
+  {
+    "label": "A2",
+    "title": "A computable projection certificate without separation",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/certified_weak_signal/theory/results.md"
+  },
+  {
+    "label": "A3",
+    "title": "The adaptation obstruction at an arbitrary orientation",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/certified_weak_signal/theory/results.md"
+  },
+  {
+    "label": "A4",
+    "title": "A cap-valid tangent interval on the original unseparated class",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/certified_weak_signal/theory/results.md"
+  },
+  {
+    "label": "G1",
+    "title": "Sharp growing-cap rates with a polynomial algorithm",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/high_dimensional_extension/theory/results.md"
+  },
+  {
+    "label": "G2",
+    "title": "General adaptation across positive growing caps is impossible",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/high_dimensional_extension/theory/results.md"
+  },
+  {
+    "label": "W1",
+    "title": "A dyadic loading bound using the full weight profile",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/high_dimensional_extension/theory/results.md"
+  },
+  {
+    "label": "W2",
+    "title": "Sharp rates at every budget for polynomially decreasing loadings",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/high_dimensional_extension/theory/results.md"
+  },
+  {
+    "label": "W3",
+    "title": "A restricted computational separation for these newly matched loadings",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/high_dimensional_extension/theory/results.md"
+  },
+  {
+    "label": "P1",
+    "title": "Efficient pointwise optimality at strong saturated Tucker means",
+    "status": "PROVED",
+    "change": "Statement/rate unchanged; reorganized and notation clarified",
+    "proof_evidence": "Complete supplied derivation and prior 59-result adversarial audit; revision dependency/statement checks",
+    "previous_source": "honest_tensor_functional_paper/high_dimensional_extension/theory/results.md"
+  },
+  {
+    "label": "R1",
+    "title": "Risk-controlled scalar companion",
+    "status": "PROVED",
+    "change": "New proposition and complete pathwise/moment proof",
+    "proof_evidence": "theory/scalar_companion.md"
+  }
+]

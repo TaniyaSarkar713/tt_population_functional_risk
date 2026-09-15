@@ -1,0 +1,112 @@
+{
+  "case": {
+    "id": "V04_006",
+    "suite": "V04",
+    "m": 16,
+    "n": 2,
+    "sigma": 1.0,
+    "M": 4.0,
+    "signal": "boundary",
+    "B": 3000
+  },
+  "records": [
+    {
+      "case": "V04_006",
+      "suite": "V04",
+      "method": "known_sigma",
+      "alpha": 0.05,
+      "repetitions": 3000,
+      "target": 1.0,
+      "coverage": 1.0,
+      "covered": 3000,
+      "coverage_wilson_95": [
+        0.9987211512746742,
+        1.0000000000000002
+      ],
+      "coverage_mcse": 0.0,
+      "length": 2.0,
+      "length_se": 0.0,
+      "mse": 1.0,
+      "mse_se": 0.0,
+      "bias": -1.0,
+      "bias_se": 0.0,
+      "paired_length": 0.0,
+      "paired_length_se": 0.0,
+      "paired_coverage": 0.0,
+      "paired_coverage_se": 0.0,
+      "estimator_id": "known_sigma_scalar",
+      "estimator_alpha": null,
+      "coverage_policy": "four endpoint ULPs",
+      "status": "COMPLETED"
+    },
+    {
+      "case": "V04_006",
+      "suite": "V04",
+      "method": "independent_upper_sigma",
+      "alpha": 0.05,
+      "repetitions": 3000,
+      "target": 1.0,
+      "coverage": 1.0,
+      "covered": 3000,
+      "coverage_wilson_95": [
+        0.9987211512746742,
+        1.0000000000000002
+      ],
+      "coverage_mcse": 0.0,
+      "length": 2.0,
+      "length_se": 0.0,
+      "mse": 1.0,
+      "mse_se": 0.0,
+      "bias": -1.0,
+      "bias_se": 0.0,
+      "paired_length": 0.0,
+      "paired_length_se": 0.0,
+      "paired_coverage": 0.0,
+      "paired_coverage_se": 0.0,
+      "estimator_id": "independent_upper_sigma_scalar",
+      "estimator_alpha": null,
+      "coverage_policy": "four endpoint ULPs",
+      "status": "COMPLETED"
+    },
+    {
+      "case": "V04_006",
+      "suite": "V04",
+      "method": "naive_plugin_sigma",
+      "alpha": 0.05,
+      "repetitions": 3000,
+      "target": 1.0,
+      "coverage": 0.9926666666666667,
+      "covered": 2978,
+      "coverage_wilson_95": [
+        0.9889211095779166,
+        0.9951521314780624
+      ],
+      "coverage_mcse": 0.0015577286408481126,
+      "length": 1.9871878674344814,
+      "length_se": 0.0009997016006804836,
+      "mse": 0.9094119544301514,
+      "mse_se": 0.0048504460055529145,
+      "bias": -0.9127355111549762,
+      "bias_se": 0.005044841971007888,
+      "paired_length": -0.0128121325655185,
+      "paired_length_se": 0.0009997016006804836,
+      "paired_coverage": -0.007333333333333333,
+      "paired_coverage_se": 0.001557988327211652,
+      "estimator_id": "naive_plugin_sigma_scalar",
+      "estimator_alpha": null,
+      "coverage_policy": "four endpoint ULPs",
+      "status": "COMPLETED"
+    }
+  ],
+  "extra": {
+    "event_coverage": 0.9916666666666667,
+    "event_wilson": [
+      0.9877267648163708,
+      0.9943490339370589
+    ],
+    "mean_scale": 1.6371092660799522,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation."
+  },
+  "seed": 2026091309
+}

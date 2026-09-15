@@ -1,0 +1,352 @@
+[
+  {
+    "item": 1,
+    "guideline": "First understand the paper independently",
+    "file": "report.md",
+    "evidence": "Section 1: reconstruction, experiment, target and procedure",
+    "status": "Addressed"
+  },
+  {
+    "item": 2,
+    "guideline": "Give a one-paragraph referee summary",
+    "file": "report.md",
+    "evidence": "Section 1: one-paragraph referee summary",
+    "status": "Addressed"
+  },
+  {
+    "item": 3,
+    "guideline": "Evaluate the statistical contribution",
+    "file": "report.md",
+    "evidence": "Section 2: statistical contribution and significance",
+    "status": "Addressed"
+  },
+  {
+    "item": 4,
+    "guideline": "Review the mathematical formulation",
+    "file": "assumption_audit.md",
+    "evidence": "Formulation and notation; report Section 1",
+    "status": "Addressed"
+  },
+  {
+    "item": 5,
+    "guideline": "Review every assumption",
+    "file": "assumption_audit.md",
+    "evidence": "R01–R20 assumption audit with use, standardness, restrictiveness and weakening",
+    "status": "Addressed"
+  },
+  {
+    "item": 6,
+    "guideline": "Audit every theorem",
+    "file": "theorem_audit.md",
+    "evidence": "59 distinct results; statement/proof/novelty/strength/issues and source lines",
+    "status": "Addressed"
+  },
+  {
+    "item": 7,
+    "guideline": "Check theorem strength",
+    "file": "theorem_audit.md",
+    "evidence": "Individual strength judgments; report Section 3 rates",
+    "status": "Addressed"
+  },
+  {
+    "item": 8,
+    "guideline": "Check minimax and optimality claims",
+    "file": "report.md",
+    "evidence": "Section 3: matched classes, losses, budgets, logs and constants",
+    "status": "Addressed"
+  },
+  {
+    "item": 9,
+    "guideline": "Independently audit the proofs",
+    "file": "report.md",
+    "evidence": "Section 4 dependency chains; individual proof reconstructions in theorem audit",
+    "status": "Addressed"
+  },
+  {
+    "item": 10,
+    "guideline": "Look specifically for proof failures",
+    "file": "report.md",
+    "evidence": "Section 4 dependence, nets, doubled ranks, conditioning, measurability and tail checks",
+    "status": "Addressed"
+  },
+  {
+    "item": 11,
+    "guideline": "Stress-test the theory",
+    "file": "report.md",
+    "evidence": "Section 4 explicit counterexamples and boundary stress tests; new proof probes",
+    "status": "Addressed"
+  },
+  {
+    "item": 12,
+    "guideline": "Check identifiability",
+    "file": "report.md",
+    "evidence": "Section 1: mean/functional identifiable, factors need not be",
+    "status": "Addressed"
+  },
+  {
+    "item": 13,
+    "guideline": "Check computational feasibility",
+    "file": "report.md",
+    "evidence": "F07 and Section 6: ideal estimator, binary search, polynomial regimes and input size",
+    "status": "Addressed"
+  },
+  {
+    "item": 14,
+    "guideline": "Review tuning-parameter theory",
+    "file": "assumption_audit.md",
+    "evidence": "Tuning audit with theoretical/empirical choices and scope",
+    "status": "Addressed"
+  },
+  {
+    "item": 15,
+    "guideline": "Review the simulation design",
+    "file": "simulation_and_claims.md",
+    "evidence": "All suites S01–S13, including separate runtime and follow-ups",
+    "status": "Addressed"
+  },
+  {
+    "item": 16,
+    "guideline": "Check rate validation",
+    "file": "report.md",
+    "evidence": "Sections 3 and 6: rate slopes, logs, finite-grid curvature and cap rounding",
+    "status": "Addressed"
+  },
+  {
+    "item": 17,
+    "guideline": "Review simulation fairness",
+    "file": "simulation_and_claims.md",
+    "evidence": "Pairing, exact baselines, oracles, comparator eligibility, F02/F05/F06",
+    "status": "Addressed"
+  },
+  {
+    "item": 18,
+    "guideline": "Check whether uncertainty is reported",
+    "file": "report.md",
+    "evidence": "Section 6: Wilson intervals, MCSE, paired differences and simultaneous screening",
+    "status": "Addressed"
+  },
+  {
+    "item": 19,
+    "guideline": "Review ablation experiments",
+    "file": "report.md",
+    "evidence": "F02: three-component ablation and concrete controlled replacement",
+    "status": "Addressed"
+  },
+  {
+    "item": 20,
+    "guideline": "Review the real-data analysis",
+    "file": "report.md",
+    "evidence": "Section 7: no executed real-data analysis; existing applicability audit reviewed",
+    "status": "Addressed"
+  },
+  {
+    "item": 21,
+    "guideline": "For AI/LLM applications, audit experimental independence",
+    "file": "report.md",
+    "evidence": "Section 7: no LLM observations used; future sampling/dependence requirements",
+    "status": "Addressed"
+  },
+  {
+    "item": 22,
+    "guideline": "Check whether empirical results support the claims",
+    "file": "simulation_and_claims.md",
+    "evidence": "Claim-to-evidence classifications and suite conclusions",
+    "status": "Addressed"
+  },
+  {
+    "item": 23,
+    "guideline": "Review figures",
+    "file": "presentation_audit.md",
+    "evidence": "All 14 active manuscript/current-study figures",
+    "status": "Addressed"
+  },
+  {
+    "item": 24,
+    "guideline": "Review tables",
+    "file": "presentation_audit.md",
+    "evidence": "Analytic and empirical tables, precision, uncertainty and comparison classes",
+    "status": "Addressed"
+  },
+  {
+    "item": 25,
+    "guideline": "Review the Abstract",
+    "file": "proposed_abstract.md",
+    "evidence": "Proposed integrated abstract; report Section 8 critique",
+    "status": "Addressed"
+  },
+  {
+    "item": 26,
+    "guideline": "Review the Introduction",
+    "file": "report.md",
+    "evidence": "Section 8 and revision plan: introduction focus and contribution hierarchy",
+    "status": "Addressed"
+  },
+  {
+    "item": 27,
+    "guideline": "Review the Related Work section",
+    "file": "report.md",
+    "evidence": "Section 2: focused primary-source novelty comparison, explicit citation-audit boundary",
+    "status": "Addressed"
+  },
+  {
+    "item": 28,
+    "guideline": "Review the Methods section",
+    "file": "assumption_audit.md",
+    "evidence": "Tuning and computation; report Sections 1,5,8 specify missing integrated methods",
+    "status": "Addressed"
+  },
+  {
+    "item": 29,
+    "guideline": "Review the Theory section as exposition",
+    "file": "report.md",
+    "evidence": "Sections 3,4,8: main theorem hierarchy and explanatory proof structure",
+    "status": "Addressed"
+  },
+  {
+    "item": 30,
+    "guideline": "Review the Discussion",
+    "file": "report.md",
+    "evidence": "Sections 5,7,8: limitations and stale discussion wording",
+    "status": "Addressed"
+  },
+  {
+    "item": 31,
+    "guideline": "Review the Appendix",
+    "file": "theorem_audit.md",
+    "evidence": "Proof-by-proof audit; presentation/revision plan reorganizes appendix dependencies",
+    "status": "Addressed"
+  },
+  {
+    "item": 32,
+    "guideline": "Check internal consistency",
+    "file": "report.md",
+    "evidence": "F03, Section 3 and claims audit: fixed/growing caps, noise laws, pointwise/risk scope",
+    "status": "Addressed"
+  },
+  {
+    "item": 33,
+    "guideline": "Check notation globally",
+    "file": "presentation_audit.md",
+    "evidence": "Global notation audit with proposed unifying symbols",
+    "status": "Addressed"
+  },
+  {
+    "item": 34,
+    "guideline": "Evaluate reproducibility",
+    "file": "report.md",
+    "evidence": "Section 6: new checks versus saved evidence; isolated byte-identical rebuild",
+    "status": "Addressed"
+  },
+  {
+    "item": 35,
+    "guideline": "Evaluate robustness of conclusions",
+    "file": "simulation_and_claims.md",
+    "evidence": "Fairness and sensitivity; changed-seed, parameter and noise conclusions delimited",
+    "status": "Addressed"
+  },
+  {
+    "item": 36,
+    "guideline": "Separate fatal issues from fixable issues",
+    "file": "revision_plan.md",
+    "evidence": "Three MAJOR, five MODERATE, two MINOR; no CRITICAL established",
+    "status": "Addressed"
+  },
+  {
+    "item": 37,
+    "guideline": "Produce a skeptical referee report",
+    "file": "report.md",
+    "evidence": "Summary, substantive strengths, ranked concerns, author questions, revisions and recommendation",
+    "status": "Addressed"
+  },
+  {
+    "item": 38,
+    "guideline": "Simulate multiple reviewers",
+    "file": "report.md",
+    "evidence": "Section 9: three explicitly simulated referee perspectives",
+    "status": "Addressed"
+  },
+  {
+    "item": 39,
+    "guideline": "Give an editor-style assessment",
+    "file": "report.md",
+    "evidence": "Section 10: associate-editor assessment and Major revision recommendation",
+    "status": "Addressed"
+  },
+  {
+    "item": 40,
+    "guideline": "Assess target-journal fit",
+    "file": "report.md",
+    "evidence": "Section 10: six venue fit scores from 1 to 5 and obstacles",
+    "status": "Addressed"
+  },
+  {
+    "item": 41,
+    "guideline": "Identify the single strongest contribution",
+    "file": "report.md",
+    "evidence": "Section 2: single strongest contribution sentence",
+    "status": "Addressed"
+  },
+  {
+    "item": 42,
+    "guideline": "Identify the single biggest weakness",
+    "file": "report.md",
+    "evidence": "Section 10: single biggest weakness and exact repair",
+    "status": "Addressed"
+  },
+  {
+    "item": 43,
+    "guideline": "Determine whether any claims should be weakened",
+    "file": "simulation_and_claims.md",
+    "evidence": "Current-claim/evidence/too-strong/recommended-wording table",
+    "status": "Addressed"
+  },
+  {
+    "item": 44,
+    "guideline": "Identify missing theoretical results",
+    "file": "revision_plan.md",
+    "evidence": "Six ranked missing-theory recommendations with impact, feasibility and publication relevance",
+    "status": "Addressed"
+  },
+  {
+    "item": 45,
+    "guideline": "Identify missing experiments",
+    "file": "revision_plan.md",
+    "evidence": "Seven ranked missing experiments",
+    "status": "Addressed"
+  },
+  {
+    "item": 46,
+    "guideline": "Identify unnecessary material",
+    "file": "revision_plan.md",
+    "evidence": "Cuts, moves and suggested final organization; presentation figure audit",
+    "status": "Addressed"
+  },
+  {
+    "item": 47,
+    "guideline": "Produce a prioritized revision plan",
+    "file": "revision_plan.md",
+    "evidence": "P0–P3 action tables with exact source locations and completion criteria",
+    "status": "Addressed"
+  },
+  {
+    "item": 48,
+    "guideline": "Final scientific checklist",
+    "file": "report.md",
+    "evidence": "Section 12: final scientific checklist with pending/not-applicable distinctions",
+    "status": "Addressed"
+  },
+  {
+    "item": 49,
+    "guideline": "Final verdict",
+    "file": "report.md",
+    "evidence": "C — Major revision required; viable core and concrete remaining corrections",
+    "status": "Addressed"
+  },
+  {
+    "item": 50,
+    "guideline": "Final deliverables",
+    "file": "README.md",
+    "evidence": "Deliverable index; complete_review.pdf includes all main review and audit documents",
+    "status": "Addressed"
+  }
+]

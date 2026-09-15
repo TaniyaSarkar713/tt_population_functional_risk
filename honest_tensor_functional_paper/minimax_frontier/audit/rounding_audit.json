@@ -1,0 +1,22 @@
+{
+  "rule": "Four endpoint ULP steps; no target-scaled tolerance.",
+  "changes": [
+    {
+      "id": "F037",
+      "method": "method",
+      "strict": 0,
+      "bounded_ulp": 2000,
+      "changed": 2000
+    },
+    {
+      "id": "F037",
+      "method": "direct",
+      "strict": 0,
+      "bounded_ulp": 1890,
+      "changed": 1890
+    }
+  ],
+  "new_mc_datasets": 0,
+  "recomputed_cases": 160,
+  "interpretation": "All strict counts are retained. Endpoint rounding is not a coverage guarantee."
+}

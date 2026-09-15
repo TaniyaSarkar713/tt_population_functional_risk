@@ -1,0 +1,2804 @@
+{
+  "url": "https://archive.ics.uci.edu/static/public/121/eeg+database.zip",
+  "citation": "Begleiter, H. (1995). EEG Database. UCI Machine Learning Repository. DOI:10.24432/C5TS3D",
+  "license": "CC BY 4.0",
+  "archive_sha256": "42bc0e5e435524c11f17140035b28ea549be771100fd60cbece36cb5beb3b1ae",
+  "archive_bytes": 799481741,
+  "raw_cache": "/private/tmp/tensor_eeg_database_121.zip",
+  "subjects": [
+    {
+      "subject": "co2a0000364",
+      "group_code": "a",
+      "archive_sha256": "1d4edbbd4d3db0bc57f19d327596b7ce06d8bb7b4db6be0999c5f31125b94e3a",
+      "archive_bytes": 5726404,
+      "trial_files": 88,
+      "valid_trials": 87,
+      "condition_counts": [
+        40,
+        26,
+        21
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1425408,
+      "clipped_counts": [
+        6927,
+        867,
+        30
+      ],
+      "max_absolute_voltage": 293.091
+    },
+    {
+      "subject": "co2a0000365",
+      "group_code": "a",
+      "archive_sha256": "4160370788a9993c3e4c6e1e6b774c9e53f33e3f6b86235d86280bb31bdf2ec2",
+      "archive_bytes": 6073064,
+      "trial_files": 93,
+      "valid_trials": 90,
+      "condition_counts": [
+        49,
+        19,
+        22
+      ],
+      "excluded_trials": {
+        "error_flag": 3
+      },
+      "eligible": true,
+      "voltage_values": 1474560,
+      "clipped_counts": [
+        5574,
+        770,
+        29
+      ],
+      "max_absolute_voltage": 236.847
+    },
+    {
+      "subject": "co2a0000368",
+      "group_code": "a",
+      "archive_sha256": "d72c39fa408f287e2636ad93b1143391c12a4a0be4b0c2427b77091048d46941",
+      "archive_bytes": 4616258,
+      "trial_files": 74,
+      "valid_trials": 73,
+      "condition_counts": [
+        39,
+        14,
+        20
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1196032,
+      "clipped_counts": [
+        1485,
+        66,
+        0
+      ],
+      "max_absolute_voltage": 146.993
+    },
+    {
+      "subject": "co2a0000369",
+      "group_code": "a",
+      "archive_sha256": "7a8e90dafa767a8b2b30b3d804953f2b20866ab73670e55c6a871a318ce2918f",
+      "archive_bytes": 7776380,
+      "trial_files": 118,
+      "valid_trials": 113,
+      "condition_counts": [
+        58,
+        29,
+        26
+      ],
+      "excluded_trials": {
+        "error_flag": 5
+      },
+      "eligible": true,
+      "voltage_values": 1851392,
+      "clipped_counts": [
+        792,
+        490,
+        0
+      ],
+      "max_absolute_voltage": 172.923
+    },
+    {
+      "subject": "co2a0000370",
+      "group_code": "a",
+      "archive_sha256": "bcf83d3ecd246921c198d66660722f63402184bda1b153e1ecf63504012b41ce",
+      "archive_bytes": 7457543,
+      "trial_files": 118,
+      "valid_trials": 116,
+      "condition_counts": [
+        59,
+        28,
+        29
+      ],
+      "excluded_trials": {
+        "error_flag": 2
+      },
+      "eligible": true,
+      "voltage_values": 1900544,
+      "clipped_counts": [
+        147,
+        0,
+        0
+      ],
+      "max_absolute_voltage": 87.097
+    },
+    {
+      "subject": "co2a0000371",
+      "group_code": "a",
+      "archive_sha256": "7b7ed9a9e61aa07e853c14decf10cb131cecc922312b4ec6118cfa0e0aab1344",
+      "archive_bytes": 6840855,
+      "trial_files": 106,
+      "valid_trials": 106,
+      "condition_counts": [
+        53,
+        25,
+        28
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1736704,
+      "clipped_counts": [
+        17632,
+        4570,
+        0
+      ],
+      "max_absolute_voltage": 143.809
+    },
+    {
+      "subject": "co2a0000372",
+      "group_code": "a",
+      "archive_sha256": "d9b51d171ec6ebe9c058a97b5f650dae32cac89a6c4c26fb2a2a2d9e291c8fe6",
+      "archive_bytes": 6891218,
+      "trial_files": 115,
+      "valid_trials": 115,
+      "condition_counts": [
+        57,
+        29,
+        29
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1884160,
+      "clipped_counts": [
+        749,
+        3,
+        0
+      ],
+      "max_absolute_voltage": 105.53
+    },
+    {
+      "subject": "co2a0000375",
+      "group_code": "a",
+      "archive_sha256": "e379344e538dcba2ae23d89e18150c5ecdf9487d258e480149c5dd4ebf8541b9",
+      "archive_bytes": 5614093,
+      "trial_files": 85,
+      "valid_trials": 85,
+      "condition_counts": [
+        39,
+        24,
+        22
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1392640,
+      "clipped_counts": [
+        5805,
+        362,
+        0
+      ],
+      "max_absolute_voltage": 187.907
+    },
+    {
+      "subject": "co2a0000377",
+      "group_code": "a",
+      "archive_sha256": "89abdc1bf05171e8a7983ed14f597f5fb24cb555f59a7f22d1c6773dcda8de19",
+      "archive_bytes": 6170398,
+      "trial_files": 100,
+      "valid_trials": 100,
+      "condition_counts": [
+        50,
+        25,
+        25
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1638400,
+      "clipped_counts": [
+        959,
+        24,
+        0
+      ],
+      "max_absolute_voltage": 110.85
+    },
+    {
+      "subject": "co2a0000378",
+      "group_code": "a",
+      "archive_sha256": "01e4c9e4f5d092736cf55d95e029bf9510e32e96956bc74042ad9c1306f9f8f4",
+      "archive_bytes": 7209674,
+      "trial_files": 112,
+      "valid_trials": 112,
+      "condition_counts": [
+        56,
+        27,
+        29
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1835008,
+      "clipped_counts": [
+        5108,
+        252,
+        0
+      ],
+      "max_absolute_voltage": 194.387
+    },
+    {
+      "subject": "co2a0000379",
+      "group_code": "a",
+      "archive_sha256": "88dcb457a0a370d5ea1c8125a3939dc809f07311ea3c152ba9748f4e28ec7827",
+      "archive_bytes": 7730768,
+      "trial_files": 108,
+      "valid_trials": 107,
+      "condition_counts": [
+        54,
+        27,
+        26
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1753088,
+      "clipped_counts": [
+        3675,
+        203,
+        17
+      ],
+      "max_absolute_voltage": 226.491
+    },
+    {
+      "subject": "co2a0000380",
+      "group_code": "a",
+      "archive_sha256": "3e0950ae83169ada510c8abe802485f9d739d68ea320e24e1c9c6000924cf72a",
+      "archive_bytes": 5245110,
+      "trial_files": 87,
+      "valid_trials": 87,
+      "condition_counts": [
+        43,
+        23,
+        21
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1425408,
+      "clipped_counts": [
+        31065,
+        5251,
+        1201
+      ],
+      "max_absolute_voltage": 447.245
+    },
+    {
+      "subject": "co2a0000381",
+      "group_code": "a",
+      "archive_sha256": "445c1ca4f9370aaddde7f8139539bac207afd6e4bb487834b6676bb94e86ebf7",
+      "archive_bytes": 6154059,
+      "trial_files": 104,
+      "valid_trials": 99,
+      "condition_counts": [
+        54,
+        22,
+        23
+      ],
+      "excluded_trials": {
+        "error_flag": 5
+      },
+      "eligible": true,
+      "voltage_values": 1622016,
+      "clipped_counts": [
+        541,
+        154,
+        18
+      ],
+      "max_absolute_voltage": 240.601
+    },
+    {
+      "subject": "co2a0000382",
+      "group_code": "a",
+      "archive_sha256": "4b61208dae3dfee4342e7fa9d40bfbc5fb2f22f6faf1944ece60d639a5a72965",
+      "archive_bytes": 7048361,
+      "trial_files": 114,
+      "valid_trials": 112,
+      "condition_counts": [
+        58,
+        28,
+        26
+      ],
+      "excluded_trials": {
+        "error_flag": 2
+      },
+      "eligible": true,
+      "voltage_values": 1835008,
+      "clipped_counts": [
+        1315,
+        114,
+        0
+      ],
+      "max_absolute_voltage": 146.759
+    },
+    {
+      "subject": "co2a0000384",
+      "group_code": "a",
+      "archive_sha256": "2f44fb0fa192cdcfdd15ad1d44def768db2b46cb693162342a4c7408c3488ead",
+      "archive_bytes": 6392813,
+      "trial_files": 100,
+      "valid_trials": 99,
+      "condition_counts": [
+        49,
+        21,
+        29
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1622016,
+      "clipped_counts": [
+        3455,
+        450,
+        75
+      ],
+      "max_absolute_voltage": 240.529
+    },
+    {
+      "subject": "co2a0000385",
+      "group_code": "a",
+      "archive_sha256": "326a5f074ec147c25f897162a2ca32af8b44f3abc23b11462025bb2da505cda0",
+      "archive_bytes": 4427515,
+      "trial_files": 70,
+      "valid_trials": 67,
+      "condition_counts": [
+        39,
+        14,
+        14
+      ],
+      "excluded_trials": {
+        "error_flag": 3
+      },
+      "eligible": true,
+      "voltage_values": 1097728,
+      "clipped_counts": [
+        4765,
+        1085,
+        164
+      ],
+      "max_absolute_voltage": 280.131
+    },
+    {
+      "subject": "co2a0000386",
+      "group_code": "a",
+      "archive_sha256": "9f68dcec133bf8a4c570e8d5f230780b8b002ba92f751dc77b2b99f467eb193d",
+      "archive_bytes": 4424712,
+      "trial_files": 72,
+      "valid_trials": 70,
+      "condition_counts": [
+        35,
+        18,
+        17
+      ],
+      "excluded_trials": {
+        "error_flag": 2
+      },
+      "eligible": true,
+      "voltage_values": 1146880,
+      "clipped_counts": [
+        9722,
+        1793,
+        296
+      ],
+      "max_absolute_voltage": 453.705
+    },
+    {
+      "subject": "co2a0000387",
+      "group_code": "a",
+      "archive_sha256": "a0d0099d01023039f799d6456f9e0e6313fdc054d709006301f138653340d4e0",
+      "archive_bytes": 4561127,
+      "trial_files": 67,
+      "valid_trials": 66,
+      "condition_counts": [
+        34,
+        15,
+        17
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1081344,
+      "clipped_counts": [
+        10310,
+        1210,
+        289
+      ],
+      "max_absolute_voltage": 490.489
+    },
+    {
+      "subject": "co2a0000388",
+      "group_code": "a",
+      "archive_sha256": "8d084195b3ee988b6e18c4bedcedcfb5f0a0d2a244e49c6e5645c11338fb7bff",
+      "archive_bytes": 5496038,
+      "trial_files": 87,
+      "valid_trials": 87,
+      "condition_counts": [
+        38,
+        25,
+        24
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1425408,
+      "clipped_counts": [
+        3880,
+        389,
+        0
+      ],
+      "max_absolute_voltage": 149.862
+    },
+    {
+      "subject": "co2a0000390",
+      "group_code": "a",
+      "archive_sha256": "d46c8ac4a30d3f9f00c7128c334e9693eee59dbd7d5e41c92deaac26e7d0b108",
+      "archive_bytes": 6288815,
+      "trial_files": 104,
+      "valid_trials": 104,
+      "condition_counts": [
+        51,
+        27,
+        26
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1703936,
+      "clipped_counts": [
+        826,
+        150,
+        0
+      ],
+      "max_absolute_voltage": 180.583
+    },
+    {
+      "subject": "co2a0000392",
+      "group_code": "a",
+      "archive_sha256": "8cdcb8beefeec3dd044966d618f43dde3911866331aa4860a9a3690c7559891c",
+      "archive_bytes": 5804259,
+      "trial_files": 96,
+      "valid_trials": 96,
+      "condition_counts": [
+        42,
+        28,
+        26
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1572864,
+      "clipped_counts": [
+        5596,
+        927,
+        116
+      ],
+      "max_absolute_voltage": 307.76
+    },
+    {
+      "subject": "co2a0000394",
+      "group_code": "a",
+      "archive_sha256": "4579aa8093a462f89155466ea48e704f66ab263c10a304818ecf45704021cb85",
+      "archive_bytes": 7648273,
+      "trial_files": 111,
+      "valid_trials": 110,
+      "condition_counts": [
+        55,
+        25,
+        30
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1802240,
+      "clipped_counts": [
+        3073,
+        353,
+        5
+      ],
+      "max_absolute_voltage": 224.62
+    },
+    {
+      "subject": "co2a0000395",
+      "group_code": "a",
+      "archive_sha256": "f93061076c6dac175df17476bdb63a28f61e8f9b446c3c402460a6652149b703",
+      "archive_bytes": 6795851,
+      "trial_files": 98,
+      "valid_trials": 98,
+      "condition_counts": [
+        46,
+        24,
+        28
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1605632,
+      "clipped_counts": [
+        2905,
+        179,
+        0
+      ],
+      "max_absolute_voltage": 149.913
+    },
+    {
+      "subject": "co2a0000396",
+      "group_code": "a",
+      "archive_sha256": "bbce5ac1f64b5e37dabf7e77143e515b3a9c70b9c3276a00a967cc768ed31fc8",
+      "archive_bytes": 4985269,
+      "trial_files": 77,
+      "valid_trials": 77,
+      "condition_counts": [
+        42,
+        14,
+        21
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1261568,
+      "clipped_counts": [
+        8488,
+        1525,
+        378
+      ],
+      "max_absolute_voltage": 385.295
+    },
+    {
+      "subject": "co2a0000398",
+      "group_code": "a",
+      "archive_sha256": "d935d48bf17e4ea14f2813e6b7f8362e90954adf41a1eb34aaa846a3fc8450b7",
+      "archive_bytes": 6319086,
+      "trial_files": 96,
+      "valid_trials": 96,
+      "condition_counts": [
+        37,
+        30,
+        29
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1572864,
+      "clipped_counts": [
+        5547,
+        946,
+        22
+      ],
+      "max_absolute_voltage": 219.645
+    },
+    {
+      "subject": "co2a0000400",
+      "group_code": "a",
+      "archive_sha256": "011146d149091ebb32bc4cff7c210cbb55e1627a7bb2346aa110bb9c583ffb5b",
+      "archive_bytes": 5239601,
+      "trial_files": 78,
+      "valid_trials": 78,
+      "condition_counts": [
+        40,
+        23,
+        15
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1277952,
+      "clipped_counts": [
+        4034,
+        2,
+        0
+      ],
+      "max_absolute_voltage": 100.8
+    },
+    {
+      "subject": "co2a0000402",
+      "group_code": "a",
+      "archive_sha256": "3ded00c83a7cf65a533bc7dae9bb621022e34898d82c043c0ba4772cbd13abb4",
+      "archive_bytes": 6116566,
+      "trial_files": 92,
+      "valid_trials": 91,
+      "condition_counts": [
+        50,
+        25,
+        16
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1490944,
+      "clipped_counts": [
+        8704,
+        379,
+        72
+      ],
+      "max_absolute_voltage": 437.327
+    },
+    {
+      "subject": "co2a0000403",
+      "group_code": "a",
+      "archive_sha256": "6dc2ce85af7854a7ba2f019049cbc625fd0a5b50a1a73ce2a92591cd8f3298a7",
+      "archive_bytes": 5989809,
+      "trial_files": 97,
+      "valid_trials": 91,
+      "condition_counts": [
+        46,
+        21,
+        24
+      ],
+      "excluded_trials": {
+        "error_flag": 6
+      },
+      "eligible": true,
+      "voltage_values": 1490944,
+      "clipped_counts": [
+        3942,
+        246,
+        0
+      ],
+      "max_absolute_voltage": 167.369
+    },
+    {
+      "subject": "co2a0000404",
+      "group_code": "a",
+      "archive_sha256": "2547f42b067a7201c08dcb2912373299d58b8991f6db7eb2dae488241dd455f5",
+      "archive_bytes": 5830031,
+      "trial_files": 96,
+      "valid_trials": 95,
+      "condition_counts": [
+        54,
+        25,
+        16
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1556480,
+      "clipped_counts": [
+        311,
+        20,
+        0
+      ],
+      "max_absolute_voltage": 136.902
+    },
+    {
+      "subject": "co2a0000405",
+      "group_code": "a",
+      "archive_sha256": "ded80e533aba7f7b58d003b31a988c497b605b55a62a0f8fd1aa1b9a06d59dd1",
+      "archive_bytes": 4710280,
+      "trial_files": 72,
+      "valid_trials": 69,
+      "condition_counts": [
+        42,
+        13,
+        14
+      ],
+      "excluded_trials": {
+        "error_flag": 3
+      },
+      "eligible": true,
+      "voltage_values": 1130496,
+      "clipped_counts": [
+        3172,
+        256,
+        29
+      ],
+      "max_absolute_voltage": 247.935
+    },
+    {
+      "subject": "co2a0000406",
+      "group_code": "a",
+      "archive_sha256": "b8aada844981e2fc74fe019567c70d52da80c8d8f0a2042445941e9f1b193cf5",
+      "archive_bytes": 3687214,
+      "trial_files": 61,
+      "valid_trials": 59,
+      "condition_counts": [
+        30,
+        16,
+        13
+      ],
+      "excluded_trials": {
+        "error_flag": 2
+      },
+      "eligible": true,
+      "voltage_values": 966656,
+      "clipped_counts": [
+        3917,
+        779,
+        67
+      ],
+      "max_absolute_voltage": 284.8
+    },
+    {
+      "subject": "co2a0000407",
+      "group_code": "a",
+      "archive_sha256": "c310457ae698fdb1a50167c5e85b526a7af623962a164f8c22abced1426cf180",
+      "archive_bytes": 6085849,
+      "trial_files": 93,
+      "valid_trials": 93,
+      "condition_counts": [
+        47,
+        28,
+        18
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1523712,
+      "clipped_counts": [
+        1004,
+        45,
+        0
+      ],
+      "max_absolute_voltage": 119.222
+    },
+    {
+      "subject": "co2a0000409",
+      "group_code": "a",
+      "archive_sha256": "815ffac64e743b352838bf49e0b7f0b617014944a3f8d7e93c3f9c01ef8f6be1",
+      "archive_bytes": 6794870,
+      "trial_files": 106,
+      "valid_trials": 105,
+      "condition_counts": [
+        52,
+        25,
+        28
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1720320,
+      "clipped_counts": [
+        3981,
+        462,
+        0
+      ],
+      "max_absolute_voltage": 161.56
+    },
+    {
+      "subject": "co2a0000410",
+      "group_code": "a",
+      "archive_sha256": "86ad39b14bab78da03f15fbd2ae58ea5f1de24525c8ec634bbb982b706ab9812",
+      "archive_bytes": 7206925,
+      "trial_files": 110,
+      "valid_trials": 107,
+      "condition_counts": [
+        56,
+        27,
+        24
+      ],
+      "excluded_trials": {
+        "error_flag": 3
+      },
+      "eligible": true,
+      "voltage_values": 1753088,
+      "clipped_counts": [
+        1118,
+        18,
+        0
+      ],
+      "max_absolute_voltage": 173.248
+    },
+    {
+      "subject": "co2a0000411",
+      "group_code": "a",
+      "archive_sha256": "34197b0888d5b3e22b420a81fa853972172cc50cd5541bfb7132b93cb704ca43",
+      "archive_bytes": 6244064,
+      "trial_files": 94,
+      "valid_trials": 93,
+      "condition_counts": [
+        48,
+        22,
+        23
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1523712,
+      "clipped_counts": [
+        3938,
+        321,
+        0
+      ],
+      "max_absolute_voltage": 172.089
+    },
+    {
+      "subject": "co2a0000412",
+      "group_code": "a",
+      "archive_sha256": "b7edbcff13ca3ad08b935302b6de0ce795573f78ab510f435dc0a728dd555154",
+      "archive_bytes": 5270113,
+      "trial_files": 90,
+      "valid_trials": 89,
+      "condition_counts": [
+        52,
+        17,
+        20
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1458176,
+      "clipped_counts": [
+        2084,
+        69,
+        0
+      ],
+      "max_absolute_voltage": 165.609
+    },
+    {
+      "subject": "co2a0000414",
+      "group_code": "a",
+      "archive_sha256": "73bc02b9cc6d8c02f0b6b107ef49d44415a9473e07f9b72f8bca55506ea82874",
+      "archive_bytes": 6596579,
+      "trial_files": 115,
+      "valid_trials": 114,
+      "condition_counts": [
+        56,
+        29,
+        29
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1867776,
+      "clipped_counts": [
+        72,
+        0,
+        0
+      ],
+      "max_absolute_voltage": 58.838
+    },
+    {
+      "subject": "co2a0000415",
+      "group_code": "a",
+      "archive_sha256": "29ca545e9f45a258e40c33da7fe41a7e347e63fc5b8f66a4d951ca1417f8eaff",
+      "archive_bytes": 4916732,
+      "trial_files": 79,
+      "valid_trials": 79,
+      "condition_counts": [
+        50,
+        15,
+        14
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1294336,
+      "clipped_counts": [
+        3412,
+        1218,
+        144
+      ],
+      "max_absolute_voltage": 324.382
+    },
+    {
+      "subject": "co2a0000416",
+      "group_code": "a",
+      "archive_sha256": "31055967a9f9865e4d5afd3a1bb3791e1b66715386a6c9775678884a350cd5d2",
+      "archive_bytes": 5224417,
+      "trial_files": 85,
+      "valid_trials": 83,
+      "condition_counts": [
+        36,
+        22,
+        25
+      ],
+      "excluded_trials": {
+        "error_flag": 2
+      },
+      "eligible": true,
+      "voltage_values": 1359872,
+      "clipped_counts": [
+        5426,
+        616,
+        48
+      ],
+      "max_absolute_voltage": 297.038
+    },
+    {
+      "subject": "co2a0000417",
+      "group_code": "a",
+      "archive_sha256": "591084859128364f89022d162eca848b2b94f31d18d120aa9df1dec5fe696eef",
+      "archive_bytes": 6328739,
+      "trial_files": 99,
+      "valid_trials": 98,
+      "condition_counts": [
+        42,
+        29,
+        27
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1605632,
+      "clipped_counts": [
+        4546,
+        978,
+        16
+      ],
+      "max_absolute_voltage": 219.92
+    },
+    {
+      "subject": "co2a0000418",
+      "group_code": "a",
+      "archive_sha256": "6074639f65f7a747c27e6c86afc068375d0835bd7cb9838527aac0082372d822",
+      "archive_bytes": 6471214,
+      "trial_files": 101,
+      "valid_trials": 97,
+      "condition_counts": [
+        48,
+        22,
+        27
+      ],
+      "excluded_trials": {
+        "error_flag": 4
+      },
+      "eligible": true,
+      "voltage_values": 1589248,
+      "clipped_counts": [
+        3593,
+        195,
+        0
+      ],
+      "max_absolute_voltage": 165.365
+    },
+    {
+      "subject": "co2a0000419",
+      "group_code": "a",
+      "archive_sha256": "9553cba6ab43ae701d12d68955e41e71aecd8b3c740327b4c787f2d0d38fa78a",
+      "archive_bytes": 7962960,
+      "trial_files": 117,
+      "valid_trials": 115,
+      "condition_counts": [
+        57,
+        29,
+        29
+      ],
+      "excluded_trials": {
+        "error_flag": 2
+      },
+      "eligible": true,
+      "voltage_values": 1884160,
+      "clipped_counts": [
+        1533,
+        32,
+        0
+      ],
+      "max_absolute_voltage": 175.395
+    },
+    {
+      "subject": "co2a0000421",
+      "group_code": "a",
+      "archive_sha256": "0d0885b82091e4cd9a14b98ff86337c246bceff5adca787e77162b65f18cf93a",
+      "archive_bytes": 6230769,
+      "trial_files": 100,
+      "valid_trials": 100,
+      "condition_counts": [
+        49,
+        27,
+        24
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1638400,
+      "clipped_counts": [
+        2767,
+        18,
+        0
+      ],
+      "max_absolute_voltage": 113.637
+    },
+    {
+      "subject": "co2a0000422",
+      "group_code": "a",
+      "archive_sha256": "4ea0c163fcc4566390bd18bb67d073da48988a3994b79f13285b342942212ff5",
+      "archive_bytes": 4910975,
+      "trial_files": 74,
+      "valid_trials": 74,
+      "condition_counts": [
+        22,
+        25,
+        27
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1212416,
+      "clipped_counts": [
+        9868,
+        1586,
+        0
+      ],
+      "max_absolute_voltage": 182.292
+    },
+    {
+      "subject": "co2a0000423",
+      "group_code": "a",
+      "archive_sha256": "74c0139f2bdf1b75ae6c926c89eb2e4aec6f65da90aa981e38351f02604267e8",
+      "archive_bytes": 4880290,
+      "trial_files": 77,
+      "valid_trials": 77,
+      "condition_counts": [
+        35,
+        19,
+        23
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1261568,
+      "clipped_counts": [
+        4086,
+        374,
+        21
+      ],
+      "max_absolute_voltage": 283.346
+    },
+    {
+      "subject": "co2a0000424",
+      "group_code": "a",
+      "archive_sha256": "c3958ad64828f8964ca27f645e38822d865c387bfbb9ba4a2cf4797c3383aa71",
+      "archive_bytes": 6340633,
+      "trial_files": 102,
+      "valid_trials": 101,
+      "condition_counts": [
+        43,
+        29,
+        29
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1654784,
+      "clipped_counts": [
+        3003,
+        87,
+        0
+      ],
+      "max_absolute_voltage": 157.379
+    },
+    {
+      "subject": "co2a0000425",
+      "group_code": "a",
+      "archive_sha256": "73fcf4ff602bfacb6e05dff3e3239cf0599ada553ae933c756a8726bef815cb9",
+      "archive_bytes": 1963457,
+      "trial_files": 30,
+      "valid_trials": 29,
+      "condition_counts": [
+        7,
+        12,
+        10
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 475136,
+      "clipped_counts": [
+        5737,
+        2027,
+        90
+      ],
+      "max_absolute_voltage": 247.569
+    },
+    {
+      "subject": "co2a0000426",
+      "group_code": "a",
+      "archive_sha256": "e131a1a0baea7f66f2ce82a3acfe75b84e34591f4df04b3d705c4830d3071895",
+      "archive_bytes": 4730325,
+      "trial_files": 70,
+      "valid_trials": 67,
+      "condition_counts": [
+        32,
+        15,
+        20
+      ],
+      "excluded_trials": {
+        "error_flag": 3
+      },
+      "eligible": true,
+      "voltage_values": 1097728,
+      "clipped_counts": [
+        4061,
+        304,
+        0
+      ],
+      "max_absolute_voltage": 161.123
+    },
+    {
+      "subject": "co2a0000427",
+      "group_code": "a",
+      "archive_sha256": "cc312b237cd564e556942e7312ba8f723abf66fee1773f39ed8ccf765cab0f12",
+      "archive_bytes": 5631706,
+      "trial_files": 89,
+      "valid_trials": 89,
+      "condition_counts": [
+        50,
+        20,
+        19
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1458176,
+      "clipped_counts": [
+        3333,
+        863,
+        93
+      ],
+      "max_absolute_voltage": 226.868
+    },
+    {
+      "subject": "co2a0000428",
+      "group_code": "a",
+      "archive_sha256": "d733d946166455168dfe62d1697ebd44276ea08f8716d08b3749db239c0e0266",
+      "archive_bytes": 4829622,
+      "trial_files": 79,
+      "valid_trials": 78,
+      "condition_counts": [
+        39,
+        19,
+        20
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1277952,
+      "clipped_counts": [
+        4270,
+        87,
+        0
+      ],
+      "max_absolute_voltage": 150.116
+    },
+    {
+      "subject": "co2a0000429",
+      "group_code": "a",
+      "archive_sha256": "58665861b2d5dc9fdd47a70bde5fbcc47e076df5a9c49b24dae0bde4449cca91",
+      "archive_bytes": 3878980,
+      "trial_files": 59,
+      "valid_trials": 59,
+      "condition_counts": [
+        29,
+        15,
+        15
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 966656,
+      "clipped_counts": [
+        4808,
+        435,
+        0
+      ],
+      "max_absolute_voltage": 192.81
+    },
+    {
+      "subject": "co2a0000430",
+      "group_code": "a",
+      "archive_sha256": "24be18d6babcbc6e031f3402c4e7b5bf73750df2df1f0097709f7e70ec963a30",
+      "archive_bytes": 7108609,
+      "trial_files": 108,
+      "valid_trials": 108,
+      "condition_counts": [
+        55,
+        26,
+        27
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1769472,
+      "clipped_counts": [
+        4729,
+        59,
+        0
+      ],
+      "max_absolute_voltage": 148.621
+    },
+    {
+      "subject": "co2a0000432",
+      "group_code": "a",
+      "archive_sha256": "c85ef08ac1aa40ff79e6cec71121380638aad0cd8280ea94d55d519e8b49f1bf",
+      "archive_bytes": 6197042,
+      "trial_files": 104,
+      "valid_trials": 100,
+      "condition_counts": [
+        52,
+        25,
+        23
+      ],
+      "excluded_trials": {
+        "error_flag": 4
+      },
+      "eligible": true,
+      "voltage_values": 1638400,
+      "clipped_counts": [
+        216,
+        0,
+        0
+      ],
+      "max_absolute_voltage": 79.427
+    },
+    {
+      "subject": "co2a0000433",
+      "group_code": "a",
+      "archive_sha256": "3990e277b8d3fda7a2045315caabe1f7e96f476d4b2d76e9f3f8c7154336e65c",
+      "archive_bytes": 5418836,
+      "trial_files": 81,
+      "valid_trials": 76,
+      "condition_counts": [
+        47,
+        14,
+        15
+      ],
+      "excluded_trials": {
+        "error_flag": 5
+      },
+      "eligible": true,
+      "voltage_values": 1245184,
+      "clipped_counts": [
+        5078,
+        1688,
+        418
+      ],
+      "max_absolute_voltage": 550.405
+    },
+    {
+      "subject": "co2a0000434",
+      "group_code": "a",
+      "archive_sha256": "5e4460ce64509c32711cd65ac08496f2f2ac1571f08540e6cfd5e7e244ca93f2",
+      "archive_bytes": 4786539,
+      "trial_files": 74,
+      "valid_trials": 73,
+      "condition_counts": [
+        38,
+        17,
+        18
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1196032,
+      "clipped_counts": [
+        10470,
+        962,
+        0
+      ],
+      "max_absolute_voltage": 190.979
+    },
+    {
+      "subject": "co2a0000435",
+      "group_code": "a",
+      "archive_sha256": "e6875fd480e2d05e31fb3e532fc6ce0dd594cda7e1917adc1b2915b400876c1d",
+      "archive_bytes": 5255541,
+      "trial_files": 79,
+      "valid_trials": 78,
+      "condition_counts": [
+        39,
+        20,
+        19
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1277952,
+      "clipped_counts": [
+        15234,
+        10,
+        0
+      ],
+      "max_absolute_voltage": 124.054
+    },
+    {
+      "subject": "co2a0000436",
+      "group_code": "a",
+      "archive_sha256": "627e6a0a09319f42673434482c7721a99ee6f7a86f382c90e72831b17b620b35",
+      "archive_bytes": 7342505,
+      "trial_files": 109,
+      "valid_trials": 109,
+      "condition_counts": [
+        52,
+        28,
+        29
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1785856,
+      "clipped_counts": [
+        2119,
+        448,
+        0
+      ],
+      "max_absolute_voltage": 178.101
+    },
+    {
+      "subject": "co2a0000437",
+      "group_code": "a",
+      "archive_sha256": "c25e625c51f3a2b0c9afd394b27cd4b15130eb7c12ac23325f397554c47d43be",
+      "archive_bytes": 7166432,
+      "trial_files": 111,
+      "valid_trials": 111,
+      "condition_counts": [
+        53,
+        29,
+        29
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1818624,
+      "clipped_counts": [
+        15078,
+        973,
+        128
+      ],
+      "max_absolute_voltage": 437.785
+    },
+    {
+      "subject": "co2a0000438",
+      "group_code": "a",
+      "archive_sha256": "453d22197cd0144654b1153a284cb0d7a384fbf5e1845048b99a942fc8a00c8c",
+      "archive_bytes": 6594427,
+      "trial_files": 101,
+      "valid_trials": 101,
+      "condition_counts": [
+        54,
+        24,
+        23
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1654784,
+      "clipped_counts": [
+        9875,
+        1793,
+        429
+      ],
+      "max_absolute_voltage": 315.959
+    },
+    {
+      "subject": "co2a0000439",
+      "group_code": "a",
+      "archive_sha256": "785db6fb28b8ca1e66e6971cbdae7d5ee0d0a05a5211b6c3e442ffa97b996fbe",
+      "archive_bytes": 6794126,
+      "trial_files": 102,
+      "valid_trials": 99,
+      "condition_counts": [
+        48,
+        25,
+        26
+      ],
+      "excluded_trials": {
+        "error_flag": 3
+      },
+      "eligible": true,
+      "voltage_values": 1622016,
+      "clipped_counts": [
+        709,
+        9,
+        0
+      ],
+      "max_absolute_voltage": 179.565
+    },
+    {
+      "subject": "co2a0000440",
+      "group_code": "a",
+      "archive_sha256": "c5e495e1a0b64b7086b784489bd0818434e1045bc7ed48b1d12b793cc94861a4",
+      "archive_bytes": 5983649,
+      "trial_files": 92,
+      "valid_trials": 92,
+      "condition_counts": [
+        46,
+        25,
+        21
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1507328,
+      "clipped_counts": [
+        3971,
+        542,
+        238
+      ],
+      "max_absolute_voltage": 500.885
+    },
+    {
+      "subject": "co2a0000443",
+      "group_code": "a",
+      "archive_sha256": "579efd630150e777f57e3e7b6d2c52979f415228859b08c417a995509614c3b9",
+      "archive_bytes": 5472450,
+      "trial_files": 83,
+      "valid_trials": 83,
+      "condition_counts": [
+        44,
+        24,
+        15
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1359872,
+      "clipped_counts": [
+        4967,
+        815,
+        24
+      ],
+      "max_absolute_voltage": 231.669
+    },
+    {
+      "subject": "co2a0000444",
+      "group_code": "a",
+      "archive_sha256": "81019aefb729b0e58c7e0ed242c0d19ec20355241488509bd0619dd5571eb15c",
+      "archive_bytes": 5386816,
+      "trial_files": 80,
+      "valid_trials": 80,
+      "condition_counts": [
+        42,
+        24,
+        14
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1310720,
+      "clipped_counts": [
+        2491,
+        146,
+        14
+      ],
+      "max_absolute_voltage": 257.629
+    },
+    {
+      "subject": "co2a0000445",
+      "group_code": "a",
+      "archive_sha256": "79d7997c46927299ff6961538ac2a0f7aeff8b9787eff207c2a62deb7f0c20d2",
+      "archive_bytes": 6359501,
+      "trial_files": 100,
+      "valid_trials": 100,
+      "condition_counts": [
+        53,
+        25,
+        22
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1638400,
+      "clipped_counts": [
+        2780,
+        290,
+        0
+      ],
+      "max_absolute_voltage": 196.594
+    },
+    {
+      "subject": "co2a0000447",
+      "group_code": "a",
+      "archive_sha256": "c8adaff4be4814f2a9da0a39da19a07856f0b3fb1fc51484c20eacc25ee222c8",
+      "archive_bytes": 6164843,
+      "trial_files": 93,
+      "valid_trials": 92,
+      "condition_counts": [
+        43,
+        28,
+        21
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1507328,
+      "clipped_counts": [
+        1163,
+        390,
+        93
+      ],
+      "max_absolute_voltage": 381.063
+    },
+    {
+      "subject": "co2c0000337",
+      "group_code": "c",
+      "archive_sha256": "b16d3494acfc6522b8543784097ce900aacfe06ad0ad41352cb3a227c686bf88",
+      "archive_bytes": 5218007,
+      "trial_files": 78,
+      "valid_trials": 78,
+      "condition_counts": [
+        40,
+        23,
+        15
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1277952,
+      "clipped_counts": [
+        2052,
+        557,
+        54
+      ],
+      "max_absolute_voltage": 278.687
+    },
+    {
+      "subject": "co2c0000338",
+      "group_code": "c",
+      "archive_sha256": "d62d88e8007d138d05fc8c532514a557f13c837a736c0c602fb65b1cf03e41da",
+      "archive_bytes": 6809629,
+      "trial_files": 104,
+      "valid_trials": 104,
+      "condition_counts": [
+        54,
+        27,
+        23
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1703936,
+      "clipped_counts": [
+        1645,
+        23,
+        0
+      ],
+      "max_absolute_voltage": 138.133
+    },
+    {
+      "subject": "co2c0000339",
+      "group_code": "c",
+      "archive_sha256": "1ff86fdae4fda167d6b2224ffab776345258990807828c8242c90c866f959fdc",
+      "archive_bytes": 5006030,
+      "trial_files": 81,
+      "valid_trials": 81,
+      "condition_counts": [
+        39,
+        19,
+        23
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1327104,
+      "clipped_counts": [
+        1393,
+        180,
+        12
+      ],
+      "max_absolute_voltage": 219.32
+    },
+    {
+      "subject": "co2c0000340",
+      "group_code": "c",
+      "archive_sha256": "20e3e828154df561f19b0cac75b42d502ea842a33f06ba15025cf8ea7a3ce5c4",
+      "archive_bytes": 5711355,
+      "trial_files": 83,
+      "valid_trials": 83,
+      "condition_counts": [
+        54,
+        12,
+        17
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1359872,
+      "clipped_counts": [
+        2766,
+        493,
+        80
+      ],
+      "max_absolute_voltage": 346.12
+    },
+    {
+      "subject": "co2c0000341",
+      "group_code": "c",
+      "archive_sha256": "b848449aee39447c5a04731c263869c1c2c53682824f5982d431954334d6bd0c",
+      "archive_bytes": 6416007,
+      "trial_files": 99,
+      "valid_trials": 96,
+      "condition_counts": [
+        51,
+        20,
+        25
+      ],
+      "excluded_trials": {
+        "error_flag": 3
+      },
+      "eligible": true,
+      "voltage_values": 1572864,
+      "clipped_counts": [
+        4905,
+        1014,
+        83
+      ],
+      "max_absolute_voltage": 277.12
+    },
+    {
+      "subject": "co2c0000342",
+      "group_code": "c",
+      "archive_sha256": "56323c7ad256d052c73cabc9499648b00ccdf28766dd66777989c095b285fa63",
+      "archive_bytes": 7407027,
+      "trial_files": 115,
+      "valid_trials": 114,
+      "condition_counts": [
+        56,
+        28,
+        30
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1867776,
+      "clipped_counts": [
+        1664,
+        480,
+        114
+      ],
+      "max_absolute_voltage": 453.847
+    },
+    {
+      "subject": "co2c0000344",
+      "group_code": "c",
+      "archive_sha256": "7ad1d37222157b1eebd12f1e8fafca54b21fff09a8936aef6d436e3ec1d13a52",
+      "archive_bytes": 6026080,
+      "trial_files": 93,
+      "valid_trials": 93,
+      "condition_counts": [
+        50,
+        20,
+        23
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1523712,
+      "clipped_counts": [
+        2040,
+        500,
+        27
+      ],
+      "max_absolute_voltage": 247.426
+    },
+    {
+      "subject": "co2c0000345",
+      "group_code": "c",
+      "archive_sha256": "495a57eb207d49a6f598ba82ac2a46dfeefdd96a9043edab7a392fd04000319d",
+      "archive_bytes": 7654883,
+      "trial_files": 112,
+      "valid_trials": 111,
+      "condition_counts": [
+        55,
+        27,
+        29
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1818624,
+      "clipped_counts": [
+        1589,
+        31,
+        0
+      ],
+      "max_absolute_voltage": 108.042
+    },
+    {
+      "subject": "co2c0000346",
+      "group_code": "c",
+      "archive_sha256": "b2e970f2fd2f6220db31737b5e1ac71ff2054187b3fefd27203a11900e1f03b2",
+      "archive_bytes": 7216477,
+      "trial_files": 112,
+      "valid_trials": 111,
+      "condition_counts": [
+        53,
+        30,
+        28
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1818624,
+      "clipped_counts": [
+        635,
+        46,
+        0
+      ],
+      "max_absolute_voltage": 150.97
+    },
+    {
+      "subject": "co2c0000347",
+      "group_code": "c",
+      "archive_sha256": "c0424d50f1d7e3520855826d445689297837c0dbe472c8a02a4dbc2c99d12a29",
+      "archive_bytes": 5878669,
+      "trial_files": 89,
+      "valid_trials": 89,
+      "condition_counts": [
+        46,
+        21,
+        22
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1458176,
+      "clipped_counts": [
+        3062,
+        580,
+        21
+      ],
+      "max_absolute_voltage": 248.067
+    },
+    {
+      "subject": "co2c0000348",
+      "group_code": "c",
+      "archive_sha256": "7aee98cef8dfdd2581f6bce9b5ba72f9cf9e95597c2be7635bd3ded752229a3e",
+      "archive_bytes": 5033808,
+      "trial_files": 73,
+      "valid_trials": 71,
+      "condition_counts": [
+        36,
+        22,
+        13
+      ],
+      "excluded_trials": {
+        "error_flag": 2
+      },
+      "eligible": true,
+      "voltage_values": 1163264,
+      "clipped_counts": [
+        3136,
+        468,
+        164
+      ],
+      "max_absolute_voltage": 382.212
+    },
+    {
+      "subject": "co2c0000351",
+      "group_code": "c",
+      "archive_sha256": "6bd56b6dcef486d131e22e8066e71a0923f95640854aecf54a7286489f664009",
+      "archive_bytes": 6560546,
+      "trial_files": 92,
+      "valid_trials": 92,
+      "condition_counts": [
+        50,
+        18,
+        24
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1507328,
+      "clipped_counts": [
+        7871,
+        422,
+        0
+      ],
+      "max_absolute_voltage": 194.997
+    },
+    {
+      "subject": "co2c0000352",
+      "group_code": "c",
+      "archive_sha256": "a7bbd810d4723af9c16df4e227ae481d3e039cfc1ddc5824d2b14fcd51056492",
+      "archive_bytes": 4141828,
+      "trial_files": 61,
+      "valid_trials": 61,
+      "condition_counts": [
+        17,
+        27,
+        17
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 999424,
+      "clipped_counts": [
+        6111,
+        959,
+        30
+      ],
+      "max_absolute_voltage": 305.145
+    },
+    {
+      "subject": "co2c0000354",
+      "group_code": "c",
+      "archive_sha256": "d780b4cfe347b3c6427cc1cdb9e76024127e9211745b7e6bdb5fe9147baa3ce8",
+      "archive_bytes": 6061121,
+      "trial_files": 92,
+      "valid_trials": 91,
+      "condition_counts": [
+        47,
+        19,
+        25
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1490944,
+      "clipped_counts": [
+        8902,
+        864,
+        33
+      ],
+      "max_absolute_voltage": 233.521
+    },
+    {
+      "subject": "co2c0000355",
+      "group_code": "c",
+      "archive_sha256": "7df915f4e23512508cea66c8c9b048e43aa961c097b81c8a478a4c489b58069b",
+      "archive_bytes": 4687347,
+      "trial_files": 67,
+      "valid_trials": 67,
+      "condition_counts": [
+        37,
+        15,
+        15
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1097728,
+      "clipped_counts": [
+        4737,
+        563,
+        78
+      ],
+      "max_absolute_voltage": 472.27
+    },
+    {
+      "subject": "co2c0000356",
+      "group_code": "c",
+      "archive_sha256": "2212621b1960e9922fb17ba3e7ec8157917c7f981d3167d902a92e3d8b28812b",
+      "archive_bytes": 6451124,
+      "trial_files": 99,
+      "valid_trials": 98,
+      "condition_counts": [
+        49,
+        27,
+        22
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1605632,
+      "clipped_counts": [
+        2096,
+        139,
+        0
+      ],
+      "max_absolute_voltage": 157.227
+    },
+    {
+      "subject": "co2c0000357",
+      "group_code": "c",
+      "archive_sha256": "a79c21a4b38dd9c8a7d6f7b74545d84f7a7d682ad523205b06d2151743ee8414",
+      "archive_bytes": 5800761,
+      "trial_files": 88,
+      "valid_trials": 88,
+      "condition_counts": [
+        41,
+        24,
+        23
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1441792,
+      "clipped_counts": [
+        6032,
+        428,
+        118
+      ],
+      "max_absolute_voltage": 509.186
+    },
+    {
+      "subject": "co2c0000359",
+      "group_code": "c",
+      "archive_sha256": "16ff8813247f78c1acbac2e9d6c46c0128f78e057490b5b6de09c1595793434d",
+      "archive_bytes": 4816657,
+      "trial_files": 69,
+      "valid_trials": 69,
+      "condition_counts": [
+        33,
+        18,
+        18
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1130496,
+      "clipped_counts": [
+        8663,
+        847,
+        126
+      ],
+      "max_absolute_voltage": 283.986
+    },
+    {
+      "subject": "co2c0000362",
+      "group_code": "c",
+      "archive_sha256": "1cbfdcbecbef8e4f1f2143f8b4d462d72702ee011fbacf2ca01bcd6ebd32d2c0",
+      "archive_bytes": 6124204,
+      "trial_files": 83,
+      "valid_trials": 82,
+      "condition_counts": [
+        45,
+        18,
+        19
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1343488,
+      "clipped_counts": [
+        29805,
+        9469,
+        4417
+      ],
+      "max_absolute_voltage": 680.125
+    },
+    {
+      "subject": "co2c0000363",
+      "group_code": "c",
+      "archive_sha256": "59bedf8913cbf4e32be9e3c713b714ce0442402c03180dc9c6f16549b6cbc574",
+      "archive_bytes": 6777475,
+      "trial_files": 110,
+      "valid_trials": 110,
+      "condition_counts": [
+        55,
+        27,
+        28
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1802240,
+      "clipped_counts": [
+        8759,
+        13,
+        0
+      ],
+      "max_absolute_voltage": 109.182
+    },
+    {
+      "subject": "co2c0000364",
+      "group_code": "c",
+      "archive_sha256": "ec3601c28bafb10a41a65c272fbd7fd096c188957ebd248a6d30b1729351683a",
+      "archive_bytes": 6068141,
+      "trial_files": 98,
+      "valid_trials": 98,
+      "condition_counts": [
+        47,
+        24,
+        27
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1605632,
+      "clipped_counts": [
+        2060,
+        297,
+        20
+      ],
+      "max_absolute_voltage": 216.553
+    },
+    {
+      "subject": "co2c0000367",
+      "group_code": "c",
+      "archive_sha256": "d99a3c3198e0bc16ca2d73329d614ab776d5814b02e80a4b1ada8ac7a5a26b10",
+      "archive_bytes": 6927759,
+      "trial_files": 102,
+      "valid_trials": 102,
+      "condition_counts": [
+        51,
+        26,
+        25
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1671168,
+      "clipped_counts": [
+        4500,
+        60,
+        0
+      ],
+      "max_absolute_voltage": 164.998
+    },
+    {
+      "subject": "co2c0000370",
+      "group_code": "c",
+      "archive_sha256": "ec3c7a8e72a4cf0db8c875527e9f32f1335e54bf9dadd4c7a08baf8491706e21",
+      "archive_bytes": 7294994,
+      "trial_files": 107,
+      "valid_trials": 107,
+      "condition_counts": [
+        56,
+        27,
+        24
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1753088,
+      "clipped_counts": [
+        7607,
+        2928,
+        1188
+      ],
+      "max_absolute_voltage": 528.514
+    },
+    {
+      "subject": "co2c0000371",
+      "group_code": "c",
+      "archive_sha256": "c21540e0406e0ef6f1d90ea7162bfd8c7f4a6afb484f144f681fc23a99c87908",
+      "archive_bytes": 4258313,
+      "trial_files": 59,
+      "valid_trials": 59,
+      "condition_counts": [
+        33,
+        16,
+        10
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 966656,
+      "clipped_counts": [
+        4683,
+        79,
+        0
+      ],
+      "max_absolute_voltage": 149.923
+    },
+    {
+      "subject": "co2c0000373",
+      "group_code": "c",
+      "archive_sha256": "d18dee1cf12dd688bbd48b9f0d9c834c24437cec3c085c76fba3c1e0343be08a",
+      "archive_bytes": 4270335,
+      "trial_files": 60,
+      "valid_trials": 60,
+      "condition_counts": [
+        37,
+        12,
+        11
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 983040,
+      "clipped_counts": [
+        6813,
+        1413,
+        156
+      ],
+      "max_absolute_voltage": 286.489
+    },
+    {
+      "subject": "co2c0000374",
+      "group_code": "c",
+      "archive_sha256": "819bec4d89eb5e67d37740dc65a9dbc02913bcf3a74ebc89402213df1eb21159",
+      "archive_bytes": 6946441,
+      "trial_files": 106,
+      "valid_trials": 106,
+      "condition_counts": [
+        51,
+        28,
+        27
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1736704,
+      "clipped_counts": [
+        1499,
+        23,
+        0
+      ],
+      "max_absolute_voltage": 117.218
+    },
+    {
+      "subject": "co2c0000378",
+      "group_code": "c",
+      "archive_sha256": "98960a694ba56d756edaba58a932f9574b33fb7377310f557f817725dad966ce",
+      "archive_bytes": 5288876,
+      "trial_files": 78,
+      "valid_trials": 78,
+      "condition_counts": [
+        43,
+        15,
+        20
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1277952,
+      "clipped_counts": [
+        3243,
+        546,
+        13
+      ],
+      "max_absolute_voltage": 280.029
+    },
+    {
+      "subject": "co2c0000379",
+      "group_code": "c",
+      "archive_sha256": "cad43fa4c2a15c003ce42a5fa71b6fdd734fb7ce164c53cfb0cb01fa6fe35e22",
+      "archive_bytes": 5778206,
+      "trial_files": 100,
+      "valid_trials": 98,
+      "condition_counts": [
+        50,
+        24,
+        24
+      ],
+      "excluded_trials": {
+        "error_flag": 2
+      },
+      "eligible": true,
+      "voltage_values": 1605632,
+      "clipped_counts": [
+        416,
+        0,
+        0
+      ],
+      "max_absolute_voltage": 80.861
+    },
+    {
+      "subject": "co2c0000381",
+      "group_code": "c",
+      "archive_sha256": "9a05f54b14a82415ec8ded90a29954ec9aa7afb49da1212cf6bc371005ba4fa9",
+      "archive_bytes": 6817403,
+      "trial_files": 102,
+      "valid_trials": 101,
+      "condition_counts": [
+        52,
+        25,
+        24
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1654784,
+      "clipped_counts": [
+        2766,
+        743,
+        111
+      ],
+      "max_absolute_voltage": 386.576
+    },
+    {
+      "subject": "co2c0000382",
+      "group_code": "c",
+      "archive_sha256": "de76195a2c2182883c1471b63d2ba48d8add8087c1eb1366e54bcd889441c2ea",
+      "archive_bytes": 7493339,
+      "trial_files": 109,
+      "valid_trials": 109,
+      "condition_counts": [
+        54,
+        28,
+        27
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1785856,
+      "clipped_counts": [
+        3186,
+        427,
+        11
+      ],
+      "max_absolute_voltage": 206.523
+    },
+    {
+      "subject": "co2c0000383",
+      "group_code": "c",
+      "archive_sha256": "0de2b8c12fc3e32de324d96c64c9c5b3b737503728cd8f7623d87f1a4baa4f37",
+      "archive_bytes": 6989555,
+      "trial_files": 105,
+      "valid_trials": 104,
+      "condition_counts": [
+        49,
+        29,
+        26
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1703936,
+      "clipped_counts": [
+        2724,
+        217,
+        144
+      ],
+      "max_absolute_voltage": 238.464
+    },
+    {
+      "subject": "co2c0000384",
+      "group_code": "c",
+      "archive_sha256": "baaf272377e17e271e1f285d2a8b524965df50a3270e8918d69f0c89c9e490b6",
+      "archive_bytes": 5773681,
+      "trial_files": 88,
+      "valid_trials": 88,
+      "condition_counts": [
+        42,
+        22,
+        24
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1441792,
+      "clipped_counts": [
+        3409,
+        757,
+        101
+      ],
+      "max_absolute_voltage": 325.073
+    },
+    {
+      "subject": "co2c0000387",
+      "group_code": "c",
+      "archive_sha256": "2b283bbdfed99f8ca047417d1146bda6b7b2a2d06d8413a6b7238bb79ad86c93",
+      "archive_bytes": 6416469,
+      "trial_files": 98,
+      "valid_trials": 98,
+      "condition_counts": [
+        53,
+        23,
+        22
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1605632,
+      "clipped_counts": [
+        2699,
+        1088,
+        447
+      ],
+      "max_absolute_voltage": 528.585
+    },
+    {
+      "subject": "co2c0000388",
+      "group_code": "c",
+      "archive_sha256": "c9937708e6b7cb7ec9f318c110dc78f32cc0062ee8af5032f56aa77d5d4cd7e5",
+      "archive_bytes": 4441664,
+      "trial_files": 66,
+      "valid_trials": 66,
+      "condition_counts": [
+        24,
+        24,
+        18
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1081344,
+      "clipped_counts": [
+        2519,
+        149,
+        0
+      ],
+      "max_absolute_voltage": 171.356
+    },
+    {
+      "subject": "co2c0000389",
+      "group_code": "c",
+      "archive_sha256": "3aa801058fa731a2863e8a7e1f59ad5a4d5fd1efa89c7db37749452bc342a06d",
+      "archive_bytes": 6664395,
+      "trial_files": 99,
+      "valid_trials": 99,
+      "condition_counts": [
+        51,
+        23,
+        25
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1622016,
+      "clipped_counts": [
+        2435,
+        173,
+        0
+      ],
+      "max_absolute_voltage": 154.48
+    },
+    {
+      "subject": "co2c0000390",
+      "group_code": "c",
+      "archive_sha256": "c24fbc8ddc2d95acc1e9a66fa2793c4e9b5c05d9b4abe20475b479131b93c689",
+      "archive_bytes": 3916287,
+      "trial_files": 59,
+      "valid_trials": 58,
+      "condition_counts": [
+        18,
+        19,
+        21
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 950272,
+      "clipped_counts": [
+        11081,
+        3254,
+        581
+      ],
+      "max_absolute_voltage": 401.581
+    },
+    {
+      "subject": "co2c0000391",
+      "group_code": "c",
+      "archive_sha256": "6fe95626fa0abf5cbf4e6dae7a8dce61068302c54993a21084636a7e30fcf577",
+      "archive_bytes": 2725510,
+      "trial_files": 41,
+      "valid_trials": 41,
+      "condition_counts": [
+        12,
+        11,
+        18
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 671744,
+      "clipped_counts": [
+        5338,
+        1303,
+        437
+      ],
+      "max_absolute_voltage": 400.92
+    },
+    {
+      "subject": "co2c0000392",
+      "group_code": "c",
+      "archive_sha256": "d9658a7b2f3c819b4d5ceaffdc1cc99235dcf1fa170ee6bf15b1d4c850c3e01c",
+      "archive_bytes": 6599201,
+      "trial_files": 99,
+      "valid_trials": 99,
+      "condition_counts": [
+        51,
+        24,
+        24
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1622016,
+      "clipped_counts": [
+        11230,
+        3000,
+        304
+      ],
+      "max_absolute_voltage": 326.904
+    },
+    {
+      "subject": "co2c0000393",
+      "group_code": "c",
+      "archive_sha256": "aac03875af61c2790cc76c6153e499fcd3739c45aa75a2fbd204d46bfc770d8f",
+      "archive_bytes": 7187412,
+      "trial_files": 109,
+      "valid_trials": 109,
+      "condition_counts": [
+        50,
+        29,
+        30
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1785856,
+      "clipped_counts": [
+        2589,
+        873,
+        195
+      ],
+      "max_absolute_voltage": 410.492
+    },
+    {
+      "subject": "co2c0000394",
+      "group_code": "c",
+      "archive_sha256": "f37bb8e0c9608dddbece83289c02847ce59517c5b2e35e63dccac7d469155fd1",
+      "archive_bytes": 5946042,
+      "trial_files": 85,
+      "valid_trials": 85,
+      "condition_counts": [
+        48,
+        18,
+        19
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1392640,
+      "clipped_counts": [
+        5309,
+        548,
+        78
+      ],
+      "max_absolute_voltage": 272.491
+    },
+    {
+      "subject": "co2c0000395",
+      "group_code": "c",
+      "archive_sha256": "4b26737456704f727c92d35551445d40a5c42875418624f609ad0d775e414d4a",
+      "archive_bytes": 6343710,
+      "trial_files": 104,
+      "valid_trials": 104,
+      "condition_counts": [
+        51,
+        25,
+        28
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1703936,
+      "clipped_counts": [
+        2103,
+        205,
+        17
+      ],
+      "max_absolute_voltage": 226.552
+    },
+    {
+      "subject": "co2c0000396",
+      "group_code": "c",
+      "archive_sha256": "0c89ae101d85b273db895d2f0e0f45b96b2f91191a13cda6ffef22faf366d329",
+      "archive_bytes": 3904232,
+      "trial_files": 57,
+      "valid_trials": 57,
+      "condition_counts": [
+        28,
+        18,
+        11
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 933888,
+      "clipped_counts": [
+        6087,
+        1244,
+        626
+      ],
+      "max_absolute_voltage": 700.114
+    },
+    {
+      "subject": "co2c0000397",
+      "group_code": "c",
+      "archive_sha256": "c01fd3754504f36e5a29f5878b982a63e47cfcf3ff42ec6c8b7d1b44c0e7858f",
+      "archive_bytes": 5227945,
+      "trial_files": 79,
+      "valid_trials": 78,
+      "condition_counts": [
+        44,
+        18,
+        16
+      ],
+      "excluded_trials": {
+        "error_flag": 1
+      },
+      "eligible": true,
+      "voltage_values": 1277952,
+      "clipped_counts": [
+        2750,
+        311,
+        0
+      ],
+      "max_absolute_voltage": 164.571
+    },
+    {
+      "subject": "co2c1000367",
+      "group_code": "c",
+      "archive_sha256": "ec244716a64f31b6ec5c5787357c09d2987c6a79a62f1650df4e6c3abd98776f",
+      "archive_bytes": 6839911,
+      "trial_files": 120,
+      "valid_trials": 103,
+      "condition_counts": [
+        53,
+        24,
+        26
+      ],
+      "excluded_trials": {
+        "unknown_condition": 17
+      },
+      "eligible": true,
+      "voltage_values": 1687552,
+      "clipped_counts": [
+        9493,
+        163,
+        12
+      ],
+      "max_absolute_voltage": 232.259
+    },
+    {
+      "subject": "co3a0000448",
+      "group_code": "a",
+      "archive_sha256": "07da11c76b3103c121cc80b316e9c7973e78af4e4f245704a44a72368a68a5ad",
+      "archive_bytes": 4121348,
+      "trial_files": 66,
+      "valid_trials": 66,
+      "condition_counts": [
+        32,
+        20,
+        14
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1081344,
+      "clipped_counts": [
+        1421,
+        380,
+        28
+      ],
+      "max_absolute_voltage": 323.364
+    },
+    {
+      "subject": "co3a0000450",
+      "group_code": "a",
+      "archive_sha256": "220cca1b7f947d60637668d45caaa47a9b4797a57b9cca1919bfd2860db7734c",
+      "archive_bytes": 7879187,
+      "trial_files": 119,
+      "valid_trials": 119,
+      "condition_counts": [
+        60,
+        29,
+        30
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1949696,
+      "clipped_counts": [
+        680,
+        22,
+        0
+      ],
+      "max_absolute_voltage": 183.685
+    },
+    {
+      "subject": "co3a0000451",
+      "group_code": "a",
+      "archive_sha256": "01f418ffcd1c9d29b74145914cbda16bf1ac085296845dc640cad3f608459687",
+      "archive_bytes": 6941372,
+      "trial_files": 117,
+      "valid_trials": 117,
+      "condition_counts": [
+        60,
+        28,
+        29
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1916928,
+      "clipped_counts": [
+        242,
+        50,
+        0
+      ],
+      "max_absolute_voltage": 169.698
+    },
+    {
+      "subject": "co3a0000453",
+      "group_code": "a",
+      "archive_sha256": "91fe04ca52f8ebe418f7264a2392cb321fe3241cde60436f518609abcc71612a",
+      "archive_bytes": 5365033,
+      "trial_files": 86,
+      "valid_trials": 86,
+      "condition_counts": [
+        48,
+        18,
+        20
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1409024,
+      "clipped_counts": [
+        1788,
+        68,
+        0
+      ],
+      "max_absolute_voltage": 150.35
+    },
+    {
+      "subject": "co3a0000454",
+      "group_code": "a",
+      "archive_sha256": "f0772635004db82c0d7be91151ee55dff01ff89a18ff0ace209e72e524237f4c",
+      "archive_bytes": 4336415,
+      "trial_files": 68,
+      "valid_trials": 68,
+      "condition_counts": [
+        40,
+        13,
+        15
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1114112,
+      "clipped_counts": [
+        6320,
+        1033,
+        13
+      ],
+      "max_absolute_voltage": 211.568
+    },
+    {
+      "subject": "co3a0000455",
+      "group_code": "a",
+      "archive_sha256": "4aab58b76daa1a7c87db813e2625a0388c052e1a95dd8ec27d2268e882d42cbf",
+      "archive_bytes": 3950473,
+      "trial_files": 58,
+      "valid_trials": 58,
+      "condition_counts": [
+        27,
+        16,
+        15
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 950272,
+      "clipped_counts": [
+        7142,
+        1725,
+        109
+      ],
+      "max_absolute_voltage": 292.969
+    },
+    {
+      "subject": "co3a0000456",
+      "group_code": "a",
+      "archive_sha256": "3da974cd64c9b8e3c3aabecde1379111b0ad04a85619b219d77397a4a6599564",
+      "archive_bytes": 5471398,
+      "trial_files": 80,
+      "valid_trials": 80,
+      "condition_counts": [
+        40,
+        18,
+        22
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1310720,
+      "clipped_counts": [
+        13723,
+        2484,
+        716
+      ],
+      "max_absolute_voltage": 392.456
+    },
+    {
+      "subject": "co3a0000457",
+      "group_code": "a",
+      "archive_sha256": "e45e3cf11ced0ac67284259fad3a17360d1c02613183728994322039b982e546",
+      "archive_bytes": 4666381,
+      "trial_files": 71,
+      "valid_trials": 71,
+      "condition_counts": [
+        33,
+        15,
+        23
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1163264,
+      "clipped_counts": [
+        8968,
+        1041,
+        117
+      ],
+      "max_absolute_voltage": 340.8
+    },
+    {
+      "subject": "co3a0000458",
+      "group_code": "a",
+      "archive_sha256": "c90d8827c8cc4eee28f4c3afe9989664c0564ad5204d9e79568ef3f31a83a8cb",
+      "archive_bytes": 6641105,
+      "trial_files": 101,
+      "valid_trials": 101,
+      "condition_counts": [
+        47,
+        27,
+        27
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1654784,
+      "clipped_counts": [
+        2217,
+        465,
+        67
+      ],
+      "max_absolute_voltage": 229.584
+    },
+    {
+      "subject": "co3a0000459",
+      "group_code": "a",
+      "archive_sha256": "42cf5be14b2fd1c435bd61e1b4ec1afb97df852c19e461460c68a1937be4c255",
+      "archive_bytes": 6401939,
+      "trial_files": 98,
+      "valid_trials": 98,
+      "condition_counts": [
+        53,
+        20,
+        25
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1605632,
+      "clipped_counts": [
+        1181,
+        258,
+        14
+      ],
+      "max_absolute_voltage": 236.165
+    },
+    {
+      "subject": "co3a0000460",
+      "group_code": "a",
+      "archive_sha256": "e24a4f8bdcd3ab72cd32768495f1f64132fc0e7bcc25427891add986aadc08f4",
+      "archive_bytes": 7162480,
+      "trial_files": 116,
+      "valid_trials": 116,
+      "condition_counts": [
+        59,
+        30,
+        27
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1900544,
+      "clipped_counts": [
+        709,
+        43,
+        13
+      ],
+      "max_absolute_voltage": 255.3
+    },
+    {
+      "subject": "co3a0000461",
+      "group_code": "a",
+      "archive_sha256": "6a47581ce8b5722b34b4b3326480c023882bd6698f9a74454c3f8768454c6572",
+      "archive_bytes": 4492855,
+      "trial_files": 71,
+      "valid_trials": 71,
+      "condition_counts": [
+        13,
+        29,
+        29
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1163264,
+      "clipped_counts": [
+        5180,
+        1184,
+        224
+      ],
+      "max_absolute_voltage": 371.541
+    },
+    {
+      "subject": "co3c0000402",
+      "group_code": "c",
+      "archive_sha256": "1d1186afe8fb0d8a839fcd7113f034f7ab0f07df537a9e7fd1296f924504ae63",
+      "archive_bytes": 6649598,
+      "trial_files": 111,
+      "valid_trials": 111,
+      "condition_counts": [
+        54,
+        30,
+        27
+      ],
+      "excluded_trials": {},
+      "eligible": true,
+      "voltage_values": 1818624,
+      "clipped_counts": [
+        2082,
+        395,
+        46
+      ],
+      "max_absolute_voltage": 459.768
+    }
+  ],
+  "processing_seconds": 99.768715875,
+  "eligible_subjects": 122,
+  "trial_file_count": 11074,
+  "trial_status_counts": {
+    "included": 10962,
+    "error_flag": 95,
+    "unknown_condition": 17
+  }
+}

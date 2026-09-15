@@ -1,0 +1,628 @@
+Work on the review
+Assume you are a senior researcher in statistics, machine learning, theoretical computer science, and scientific writing, with experience revising papers for journals such as JASA, Annals of Statistics, JRSS-B, Biometrika, Bernoulli, NeurIPS, ICML, and COLT.
+A complete scientific review of this paper has already been conducted.
+Your task now is to work through that review systematically and revise the research project and manuscript until all scientifically important concerns have been resolved as far as possible.
+Do not merely summarize the review.
+Do not simply rewrite sentences to make criticisms disappear.
+For each review comment, determine whether the underlying issue requires:
+new theory;
+corrected theory;
+additional proof;
+weaker assumptions;
+a revised theorem;
+a counterexample;
+new simulations;
+additional robustness experiments;
+stronger baselines;
+revised real-data analysis;
+improved interpretation;
+restructuring;
+rewriting;
+clarification;
+or no change because the criticism is not technically valid.
+Review all relevant files in the project folder, including:
+manuscript;
+appendix;
+theorem statements;
+proofs;
+simulation code;
+simulation results;
+real-data analysis;
+figures;
+tables;
+literature review;
+prior novelty assessment;
+full scientific review;
+referee-style reports;
+revision recommendations.
+The objective is to convert the review into a concrete, scientifically rigorous revision of the paper.
+
+1. Read the entire review before modifying the paper
+First reconstruct all issues identified in the review.
+Do not start editing after reading only the first few comments.
+Create a complete issue registry.
+For each issue record:
+| ID | Review concern | Severity | Paper location | Scientific type | Proposed action | Status |
+|---|---|---|---|---|---|
+Use severity levels:
+P0 — Critical
+Potentially affects:
+correctness;
+validity;
+identifiability;
+novelty;
+main theorem;
+main empirical conclusion.
+P1 — Major
+Could plausibly lead to rejection or major revision.
+P2 — Moderate
+Meaningful improvement but does not threaten the core paper.
+P3 — Minor
+Presentation, notation, organization, or polish.
+Work in the order:
+P0→P1→P2→P3.P0 \rightarrow P1 \rightarrow P2 \rightarrow P3.
+2. Separate scientific problems from presentation problems
+For every review comment classify it as one of:
+THEORY
+The mathematical result, assumptions, rate, proof, or interpretation is problematic.
+METHOD
+The estimator/procedure is unclear, incomplete, or theoretically unsupported.
+SIMULATION
+The empirical design does not adequately test the theory.
+REAL DATA
+The application, preprocessing, dependence structure, or interpretation is weak.
+NOVELTY
+The contribution is insufficiently distinguished from prior work.
+WRITING
+The result may be correct but is explained poorly.
+REPRODUCIBILITY
+Important implementation details are missing.
+NOTATION / STRUCTURE
+Presentation problem.
+This classification should determine what type of revision is required.
+
+3. Resolve correctness issues before strengthening the paper
+If the review identifies any possible mathematical error, address it first.
+Do not proceed by merely modifying the exposition.
+For example, if the paper claims
+∥θ^−θ⋆∥=Op(rn),\|\widehat\theta-\theta^\star\| = O_p(r_n),
+verify the proof independently.
+If the proof only establishes
+Op(rn′),rn′>rn,O_p(r'_n), \qquad r'_n>r_n,
+then either:
+prove the stronger result rigorously; or
+revise the theorem and all downstream claims to the correct rate.
+Never preserve a stronger theorem merely because it makes the paper more attractive.
+
+4. Revisit identifiability when flagged
+If the review raises an identifiability problem, address it mathematically.
+Determine whether
+Pθ1=Pθ2P_{\theta_1} = P_{\theta_2}
+can occur for
+θ1≠θ2.\theta_1\neq\theta_2.
+If the model is identifiable only up to an equivalence relation
+θ1∼θ2,\theta_1\sim\theta_2,
+redefine the estimand and loss accordingly.
+Examples include invariance to:
+sign;
+permutation;
+rotation;
+scaling;
+factorization.
+Do not continue proving consistency for a parameter that is not uniquely identifiable.
+
+5. Work through every theorem-related criticism
+For each theorem concern, reconstruct:
+Assumptions→Lemmas→Main Result.\text{Assumptions} \rightarrow \text{Lemmas} \rightarrow \text{Main Result}.
+Determine exactly where the problem occurs.
+Possible actions include:
+Strengthen the proof
+Fill a missing argument.
+Add a lemma
+If an intermediate result is required.
+Strengthen assumptions
+Only when mathematically necessary.
+Weaken assumptions
+If the review correctly identifies unnecessary restrictions.
+Revise the theorem
+If the originally claimed result is too strong.
+Add a lower bound
+If optimality is claimed without justification.
+Add an impossibility result
+If an important boundary of the method can be characterized.
+Add a special-case theorem
+If the general result is too opaque.
+Do not patch a proof locally without checking whether the change propagates to later results.
+
+6. Maintain theorem status labels
+While revising, label each theoretical result internally as:
+PROVED
+Complete proof verified.
+REVISED AND PROVED
+Original theorem changed and new version verified.
+PARTIAL
+Some technical step remains unresolved.
+CONJECTURED
+Plausible but unproved.
+Only PROVED and REVISED AND PROVED results may appear as formal theorems in the final manuscript.
+
+7. Address restrictive assumptions seriously
+If reviewers criticize assumptions, do not respond only with:
+“This assumption is standard.”
+Investigate whether it can be weakened.
+For every important assumption AjA_j, consider whether the theorem still holds under
+Aj′⊃Aj.A_j' \supset A_j.
+Determine which proof step fails when AjA_j is weakened.
+If the assumption cannot reasonably be removed:
+explain precisely why it is needed;
+provide interpretation;
+compare it with assumptions in the closest literature;
+discuss its practical implications;
+examine the consequences when the assumption fails in simulations.
+
+8. Address rate and optimality concerns
+If reviewers question a convergence rate, compare carefully with known theory.
+Suppose our result is
+rnoursr_n^{\text{ours}}
+and existing work achieves
+rnexisting.r_n^{\text{existing}}.
+Determine whether the difference comes from:
+stronger assumptions;
+weaker assumptions;
+different loss;
+different parameter space;
+contamination;
+dependence;
+dimension;
+computational restrictions.
+Avoid misleading comparisons.
+If the rate appears suboptimal, determine whether:
+the proof is loose,
+the estimator is suboptimal,
+or
+the problem itself requires the slower rate.
+If possible, derive or investigate a minimax lower bound.
+
+9. Address novelty concerns through mathematics
+If the review says the contribution appears incremental, do not simply strengthen the wording.
+Re-examine:
+Existing theory⟶Our theory.\text{Existing theory} \quad\longrightarrow\quad \text{Our theory}.
+Make explicit what changes mathematically.
+Examples:
+i.i.d.→dependent observations,\text{i.i.d.} \rightarrow \text{dependent observations}, sub-Gaussian→ϵ-contamination,\text{sub-Gaussian} \rightarrow \epsilon\text{-contamination}, estimation→valid inference,\text{estimation} \rightarrow \text{valid inference}, p=o(n)→p/n→γ,p=o(n) \rightarrow p/n\rightarrow\gamma, known rank→adaptive unknown rank.\text{known rank} \rightarrow \text{adaptive unknown rank}.
+If no substantive distinction survives, do not artificially defend the original claim.
+Recommend and implement a stronger research formulation if feasible.
+
+10. Address simulation criticisms by running new experiments
+If the review identifies missing simulations, design and execute them.
+Do not merely add a sentence saying they are future work if the experiment is important and feasible.
+Examples include:
+convergence-rate validation;
+sample complexity;
+contamination curves;
+dimension scaling;
+rank scaling;
+sparsity scaling;
+type-I error;
+confidence-interval coverage;
+power;
+assumption violations;
+tuning sensitivity;
+ablations;
+stronger baseline comparisons;
+computational scaling.
+Each added experiment should correspond to a specific review concern.
+
+11. Test theory directly when requested by the review
+If the review says the simulations fail to demonstrate the theorem, explicitly connect them.
+For example, if theory predicts
+En≍n−α,E_n \asymp n^{-\alpha},
+run experiments across nn, estimate
+α^,\widehat\alpha,
+and compare
+α^withα.\widehat\alpha \quad\text{with}\quad \alpha.
+If theory predicts
+n≳Cslog⁡p,n\gtrsim Cs\log p,
+study recovery probability against
+nslog⁡p.\frac{n}{s\log p}.
+The revised simulations should make the theoretical predictions visible whenever possible.
+
+12. Investigate empirical results that contradict theory
+If a reviewer identifies a contradiction between simulations and theoretical claims, investigate rather than explain it away.
+Check:
+implementation;
+parameter regime;
+theorem assumptions;
+finite-sample constants;
+tuning;
+numerical optimization;
+theoretical derivation.
+If the discrepancy remains real, revise the theoretical or empirical claim accordingly.
+Do not suppress contradictory results.
+
+13. Strengthen baselines where necessary
+If the review identifies weak or missing competitors, add the strongest relevant alternatives.
+For each baseline ensure:
+proper tuning;
+same data splits;
+same preprocessing;
+comparable information access;
+fair computational budget where relevant.
+If a stronger baseline substantially reduces the claimed empirical advantage, update the manuscript honestly.
+
+14. Address real-data concerns
+For every real-data criticism, determine whether the issue involves:
+inappropriate dataset;
+insufficient sample size;
+data leakage;
+incorrect independence assumptions;
+improper train/test splitting;
+unreported missingness;
+weak baseline selection;
+insufficient uncertainty;
+unsupported interpretation.
+Fix the analysis where possible.
+If repeated observations exist, identify the true sampling unit.
+For example,
+Yij=observation j nested within unit iY_{ij} = \text{observation }j \text{ nested within unit }i
+should not automatically imply
+N=∑imiN=\sum_i m_i
+independent observations.
+
+15. If necessary, add a better real-data example
+If the review concludes that the current application does not exhibit the phenomenon studied by the theory, identify a better dataset.
+Choose it based on the statistical structure, not popularity.
+The application should make it possible to observe the practical relevance of the theoretical contribution.
+Do not add multiple datasets merely to increase experimental volume.
+
+16. Address computational concerns
+If reviewers question computational feasibility, provide:
+runtime analysis;
+memory complexity;
+convergence diagnostics;
+scaling experiments.
+If theory analyzes an ideal estimator
+θ^=arg⁡min⁡θQn(θ)\widehat\theta = \arg\min_\theta Q_n(\theta)
+but the implemented procedure returns
+θ~,\widetilde\theta,
+study whether
+Qn(θ~)−Qn(θ^)Q_n(\widetilde\theta)-Q_n(\widehat\theta)
+or a comparable optimization error affects the statistical conclusions.
+
+17. Resolve tuning concerns
+If reviewers criticize tuning-parameter choices, formalize them.
+For example, if theory requires
+λ≍σlog⁡pn,\lambda \asymp \sigma \sqrt{\frac{\log p}{n}},
+but σ\sigma is unknown, specify how it is estimated.
+Compare:
+theoretically motivated tuning;
+cross-validation;
+oracle tuning where useful.
+Demonstrate that results are not artifacts of a favorable tuning scheme.
+
+18. Revise claims only after scientific fixes are complete
+Do not rewrite the Abstract or Introduction first.
+First fix:
+Theory→Proofs→Simulations→Real Data\boxed{ \text{Theory} \rightarrow \text{Proofs} \rightarrow \text{Simulations} \rightarrow \text{Real Data} }
+Then revise:
+Claims→Abstract→Introduction→Discussion\boxed{ \text{Claims} \rightarrow \text{Abstract} \rightarrow \text{Introduction} \rightarrow \text{Discussion} }
+The narrative should reflect the final scientific results, not drive them.
+
+19. Revisit every contribution statement
+For every contribution bullet in the Introduction, verify:
+Is it true?
+Is it novel?
+Is it supported by a theorem or experiment?
+Is it distinct from the other contributions?
+Is the wording proportional to the evidence?
+Remove or rewrite weak contribution claims.
+
+20. Revise the Abstract only after all results stabilize
+The revised Abstract should accurately state:
+problem;
+method;
+theoretical contribution;
+empirical evidence.
+Do not use language stronger than the final results support.
+If the theorem changed from
+Op(rn)O_p(r_n)
+to
+Op(rnlog⁡n),O_p(r_n\log n),
+the Abstract and Introduction must reflect that.
+
+21. Strengthen interpretation of the theory
+For each theorem, add concise interpretation answering:
+What does the result mean?
+Which quantities determine difficulty?
+What improves as nn grows?
+What deteriorates as p,r,s,ϵ,Tp,r,s,\epsilon,T increase?
+How does the result compare with existing theory?
+What practical regime does the theorem cover?
+The manuscript should not contain technically correct but uninterpreted theory.
+
+22. Move technical material appropriately
+If the review says the main paper is too technical, distinguish:
+Core result
+Keep in main text.
+Proof intuition
+Keep in main text.
+Technical lemma
+Move to appendix where appropriate.
+Full proof
+Appendix unless central to exposition.
+Do not move essential assumptions or theorem conditions out of sight.
+
+23. Improve notation systematically
+If reviewers identify notation problems, perform a global notation pass.
+Create a notation dictionary such as:
+Symbol
+Meaning
+Dimension
+First definition
+
+Fix:
+reused symbols;
+undefined notation;
+inconsistent superscripts;
+incompatible dimensions;
+inconsistent norms;
+inconsistent stochastic notation.
+Do not patch notation only where the reviewer noticed it.
+
+24. Improve reproducibility
+Resolve any reproducibility concerns by documenting:
+random seeds;
+package versions;
+data preprocessing;
+hyperparameters;
+simulation configurations;
+train/test splits;
+figure-generation scripts;
+table-generation scripts.
+Ensure each main empirical result can be regenerated.
+
+25. Maintain a response-to-review matrix
+For every review concern, maintain:
+Review ID
+Concern
+Action taken
+Files changed
+New result
+Remaining issue
+Status
+
+Use statuses:
+RESOLVED
+Scientifically addressed.
+PARTIALLY RESOLVED
+Important progress made but limitation remains.
+NOT RESOLVED
+Cannot currently be addressed.
+NOT APPLICABLE
+Review comment is based on a misunderstanding or does not apply.
+For NOT APPLICABLE comments, provide mathematical justification.
+Do not mark an issue resolved merely because text was added.
+
+26. Write an internal response to each reviewer comment
+For each major issue, formulate a response similar to a journal revision letter:
+Review concern:
+[concise restatement]
+Assessment:
+[whether the concern is correct]
+Action:
+[what was changed]
+Technical resolution:
+[mathematical/empirical explanation]
+Manuscript changes:
+[sections/theorems/figures changed]
+Status:
+RESOLVED / PARTIAL / NOT RESOLVED
+This response is initially an internal record.
+It may later be adapted into an actual response-to-reviewers letter.
+
+27. Do not automatically agree with every review comment
+Treat reviewer feedback seriously but critically.
+If a requested change is mathematically inappropriate, explain why.
+For example, if a reviewer requests a result under assumptions under which the parameter is not identifiable, demonstrate the issue rather than forcing an invalid theorem.
+The goal is to improve the science, not mechanically comply with every comment.
+
+28. Re-run all affected experiments
+Whenever code, preprocessing, tuning, estimator implementation, or theory changes, identify all affected downstream experiments.
+Re-run them.
+Do not keep old results after changing the underlying method.
+Track dependencies such as:
+method change→simulation rerun→table update→figure update→text update.\text{method change} \rightarrow \text{simulation rerun} \rightarrow \text{table update} \rightarrow \text{figure update} \rightarrow \text{text update}.
+29. Re-check all downstream claims after theorem revisions
+If a theorem changes, search the manuscript for every statement that depends on it.
+For example, changing
+rnr_n
+requires checking:
+Abstract;
+Introduction;
+theorem interpretation;
+simulations;
+Discussion;
+Conclusion.
+Avoid internal contradictions introduced during revision.
+
+30. Re-check all figures and tables after analysis changes
+Do not update numerical results manually in the manuscript.
+Regenerate figures and tables from code.
+Check:
+captions;
+references in text;
+highlighted best values;
+reported standard errors;
+sample sizes;
+parameter settings.
+
+31. Add negative findings when scientifically informative
+If the review process reveals that the method performs poorly when:
+ϵ>ϵ⋆,\epsilon>\epsilon^\star,
+or
+r≫rmax⁡,r\gg r_{\max},
+or under severe misspecification, consider documenting this.
+These findings may:
+clarify theorem assumptions;
+define applicability;
+strengthen credibility;
+motivate future work.
+Do not present them as weaknesses to conceal.
+
+32. Re-evaluate the central contribution after revisions
+Once P0 and P1 issues are resolved, answer again:
+What exactly is new?
+State it mathematically.
+For example:
+Known: rn under assumptions A\boxed{ \text{Known: } r_n \text{ under assumptions }A }
+versus
+Ours: rn′ under assumptions A′\boxed{ \text{Ours: } r'_n \text{ under assumptions }A' }
+or:
+Known: estimationOurs: inference\boxed{ \text{Known: estimation} \quad \text{Ours: inference} }
+If the answer has become weaker during revision, revise the positioning accordingly.
+
+33. Re-evaluate journal fit
+After the scientific changes, reassess suitability for:
+Annals of Statistics;
+JASA — Theory and Methods;
+JRSS-B;
+Biometrika;
+Bernoulli;
+other appropriate venues.
+A review may reveal that the work is scientifically sound but better suited to a different journal.
+Do not force the original target.
+
+34. Run a second adversarial review after revisions
+Once all feasible P0/P1 items are addressed, perform another brief reviewer-style check.
+Ask:
+Did the revision truly solve the original concern?
+Did it introduce a new assumption?
+Did new experiments create new contradictions?
+Did theory weaken substantially?
+Are claims now proportional to evidence?
+Would the original reviewer likely be satisfied?
+Do not declare an issue resolved solely because the manuscript contains more text.
+
+35. Identify residual weaknesses
+Create a final list of issues that remain.
+Classify them as:
+ACCEPTABLE LIMITATION
+Can be transparently discussed without threatening the contribution.
+FUTURE WORK
+Interesting extension but not necessary for current paper.
+SUBMISSION RISK
+Could still trigger a major reviewer objection.
+BLOCKING ISSUE
+Should be resolved before submission.
+Make this distinction explicit.
+
+36. Update the Discussion and Limitations section
+Incorporate genuine remaining limitations.
+Examples:
+stronger-than-desired assumptions;
+computational cost;
+untested regimes;
+finite-sample sensitivity;
+restricted data setting;
+dependence on rank/sparsity estimation.
+Do not use vague language.
+State limitations mathematically or operationally where possible.
+
+37. Produce a final revision summary
+At the end, produce:
+A. Review issue registry
+All review comments and their status.
+B. Critical fixes completed
+Explain every P0 issue and resolution.
+C. Major fixes completed
+Explain every P1 issue and resolution.
+D. Theory revisions
+List:
+changed assumptions;
+revised lemmas;
+revised theorems;
+new proofs;
+changed rates.
+E. New simulations
+List each added experiment and why it was needed.
+F. Real-data changes
+Explain any preprocessing, dataset, analysis, or interpretation changes.
+G. Manuscript changes
+Identify major sections rewritten or reorganized.
+H. Remaining limitations
+Clearly state unresolved issues.
+I. Revised contribution statement
+State the paper's final contribution in precise mathematical terms.
+J. Journal recommendation
+Recommend the most appropriate submission target after revision.
+
+38. Produce a revision diff at the scientific level
+Do not only report textual changes.
+Create a “before → after” table such as:
+Component
+Before review
+After revision
+Assumption
+Sub-Gaussian
+finite 2+δ2+\delta moment
+Rate
+rnr_n
+corrected rnlog⁡pr_n\log p
+Robustness
+empirical only
+theorem + contamination simulations
+Simulation
+benchmark only
+explicit rate validation
+Real data
+random split
+group-wise split
+Claim
+“optimal”
+“rate-optimal up to log factor”
+
+This should make the scientific impact of the review process transparent.
+
+39. Final readiness checkpoint
+Before finishing, answer:
+Correctness
+Are all central theoretical results now believed to be correct?
+Proof completeness
+Are all main theorem proofs complete?
+Assumptions
+Are assumptions explicit, interpretable, and justified?
+Theory strength
+Is the theoretical contribution substantial enough?
+Simulation adequacy
+Do simulations now test the theory directly?
+Empirical fairness
+Are baselines and tuning fair?
+Real-data validity
+Is the application statistically sound?
+Internal consistency
+Do Abstract, Introduction, Theory, Results, and Discussion all describe the same final results?
+Reproducibility
+Can all experiments be regenerated?
+Remaining rejection risk
+What is the strongest unresolved criticism a skeptical reviewer could still make?
+
+40. Final verdict
+Classify the revised paper as:
+A — Ready for final citation check and submission preparation
+All central scientific issues are resolved.
+B — Near ready
+Only moderate or minor issues remain.
+C — Additional theoretical or empirical work required
+The core paper remains promising but one or more major issues remain.
+D — Fundamental research issue remains
+The current formulation should not proceed to submission yet.
+Explain the verdict.
+
+Final principle
+The objective is not to “address reviewer comments” cosmetically.
+The objective is to use the review as an adversarial test of the research and revise the project until the strongest defensible version of the paper remains.
+The workflow should be:
+Review→Issue diagnosis→Scientific correction→New theory/experiments if required→Manuscript revision→Re-review.\boxed{ \text{Review} \rightarrow \text{Issue diagnosis} \rightarrow \text{Scientific correction} \rightarrow \text{New theory/experiments if required} \rightarrow \text{Manuscript revision} \rightarrow \text{Re-review}. }
+Do not weaken scientific standards simply to make every review item appear resolved.
+
+

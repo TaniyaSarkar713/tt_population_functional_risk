@@ -1,0 +1,200 @@
+
+\section{Proofs of the sharp rates and computational statements}\label{app:gap_proofs}
+
+\subsection{Proof of Theorem~\ref{thm:sparse_harmonic}}
+\noindent\emph{Roadmap.} Embed a harmonic rank-one profile on a random support; bound its full tensor likelihood using support overlap.
+\begin{proof}
+For a size-$m$ support $S$, assign values $j^{-1/3}$, $j=1,\ldots,m$, in increasing coordinate order and zeros elsewhere; call this vector $x_S$. Set $A_S=b_mx_S^{\otimes3}$. Then
+\[
+ \norm{A_S}_F=b_m\left(\sum_{j=1}^m j^{-2/3}\right)^{3/2}
+ \le b_m\sqrt{27m}\le M,\qquad \psi(A_S)=b_mH_m/\sqrt p.
+\]
+The sum bound follows by integrating $x^{-2/3}$.
+All alternatives have rank one and the same target.
+For $H=|S\cap T|$, Cauchy--Schwarz and the decreasing profile give
+\[
+ 0\le\ip{x_S}{x_T}
+ \le\left(\sum_{i\in S\cap T}x_{S,i}^2
+           \sum_{i\in S\cap T}x_{T,i}^2\right)^{1/2}
+ \le\sum_{j=1}^Hj^{-2/3}\le3H^{1/3}.
+\]
+At $H=0$ every term is zero. Therefore
+$\ip{A_S}{A_T}\le27b_m^2H$.
+The full Gaussian likelihood identity and the hypergeometric bound already proved in Proposition~\ref{prop:diagonal_minimax} imply
+\[
+ 1+\chi^2(Q,P_0)\le\E e^{27b_m^2H/\tau^2}
+ \le\exp\{(m^2/p)(e^{27b_m^2/\tau^2}-1)\}\le e^{1/4}.
+\]
+Only the hypergeometric inequality is reused, not the diagonal likelihood.
+Lemma~\ref{lem:mixture} proves \eqref{eq:sparse_harmonic}.
+
+For $p\ge256$, $m=\lfloor p^{1/4}\rfloor\ge p^{1/4}/2$,
+so $H_m\ge\log m\ge(\log p)/8$.
+Also $p/(4m^2)\ge\sqrt p/4\ge p^{1/4}$, and
+\[
+ \tfrac14\log p\le\log(1+p/(4m^2))\le\log p\le\sqrt p\le p/m.
+\]
+For $p\ge4$, $\log p\le\sqrt p$ follows from positivity at four and the nonnegative derivative of $\sqrt p-\log p$.
+Thus the noise term is the minimum in $b_m$ and is at least
+$\tau\sqrt{\log p}/(2\sqrt{27})$. Multiplication proves the stated constant.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:full_minimax}}
+\noindent\emph{Roadmap.} Verify measurable extrema and coverage, then bound differences of feasible tensors using doubled caps.
+\begin{proof}
+The parameter class is compact: its norm ball is bounded and closed, and rank constraints are closed polynomial conditions on unfolding minors. Each finite-net maximum is continuous. Hence every nonempty feasible section is compact and its functional extrema are attained.
+
+The feasible-data domain is closed. Indeed, if $Z_j\to Z$ and $B_j$ are feasible, compactness supplies a subsequence $B_{j_k}\to B\in\Theta$; continuity preserves every constraint.
+For any real $u$, the set of $Z$ admitting a feasible $B$ with $\psi(B)\ge u$ is also closed by this argument, as is the analogous set with $\psi(B)\le u$.
+The extrema on the feasible-data domain, extended by zero elsewhere, are therefore Borel functions.
+The noise event at error level $\alpha$ makes $A$ feasible, uniformly with probability at least $1-\alpha$. On that event $C_F$ covers the target.
+
+For $B,B'\in{\cal F}(Z)$, put $\Delta=B-B'$.
+Matrix-rank subadditivity gives the doubled unfolding caps; coordinate restriction cannot increase them. Also
+$N_S(\Delta)\le N_S(Z-B)+N_S(Z-B')\le2\lambda_s$,
+so $\rho(\Delta_S)\le4\lambda_s$.
+The diagonal bound and injective-norm comparison with $J_2$ give
+\[
+ \sum_{i\in S}|\Delta_{i,\ldots,i}|^{2/K}
+ \le J_2^{1-1/K}\norm{\Delta_S}_F^{2/K}
+ \le J_2\rho(\Delta_S)^{2/K}.
+\]
+Taking the $s$ largest diagonal entries yields
+$|\Delta|_{(s)}\le4J_2^{K/2}\lambda_s s^{-K/2}$.
+Summation proves $|\psi(B)-\psi(B')|\le W_\alpha$.
+Apply it to the attained extrema; the structural range gives the other bound $2h_0$. Empty sections have length zero.
+
+For fixed confidence, $\lambda_s\le C_{K,\alpha}\tau\sqrt{s\log p}$ for large $p$.
+The sum of $s^{-(K-1)/2}$ is bounded for $K\ge4$ and at most $1+\log p$ for $K=3$.
+This proves the worst-case upper bounds.
+Theorem~\ref{thm:jointlower} matches the higher-order bound and
+Theorem~\ref{thm:sparse_harmonic} matches the cubic bound, already at zero and within the rank-one subclass. Since $\calL_0\le\calL_{\max}$, both rates follow.
+\end{proof}
+
+\subsection{Proof of Proposition~\ref{prop:mse_sharp}}
+\noindent\emph{Roadmap.} Use a smaller failure budget and bounded target range for the upper risk; reduce estimation to common-target testing for the lower risk.
+\begin{proof}
+For $p\ge2$, $\alpha_p=p^{-2}$ still gives $W_{\alpha_p}=O(r_K(p))$.
+The midpoint is in $[-h_0,h_0]$, including the empty-set convention.
+On coverage its error is at most $W_{\alpha_p}/2$; otherwise the error is at most $2h_0$. Thus
+\[
+ \sup_A\E_A(\widehat\psi-\psi(A))^2
+ \le W_{\alpha_p}^2/4+4h_0^2p^{-2}=O(r_K(p)^2),
+\]
+since $h_0=\tau\sqrt{s_{\rm cap}}$.
+For a common-target prior with target $\delta$, test whether an estimator is at least $\delta/2$.
+If its worst-case squared risk is $R$, Markov bounds the total null-plus-mixture testing error by $8R/\delta^2$.
+Total variation bounds this error below by $1-\TV(P_0,Q)$.
+Hence $R\ge\delta^2(1-\TV)/8$.
+The coordinate and sparse harmonic mixtures have bounded total variation and targets of the required respective orders.
+\end{proof}
+
+\subsection{Proof of Proposition~\ref{prop:truncated}}
+\noindent\emph{Roadmap.} Combine leading-entry scan bounds with a quasi-norm tail bound and an explicit grid-net construction.
+\begin{proof}
+On acceptance and the common noise event,
+$|a|_{(s)}\le4J^{K/2}\lambda_s s^{-K/2}$ for $s\le t$.
+The remaining magnitudes are at most $a_t$, so
+\[
+ \sum_{s>t}|a|_{(s)}
+ \le a_t^{1-q}\sum_{s>t}|a|_{(s)}^q\le a_t^{1-q}B_q.
+\]
+The tail vanishes for $t=p$. This proves the radius.
+On rejection the structural interval covers surely.
+Intersection gives honesty by error allocation and length at most $\ell_*$.
+At zero rejection has probability at most $\gamma$, giving the stated expectation bound.
+
+For the rate, substitute $\lambda_s\lesssim\tau\sqrt{s\log p}$ and
+$B_q=J^{1-1/K}\tau^{2/K}p^{1/K}$.
+The tail becomes a constant times
+$\tau p^{1/K-1/2}(\log p)^{(1-2/K)/2}t^{-(K-1)(1-2/K)/2}$,
+as asserted.
+
+For a computable net, split each coordinate of $[-1,1]^s$ into
+$N=\lceil4K\sqrt s\rceil$ equal intervals and normalize every nonzero product-grid vector.
+Rounding a unit vector incurs error at most $\sqrt s/N\le1/(4K)$.
+The rounded vector is nonzero, and normalization adds at most the original error, giving a $1/(2K)$-net.
+Its size is at most $(N+1)^s\le(3+4K\sqrt s)^s$.
+Use log cardinality $Ks\log(3+4K\sqrt s)$ in the Gaussian union bound.
+Since $s\le p$, this still gives $\lambda_s\lesssim_K\tau\sqrt{s\log p}$.
+Each contraction costs $O(s^K)$ operations, proving the complexity bound.
+All completed levels cover on one event; adaptive continuation and intersection add no scan error. The separately calibrated $C_*$ is intersected only once.
+\end{proof}
+
+\subsection{Proof of Theorem~\ref{thm:low_degree}}
+\noindent\emph{Roadmap.} Expand in Hermite polynomials, bound overlap moments and control the possible mean shift of a low-degree estimator by its null variance.
+\begin{proof}
+Scale by $\tau$ and let $h_\nu$ be normalized multivariate probabilists' Hermite polynomials over the $p^K$ coordinates.
+The generating identity
+$e^{tz-t^2/2}=\sum_{j\ge0}H_j(z)t^j/j!$
+gives $\E H_j(g)H_k(g)=j!\mathbf1_{\{j=k\}}$:
+multiply two generating functions and compare coefficients of their expectation $e^{tu}$.
+Coordinate independence gives multivariate orthonormality.
+The shift calculation similarly gives
+$\E h_\nu(g+a)=a^\nu/\sqrt{\nu!}$.
+The coefficient identities follow by differentiation at zero of Gaussian entire moment-generating functions.
+
+For the finite support prior, the degree-$d$ coefficient sum is
+\[
+ \sum_{|\nu|=d}\{\E_Qh_\nu(Z/\tau)\}^2
+ =\frac1{d!}\E_{S,T}
+      \left(\frac{\ip{A_S}{A_T}}{\tau^2}\right)^d
+ =\frac{\lambda^{2d}}{d!s^{Kd}}\E H^{Kd},
+\]
+by the multinomial theorem, where $H=|S\cap T|$.
+This uses the full likelihood.
+
+Let $\mathrm S(m,j)$ count partitions of an $m$-element set into $j$ nonempty unlabeled sets.
+Counting maps according to their number of image elements gives
+$H^m=\sum_{j=1}^m\mathrm S(m,j)(H)_j$.
+There are at most $j^m$ labeled maps, so
+$\mathrm S(m,j)\le j^m/j!$.
+For $j\le s$, the hypergeometric factorial moments obey
+\[
+ \E(H)_j=(s)_j^2/(p)_j\le(s^2/p)^j=\mu^j,
+\]
+using $(s-\ell)/(p-\ell)\le s/p$ and $s-\ell\le s$ factor by factor.
+For $j>s$ the moment is zero. Therefore
+\[
+ \E H^m\le\sum_{j=1}^m j^m\mu^j/j!
+ \le m^m(e^\mu-1)\le\mu e^\mu m^m.
+\]
+The centered projection omits degree zero. Summing the remaining degrees,
+\[
+ \chi^2_{\le \mathsf d}
+ \le\mu e^\mu\sum_{d=1}^{\mathsf d}
+      \frac{\lambda^{2d}(Kd)^{Kd}}{d!s^{Kd}}
+ \le\mu e^\mu\sum_{d=1}^{\mathsf d} B_{\mathsf d}^d
+ \le\mu e^\mu B_{\mathsf d}/(1-B_{\mathsf d})=\eta_{\mathsf d}^2.
+\]
+
+For a degree-$\mathsf d$ estimator with worst-case squared risk $R$ on zero and the alternatives,
+$|\E_0T|\le\sqrt R$ and $|\E_QT-\delta|\le\sqrt R$.
+Orthonormal projection and Cauchy--Schwarz give
+\[
+ |\E_QT-\E_0T|\le
+ \sqrt{\operatorname{Var}_0T}\sqrt{\chi^2_{\le \mathsf d}}\le\sqrt R\,\eta_{\mathsf d}.
+\]
+Thus $\delta\le(2+\eta_{\mathsf d})\sqrt R$, proving the risk lower bound.
+For the stated exponents,
+$\mu=O(p^{2a-1})\to0$ and $B_{\mathsf d}=O(p^{1-aK+bK})\to0$;
+floor factors remain bounded for large $p$.
+The target is $\delta=\tau s^{1-K/2}$.
+Since $a(K-2)<1$, its square is polynomially larger than
+$\tau^2/p$ times either logarithmic factor of the unrestricted minimax risk.
+The alternatives have norm $M$ and rank one in every unfolding, so belong to either positive cap class.
+\end{proof}
+
+\subsection{Proof of Proposition~\ref{prop:ci_detection}}
+\noindent\emph{Roadmap.} Combine mixture coverage with null coverage and Markov's inequality for length.
+\begin{proof}
+Mixture coverage gives $Q(\delta\notin C)\le\alpha$.
+If $0\in C$ and $|C|<\delta$, the interval cannot contain $\delta$.
+Consequently
+\[
+ P_0(\delta\in C)\le P_0(0\notin C)+P_0(|C|\ge\delta)
+ \le\alpha+\E_0|C|/\delta.
+\]
+Add the errors. Polynomial-time interval evaluation and membership evaluation yield a polynomial-time test, proving the conditional implication.
+No unrestricted testing-hardness conclusion is deduced from the low-degree squared-risk bound.
+\end{proof}

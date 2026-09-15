@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "seed": 2026091401,
+  "checks": 40553,
+  "by_family": {
+    "prefix_monotonicity": 144,
+    "abel_identity": 864,
+    "envelope_comparison": 864,
+    "universal_factor": 864,
+    "homogeneity": 864,
+    "scalar_projection_lemma": 30000,
+    "normal_overshoot_bound": 30,
+    "tucker_projector_implementation": 30,
+    "tucker_projector_idempotence": 30,
+    "tucker_bias_certificate": 80,
+    "tt_bridge_all_caps": 540,
+    "tt_bias_certificate": 180,
+    "sparse_bias_integral": 24,
+    "sparse_variance_integral": 24,
+    "deterministic_replay": 4,
+    "range_protection": 4,
+    "zero_budget": 4,
+    "invalid_input_rejection": 3,
+    "minor_rank_one_identity": 2000,
+    "minor_coverage_on_event": 2000,
+    "minor_direct_width_cap": 2000
+  },
+  "scope": "Finite checks complement supplied proofs; no general optimizer certification or formal proof verification."
+}

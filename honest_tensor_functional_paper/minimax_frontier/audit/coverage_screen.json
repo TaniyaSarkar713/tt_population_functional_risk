@@ -1,0 +1,8 @@
+{
+  "tests": 159,
+  "holm_rejections": [],
+  "min_raw_p": 0.047802442217870555,
+  "excluded": "F159, deliberate rank-two violation of P5",
+  "evaluation": "Four endpoint ULP steps; strict counts and all differences retained.",
+  "interpretation": "Finite simulation discrepancy screen; not proof of uniform coverage."
+}

@@ -1,0 +1,36 @@
+{
+  "status": "PASSED",
+  "checks": 209,
+  "failures": [],
+  "baseline_files": 1469,
+  "unchanged_baseline_files": 1467,
+  "intentional_root_documentation_changes": [
+    "requirements.md",
+    "README.md"
+  ],
+  "missing_files": [],
+  "pdfs": [
+    {
+      "file": "report.pdf",
+      "pages": 12,
+      "outside_page_spans": [],
+      "margin_violations": []
+    },
+    {
+      "file": "complete_review.pdf",
+      "pages": 51,
+      "outside_page_spans": [],
+      "margin_violations": []
+    }
+  ],
+  "broken_links": [],
+  "theorem_results": 59,
+  "guideline_items": 50,
+  "findings_by_severity": {
+    "CRITICAL": 0,
+    "MAJOR": 3,
+    "MODERATE": 5,
+    "MINOR": 2
+  },
+  "scope": "Review-artifact consistency and preservation checks; not theorem verification or correction of preserved research findings."
+}

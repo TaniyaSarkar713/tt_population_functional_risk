@@ -1,0 +1,929 @@
+[
+  {
+    "id": "V03_000",
+    "suite": "V03",
+    "law": "gaussian",
+    "n": 512,
+    "m": 16,
+    "M": 20.0,
+    "supplied_c": 0,
+    "actual_c": 0,
+    "B": 1000,
+    "event_covered": 1000,
+    "event_wilson_95": [
+      0.996173241514445,
+      1.0
+    ],
+    "event_coverage": 1.0,
+    "event_wilson": [
+      0.996173241514445,
+      1.0
+    ],
+    "mean_scale": 1.4142135623730956,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation.",
+    "blocks": 185,
+    "block_size": 2,
+    "threshold": 1.414213562373095
+  },
+  {
+    "id": "V03_001",
+    "suite": "V03",
+    "law": "gaussian",
+    "n": 512,
+    "m": 16,
+    "M": 20.0,
+    "supplied_c": 8,
+    "actual_c": 8,
+    "B": 1000,
+    "event_covered": 1000,
+    "event_wilson_95": [
+      0.996173241514445,
+      1.0
+    ],
+    "event_coverage": 1.0,
+    "event_wilson": [
+      0.996173241514445,
+      1.0
+    ],
+    "mean_scale": 1.4142135623730956,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation.",
+    "blocks": 185,
+    "block_size": 2,
+    "threshold": 1.414213562373095
+  },
+  {
+    "id": "V03_002",
+    "suite": "V03",
+    "law": "gaussian",
+    "n": 512,
+    "m": 16,
+    "M": 20.0,
+    "supplied_c": 20,
+    "actual_c": 20,
+    "B": 1000,
+    "event_covered": 1000,
+    "event_wilson_95": [
+      0.996173241514445,
+      1.0
+    ],
+    "event_coverage": 1.0,
+    "event_wilson": [
+      0.996173241514445,
+      1.0
+    ],
+    "mean_scale": 1.4142135623730956,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation.",
+    "blocks": 185,
+    "block_size": 2,
+    "threshold": 1.414213562373095
+  },
+  {
+    "id": "V03_003",
+    "suite": "V03",
+    "law": "gaussian",
+    "n": 1024,
+    "m": 16,
+    "M": 20.0,
+    "supplied_c": 0,
+    "actual_c": 0,
+    "B": 1000,
+    "event_covered": 1000,
+    "event_wilson_95": [
+      0.996173241514445,
+      1.0
+    ],
+    "event_coverage": 1.0,
+    "event_wilson": [
+      0.996173241514445,
+      1.0
+    ],
+    "mean_scale": 0.8944271909999161,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation.",
+    "blocks": 185,
+    "block_size": 5,
+    "threshold": 0.8944271909999159
+  },
+  {
+    "id": "V03_004",
+    "suite": "V03",
+    "law": "gaussian",
+    "n": 1024,
+    "m": 16,
+    "M": 20.0,
+    "supplied_c": 8,
+    "actual_c": 8,
+    "B": 1000,
+    "event_covered": 1000,
+    "event_wilson_95": [
+      0.996173241514445,
+      1.0
+    ],
+    "event_coverage": 1.0,
+    "event_wilson": [
+      0.996173241514445,
+      1.0
+    ],
+    "mean_scale": 0.8944271909999161,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation.",
+    "blocks": 185,
+    "block_size": 5,
+    "threshold": 0.8944271909999159
+  },
+  {
+    "id": "V03_005",
+    "suite": "V03",
+    "law": "gaussian",
+    "n": 1024,
+    "m": 16,
+    "M": 20.0,
+    "supplied_c": 20,
+    "actual_c": 20,
+    "B": 1000,
+    "event_covered": 1000,
+    "event_wilson_95": [
+      0.996173241514445,
+      1.0
+    ],
+    "event_coverage": 1.0,
+    "event_wilson": [
+      0.996173241514445,
+      1.0
+    ],
+    "mean_scale": 0.8944271909999161,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation.",
+    "blocks": 185,
+    "block_size": 5,
+    "threshold": 0.8944271909999159
+  },
+  {
+    "id": "V03_006",
+    "suite": "V03",
+    "law": "t3",
+    "n": 512,
+    "m": 16,
+    "M": 20.0,
+    "supplied_c": 0,
+    "actual_c": 0,
+    "B": 1000,
+    "event_covered": 1000,
+    "event_wilson_95": [
+      0.996173241514445,
+      1.0
+    ],
+    "event_coverage": 1.0,
+    "event_wilson": [
+      0.996173241514445,
+      1.0
+    ],
+    "mean_scale": 1.4142135623730956,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation.",
+    "blocks": 185,
+    "block_size": 2,
+    "threshold": 1.414213562373095
+  },
+  {
+    "id": "V03_007",
+    "suite": "V03",
+    "law": "t3",
+    "n": 512,
+    "m": 16,
+    "M": 20.0,
+    "supplied_c": 8,
+    "actual_c": 8,
+    "B": 1000,
+    "event_covered": 1000,
+    "event_wilson_95": [
+      0.996173241514445,
+      1.0
+    ],
+    "event_coverage": 1.0,
+    "event_wilson": [
+      0.996173241514445,
+      1.0
+    ],
+    "mean_scale": 1.4142135623730956,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation.",
+    "blocks": 185,
+    "block_size": 2,
+    "threshold": 1.414213562373095
+  },
+  {
+    "id": "V03_008",
+    "suite": "V03",
+    "law": "t3",
+    "n": 512,
+    "m": 16,
+    "M": 20.0,
+    "supplied_c": 20,
+    "actual_c": 20,
+    "B": 1000,
+    "event_covered": 1000,
+    "event_wilson_95": [
+      0.996173241514445,
+      1.0
+    ],
+    "event_coverage": 1.0,
+    "event_wilson": [
+      0.996173241514445,
+      1.0
+    ],
+    "mean_scale": 1.4142135623730956,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation.",
+    "blocks": 185,
+    "block_size": 2,
+    "threshold": 1.414213562373095
+  },
+  {
+    "id": "V03_009",
+    "suite": "V03",
+    "law": "t3",
+    "n": 1024,
+    "m": 16,
+    "M": 20.0,
+    "supplied_c": 0,
+    "actual_c": 0,
+    "B": 1000,
+    "event_covered": 1000,
+    "event_wilson_95": [
+      0.996173241514445,
+      1.0
+    ],
+    "event_coverage": 1.0,
+    "event_wilson": [
+      0.996173241514445,
+      1.0
+    ],
+    "mean_scale": 0.8944271909999161,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation.",
+    "blocks": 185,
+    "block_size": 5,
+    "threshold": 0.8944271909999159
+  },
+  {
+    "id": "V03_010",
+    "suite": "V03",
+    "law": "t3",
+    "n": 1024,
+    "m": 16,
+    "M": 20.0,
+    "supplied_c": 8,
+    "actual_c": 8,
+    "B": 1000,
+    "event_covered": 1000,
+    "event_wilson_95": [
+      0.996173241514445,
+      1.0
+    ],
+    "event_coverage": 1.0,
+    "event_wilson": [
+      0.996173241514445,
+      1.0
+    ],
+    "mean_scale": 0.8944271909999161,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation.",
+    "blocks": 185,
+    "block_size": 5,
+    "threshold": 0.8944271909999159
+  },
+  {
+    "id": "V03_011",
+    "suite": "V03",
+    "law": "t3",
+    "n": 1024,
+    "m": 16,
+    "M": 20.0,
+    "supplied_c": 20,
+    "actual_c": 20,
+    "B": 1000,
+    "event_covered": 1000,
+    "event_wilson_95": [
+      0.996173241514445,
+      1.0
+    ],
+    "event_coverage": 1.0,
+    "event_wilson": [
+      0.996173241514445,
+      1.0
+    ],
+    "mean_scale": 0.8944271909999161,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation.",
+    "blocks": 185,
+    "block_size": 5,
+    "threshold": 0.8944271909999159
+  },
+  {
+    "id": "V03_012",
+    "suite": "V03",
+    "law": "correlated",
+    "n": 512,
+    "m": 16,
+    "M": 20.0,
+    "supplied_c": 0,
+    "actual_c": 0,
+    "B": 1000,
+    "event_covered": 1000,
+    "event_wilson_95": [
+      0.996173241514445,
+      1.0
+    ],
+    "event_coverage": 1.0,
+    "event_wilson": [
+      0.996173241514445,
+      1.0
+    ],
+    "mean_scale": 1.4142135623730956,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation.",
+    "blocks": 185,
+    "block_size": 2,
+    "threshold": 1.414213562373095
+  },
+  {
+    "id": "V03_013",
+    "suite": "V03",
+    "law": "correlated",
+    "n": 512,
+    "m": 16,
+    "M": 20.0,
+    "supplied_c": 8,
+    "actual_c": 8,
+    "B": 1000,
+    "event_covered": 1000,
+    "event_wilson_95": [
+      0.996173241514445,
+      1.0
+    ],
+    "event_coverage": 1.0,
+    "event_wilson": [
+      0.996173241514445,
+      1.0
+    ],
+    "mean_scale": 1.4142135623730956,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation.",
+    "blocks": 185,
+    "block_size": 2,
+    "threshold": 1.414213562373095
+  },
+  {
+    "id": "V03_014",
+    "suite": "V03",
+    "law": "correlated",
+    "n": 512,
+    "m": 16,
+    "M": 20.0,
+    "supplied_c": 20,
+    "actual_c": 20,
+    "B": 1000,
+    "event_covered": 1000,
+    "event_wilson_95": [
+      0.996173241514445,
+      1.0
+    ],
+    "event_coverage": 1.0,
+    "event_wilson": [
+      0.996173241514445,
+      1.0
+    ],
+    "mean_scale": 1.4142135623730956,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation.",
+    "blocks": 185,
+    "block_size": 2,
+    "threshold": 1.414213562373095
+  },
+  {
+    "id": "V03_015",
+    "suite": "V03",
+    "law": "correlated",
+    "n": 1024,
+    "m": 16,
+    "M": 20.0,
+    "supplied_c": 0,
+    "actual_c": 0,
+    "B": 1000,
+    "event_covered": 1000,
+    "event_wilson_95": [
+      0.996173241514445,
+      1.0
+    ],
+    "event_coverage": 1.0,
+    "event_wilson": [
+      0.996173241514445,
+      1.0
+    ],
+    "mean_scale": 0.8944271909999161,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation.",
+    "blocks": 185,
+    "block_size": 5,
+    "threshold": 0.8944271909999159
+  },
+  {
+    "id": "V03_016",
+    "suite": "V03",
+    "law": "correlated",
+    "n": 1024,
+    "m": 16,
+    "M": 20.0,
+    "supplied_c": 8,
+    "actual_c": 8,
+    "B": 1000,
+    "event_covered": 1000,
+    "event_wilson_95": [
+      0.996173241514445,
+      1.0
+    ],
+    "event_coverage": 1.0,
+    "event_wilson": [
+      0.996173241514445,
+      1.0
+    ],
+    "mean_scale": 0.8944271909999161,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation.",
+    "blocks": 185,
+    "block_size": 5,
+    "threshold": 0.8944271909999159
+  },
+  {
+    "id": "V03_017",
+    "suite": "V03",
+    "law": "correlated",
+    "n": 1024,
+    "m": 16,
+    "M": 20.0,
+    "supplied_c": 20,
+    "actual_c": 20,
+    "B": 1000,
+    "event_covered": 1000,
+    "event_wilson_95": [
+      0.996173241514445,
+      1.0
+    ],
+    "event_coverage": 1.0,
+    "event_wilson": [
+      0.996173241514445,
+      1.0
+    ],
+    "mean_scale": 0.8944271909999161,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation.",
+    "blocks": 185,
+    "block_size": 5,
+    "threshold": 0.8944271909999159
+  },
+  {
+    "id": "V03_018",
+    "suite": "V03",
+    "law": "gaussian",
+    "n": 512,
+    "m": 16,
+    "M": 20.0,
+    "supplied_c": 0,
+    "actual_c": 120,
+    "B": 1000,
+    "event_covered": 0,
+    "event_wilson_95": [
+      2.168404344971009e-19,
+      0.003826758485555125
+    ],
+    "event_coverage": 0.0,
+    "event_wilson": [
+      2.168404344971009e-19,
+      0.003826758485555125
+    ],
+    "mean_scale": 1.4142135623730956,
+    "conditions_satisfied": false,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation.",
+    "blocks": 185,
+    "block_size": 2,
+    "threshold": 1.414213562373095
+  },
+  {
+    "id": "V04_000",
+    "suite": "V04",
+    "m": 1,
+    "n": 2,
+    "sigma": 1.0,
+    "M": 4.0,
+    "signal": "boundary",
+    "B": 3000,
+    "event_covered": 2962,
+    "event_wilson_95": [
+      0.982662642278329,
+      0.9907575731640531
+    ],
+    "event_coverage": 0.9873333333333333,
+    "event_wilson": [
+      0.982662642278329,
+      0.9907575731640531
+    ],
+    "mean_scale": 64.22338586131264,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation."
+  },
+  {
+    "id": "V04_001",
+    "suite": "V04",
+    "m": 1,
+    "n": 2,
+    "sigma": 3.0,
+    "M": 4.0,
+    "signal": "boundary",
+    "B": 3000,
+    "event_covered": 2969,
+    "event_wilson_95": [
+      0.985370258715706,
+      0.9927106554326248
+    ],
+    "event_coverage": 0.9896666666666667,
+    "event_wilson": [
+      0.985370258715706,
+      0.9927106554326248
+    ],
+    "mean_scale": 62.80675393699941,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation."
+  },
+  {
+    "id": "V04_002",
+    "suite": "V04",
+    "m": 1,
+    "n": 4,
+    "sigma": 1.0,
+    "M": 4.0,
+    "signal": "boundary",
+    "B": 3000,
+    "event_covered": 2965,
+    "event_wilson_95": [
+      0.9838183479129743,
+      0.9915993098319573
+    ],
+    "event_coverage": 0.9883333333333333,
+    "event_wilson": [
+      0.9838183479129743,
+      0.9915993098319573
+    ],
+    "mean_scale": 4.624148422409534,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation."
+  },
+  {
+    "id": "V04_003",
+    "suite": "V04",
+    "m": 1,
+    "n": 4,
+    "sigma": 3.0,
+    "M": 4.0,
+    "signal": "boundary",
+    "B": 3000,
+    "event_covered": 2976,
+    "event_wilson_95": [
+      0.9881235263289165,
+      0.9946180865253627
+    ],
+    "event_coverage": 0.992,
+    "event_wilson": [
+      0.9881235263289165,
+      0.9946180865253627
+    ],
+    "mean_scale": 4.734354475231971,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation."
+  },
+  {
+    "id": "V04_004",
+    "suite": "V04",
+    "m": 1,
+    "n": 16,
+    "sigma": 1.0,
+    "M": 4.0,
+    "signal": "boundary",
+    "B": 3000,
+    "event_covered": 2972,
+    "event_wilson_95": [
+      0.9865437152737208,
+      0.9935346411771594
+    ],
+    "event_coverage": 0.9906666666666667,
+    "event_wilson": [
+      0.9865437152737208,
+      0.9935346411771594
+    ],
+    "mean_scale": 1.6636157791692079,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation."
+  },
+  {
+    "id": "V04_005",
+    "suite": "V04",
+    "m": 1,
+    "n": 16,
+    "sigma": 3.0,
+    "M": 4.0,
+    "signal": "boundary",
+    "B": 3000,
+    "event_covered": 2960,
+    "event_wilson_95": [
+      0.98189564159083,
+      0.9901929456498528
+    ],
+    "event_coverage": 0.9866666666666667,
+    "event_wilson": [
+      0.98189564159083,
+      0.9901929456498528
+    ],
+    "mean_scale": 1.6716095530623316,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation."
+  },
+  {
+    "id": "V04_006",
+    "suite": "V04",
+    "m": 16,
+    "n": 2,
+    "sigma": 1.0,
+    "M": 4.0,
+    "signal": "boundary",
+    "B": 3000,
+    "event_covered": 2975,
+    "event_wilson_95": [
+      0.9877267648163708,
+      0.9943490339370589
+    ],
+    "event_coverage": 0.9916666666666667,
+    "event_wilson": [
+      0.9877267648163708,
+      0.9943490339370589
+    ],
+    "mean_scale": 1.6371092660799522,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation."
+  },
+  {
+    "id": "V04_007",
+    "suite": "V04",
+    "m": 16,
+    "n": 2,
+    "sigma": 3.0,
+    "M": 4.0,
+    "signal": "boundary",
+    "B": 3000,
+    "event_covered": 2968,
+    "event_wilson_95": [
+      0.9849810029282877,
+      0.9924340971191932
+    ],
+    "event_coverage": 0.9893333333333333,
+    "event_wilson": [
+      0.9849810029282877,
+      0.9924340971191932
+    ],
+    "mean_scale": 1.6283819188480295,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation."
+  },
+  {
+    "id": "V04_008",
+    "suite": "V04",
+    "m": 16,
+    "n": 4,
+    "sigma": 1.0,
+    "M": 4.0,
+    "signal": "boundary",
+    "B": 3000,
+    "event_covered": 2974,
+    "event_wilson_95": [
+      0.9873312537039419,
+      0.9940787309486377
+    ],
+    "event_coverage": 0.9913333333333333,
+    "event_wilson": [
+      0.9873312537039419,
+      0.9940787309486377
+    ],
+    "mean_scale": 1.2997602323164346,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation."
+  },
+  {
+    "id": "V04_009",
+    "suite": "V04",
+    "m": 16,
+    "n": 4,
+    "sigma": 3.0,
+    "M": 4.0,
+    "signal": "boundary",
+    "B": 3000,
+    "event_covered": 2979,
+    "event_wilson_95": [
+      0.9893221068716328,
+      0.9954169482851959
+    ],
+    "event_coverage": 0.993,
+    "event_wilson": [
+      0.9893221068716328,
+      0.9954169482851959
+    ],
+    "mean_scale": 1.3034574080528905,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation."
+  },
+  {
+    "id": "V04_010",
+    "suite": "V04",
+    "m": 16,
+    "n": 16,
+    "sigma": 1.0,
+    "M": 4.0,
+    "signal": "boundary",
+    "B": 3000,
+    "event_covered": 2965,
+    "event_wilson_95": [
+      0.9838183479129743,
+      0.9915993098319573
+    ],
+    "event_coverage": 0.9883333333333333,
+    "event_wilson": [
+      0.9838183479129743,
+      0.9915993098319573
+    ],
+    "mean_scale": 1.1158672250741195,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation."
+  },
+  {
+    "id": "V04_011",
+    "suite": "V04",
+    "m": 16,
+    "n": 16,
+    "sigma": 3.0,
+    "M": 4.0,
+    "signal": "boundary",
+    "B": 3000,
+    "event_covered": 2980,
+    "event_wilson_95": [
+      0.9897247083783173,
+      0.995680160879361
+    ],
+    "event_coverage": 0.9933333333333333,
+    "event_wilson": [
+      0.9897247083783173,
+      0.995680160879361
+    ],
+    "mean_scale": 1.1177394918935015,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation."
+  },
+  {
+    "id": "V04_012",
+    "suite": "V04",
+    "m": 64,
+    "n": 2,
+    "sigma": 1.0,
+    "M": 4.0,
+    "signal": "boundary",
+    "B": 3000,
+    "event_covered": 2978,
+    "event_wilson_95": [
+      0.9889211095779166,
+      0.9951521314780624
+    ],
+    "event_coverage": 0.9926666666666667,
+    "event_wilson": [
+      0.9889211095779166,
+      0.9951521314780624
+    ],
+    "mean_scale": 1.2534944195620203,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation."
+  },
+  {
+    "id": "V04_013",
+    "suite": "V04",
+    "m": 64,
+    "n": 2,
+    "sigma": 3.0,
+    "M": 4.0,
+    "signal": "boundary",
+    "B": 3000,
+    "event_covered": 2977,
+    "event_wilson_95": [
+      0.9885216135151567,
+      0.9948858134399723
+    ],
+    "event_coverage": 0.9923333333333333,
+    "event_wilson": [
+      0.9885216135151567,
+      0.9948858134399723
+    ],
+    "mean_scale": 1.2525608539356465,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation."
+  },
+  {
+    "id": "V04_014",
+    "suite": "V04",
+    "m": 64,
+    "n": 4,
+    "sigma": 1.0,
+    "M": 4.0,
+    "signal": "boundary",
+    "B": 3000,
+    "event_covered": 2965,
+    "event_wilson_95": [
+      0.9838183479129743,
+      0.9915993098319573
+    ],
+    "event_coverage": 0.9883333333333333,
+    "event_wilson": [
+      0.9838183479129743,
+      0.9915993098319573
+    ],
+    "mean_scale": 1.1318423348376958,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation."
+  },
+  {
+    "id": "V04_015",
+    "suite": "V04",
+    "m": 64,
+    "n": 4,
+    "sigma": 3.0,
+    "M": 4.0,
+    "signal": "boundary",
+    "B": 3000,
+    "event_covered": 2971,
+    "event_wilson_95": [
+      0.9861515686577085,
+      0.9932609736923217
+    ],
+    "event_coverage": 0.9903333333333333,
+    "event_wilson": [
+      0.9861515686577085,
+      0.9932609736923217
+    ],
+    "mean_scale": 1.1335862234119132,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation."
+  },
+  {
+    "id": "V04_016",
+    "suite": "V04",
+    "m": 64,
+    "n": 16,
+    "sigma": 1.0,
+    "M": 4.0,
+    "signal": "boundary",
+    "B": 3000,
+    "event_covered": 2964,
+    "event_wilson_95": [
+      0.9834323822876037,
+      0.9913194613564782
+    ],
+    "event_coverage": 0.988,
+    "event_wilson": [
+      0.9834323822876037,
+      0.9913194613564782
+    ],
+    "mean_scale": 1.0563336076263545,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation."
+  },
+  {
+    "id": "V04_017",
+    "suite": "V04",
+    "m": 64,
+    "n": 16,
+    "sigma": 3.0,
+    "M": 4.0,
+    "signal": "boundary",
+    "B": 3000,
+    "event_covered": 2971,
+    "event_wilson_95": [
+      0.9861515686577085,
+      0.9932609736923217
+    ],
+    "event_coverage": 0.9903333333333333,
+    "event_wilson": [
+      0.9861515686577085,
+      0.9932609736923217
+    ],
+    "mean_scale": 1.055104405294891,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation."
+  }
+]

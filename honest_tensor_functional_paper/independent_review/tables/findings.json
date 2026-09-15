@@ -1,0 +1,157 @@
+[
+  {
+    "id": "F01",
+    "severity": "MAJOR",
+    "title": "coverage tolerance can count a genuine miss as a hit",
+    "locations": [
+      {
+        "source": "honest_tensor_functional_paper/empirical_study/code/common.py",
+        "line": 66,
+        "exact_excerpt": "1e-11 * max(1., abs(target))"
+      },
+      {
+        "source": "honest_tensor_functional_paper/empirical_study/code/analyze_results.py",
+        "line": 74,
+        "exact_excerpt": "tolerance=1e-11*max(1.,abs(target))"
+      }
+    ]
+  },
+  {
+    "id": "F02",
+    "severity": "MAJOR",
+    "title": "the no-bias ablation changes three components",
+    "locations": [
+      {
+        "source": "honest_tensor_functional_paper/empirical_study/code/tensor_methods.py",
+        "line": 101,
+        "exact_excerpt": "Omit only bias and fallback"
+      },
+      {
+        "source": "honest_tensor_functional_paper/empirical_study/code/tensor_methods.py",
+        "line": 102,
+        "exact_excerpt": "qa=norm.isf(alpha/2)"
+      }
+    ]
+  },
+  {
+    "id": "F03",
+    "severity": "MAJOR",
+    "title": "the submission has no synchronized final manuscript",
+    "locations": [
+      {
+        "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/main.tex",
+        "line": 39,
+        "exact_excerpt": "general unseparated rank adaptation remain open"
+      },
+      {
+        "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/main.tex",
+        "line": 406,
+        "exact_excerpt": "absence of actual-rank adaptation"
+      },
+      {
+        "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/norm_loading_section.tex",
+        "line": 99,
+        "exact_excerpt": "What remains unresolved."
+      }
+    ]
+  },
+  {
+    "id": "F04",
+    "severity": "MODERATE",
+    "title": "the interval API's midpoint has a severe risk pathology",
+    "locations": [
+      {
+        "source": "honest_tensor_functional_paper/high_dimensional_extension/code/methods.py",
+        "line": 191,
+        "exact_excerpt": "lo = hi = 0."
+      },
+      {
+        "source": "honest_tensor_functional_paper/empirical_study/code/tensor_methods.py",
+        "line": 99,
+        "exact_excerpt": "if lo>hi:lo=hi=0."
+      }
+    ]
+  },
+  {
+    "id": "F05",
+    "severity": "MODERATE",
+    "title": "the signal sweep also changes the honesty class",
+    "locations": [
+      {
+        "source": "honest_tensor_functional_paper/empirical_study/code/run_study.py",
+        "line": 89,
+        "exact_excerpt": "M=max(np.sqrt(p)*tau,1.1*np.linalg.norm(A),np.linalg.norm(A)+tau)"
+      }
+    ]
+  },
+  {
+    "id": "F06",
+    "severity": "MODERATE",
+    "title": "comparator applicability needs case-level labels",
+    "locations": [
+      {
+        "source": "honest_tensor_functional_paper/empirical_study/code/run_study.py",
+        "line": 137,
+        "exact_excerpt": "asymptotic_regular_signal"
+      }
+    ]
+  },
+  {
+    "id": "F07",
+    "severity": "MODERATE",
+    "title": "computation and optimality evidence must remain separated",
+    "locations": [
+      {
+        "source": "honest_tensor_functional_paper/empirical_study/figures/captions.md",
+        "line": 13,
+        "exact_excerpt": "not formal interval arithmetic"
+      },
+      {
+        "source": "honest_tensor_functional_paper/high_dimensional_extension/theory/results.md",
+        "line": 135,
+        "exact_excerpt": "statistical"
+      }
+    ]
+  },
+  {
+    "id": "F08",
+    "severity": "MODERATE",
+    "title": "direct empirical checks are missing for two retained calibration refinements",
+    "locations": [
+      {
+        "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/refinements.tex",
+        "line": 139,
+        "exact_excerpt": "\\label{prop:mom}"
+      },
+      {
+        "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/refinements.tex",
+        "line": 184,
+        "exact_excerpt": "\\label{prop:variance}"
+      }
+    ]
+  },
+  {
+    "id": "F09",
+    "severity": "MINOR",
+    "title": "exported MSE rows need an estimator-level identifier",
+    "locations": [
+      {
+        "source": "honest_tensor_functional_paper/empirical_study/code/run_study.py",
+        "line": 153,
+        "exact_excerpt": "Midpoint of the 95% interval; no general MSE theorem asserted."
+      }
+    ]
+  },
+  {
+    "id": "F10",
+    "severity": "MINOR",
+    "title": "notation and historical presentation need consolidation",
+    "locations": [
+      {
+        "source": "honest_tensor_functional_paper/robust_adaptive_extension/paper/gap_section.tex",
+        "line": 115,
+        "exact_excerpt": "\\label{thm:low_degree}"
+      }
+    ]
+  }
+]

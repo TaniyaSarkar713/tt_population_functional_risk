@@ -1,0 +1,14 @@
+{
+  "status": "VALIDATED",
+  "original_case": "S03_007",
+  "full_noise_regenerated": true,
+  "maximum_center_discrepancy": 1.862645149230957e-09,
+  "covered95": 131,
+  "repetitions": 150,
+  "original_one_sided_binomial_pvalue": 0.00019221858994606332,
+  "original_pivot_mean": 0.06604112195810015,
+  "original_pivot_variance": 1.3035948114720817,
+  "original_pivot_ks_distance": 0.06710787921019468,
+  "confirmation_case": "S13_000",
+  "interpretation": "Original low coverage is retained. Independent confirmation is a separate post-hoc diagnostic, not a replacement."
+}

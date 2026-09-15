@@ -1,0 +1,28 @@
+/Users/taniyamac/Library/Python/3.9/lib/python/site-packages/scipy/stats/_ksstats.py:165: RuntimeWarning: divide by zero encountered in matmul
+  H = np.matmul(H, H)
+/Users/taniyamac/Library/Python/3.9/lib/python/site-packages/scipy/stats/_ksstats.py:165: RuntimeWarning: overflow encountered in matmul
+  H = np.matmul(H, H)
+/Users/taniyamac/Library/Python/3.9/lib/python/site-packages/scipy/stats/_ksstats.py:165: RuntimeWarning: invalid value encountered in matmul
+  H = np.matmul(H, H)
+/Users/taniyamac/Library/Python/3.9/lib/python/site-packages/scipy/stats/_ksstats.py:163: RuntimeWarning: divide by zero encountered in matmul
+  Hpwr = np.matmul(Hpwr, H)
+/Users/taniyamac/Library/Python/3.9/lib/python/site-packages/scipy/stats/_ksstats.py:163: RuntimeWarning: overflow encountered in matmul
+  Hpwr = np.matmul(Hpwr, H)
+/Users/taniyamac/Library/Python/3.9/lib/python/site-packages/scipy/stats/_ksstats.py:163: RuntimeWarning: invalid value encountered in matmul
+  Hpwr = np.matmul(Hpwr, H)
+{
+  "status": "PASSED",
+  "registered_cases": 402,
+  "monte_carlo_cases": 318,
+  "analytic_only_cases": 84,
+  "monte_carlo_data_sets": 1084640,
+  "summary_rows": 3444,
+  "analytic_bounds": 336,
+  "solver_solves": 2160,
+  "finite_sample_screen_rows": 2526,
+  "bonferroni_threshold": 1.9794140934283453e-05,
+  "finite_sample_undercoverage_flags": 0,
+  "preserved_files": 330,
+  "checks": 8061,
+  "interpretation": "VALIDATED means results/implementation checked, not proof of uniform coverage or minimax optimality."
+}

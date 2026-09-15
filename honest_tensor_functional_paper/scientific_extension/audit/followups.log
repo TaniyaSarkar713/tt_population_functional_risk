@@ -1,0 +1,148 @@
+[
+  {
+    "family": "dense_TT_core_loading",
+    "signal": "zero",
+    "gamma": 0.2,
+    "pointwise_risk_proxy": 0.04000000000000001,
+    "method": {
+      "replications": 2000,
+      "coverage": 0.95,
+      "coverage_lo": 0.9395558910656041,
+      "coverage_hi": 0.9587187663812682,
+      "mean_width": 4.257121961587831,
+      "width_mcse": 0.008947596872228552,
+      "mse": 2.0439835628121847,
+      "mse_mcse": 0.062082608750486164,
+      "error_mean": -0.010096154650695813,
+      "max_squared_error": 15.298916812857593
+    },
+    "direct": {
+      "replications": 2000,
+      "coverage": 0.952,
+      "coverage_lo": 0.9417339082484883,
+      "coverage_hi": 0.9605330810092589,
+      "mean_width": 3.919927969080108,
+      "width_mcse": 1.9865240156961426e-17,
+      "mse": 1.0271776828578913,
+      "mse_mcse": 0.032553210007944734,
+      "error_mean": 0.010254540319082408,
+      "max_squared_error": 12.547328873014129
+    },
+    "selected": {
+      "split_direct": 2000
+    },
+    "bias_condition_ratio": null
+  },
+  {
+    "family": "dense_TT_core_loading",
+    "signal": "strong",
+    "gamma": 0.2,
+    "pointwise_risk_proxy": 0.04000000000000001,
+    "method": {
+      "replications": 2000,
+      "coverage": 0.9635,
+      "coverage_lo": 0.9543526494507533,
+      "coverage_hi": 0.9708702477195252,
+      "mean_width": 1.4006618779681739,
+      "width_mcse": 0.004958672644056488,
+      "mse": 0.08057118098770998,
+      "mse_mcse": 0.0025189772377198407,
+      "error_mean": -0.004023059405153617,
+      "max_squared_error": 1.0957388914642132
+    },
+    "direct": {
+      "replications": 2000,
+      "coverage": 0.944,
+      "coverage_lo": 0.9330459959530119,
+      "coverage_hi": 0.9532516660612355,
+      "mean_width": 3.919927969080108,
+      "width_mcse": 1.9865240156961426e-17,
+      "mse": 1.0286310095398505,
+      "mse_mcse": 0.03408450108027519,
+      "error_mean": 0.02089809017832158,
+      "max_squared_error": 14.881131658990839
+    },
+    "selected": {
+      "tt_cut_2": 2000
+    },
+    "bias_condition_ratio": 0.125
+  },
+  {
+    "family": "diagonal_assumption_violation",
+    "scope": "Deliberate use outside exact diagonal-mean submodel; dense rank-one full tensor has all diagonal means t/2.",
+    "p": 4096,
+    "M": 534607.0116252176,
+    "method": {
+      "replications": 2000,
+      "coverage": 0.0,
+      "coverage_lo": 1.0842021724855044e-19,
+      "coverage_hi": 0.0019170472812529349,
+      "mean_width": 0.9969769868626345,
+      "width_mcse": 0.0,
+      "mse": 15527.00648168695,
+      "mse_mcse": 3.629196657360411,
+      "error_mean": -124.60570796201931,
+      "max_squared_error": 16065.749768373766
+    }
+  },
+  {
+    "family": "bounded_projection_bias",
+    "n_calibration": 100,
+    "n_validation": 100,
+    "target": 0.4,
+    "corrected": {
+      "replications": 2000,
+      "coverage": 1.0,
+      "coverage_lo": 0.9980829527187469,
+      "coverage_hi": 0.9999999999999998,
+      "mean_width": 1.611278007991765,
+      "width_mcse": 0.0017005448306168125,
+      "mse": 0.004442074017777777,
+      "mse_mcse": 0.0001423510949031861,
+      "error_mean": -0.0016059333333333654,
+      "max_squared_error": 0.04522711111111113
+    },
+    "uncorrected_DIAGNOSTIC": {
+      "replications": 2000,
+      "coverage": 0.9555,
+      "coverage_lo": 0.9455562350551854,
+      "coverage_hi": 0.9636973348715931,
+      "mean_width": 0.6193837892752035,
+      "width_mcse": 0.00045686747047202165,
+      "mse": 0.06291430261333335,
+      "mse_mcse": 0.0004017735330089722,
+      "error_mean": -0.24819213333333334,
+      "max_squared_error": 0.132496
+    }
+  },
+  {
+    "family": "bounded_projection_bias",
+    "n_calibration": 1000,
+    "n_validation": 1000,
+    "target": 0.4,
+    "corrected": {
+      "replications": 2000,
+      "coverage": 1.0,
+      "coverage_lo": 0.9980829527187469,
+      "coverage_hi": 0.9999999999999998,
+      "mean_width": 0.32688408537175256,
+      "width_mcse": 4.292023780984664e-05,
+      "mse": 0.00047232614959999994,
+      "mse_mcse": 1.4687726801778202e-05,
+      "error_mean": 0.0001798333333332988,
+      "max_squared_error": 0.004911206400000004
+    },
+    "uncorrected_DIAGNOSTIC": {
+      "replications": 2000,
+      "coverage": 0.0,
+      "coverage_lo": 1.0842021724855044e-19,
+      "coverage_hi": 0.0019170472812529349,
+      "mean_width": 0.10610807931577104,
+      "width_mcse": 0.0001293507802628581,
+      "mse": 0.06177864940942223,
+      "mse_mcse": 0.00019321564652902807,
+      "error_mean": -0.24793965333333334,
+      "max_squared_error": 0.08997600160000001
+    }
+  }
+]

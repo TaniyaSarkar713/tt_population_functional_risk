@@ -1,0 +1,112 @@
+{
+  "case": {
+    "id": "V04_008",
+    "suite": "V04",
+    "m": 16,
+    "n": 4,
+    "sigma": 1.0,
+    "M": 4.0,
+    "signal": "boundary",
+    "B": 3000
+  },
+  "records": [
+    {
+      "case": "V04_008",
+      "suite": "V04",
+      "method": "known_sigma",
+      "alpha": 0.05,
+      "repetitions": 3000,
+      "target": 1.0,
+      "coverage": 1.0,
+      "covered": 3000,
+      "coverage_wilson_95": [
+        0.9987211512746742,
+        1.0000000000000002
+      ],
+      "coverage_mcse": 0.0,
+      "length": 1.930057285833982,
+      "length_se": 4.7705926067114145e-18,
+      "mse": 0.22049835350757796,
+      "mse_se": 0.0020881953775500105,
+      "bias": -0.45284825144681834,
+      "bias_se": 0.002268035762163346,
+      "paired_length": 0.0,
+      "paired_length_se": 0.0,
+      "paired_coverage": 0.0,
+      "paired_coverage_se": 0.0,
+      "estimator_id": "known_sigma_scalar",
+      "estimator_alpha": null,
+      "coverage_policy": "four endpoint ULPs",
+      "status": "COMPLETED"
+    },
+    {
+      "case": "V04_008",
+      "suite": "V04",
+      "method": "independent_upper_sigma",
+      "alpha": 0.05,
+      "repetitions": 3000,
+      "target": 1.0,
+      "coverage": 1.0,
+      "covered": 3000,
+      "coverage_wilson_95": [
+        0.9987211512746742,
+        1.0000000000000002
+      ],
+      "coverage_mcse": 0.0,
+      "length": 1.9983268154800655,
+      "length_se": 0.00018008360482370543,
+      "mse": 0.9629987428453398,
+      "mse_se": 0.003015169935369214,
+      "bias": -0.9744579689694455,
+      "bias_se": 0.002116198466845238,
+      "paired_length": 0.06826952964608336,
+      "paired_length_se": 0.00018008360482370543,
+      "paired_coverage": 0.0,
+      "paired_coverage_se": 0.0,
+      "estimator_id": "independent_upper_sigma_scalar",
+      "estimator_alpha": null,
+      "coverage_policy": "four endpoint ULPs",
+      "status": "COMPLETED"
+    },
+    {
+      "case": "V04_008",
+      "suite": "V04",
+      "method": "naive_plugin_sigma",
+      "alpha": 0.05,
+      "repetitions": 3000,
+      "target": 1.0,
+      "coverage": 0.9666666666666667,
+      "covered": 2900,
+      "coverage_wilson_95": [
+        0.9596228935228089,
+        0.972516847666887
+      ],
+      "coverage_mcse": 0.00327730693416725,
+      "length": 1.8815005072087305,
+      "length_se": 0.002163695178738227,
+      "mse": 0.3350285775118432,
+      "mse_se": 0.006243971889618455,
+      "bias": -0.3351141777770576,
+      "bias_se": 0.0086178367833905,
+      "paired_length": -0.04855677862525141,
+      "paired_length_se": 0.0021636951787382267,
+      "paired_coverage": -0.03333333333333333,
+      "paired_coverage_se": 0.0032778532885820093,
+      "estimator_id": "naive_plugin_sigma_scalar",
+      "estimator_alpha": null,
+      "coverage_policy": "four endpoint ULPs",
+      "status": "COMPLETED"
+    }
+  ],
+  "extra": {
+    "event_coverage": 0.9913333333333333,
+    "event_wilson": [
+      0.9873312537039419,
+      0.9940787309486377
+    ],
+    "mean_scale": 1.2997602323164346,
+    "conditions_satisfied": true,
+    "scope": "Coordinate-envelope/selected-interval calibration, not general robust minimax computation."
+  },
+  "seed": 2026091309
+}

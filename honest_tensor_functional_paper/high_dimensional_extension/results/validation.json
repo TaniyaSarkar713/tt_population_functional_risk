@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "preserved_files": 23,
+  "growing_trials": 7200,
+  "pointwise_trials": 1900,
+  "loading_calculations": 96,
+  "adaptation_comparisons": 8,
+  "largest_full_tensor_entries": 262144
+}

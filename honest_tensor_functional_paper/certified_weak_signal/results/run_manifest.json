@@ -1,0 +1,12 @@
+{
+  "seed": 2026091102,
+  "seconds": 69.56730079650879,
+  "python": "3.9.6",
+  "numpy": "2.0.2",
+  "scipy": "1.13.1",
+  "source_hashes": {
+    "run_experiments.py": "f765b922f796f9b7f821e568c05fb42234fc55396b4e9943efdb163880b11f78",
+    "certified_optimizer.py": "57eb05070ea8e62726ae5f29ad447ada44cac6670a0a8eb2f1328fdfa3c72158",
+    "loading_and_adaptation.py": "f3bd3ac85f155c4db6e11b38b9467d21bc68c55b8d4c4099d95f1eed95c77acd"
+  }
+}

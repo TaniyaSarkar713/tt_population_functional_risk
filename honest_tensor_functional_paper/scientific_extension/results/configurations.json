@@ -1,0 +1,638 @@
+[
+  {
+    "family": "tensor",
+    "geometry": "tucker",
+    "order": 3,
+    "p": 8,
+    "rank": 1,
+    "signal": "zero",
+    "B": 1000
+  },
+  {
+    "family": "tensor",
+    "geometry": "tucker",
+    "order": 3,
+    "p": 8,
+    "rank": 1,
+    "signal": "weak",
+    "B": 1000
+  },
+  {
+    "family": "tensor",
+    "geometry": "tucker",
+    "order": 3,
+    "p": 8,
+    "rank": 1,
+    "signal": "strong",
+    "B": 1000
+  },
+  {
+    "family": "tensor",
+    "geometry": "tucker",
+    "order": 3,
+    "p": 8,
+    "rank": 2,
+    "signal": "zero",
+    "B": 1000
+  },
+  {
+    "family": "tensor",
+    "geometry": "tucker",
+    "order": 3,
+    "p": 8,
+    "rank": 2,
+    "signal": "weak",
+    "B": 1000
+  },
+  {
+    "family": "tensor",
+    "geometry": "tucker",
+    "order": 3,
+    "p": 8,
+    "rank": 2,
+    "signal": "strong",
+    "B": 1000
+  },
+  {
+    "family": "tensor",
+    "geometry": "tucker",
+    "order": 3,
+    "p": 16,
+    "rank": 1,
+    "signal": "zero",
+    "B": 500
+  },
+  {
+    "family": "tensor",
+    "geometry": "tucker",
+    "order": 3,
+    "p": 16,
+    "rank": 1,
+    "signal": "weak",
+    "B": 500
+  },
+  {
+    "family": "tensor",
+    "geometry": "tucker",
+    "order": 3,
+    "p": 16,
+    "rank": 1,
+    "signal": "strong",
+    "B": 500
+  },
+  {
+    "family": "tensor",
+    "geometry": "tucker",
+    "order": 3,
+    "p": 16,
+    "rank": 2,
+    "signal": "zero",
+    "B": 500
+  },
+  {
+    "family": "tensor",
+    "geometry": "tucker",
+    "order": 3,
+    "p": 16,
+    "rank": 2,
+    "signal": "weak",
+    "B": 500
+  },
+  {
+    "family": "tensor",
+    "geometry": "tucker",
+    "order": 3,
+    "p": 16,
+    "rank": 2,
+    "signal": "strong",
+    "B": 500
+  },
+  {
+    "family": "tensor",
+    "geometry": "tucker",
+    "order": 3,
+    "p": 32,
+    "rank": 1,
+    "signal": "zero",
+    "B": 500
+  },
+  {
+    "family": "tensor",
+    "geometry": "tucker",
+    "order": 3,
+    "p": 32,
+    "rank": 1,
+    "signal": "weak",
+    "B": 500
+  },
+  {
+    "family": "tensor",
+    "geometry": "tucker",
+    "order": 3,
+    "p": 32,
+    "rank": 1,
+    "signal": "strong",
+    "B": 500
+  },
+  {
+    "family": "tensor",
+    "geometry": "tucker",
+    "order": 3,
+    "p": 32,
+    "rank": 2,
+    "signal": "zero",
+    "B": 500
+  },
+  {
+    "family": "tensor",
+    "geometry": "tucker",
+    "order": 3,
+    "p": 32,
+    "rank": 2,
+    "signal": "weak",
+    "B": 500
+  },
+  {
+    "family": "tensor",
+    "geometry": "tucker",
+    "order": 3,
+    "p": 32,
+    "rank": 2,
+    "signal": "strong",
+    "B": 500
+  },
+  {
+    "family": "tensor",
+    "geometry": "tt",
+    "order": 4,
+    "p": 4,
+    "rank": 1,
+    "signal": "zero",
+    "B": 1000
+  },
+  {
+    "family": "tensor",
+    "geometry": "tt",
+    "order": 4,
+    "p": 4,
+    "rank": 1,
+    "signal": "weak",
+    "B": 1000
+  },
+  {
+    "family": "tensor",
+    "geometry": "tt",
+    "order": 4,
+    "p": 4,
+    "rank": 1,
+    "signal": "strong",
+    "B": 1000
+  },
+  {
+    "family": "tensor",
+    "geometry": "tt",
+    "order": 4,
+    "p": 4,
+    "rank": 2,
+    "signal": "zero",
+    "B": 1000
+  },
+  {
+    "family": "tensor",
+    "geometry": "tt",
+    "order": 4,
+    "p": 4,
+    "rank": 2,
+    "signal": "weak",
+    "B": 1000
+  },
+  {
+    "family": "tensor",
+    "geometry": "tt",
+    "order": 4,
+    "p": 4,
+    "rank": 2,
+    "signal": "strong",
+    "B": 1000
+  },
+  {
+    "family": "tensor",
+    "geometry": "tt",
+    "order": 4,
+    "p": 8,
+    "rank": 1,
+    "signal": "zero",
+    "B": 1000
+  },
+  {
+    "family": "tensor",
+    "geometry": "tt",
+    "order": 4,
+    "p": 8,
+    "rank": 1,
+    "signal": "weak",
+    "B": 1000
+  },
+  {
+    "family": "tensor",
+    "geometry": "tt",
+    "order": 4,
+    "p": 8,
+    "rank": 1,
+    "signal": "strong",
+    "B": 1000
+  },
+  {
+    "family": "tensor",
+    "geometry": "tt",
+    "order": 4,
+    "p": 8,
+    "rank": 2,
+    "signal": "zero",
+    "B": 1000
+  },
+  {
+    "family": "tensor",
+    "geometry": "tt",
+    "order": 4,
+    "p": 8,
+    "rank": 2,
+    "signal": "weak",
+    "B": 1000
+  },
+  {
+    "family": "tensor",
+    "geometry": "tt",
+    "order": 4,
+    "p": 8,
+    "rank": 2,
+    "signal": "strong",
+    "B": 1000
+  },
+  {
+    "family": "tensor",
+    "geometry": "tt",
+    "order": 4,
+    "p": 12,
+    "rank": 1,
+    "signal": "zero",
+    "B": 500
+  },
+  {
+    "family": "tensor",
+    "geometry": "tt",
+    "order": 4,
+    "p": 12,
+    "rank": 1,
+    "signal": "weak",
+    "B": 500
+  },
+  {
+    "family": "tensor",
+    "geometry": "tt",
+    "order": 4,
+    "p": 12,
+    "rank": 1,
+    "signal": "strong",
+    "B": 500
+  },
+  {
+    "family": "tensor",
+    "geometry": "tt",
+    "order": 4,
+    "p": 12,
+    "rank": 2,
+    "signal": "zero",
+    "B": 500
+  },
+  {
+    "family": "tensor",
+    "geometry": "tt",
+    "order": 4,
+    "p": 12,
+    "rank": 2,
+    "signal": "weak",
+    "B": 500
+  },
+  {
+    "family": "tensor",
+    "geometry": "tt",
+    "order": 4,
+    "p": 12,
+    "rank": 2,
+    "signal": "strong",
+    "B": 500
+  },
+  {
+    "family": "tensor",
+    "geometry": "tucker",
+    "order": 3,
+    "p": 16,
+    "rank": 2,
+    "signal": "undersaturated",
+    "B": 1000
+  },
+  {
+    "family": "tensor",
+    "geometry": "tt",
+    "order": 4,
+    "p": 8,
+    "rank": 2,
+    "signal": "undersaturated",
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 256,
+    "rank": 1,
+    "budget": 0.2,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 256,
+    "rank": 1,
+    "budget": 2.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 256,
+    "rank": 1,
+    "budget": 20.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 256,
+    "rank": 4,
+    "budget": 0.2,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 256,
+    "rank": 4,
+    "budget": 2.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 256,
+    "rank": 4,
+    "budget": 20.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 256,
+    "rank": 16,
+    "budget": 0.2,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 256,
+    "rank": 16,
+    "budget": 2.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 256,
+    "rank": 16,
+    "budget": 20.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 256,
+    "rank": 64,
+    "budget": 0.2,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 256,
+    "rank": 64,
+    "budget": 2.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 256,
+    "rank": 64,
+    "budget": 20.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 4096,
+    "rank": 1,
+    "budget": 0.2,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 4096,
+    "rank": 1,
+    "budget": 2.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 4096,
+    "rank": 1,
+    "budget": 20.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 4096,
+    "rank": 4,
+    "budget": 0.2,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 4096,
+    "rank": 4,
+    "budget": 2.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 4096,
+    "rank": 4,
+    "budget": 20.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 4096,
+    "rank": 8,
+    "budget": 0.2,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 4096,
+    "rank": 8,
+    "budget": 2.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 4096,
+    "rank": 8,
+    "budget": 20.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 4096,
+    "rank": 64,
+    "budget": 0.2,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 4096,
+    "rank": 64,
+    "budget": 2.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 4096,
+    "rank": 64,
+    "budget": 20.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 4096,
+    "rank": 256,
+    "budget": 0.2,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 4096,
+    "rank": 256,
+    "budget": 2.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 4096,
+    "rank": 256,
+    "budget": 20.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 65536,
+    "rank": 1,
+    "budget": 0.2,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 65536,
+    "rank": 1,
+    "budget": 2.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 65536,
+    "rank": 1,
+    "budget": 20.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 65536,
+    "rank": 4,
+    "budget": 0.2,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 65536,
+    "rank": 4,
+    "budget": 2.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 65536,
+    "rank": 4,
+    "budget": 20.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 65536,
+    "rank": 16,
+    "budget": 0.2,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 65536,
+    "rank": 16,
+    "budget": 2.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 65536,
+    "rank": 16,
+    "budget": 20.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 65536,
+    "rank": 256,
+    "budget": 0.2,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 65536,
+    "rank": 256,
+    "budget": 2.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 65536,
+    "rank": 256,
+    "budget": 20.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 65536,
+    "rank": 1024,
+    "budget": 0.2,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 65536,
+    "rank": 1024,
+    "budget": 2.0,
+    "B": 1000
+  },
+  {
+    "family": "diagonal",
+    "p": 65536,
+    "rank": 1024,
+    "budget": 20.0,
+    "B": 1000
+  }
+]

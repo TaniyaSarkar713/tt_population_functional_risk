@@ -1,0 +1,214 @@
+{
+  "status": "PASSED",
+  "checks": 87,
+  "passed": [
+    "analysis_passed",
+    "all_registered_cases",
+    "independent_dataset_count",
+    "solver_solves",
+    "S01_completed",
+    "S01_sources",
+    "S02_completed",
+    "S02_sources",
+    "S03_completed",
+    "S03_sources",
+    "S04_completed",
+    "S04_sources",
+    "S05_completed",
+    "S05_sources",
+    "S06_completed",
+    "S06_sources",
+    "S07_completed",
+    "S07_sources",
+    "S08_completed",
+    "S08_sources",
+    "S09_completed",
+    "S09_sources",
+    "S10_completed",
+    "S10_sources",
+    "S11_completed",
+    "S11_sources",
+    "S12_completed",
+    "S12_sources",
+    "S13_completed",
+    "S13_sources",
+    "earlier_files_preserved",
+    "report.pdf_pdf_signature",
+    "report.pdf_nonempty",
+    "report.pdf_no_unresolved_marker",
+    "empirical_sections.pdf_pdf_signature",
+    "empirical_sections.pdf_nonempty",
+    "empirical_sections.pdf_no_unresolved_marker",
+    "03_pointwise_rates.pdf_pdf_signature",
+    "03_pointwise_rates.pdf_nonempty",
+    "03_pointwise_rates.pdf_no_unresolved_marker",
+    "03_pointwise_rates.pdf_vector",
+    "08_power_and_pivots.pdf_pdf_signature",
+    "08_power_and_pivots.pdf_nonempty",
+    "08_power_and_pivots.pdf_no_unresolved_marker",
+    "08_power_and_pivots.pdf_vector",
+    "07_corrections.pdf_pdf_signature",
+    "07_corrections.pdf_nonempty",
+    "07_corrections.pdf_no_unresolved_marker",
+    "07_corrections.pdf_vector",
+    "02_weak_threshold.pdf_pdf_signature",
+    "02_weak_threshold.pdf_nonempty",
+    "02_weak_threshold.pdf_no_unresolved_marker",
+    "02_weak_threshold.pdf_vector",
+    "01_growing_rates.pdf_pdf_signature",
+    "01_growing_rates.pdf_nonempty",
+    "01_growing_rates.pdf_no_unresolved_marker",
+    "01_growing_rates.pdf_vector",
+    "05_noise.pdf_pdf_signature",
+    "05_noise.pdf_nonempty",
+    "05_noise.pdf_no_unresolved_marker",
+    "05_noise.pdf_vector",
+    "06_solver.pdf_pdf_signature",
+    "06_solver.pdf_nonempty",
+    "06_solver.pdf_no_unresolved_marker",
+    "06_solver.pdf_vector",
+    "10_intermediate_caps.pdf_pdf_signature",
+    "10_intermediate_caps.pdf_nonempty",
+    "10_intermediate_caps.pdf_no_unresolved_marker",
+    "10_intermediate_caps.pdf_vector",
+    "09_runtime.pdf_pdf_signature",
+    "09_runtime.pdf_nonempty",
+    "09_runtime.pdf_no_unresolved_marker",
+    "09_runtime.pdf_vector",
+    "04_signal_sweep.pdf_pdf_signature",
+    "04_signal_sweep.pdf_nonempty",
+    "04_signal_sweep.pdf_no_unresolved_marker",
+    "04_signal_sweep.pdf_vector",
+    "ten_vector_figures",
+    "report_1,084,640",
+    "report_402",
+    "report_2,160",
+    "report_Real-data",
+    "report_midpoint",
+    "report_S13",
+    "report_intermediate",
+    "gaussian_direct_regenerated",
+    "complete_tables"
+  ],
+  "figures": [
+    {
+      "file": "03_pointwise_rates.pdf",
+      "pages": 1,
+      "embedded_images": 0,
+      "font_sizes": [
+        6.3,
+        7.02,
+        8.0,
+        9.0,
+        10.0,
+        12.0
+      ],
+      "note": "Small math superscripts may be below 8pt; base labels/legends are >=8pt at native figure size. Visual inspection recorded separately."
+    },
+    {
+      "file": "08_power_and_pivots.pdf",
+      "pages": 1,
+      "embedded_images": 0,
+      "font_sizes": [
+        8.0,
+        9.0,
+        10.0
+      ],
+      "note": "Small math superscripts may be below 8pt; base labels/legends are >=8pt at native figure size. Visual inspection recorded separately."
+    },
+    {
+      "file": "07_corrections.pdf",
+      "pages": 1,
+      "embedded_images": 0,
+      "font_sizes": [
+        8.0,
+        9.0,
+        10.0
+      ],
+      "note": "Small math superscripts may be below 8pt; base labels/legends are >=8pt at native figure size. Visual inspection recorded separately."
+    },
+    {
+      "file": "02_weak_threshold.pdf",
+      "pages": 1,
+      "embedded_images": 0,
+      "font_sizes": [
+        6.3,
+        8.0,
+        9.0,
+        10.0
+      ],
+      "note": "Small math superscripts may be below 8pt; base labels/legends are >=8pt at native figure size. Visual inspection recorded separately."
+    },
+    {
+      "file": "01_growing_rates.pdf",
+      "pages": 1,
+      "embedded_images": 0,
+      "font_sizes": [
+        8.0,
+        9.0,
+        10.0
+      ],
+      "note": "Small math superscripts may be below 8pt; base labels/legends are >=8pt at native figure size. Visual inspection recorded separately."
+    },
+    {
+      "file": "05_noise.pdf",
+      "pages": 1,
+      "embedded_images": 0,
+      "font_sizes": [
+        8.0,
+        9.0,
+        10.0
+      ],
+      "note": "Small math superscripts may be below 8pt; base labels/legends are >=8pt at native figure size. Visual inspection recorded separately."
+    },
+    {
+      "file": "06_solver.pdf",
+      "pages": 1,
+      "embedded_images": 0,
+      "font_sizes": [
+        6.3,
+        8.0,
+        9.0,
+        10.0
+      ],
+      "note": "Small math superscripts may be below 8pt; base labels/legends are >=8pt at native figure size. Visual inspection recorded separately."
+    },
+    {
+      "file": "10_intermediate_caps.pdf",
+      "pages": 1,
+      "embedded_images": 0,
+      "font_sizes": [
+        6.3,
+        8.0,
+        9.0,
+        10.0
+      ],
+      "note": "Small math superscripts may be below 8pt; base labels/legends are >=8pt at native figure size. Visual inspection recorded separately."
+    },
+    {
+      "file": "09_runtime.pdf",
+      "pages": 1,
+      "embedded_images": 0,
+      "font_sizes": [
+        6.3,
+        8.0,
+        9.0,
+        10.0
+      ],
+      "note": "Small math superscripts may be below 8pt; base labels/legends are >=8pt at native figure size. Visual inspection recorded separately."
+    },
+    {
+      "file": "04_signal_sweep.pdf",
+      "pages": 1,
+      "embedded_images": 0,
+      "font_sizes": [
+        6.3,
+        8.0,
+        9.0,
+        10.0
+      ],
+      "note": "Small math superscripts may be below 8pt; base labels/legends are >=8pt at native figure size. Visual inspection recorded separately."
+    }
+  ],
+  "limitations": "Artifact and numerical validation; not proof of statistical claims. Real-data analysis remains pending."
+}

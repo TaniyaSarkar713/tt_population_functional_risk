@@ -1,0 +1,30 @@
+{
+  "seed": 2026091455,
+  "B": 2000,
+  "families": [
+    "dense_TT_core_loading",
+    "diagonal_assumption_violation",
+    "bounded_projection_bias"
+  ],
+  "TT_shape": [
+    4,
+    5,
+    4,
+    3
+  ],
+  "TT_caps": [
+    2,
+    3,
+    2
+  ],
+  "TT_strengths": [
+    "zero",
+    "strong"
+  ],
+  "bounded_n_each": [
+    100,
+    1000
+  ],
+  "diagonal_violation_p": 4096,
+  "alpha": 0.05
+}

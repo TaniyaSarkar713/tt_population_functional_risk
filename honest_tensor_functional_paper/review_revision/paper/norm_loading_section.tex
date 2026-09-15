@@ -1,0 +1,100 @@
+\section{Norm budgets and loading geometry}\label{sec:norm_loading}
+
+The restriction $M=\tau\sqrt p$ can be removed for the equal diagonal contrast. The key is to impose the Frobenius budget and the residual-scan constraints on each ordered diagonal entry, before summing. Throughout this section the tensor order and positive rank caps are fixed; constants are not claimed uniform in growing caps.
+
+Put $P_2=2J_2^{(K-1)/2}$ and $Q_2=4J_2^{K/2}$, where $J_2=J(2\bar r)$, and define
+\begin{equation}\label{eq:norm_diameter}
+ U_{K,p}(M;\alpha)=\frac1{\sqrt p}\sum_{s=1}^p
+       \min\{P_2M,Q_2\lambda_s(\alpha)\}\,s^{-K/2}.
+\end{equation}
+Here $\lambda_s(\alpha)$ is the finite-net threshold in \eqref{eq:scan_threshold}, with error budget $\alpha$.
+
+\begin{theorem}[Diameter using both norm and scan constraints]\label{thm:norm_diameter}
+For every $p\ge1$, $K\ge3$, $M,\tau>0$ and $0<\alpha<1$, the residual-projection interval $C_F$ is honest and satisfies, for every observation,
+\[
+ |C_F|\le\min\{2h_0,U_{K,p}(M;\alpha)\}.
+\]
+The bound retains the supplied norm budget inside the ordered-coordinate sum; taking the minimum only after summation can lose the intermediate cubic regime.
+\end{theorem}
+
+Let $\ell_p=\log(ep)$, $x=M/(\tau\sqrt{\ell_p})$, and define
+\begin{align}
+ g_p(x)&=\min\{x,1+\log_+x,\ell_p\},\qquad
+          \log_+x=\max(0,\log x),\label{eq:norm_g}\\
+ \mathfrak r_K(p,M,\tau)&=\frac{\tau\sqrt{\ell_p}}{\sqrt p}
+ \begin{cases}
+ g_p(x),&K=3,\\
+ \min(x,1),&K\ge4.
+ \end{cases}\label{eq:norm_rate}
+\end{align}
+These definitions also cover $p=1$, when the rate is $\min(M,\tau)$.
+
+\begin{theorem}[Full-data length for every positive norm budget]\label{thm:all_norm_rates}
+Fix $K\ge3$, positive Tucker or TT caps, and $0<\alpha<1/4$. For the equal diagonal contrast there are constants $0<c<C<\infty$, depending only on these fixed quantities, such that for every $p\ge1$ and every $M,\tau>0$,
+\[
+ c\,\mathfrak r_K(p,M,\tau)
+ \le\mathcal L_0(\Theta)
+ \le\mathcal L_{\max}(\Theta)
+ \le C\,\mathfrak r_K(p,M,\tau).
+\]
+The lower bounds already hold when the honesty class is restricted to rank-one tensors. The interval in Theorem~\ref{thm:norm_diameter} attains the upper order.
+\end{theorem}
+
+For $K\ge4$ the rate is $\min\{M,\tau\sqrt{\log(ep)}\}/\sqrt p$. For $K=3$, the norm-limited regime $x\le1$ has rate $M/\sqrt p$; above it the multiplier grows as $1+\log x$ until capped at $\ell_p$. These are rates up to fixed multiplicative constants, not exact transition constants. Substituting $M=\tau\sqrt p$ recovers Theorem~\ref{thm:full_minimax}.
+
+For squared-error estimation, a fixed-confidence midpoint argument is insufficient when $M/\tau$ is arbitrarily large: its off-coverage term can grow with $M^2$. Instead use an approximate minimum-residual estimator. Fix $\beta=1/8$, and put
+\[
+ T(R)=\max\bigl(0,\max_{S\ne\varnothing}
+                  \{N_S(R)-\lambda_{|S|}(\beta)\}\bigr).
+\]
+Choose a fixed countable dense sequence $(B_j)$ in the compact cap class. Define
+\begin{equation}\label{eq:residual_fit}
+ d(Z)=\inf_j T(Z-B_j),\quad
+ j(Z)=\min\{j:T(Z-B_j)\le d(Z)+\tau\},\quad
+ \widehat\psi=\psi(B_{j(Z)}).
+\end{equation}
+The tolerance $\tau$ ensures the displayed index exists. This defines a statistical estimator, not a claimed efficient optimization algorithm.
+
+\begin{theorem}[Squared risk uniformly over norm budgets]\label{thm:all_norm_mse}
+Under the fixed-order, fixed-cap conditions of Theorem~\ref{thm:all_norm_rates},
+\[
+ \inf_{\widetilde\psi}\sup_{A\in\Theta}
+       \E_A(\widetilde\psi-\psi(A))^2
+       \asymp\mathfrak r_K(p,M,\tau)^2
+\]
+uniformly over $p\ge1$ and $M,\tau>0$. The measurable estimator in \eqref{eq:residual_fit} attains the upper bound. It uses neither a failure probability depending on $M$ nor a minimum nonzero singular value.
+\end{theorem}
+
+\subsection{Nonuniform orthogonal loadings}
+
+Return to the prescribed orthogonal product loading in \eqref{eq:loading}, with $m$ nonzero weights and possibly unequal ambient mode dimensions. Let $w_s^*$ denote decreasing absolute weights. Use orthogonal mode transformations and restrict to the $m^K$ coordinates spanned by the prescribed loading vectors. The resulting Gaussian tensor retains the rank and norm bounds. Write $\lambda_s^{(m)}$ for the scan threshold with $p=m$, and define
+\begin{align}
+ U_w&=\sum_{s=1}^m w_s^*
+          \min\{P_2M,Q_2\lambda_s^{(m)}(\alpha)\}s^{-K/2},\label{eq:weighted_upper}\\
+ L_w&=\max_{1\le d\le m} w_d^*\sqrt d\,
+                  \mathfrak r_K(d,M,\tau).\label{eq:weighted_lower}
+\end{align}
+The rank constants use the same supplied caps. The structural radius is
+\[
+h_0=M\left(\sum_{s=1}^{s_{\rm cap}}(w_s^*)^2\right)^{1/2},
+\]
+with $s_{\rm cap}$ truncated at $m$.
+
+\begin{theorem}[Loading-dependent full-data bounds]\label{thm:weighted_bounds}
+For fixed $K\ge3$, fixed positive caps and fixed $0<\alpha<1/4$, an honest interval obtained by residual projection in the rotated block satisfies
+\[
+ |C_w(Z)|\le\min(2h_0,U_w)
+\]
+for every observation. Conversely every interval honest on the full ambient cap class satisfies
+\[
+ \E_0|C(Z)|\ge c_{K,\alpha}L_w.
+\]
+The lower bound allows use of every ambient tensor entry. These bounds are not asserted to match for arbitrary nonuniform weights.
+\end{theorem}
+
+\begin{proposition}[Sharp rates for a flat orthogonal loading]\label{prop:flat_loading}
+If $w_i=\epsilon_i/\sqrt m$ with prescribed $\epsilon_i\in\{-1,1\}$, then both minimax expected-length criteria have order $\mathfrak r_K(m,M,\tau)$, and minimax squared error has its square, independently of the larger ambient mode dimensions. The statement includes dense orthogonal rotations of the loading. At $m=1$ it gives the bounded-normal-mean scale $\min(M,\tau)$.
+\end{proposition}
+
+\paragraph{Scope of the general-loading bounds.}
+The displayed envelopes need not match for arbitrary unequal weights. Results L1 and W2 below establish additional small-budget and fixed-decay regimes. Results A1, G2 and P1 separately describe fixed-cap rate adaptation, a growing-outer-class obstruction and strong saturated pointwise inference. General loading profiles and complete pointwise adaptation remain open.

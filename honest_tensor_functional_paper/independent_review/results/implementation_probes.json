@@ -1,0 +1,171 @@
+{
+  "status": "COMPLETED_WITH_FINDINGS",
+  "oracle_tolerance": {
+    "case": "S03_007",
+    "alpha": 0.1,
+    "records": [
+      {
+        "trial": 41,
+        "noise_contraction": -0.5816030753966773,
+        "normal_radius": 0.5815435768383368,
+        "exact_noise_miss": true,
+        "miss_distance": 5.949855834053164e-05,
+        "ulp": 1.862645149230957e-09
+      }
+    ],
+    "conclusion": "Genuine miss; strict coverage is 133/150, stored tolerant coverage is 134/150 for oracle and XCH known."
+  },
+  "bias_ablation": {
+    "alpha": 0.05,
+    "p": 16,
+    "rank": 1,
+    "full_validation_quantile": 2.2474798802084313,
+    "ablation_validation_quantile": 1.9599639845400545,
+    "changes": [
+      "Removes bias",
+      "Removes direct/structural fallback and intersections",
+      "Changes confidence allocation"
+    ]
+  },
+  "signal_budget_sweep": [
+    {
+      "case": "S04_000",
+      "amplitude": 0.0,
+      "M": 4.0
+    },
+    {
+      "case": "S04_001",
+      "amplitude": 0.5,
+      "M": 4.0
+    },
+    {
+      "case": "S04_002",
+      "amplitude": 2.0,
+      "M": 4.0
+    },
+    {
+      "case": "S04_003",
+      "amplitude": 8.0,
+      "M": 9.0
+    },
+    {
+      "case": "S04_004",
+      "amplitude": 32.0,
+      "M": 35.2
+    },
+    {
+      "case": "S04_005",
+      "amplitude": 128.0,
+      "M": 140.8
+    },
+    {
+      "case": "S04_006",
+      "amplitude": 512.0,
+      "M": 563.2
+    },
+    {
+      "case": "S04_007",
+      "amplitude": 2048.0,
+      "M": 2252.8
+    },
+    {
+      "case": "S04_008",
+      "amplitude": 8192.0,
+      "M": 9011.2
+    },
+    {
+      "case": "S04_009",
+      "amplitude": 38866.21485069781,
+      "M": 42752.8363357676
+    },
+    {
+      "case": "S04_010",
+      "amplitude": 310929.7188055825,
+      "M": 342022.6906861408
+    }
+  ],
+  "binary_outer_grid_checks": [
+    {
+      "trial": 0,
+      "budget": 1,
+      "grid_feasible": 695,
+      "passed": true,
+      "certified": false,
+      "lo": -2.000000000624907,
+      "hi": 2.000000000624907
+    },
+    {
+      "trial": 0,
+      "budget": 25,
+      "grid_feasible": 695,
+      "passed": true,
+      "certified": false,
+      "lo": -2.000000000624907,
+      "hi": 2.000000000624907
+    },
+    {
+      "trial": 0,
+      "budget": 125,
+      "grid_feasible": 695,
+      "passed": true,
+      "certified": false,
+      "lo": -2.000000000624907,
+      "hi": 2.000000000624907
+    },
+    {
+      "trial": 1,
+      "budget": 1,
+      "grid_feasible": 769,
+      "passed": true,
+      "certified": false,
+      "lo": -2.000000000597446,
+      "hi": 2.000000000597446
+    },
+    {
+      "trial": 1,
+      "budget": 25,
+      "grid_feasible": 769,
+      "passed": true,
+      "certified": false,
+      "lo": -2.000000000597446,
+      "hi": 2.000000000597446
+    },
+    {
+      "trial": 1,
+      "budget": 125,
+      "grid_feasible": 769,
+      "passed": true,
+      "certified": false,
+      "lo": -2.000000000597446,
+      "hi": 2.000000000597446
+    },
+    {
+      "trial": 2,
+      "budget": 1,
+      "grid_feasible": 522,
+      "passed": true,
+      "certified": false,
+      "lo": -2.0000000006447203,
+      "hi": 2.0000000006447203
+    },
+    {
+      "trial": 2,
+      "budget": 25,
+      "grid_feasible": 522,
+      "passed": true,
+      "certified": false,
+      "lo": -2.0000000006447203,
+      "hi": 2.0000000006447203
+    },
+    {
+      "trial": 2,
+      "budget": 125,
+      "grid_feasible": 522,
+      "passed": true,
+      "certified": false,
+      "lo": -2.0000000006447203,
+      "hi": 2.0000000006447203
+    }
+  ],
+  "scope": "New bounded checks and one full-noise regeneration. Finite grids cannot prove global certificates."
+}

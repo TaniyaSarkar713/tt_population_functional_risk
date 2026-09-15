@@ -1,0 +1,573 @@
+{
+  "seed": 2026091309,
+  "registered_before_execution": true,
+  "cases": [
+    {
+      "id": "V01_000",
+      "suite": "V01",
+      "p": 16,
+      "rank": 1,
+      "amplitude": 0.0,
+      "M_fixed": 342023.6906861408,
+      "B": 1000
+    },
+    {
+      "id": "V01_001",
+      "suite": "V01",
+      "p": 16,
+      "rank": 1,
+      "amplitude": 2.0,
+      "M_fixed": 342023.6906861408,
+      "B": 1000
+    },
+    {
+      "id": "V01_002",
+      "suite": "V01",
+      "p": 16,
+      "rank": 1,
+      "amplitude": 32.0,
+      "M_fixed": 342023.6906861408,
+      "B": 1000
+    },
+    {
+      "id": "V01_003",
+      "suite": "V01",
+      "p": 16,
+      "rank": 1,
+      "amplitude": 128.0,
+      "M_fixed": 342023.6906861408,
+      "B": 1000
+    },
+    {
+      "id": "V01_004",
+      "suite": "V01",
+      "p": 16,
+      "rank": 1,
+      "amplitude": 512.0,
+      "M_fixed": 342023.6906861408,
+      "B": 1000
+    },
+    {
+      "id": "V01_005",
+      "suite": "V01",
+      "p": 16,
+      "rank": 1,
+      "amplitude": 2048.0,
+      "M_fixed": 342023.6906861408,
+      "B": 1000
+    },
+    {
+      "id": "V01_006",
+      "suite": "V01",
+      "p": 16,
+      "rank": 1,
+      "amplitude": 8192.0,
+      "M_fixed": 342023.6906861408,
+      "B": 1000
+    },
+    {
+      "id": "V01_007",
+      "suite": "V01",
+      "p": 16,
+      "rank": 1,
+      "amplitude": 30000.0,
+      "M_fixed": 342023.6906861408,
+      "B": 1000
+    },
+    {
+      "id": "V01_008",
+      "suite": "V01",
+      "p": 16,
+      "rank": 1,
+      "amplitude": 100000.0,
+      "M_fixed": 342023.6906861408,
+      "B": 1000
+    },
+    {
+      "id": "V01_009",
+      "suite": "V01",
+      "p": 16,
+      "rank": 1,
+      "amplitude": 310929.7188055825,
+      "M_fixed": 342023.6906861408,
+      "B": 1000
+    },
+    {
+      "id": "V02_000",
+      "suite": "V02",
+      "amplitude": 0.0,
+      "M": 3.0,
+      "tau": 0.5,
+      "B": 50,
+      "budgets": [
+        100,
+        600,
+        3000
+      ],
+      "tolerance": 0.1
+    },
+    {
+      "id": "V02_001",
+      "suite": "V02",
+      "amplitude": 0.2,
+      "M": 3.0,
+      "tau": 0.5,
+      "B": 50,
+      "budgets": [
+        100,
+        600,
+        3000
+      ],
+      "tolerance": 0.1
+    },
+    {
+      "id": "V02_002",
+      "suite": "V02",
+      "amplitude": 1.0,
+      "M": 3.0,
+      "tau": 0.5,
+      "B": 50,
+      "budgets": [
+        100,
+        600,
+        3000
+      ],
+      "tolerance": 0.1
+    },
+    {
+      "id": "V02_003",
+      "suite": "V02",
+      "amplitude": 2.5,
+      "M": 3.0,
+      "tau": 0.5,
+      "B": 50,
+      "budgets": [
+        100,
+        600,
+        3000
+      ],
+      "tolerance": 0.1
+    },
+    {
+      "id": "V03_000",
+      "suite": "V03",
+      "law": "gaussian",
+      "n": 512,
+      "m": 16,
+      "M": 20.0,
+      "supplied_c": 0,
+      "actual_c": 0,
+      "B": 1000
+    },
+    {
+      "id": "V03_001",
+      "suite": "V03",
+      "law": "gaussian",
+      "n": 512,
+      "m": 16,
+      "M": 20.0,
+      "supplied_c": 8,
+      "actual_c": 8,
+      "B": 1000
+    },
+    {
+      "id": "V03_002",
+      "suite": "V03",
+      "law": "gaussian",
+      "n": 512,
+      "m": 16,
+      "M": 20.0,
+      "supplied_c": 20,
+      "actual_c": 20,
+      "B": 1000
+    },
+    {
+      "id": "V03_003",
+      "suite": "V03",
+      "law": "gaussian",
+      "n": 1024,
+      "m": 16,
+      "M": 20.0,
+      "supplied_c": 0,
+      "actual_c": 0,
+      "B": 1000
+    },
+    {
+      "id": "V03_004",
+      "suite": "V03",
+      "law": "gaussian",
+      "n": 1024,
+      "m": 16,
+      "M": 20.0,
+      "supplied_c": 8,
+      "actual_c": 8,
+      "B": 1000
+    },
+    {
+      "id": "V03_005",
+      "suite": "V03",
+      "law": "gaussian",
+      "n": 1024,
+      "m": 16,
+      "M": 20.0,
+      "supplied_c": 20,
+      "actual_c": 20,
+      "B": 1000
+    },
+    {
+      "id": "V03_006",
+      "suite": "V03",
+      "law": "t3",
+      "n": 512,
+      "m": 16,
+      "M": 20.0,
+      "supplied_c": 0,
+      "actual_c": 0,
+      "B": 1000
+    },
+    {
+      "id": "V03_007",
+      "suite": "V03",
+      "law": "t3",
+      "n": 512,
+      "m": 16,
+      "M": 20.0,
+      "supplied_c": 8,
+      "actual_c": 8,
+      "B": 1000
+    },
+    {
+      "id": "V03_008",
+      "suite": "V03",
+      "law": "t3",
+      "n": 512,
+      "m": 16,
+      "M": 20.0,
+      "supplied_c": 20,
+      "actual_c": 20,
+      "B": 1000
+    },
+    {
+      "id": "V03_009",
+      "suite": "V03",
+      "law": "t3",
+      "n": 1024,
+      "m": 16,
+      "M": 20.0,
+      "supplied_c": 0,
+      "actual_c": 0,
+      "B": 1000
+    },
+    {
+      "id": "V03_010",
+      "suite": "V03",
+      "law": "t3",
+      "n": 1024,
+      "m": 16,
+      "M": 20.0,
+      "supplied_c": 8,
+      "actual_c": 8,
+      "B": 1000
+    },
+    {
+      "id": "V03_011",
+      "suite": "V03",
+      "law": "t3",
+      "n": 1024,
+      "m": 16,
+      "M": 20.0,
+      "supplied_c": 20,
+      "actual_c": 20,
+      "B": 1000
+    },
+    {
+      "id": "V03_012",
+      "suite": "V03",
+      "law": "correlated",
+      "n": 512,
+      "m": 16,
+      "M": 20.0,
+      "supplied_c": 0,
+      "actual_c": 0,
+      "B": 1000
+    },
+    {
+      "id": "V03_013",
+      "suite": "V03",
+      "law": "correlated",
+      "n": 512,
+      "m": 16,
+      "M": 20.0,
+      "supplied_c": 8,
+      "actual_c": 8,
+      "B": 1000
+    },
+    {
+      "id": "V03_014",
+      "suite": "V03",
+      "law": "correlated",
+      "n": 512,
+      "m": 16,
+      "M": 20.0,
+      "supplied_c": 20,
+      "actual_c": 20,
+      "B": 1000
+    },
+    {
+      "id": "V03_015",
+      "suite": "V03",
+      "law": "correlated",
+      "n": 1024,
+      "m": 16,
+      "M": 20.0,
+      "supplied_c": 0,
+      "actual_c": 0,
+      "B": 1000
+    },
+    {
+      "id": "V03_016",
+      "suite": "V03",
+      "law": "correlated",
+      "n": 1024,
+      "m": 16,
+      "M": 20.0,
+      "supplied_c": 8,
+      "actual_c": 8,
+      "B": 1000
+    },
+    {
+      "id": "V03_017",
+      "suite": "V03",
+      "law": "correlated",
+      "n": 1024,
+      "m": 16,
+      "M": 20.0,
+      "supplied_c": 20,
+      "actual_c": 20,
+      "B": 1000
+    },
+    {
+      "id": "V03_018",
+      "suite": "V03",
+      "law": "gaussian",
+      "n": 512,
+      "m": 16,
+      "M": 20.0,
+      "supplied_c": 0,
+      "actual_c": 120,
+      "B": 1000
+    },
+    {
+      "id": "V04_000",
+      "suite": "V04",
+      "m": 1,
+      "n": 2,
+      "sigma": 1.0,
+      "M": 4.0,
+      "signal": "boundary",
+      "B": 3000
+    },
+    {
+      "id": "V04_001",
+      "suite": "V04",
+      "m": 1,
+      "n": 2,
+      "sigma": 3.0,
+      "M": 4.0,
+      "signal": "boundary",
+      "B": 3000
+    },
+    {
+      "id": "V04_002",
+      "suite": "V04",
+      "m": 1,
+      "n": 4,
+      "sigma": 1.0,
+      "M": 4.0,
+      "signal": "boundary",
+      "B": 3000
+    },
+    {
+      "id": "V04_003",
+      "suite": "V04",
+      "m": 1,
+      "n": 4,
+      "sigma": 3.0,
+      "M": 4.0,
+      "signal": "boundary",
+      "B": 3000
+    },
+    {
+      "id": "V04_004",
+      "suite": "V04",
+      "m": 1,
+      "n": 16,
+      "sigma": 1.0,
+      "M": 4.0,
+      "signal": "boundary",
+      "B": 3000
+    },
+    {
+      "id": "V04_005",
+      "suite": "V04",
+      "m": 1,
+      "n": 16,
+      "sigma": 3.0,
+      "M": 4.0,
+      "signal": "boundary",
+      "B": 3000
+    },
+    {
+      "id": "V04_006",
+      "suite": "V04",
+      "m": 16,
+      "n": 2,
+      "sigma": 1.0,
+      "M": 4.0,
+      "signal": "boundary",
+      "B": 3000
+    },
+    {
+      "id": "V04_007",
+      "suite": "V04",
+      "m": 16,
+      "n": 2,
+      "sigma": 3.0,
+      "M": 4.0,
+      "signal": "boundary",
+      "B": 3000
+    },
+    {
+      "id": "V04_008",
+      "suite": "V04",
+      "m": 16,
+      "n": 4,
+      "sigma": 1.0,
+      "M": 4.0,
+      "signal": "boundary",
+      "B": 3000
+    },
+    {
+      "id": "V04_009",
+      "suite": "V04",
+      "m": 16,
+      "n": 4,
+      "sigma": 3.0,
+      "M": 4.0,
+      "signal": "boundary",
+      "B": 3000
+    },
+    {
+      "id": "V04_010",
+      "suite": "V04",
+      "m": 16,
+      "n": 16,
+      "sigma": 1.0,
+      "M": 4.0,
+      "signal": "boundary",
+      "B": 3000
+    },
+    {
+      "id": "V04_011",
+      "suite": "V04",
+      "m": 16,
+      "n": 16,
+      "sigma": 3.0,
+      "M": 4.0,
+      "signal": "boundary",
+      "B": 3000
+    },
+    {
+      "id": "V04_012",
+      "suite": "V04",
+      "m": 64,
+      "n": 2,
+      "sigma": 1.0,
+      "M": 4.0,
+      "signal": "boundary",
+      "B": 3000
+    },
+    {
+      "id": "V04_013",
+      "suite": "V04",
+      "m": 64,
+      "n": 2,
+      "sigma": 3.0,
+      "M": 4.0,
+      "signal": "boundary",
+      "B": 3000
+    },
+    {
+      "id": "V04_014",
+      "suite": "V04",
+      "m": 64,
+      "n": 4,
+      "sigma": 1.0,
+      "M": 4.0,
+      "signal": "boundary",
+      "B": 3000
+    },
+    {
+      "id": "V04_015",
+      "suite": "V04",
+      "m": 64,
+      "n": 4,
+      "sigma": 3.0,
+      "M": 4.0,
+      "signal": "boundary",
+      "B": 3000
+    },
+    {
+      "id": "V04_016",
+      "suite": "V04",
+      "m": 64,
+      "n": 16,
+      "sigma": 1.0,
+      "M": 4.0,
+      "signal": "boundary",
+      "B": 3000
+    },
+    {
+      "id": "V04_017",
+      "suite": "V04",
+      "m": 64,
+      "n": 16,
+      "sigma": 3.0,
+      "M": 4.0,
+      "signal": "boundary",
+      "B": 3000
+    },
+    {
+      "id": "V05_000",
+      "suite": "V05",
+      "p": 32,
+      "rank": 1,
+      "amplitude": 1687535.9776624753,
+      "B": 1000
+    },
+    {
+      "id": "V05_001",
+      "suite": "V05",
+      "p": 32,
+      "rank": 6,
+      "amplitude": 1686238.6052250266,
+      "B": 1000
+    },
+    {
+      "id": "V05_002",
+      "suite": "V05",
+      "p": 64,
+      "rank": 1,
+      "amplitude": 9371115.579480572,
+      "B": 1000
+    },
+    {
+      "id": "V05_003",
+      "suite": "V05",
+      "p": 64,
+      "rank": 8,
+      "amplitude": 9368986.231341893,
+      "B": 1000
+    }
+  ]
+}

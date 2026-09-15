@@ -1,0 +1,1 @@
+Recomputed 160 saved cases; rounding differences: [{'id': 'F037', 'method': 'method', 'strict': 0, 'bounded_ulp': 2000, 'changed': 2000}, {'id': 'F037', 'method': 'direct', 'strict': 0, 'bounded_ulp': 1890, 'changed': 1890}]

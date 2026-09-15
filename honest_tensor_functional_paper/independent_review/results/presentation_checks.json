@@ -1,0 +1,119 @@
+{
+  "active_source_count": 22,
+  "integrated_label_count": 132,
+  "duplicate_labels": [],
+  "missing_reference_labels": [],
+  "cited_keys": 34,
+  "missing_bib_keys": [],
+  "bibliography_scope": "Key resolution only; not a full accuracy/priority audit.",
+  "pdfs": [
+    {
+      "file": "honest_tensor_functional_paper/robust_adaptive_extension/paper/main.pdf",
+      "pages": 55,
+      "outside_page_spans": [],
+      "replacement_characters": 0
+    },
+    {
+      "file": "honest_tensor_functional_paper/certified_weak_signal/paper/main.pdf",
+      "pages": 7,
+      "outside_page_spans": [],
+      "replacement_characters": 0
+    },
+    {
+      "file": "honest_tensor_functional_paper/high_dimensional_extension/paper/main.pdf",
+      "pages": 6,
+      "outside_page_spans": [],
+      "replacement_characters": 0
+    },
+    {
+      "file": "honest_tensor_functional_paper/empirical_study/report.pdf",
+      "pages": 14,
+      "outside_page_spans": [],
+      "replacement_characters": 0
+    },
+    {
+      "file": "honest_tensor_functional_paper/empirical_study/manuscript/empirical_sections.pdf",
+      "pages": 2,
+      "outside_page_spans": [],
+      "replacement_characters": 0
+    }
+  ],
+  "figures": [
+    {
+      "file": "honest_tensor_functional_paper/robust_adaptive_extension/paper/figures/theoretical_comparison.pdf",
+      "pages": 1,
+      "embedded_raster_images": 0
+    },
+    {
+      "file": "honest_tensor_functional_paper/robust_adaptive_extension/paper/figures/weak_rank_coverage.pdf",
+      "pages": 1,
+      "embedded_raster_images": 0
+    },
+    {
+      "file": "honest_tensor_functional_paper/robust_adaptive_extension/figures/adaptive_intervals.pdf",
+      "pages": 1,
+      "embedded_raster_images": 0
+    },
+    {
+      "file": "honest_tensor_functional_paper/robust_adaptive_extension/figures/robustness_and_loadings.pdf",
+      "pages": 1,
+      "embedded_raster_images": 0
+    },
+    {
+      "file": "honest_tensor_functional_paper/empirical_study/figures/01_growing_rates.pdf",
+      "pages": 1,
+      "embedded_raster_images": 0
+    },
+    {
+      "file": "honest_tensor_functional_paper/empirical_study/figures/02_weak_threshold.pdf",
+      "pages": 1,
+      "embedded_raster_images": 0
+    },
+    {
+      "file": "honest_tensor_functional_paper/empirical_study/figures/03_pointwise_rates.pdf",
+      "pages": 1,
+      "embedded_raster_images": 0
+    },
+    {
+      "file": "honest_tensor_functional_paper/empirical_study/figures/04_signal_sweep.pdf",
+      "pages": 1,
+      "embedded_raster_images": 0
+    },
+    {
+      "file": "honest_tensor_functional_paper/empirical_study/figures/05_noise.pdf",
+      "pages": 1,
+      "embedded_raster_images": 0
+    },
+    {
+      "file": "honest_tensor_functional_paper/empirical_study/figures/06_solver.pdf",
+      "pages": 1,
+      "embedded_raster_images": 0
+    },
+    {
+      "file": "honest_tensor_functional_paper/empirical_study/figures/07_corrections.pdf",
+      "pages": 1,
+      "embedded_raster_images": 0
+    },
+    {
+      "file": "honest_tensor_functional_paper/empirical_study/figures/08_power_and_pivots.pdf",
+      "pages": 1,
+      "embedded_raster_images": 0
+    },
+    {
+      "file": "honest_tensor_functional_paper/empirical_study/figures/09_runtime.pdf",
+      "pages": 1,
+      "embedded_raster_images": 0
+    },
+    {
+      "file": "honest_tensor_functional_paper/empirical_study/figures/10_intermediate_caps.pdf",
+      "pages": 1,
+      "embedded_raster_images": 0
+    }
+  ],
+  "isolated_latex_build": {
+    "exit_code": 0,
+    "seconds": 3.8432344169999997,
+    "final_pages": 55,
+    "warning_lines": []
+  }
+}

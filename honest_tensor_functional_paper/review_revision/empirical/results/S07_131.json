@@ -1,0 +1,41 @@
+{
+  "case": {
+    "id": "S07_131",
+    "suite": "S07",
+    "p": 16384,
+    "profile": "spike",
+    "M": 1000.0,
+    "B": 0
+  },
+  "records": [],
+  "extra": {
+    "bounds": [
+      {
+        "K": 3,
+        "upper_diameter": 3.9199279690801125,
+        "block_diameter": 179.86082900358957,
+        "direct_diameter": 3.9199279690801125,
+        "structural_diameter": 1231.3114185998386,
+        "H": 2.937136538054196,
+        "largest": 0.6156557092999193,
+        "two_point_scale": 0.6156557092999193,
+        "sharp_scale_claim": false,
+        "analytic_only": true
+      },
+      {
+        "K": 4,
+        "upper_diameter": 3.9199279690801125,
+        "block_diameter": 1245.0363804737797,
+        "direct_diameter": 3.9199279690801125,
+        "structural_diameter": 1231.3114185998386,
+        "H": 0.858650071583507,
+        "largest": 0.6156557092999193,
+        "two_point_scale": 0.6156557092999193,
+        "sharp_scale_claim": false,
+        "analytic_only": true
+      }
+    ],
+    "status": "NEEDS CHECK",
+    "interpretation": "Analytic envelopes only; no fitted interval or empirical rate attainment."
+  }
+}

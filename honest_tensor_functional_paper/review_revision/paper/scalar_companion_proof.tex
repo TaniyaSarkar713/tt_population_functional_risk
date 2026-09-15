@@ -1,0 +1,52 @@
+\section{R1. Scalar companion and risk
+proof}\label{r1.-scalar-companion-and-risk-proof}\label{sup:R1}
+
+This is a new statement for the revision, with the complete argument
+below. It does not alter the confidence interval or assert pointwise
+minimax squared risk.
+
+Let \(Y=\psi+\tau g\), \(g\sim N(0,1)\), and suppose the supplied
+structural range is \(|\psi|\le h\). Let \(I\) be the intersection of
+any candidate interval with \([Y-d,Y+d]\) and \([-h,h]\), where
+\(d=z_{1-\alpha/4}\tau\). The candidate may depend arbitrarily on the
+data. The reported confidence interval may retain its existing
+empty-intersection convention \(\{0\}\).
+
+Define a \textbf{separate scalar estimator} by \(\widehat\psi=0\) when
+\(h\le\tau\). Otherwise, use the midpoint of the actual nonempty
+intersection; on an empty intersection use \(\Pi_{[-h,h]}Y\). Replacing
+an exactly zero singleton by the clipped direct estimate also satisfies
+the bound. Then, for every admissible mean,
+
+\[E(\widehat\psi-\psi)^2\le
+\begin{cases}
+h^2,&h\le\tau,\\
+\tau^2\{1+2z_{1-\alpha/4}\sqrt{2/\pi}+z_{1-\alpha/4}^2\},&h>\tau.
+\end{cases}\]
+
+Thus the risk is at most \(C_\alpha\min(h^2,\tau^2)\), uniformly over
+the norm budget and signal magnitude. No candidate coverage, separation,
+rank recovery, or independence from \(Y\) is needed for this
+\textbf{risk} bound. Honesty of the reported interval continues to
+require its original assumptions and calibration.
+
+\textbf{Proof.} On \(h\le\tau\), zero has squared error at most \(h^2\).
+Otherwise, on a nonempty intersection its midpoint \(m\) is in
+\([Y-d,Y+d]\), so \(|m-\psi|\le|Y-\psi|+d\). On an empty intersection,
+projection onto an interval containing \(\psi\) is nonexpansive relative
+to \(\psi\): \(|\Pi_{[-h,h]}Y-\psi|\le|Y-\psi|\). The same argument
+covers a zero-singleton replacement. Consequently the error on every
+observation is at most \(\tau|g|+d\). Taking expectations, using
+\(Eg^2=1\) and \(E|g|=\sqrt{2/\pi}\), proves the second branch. Since
+\(C_\alpha\ge1\), both branches imply the final inequality. No
+conditioning on a successful pilot or deletion of rare events occurs.
+
+For A4/P1 and the normalized diagonal loading, \(h=M\sqrt{r/p}\). The
+cap-valid intervals already intersect the direct interval at error
+\(\alpha/2\), so \(d=z_{1-\alpha/4}\tau\) is exactly their existing
+direct radius. The scalar companion therefore removes the \(M^2\) loss
+from the arbitrary zero sentinel without changing any coverage event or
+interval length. For general fixed \(L\), replace \(\tau\) by
+\(\tau\|L\|_F\) and use any valid supplied structural range. This is a
+noise-scale risk bound, not a proof of the smaller P1 pointwise
+squared-risk rate or of the ideal full-data minimax risk.

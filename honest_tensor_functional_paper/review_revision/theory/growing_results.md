@@ -1,0 +1,403 @@
+Observe $Z=A+\tau G$ with independent standard Gaussian tensor entries,
+known $\tau>0$, norm bound $\|A\|_F\le M$, and supplied Tucker or TT caps.
+Unless specified otherwise, dimensions are equal to $p$ and $K\ge3$.
+For $L=p^{-1/2}\sum_{i=1}^p E_i$, write
+$\psi(A)=\langle L,A\rangle$, where $E_i=e_i^{\otimes K}$.
+The criteria $\mathcal L_0$ and $\mathcal L_{\max}$ are optimal expected
+length at zero and optimal worst-case expected length among intervals
+honest over the whole stated class. Fix $0<\alpha<1/4$.
+
+## G1. Sharp growing-cap rates with a polynomial algorithm
+
+Let $r=\min(p,\min_k\bar r_k)$, where the minimum is over the supplied
+constrained unfoldings (Tucker modes or TT cuts). Suppose
+$r\ge c\sqrt p$ for a fixed $c>0$. Uniformly over all remaining caps,
+all $p$, and every $M,\tau>0$,
+
+$$\mathcal L_0\asymp_{\alpha,c}\mathcal L_{\max}
+\asymp_{\alpha,c}\min\{M\sqrt{r/p},\tau\}.$$
+
+Minimax squared risk has the square of this rate. The constants do not
+depend on growing ranks or tensor order. Choose deterministically between
+the structural interval $[-h_0,h_0]$, $h_0=M\sqrt{r/p}$, and the direct
+Gaussian interval centered at $\psi(Z)$ with radius $z_{1-\alpha/2}\tau$.
+This takes $O(p)$ accessed entries and arithmetic for the coordinate loading.
+For a rotated flat loading, obtaining the contractions has its additional
+polynomial input-access cost. No factor estimation or exponential scan is
+required.
+
+**Upper proof.** An unfolding attaining the smallest cap has loading matrix
+singular values $1/\sqrt p$, repeated $p$ times. Matrix singular-value
+duality and Cauchy--Schwarz bound its contraction with any rank-at-most-$r$
+matrix of norm $M$ by $M\sqrt{r/p}$. Thus the structural interval covers
+surely. The direct error is $N(0,\tau^2)$. Deterministic radius selection
+proves the length upper bound. Choosing estimator zero when $h_0\le\tau$
+and the direct estimator otherwise gives squared risk at most
+$\min(h_0^2,\tau^2)$.
+
+**Lower proof.** For a uniform size-$r$ subset $S$ of $\{1,\ldots,p\}$ set
+
+$$A_S=b\sum_{i\in S}E_i,\qquad
+b=\min\{M/\sqrt r,\tau\sqrt{\log(1+p/(4r^2))}\}.$$
+
+All constrained unfolding ranks are $r$, the norm is at most $M$, and the
+common target is $\Delta=rb/\sqrt p$. For independent supports $S,T$,
+the full Gaussian likelihood second moment equals
+$\mathbb E\exp\{b^2|S\cap T|/\tau^2\}$. To bound it, for
+$H=|S\cap T|$ factorial moments give
+$\mathbb E\binom Hj=\binom rj(r)_j/(p)_j\le\binom rj(r/p)^j$.
+Expand $(1+t)^H$ at $t=e^{b^2/\tau^2}-1$ to obtain
+
+$$1+\chi^2(Q,P_0)\le(1+rt/p)^r\le\exp(r^2t/p)\le e^{1/4}.$$
+
+Put $x=p/(4r^2)\le1/(4c^2)$. Since
+$x/(1+x)\le\log(1+x)\le x$,
+
+$$\frac{\tau}{2\sqrt{1+1/(4c^2)}}
+\le\frac{\tau r}{\sqrt p}\sqrt{\log(1+p/(4r^2))}\le\frac\tau2.$$
+
+Consequently $\Delta\asymp_c\min(M\sqrt{r/p},\tau)$.
+Total variation is at most
+$\eta=\sqrt{e^{1/4}-1}/2<1/2$.
+Coverage of both zero and the common target implies
+$\mathbb E_0|C|\ge\Delta(1-2\alpha-\eta)$, which is positive for
+$\alpha<1/4$. The nearest-target testing argument also gives squared risk
+at least $\Delta^2(1-\eta)/8$. This proves all claims.
+
+This closes the large-cap regime using the earlier sparse-diagonal lower
+bound. It is a consequence of that bound with a newly matched upper bound,
+not a new sparse-mixture technique. Under $M=\tau\sqrt p$ the rate is
+$\tau$, so the vanishing fixed-cap improvement has already disappeared
+by rank order $\sqrt p$, well below unrestricted rank $p$.
+
+## G2. General adaptation across positive growing caps is impossible
+
+Set $M=\tau\sqrt p$ and let the outer smallest cap satisfy
+$r\ge c\sqrt p$. Every interval honest on that outer class has
+$\mathbb E_0|C|\ge c_{\alpha,c}\tau$. For a fixed positive inner cap
+vector, the previously established oracle minimax rate is
+
+$$\mathfrak r_K(p)=\frac\tau{\sqrt p}
+\begin{cases}(\log(ep))^{3/2},&K=3,\\
+\sqrt{\log(ep)},&K\ge4.
+\end{cases}$$
+
+Zero belongs to every such inner class. Its worst-case expected length
+under outer honesty is therefore at least order $\tau$, a diverging factor
+$\sqrt p/(\log(ep))^{3/2}$ or $\sqrt{p/\log(ep)}$ larger than its
+known-class oracle rate. No algorithm, including an exponential one, can
+be simultaneously minimax in rate over these positive fixed and growing
+cap classes. This is stronger than excluding only the known-rank-zero
+oracle. It does not conflict with earlier adaptation across *fixed* outer
+caps, whose constants were allowed to depend on that outer cap.
+
+**Nonzero version.** Suppose $A_0$ is supported on the first $q$ coordinates
+in every mode, with norm $a<M$ and actual constrained ranks $r_{0,k}$.
+Let $m=p-q$, $s=\min(m,\min_k(\bar r_k-r_{0,k}))$ and
+$M_0=\sqrt{M^2-a^2}$. If $s\ge c\sqrt m$, then
+
+$$\mathbb E_{A_0}|C|\gtrsim_{\alpha,c}
+\min\{M_0\sqrt{s/p},\tau\sqrt{m/p}\}.$$
+
+**Proof.** Add the G1 alternatives on the disjoint remaining block. Norm
+squares add; every unfolding rank increases by at most $s$. Translation
+by $A_0$ preserves Gaussian likelihood overlaps, and normalization of the
+target multiplies the dimension-$m$ lower bound by $\sqrt{m/p}$.
+This gives a positive nonzero-base obstruction when weak extra rank fits
+inside the supplied caps. Arbitrarily oriented versions follow by using
+orthogonal product blocks when the transformed loading is flat on that block.
+
+## W1. A dyadic loading bound using the full weight profile
+
+Return to a prescribed orthogonal product loading
+$L_w=\sum_{i=1}^m w_i U_i$, with decreasing absolute weights and fixed
+positive caps. The ambient mode dimensions may exceed $m$.
+Partition the ordered indices into $B_0=\{1\}$ and
+$B_j=\{2^{j-1}+1,\ldots,\min(2^j,m)\}$ for $j\ge1$, stopping when empty.
+Let $a_j=\max_{i\in B_j}|w_i|$, $d_j=|B_j|$, and
+$\alpha_j=\alpha/2^{j+1}$. Define
+
+$$H_K(w)=\sum_j a_j(j+1)^{\nu_K},\qquad
+\nu_3=3/2,\quad \nu_K=1/2\ (K\ge4).$$
+
+There is a full-data honest interval satisfying the deterministic bound
+
+$$|C_w|\le C_{K,\bar r,\alpha}
+\min\{M\|w\|_\infty,\tau H_K(w)\}.$$
+
+The minimax squared risk is at most a constant times the square of the
+same expression. This is a statistical upper bound using the ideal block
+residual fits, not a polynomial implementation of those fits.
+
+**Proof.** Rotate the known orthogonal factors into coordinates. Restrict
+the data to each $d_j^K$ block; this cannot increase its norm or rank caps.
+Apply the earlier weighted residual confidence projection at error
+$\alpha_j$. With $J_2=J(2\bar r)$, its block diameter is at most
+
+$$4J_2^{K/2}a_j\sum_{s=1}^{d_j}\lambda_s^{(j)}s^{-K/2},$$
+
+where
+
+$$\lambda_s^{(j)}=\tau\sqrt{2\{s\log(ed_j/s)+Ks\log(1+4K)
++\log(2d_j/\alpha_j)\}}.$$
+
+For $s\ge1$, $\log(ed_j)$ and $\log(1/\alpha_j)$ are bounded by a fixed
+constant times $j+1$. Thus
+$\lambda_s^{(j)}\le C_{K,\alpha}\tau\sqrt{s(j+1)}$.
+The remaining sum is harmonic for $K=3$, bounded by $C(j+1)$, and bounded
+by a $K$-dependent constant for $K\ge4$. Add the block intervals and use
+$\sum_j\alpha_j\le\alpha$. Their lengths sum to at most $C\tau H_K(w)$.
+The old structural radius is at most $M\sqrt{\min\bar r_k}\|w\|_\infty$,
+which is $O(M\|w\|_\infty)$ for fixed caps. Select the smaller deterministic
+bound before seeing the data.
+
+For squared error use block residual fits with error budgets
+$\beta_j=2^{-j-4}$ and deterministic optimization tolerance $\tau$.
+The earlier excess-tail proof gives each block error an $L_2$ norm at most
+$C\tau a_j(j+1)^{\nu_K}$: the deterministic diameter term has the bound
+just derived, and the excess term has $L_2$ norm $O(\tau a_j)$ because
+$\sum_s s^{-K/2}<\infty$ and $\mathbb E T_{0,j}^2\le2\beta_j\tau^2$.
+Minkowski's inequality bounds the $L_2$ norm of their summed error by
+$C\tau H_K(w)$, without requiring independence. Compare with estimator
+zero and its structural risk bound. The finite number of blocks makes
+measurability and summation immediate.
+
+## W2. Sharp rates at every budget for polynomially decreasing loadings
+
+Suppose for fixed $\beta>0$ and $C_0<\infty$ that the nonzero, decreasing
+weights satisfy
+
+$$|w_i|\le C_0|w_1|i^{-\beta},\qquad i=1,\ldots,m.$$
+
+For fixed positive caps and order, uniformly over all $m,M,\tau>0$,
+
+$$\mathcal L_0(\Theta;L_w)\asymp\mathcal L_{\max}(\Theta;L_w)
+\asymp |w_1|\min(M,\tau),$$
+
+and minimax squared risk is $\asymp |w_1|^2\min(M,\tau)^2$.
+Constants may depend on $\beta,C_0,K,\bar r,\alpha$, but not on dimension
+or budget. This includes all signed power-law weights, whether normalized
+or not. In particular, $0<\beta<1/2$ permits diffuse unit-Frobenius
+loadings with $|w_1|\to0$; the result is not limited to a constant product
+overlap with a unit-Frobenius loading.
+
+**Proof.** For $j\ge1$,
+$a_j\le C_0|w_1|2^{-\beta(j-1)}$. The series
+$\sum_j2^{-\beta(j-1)}(j+1)^{\nu_K}$ is finite for every fixed $\beta>0$.
+W1 therefore gives the matching length and risk upper bounds. For the
+lower bounds compare zero with $tU_1$, where
+$t=\min(M,\tau)/2$ and its sign agrees with $w_1$. These rank-one means
+belong to every positive cap class, their target difference is $t|w_1|$,
+and their total variation is at most $2\Phi(1/4)-1<1/4$.
+The common-target interval argument and two-point squared-loss argument
+give the asserted lower orders. No lower power-envelope assumption on the
+other weights is needed.
+
+As $\beta\downarrow0$ the constants deteriorate: the dyadic sum is of
+order at most $1+\beta^{-(\nu_K+1)}$ up to fixed constants. Thus this
+theorem does not cover a dimension-dependent exponent approaching zero
+uniformly, and does not contradict the extra logarithmic factors for
+flat loadings. Completely arbitrary unequal weight sequences, including
+many slowly varying profiles, remain uncharacterized.
+
+**Nonorthogonal perturbations.** Suppose $L=L_w+R$, with the same weight
+condition and a known otherwise arbitrary tensor $R$ satisfying
+$\|R\|_F\le\epsilon|w_1|$ for a fixed $0\le\epsilon<1$.
+The same sharp rates hold with constants depending also on $1-\epsilon$.
+For the lower bound,
+$|\langle L,U_1\rangle|\ge(1-\epsilon)|w_1|$.
+For large budgets add a direct interval for $\langle R,A\rangle$ at a
+separate error allocation, costing $O(\tau\|R\|_F)$.
+For small budgets, $\rho(L_w)=|w_1|$ by generalized Hölder and
+$\rho(R)\le\|R\|_F$; the canonical expansion bounds the structural
+radius by $\sqrt J M(1+\epsilon)|w_1|$. The same reasoning applies to
+squared error, using the direct residual estimator and Minkowski.
+This gives an all-budget result for a class of loadings without an exact
+orthogonal representation, but is not a theorem for every loading.
+
+## W3. A restricted computational separation for these newly matched loadings
+
+The W2 rate does not automatically have an efficient estimator. To make
+this distinction precise, let $w_i=w_1i^{-\beta}>0$ with fixed
+$0<\beta<1/K$, and set $M=\tau\sqrt p$.
+Choose constants
+
+$$\frac1K<a<\min\left\{\frac12,\frac{1-2\beta}{K-2}\right\},
+\qquad 0<b<a-\frac1K.$$
+
+For $s=\lfloor p^a\rfloor$ and $\mathsf d=\lfloor p^b\rfloor$, every polynomial
+estimator of total degree at most $\mathsf d$ in the full observed tensor has
+worst-case squared risk polynomially larger than the unrestricted
+$\tau^2w_1^2$ rate of W2.
+
+**Finite statement and proof.** For a uniform size-$s$ support $S$, put
+$x_S=s^{-1/2}\mathbf1_S$ and let $\mathsf d_w$ be the diagonal map with entries
+$w_p/w_i\le1$. Use the rank-one alternatives
+
+$$A_S=\tau\lambda(\mathsf d_wx_S)\otimes x_S^{\otimes(K-1)},\qquad
+0<\tau\lambda\le M.$$
+
+They have norm at most $M$ and common weighted target
+$\Delta=\tau\lambda w_p s^{1-K/2}$.
+All factors are nonnegative, so for two supports
+$0\le\langle A_S,A_T\rangle/\tau^2\le
+\lambda^2|S\cap T|^K/s^K$.
+The full Gaussian Hermite expansion therefore bounds the squared norm of
+the centered likelihood ratio through degree $\mathsf d$ by
+
+$$\chi^2_{\le \mathsf d}\le\sum_{d=1}^{\mathsf d}
+\frac{\lambda^{2d}\mathbb E H^{Kd}}{d!s^{Kd}}
+\le\frac{\mu e^\mu B_{\mathsf d}}{1-B_{\mathsf d}}=\eta_{\mathsf d}^2,
+\quad \mu=s^2/p,\quad B_{\mathsf d}=\frac{\lambda^2(K\mathsf d)^K}{s^K}<1.$$
+
+For completeness, counting maps by their nonempty fibers gives
+$H^q=\sum_{j=1}^q S(q,j)(H)_j$, where $S(q,j)$ counts partitions of $q$
+elements into $j$ nonempty sets. We have $S(q,j)\le j^q/j!$ and
+$\mathbb E(H)_j\le\mu^j$.
+Hence $\mathbb E H^q\le q^q(e^\mu-1)\le\mu e^\mu q^q$.
+Substitute $q=Kd$ and sum the geometric upper bound to get the display.
+For a degree-$\mathsf d$ estimator with worst-case squared risk $R$, orthogonality
+of Hermite polynomials and Cauchy--Schwarz give
+$|\mathbb E_QT-\mathbb E_0T|\le\sqrt R\,\eta_{\mathsf d}$.
+The two target means differ by $\Delta$ and their estimation biases are
+each at most $\sqrt R$, so
+
+$$R\ge\Delta^2/(2+\eta_{\mathsf d})^2.$$
+
+Set $\lambda=\sqrt p$. Then $\mu\to0$ and
+$B_{\mathsf d}=O(p^{1-Ka+Kb})\to0$, whereas
+
+$$\frac{\Delta}{\tau w_1}
+\asymp p^{1/2-\beta-a(K-2)/2}\longrightarrow\infty$$
+
+at a polynomial rate by the choice of $a$. Such an $a$ exists precisely
+under the stated sufficient condition $\beta<1/K$. This proves the
+restricted separation, using the earlier general low-degree argument with
+a new loading-compatible prior. It includes diffuse power-law loadings
+with sharp all-budget rates from W2.
+
+This is not a lower bound for all polynomial-time algorithms or all
+confidence intervals. An interval honest on zero and these alternatives
+would give the test $\mathbf1\{\Delta\in C(Z)\}$ with total error at most
+$2\alpha+\mathbb E_0|C|/\Delta$. Excluding such efficient tests requires
+an additional computational hypothesis; the polynomial-estimator result
+alone does not supply one.
+
+## P1. Efficient pointwise optimality at strong saturated Tucker means
+
+This result concerns **Tucker mode caps all equal to $r$**, $1\le r\le p$.
+It does not substitute TT bond caps for mode caps. Let
+
+$$A_0=\sum_{i\in S}a_i E_i,\qquad |S|=r,\quad
+a=\min_{i\in S}|a_i|>0,\quad
+\|A_0\|_F+\tau\le M\le c_0a\sqrt r,$$
+
+where $c_0>1$ is fixed. The support and signed amplitudes are not supplied
+to the algorithm. These means saturate every supplied mode cap.
+There is a polynomial interval honest on the entire unseparated Tucker
+class such that, in the strong-signal regime specified below,
+
+$$\mathbb E_{A_0}|C|\asymp_{K,\alpha,c_0}\tau\sqrt{r/p},$$
+
+and this matches the infimum expected length at $A_0$ under that *same
+outer-class honesty requirement*. Both $p$ and $r$ may grow. This is
+pointwise optimality in rate, not optimal leading constants.
+
+**Algorithm and noise budgets.** Make the valid artificial split
+$Z^{(1)}=Z+\tau G'$, $Z^{(2)}=Z-\tau G'$, with independent errors of scale
+$v=\sqrt2\tau$. Set $\delta=\alpha r/(8p)$ and
+
+$$\eta=2v\sqrt{2\{(p+p^{K-1})\log9+\log(2K/\delta)\}}.$$
+
+Use the preceding cap-valid tangent interval with pilot failure budget
+$\delta$ and total failure budget $\alpha/2$. Its validation quantile is
+$z_{\mathrm{val}}=z_{1-(\alpha/2-\delta)/2}$. Intersect it with the direct interval on
+$Z$ at error $\alpha/2$ and the structural range. All choices are valid on
+the unseparated class. The total reported length is bounded by
+$2z_{1-\alpha/4}\tau$, including on pilot failure.
+
+A sufficient condition for the pointwise rate is
+
+$$a\ge 4\eta,\qquad a\ge \eta^2\sqrt p/\tau.$$
+
+For fixed order/confidence this is satisfied at sufficiently large constant
+multiple of $\tau p^{K-1/2}$. This requirement is conservative and much
+stronger than a claim of optimal computational signal strength.
+
+**Upper proof.** On the simultaneous pilot event, the top-$r$ projector
+$Q_k$ satisfies $\|Q_k-P_k\|_{op}\le d=4\eta/a$, where $P_k$ projects
+onto the coordinates in $S$. The cap-valid certificate has each angle
+bound at most $d$ by Weyl's inequality and $a\ge4\eta$.
+Write $T_Q$ and $T_P$ for their first-order product-space projectors.
+The representation
+
+$$T_Q=\sum_k\bigotimes_{l\ne k}Q_l-(K-1)\bigotimes_l Q_l$$
+
+with an identity in the omitted mode, and product telescoping, gives
+$\|T_Q-T_P\|_{op}\le2K(K-1)d$.
+For the diagonal loading,
+$T_PL=p^{-1/2}\sum_{i\in S}E_i$, so
+
+$$\|T_QL\|_F\le\sqrt{r/p}+2K(K-1)d.$$
+
+The cap-valid bias is bounded by
+$M\sqrt{\binom K2}d^2\le
+16c_0\sqrt{\binom K2}\sqrt r\,\eta^2/a$.
+The assumed amplitude makes this $O(\tau\sqrt{r/p})$.
+It also gives $d\le4\tau/(\eta\sqrt p)=O(\sqrt{r/p})$, because
+$\eta\gtrsim\tau$ and $r\ge1$. Thus the selected/intersected interval
+has length $O(\tau\sqrt{r/p})$ on the pilot event. Off that event its
+length is $O(\tau)$, with probability at most
+$\delta=O(r/p)\le O(\sqrt{r/p})$. The expected-length upper bound follows.
+The dimension-dependent failure budget is essential to this argument;
+fixed failure probability would leave an unjustified $O(\tau)$ term.
+
+**Lower proof.** Put $V=r^{-1/2}\sum_{i\in S}E_i$ and compare $A_0$ with
+$A_0+(\tau/2)V$. Both have mode ranks at most $r$ and norms at most $M$.
+Their full Gaussian total variation is less than $1/4$ and their target
+difference is $(\tau/2)\sqrt{r/p}$. The common-target interval argument
+at base $A_0$ proves the lower bound. This lower comparison uses the same
+outer class on which the algorithm is honest.
+
+**Computation.** Economy SVDs of the $p\times p^{K-1}$ unfoldings require
+$O(Kp^{K+1})$ arithmetic and $O(p^K+p^2)$ working storage for fixed $K$.
+Tensor projection has polynomial cost of the same order. The new code
+uses economy SVDs; the previous prototype requested full right singular
+matrices, which could allocate $p^{2K-2}$ entries. Thus the implementation
+now scales with the explicit tensor rather than that avoidable allocation.
+It still reads the full tensor and does not claim sublinear access cost.
+
+## What these results do and do not resolve
+
+- Efficient high-dimensional minimax computation is resolved here for
+  $r\gtrsim\sqrt p$, where G1 gives the sharp all-budget rate. Original
+  fixed-cap diffuse-loading weak signals remain computationally open.
+- All-budget loading rates are resolved for fixed polynomial decay and
+  the specified nonorthogonal perturbations. General profiles remain open;
+  the matching W2 statistical construction still uses ideal block fits.
+- General growing-cap adaptation is impossible in the G2 comparison,
+  even between positive cap classes. P1 gives a positive, efficiently
+  attained pointwise rate on a strong saturated Tucker family. It does
+  not characterize pointwise lengths everywhere or optimal SNR thresholds.
+
+No blanket tensor hardness theorem is inferred from low-degree results
+for sparse tensor PCA. Those results concern a restricted computational
+model; a testing reduction for arbitrary efficient intervals still needs
+an explicit, justified computational hypothesis.
+
+## Methodological references
+
+- The sparse-functional precursor for G1 is Collier, Comminges and
+  Tsybakov, [*Minimax estimation of linear and quadratic functionals on
+  sparsity classes*](https://arxiv.org/abs/1502.00665).
+- For the distinct estimation-adaptation problem, see Collier, Comminges,
+  Tsybakov and Verzélen, [*Optimal adaptive estimation of linear functionals
+  under sparsity*](https://arxiv.org/abs/1611.09744).
+- The restricted computational perspective in W3 follows the methodology
+  of Choo and d'Orsi, [*The Complexity of Sparse Tensor PCA*](https://arxiv.org/abs/2106.06308).
+- For general tensor-functional tangent inference under signal conditions,
+  see Xu, Chen and Han, [*Statistical Inference for Low-Rank Tensor
+  Models*](https://arxiv.org/abs/2501.16223).
+
+The repository-specific dependency and novelty distinctions are recorded
+in the accompanying audit and literature update.

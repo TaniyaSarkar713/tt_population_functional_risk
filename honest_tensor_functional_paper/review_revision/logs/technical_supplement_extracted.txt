@@ -1,0 +1,3887 @@
+[PAGE 1]
+Technical Supplement: Honest Tensor-Functional Inference
+Revised September 13, 2026
+This supplement contains the complete supplied proofs supporting the accompanying revised main
+paper. The main paper states the final central results and empirical findings; this document records
+the auxiliary comparisons, calibrations, computational contracts and proofs. Fixed-budget intermediate
+results are retained here as proof ingredients, not as unresolved final rate claims. All formal results have
+internal status PROVED; this means a checked supplied derivation, not formal verification or external
+peer review.
+The notation is local to each explicit experiment: Damb is ambient dimension, d polynomial degree,
+Cdiag a diagonal-envelope coefficient, εA an approximation allowance and ηk a pilot operator bound. The
+main paper’s qK = 2/K is denoted q in scalar-threshold proofs; its z-quantile notation (or zval) is used
+for Gaussian critical values. Canonical complexity J and support overlap H are distinguished.
+Contents
+1
+Experiment and parameter classes
+3
+2
+Interval construction
+4
+3
+Statistical theory
+5
+3.1
+Diagonal geometry and honest coverage
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+5
+3.2
+Two lower-bound comparisons . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6
+3.3
+An initial full-data lower bound . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+7
+3.4
+Optimality when only the diagonal is observed
+. . . . . . . . . . . . . . . . . . . . . . .
+7
+3.5
+Using the full tensor at the zero mean . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+8
+3.6
+Sharp full-data rates, including worst-case length . . . . . . . . . . . . . . . . . . . . . .
+10
+3.7
+Computation: a certified hierarchy and a restricted lower bound
+. . . . . . . . . . . . .
+11
+4
+Norm budgets and loading geometry
+12
+4.1
+Nonuniform orthogonal loadings
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+13
+5
+Robust noise, computation, and rank adaptation
+14
+5.1
+Beyond Gaussian observations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+14
+5.2
+Approximate ranks and growing caps . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+15
+5.3
+Arbitrary loading tensors and efficient regimes . . . . . . . . . . . . . . . . . . . . . . . .
+16
+5.4
+Actual rank: an obstruction and a computable separated case . . . . . . . . . . . . . . .
+16
+A Complete proofs
+18
+A.1 Canonical product expansions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+18
+A.2 Proof of Theorem 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+19
+A.3 Exact rank-one diagonal image . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+19
+A.4 Threshold error and structural radius . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+19
+1
+
+
+[PAGE 2]
+A.5 Proof of Theorem 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+20
+A.6 Proof of Theorem 3 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+21
+A.7 A mixture inequality for confidence intervals . . . . . . . . . . . . . . . . . . . . . . . . .
+21
+A.8 Proof of Theorem 4 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+22
+A.9 Proof of Theorem 5 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+22
+A.10 Proof of Theorem 6 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+22
+A.11 Proof of Proposition 1 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+23
+B Proofs of the full-data refinements
+24
+B.1
+Proof of Theorem 7 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+24
+B.2
+Proof of Theorem 8 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+25
+C Supporting refinements
+26
+C.1
+Diagonal geometry . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+26
+C.2
+Exact affine benchmark
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+27
+C.3
+Noise envelopes and approximate ranks
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+28
+C.4
+Finite variance and bounded row corruption . . . . . . . . . . . . . . . . . . . . . . . . .
+28
+C.5
+Unknown Gaussian variance . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+29
+C.6
+Confidence levels and covariance
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+30
+D Proofs of the sharp rates and computational statements
+30
+D.1 Proof of Theorem 9 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+30
+D.2 Proof of Theorem 10 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+31
+D.3 Proof of Proposition 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+31
+D.4 Proof of Proposition 3 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+32
+D.5 Proof of Theorem 11 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+32
+D.6 Proof of Proposition 4 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+33
+E Proofs for norm budgets and loading geometry
+33
+E.1
+Proof of Theorem 12 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+33
+E.2
+Proof of Theorem 13 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+34
+E.3
+Proof of Theorem 14 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+36
+E.4
+Proof of Theorem 15 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+36
+E.5
+Proof of Proposition 5 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+37
+F Proofs for robustness, loading transfer, and adaptation
+37
+F.1
+Proof of Theorem 16 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+37
+F.2
+Proof of Theorem 17 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+37
+F.3
+Proof of Proposition 6 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+38
+F.4
+Proof of Theorem 18 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+38
+F.5
+Proof of Proposition 7 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+39
+F.6
+Proof of Proposition 8 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+39
+F.7
+Proof of Theorem 19 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+39
+F.8
+Proof of Proposition 9 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+39
+F.9
+Proof of Theorem 20 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+40
+F.10 Proof of Theorem 21 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+40
+2
+
+
+[PAGE 3]
+G Optimization contracts, loadings and cap-valid inference
+41
+G.1 C1. A quantitative contract for approximate minimax optimization . . . . . . . . . . . .
+41
+G.2 C2. An implemented global solver on the binary rank-one class . . . . . . . . . . . . . .
+42
+G.3 L1. Sharp small-budget rates for every loading tensor
+. . . . . . . . . . . . . . . . . . .
+43
+G.4 L2. An optimized common-target lower bound for unequal weights . . . . . . . . . . . .
+43
+G.5 A1. Unseparated rate adaptation across positive fixed caps
+. . . . . . . . . . . . . . . .
+44
+G.6 A2. A computable projection certificate without separation
+. . . . . . . . . . . . . . . .
+44
+G.6.1
+Why the first-order repair does not solve the original problem . . . . . . . . . . .
+45
+G.7 A3. The adaptation obstruction at an arbitrary orientation
+. . . . . . . . . . . . . . . .
+45
+G.8 A4. A cap-valid tangent interval on the original unseparated class
+. . . . . . . . . . . .
+46
+G.9 Remaining problems . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+47
+H Growing caps, decaying loadings and pointwise inference
+47
+H.1 G1. Sharp growing-cap rates with a polynomial algorithm . . . . . . . . . . . . . . . . .
+47
+H.2 G2. General adaptation across positive growing caps is impossible
+. . . . . . . . . . . .
+48
+H.3 W1. A dyadic loading bound using the full weight profile
+. . . . . . . . . . . . . . . . .
+48
+H.4 W2. Sharp rates at every budget for polynomially decreasing loadings
+. . . . . . . . . .
+49
+H.5 W3. A restricted computational separation for these newly matched loadings
+. . . . . .
+50
+H.6 P1. Efficient pointwise optimality at strong saturated Tucker means
+. . . . . . . . . . .
+51
+H.7 What these results do and do not resolve . . . . . . . . . . . . . . . . . . . . . . . . . . .
+52
+H.8 Methodological references . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+52
+I
+R1. Scalar companion and risk proof
+52
+1
+Experiment and parameter classes
+Let K ≥2, pk ≥1, and Damb = QK
+k=1 pk. We observe
+Z = A + τG ∈Rp1×···×pK,
+vec(G) ∼N(0, IDamb),
+τ > 0.
+(1)
+The noise level is known in the baseline model. Section 5 states different, explicitly calibrated noise
+and rank assumptions. Equivalently, Z is the sufficient sample mean of independent full observations
+Wj = A + σGj, j = 1, . . . , n, with known σ and τ = σ/√n. This is an exact Gaussian mean equivalence,
+not an equivalence to scalar-response tensor regression. The observed variables are the tensors Wj, or
+Z; A is a fixed unknown parameter. Factor and core representations are nonunique coordinates, not
+additional latent random variables.
+Write A(k) for the mode-k unfolding and A⟨k⟩for the matrix joining modes 1, . . . , k against k+1, . . . , K.
+For supplied positive integer caps, define
+ΘTu(M, ¯r) = {A : ∥A∥F ≤M, rank(A(k)) ≤¯rk, k = 1, . . . , K},
+(2)
+ΘTT(M, ¯r) = {A : ∥A∥F ≤M, rank(A⟨k⟩) ≤¯rk, k = 1, . . . , K −1}.
+(3)
+The known bound M is positive. Actual ranks may be smaller, including zero; nonzero singular values
+may be arbitrarily small. No incoherence or coordinate sparsity condition is imposed. The main
+experiment assumes Gaussian isotropic noise and exact caps. Appendix C states separately calibrated
+noise and approximation extensions; missing observations remain untreated.
+The prescribed loading has the form
+L =
+m
+X
+i=1
+wiVi,
+Vi =
+K
+O
+k=1
+vki,
+v⊤
+kivkj = 1{i = j},
+∥w∥2 = 1.
+(4)
+3
+
+
+[PAGE 4]
+Here m ≤mink pk, and each loading family is supplied independently of the data. Thus ∥L∥F = 1.
+Although this is restrictive, L need not be sparse in the observation basis: known orthogonal mode
+rotations can make it dense. The estimand and relevant observations are
+ψ(A) = ⟨L, A⟩=
+X
+i
+wiai,
+ai = ⟨A, Vi⟩,
+di = ⟨Z, Vi⟩= ai + τgi,
+(5)
+where the gi are independent standard normals.
+An interval C(Z) is honest at level 1 −α on Θ if
+inf
+A∈Θ PA{ψ(A) ∈C(Z)} ≥1 −α.
+(6)
+This is a finite-sample requirement, not a pointwise limit along a fixed-rank stratum. Length and
+expected length are the primary criteria. For example,
+L0(Θ) = inf
+C: (6) E0|C|,
+Lmax(Θ) = inf
+C: (6) sup
+A∈Θ
+EA|C|.
+(7)
+The infima range over all measurable intervals, allowing independent randomization. The usual squared
+Frobenius estimation loss has population risk RA(B) = ∥B −A∥2
+F + Dambσ2 and empirical risk Rn(B) =
+n−1 P
+j∥Wj −B∥2
+F . We do not minimize these risks or require a full-tensor estimator.
+The fixed-budget benchmark comparison in experiment (1) uses pk = m = p, fixed K ≥3, fixed rank
+caps, and M = τ√p. A concrete sequence is M = σ = 1, n = p, so Damb = nK. Section 4 removes the
+relation between M and τ for the sharp full-data results and extends them to flat orthogonal loadings in
+unequal ambient dimensions.
+The structural and probabilistic assumptions have distinct roles, summarized in Table 1. A1–A4
+define the inferential problem; A5 is used for the original asymptotic comparisons. The norm/noise
+relation in A5 is not required in Section 4.
+Assumption
+Role and restriction
+A1
+Full observation with independent Gaussian
+coordinates and known τ
+Gives exact diagonal noise, direct calibration and
+Gaussian likelihood identities.
+A2
+Supplied M and Tucker or TT upper rank bounds
+Defines the outer honesty class; actual rank and
+signal strength are unrestricted below it.
+A3
+Prescribed loading in (4)
+Gives orthogonal noise coordinates and the diagonal
+envelope; data-selected loadings are excluded;
+arbitrary prescribed loadings are treated separately
+in Section 5.
+A4
+Finite-sample uniform coverage in (6)
+Coverage includes zero and local sequences
+approaching lower-rank strata.
+A5
+Equal dimensions, fixed K ≥3, fixed caps and
+M = τ√p
+Produces the stated vanishing length ratio; not
+needed for the finite-sample interval.
+Table 1: Assumptions, their purpose and the scope they exclude. Known upper bounds are not replaced
+by same-data estimates anywhere in the stated procedure.
+2
+Interval construction
+Define
+q = 2
+K ,
+JTu = min
+k
+Y
+ℓ̸=k
+¯rℓ,
+JTT =
+K−1
+Y
+k=1
+¯rk,
+B = J1−q/2Mq,
+(8)
+4
+
+
+[PAGE 5]
+where J is chosen for the applicable class. Set
+λ = τ
+q
+2 log(2m/α),
+bψNL =
+X
+i
+wi softλ(di),
+softλ(x) = sign(x)(|x| −λ)+.
+(9)
+The three candidate intervals have radii
+hNL = ∥w∥∞B(2λ)1−q,
+INL = [ bψNL −hNL, bψNL + hNL],
+(10)
+hG = z1−α/2τ,
+IG = [⟨L, Z⟩−hG, ⟨L, Z⟩+ hG],
+(11)
+h0 = M
+ s
+X
+i=1
+w2
+(i)
+!1/2
+,
+I0 = [−h0, h0],
+(12)
+where |w(1)| ≥· · · ≥|w(m)| and s is the smaller of m and the smallest supplied rank cap. Choose
+C∗= Ij∗,
+j∗∈arg
+min
+j∈{NL,G,0} hj,
+(13)
+with a fixed rule for ties. This choice depends only on known quantities. Choosing an interval after
+examining its center or an estimated rank is a different procedure and is not justified by the proof.
+The constants in (8) calibrate the threshold procedure (9); the direct alternative (11) supplies a valid
+fallback. Only m contractions are used. For coordinate loadings, computation reads m tensor entries
+and takes O(m) operations. Obtaining contractions for a dense rotated loading has additional cost,
+which can be large. The procedure does not estimate a Tucker core, TT cores, factors or actual ranks.
+3
+Statistical theory
+All numbered theorems and propositions are PROVED, with complete derivations in the appendix. The
+result-status table separates the proved statements from open computational and adaptive questions. The
+results use the experiment and classes of Section 1. Lower-bound constants are stated for 0 < α < 1/4
+when this simplifies positivity.
+3.1
+Diagonal geometry and honest coverage
+Theorem 1 (Orthogonal diagonal compressibility). For either class in (2)–(3), under loading (4),
+m
+X
+i=1
+|⟨A, Vi⟩|2/K ≤J1−1/KM2/K.
+(14)
+No minimum singular value is required.
+The proof expands a canonical tensor representation into at most J product terms whose squared
+component weights sum to ∥A∥2
+F . For TT tensors, these terms need not be orthogonal. A prefix-weight
+identity establishes the sum exactly; assuming termwise orthogonality would be an incorrect shortcut.
+Hölder’s inequality and Bessel’s inequality then give (14). The rank factor may be loose, particularly for
+growing caps.
+For rank cap one the diagonal image is exactly the ball {a : P
+i |ai|2/K ≤M2/K}, as shown in
+Lemma 2. Thus the diagonal-only statistical experiment is precisely a classical Gaussian sequence
+problem on an ℓq ball. The full tensor experiment contains additional off-diagonal information. This
+identity permits a sharp benchmark for the restricted observation experiment; it does not remove the
+additional information in the rest of the tensor.
+5
+
+
+[PAGE 6]
+Theorem 2 (Finite-sample honest interval). For every 0 < α < 1, each interval in (10)–(12) is honest
+on the applicable cap class. Consequently, C∗is honest and has deterministic length
+|C∗| = 2 min{hNL, hG, h0}.
+(15)
+The event maxi |τgi| ≤λ has probability at least 1 −α. On this event soft thresholding satisfies
+| softλ(ai + τgi) −ai| ≤min(|ai|, 2λ) ≤|ai|q(2λ)1−q.
+Summing proves the nonlinear interval bound. No central limit theorem, rank recovery or pilot remainder
+is needed. Known M is essential to this deterministic calibration.
+3.2
+Two lower-bound comparisons
+For the remainder of this subsection let all dimensions equal p, let Ei = e⊗K
+i
+, and put
+L = p−1/2
+p
+X
+i=1
+Ei,
+z = z1−α/2.
+(16)
+Theorem 3 (Fixed-radius affine intervals). Suppose the honesty class contains 0 and all ±MEi. If
+0 < α < 1/2 and
+C(Z) = [⟨W, Z⟩+ b −h, ⟨W, Z⟩+ b + h]
+is honest, with deterministic W, b, h, then
+h ≥(M/√p)zτ
+M/√p + zτ .
+(17)
+On the rank-one tensor Frobenius ball, the best radius in this affine class is therefore of order
+min(M/√p, τ), up to constants depending on α.
+The theorem allows W to use the entire tensor. It does not cover affine centers with data-dependent
+radii. The matching upper order follows by choosing between IG and I0 for rank cap one.
+For a nonempty proper subset S of modes, write A[S] for the corresponding bipartition unfolding
+and define
+ΘS = {A : rank(A[S]) ≤1, ∥A∥F ≤M}.
+(18)
+Theorem 4 (Cost of a single unfolding honesty class). If 0 < α < 1/4, every interval honest on ΘS
+satisfies
+E0|C| ≥cα min
+(
+M
+√p, τ
+4
+)
+,
+cα = 1 −2α −1
+2
+rq
+8/7 −1 > 0.
+(19)
+The lower order min(M/√p, τ) is attained up to α-dependent constants by the direct/structural choice
+on ΘS.
+The alternatives in the proof are rank one in the chosen matrix unfolding. They generally violate the
+other tensor rank constraints. This is necessary for the comparison: the theorem measures the cost of
+requiring coverage on the larger class. For Tucker caps, a mode unfolding is a permissible relaxation;
+for TT caps, a contiguous cut is permissible. With all tensor rank caps one, every bipartition in (18)
+contains the original tensor class. Increasing an unfolding cap further preserves the lower bound.
+6
+
+
+[PAGE 7]
+Theorem 5 (Strict length separations). Let 0 < α < 1/4, K ≥3 and the rank caps be fixed. Under (16)
+and M = τ√p, C∗is honest on the Tucker or TT class and
+|C∗| ≤2τJ1−1/K
+8 log(2p/α)
+p
+(K−2)/(2K)
+= o(τ).
+(20)
+In contrast, every fixed-radius affine interval honest on the same class has length at least 2zτ/(1 + z).
+Every interval honest on a class retaining only one constrained unfolding has expected length at zero at
+least cατ/4.
+For growing caps, the same conclusion follows if J1−1/K(log p/p)(K−2)/(2K) →0. This condition may
+be restrictive. At K = 2 the exponent in (20) is zero, so the argument gives no polynomial separation.
+Theorem 5 neither asserts that the displayed exponent is optimal nor compares favorably at every
+strong signal with an efficient oracle projection interval. The following benchmark concerns the diagonal
+observation experiment; the subsequent full-data theorem gives the final rate.
+3.3
+An initial full-data lower bound
+Theorem 6 (Within-class lower bound). Under (1) and (16), for 0 < α < 1/4, every interval honest
+on a class containing the rank-one tensor Frobenius ball of radius M satisfies
+E0|C| ≥(3/4 −2α)min{M, τ
+p
+log(1 + p/4)}
+√p
+.
+(21)
+This is a sparse-coordinate mixture bound. At M = τ√p, for fixed caps and fixed K ≥3, the results
+imply
+cτ
+s
+log p
+p
+≤L0(Θ) ≤Lmax(Θ) ≤Cτ
+log p
+p
+(K−2)/(2K)
+(22)
+for sufficiently large p, with constants depending on K, the caps and α. The ratio of these initial scales
+grows as (p/ log p)1/K. Section 3.6 closes the gaps: the two criteria in (7) have the same rate, with an
+additional logarithmic factor in the cubic case.
+3.4
+Optimality when only the diagonal is observed
+Let Θ1 denote the Frobenius ball of tensors with rank at most one, including zero. Restrict the interval
+to be measurable in d = (Zi,...,i)p
+i=1 and an independent random seed. Write Cα,d(Θ1) for such intervals
+that are honest on Θ1, and define
+L0,d(Θ1) =
+inf
+C∈Cα,d(Θ1) E0|C|,
+Lmax,d(Θ1) =
+inf
+C∈Cα,d(Θ1) sup
+A∈Θ1
+EA|C|.
+The next result specializes classical sparse-sequence arguments [Cai and Low, 2004, Collier et al.,
+2017] to honest intervals. It is a benchmark for the proposed use of diagonal information, not a new
+Gaussian-sequence minimax principle.
+Proposition 1 (Classical diagonal-information benchmark). Assume (1), (16) and 0 < α < 1/4. For
+each integer 1 ≤s ≤p, put
+bs = min
+(
+Ms−K/2, τ
+s
+log
+
+1 + p
+4s2
+)
+,
+cα,d = 1 −2α −1
+2
+q
+e1/4 −1 > 0.
+Every C ∈Cα,d(Θ1) satisfies
+E0|C| ≥cα,d
+sbs
+√p.
+(23)
+7
+
+
+[PAGE 8]
+For fixed K ≥3 and M = τ√p,
+L0,d(Θ1) ≍Lmax,d(Θ1) ≍τ
+log p
+p
+(K−2)/(2K)
+.
+(24)
+The comparison constants depend on K and α.
+The rate in (24) follows because the effective support size s ≍(p/ log p)1/K makes (23) match the
+threshold interval’s upper order. The same asymptotic conclusion holds for any fixed Tucker or TT caps:
+the class contains Θ1 and Theorem 2 changes the upper bound only by a fixed rank factor. Thus further
+improvement in the power of p cannot come from recalibrating a procedure restricted to d.
+For comparison with the full-data result, consider the preliminary bound in (22). For the common-
+target tensors AS = bs(P
+i∈S ei)⊗K, two support sets with overlap H have diagonal inner product b2
+sH
+but full-tensor inner product b2
+sHK. The likelihood second moment in the full experiment is consequently
+different. A valid diagonal lower bound cannot be transferred by ignoring the extra observations.
+Theorem 7 establishes that they do permit shorter expected length at zero.
+Table 2 separates the procedure and parameter classes in the comparisons.
+Comparison
+Information and honesty
+class
+Length statement when M = τ√p
+Direct Gaussian interval
+All means; prescribed L
+2zτ, with exact coverage.
+Selected interval
+Joint cap class; uses d
+At most 2τJ1−1/K{8 log(2p/α)/p}β; β = (K −2)/(2K).
+Any fixed-radius affine
+interval
+Full tensor; same joint
+class
+Length at least 2zτ/(1 + z).
+Any interval on one
+unfolding class
+Full tensor; enlarged
+honesty class
+Expected length at zero at least cατ/4.
+Any diagonal-based
+interval
+Only d; rank-one or
+fixed-cap class
+Optimal expected length at zero and in worst case has
+order τ(log p/p)β.
+Any full-data interval
+Full tensor; joint class
+Optimal expected length both at zero and in the worst
+case is rK(p) in (34).
+Table 2: Precisely delimited comparisons for fixed K ≥3 and fixed rank caps. Lower bounds for relaxed
+honesty classes or restricted observations are not lower bounds for unrestricted full-data procedures on
+the original class.
+3.5
+Using the full tensor at the zero mean
+The diagonal rate is a constraint on procedures using the diagonal. A finite scan over product directions of
+coordinate subtensors can give shorter expected length at zero while preserving the original uniform length
+bound. The scan is an existence construction with exponential complexity; no efficient implementation
+is asserted.
+For a tensor B, define its injective norm
+ρ(B) =
+sup
+∥uk∥2=1
+|⟨B, u1 ⊗· · · ⊗uK⟩|.
+For every nonempty subset S ⊆{1, . . . , p} of size s, choose fixed 1/(2K)-nets of the unit sphere in Rs,
+one per mode, each with at most (1 + 4K)s points. Let NS(Z) be the largest absolute contraction of
+ZS,...,S over their product. Define
+λscan
+s
+= τ [2{s log(ep/s) + Ks log(1 + 4K) + log(2p/γ)}]1/2 ,
+(25)
+Rγ = 4JK/2
+√p
+p
+X
+s=1
+λscan
+s
+s−K/2.
+(26)
+8
+
+
+[PAGE 9]
+Accept the zero test if NS(Z) ≤λscan
+|S|
+for every nonempty S. On acceptance, let Cscan = [−hscan, hscan],
+where hscan = min(h0, Rγ); on rejection let Cscan = [−h0, h0]. Here h0 = M
+q
+scap/p and scap is the
+smallest cap, truncated at p. For 0 < α0, γ < 1 with α0 + γ ≤α, intersect this interval with C∗(α0) and
+call the result C†; replace an empty intersection by {0}. Write ℓ∗= |C∗(α0)|.
+Theorem 7 (A full-data interval with short expected length at zero). Under (1), (16) and either cap
+class, Cscan is honest at level 1 −γ, and C† is honest at level 1 −α. Moreover,
+sup
+A∈Θ
+EA|C†| ≤ℓ∗,
+E0|C†| ≤min{ℓ∗, 2Rγ + ℓ∗γ}.
+(27)
+For fixed 0 < α < 1/4, fixed K ≥3, fixed positive caps and M = τ√p, choose α0 = α/2 and γ = α/(2p).
+Then
+E0|C†| ≤CK,J,α
+τ√log p
+√p
+p
+X
+s=1
+s−(K−1)/2
+(28)
+for sufficiently large p. Consequently,
+L0(Θ) ≍τ
+s
+log p
+p
+,
+K ≥4.
+(29)
+The matching lower bound in (29) is Theorem 6, applied to the same full-data experiment and
+honesty class. The sum in (28) is bounded for K ≥4 and harmonic for K = 3. The number of scanned
+product directions is bounded by (1 + (1 + 4K)K)p −1. Thus the result establishes attainable statistical
+precision, without a polynomial-time guarantee. The worst-case bound in (27) is the initial diagonal
+upper order. The residual projection in Theorem 10 strengthens it to the sharp full-data rate.
+Theorem 8 (A harmonic obstruction in order three). Under (1) and (16), let K = 3, M = τ√p and
+0 < α < 1/4. Every interval honest on a class containing the rank-one tensor Frobenius ball satisfies
+E0|C| ≥(3/4 −2α) τHp
+200√p,
+Hp =
+p
+X
+i=1
+i−1.
+(30)
+Theorem 8 uses a full-data mixture of rank-one tensors with sign-coupled factors and a common
+harmonic diagonal. It refutes the earlier conjecture that L0 always has order τ
+p
+log p/p at rank one.
+Combining (30) and (28) gives the intermediate cubic bracket
+ccub
+α
+τ log p
+√p
+≤L0(Θ) ≤CJ,α
+τ(log p)3/2
+√p
+.
+(31)
+Here ccub
+α
+= (3/4 −2α)/200 > 0. The intermediate bracket (31) has a factor √log p gap. Theorem 9
+closes it from below. The constant 1/200 is conservative and is not an optimal finite-sample constant.
+Further verified refinements.
+The accompanying theory review proves a smaller rank coefficient in
+the diagonal bound, an exact one-dimensional characterization of the optimal fixed affine radius, and a
+noise-envelope version with an additive approximation term. It also records finite-variance and unknown-
+Gaussian-variance extensions requiring retained replicates. These supporting results are collected in
+Appendix C; the simulations retain the original Gaussian threshold procedure.
+9
+
+
+[PAGE 10]
+3.6
+Sharp full-data rates, including worst-case length
+A sparse harmonic profile strengthens the cubic lower bound. Inverting the residual scan then turns the
+zero-point construction into an interval with uniformly controlled length.
+Theorem 9 (Sparse harmonic lower bound). Under (1) and (16), let K = 3 and 0 < α < 1/4. For
+every integer 1 ≤m ≤p, put
+bm = min
+
+M
+√
+27m,
+τ
+√
+27
+q
+log(1 + p/(4m2))
+
+,
+cα,d = 1 −2α −1
+2
+q
+e1/4 −1.
+Every interval honest on a class containing the rank-one Frobenius ball satisfies
+E0|C| ≥cα,d
+bmHm
+√p
+.
+(32)
+If M = τ√p, then for p ≥256 and m = ⌊p1/4⌋,
+E0|C| ≥
+cα,d
+16
+√
+27
+τ(log p)3/2
+√p
+.
+The profile weights, rather than additional rank components, produce the harmonic sum. The
+alternatives are nonnegative rank-one tensors. Their full likelihood overlap is bounded linearly in the
+support intersection, permitting the classical hypergeometric calculation.
+Write λs(γ) = λscan
+s
+for the threshold in (25) at error budget γ. Use the product nets above with
+thresholds λs(α). Define
+F(Z) = {B ∈Θ(M, ¯r) : NS(Z −B) ≤λ|S|(α) for every nonempty S}.
+Let CF be the interval between the minimum and maximum of ψ on F(Z), and set CF = {0} when this
+set is empty. Write J2 = J(2¯r), the expansion constant with doubled caps, and put
+Wα = 4JK/2
+2√p
+p
+X
+s=1
+λs(α)s−K/2.
+Theorem 10 (Uniform diameter and full-data minimax length). Under (1), (16), 0 < α < 1 and either
+positive cap class, CF is measurable and honest at level 1 −α, and for every observation
+|CF | ≤min(2h0, Wα).
+(33)
+For fixed 0 < α < 1/4, fixed K ≥3, fixed positive caps and M = τ√p,
+L0(Θ) ≍Lmax(Θ) ≍rK(p),
+rK(p) =
+(
+τ(log p)3/2/√p,
+K = 3,
+τ
+p
+log p/p,
+K ≥4.
+(34)
+Constants may depend on K, the caps and α.
+Differences of feasible tensors obey doubled unfolding caps; the proof does not assume that a rank
+class is closed under subtraction. Computing the confidence-set extrema is not claimed to be efficient.
+Proposition 2 (Squared-error consequence). In the regime of (34),
+inf
+b
+ψ
+sup
+A∈Θ
+EA( bψ −ψ(A))2 ≍rK(p)2.
+The midpoint of CF with error level αp = p−2 attains the upper order for p ≥2.
+10
+
+
+[PAGE 11]
+3.7
+Computation: a certified hierarchy and a restricted lower bound
+The exact residual projection supplies the statistical benchmark. A truncated zero test is computable
+with an explicit search budget. It does not compute the extrema defining CF .
+Proposition 3 (Truncated scans). For 1 ≤t ≤p, test zero using only supports of sizes at most t,
+retaining thresholds calibrated simultaneously over all sizes. Write λs = λs(γ) and put
+q = 2/K,
+Bq = J1−1/KMq,
+at = 4JK/2λtt−K/2,
+Rt = 4JK/2
+√p
+t
+X
+s=1
+λss−K/2 + 1{t<p}
+Bq
+√pa1−q
+t
+.
+On acceptance use radius min(h0, Rt) centered at zero; on rejection use the structural interval. Intersect
+with C∗(α0), where 0 < α0, γ < 1, α0 + γ ≤α, and γ is the scan error budget, using the singleton
+convention. The resulting Ct is honest, has length at most ℓ∗= |C∗(α0)|, and
+E0|Ct| ≤min(ℓ∗, 2Rt + ℓ∗γ).
+For fixed K ≥3, fixed caps and fixed 0 < α < 1, with M = τ√p, α0 = α/2 and γ = α/(2p),
+Rt ≲τ√log p
+√p
+t
+X
+s=1
+s−(K−1)/2
+(35)
++ 1{t<p}τ(log p/p)βt−(K−1)β,
+β = (K −2)/(2K).
+Explicit normalized grid nets have at most (3+4K√s)s directions per mode. Using their cardinalities
+in the Gaussian thresholds preserves (35). The arithmetic cost through level t is bounded by
+O
+( t
+X
+s=1
+ 
+p
+s
+!
+(3 + 4K√s)KssK
+)
+.
+For fixed t, K this is polynomial in p. Fixed t does not close the power gap in the tail term of (35).
+Completed levels share one noise event, so successive intersections remain honest even if the decision to
+compute another complete level uses the data.
+A complementary obstruction holds for polynomial estimators under squared-error loss. This is the
+restricted low-degree framework used in sparse tensor PCA [Choo and d’Orsi, 2021, Fu and Sohn, 2026];
+it does not characterize all polynomial-time computation.
+Theorem 11 (A low-degree estimation separation). Let K ≥3, 1 ≤s ≤√p, and mix uniformly over
+xS = s−1/21S,
+AS = τλx⊗K
+S
+,
+|S| = s.
+Assume 0 < τλ ≤M, and write
+δ = τλs1−K/2
+√p
+,
+µ = s2/p,
+Bd = λ2
+sK (Kd)K,
+where d ≥1 is the polynomial degree. If Bd < 1, the centered likelihood ratio projected onto polynomials
+of degree at most d has squared null norm at most
+η2
+d = µeµBd/(1 −Bd).
+11
+
+
+[PAGE 12]
+Every scalar polynomial estimator T(Z) of degree at most d satisfies
+sup
+A∈Θ
+EA(T −ψ(A))2 ≥
+δ2
+(2 + ηd)2
+(36)
+on any parameter class containing zero and these alternatives. In particular, let M = τ√p, λ = √p,
+s = ⌊pa⌋, and d = ⌊pb⌋, where
+1
+K < a < min
+1
+2,
+1
+K −2
+
+,
+0 < b < a −1
+K .
+Then ηd →0 and the lower order in (36) is polynomially larger than the unrestricted rate in Proposition 2.
+This theorem includes K = 3 and uses nonnegative sparse factors. It does not imply the same
+limitation for arbitrary interval endpoints or arbitrary thresholded algorithms.
+Proposition 4 (What an efficient short interval would imply). Let Q be supported on parameters with
+common target δ > 0, and let the null target be zero. An interval honest at level 1 −α at the null and
+these alternatives defines ϕ(Z) = 1{δ ∈C(Z)} with
+Q(ϕ = 0) ≤α,
+P0(ϕ = 1) ≤α + E0|C|/δ.
+A computational hypothesis excluding polynomial-time tests with total error below c > 2α therefore
+excludes polynomial-time honest intervals with E0|C| < (c −2α)δ for that prior.
+The last implication is conditional on a testing-hardness hypothesis. Theorem 11 alone does not
+establish that hypothesis. Efficient minimax confidence intervals remain open, with a proved restricted
+estimation obstruction and an explicit computable hierarchy.
+4
+Norm budgets and loading geometry
+The restriction M = τ√p can be removed for the equal diagonal contrast. The key is to impose the
+Frobenius budget and the residual-scan constraints on each ordered diagonal entry, before summing.
+Throughout this section the tensor order and positive rank caps are fixed; constants are not claimed
+uniform in growing caps.
+Put P2 = 2J(K−1)/2
+2
+and Q2 = 4JK/2
+2
+, where J2 = J(2¯r), and define
+UK,p(M; α) =
+1
+√p
+p
+X
+s=1
+min{P2M, Q2λs(α)} s−K/2.
+(37)
+Here λs(α) is the finite-net threshold in (25), with error budget α.
+Theorem 12 (Diameter using both norm and scan constraints). For every p ≥1, K ≥3, M, τ > 0 and
+0 < α < 1, the residual-projection interval CF is honest and satisfies, for every observation,
+|CF | ≤min{2h0, UK,p(M; α)}.
+The bound retains the supplied norm budget inside the ordered-coordinate sum; taking the minimum only
+after summation can lose the intermediate cubic regime.
+Let ℓp = log(ep), x = M/(τ
+pℓp), and define
+gp(x) = min{x, 1 + log+ x, ℓp},
+log+ x = max(0, log x),
+(38)
+rK(p, M, τ) = τ
+pℓp
+√p
+(
+gp(x),
+K = 3,
+min(x, 1),
+K ≥4.
+(39)
+These definitions also cover p = 1, when the rate is min(M, τ).
+12
+
+
+[PAGE 13]
+Theorem 13 (Full-data length for every positive norm budget). Fix K ≥3, positive Tucker or TT
+caps, and 0 < α < 1/4. For the equal diagonal contrast there are constants 0 < c < C < ∞, depending
+only on these fixed quantities, such that for every p ≥1 and every M, τ > 0,
+c rK(p, M, τ) ≤L0(Θ) ≤Lmax(Θ) ≤C rK(p, M, τ).
+The lower bounds already hold when the honesty class is restricted to rank-one tensors. The interval in
+Theorem 12 attains the upper order.
+For K ≥4 the rate is min{M, τ
+p
+log(ep)}/√p. For K = 3, the norm-limited regime x ≤1 has
+rate M/√p; above it the multiplier grows as 1 + log x until capped at ℓp. These are rates up to fixed
+multiplicative constants, not exact transition constants. Substituting M = τ√p recovers Theorem 10.
+For squared-error estimation, a fixed-confidence midpoint argument is insufficient when M/τ is
+arbitrarily large: its off-coverage term can grow with M2. Instead use an approximate minimum-residual
+estimator. Fix β = 1/8, and put
+T(R) = max
+ 0, max
+S̸=∅{NS(R) −λ|S|(β)}
+.
+Choose a fixed countable dense sequence (Bj) in the compact cap class. Define
+d(Z) = inf
+j T(Z −Bj),
+j(Z) = min{j : T(Z −Bj) ≤d(Z) + τ},
+bψ = ψ(Bj(Z)).
+(40)
+The tolerance τ ensures the displayed index exists. This defines a statistical estimator, not a claimed
+efficient optimization algorithm.
+Theorem 14 (Squared risk uniformly over norm budgets). Under the fixed-order, fixed-cap conditions
+of Theorem 13,
+inf
+e
+ψ
+sup
+A∈Θ
+EA( eψ −ψ(A))2 ≍rK(p, M, τ)2
+uniformly over p ≥1 and M, τ > 0. The measurable estimator in (40) attains the upper bound. It uses
+neither a failure probability depending on M nor a minimum nonzero singular value.
+4.1
+Nonuniform orthogonal loadings
+Return to the prescribed orthogonal product loading in (4), with m nonzero weights and possibly
+unequal ambient mode dimensions. Let w∗
+s denote decreasing absolute weights. Use orthogonal mode
+transformations and restrict to the mK coordinates spanned by the prescribed loading vectors. The
+resulting Gaussian tensor retains the rank and norm bounds. Write λ(m)
+s
+for the scan threshold with
+p = m, and define
+Uw =
+m
+X
+s=1
+w∗
+s min{P2M, Q2λ(m)
+s
+(α)}s−K/2,
+(41)
+Lw = max
+1≤d≤m w∗
+d
+√
+d rK(d, M, τ).
+(42)
+The rank constants use the same supplied caps. The structural radius is
+h0 = M
+ scap
+X
+s=1
+(w∗
+s)2
+!1/2
+,
+with scap truncated at m.
+13
+
+
+[PAGE 14]
+Theorem 15 (Loading-dependent full-data bounds). For fixed K ≥3, fixed positive caps and fixed
+0 < α < 1/4, an honest interval obtained by residual projection in the rotated block satisfies
+|Cw(Z)| ≤min(2h0, Uw)
+for every observation. Conversely every interval honest on the full ambient cap class satisfies
+E0|C(Z)| ≥cK,αLw.
+The lower bound allows use of every ambient tensor entry. These bounds are not asserted to match for
+arbitrary nonuniform weights.
+Proposition 5 (Sharp rates for a flat orthogonal loading). If wi = ϵi/√m with prescribed ϵi ∈{−1, 1},
+then both minimax expected-length criteria have order rK(m, M, τ), and minimax squared error has its
+square, independently of the larger ambient mode dimensions. The statement includes dense orthogonal
+rotations of the loading. At m = 1 it gives the bounded-normal-mean scale min(M, τ).
+Scope of the general-loading bounds.
+The displayed envelopes need not match for arbitrary
+unequal weights. Results L1 and W2 below establish additional small-budget and fixed-decay regimes.
+Results A1, G2 and P1 separately describe fixed-cap rate adaptation, a growing-outer-class obstruction
+and strong saturated pointwise inference. General loading profiles and complete pointwise adaptation
+remain open.
+5
+Robust noise, computation, and rank adaptation
+This section separates extensions of validity from sharp minimax claims. It also separates adaptation on
+a spectrally separated class from honesty on the original class containing arbitrarily weak components.
+Lower-bound comparisons use a fixed error level below 1/4. All statements have proofs in Appendix F.
+5.1
+Beyond Gaussian observations
+For a centered error tensor E, the following joint directional condition is sufficient:
+E exp(t⟨U, E⟩) ≤exp(t2v2∥U∥2
+F /2)
+(U deterministic, t ∈R).
+(43)
+It allows dependence and nonidentical coordinates. Independent centered sub-Gaussian coordinates with
+common proxy v satisfy it, as does Gaussian covariance bounded above by v2I. Marginal coordinate
+bounds alone do not imply it.
+Theorem 16 (Full-data robustness under directional tails). In Z = A + E, replace τ by a known v > 0
+in the scan thresholds and residual-fit tolerance. Under (43), the norm-sensitive diameter, uniform
+squared-risk upper bound, and orthogonal-loading upper bounds remain valid. For fixed order/caps, their
+equal-diagonal orders are rK(p, M, v) and its square. If the noise law is an unknown member of the
+family satisfying (43), these rates are minimax when coverage and the supremum risk/length range over
+that family. This lower-bound statement need not hold for each fixed non-Gaussian law separately.
+For a finite-variance extension retain independent identically distributed full-tensor replicates
+W1, . . . , Wn, with mean A and Cov(vec Wj) ⪯σ2I for known σ > 0. Put τ = σ/√n, and let
+Hs = s log(ep/s) + Ks log(1 + 4K).
+For a desired error 0 < β < 1/4, choose bs as the smallest odd integer at least
+max{9, [Hs + log(p/β)]/ log 2},
+n ≥2 max
+s
+bs.
+(44)
+14
+
+
+[PAGE 15]
+For each unit product-net direction U supported on SK, |S| = s, let dU be the median of its bs
+disjoint block averages, using block size ks = ⌊n/bs⌋. The block partitions may differ across s but are
+deterministic. Set λmom
+s
+= 4σ/√ks.
+Theorem 17 (Full scans with only finite-variance replicates). Use the feasible constraints |dU −⟨U, B⟩| ≤
+λmom
+s
+in place of the Gaussian residual constraints. Their projection onto the equal-diagonal target is
+honest at level 1 −β, with the norm-sensitive diameter using λmom
+s
+. For fixed K, caps and confidence,
+both minimax expected-length criteria, with a supremum over all the stated replicate laws, have order
+rK(p, M, σ/√n) whenever (44) holds.
+For squared error use β = 1/8 and approximately minimize
+F(B) = max
+ 0, max
+U {|dU −⟨U, B⟩| −λmom
+s(U) }
+
+over a fixed countable dense cap-class sequence, within tolerance τ. The resulting scalar estimator has
+minimax squared risk of order r2
+K over the same family. This is an existence construction. The sufficient
+replicate count is n ≥CK,βp, and the full directional search remains exponential.
+The moments dU need not be contractions of a single tensor estimate. Their separate linear constraints
+suffice. No Gaussian likelihood is used for the robust upper bounds; the lower bounds use the Gaussian
+subfamily of replicate distributions. This is a finite-direction use of the classical median-of-means
+principle [Devroye et al., 2016].
+Proposition 6 (Two limits of a noise relaxation). (i) In one dimension, known noise taking values
+±v with equal probabilities permits exact recovery of every mean |A| ≤M < v, although it has variance
+v2 and satisfies (43). Thus a Gaussian lower bound cannot be transferred to every noise law from a
+variance bound alone. (ii) For E = vξ1 with one Rademacher sign ξ, every coordinate has proxy v, but a
+flat unit product contraction on a pK block has variance v2pK. Coordinatewise calibration cannot certify
+a full scan or a dense rotated loading.
+5.2
+Approximate ranks and growing caps
+Theorem 18 (Sharp length under a Frobenius approximation allowance). In the original Gaussian
+experiment let ΘεA = Θ(M, ¯r) + εABF , εA ≥0. For the equal diagonal, fixed K ≥3, fixed positive caps
+and fixed 0 < α < 1/4,
+L0(ΘεA) ≍Lmax(ΘεA) ≍min{τ, rK(p, M, τ) + εA}.
+The upper interval inflates every scan threshold by εA and both projected endpoints by εA, with a
+deterministically selected direct Gaussian fallback. Thus approximate low rank is allowed, but the original
+rate requires εA = O(rK).
+Proposition 7 (A growing-rank lower bound and the unrestricted endpoint). Let r∗be the minimum
+supplied cap, truncated at p. Under equal loading every honest interval obeys
+E0|C| ≥cα
+√p max
+1≤s≤r∗min{M√s, τs
+q
+log(1 + p/(4s2))}.
+The finite upper envelopes of the preceding sections remain valid for dimension-dependent supplied caps
+with their displayed cap constants; these constants are not uniformly bounded. If all rank restrictions
+are removed, then for any prescribed unit loading both length criteria have order min(M, τ), attained in
+polynomial time. The vanishing tensor rate therefore does not persist under unrestricted ranks.
+15
+
+
+[PAGE 16]
+5.3
+Arbitrary loading tensors and efficient regimes
+For a nonzero, otherwise arbitrary deterministic tensor L, a useful sufficient description is a certified
+decomposition L = L0 +R, where L0 has a tractable orthogonal loading representation and the remainder
+R is known exactly. Normalization is not required in this subsection.
+Proposition 8 (A confidence interval for any certified loading decomposition). Suppose C0 = [a0, b0] is
+honest for ⟨L0, A⟩at error α0, and P(|⟨R, E⟩| > qR) ≤α1 uniformly. Then
+CL = [a0 + ⟨R, Z⟩−qR, b0 + ⟨R, Z⟩+ qR]
+is honest at error α0 + α1 and has length |C0| + 2qR. Under (43), one may take
+qR = v∥R∥F
+q
+2 log(2/α1).
+For Gaussian noise use the normal quantile. No independence between the two terms is required. A
+decomposition or partition selected from loading and supplied constants alone needs no selection penalty.
+Selection using Z does require simultaneous calibration.
+This also supplies additional unequal-weight upper bounds: partition the orthogonal terms into
+prescribed blocks, apply their separate weighted bounds with error budgets summing to α, and add the
+intervals. Include the unsplit construction among the choices. The minimum among their deterministic
+diameter bounds is achievable by choosing the construction before observing data.
+Theorem 19 (Two efficiently attained minimax regimes). (i) For the equal diagonal, fixed order/caps
+and M ≤τ
+p
+log(ep), the structural interval is minimax up to fixed constants, with length of order M/√p.
+(ii) Let a parameter class contained in {A : ∥A∥F ≤M} contain every rank-one tensor of Frobenius
+norm at most M. If a supplied unit product tensor U certifies |⟨L, U⟩| ≥c∥L∥F for a fixed c > 0,
+then under Gaussian observations both length criteria have order ∥L∥F min(M, τ). Choose between the
+norm-only structural interval and the direct Gaussian interval. The algorithm uses a contraction and
+scalar comparisons, without rank recovery or tensor optimization. This covers arbitrary loadings with a
+certified constant product overlap, regardless of supplied rank caps.
+The general loading transfer is a valid upper bound, not a characterization of the optimum for
+every tensor L. The near-flat difficult contrasts do not satisfy a dimension-independent product-overlap
+condition.
+Proposition 9 (Why full convexification loses the weak-signal gain). Any convex parameter set containing
+the rank-one Frobenius ball of radius M also contains {tL : |t| ≤M/√p} for the equal diagonal loading.
+Consequently, every interval honest on that convex set satisfies
+E0|C| ≥cα min(M/√p, τ).
+At M = τ√p this is order τ, exceeding the original full-data rate by an unbounded factor as p →∞.
+The conclusion concerns procedures guaranteeing coverage on the whole convex outer class; it is not a
+computational lower bound for every algorithm using a convex subroutine.
+5.4
+Actual rank: an obstruction and a computable separated case
+Theorem 20 (An adaptation obstruction at nonzero tensors). Suppose A0 is supported on {1, . . . , q}K,
+q < p, has norm a < M, and every supplied unfolding cap is at least its actual rank plus one. Put
+m = p −q and M0 = (M2 −a2)1/2. For the equal diagonal every interval honest on the outer cap class
+satisfies
+EA0|C| ≥cK,α
+q
+m/p rK(m, M0, τ).
+Thus arbitrarily weak extra components obstruct shortening at some nonzero lower-rank tensors, not only
+at zero. This is a lower bound, not a complete characterization of adaptation on all rank subclasses.
+16
+
+
+[PAGE 17]
+An explicit positive result uses two independent observations Z(j) = A+E(j), with directional proxies
+vj as in (43). Let dk = Q
+ℓ̸=k pℓ, choose 0 < δ < α, and set
+ηk = 2v1
+q
+2{(pk + dk) log 9 + log(2K/δ)}.
+(45)
+The allowed class has ∥A∥F ≤M and, in each mode, either rank zero or smallest nonzero singular value
+strictly greater than 2ηk. No ranks or rank caps are supplied to the algorithm. Separation is a model
+assumption; observed singular values alone cannot certify the absence of undetected weak components.
+Compute brk = #{j : σj(Z(1)
+(k)) > ηk} and let Qk project onto those left singular vectors. If any brk = 0,
+return {0}. Otherwise put
+d∗
+k = min
+
+
+1,
+2ηk
+σbrk(Z(1)
+(k)) −ηk
+
+
+.
+Here d∗
+k is an error bound, distinct from the unfolding column dimension dk. For the commuting mode
+projectors define the orthogonal projector
+T =
+O
+k
+Qk +
+X
+k
+(I −Qk) ⊗
+O
+ℓ̸=k
+Qℓ.
+The tensor factors in this expression occupy their respective modes. This first-order product-space
+projector may be larger than the exact Tucker manifold tangent projector at ranks above one. Set
+BL = M∥(I −T)L∥F min
+
+
+
+
+
+1,
+
+X
+k<ℓ
+(d∗
+kd∗
+ℓ)2
+
+
+1/2
+
+
+
+
+,
+(46)
+hT = BL + v2∥TL∥F
+q
+2 log(2/(α −δ)).
+(47)
+Theorem 21 (Finite-sample rank calibration with a computable bias correction). The interval centered
+at ⟨TL, Z(2)⟩with radius hT is honest at level 1−α on the separated class just specified, for any prescribed
+loading L. One may choose, using only the pilot and known quantities, the shortest-radius option among
+it, the direct second-observation interval with error α −δ, and the norm-only structural interval. It may
+also be intersected with the structural interval. For Gaussian second-observation noise the square-root
+logarithm can be replaced by z1−(α−δ)/2.
+With probability at least 1 −δ, all selected mode ranks equal the actual ranks and (46) bounds the
+functional bias. The method consists of unfolding SVDs and tensor projections and is polynomial in the
+explicit input size. Its noise radius depends on ∥TL∥F , and its additional cost is the displayed bias term.
+General minimax optimality and adaptation without the spectral separation are not asserted.
+For one Gaussian observation, independent artificial G′ gives Z(1) = Z + τG′ and Z(2) = Z −τG′,
+with independent errors of scale
+√
+2τ. For non-Gaussian errors, this trick need not give independence;
+genuinely independent replicate groups suffice. The rank statement concerns Tucker mode ranks, and
+applies to TT tensors meeting the mode-gap conditions, but does not identify their TT bond ranks.
+Subspace projection is established methodology [Xu et al., 2025]; the present contribution is an explicit
+conservative finite-sample certificate in this setting.
+Assumption audit.
+Gaussian isotropy gives the exact diagonal sequence and the likelihood-ratio
+identities. The threshold interval alone extends whenever a valid simultaneous coordinate noise envelope
+is supplied, but the direct alternative and lower bounds require their own calibration. Orthonormal
+loading families produce Bessel bounds and equal noise variances; general loading results require the
+additional conditions stated later in this supplement. Canonical tensor expansions avoid a spectral
+gap but yield potentially large rank constants. Supplied caps and M identify the outer honesty class;
+replacing them with unvalidated estimates is not covered. None of these assumptions should be described
+as a routine approximation for dependent LLM representations.
+17
+
+
+[PAGE 18]
+A
+Complete proofs
+The proofs apply in finite dimensions. Constants used in the main text are explicit. All tensors and
+Gaussian variables are real.
+A.1
+Canonical product expansions
+Lemma 1 (Controlled squared component weights). For a tensor in either cap class there is a finite
+representation
+A =
+JA
+X
+j=1
+x1j ⊗· · · ⊗xKj,
+acp
+j =
+K
+Y
+k=1
+∥xkj∥2,
+such that JA ≤J and P
+j(acp
+j )2 = ∥A∥2
+F .
+Roadmap. Choose orthonormal Tucker mode bases or left-orthogonal TT cores; expand product terms
+and sum their squared weights. The TT argument uses a prefix identity, not orthogonality of individual
+paths.
+Proof. The zero tensor has a zero-term representation. For a nonzero Tucker tensor, choose orthonormal
+bases Uk for the column spaces of its mode unfoldings. Orthogonal projection onto each such space leaves
+A unchanged. Contracting these bases gives a core G with A = G ×1 U1 · · · ×K UK and ∥G∥F = ∥A∥F .
+The actual mode ranks satisfy rk ≤¯rk.
+Fix a mode k. Expand all core indices other than k. Each tuple j−k gives unit factors Uℓ[:, jℓ] in
+modes ℓ̸= k and factor UkG[:, j−k] in mode k. Its squared product weight is ∥G[:, j−k]∥2
+2. These slice
+squares sum to ∥G∥2
+F . The number of terms is Q
+ℓ̸=k rℓ. Choosing k to minimize the corresponding cap
+product proves the Tucker assertion.
+For a TT tensor, sequential matrix factorizations yield cores Gk ∈Rrk−1×pk×rk, with r0 = rK = 1
+and rk ≤¯rk. At each cut, factor the relevant matrix through a basis of its column space. Equivalently,
+left-orthogonalize the cores by QR and absorb the triangular factors into the next core. Thus the
+(rk−1pk) × rk matrix associated with Gk has orthonormal columns for k < K, and ∥GK∥F = ∥A∥F .
+These steps use no inverse lower bound on a singular value.
+Expand the contraction over all internal paths (a1, . . . , aK−1). A path contributes the product tensor
+with physical vectors Gk[ak−1, :, ak]. There are at most Q
+k<K rk ≤J paths. To sum their squared
+weights, let
+tk(b) =
+X
+a1,...,ak−1
+k
+Y
+ℓ=1
+∥Gℓ[aℓ−1, :, aℓ]∥2
+2,
+ak = b.
+Column normalization gives t1(b) = 1. If tk−1(a) = 1 for all a, then
+tk(b) =
+X
+a
+tk−1(a)∥Gk[a, :, b]∥2
+2 = 1
+for k < K. Hence the sum of all squared path weights is
+X
+a
+tK−1(a)∥GK[a, :, 1]∥2
+2 = ∥GK∥2
+F = ∥A∥2
+F .
+The individual path terms need not be orthogonal; the prefix identity is what proves the required
+equality.
+18
+
+
+[PAGE 19]
+A.2
+Proof of Theorem 1
+Roadmap. Apply subadditivity, modewise Hölder and Bessel, then control the component-weight sum.
+Proof. Let q = 2/K ≤1 and use Lemma 1. Subadditivity of the qth power of absolute value gives
+X
+i
+|⟨A, Vi⟩|q ≤
+X
+j
+X
+i
+K
+Y
+k=1
+|⟨xkj, vki⟩|2/K.
+Hölder’s inequality with K equal exponents, followed by Bessel’s inequality for each orthonormal family,
+yields
+X
+i
+Y
+k
+|⟨xkj, vki⟩|2/K ≤
+Y
+k
+ X
+i
+|⟨xkj, vki⟩|2
+!1/K
+≤
+Y
+k
+∥xkj∥2/K
+2
+= (acp
+j )q.
+Finally, the power-mean inequality (or Hölder with exponents 2/q and 2/(2 −q)) gives
+X
+j
+(acp
+j )q ≤J1−q/2
+A
+
+
+
+X
+j
+(acp
+j )2
+
+
+
+q/2
+≤J1−q/2Mq.
+This is (14). For JA = 0 both sides of the first inequality are zero.
+A.3
+Exact rank-one diagonal image
+Lemma 2 (Exact diagonal reduction). Under (4), the image of the rank-one tensor Frobenius ball of
+radius M under A 7→(⟨A, Vi⟩)m
+i=1 is exactly
+(
+a ∈Rm :
+X
+i
+|ai|2/K ≤M2/K
+)
+.
+Roadmap. Use the diagonal bound for one inclusion and construct signed product factors for the converse.
+Proof. One inclusion follows from Theorem 1 with J = 1. Conversely, for any vector in the displayed
+ball, put
+x1 =
+X
+i
+sign(ai)|ai|1/Kv1i,
+xk =
+X
+i
+|ai|1/Kvki,
+k ≥2,
+and set A = x1 ⊗· · · ⊗xK. Orthonormality gives ⟨A, Vi⟩= ai and
+∥A∥F =
+Y
+k
+∥xk∥2 =
+ X
+i
+|ai|2/K
+!K/2
+≤M.
+The tensor has every Tucker and TT rank at most one. The zero vector is handled by the zero tensor.
+A.4
+Threshold error and structural radius
+Lemma 3 (Scalar threshold envelope). If |e| ≤λ and s = softλ(x + e), then s lies between zero and x
+and
+|s −x| ≤min(|x|, 2λ).
+For q ∈(0, 1], t, u ≥0, one also has min(t, u) ≤tqu1−q, with the continuous interpretation at zero.
+19
+
+
+[PAGE 20]
+Roadmap. Check positive and negative scalar inputs, then interpolate the two deterministic error bounds.
+Proof. For x ≥0, x + e ≥−λ, so thresholding cannot produce a negative value. Also x + e −λ ≤x, so
+0 ≤s ≤x. If x > 2λ, then x + e > λ and x −s = λ −e ≤2λ. Otherwise x −s ≤x ≤2λ. The negative
+case follows by oddness. If t ≤u, then t = tqt1−q ≤tqu1−q; if u ≤t, then u = uqu1−q ≤tqu1−q.
+Lemma 4 (Matrix functional bound). If rank(B) ≤r and H has singular values s1(H) ≥s2(H) ≥· · · ,
+then
+|⟨H, B⟩| ≤∥B∥F
+
+X
+i≤r
+si(H)2
+
+
+1/2
+.
+Roadmap. Project onto the matrix column space and maximize the spectral trace over projections of
+bounded rank.
+Proof. Let P project onto the column space of B. Then PB = B and Cauchy–Schwarz gives |⟨H, B⟩| =
+|⟨PH, B⟩| ≤∥PH∥F ∥B∥F . Write HH⊤= P
+i λiuiu⊤
+i , with decreasing nonnegative eigenvalues. The
+numbers bi = u⊤
+i Pui satisfy 0 ≤bi ≤1 and P
+i bi = tr(P) ≤r. Therefore ∥PH∥2
+F = P
+i λibi ≤P
+i≤r λi:
+moving any weight from a smaller eigenvalue to an unfilled larger one cannot reduce this sum. Since
+λi = si(H)2, the result follows.
+A.5
+Proof of Theorem 2
+Roadmap. Construct a uniform coordinate-noise event, bound the threshold error pathwise, verify the
+other intervals and use the deterministic selection rule.
+Proof. The product atoms are orthonormal because
+⟨Vi, Vj⟩=
+Y
+k
+⟨vki, vkj⟩= 1{i = j}.
+Gaussian isotropy then gives the independent normals in (5). For a standard normal g, Chernoff’s
+inequality gives P(g > t) ≤exp(−t2/2) by minimizing exp(−ut + u2/2) at u = t. Apply the same
+inequality to −g and take a union bound to obtain
+P{max
+i
+|τgi| > λ} ≤2m exp{−λ2/(2τ 2)} = α.
+On the complementary event, Lemma 3 and Theorem 1 give
+| bψNL −ψ(A)| ≤∥w∥∞
+X
+i
+min(|ai|, 2λ)
+≤∥w∥∞(2λ)1−q X
+i
+|ai|q ≤hNL.
+This proves the uniform coverage of INL.
+Because ∥L∥F = 1, ⟨L, Z⟩−ψ(A) ∼N(0, τ 2), so IG has exact coverage. For any constrained unfolding,
+the loading matrix has singular values |wi|: the product vectors on each side form orthonormal families.
+Lemma 4 thus gives |ψ(A)| ≤M(P
+i≤r w2
+(i))1/2. Choosing the smallest cap proves |ψ(A)| ≤h0, so I0
+has coverage one. The selected index in (13) is deterministic, hence the selected interval retains its
+individual coverage without a multiple-selection correction. Its length is exactly (15).
+20
+
+
+[PAGE 21]
+A.6
+Proof of Theorem 3
+Roadmap. Force a variance cost at zero and a bias cost at signed coordinate tensors, then combine the
+two necessary inequalities.
+Proof. Set t = ⟨W, L⟩. At A = 0 the center error is normal with mean b and standard deviation
+v = τ∥W∥F . For fixed h and v > 0, the probability that this variable belongs to [−h, h] is maximized at
+b = 0. Indeed, for b ≥0 its derivative is
+v−1{ϕ((h + b)/v) −ϕ((h −b)/v)} ≤0,
+since |h + b| ≥|h −b|; the function is even in b. Honesty at zero therefore implies h ≥zτ∥W∥F ≥zτ|t|.
+If v = 0, the same last inequality is automatic.
+At A = ±MEi, the mean center error is
+b ± M(⟨W, Ei⟩−p−1/2).
+At least one sign has absolute mean at least M|⟨W, Ei⟩−p−1/2|. A symmetric interval whose radius
+is strictly smaller than this mean magnitude has probability below 1/2 under a nondegenerate normal
+distribution: it lies strictly to one side of the median. In the degenerate case the coverage is zero. Since
+1 −α > 1/2, honesty forces
+h ≥M max
+i
+|⟨W, Ei⟩−p−1/2| ≥M
+√p|1 −t|.
+The last inequality follows from t −1 = p−1/2 P
+i(⟨W, Ei⟩−p−1/2). Put a = M/√p and b′ = zτ. The
+two bounds imply
+1 ≤|1 −t| + |t| ≤h/a + h/b′,
+which rearranges to (17). On the rank-one tensor ball, h0 = M/√p, and the direct/structural choice
+gives the matching order. No result about arbitrary data-dependent widths is invoked.
+A.7
+A mixture inequality for confidence intervals
+Lemma 5 (Common-target alternatives). Let P0 have target zero and let Q be a mixture of alternatives
+whose targets all equal δ > 0. If C covers zero under P0 and covers the target at every alternative with
+probability at least 1 −α, then
+E0|C| ≥δ{1 −2α −TV(P0, Q)}.
+(48)
+If Q ≪P0, then TV(P0, Q) ≤1
+2
+p
+χ2(Q, P0).
+Roadmap. Transfer coverage from the common-target mixture to the null using total variation, then
+intersect the two coverage events.
+Proof. Mixture coverage gives Q(δ ∈C) ≥1 −α. By the definition of total variation, P0(δ ∈C) ≥
+1−α−TV(P0, Q). Intersecting with {0 ∈C} gives probability at least 1−2α−TV. An interval containing
+both points has length at least δ, proving (48). The divergence bound follows from Cauchy–Schwarz
+applied to 1
+2E0|dQ/dP0 −1|. Appending an independent random seed leaves total variation unchanged,
+so randomized intervals are covered as well.
+For Gaussian shifts PB = N(vec(B), τ 2ID), direct integration of their likelihood ratios gives
+E0
+dPB
+dP0
+dPC
+dP0
+
+= exp{⟨B, C⟩/τ 2}.
+(49)
+To verify this, each ratio is exp{⟨Z, B⟩/τ 2 −∥B∥2
+F /(2τ 2)}. Multiply the ratios and use the moment
+generating function of ⟨Z, B + C⟩, whose variance under P0 is τ 2∥B + C∥2
+F . The exponent simplifies to
+(49).
+21
+
+
+[PAGE 22]
+A.8
+Proof of Theorem 4
+Roadmap. Construct rank-one matrix alternatives within the chosen unfolding and bound their full
+Gaussian likelihood second moment using an auxiliary Gaussian.
+Proof. For the given bipartition, let fi = N
+k∈S ei and gi = N
+k/∈S ei. Both families are orthonormal. Let
+u = p−1/2(s1, . . . , sp) with independent uniform signs, and define
+θ = min(M, τ√p/4),
+Au = θ
+ X
+i
+uifi
+!
+⊗
+
+X
+j
+ujgj
+
+.
+Every alternative has rank one in this unfolding, norm θ, and functional value δ = θ/√p. Let Q average
+their Gaussian laws. If v is an independent copy of u, then (49) gives
+1 + χ2(Q, P0) = Eu,v exp{θ2(u⊤v)2/τ 2} = E exp{aS2
+p/p},
+where Sp is a sum of p independent signs and a = θ2/(τ 2p) ≤1/16.
+Introduce an independent standard normal H. Its moment generating function yields
+E exp(aS2
+p/p) = EH
+
+cosh(
+q
+2a/p H)
+p
+≤EH exp(aH2) = (1 −2a)−1/2 ≤
+q
+8/7.
+The inequality uses log cosh(x) ≤x2/2: for x ≥0, its derivative tanh(x) is at most x, and both functions
+are even. The Gaussian-square expectation follows by integrating exp{−(1 −2a)h2/2}/
+√
+2π; it is finite
+since a < 1/2. Nonnegative integrands justify exchanging the expectations.
+Lemma 5 now gives (19). The constant is positive for α < 1/4. On ΘS, Lemma 4 with loading
+singular values all equal to p−1/2 gives |ψ(A)| ≤M/√p. Choosing between this structural interval and
+the direct interval attains the lower order. All calculations use the entire Gaussian experiment; the result
+does not arise from hiding off-diagonal observations.
+A.9
+Proof of Theorem 5
+Roadmap. Substitute the specified dimensions and norm scaling, then apply the two lower-bound
+theorems with their confidence-level restrictions.
+Proof. Substitute M = τ√p, q = 2/K and ∥w∥∞= p−1/2 into (10). This gives
+hNL = τJ1−1/Kp1/K−1/2{8 log(2p/α)}(K−2)/(2K),
+which is the radius in (20). For fixed K ≥3, its exponent β = (K−2)/(2K) is positive and (log p/p)β →0.
+The cap classes contain all ±MEi and zero, so Theorem 3 gives radius at least zτ/(1 + z). For any
+retained constrained unfolding, the corresponding matrix-rank cap class contains ΘS, and Theorem 4
+gives expected length at zero at least cατ/4. The same comparisons under the stated growing-cap
+condition follow by retaining the factor J1−1/K.
+A.10
+Proof of Theorem 6
+Roadmap. Mix orthogonal coordinate shifts, compute the full likelihood second moment exactly and
+apply the interval mixture lemma.
+22
+
+
+[PAGE 23]
+Proof. Let a = min{M, τ
+p
+log(1 + p/4)} and mix uniformly over Aj = aEj, j = 1, . . . , p. Each is in the
+rank-one tensor class and has target δ = a/√p. Orthogonality of the Ej and (49) imply
+1 + χ2(Q, P0) = p−2{p exp(a2/τ 2) + p(p −1)}.
+Thus χ2(Q, P0) = {exp(a2/τ 2) −1}/p ≤1/4 and TV(P0, Q) ≤1/4.
+Lemma 5 gives (21).
+This
+construction does not establish that these alternatives are least favorable.
+A.11
+Proof of Proposition 1
+Roadmap. Construct sparse diagonals inside the rank-one tensor class, bound the diagonal likelihood
+mixture using factorial moments and balance the support size. The full-data likelihood is kept separate.
+Proof. For an integer 1 ≤s ≤p, let S be a uniformly chosen size-s subset of {1, . . . , p}. Define
+AS = bs
+ X
+i∈S
+ei
+!⊗K
+.
+This is a rank-one tensor, ∥AS∥F = bssK/2 ≤M, and every alternative has target δs = sbs/√p. Its
+observed diagonal has mean bs1S. Let Qd be the uniform mixture of these diagonal Gaussian laws, and
+let P0,d be the zero-mean diagonal law. Applying the Gaussian shift calculation (49) in dimension p gives
+1 + χ2(Qd, P0,d) = ES,T exp{b2
+s|S ∩T|/τ 2},
+(50)
+where S, T are independent uniform size-s subsets. This is the sparse-mixture mechanism used in classical
+sequence lower bounds [Collier et al., 2017]; the following counting argument records the needed bound
+explicitly.
+Conditional on S, H = |S ∩T| is hypergeometric with population size p, success count s and sample
+size s. Write (x)j = x(x−1) · · · (x−j +1), with (x)0 = 1. Counting the j-element subsets of S contained
+in T yields
+E
+ 
+H
+j
+!
+=
+ 
+s
+j
+!
+(s)j
+(p)j
+≤
+ 
+s
+j
+!
+(s/p)j,
+0 ≤j ≤s.
+For j ≥1, the inequality follows factor by factor from (s −ℓ)/(p −ℓ) ≤s/p for 0 ≤ℓ< j, since s ≤p.
+Set t = exp(b2
+s/τ 2) −1 ≥0. Expanding (1 + t)H and using the preceding factorial moments gives
+E exp(b2
+sH/τ 2) =
+s
+X
+j=0
+tjE
+ 
+H
+j
+!
+≤(1 + st/p)s ≤exp(s2t/p) ≤e1/4.
+The last inequality uses the definition of bs. Equation (50) and Cauchy–Schwarz therefore give
+TV(Qd, P0,d) ≤1
+2
+q
+e1/4 −1.
+Lemma 5, now applied to the diagonal experiment, proves (23). The constant is positive because α < 1/4
+and 1
+2
+p
+e1/4 −1 < 1/2. The argument also covers independent randomization.
+To prove (24), let xp = (p/ log p)1/K and sp = ⌊xp⌋. For sufficiently large p, xp/2 ≤sp ≤xp and
+sp ≥1. When M = τ√p, the norm term in bsp is at least τ√log p. The noise term is at most this
+quantity, since 1 + p/(4s2
+p) ≤1 + p/4 ≤p for p ≥2. Thus the minimum equals the noise term. Since
+K > 2 and sp ≤p1/K eventually,
+log{1 + p/(4s2
+p)} ≥log{1 + p1−2/K/4} ≥1
+2(1 −2/K) log p
+23
+
+
+[PAGE 24]
+for sufficiently large p. Consequently,
+spbsp
+√p ≥1
+2
+s
+1 −2/K
+2
+τ
+log p
+p
+(K−2)/(2K)
+.
+Theorem 2 with J = 1 gives an upper bound of the same order and deterministic length. Since the
+worst-case criterion is at least the criterion at zero, both rates follow. The fixed-cap extension follows by
+class inclusion for the lower bound and a constant J1−1/K for the upper bound.
+For completeness, the corresponding full-tensor mixture would have ⟨AS, AT ⟩= b2
+s|S ∩T|K in (49).
+Its likelihood second moment is not (50), and the preceding bound does not apply to it. The proposition
+is restricted to diagonal observations throughout.
+B
+Proofs of the full-data refinements
+Lemma 6 (Finite product nets and injective norm). The nets used in (25) exist and satisfy ρ(B) ≤
+2NS(B) for any tensor on SK. Furthermore, a tensor B in either rank-cap class satisfies ∥B∥F ≤
+√
+J ρ(B).
+Roadmap. Use a volume bound and product telescoping, then apply the canonical squared-weight
+identity.
+Proof. A maximal ε-separated subset of the unit sphere is an ε-net. Balls of radius ε/2 around its points
+are disjoint and contained in the ball of radius 1 + ε/2. The ratio of their Euclidean volumes bounds the
+cardinality by (1 + 2/ε)s. Compactness gives a finite maximal set. Take ε = 1/(2K).
+Approximate each factor of any unit product direction by a net point. Telescoping the product
+one factor at a time, each contraction difference has magnitude at most ερ(B), by multilinearity and
+the definition of ρ. The sum is at most Kερ(B) = ρ(B)/2. Taking the supremum gives ρ(B) ≤
+NS(B) + ρ(B)/2.
+For the second assertion use Lemma 1, writing its product terms as Xj. Then
+∥B∥2
+F =
+X
+j
+⟨B, Xj⟩≤ρ(B)
+X
+j
+∥Xj∥F ≤ρ(B)
+√
+J
+
+X
+j
+∥Xj∥2
+F
+
+
+1/2
+= ρ(B)
+√
+J ∥B∥F .
+The middle inequality is Cauchy–Schwarz, and the last identity is the squared-weight conclusion of
+Lemma 1. Divide when B ̸= 0; the zero case is immediate.
+B.1
+Proof of Theorem 7
+Roadmap. A finite Gaussian union bound controls every net contraction. Test acceptance on that event
+bounds each ordered diagonal coordinate. Summation gives the interval and intersection gives the two
+expected-length guarantees.
+Proof. There are at most (ep/s)s subsets of size s, since
+ p
+s
+ ≤ps/s! and log(s!) ≥
+R s
+1 log x dx ≥s log s−s.
+Each unit product contraction of τG has distribution N(0, τ 2). Therefore the Gaussian Chernoff bound
+gives
+P{∃S : NS(τG) > λscan
+|S| } ≤
+p
+X
+s=1
+2(ep/s)s(1 + 4K)Ks exp{−(λscan
+s
+)2/(2τ 2)}
+≤γ.
+Let Eγ be the complementary event. No independence between the scanned contractions is required.
+24
+
+
+[PAGE 25]
+On Eγ, if the test accepts, the triangle inequality for the finite maximum implies NS(A) ≤2λscan
+s
+.
+Lemma 6 gives ρ(AS,...,S) ≤4λscan
+s
+. Coordinate restriction cannot increase any constrained unfolding
+rank, because it multiplies an unfolding by selection matrices. Theorem 1 and Lemma 6 thus imply
+X
+i∈S
+|Ai,...,i|q ≤J1−q/2∥AS,...,S∥q
+F ≤J ρ(AS,...,S)q.
+Let |a|(s) be the sth largest absolute diagonal entry. Choose S to contain the s largest entries. It follows
+that
+s|a|q
+(s) ≤J(4λscan
+s
+)q,
+|a|(s) ≤4JK/2λscan
+s
+s−K/2.
+Summing these inequalities and using |ψ(A)| ≤p−1/2 P
+i |ai| proves the bound |ψ(A)| ≤Rγ in (26). On
+rejection the structural interval covers surely. Therefore Cscan covers on Eγ and is honest at level 1 −γ.
+Both intersected intervals cover with probability at least 1 −α0 −γ. On that event the intersection is
+nonempty and covers; replacing empty intersections by {0} preserves this argument. Its length is always
+at most ℓ∗. At zero, the rejection probability is at most γ, and on acceptance the intersection has length
+at most 2Rγ. This gives (27), without independence between the intervals.
+For the specified γ, elementary logarithm bounds give λscan
+s
+≤CKτ
+p
+s log(2p/α). For example, use
+s log(ep/s) ≤s(1 + log p), log(2p/γ) ≤2 log(2p/α) and s ≥1. Equation (26) now proves (28); the extra
+term ℓ∗γ is smaller in order by Theorem 5. If K ≥4, the sum is at most 1 + 2/(K −3) by integration of
+x−(K−1)/2 over [1, ∞). If K = 3, it is at most 1 + log p. Combining the upper bound for K ≥4 with
+Theorem 6 proves (29).
+Lemma 7 (Uniform cubic moment for a weighted sign sum). For independent uniform signs ϵi, let
+Sp = Pp
+i=1 i−2/3ϵi. Then, uniformly in p ≥1,
+P(|Sp| > x) ≤2e−x3/192
+(x ≥12),
+E exp{|Sp|3/40000} ≤20/19 + 1/100 < 5/4.
+Roadmap. Split the weighted sign sum into a bounded head and a sub-Gaussian tail, then integrate its
+cubic tail probability.
+Proof. For x ≥12, put m = ⌊(x/6)3⌋. If m ≥p, then |Sp| ≤3p1/3 ≤x/2. Otherwise, the first m terms
+have absolute sum at most 3m1/3 ≤x/2. The remaining independent sign sum has variance proxy
+Vm =
+X
+i>m
+i−4/3 ≤3m−1/3 ≤24/x.
+Here m ≥(x/6)3/2 and 18 · 21/3 < 24. The product inequality Q
+i cosh(ti−2/3) ≤exp(t2Vm/2) and
+Chernoff optimization give a two-sided tail bound 2 exp{−(x/2)2/(2Vm)} ≤2e−x3/192.
+Put u = 1/40000 and Y = |Sp|3. Tonelli’s theorem applied to euY = 1 +
+R Y
+0 ueut dt yields
+EeuY ≤e1728u +
+2u
+1/192 −ue−(1/192−u)1728 ≤20
+19 +
+1
+100.
+The last step uses 1728u < 1/20, ex ≤(1 −x)−1 for 0 ≤x < 1, and 1/192 −u ≥1/200. The exponential
+factor in the second term is at most one. These estimates are uniform in p.
+B.2
+Proof of Theorem 8
+Roadmap. Couple three rank-one factor signs so that the diagonal is deterministic and harmonic. Control
+the full likelihood mixture by the cubic moment lemma and Hölder, without assuming independence of
+the three inner-product sums.
+25
+
+
+[PAGE 26]
+Proof. For independent uniform sign vectors u, v ∈{−1, 1}p, define
+(xu)i = uii−1/3,
+Au,v =
+τ
+200xu ⊗xv ⊗xuv,
+where (uv)i = uivi. Every alternative is rank one and
+∥Au,v∥F =
+τ
+200
+ X
+i
+i−2/3
+!3/2
+≤33/2
+200 τ√p ≤M.
+The sum bound follows from 1 +
+R p
+1 x−2/3 dx ≤3p1/3. Its diagonal is τ/(200i), so the common target is
+δ = τHp/(200√p).
+Let Q mix the full Gaussian laws over u, v. For independent copies u′, v′, set ϵi = uiu′
+i and ηi = viv′
+i.
+The full tensor inner product divided by τ2 is S1S2S3/40000, where
+S1 =
+X
+i
+i−2/3ϵi,
+S2 =
+X
+i
+i−2/3ηi,
+S3 =
+X
+i
+i−2/3ϵiηi.
+Each has the marginal distribution in Lemma 7. They are dependent. The likelihood identity (49), the
+arithmetic–geometric mean inequality and Hölder give, with u0 = 1/40000,
+1 + χ2(Q, P0) = Eeu0S1S2S3
+≤Eeu0(|S1|3+|S2|3+|S3|3)/3
+≤
+3
+Y
+j=1
+{Eeu0|Sj|3}1/3 < 5/4.
+Thus TV(Q, P0) < 1/4. Lemma 5 gives E0|C| ≥(3/4 −2α)δ, proving (30). Since Hp ≍log p, this also
+proves the claimed obstruction to the earlier zero-point conjecture.
+C
+Supporting refinements
+These separately calibrated extensions do not change the observation model of a lower bound by
+implication. The simulations retain the original Gaussian procedure.
+C.1
+Diagonal geometry
+Proposition 10 (Smaller rank coefficient). In P
+i |ai|2/K ≤CdiagM2/K one may take
+Cdiag,Tu = min
+(
+J1−1/K
+Tu
+, m1−1/K, (
+Y
+k
+¯rk)1/K
+)
+.
+For TT caps put ¯r0 = ¯rK = 1 and ρk = min(pk, ¯rk−1¯rk); one may take
+Cdiag,TT = min
+(
+J1−1/K
+TT
+, m1−1/K, (
+Y
+k
+ρk)1/K
+)
+.
+The nonlinear radius remains valid with coefficient Cdiag.
+Roadmap. Add ambient and mode-subspace bounds to the original expansion bound.
+26
+
+
+[PAGE 27]
+Proof. Bessel gives P
+i |ai|2 ≤M2; Hölder in dimension m gives the second coefficient. For Tucker mode
+projectors Pk put ℓki = ∥Pkvki∥2
+2. Projection leaves A unchanged, so Cauchy–Schwarz and Hölder give
+X
+i
+|ai|2/K ≤M2/K X
+i
+Y
+k
+ℓ1/K
+ki
+≤M2/K Y
+k
+(
+X
+i
+ℓki)1/K ≤M2/K Y
+k
+¯r1/K
+k
+.
+The last step uses P
+i v⊤
+kiPkvki ≤tr Pk. For TT cores, fixing the two bond indices of core k expresses
+its physical fibers through at most ¯rk−1¯rk vectors. The mode rank is therefore at most ρk; the Tucker
+argument applies. Theorem 1 gives the first coefficient.
+For equal Tucker caps r this supplies coefficient r, instead of r(K−1)2/K; optimal rank dependence is
+not established. For unit loading vectors with frame bounds P
+i vkiv⊤
+ki ⪯FkI, the original proof instead
+gives coefficient J1−1/K Q
+k F 1/K
+k
+. This follows by replacing each Bessel inequality by its frame bound.
+The direct variance must use the actual ∥L∥2
+F ; the orthogonal structural formula is not asserted for these
+frames.
+C.2
+Exact affine benchmark
+Let Qα(µ, v) be the smallest h ≥0 such that P{|N(µ, v2)| ≤h} ≥1 −α, for µ, v ≥0, with Qα(µ, 0) = µ.
+Proposition 11 (Structural range and fixed affine optimum). The range of ψ on either cap class under
+(4) is exactly [−h0, h0]. Under (16) and 0 < α < 1/2, set a0 = M
+q
+scap/p. Among all honest full-data
+fixed-radius affine intervals, the optimal radius is
+h∗
+aff = min
+0≤t≤1 Qα(a0(1 −t), τt).
+Center t⟨L, Z⟩attains the optimum. If a0 ≤z1−ατ, then h∗
+aff = a0.
+Roadmap. Attain the structural bound, force bias and variance for any affine center, and reduce to a
+scalar optimization.
+Proof. Let T index the scap largest weights. The tensor M P
+i∈T wiVi/(P
+i∈T w2
+i )1/2 has norm M, all
+constrained ranks at most scap, and target h0. Its signed scalar multiples attain the full interval; Lemma 4
+gives the reverse inclusion.
+For center ⟨W, Z⟩+ b put t = ⟨W, L⟩and gi = ⟨W, Ei⟩−p−1/2. All scap-sparse diagonal tensors of
+norm at most M belong to the class. Opposite such tensors force an absolute mean error at least
+|b| + M(
+scap
+X
+i=1
+g2
+(i))1/2 ≥a0|1 −t|.
+Indeed, the top-square sum is at least scap/p times the full sum, and ∥g∥2 ≥| P
+i gi|/√p = |t −1|.
+The noise standard deviation is τ∥W∥F ≥τ|t|. Confidence greater than one half forces h to be at
+least the absolute mean error, by the normal median argument.
+For h ≥µ ≥0 the probability
+F(h; µ, v) = Φ((h −µ)/v) + Φ((h + µ)/v) −1 decreases with µ and with v > 0. For µ, compare the
+normal densities. For v, its derivative is
+−{(h −µ)ϕ((h −µ)/v) + (h + µ)ϕ((h + µ)/v)}/v2 ≤0.
+Thus h ≥Qα(a0|1 −t|, τ|t|); zero variance follows directly. For t < 0 this is at least a0, and for t > 1
+it is at least z1−α/2τ. Both endpoints are achievable. On [0, 1], center t⟨L, Z⟩has exactly the asserted
+maximum bias and variance and attains the quantile bound. Continuity, including the zero-variance
+limit, gives a minimum. Finally F(h; µ, v) ≤Φ((h −µ)/v) implies Qα(µ, v) ≥µ + z1−αv. If a0 ≤z1−ατ,
+every t ∈[0, 1] requires radius at least a0, attained at t = 0.
+At cap one, M = τ√p and α = 0.05, the exact affine length is 2τ. The scalar bounded-normal-mean
+mechanism is classical [Stark, 1992]; the tensor reduction is proved above.
+27
+
+
+[PAGE 28]
+C.3
+Noise envelopes and approximate ranks
+Define ΘεA = {A : ∃B ∈Θ(M, ¯r), ∥A −B∥F ≤εA} for supplied εA ≥0.
+Proposition 12 (Envelope and approximation calibration). Suppose di = ai + ei and, uniformly over
+the asserted class, P(maxi |ei| ≤λ0) ≥1 −α. For any measurable Λ ≥λ0, the threshold center has an
+honest radius
+∥w∥∞CdiagM2/K(2Λ)1−2/K + εA
+on ΘεA. The structural radius is h0 +εA. Data-dependent selection between these two intervals is valid. A
+direct Gaussian alternative needs its own calibration and deterministic selection or joint error allocation.
+Roadmap. Use one event for every allowed threshold and a residual Lipschitz bound.
+Proof. On the envelope event, Lemma 3 holds simultaneously for all Λ ≥λ0, proving the assertion at
+εA = 0. For fixed e, the residual map fe(x) = softΛ(x + e) −x = e −clip(x + e, [−Λ, Λ]) is one-Lipschitz.
+For ai = ⟨A, Vi⟩and bi = ⟨B, Vi⟩,
+|
+X
+i
+wi{fei(ai) −fei(bi)}| ≤∥w∥2∥a −b∥2 ≤∥A −B∥F .
+The last step is Bessel. Add the threshold error at B. Also |ψ(A) −ψ(B)| ≤∥L∥F ∥A −B∥F ≤εA. Both
+intervals cover on the same event, proving the selection assertion.
+For iid Gaussian errors the exact threshold is τΦ−1({1 + (1 −α)1/m}/2), by multiplying the m
+probabilities 2Φ(λ0/τ) −1. Dependent Gaussian margins with variances at most τ 2 admit τΦ−1(1 −
+α/(2m)) by Bonferroni. Marginal bounds Eetei ≤et2v2/2 give v
+p
+2 log(2m/α) by Chernoff and a union
+bound. Bounds E|ei|a ≤va give v(m/α)1/a by Markov and a union bound. Independence is unnecessary
+for these three union-bound calibrations.
+Writing DLA = (⟨A, Vi⟩)i, the same proof gives
+| bψ −ψ(A)| ≤inf
+B
+n
+∥w∥∞Cdiag,B∥B∥2/K
+F
+(2Λ)1−2/K + ∥DL(A −B)∥2
+o
+.
+The infimum ranges over tensors with their indicated valid budget Cdiag,B. Its unknown value is not an
+adaptive confidence radius.
+For Tucker approximation let Pk be any leading mode singular-space projector of dimension min(¯rk, pk)
+and put B = (N
+k Pk)A. The lifted projections commute. The identity I −Q
+k Pk = P
+k(Q
+ℓ<k Pℓ)(I −Pk)
+has summands with mutually orthogonal ranges. Their squared residual norms add, each at most
+∥(I −Pk)A∥2
+F . Thus
+∥A −B∥2
+F ≤
+X
+k
+X
+j>¯rk
+σj(A(k))2,
+∥B∥F ≤∥A∥F .
+This holds without a spectral gap, including ties.
+The distance-class proposition also covers TT
+approximation.
+C.4
+Finite variance and bounded row corruption
+Proposition 13 (Replicate median calibration). Let clean tensor replicates be independent with common
+mean A, and every prescribed contraction have variance at most known v2. Allow at most c adversarial
+replacements of entire replicates. Coordinates within a replicate may be dependent. Choose an odd block
+count b with
+b ≥8c,
+b ≥32 log(m/α),
+n ≥2b,
+k = ⌊n/b⌋.
+28
+
+
+[PAGE 29]
+Partition the first bk replicates into fixed disjoint blocks. For coordinatewise medians di of the block
+means,
+P(max
+i
+|di −ai| > 2v/
+√
+k) ≤α.
+Thus Proposition 12 applies. For the smallest admissible odd b, the threshold has order
+O{v
+q
+c/n + log(m/α)/n}.
+Roadmap. Bound clean-block errors, count corrupted blocks deterministically and concentrate the
+original bad-block count.
+Proof. Chebyshev bounds a clean block’s error probability at 2v/
+√
+k by 1/4. For a fixed coordinate
+let Ij be its original clean-block error indicators. They are independent and P
+j EIj ≤b/4. At most c
+summaries change even for an adaptive adversary. If the final median errs, P
+j Ij ≥b/2 −c ≥3b/8. For
+a Bernoulli I, h(t) = log Eet(I−EI) satisfies h(0) = h′(0) = 0 and h′′(t) ≤1/4, the variance of a tilted
+Bernoulli. Hence h(t) ≤t2/8. Independence and Markov give
+P{
+X
+j
+(Ij −EIj) ≥b/8} ≤e−tb/8+bt2/8 = e−b/32
+(t = 1/2).
+A union bound over m coordinates proves the claim. Since k ≥n/(2b), the rate follows, including the
+fixed rounding constants in b.
+Median-of-means calibration is classical [Devroye et al., 2016]. For independent Bernoulli replacements
+of probability ϵ, let c = ⌈2nϵ + 2 log(1/δ)⌉.
+Their count satisfies E2N = (1 + ϵ)n ≤enϵ, giving
+P(N > c) ≤enϵ−c log 2 ≤δ. With envelope error budget α0, coverage is at least 1 −α0 −δ when the block
+conditions hold. These sufficient corruption conditions are not a sharp breakdown or contamination-
+minimax result.
+C.5
+Unknown Gaussian variance
+Proposition 14 (Independent residual calibration). Retain n ≥2 iid Gaussian full-tensor replicates
+with unknown noise standard deviation σ > 0. Let dji = ⟨Wj, Vi⟩, ¯di = n−1 P
+j dji, ν = m(n −1), and
+S2 = ν−1 X
+i
+X
+j
+(dji −¯di)2,
+σU = S
+q
+ν/χ2
+ν,δ,
+0 < δ < α.
+The denominator is the lower δ chi-square quantile. Compute the original three intervals with τU = σU/√n
+and α0 = α −δ, choosing the smallest using only S and supplied quantities. The selected interval is
+honest at level 1 −α. For fixed δ and ν →∞, σU/σ →1 in probability, and the nonlinear expected-length
+order is preserved.
+Roadmap. Orthogonally separate means and residuals, then condition on a conservative scale estimate.
+Proof. An orthogonal transformation in the replicate index separates each sample mean from its n −1
+residual coordinates. Joint Gaussianity and loading orthonormality give independence of all residual and
+mean coordinates. Therefore νS2/σ2 ∼χ2
+ν, independent of the vector of means, and P(σU ≥σ) = 1 −δ.
+Conditional on S with σU ≥σ, both stochastic intervals have failure at most α0 and the selected index is
+fixed. The structural interval covers surely. Integrating conditional failure and adding δ proves honesty.
+The normalized chi-square has mean one and variance 2/ν. Chebyshev gives convergence to one
+and convergence of its fixed-δ quantile to one. Thus σU/σ →1 and E(σU/σ)2 = ν/χ2
+ν,δ →1. The
+second-moment bound gives uniform integrability for powers at most one. Since the nonlinear radius is
+proportional to τ 1−2/K
+U
+, its expected order is preserved.
+Retained residuals are essential to this construction; it is not an estimate of variance from Z alone.
+29
+
+
+[PAGE 30]
+C.6
+Confidence levels and covariance
+Proposition 15 (Calibrated lower bounds). The fixed-confidence rates of Theorems 6, 4 and Proposition 1
+extend to every 0 < α < 1/2 after changing constants. If known Gaussian covariance satisfies Σ ⪰s2
+0I
+with s0 > 0, all-procedure isotropic lower bounds transfer with τ = s0.
+Roadmap. Tune the mixture distance below 1 −2α; compare covariance models by adding independent
+noise.
+Proof. Fix 0 < εTV < 1 −2α. For the coordinate mixture use a = min{M, τ
+q
+log(1 + 4ε2
+TVp)}, giving
+χ2 ≤4ε2
+TV. For the unfolding mixture use θ = min(M, cεTVτ√p) with c2
+εTV = {1 −(1 + 4ε2
+TV)−2}/2. Its
+second-moment bound is at most 1 + 4ε2
+TV. For the diagonal support mixture use
+bs = min{Ms−K/2, τ
+q
+log[1 + log(1 + 4ε2
+TV)p/s2]}.
+The factorial-moment bound again gives second moment at most 1 + 4ε2
+TV. Total variation is at most
+εTV in each case; the interval lemma has positive factor 1 −2α −εTV. The fixed-α rates are unchanged.
+Add independent N(0, Σ −s2
+0I) noise to N(A, s2
+0I). Applying any Σ-procedure to the result gives
+an isotropic randomized procedure with the same coverage and length distributions. The isotropic
+all-procedure lower bound therefore applies.
+Upper envelope calibration uses the marginal variances vec(Vi)⊤Σ vec(Vi); the direct radius uses
+z1−α/2
+q
+vec(L)⊤Σ vec(L). A lower covariance bound is needed for a universal positive noise lower scale:
+if Σ = τ 2(I −vec(L) vec(L)⊤), the target is observed without noise. Cross terms B⊤Σ−1C cannot in
+general be ordered by a covariance bound; the randomization proof avoids that invalid step.
+D
+Proofs of the sharp rates and computational statements
+D.1
+Proof of Theorem 9
+Roadmap. Embed a harmonic rank-one profile on a random support; bound its full tensor likelihood
+using support overlap.
+Proof. For a size-m support S, assign values j−1/3, j = 1, . . . , m, in increasing coordinate order and
+zeros elsewhere; call this vector xS. Set AS = bmx⊗3
+S . Then
+∥AS∥F = bm
+
+
+m
+X
+j=1
+j−2/3
+
+
+3/2
+≤bm
+√
+27m ≤M,
+ψ(AS) = bmHm/√p.
+The sum bound follows by integrating x−2/3. All alternatives have rank one and the same target. For
+H = |S ∩T|, Cauchy–Schwarz and the decreasing profile give
+0 ≤⟨xS, xT ⟩≤
+ X
+i∈S∩T
+x2
+S,i
+X
+i∈S∩T
+x2
+T,i
+!1/2
+≤
+H
+X
+j=1
+j−2/3 ≤3H1/3.
+At H = 0 every term is zero. Therefore ⟨AS, AT ⟩≤27b2
+mH. The full Gaussian likelihood identity and
+the hypergeometric bound already proved in Proposition 1 imply
+1 + χ2(Q, P0) ≤Ee27b2
+mH/τ 2 ≤exp{(m2/p)(e27b2
+m/τ 2 −1)} ≤e1/4.
+Only the hypergeometric inequality is reused, not the diagonal likelihood. Lemma 5 proves (32).
+30
+
+
+[PAGE 31]
+For p ≥256, m = ⌊p1/4⌋≥p1/4/2, so Hm ≥log m ≥(log p)/8. Also p/(4m2) ≥√p/4 ≥p1/4, and
+1
+4 log p ≤log(1 + p/(4m2)) ≤log p ≤√p ≤p/m.
+For p ≥4, log p ≤√p follows from positivity at four and the nonnegative derivative of √p −log p. Thus
+the noise term is the minimum in bm and is at least τ√log p/(2
+√
+27). Multiplication proves the stated
+constant.
+D.2
+Proof of Theorem 10
+Roadmap. Verify measurable extrema and coverage, then bound differences of feasible tensors using
+doubled caps.
+Proof. The parameter class is compact: its norm ball is bounded and closed, and rank constraints are
+closed polynomial conditions on unfolding minors. Each finite-net maximum is continuous. Hence every
+nonempty feasible section is compact and its functional extrema are attained.
+The feasible-data domain is closed. Indeed, if Zj →Z and Bj are feasible, compactness supplies a
+subsequence Bjk →B ∈Θ; continuity preserves every constraint. For any real u, the set of Z admitting
+a feasible B with ψ(B) ≥u is also closed by this argument, as is the analogous set with ψ(B) ≤u. The
+extrema on the feasible-data domain, extended by zero elsewhere, are therefore Borel functions. The
+noise event at error level α makes A feasible, uniformly with probability at least 1 −α. On that event
+CF covers the target.
+For B, B′ ∈F(Z), put ∆= B −B′. Matrix-rank subadditivity gives the doubled unfolding caps;
+coordinate restriction cannot increase them.
+Also NS(∆) ≤NS(Z −B) + NS(Z −B′) ≤2λs, so
+ρ(∆S) ≤4λs. The diagonal bound and injective-norm comparison with J2 give
+X
+i∈S
+|∆i,...,i|2/K ≤J1−1/K
+2
+∥∆S∥2/K
+F
+≤J2ρ(∆S)2/K.
+Taking the s largest diagonal entries yields |∆|(s) ≤4JK/2
+2
+λss−K/2. Summation proves |ψ(B) −ψ(B′)| ≤
+Wα. Apply it to the attained extrema; the structural range gives the other bound 2h0. Empty sections
+have length zero.
+For fixed confidence, λs ≤CK,ατ√s log p for large p. The sum of s−(K−1)/2 is bounded for K ≥4
+and at most 1 + log p for K = 3. This proves the worst-case upper bounds. Theorem 6 matches the
+higher-order bound and Theorem 9 matches the cubic bound, already at zero and within the rank-one
+subclass. Since L0 ≤Lmax, both rates follow.
+D.3
+Proof of Proposition 2
+Roadmap. Use a smaller failure budget and bounded target range for the upper risk; reduce estimation
+to common-target testing for the lower risk.
+Proof. For p ≥2, αp = p−2 still gives Wαp = O(rK(p)). The midpoint is in [−h0, h0], including the
+empty-set convention. On coverage its error is at most Wαp/2; otherwise the error is at most 2h0. Thus
+sup
+A
+EA( bψ −ψ(A))2 ≤W 2
+αp/4 + 4h2
+0p−2 = O(rK(p)2),
+since h0 = τ√scap. For a common-target prior with target δ, test whether an estimator is at least δ/2.
+If its worst-case squared risk is R, Markov bounds the total null-plus-mixture testing error by 8R/δ2.
+Total variation bounds this error below by 1−TV(P0, Q). Hence R ≥δ2(1−TV)/8. The coordinate and
+sparse harmonic mixtures have bounded total variation and targets of the required respective orders.
+31
+
+
+[PAGE 32]
+D.4
+Proof of Proposition 3
+Roadmap. Combine leading-entry scan bounds with a quasi-norm tail bound and an explicit grid-net
+construction.
+Proof. On acceptance and the common noise event, |a|(s) ≤4JK/2λss−K/2 for s ≤t. The remaining
+magnitudes are at most at, so
+X
+s>t
+|a|(s) ≤a1−q
+t
+X
+s>t
+|a|q
+(s) ≤a1−q
+t
+Bq.
+The tail vanishes for t = p. This proves the radius. On rejection the structural interval covers surely.
+Intersection gives honesty by error allocation and length at most ℓ∗. At zero rejection has probability at
+most γ, giving the stated expectation bound.
+For the rate, substitute λs ≲τ√s log p and Bq = J1−1/Kτ 2/Kp1/K. The tail becomes a constant
+times τp1/K−1/2(log p)(1−2/K)/2t−(K−1)(1−2/K)/2, as asserted.
+For a computable net, split each coordinate of [−1, 1]s into N = ⌈4K√s⌉equal intervals and normalize
+every nonzero product-grid vector. Rounding a unit vector incurs error at most √s/N ≤1/(4K). The
+rounded vector is nonzero, and normalization adds at most the original error, giving a 1/(2K)-net. Its
+size is at most (N + 1)s ≤(3 + 4K√s)s. Use log cardinality Ks log(3 + 4K√s) in the Gaussian union
+bound. Since s ≤p, this still gives λs ≲K τ√s log p. Each contraction costs O(sK) operations, proving
+the complexity bound. All completed levels cover on one event; adaptive continuation and intersection
+add no scan error. The separately calibrated C∗is intersected only once.
+D.5
+Proof of Theorem 11
+Roadmap. Expand in Hermite polynomials, bound overlap moments and control the possible mean shift
+of a low-degree estimator by its null variance.
+Proof. Scale by τ and let hν be normalized multivariate probabilists’ Hermite polynomials over the pK
+coordinates. The generating identity etz−t2/2 = P
+j≥0 Hj(z)tj/j! gives EHj(g)Hk(g) = j!1{j=k}: multiply
+two generating functions and compare coefficients of their expectation etu. Coordinate independence
+gives multivariate orthonormality. The shift calculation similarly gives Ehν(g + a) = aν/
+√
+ν!. The
+coefficient identities follow by differentiation at zero of Gaussian entire moment-generating functions.
+For the finite support prior, the degree-d coefficient sum is
+X
+|ν|=d
+{EQhν(Z/τ)}2 = 1
+d!ES,T
+⟨AS, AT ⟩
+τ 2
+d
+=
+λ2d
+d!sKd EHKd,
+by the multinomial theorem, where H = |S ∩T|. This uses the full likelihood.
+Let S(m, j) count partitions of an m-element set into j nonempty unlabeled sets. Counting maps
+according to their number of image elements gives Hm = Pm
+j=1 S(m, j)(H)j. There are at most jm
+labeled maps, so S(m, j) ≤jm/j!. For j ≤s, the hypergeometric factorial moments obey
+E(H)j = (s)2
+j/(p)j ≤(s2/p)j = µj,
+using (s −ℓ)/(p −ℓ) ≤s/p and s −ℓ≤s factor by factor. For j > s the moment is zero. Therefore
+EHm ≤
+m
+X
+j=1
+jmµj/j! ≤mm(eµ −1) ≤µeµmm.
+32
+
+
+[PAGE 33]
+The centered projection omits degree zero. Summing the remaining degrees,
+χ2
+≤d ≤µeµ
+d
+X
+d=1
+λ2d(Kd)Kd
+d!sKd
+≤µeµ
+d
+X
+d=1
+Bd
+d ≤µeµBd/(1 −Bd) = η2
+d.
+For a degree-d estimator with worst-case squared risk R on zero and the alternatives, |E0T| ≤
+√
+R
+and |EQT −δ| ≤
+√
+R. Orthonormal projection and Cauchy–Schwarz give
+|EQT −E0T| ≤
+p
+Var0 T
+q
+χ2
+≤d ≤
+√
+R ηd.
+Thus δ ≤(2 + ηd)
+√
+R, proving the risk lower bound. For the stated exponents, µ = O(p2a−1) →0
+and Bd = O(p1−aK+bK) →0; floor factors remain bounded for large p. The target is δ = τs1−K/2.
+Since a(K −2) < 1, its square is polynomially larger than τ 2/p times either logarithmic factor of the
+unrestricted minimax risk. The alternatives have norm M and rank one in every unfolding, so belong to
+either positive cap class.
+D.6
+Proof of Proposition 4
+Roadmap. Combine mixture coverage with null coverage and Markov’s inequality for length.
+Proof. Mixture coverage gives Q(δ /∈C) ≤α. If 0 ∈C and |C| < δ, the interval cannot contain δ.
+Consequently
+P0(δ ∈C) ≤P0(0 /∈C) + P0(|C| ≥δ) ≤α + E0|C|/δ.
+Add the errors. Polynomial-time interval evaluation and membership evaluation yield a polynomial-time
+test, proving the conditional implication. No unrestricted testing-hardness conclusion is deduced from
+the low-degree squared-risk bound.
+E
+Proofs for norm budgets and loading geometry
+E.1
+Proof of Theorem 12
+Roadmap. Bound each ordered diagonal difference twice, then take the minimum before summing.
+Proof. The coverage, compactness, and measurable-extrema argument of Theorem 10 applies for every
+finite M > 0. For two feasible tensors put ∆= B −B′. Then ∥∆∥F ≤2M and every constrained
+unfolding rank is at most twice its original cap. Writing ai = ∆i,...,i and q = 2/K, Theorem 1 gives
+s|a|q
+(s) ≤
+X
+i
+|ai|q ≤J1−1/K
+2
+(2M)q.
+The norm argument and the residual-scan proof give, respectively,
+|a|(s) ≤P2Ms−K/2,
+|a|(s) ≤Q2λs(α)s−K/2.
+Both inequalities hold for the same ordered entry. Summing their minimum bounds |ψ(B) −ψ(B′)|
+by (37). The structural range gives 2h0. Empty feasible sets produce a singleton and therefore length
+zero.
+Lemma 8 (A norm-sensitive harmonic sum). For p ≥1, x > 0 and K ≥3, put
+SK,p(x) =
+p
+X
+s=1
+min{xs−K/2, s−(K−1)/2}.
+Then S3,p(x) ≤4gp(x), and SK,p(x) ≤3 min(x, 1) for K ≥4. For fixed K and 0 < α < 1, UK,p(M; α) ≤
+CK,¯r,αrK(p, M, τ) uniformly in p, M, τ.
+33
+
+
+[PAGE 34]
+Roadmap. Split the cubic sum at s = x2 and use summability in higher order.
+Proof. For K ≥3, SK,p(x) ≤x P
+s≥1 s−3/2 ≤3x.
+For K ≥4 the second term gives SK,p(x) ≤
+P
+s≥1 s−3/2 ≤3.
+For K = 3, S3,p(x) ≤Hp ≤ℓp. If x ≤1, the bound 3x suffices for gp(x) = x. If 1 < x < √p, put
+n = ⌊x2⌋. Since n ≥x2/2,
+S3,p(x) ≤Hn + x
+X
+s>n
+s−3/2 ≤1 + 2 log x + 2x/√n ≤4(1 + log x).
+If x ≥√p, the bound Hp ≤1 + log p ≤2(1 + log x) gives the same conclusion. Together with 3x and ℓp,
+this proves the first statement.
+The threshold satisfies
+λs(α) ≤cK,ατ
+q
+sℓp,
+cK,α = {2[2 + K log(1 + 4K) + log(2/α)]}1/2.
+Indeed, bound log(ep/s) ≤ℓp, log p ≤ℓp, s ≥1, and ℓp ≥1 in (25). The inequality min(au, bv) ≤
+max(a, b) min(u, v) for nonnegative arguments shows
+UK,p(M; α) ≤max(P2, Q2cK,α)τ
+pℓp
+√p SK,p(x).
+The established sum bounds prove the claim.
+E.2
+Proof of Theorem 13
+Roadmap. Combine the new diameter with a coordinate mixture and a norm-tuned harmonic support
+mixture.
+Proof. The upper bound follows from Theorem 12 and Lemma 8. Since the upper diameter is deterministic
+it controls both expected-length criteria.
+For the lower bound put a = min{M, τ
+p
+log(1 + p/4)} and mix uniformly over aEi, i = 1, . . . , p.
+These rank-one alternatives have target a/√p. The full Gaussian likelihood identity gives
+χ2(Q, P0) = ea2/τ 2 −1
+p
+≤1
+4,
+TV(Q, P0) ≤1
+4.
+The common-target interval lemma implies
+E0|C| ≥(3/4 −2α)min{M, τ
+p
+log(1 + p/4)}
+√p
+.
+(51)
+For p ≥1, log(1 + p/4) ≥ℓp/5. To verify this, the difference is positive at one and its derivative is
+1/(p + 4) −1/(5p) ≥0. Thus (51) is at least a constant times τ
+pℓp min(x, 1)/√p. This proves the lower
+bound for every K ≥4, and for K = 3 when x ≤1.
+For the remaining cubic case assume first p ≥256 and x > 1, and take
+u = min(p1/4, x2),
+m = ⌊u⌋≥1.
+Use the sparse harmonic mixture of Theorem 9, with the original general-budget coefficient bm. Since
+m ≤x2, M/√m ≥τ
+pℓp. Also m ≤p1/4 implies
+log(1 + p/(4m2)) ≥1
+4 log p ≥ℓp/5,
+34
+
+
+[PAGE 35]
+where the first inequality holds for p ≥256 and the second for log p ≥4. Hence bm ≥τ
+pℓp/
+√
+135.
+Furthermore Hm ≥1 and Hm ≥log(m + 1) ≥log u.
+Writing t = log x, if 2t ≤(log p)/4 then
+Hm ≥max(1, 2t) ≥(1 + t)/2. Otherwise Hm ≥(log p)/4 ≥ℓp/5. In both cases
+Hm ≥1
+5 min(1 + log x, ℓp) = 1
+5gp(x),
+where 1 + log x ≤x for x ≥1 was used. Consequently
+E0|C| ≥
+cα,d
+5
+√
+135r3(p, M, τ).
+(52)
+All likelihoods here are for the full tensor; the support-mixture proof holds for the newly chosen m and
+bm without modification.
+For p < 256, ℓp < 7 and gp(x) ≤7 min(x, 1), so the coordinate mixture suffices with a changed
+absolute constant. Finally L0 ≤Lmax completes the proof. Every lower alternative has rank one; higher
+supplied caps enter only the upper constants.
+Lemma 9 (Residual fit and its noise tail). The estimator in (40) is Borel measurable. With T0 = T(τG)
+and β = 1/8,
+P(T0 > t) ≤βe−t2/(2τ 2)
+(t ≥0),
+ET 2
+0 ≤2βτ 2.
+Put zK = P∞
+s=1 s−K/2 ≤3. Then
+| bψ −ψ(A)| ≤UK,p(M; β) + Q2zK
+√p (T0 + τ/2),
+| bψ −ψ(A)| ≤2h0.
+(53)
+Roadmap. Use a Gaussian union bound with a common additive slack, then compare an approximate
+residual minimizer to the truth.
+Proof. Each unit net contraction is one-Lipschitz in the Frobenius norm; finite maxima and the positive
+part preserve this property. Thus T is continuous and one-Lipschitz. Density of (Bj) implies d(Z) =
+minB∈Θ T(Z −B), although the estimator only uses a positive tolerance. The function d is one-Lipschitz
+as an infimum of functions with the same Lipschitz constant. The sets {Z : T(Z −Bj) ≤d(Z) + τ}
+are Borel, and their union is the entire observation space. Selecting the first such index is measurable.
+Hence so is bψ.
+For t ≥0, apply the same finite Gaussian union bound as for the original scan at thresholds λs(β) + t.
+Since
+e−(λs+t)2/(2τ 2) ≤e−λ2
+s/(2τ 2)e−t2/(2τ 2),
+the total probability is at most βe−t2/(2τ 2). Integrating the tail of T 2
+0 proves its moment bound.
+For bA = Bj(Z), comparison with A gives T(Z −bA) ≤d(Z) + τ ≤T0 + τ. Therefore for every support,
+NS( bA −A) ≤2λs(β) + 2T0 + τ.
+The net comparison and doubled-rank argument bound its ordered diagonal entry by Q2(λs(β) + T0 +
+τ/2)s−K/2. It is also bounded by P2Ms−K/2. Use min(a, b + c) ≤min(a, b) + c, sum, and divide by √p
+to obtain (53). Both tensors belong to the original cap class, so their targets lie in [−h0, h0], giving the
+second bound.
+35
+
+
+[PAGE 36]
+E.3
+Proof of Theorem 14
+Roadmap. Control residual-fit tails without an M-dependent failure event and reuse the same full-data
+mixtures for the lower bound.
+Proof. Lemma 9 and (a + b)2 ≤2a2 + 2b2 give
+sup
+A
+EA( bψ −ψ(A))2 ≤min
+(
+4h2
+0, 2UK,p(M; β)2 + (8β + 1)Q2
+2z2
+K
+τ 2
+p
+)
+.
+(54)
+If x ≤1, use h2
+0 ≤scapM2/p and rK = M/√p. If x > 1, then rK ≥τ
+pℓp/√p ≥τ/√p; Lemma 8 absorbs
+both terms in the second bound into a constant times r2
+K.
+The lower constructions in Theorem 13 have common target δ ≥crK and total variation bounded
+by a constant below one, independently of p, M, τ. For any estimator with worst-case risk R, the test
+1{ eψ ≥δ/2} has total null-plus-mixture error at most 8R/δ2 by Markov’s inequality. Testing error is at
+least 1 −TV(P0, Q). Thus R ≥δ2(1 −TV)/8 ≳r2
+K.
+E.4
+Proof of Theorem 15
+Roadmap. Rearrange weights against ordered diagonal bounds; equalize the target of a hard mixture by
+a contraction in one mode.
+Proof. Extend each prescribed orthonormal loading family to an orthonormal mode basis.
+Mode
+transformations preserve Gaussian isotropy and every constrained unfolding rank; restriction to the
+loading block cannot increase rank or Frobenius norm. Apply residual projection to that mK block.
+Every pair of feasible block tensors satisfies the ordered-entry bound from Theorem 12, with p = m.
+The rearrangement inequality gives
+|ψ(B) −ψ(B′)| ≤
+m
+X
+s=1
+w∗
+s| diag(B −B′)|(s) ≤Uw.
+The structural bound and the earlier measurable-extrema argument give the other assertions about this
+interval.
+For the lower bound fix d ≤m and work in the coordinates corresponding to the d largest absolute
+weights. These weights are nonzero. Take whichever coordinate or nonnegative cubic harmonic mixture
+supplies the lower rate in dimension d in Theorem 13. Its common normalized diagonal target is at least
+crK(d, M, τ). In the first tensor mode apply the diagonal linear map with multipliers w∗
+d/wi on these
+coordinates. Its operator norm is at most one, so every alternative remains rank one with Frobenius
+norm at most M. Its weighted target is now the same for every alternative and equals w∗
+d
+√
+d times the
+original normalized target.
+For each pair of alternatives, the first-mode factor inner product becomes
+X
+i
+(w∗
+d/wi)2uivi ≤
+X
+i
+uivi,
+because the original factors are nonnegative. The other factor inner products are unchanged and
+nonnegative. Thus the full tensor inner product does not increase. The Gaussian likelihood second
+moment is no larger than that of the original hard mixture. Embedding these alternatives in the full
+ambient tensor adds only independent mean-zero noise coordinates and leaves the likelihood second
+moment unchanged. The common-target interval lemma therefore gives E0|C| ≥cK,αw∗
+d
+√
+d rK(d, M, τ).
+Maximize over the finite set of d to obtain (42).
+36
+
+
+[PAGE 37]
+E.5
+Proof of Proposition 5
+Roadmap. Rotate to the loading block, absorb known signs, and apply the matching dimension-m
+theorem.
+Proof. Replace each first-mode loading vector by ϵiv1i, preserving orthonormality. The loading now has
+equal positive weights m−1/2. The reduced mK Gaussian tensor has the same norm and cap constraints,
+so Theorems 13 and 14 give the upper bounds. For the lower bounds embed their rank-one alternatives
+in the loading block and set all other mean entries to zero. The extra independent noise carries no
+parameter information; the full likelihood second moments equal the reduced ones. Equivalently, the
+interval lower bound follows by taking d = m in Theorem 15, and the same mixtures give the squared-risk
+lower bound. This includes m = 1 and arbitrary ambient dimensions at least m.
+F
+Proofs for robustness, loading transfer, and adaptation
+F.1
+Proof of Theorem 16
+Roadmap. Identify the tail inequalities actually used by the upper proofs, then use a Gaussian subfamily
+for family-wise minimax lower bounds.
+Proof. For every unit net direction, Chernoff applied to (43) gives P(|⟨U, E⟩| > t) ≤2e−t2/(2v2). The finite
+union bound proving scan coverage and the additive-slack bound proving Lemma 9 use no independence
+between directions. Both therefore hold with v replacing τ. All subsequent diameter and squared-error
+inequalities are deterministic functions of these events and moments. Orthogonal changes of coordinates
+preserve (43). The weighted proofs apply unchanged. The unknown-law family includes E ∼N(0, v2I).
+Honesty over the family implies honesty over that subexperiment, and the worst-case risk or expected
+length over the family is at least its Gaussian value. The Gaussian lower bounds give the matching
+order.
+F.2
+Proof of Theorem 17
+Roadmap. Control every median by a binomial tail, obtain a common excess-tail moment, and reuse the
+ordered-difference argument.
+Proof. For a direction at level s, each block average has variance at most σ2/ks. Chebyshev gives a
+block-error probability at most σ2/(kst2). If the median errs by more than t, at least half its blocks err.
+Independence of blocks, followed by a union over their subsets, gives
+P(|dU −⟨U, A⟩| > λmom
+s
++ t) ≤2−bs(1 + t/λmom
+s
+)−bs,
+t ≥0.
+This follows by substituting λmom
+s
+= 4σ/√ks into 2bs{σ2/[ks(λmom
+s
++ t)2]}bs/2. There are at most eHs
+directions at level s. By the definition of bs, P
+s eHs2−bs ≤β. Thus all constraints cover the true tensor
+with probability at least 1 −β.
+Since ks ≥n/(2bs), λmom
+s
+≤4
+√
+2τ√bs. Define T0 = maxU(|dU −⟨U, A⟩| −λmom
+s(U) )+. For a ≥0, the
+function b log(1 + a/
+√
+b) is increasing for b > 0: its derivative is log(1 + u) −u/[2(1 + u)] ≥0, u = a/
+√
+b.
+Because every bs ≥9, the union bound yields
+P(T0 > t) ≤β(1 + t/(12
+√
+2τ))−9,
+ET 2
+0 ≤72
+7 βτ 2.
+(55)
+For the moment, integrate 2t times the tail and use
+R ∞
+0 u(1 + u)−9du = 1/(8 · 7).
+For two feasible tensors every directional difference is at most 2λmom
+s
+. The net comparison, doubled
+caps and norm bound prove exactly the previous norm-sensitive diameter. Medians are measurable finite
+37
+
+
+[PAGE 38]
+order statistics. The extrema of their compact feasible sections are Borel by the same compact-section
+argument as before, now treating (dU)U as the finite observation vector. The smallest-odd-integer rule
+gives bs ≤11 + [Hs + log(p/β)]/ log 2 ≤CK,βsℓp. The sum lemma therefore bounds the diameter by
+CrK.
+For estimation, F is continuous and one-Lipschitz in B. Selecting the first dense-sequence element
+with value at most infj F(Bj) + τ is measurable. Its comparison with A gives directional differences at
+most 2λmom
+s
++ 2T0 + τ. Lemma 9’s deterministic argument gives
+| bψ −ψ(A)| ≤Umom + Q2zK(T0 + τ/2)/√p,
+| bψ −ψ(A)| ≤2h0.
+Equation (55) and the small-M structural bound prove risk O(r2
+K) exactly as in Theorem 14. For
+the lower bound restrict the replicate family to iid Gaussian errors with covariance σ2I. Orthogonal
+transformation in the replicate index separates the sample mean, whose noise level is σ/√n, from mean-
+independent residuals. Thus the full replicate likelihood second moments equal the sample-mean ones.
+The earlier Gaussian lower bounds apply to any procedure using all replicates, including randomized
+ones. Finally, Hs is increasing in s, so the replicate condition has the stated sufficient order p for fixed
+K, β.
+F.3
+Proof of Proposition 6
+Roadmap. Exhibit exact scalar recovery and a correlated direction with inflated variance.
+Proof. If |A| < v, then sign(A + vξ) = ξ. The estimator Z −v sign(Z) is identically A, proving (i). The
+Rademacher moment-generating function obeys cosh(tv) ≤et2v2/2. For (ii), take the unit product tensor
+with every entry p−K/2. Its contraction with E is vξpK/2, with variance v2pK. Each individual entry
+still has variance and sub-Gaussian proxy v2.
+F.4
+Proof of Theorem 18
+Roadmap. Inflate scan constraints for a bounded approximation residual, then combine two nested
+lower-bound subclasses.
+Proof. Write A = B0 + R, B0 ∈Θ, ∥R∥F ≤εA; compactness ensures such a decomposition exists. On
+the Gaussian scan event every residual contraction of Z −B0 is at most λs + εA, so B0 is feasible. Inflate
+its projected target interval by εA on both sides. If the feasible set is empty use a singleton; this cannot
+occur on the coverage event. Since ∥L∥F = 1, the enlarged interval covers ψ(A). For feasible differences
+the diameter argument gives
+|C| ≤UK,p(M; α) + {Q2zK/√p + 2}εA,
+using min(a, b + c) ≤min(a, b) + c. It also gives |C| ≤2h0 + 2εA. Choose between this procedure
+and the direct Gaussian interval using their deterministic length bounds. This proves the upper order
+min{τ, rK + εA}.
+The class contains Θ, giving lower bound crK at zero. It also contains {tL : |t| ≤εA} because 0 ∈Θ.
+Comparing zero with tL for t = min(εA, τ/2) gives total variation at most 1
+2
+p
+e1/4 −1 < 1/2 and target
+difference t. Hence the lower bound is also cα min(εA, τ). Finally min(τ, r + εA) ≤r + min(τ, εA) ≤
+2 max{r, min(τ, εA)} for every r ≥0. This establishes both criteria up to fixed constants.
+38
+
+
+[PAGE 39]
+F.5
+Proof of Proposition 7
+Roadmap. Embed sparse diagonal tensors of rank s, then compare with the full norm ball.
+Proof. For a uniform size-s support S, set AS = b P
+i∈S Ei with
+b = min{M/√s, τ
+q
+log(1 + p/(4s2))}.
+All constrained ranks are s, its norm is b√s ≤M, and its target is sb/√p. The full tensor inner product is
+b2|S ∩T|; the hypergeometric factorial-moment inequality gives 1+χ2(Q, P0) ≤exp{(s2/p)(eb2/τ 2 −1)} ≤
+e1/4. The common-target lemma proves the lower bound for every s ≤r∗. Maximize over s. If there are
+no rank restrictions, the line {tL : |t| ≤M} belongs to the Frobenius ball. The two-point argument with
+t = min(M, τ/2) gives lower order min(M, τ). The direct interval and [−M, M], chosen deterministically
+by radius, give the matching upper bound for every mean in that ball. No asymptotic fixed-cap argument
+applies to this enlarged class.
+F.6
+Proof of Proposition 8
+Roadmap. Add an independently calibrated error event, without assuming stochastic independence.
+Proof. On the intersection of ⟨L0, A⟩∈C0 and |⟨R, E⟩| ≤qR, adding the second target contribution
+gives the asserted interval. A union bound controls failure by α0 + α1. The length is the displayed sum.
+Chernoff or the Gaussian distribution of ⟨R, E⟩supplies the calibrations. For a prescribed partition,
+repeat the argument over blocks using the sum of their allocated failures; their centers may be dependent.
+Selecting among complete constructions from deterministic diameter bounds uses no data and retains its
+own coverage guarantee. Applying the result with L0 = 0 also covers every L, although it then reduces
+to the direct interval.
+F.7
+Proof of Theorem 19
+Roadmap. Match elementary constructive upper bounds with the existing small-budget lower bound and
+a product-direction two-point test.
+Proof. In (i), the rate formula has x ≤1 and is M/√p. The structural radius is M
+q
+scap/p, with
+fixed cap factor. Theorem 13 gives the matching lower bound. For (ii), choose the sign of U so that
+⟨L, U⟩≥c∥L∥F and compare zero with tU, t = min(M, τ/2). The full likelihood second moment is
+et2/τ 2 ≤e1/4 and the target difference is at least ct∥L∥F . The common-target lemma gives the lower
+order at zero. Cauchy–Schwarz supplies structural radius M∥L∥F , while the direct Gaussian radius is
+z1−α/2τ∥L∥F . Their deterministic selection controls worst-case length and is polynomial in the number of
+observed coordinates. The cap class is used only for the lower inclusion; fixed rank caps are unnecessary
+here.
+F.8
+Proof of Proposition 9
+Roadmap. Find a one-dimensional Gaussian submodel inside every such convex relaxation.
+Proof. The average of MEi, i = 1, . . . , p, is (M/√p)L. Both signs and zero belong to the convex hull,
+hence so does the asserted line segment. Compare zero with tL for t = min(M/√p, τ/2) and apply the
+same two-point calculation. At M = τ√p it forces order τ. The previous minimax rates divided by τ
+tend to zero for each fixed K ≥3. This argument changes the honesty class and makes no complexity
+assumption.
+39
+
+
+[PAGE 40]
+F.9
+Proof of Theorem 20
+Roadmap. Shift the full-data hard mixtures into an unused orthogonal block.
+Proof. Embed the dimension-m rank-one alternatives from Theorem 13, with norm budget M0, in
+coordinates {q + 1, . . . , p}K. Denote them by B. Their supports are disjoint from A0, so ∥A0 + B∥2
+F =
+∥A0∥2
+F + ∥B∥2
+F ≤M2. Unfolding rank subadditivity shows A0 + B is in the outer cap class. Translation
+of Gaussian likelihoods by A0 leaves their second moments unchanged. All alternatives have a common
+increment in the normalized p-diagonal target equal to
+p
+m/p times their dimension-m target. Their total
+variation from the law at A0 is bounded by a fixed constant less than 1 −2α. Apply the common-target
+lemma with baseline target ψ(A0), or translate the interval by that fixed number. This proves the lower
+bound.
+F.10
+Proof of Theorem 21
+Roadmap. Recover ranks on one spectral event, bound a second-order projection residual, and condition
+on the independent pilot.
+Proof. For each unfolding use 1/4-nets of its two unit spheres, of total cardinality at most 9pk+dk.
+Product telescoping bounds its operator norm by twice the maximum net contraction. Chernoff and a
+union bound over the K unfoldings give an event E of probability at least 1 −δ on which every pilot
+error operator norm is at most ηk. No independence between unfoldings is used. The singular-value
+perturbation inequality |σj(Z(1)
+(k))−σj(A(k))| ≤ηk follows from the variational characterization of singular
+values: for every unit vector the two image norms differ by at most ηk, and taking the relevant min/max
+over subspaces preserves this bound. Thus zero singular values produce observed values at most ηk,
+while nonzero values exceeding 2ηk produce observed values greater than ηk. All selected ranks are exact
+on E. If any is zero then A = 0 and the singleton covers.
+For a positive selected rank rk, write A(k) = UkSkV ⊤
+k using its true nonzero singular values. Because
+Qk is the leading observed rank-rk projector,
+∥(I −Qk)A(k)∥op ≤σrk+1(Z(1)
+(k)) + ηk ≤2ηk.
+For full row rank the residual is zero, and the same inequality holds. Right multiplication by VkS−1
+k
+gives
+∥(I −Qk)Uk∥op ≤
+2ηk
+σrk(A(k)) ≤
+2ηk
+σrk(Z(1)
+(k)) −ηk
+.
+Clipping at one yields d∗
+k. This calculation uses the gap only on the stated separated class, with a strictly
+positive observed denominator.
+Expand the identity into the 2K mutually orthogonal products of Qk and I −Qk. The projector T
+retains exactly the terms with at most one complement. Each term discarded by T appears in at least
+one product (I −Qk)(I −Qℓ). Orthogonality therefore implies
+∥(I −T)A∥2
+F ≤
+X
+k<ℓ
+∥(I −Qk)(I −Qℓ)A∥2
+F ≤M2 X
+k<ℓ
+(d∗
+kd∗
+ℓ)2.
+The last inequality uses A = (N
+k Uk)G with ∥G∥F = ∥A∥F and the operator norm of a product of mode
+maps. Also ∥(I −T)A∥F ≤M. Since T is orthogonal, Cauchy–Schwarz bounds |⟨L, (I −T)A⟩| by BL.
+Condition on the pilot. The vector TL is now deterministic, and independence makes the second
+error contraction sub-Gaussian with proxy v2∥TL∥F . Conditional on any pilot in E, the projected
+interval has error at most α −δ. The direct alternative has the same conditional failure bound and the
+structural alternative never fails. A choice determined by the pilot thus also has conditional failure at
+40
+
+
+[PAGE 41]
+most α −δ. Intersecting with a surely valid structural interval preserves coverage; empty intersections
+may be replaced by a singleton. Integrating and adding P(Ec) ≤δ proves honesty. SVDs, finite sums,
+and tensor matrix products give the stated arithmetic complexity.
+For Gaussian artificial splitting the two centered errors are jointly Gaussian with zero cross covariance,
+each of covariance 2τ 2I, hence independent. Zero covariance would not suffice for non-Gaussian errors.
+No minimax length conclusion on the original unseparated class follows from this proof.
+G
+Optimization contracts, loadings and cap-valid inference
+Observe the entire tensor Z = A+τG, with iid standard Gaussian entries, known τ > 0, and A ∈Θ(M, ¯r),
+a Tucker or TT Frobenius ball. The functional is ψL(A) = ⟨L, A⟩; normalization of L is unnecessary.
+Write J = J(¯r) for the existing canonical expansion bound: A = P
+j≤J ajUj, each Uj a unit product
+tensor, and P
+j a2
+j = ∥A∥2
+F . Zero terms can be appended. Assume positive caps.
+For reference, the previously established equal/flat-loading rate is rK(m, M, τ) = τ
+p
+ℓm/m gK(x),
+where ℓm = log(em), x = M/(τ√ℓm), and
+gK(x) =
+(
+min{x, 1 + max(0, log x), ℓm},
+K = 3,
+min{x, 1},
+K ≥4.
+The original equal diagonal has m = p and weights 1/√p. Length criteria below mean the infimum
+expected length at zero (L0), or the infimum worst-case expected length (Lmax), over intervals honest
+on the stated parameter class.
+G.1
+C1. A quantitative contract for approximate minimax optimization
+Use every support and every direction in the calibrated finite product nets. For their unit directions U
+and thresholds λs(U), put
+FZ(B) = max{0, max
+U (|⟨U, Z −B⟩| −λs(U))}.
+This function is 1-Lipschitz in Frobenius norm. Suppose an algorithm returns bB ∈Θ and numbers
+l ≤infB∈Θ FZ(B) ≤FZ( bB) = u, with u −l ≤ε. On the simultaneous noise event, the true A is feasible,
+so FZ(A) = 0 and u ≤ε. Consequently, for every support size s,
+NS( bB −A) ≤2λs + ε.
+With J2 = J(2¯r), the preceding ordered-diagonal proof gives
+| bBi,...,i −Ai,...,i|(s) ≤min{2J(K−1)/2
+2
+M, 4JK/2
+2
+(λs + ε/2)}s−K/2.
+For known orthogonal loading weights wi, sorted by absolute value, the sum of the right side against
+w∗
+s is an honest radius about ψL( bB). It may be intersected with the structural range. Choosing ε ≤cτ
+retains the existing all-budget minimax orders for equal/flat loadings. Indeed every λs is bounded below
+by a positive constant times τ, so the added term changes the existing minimum by only a fixed factor,
+including in the norm-limited regime.
+For squared error set the scan error budget to 1/8. If the optimizer guarantees ε ≤cτ for every
+observation, the same excess tail proof as before applies: FZ( bB) ≤FZ(A) + ε and NS( bB −A) ≤
+2λs + 2FZ(A) + ε. Thus the existing all-budget MSE bound follows. A budget-limited run with a larger
+reported gap does not establish that MSE guarantee.
+Endpoint version. Let F = {B ∈Θ : FZ(B) = 0}. If certified outer endpoints enclose ψL(F), they
+define an honest interval, even at an arbitrary computation stop. If feasible witnesses establish each
+41
+
+
+[PAGE 42]
+outer endpoint within ε of the exact endpoint, its length exceeds the ideal projection length by at most
+2ε. An inner optimization solution alone does not give an honest interval. On a certified empty feasible
+set use {0}, as before.
+Proof. Lipschitzness follows from ∥U∥F = 1, the reverse triangle inequality, and stability of finite
+maxima. The objective-gap implication uses FZ ≥0. Rank caps double under subtraction; the norm
+budget doubles as well. The ordered bound is exactly the earlier net comparison and diagonal quasi-norm
+inequality with 2λs replaced by 2λs + ε. The Gaussian union event has probability at least 1 −α.
+Endpoint containment proves coverage on the same event. For the length assertion, use an inner feasible
+witness at each end. The squared-risk argument invokes the already supplied excess-tail integration,
+with only its deterministic tolerance constant changed. No algorithmic complexity conclusion follows
+from this contract.
+G.2
+C2. An implemented global solver on the binary rank-one class
+For p = 2 and any fixed order K ≥3, every rank-one tensor of norm at most M has a representation
+B(a, θ) = a
+K
+O
+k=1
+(cos θk, sin θk),
+a ∈[−M, M],
+θk ∈[0, π].
+Each vector is represented up to sign on a semicircle; the product of signs is absorbed into a. The
+zero tensor is included. There is no grid restriction on the parameter space.
+The code includes both singleton supports and the full support. For the latter it uses nK = ⌈πK⌉
+equally spaced angles in [0, π) per mode. Every unit vector is within Euclidean distance 1/(2K) of a net
+point up to sign: its angular discrepancy modulo π is at most π/(2nK). Absolute contractions remove
+the signs. The same telescoping proof therefore gives ρ ≤2N. There are d1 = 2 singleton directions and
+d2 = nK
+K full-support directions. Set
+λs = τ
+q
+2 log(4ds/α),
+s = 1, 2.
+The sum of the two Gaussian union bounds is at most α.
+For each parameter box, exact real-arithmetic ranges of cosine and products enclose every scanned
+contraction and tensor entry. If their contraction range is [b−
+U, b+
+U], then
+lbox = max{0, max
+U [dist(⟨U, Z⟩, [b−
+U, b+
+U]) −λs(U)]}
+is a lower bound for FZ throughout the box. Centers provide actual rank-one upper witnesses. A
+largest-scaled-side split covers the parent with two children. Branch and bound retains global lower and
+upper bounds; the objective run ends at its requested gap or reports a budget stop. It implements the
+ideal residual criterion itself on this class.
+For confidence projection reject a box only when its objective lower bound is positive. Loading-entry
+interval arithmetic bounds every surviving box’s target; their hull contains the ideal confidence projection.
+Feasible amplitude intervals at fixed central factors supply inner witnesses. An endpoint gap is reported
+only when such witnesses exist. Endpoints need not reach a requested tolerance within a finite node
+budget, especially near singular feasibility boundaries. This is recorded, not treated as a successful exact
+optimization.
+The code supports arbitrary loadings in the binary tensor, but caps above one and mode dimensions
+above two are not implemented.
+Exhaustive scans and global subdivision are exponential.
+Tests
+check range containment and global certificates against independent finite calculations. Floating point
+evaluations include conservative guards; these are numerical certificates under the derived inequalities,
+not formal directed-rounding interval proofs. The real-arithmetic method, rather than any particular
+floating point tolerance, is the mathematical result.
+42
+
+
+[PAGE 43]
+G.3
+L1. Sharp small-budget rates for every loading tensor
+Define the product overlap
+ρ(L) =
+sup
+∥uk∥2=1
+|⟨L,
+O
+k
+uk⟩|.
+For fixed positive caps, fixed 0 < α < 1/4, arbitrary mode dimensions, and every known loading
+tensor L, if 0 < M ≤τ, then
+L0(Θ; L) ≍Lmax(Θ; L) ≍Mρ(L),
+inf
+b
+ψ
+sup
+Θ
+EA( bψ −ψL(A))2 ≍M2ρ(L)2.
+Constants depend only on the fixed caps/order and confidence, not on L or the ambient dimensions.
+The zero loading has identically zero risk and length. More generally, for all M, τ > 0,
+cαρ(L) min(M, τ) ≤L0 ≤Lmax ≤2 min{
+√
+JMρ(L), z1−α/2τ∥L∥F }.
+Proof. The canonical expansion and Cauchy–Schwarz give |ψL(A)| ≤ρ(L) P
+j |aj| ≤
+√
+JMρ(L).
+This gives a deterministic interval and the risk of estimator zero. The direct Gaussian interval gives the
+other upper bound; choose between the two using known quantities. Compactness gives a maximizing
+product U; choose its sign so ⟨L, U⟩= ρ(L). Both 0 and tU belong to every positive cap class, for
+t = min(M, τ)/2. Their Gaussian total variation is 2Φ(t/(2τ)) −1 ≤2Φ(1/4) −1 < 1/4. Honesty at
+both parameters implies E0|C| ≥tρ(L)(1 −2α −TV). The two-point squared-loss lower bound is a
+fixed positive multiple of t2ρ(L)2: classify an estimate by its nearest target. A classification error entails
+squared error at least t2ρ(L)2/4, while the sum of the two testing errors is at least 1 −TV. Therefore
+the larger squared risk is at least t2ρ(L)2(1 −TV)/8. For M ≤τ the bounds match. This proof is a
+direct specialization of standard Gaussian two-point reasoning, not a novel general inference principle.
+Limits. Computing ρ(L) for a general high-order loading is itself a global optimization problem.
+A certified upper bound can replace it in the interval; a certified product witness supplies a lower
+bound. Without a constant ratio between them, an efficient sharp algorithm has not been obtained.
+This theorem covers all loading tensors in the stated budget regime; it does not characterize their
+larger-budget rates. The flat loading small-budget theorem extends to M ≲τ√log m, a larger regime
+than the arbitrary-loading result here.
+G.4
+L2. An optimized common-target lower bound for unequal weights
+For an orthogonal product loading with decreasing nonzero absolute weights w1 ≥· · · ≥wm > 0, choose
+d ≤m and 0 < ∆≤Mwd. For signed original weights ewi, set Ai = (∆/ ewi)Ui, 1 ≤i ≤d. All alternatives
+have target ∆, satisfy the norm budget, and have rank one. They are orthogonal as full tensors. Let
+vi = exp{∆2/(τ 2w2
+i )} −1,
+Hd(∆) =
+d
+X
+i=1
+v−1
+i
+,
+πi = v−1
+i
+/Hd(∆).
+The optimal chi-square divergence among mixtures on these alternatives is
+χ2(Q, P0) = min
+π∈Sd
+X
+i
+π2
+i vi = Hd(∆)−1.
+Thus every interval honest on the full tensor class satisfies
+E0|C| ≥∆
+"
+1 −2α −
+1
+2
+p
+Hd(∆)
+#
++
+.
+43
+
+
+[PAGE 44]
+Proof. The Gaussian likelihood identity gives overlap 1 for distinct orthogonal alternatives and 1+vi
+for equal alternatives. Subtracting 1 leaves P π2
+i vi. Cauchy–Schwarz bounds this below by (P v−1
+i
+)−1
+and the displayed weights attain equality. Apply TV ≤
+p
+χ2/2 and the common-target interval lemma.
+This uses the full observation; there is no diagonal-data restriction.
+weighted_axis_lower enumerates d and uses scalar root finding for the largest ∆≤Mwd with
+χ2 ≤1/4. Every reported lower bound uses the actual recomputed divergence and a feasible prior. This
+optimizes the prior at each chosen target within the axis family. It is not an optimization over all tensor
+alternatives. For equal weights it recovers the one-spike logarithmic obstruction. It cannot recover the
+cubic harmonic obstruction on its own and is not claimed sharp for all weights.
+G.5
+A1. Unseparated rate adaptation across positive fixed caps
+Fix an outer positive Tucker or TT cap vector ¯r. Let R contain any collection of positive cap vectors
+componentwise below it. For equal or flat orthogonal loadings, the same full-data outer-class interval
+satisfies
+sup
+A∈Θ(M,r)
+EA|C¯r| ≤CK,¯r,α rK(m, M, τ),
+r ∈R.
+Every smaller class contains the rank-one ball, whose lower bound is cK,αrK. Therefore the interval is
+simultaneously minimax in rate over every such class, uniformly in m, M, τ, without knowing the actual
+ranks or imposing singular-value separation. The analogous MSE conclusion holds for the outer-class
+ideal residual fit.
+Proof. Restrict the existing outer supremum upper bound to each subset and apply the same
+rank-one lower bound inside each smaller class. No selection step or new probability argument is required.
+This observation resolves the fixed-positive-cap, rate-only statistical adaptation question. It does
+not give optimal rank-dependent constants, growing-cap rates, computation, exact-rank selection, or
+pointwise oracle lengths. Rank zero must be excluded: its known-model oracle interval has length
+zero, whereas outer-class honesty forces positive length at zero. The preceding ledgers used the word
+adaptation broadly; these distinct objectives must be separated.
+G.6
+A2. A computable projection certificate without separation
+Let Z(1) = A+E(1) and Z(2) = A+E(2) have independent iid Gaussian errors of known scales τ1, τ2. Only
+∥A∥F ≤M is assumed here; supplied rank caps are unnecessary. Let 0 < δ < α. Use the simultaneous
+unfolding operator envelopes from the previous stage:
+ηk = 2τ1
+s
+2{(pk +
+Y
+l̸=k
+pl) log 9 + log(2K/δ)}.
+On one event of probability at least 1 −δ all ∥E(1)
+(k)∥op ≤ηk. For any pilot-chosen ranks rk, let Qk
+project onto the first rk left singular vectors of Z(1)
+(k). Set dk = σrk+1(Z(1)
+(k)) + ηk if rk < pk, and dk = 0 if
+Qk = I. Singular values beyond the matrix rank are zero. For P = N
+k Qk, decompose
+R = (I −P)L =
+K
+X
+k=1
+Rk,
+Rk =
+
+O
+l<k
+Ql
+
+⊗(I −Qk) ⊗
+
+O
+l>k
+I
+
+L.
+Then the observable bound
+B = min
+(
+M∥R∥F ,
+X
+k
+dk∥(Rk)(k)∥∗
+)
+44
+
+
+[PAGE 45]
+satisfies |⟨R, A⟩| ≤B on that event. The interval centered at ⟨PL, Z(2)⟩, with radius
+B + z1−(α−δ)/2τ2∥PL∥F ,
+is honest over the whole norm ball. Any finite set of pilot-selected projection choices can be compared
+by their radii on this same event; choose the smallest before using validation data. Include P = I for
+the direct interval and P = 0 for the structural interval. Intersect with [−M∥L∥F , M∥L∥F ] and use {0}
+for an empty intersection.
+Proof. Residual SVD optimality and the triangle inequality give ∥(I −Qk)A(k)∥op ≤dk on the com-
+mon event, even for selected rk. The definition of Rk gives (I −Qk)(Rk)(k) = (Rk)(k). Operator/nuclear
+norm duality bounds its contraction with A by dk∥(Rk)(k)∥∗. Sum and combine with the norm-only
+bound. Conditional on the pilot, validation noise in the selected loading is Gaussian with variance
+τ 2
+2 ∥PL∥2
+F . No multiplicity correction over the candidate ranks is required: all bias certificates hold on
+one uniform pilot event, and the choice precedes validation. The union bound gives total error at most
+α. Unfolding SVDs, tensor projections and nuclear norms are polynomial in the explicit input size.
+This algorithm never interprets an undetected component as identically zero. It does not certify
+the actual rank. Its bias term can be large, and no weak-signal or pointwise minimax optimality is
+claimed. Honesty on the full norm ball cannot yield the low-rank weak-signal minimax gain: the earlier
+unrestricted-class lower bound still applies. Independent artificial Gaussian splitting of one observation
+is valid with τ1 = τ2 =
+√
+2τ; using both halves at scale τ is invalid.
+G.6.1
+Why the first-order repair does not solve the original problem
+For the A2 construction, if mink ηk ≥zvalτ2, where zval = z1−(α−δ)/2, no projected candidate improves
+the smaller of the untruncated direct and norm-only radii. In fact, nonzero Rk have dk ≥ηk, so triangle
+inequalities and nuclear/Frobenius norm comparison give B ≥min(M, mink ηk)∥R∥F . Hence its radius
+is at least min(M, zvalτ2)(∥PL∥F + ∥R∥F ), which is at least min(M, zvalτ2)∥L∥F . The explicit envelopes
+meet this condition in the equal-noise experiments below. This is a proved limitation of this particular
+repair, not a universal computational lower bound.
+G.7
+A3. The adaptation obstruction at an arbitrary orientation
+Let a base tensor A0 have norm a < M, and leave at least one unused unit of every supplied Tucker or TT
+rank cap. Choose mode subspaces Wk such that A0 is orthogonal to every tensor in W = N
+k Wk. One
+sufficient choice is to take at least one Wk orthogonal to the column space of A0,(k). Put M0 =
+√
+M2 −a2
+and LW = PWL. Then
+EA0|C| ≥cα min(M0, τ)ρ(LW)
+for every interval honest on the outer class. If the restriction of the loading to an m-dimensional
+orthogonal diagonal block in W equals b times a flat unit loading, the stronger bound is
+EA0|C| ≥cK,α|b| rK(m, M0, τ).
+Here ρ is taken within the indicated product subspace. The zero overlap case gives a zero lower
+bound and says nothing further.
+Proof. Add rank-one perturbations B ∈W with norm at most M0. Rank subadditivity keeps
+A0 + B in every outer unfolding cap; orthogonality gives ∥A0 + B∥2
+F = a2 + ∥B∥2
+F ≤M2. Translate
+the Gaussian experiment by A0. The target difference is ⟨LW, B⟩. Apply the two-point construction
+of L1 or the existing flat-loading mixtures, all of which have rank one. Unused observed coordinates
+contain identical independent Gaussian noise under both hypotheses and do not change the likelihood
+45
+
+
+[PAGE 46]
+calculation. This is a rotation-invariant extension of the preceding block-supported shifted bound, not a
+complete characterization at every mean.
+G.8
+A4. A cap-valid tangent interval on the original unseparated class
+There is a more useful repair when mode caps ¯rk ≤pk are supplied. Use the same independent Gaussian
+pilot and validation data and envelopes as A2. Let Qk project onto the leading ¯rk pilot left singular
+vectors. Define
+ek =
+
+
+
+
+
+
+
+0,
+¯rk = pk,
+min{1, 2ηk/(σ¯rk(Z(1)
+(k)) −ηk)},
+¯rk < pk, σ¯rk(Z(1)
+(k)) > ηk,
+1,
+otherwise.
+With the first-order product-space projector from the previous stage,
+T =
+O
+k
+Qk +
+X
+k
+(I −Qk) ⊗
+O
+l̸=k
+Ql,
+put R = (I −T)L and
+BT = M∥R∥F min{1, (
+X
+k<l
+e2
+ke2
+l )1/2}.
+The interval centered at ⟨TL, Z(2)⟩, with radius BT + zvalτ2∥TL∥F , is honest on every tensor with
+these supplied mode caps and norm bound, including zero, arbitrarily weak signals, and actual ranks
+strictly below the caps. No singular-value separation is assumed. Choose the smallest pilot-measurable
+radius among this candidate, the direct interval, and the structural norm interval, as before.
+Proof. Let Vk be the actual left singular subspace of A(k). On the simultaneous noise event we claim
+∥(I −Qk)PVk∥op ≤ek. This is immediate for ek = 1 or Qk = I. Otherwise σ¯rk(Z(1)
+(k)) > ηk forces the
+true mode rank to equal the supplied cap: a smaller true rank would give that observed singular value
+at most ηk by Weyl’s inequality. The pilot tail after the cap is at most ηk, so ∥(I −Qk)A(k)∥op ≤2ηk.
+Multiplying by the inverse nonzero singular values and using σ¯rk(A(k)) ≥σ¯rk(Z(1)
+(k)) −ηk proves the claim.
+Decompose A into the mutually orthogonal mode-projector blocks indexed by which modes fall in
+I −Qk. The complement of T consists of blocks with at least two such modes. Counting each block
+once is bounded by counting it for every contained pair. Consequently
+∥(I −T)A∥2
+F ≤
+X
+k<l
+∥(I −Qk)(I −Ql)A∥2
+F ≤M2 X
+k<l
+e2
+ke2
+l .
+The last inequality restricts each operator to its true mode subspace and uses that operators on
+distinct modes commute. Combine with the trivial bound ∥(I −T)A∥F ≤M and Cauchy–Schwarz
+against R. Conditional Gaussian validation and the common pilot event now prove coverage and valid
+radius selection exactly as in A2.
+This algorithm is polynomial and honest for the original weak-signal class. Strong signals can make
+the second-order bias correction small, even though separation is not a coverage assumption. It is not
+a polynomial weak-signal minimax solution or a method of estimating actual rank. At smaller actual
+ranks, the unresolved cap singular values trigger conservative error bounds. For a supplied TT cap
+vector, valid mode caps are min(pk, ¯rk−1¯rk), with boundary TT ranks one; the interval does not estimate
+TT bond ranks. Artificial splitting must use its increased noise scales.
+For the original single observation, single_observation_interval creates Z±τG′ with independent
+artificial G′, uses scales
+√
+2τ and error α/2 for the cap-valid construction, and intersects with the direct
+interval based on Z at error α/2. The union bound proves honesty at error α despite the dependence
+46
+
+
+[PAGE 47]
+between these two intervals. The direct component caps the reported length at 2z1−α/4τ∥L∥F . The split
+is randomization within the original experiment, not an extra observed replicate.
+G.9
+Remaining problems
+1. Polynomial minimax intervals for diffuse weak-signal classes at general dimensions: open. The new
+optimizer establishes a working global benchmark only for binary rank-one tensors; it does not
+remove the computational obstruction.
+2. Sharp larger-budget rates for every loading, including every unequal weight sequence: open. L1
+resolves all loadings only for M ≤τ; L2 strengthens the usable lower-bound machinery.
+3. General rank-dependent and pointwise adaptation: open, with explicit impossibility results for some
+oracle demands. Rate adaptation over fixed positive nested caps is already attained statistically
+(A1).
+4. General Tucker/TT global optimizers, validated directed-rounding arithmetic, and high-dimensional
+runtime scaling: not implemented.
+H
+Growing caps, decaying loadings and pointwise inference
+Observe Z = A + τG with independent standard Gaussian tensor entries, known τ > 0, norm bound
+∥A∥F ≤M, and supplied Tucker or TT caps. Unless specified otherwise, dimensions are equal to p and
+K ≥3. For L = p−1/2 Pp
+i=1 Ei, write ψ(A) = ⟨L, A⟩, where Ei = e⊗K
+i
+. The criteria L0 and Lmax are
+optimal expected length at zero and optimal worst-case expected length among intervals honest over the
+whole stated class. Fix 0 < α < 1/4.
+H.1
+G1. Sharp growing-cap rates with a polynomial algorithm
+Let r = min(p, mink ¯rk), where the minimum is over the supplied constrained unfoldings (Tucker modes
+or TT cuts). Suppose r ≥c√p for a fixed c > 0. Uniformly over all remaining caps, all p, and every
+M, τ > 0,
+L0 ≍α,c Lmax ≍α,c min{M
+q
+r/p, τ}.
+Minimax squared risk has the square of this rate. The constants do not depend on growing ranks
+or tensor order. Choose deterministically between the structural interval [−h0, h0], h0 = M
+p
+r/p, and
+the direct Gaussian interval centered at ψ(Z) with radius z1−α/2τ. This takes O(p) accessed entries
+and arithmetic for the coordinate loading. For a rotated flat loading, obtaining the contractions has its
+additional polynomial input-access cost. No factor estimation or exponential scan is required.
+Upper proof. An unfolding attaining the smallest cap has loading matrix singular values 1/√p,
+repeated p times. Matrix singular-value duality and Cauchy–Schwarz bound its contraction with any
+rank-at-most-r matrix of norm M by M
+p
+r/p. Thus the structural interval covers surely. The direct
+error is N(0, τ 2). Deterministic radius selection proves the length upper bound. Choosing estimator
+zero when h0 ≤τ and the direct estimator otherwise gives squared risk at most min(h2
+0, τ 2).
+Lower proof. For a uniform size-r subset S of {1, . . . , p} set
+AS = b
+X
+i∈S
+Ei,
+b = min{M/√r, τ
+q
+log(1 + p/(4r2))}.
+All constrained unfolding ranks are r, the norm is at most M, and the common target is ∆= rb/√p.
+For independent supports S, T, the full Gaussian likelihood second moment equals E exp{b2|S ∩T|/τ 2}.
+To bound it, for H = |S ∩T| factorial moments give E
+ H
+j
+ =
+ r
+j
+(r)j/(p)j ≤
+ r
+j
+(r/p)j. Expand (1 + t)H
+at t = eb2/τ 2 −1 to obtain
+47
+
+
+[PAGE 48]
+1 + χ2(Q, P0) ≤(1 + rt/p)r ≤exp(r2t/p) ≤e1/4.
+Put x = p/(4r2) ≤1/(4c2). Since x/(1 + x) ≤log(1 + x) ≤x,
+τ
+2
+p
+1 + 1/(4c2) ≤τr
+√p
+q
+log(1 + p/(4r2)) ≤τ
+2.
+Consequently ∆≍c min(M
+p
+r/p, τ). Total variation is at most η =
+p
+e1/4 −1/2 < 1/2. Coverage of
+both zero and the common target implies E0|C| ≥∆(1 −2α −η), which is positive for α < 1/4. The
+nearest-target testing argument also gives squared risk at least ∆2(1 −η)/8. This proves all claims.
+This closes the large-cap regime using the earlier sparse-diagonal lower bound. It is a consequence of
+that bound with a newly matched upper bound, not a new sparse-mixture technique. Under M = τ√p
+the rate is τ, so the vanishing fixed-cap improvement has already disappeared by rank order √p, well
+below unrestricted rank p.
+H.2
+G2. General adaptation across positive growing caps is impossible
+Set M = τ√p and let the outer smallest cap satisfy r ≥c√p. Every interval honest on that outer class
+has E0|C| ≥cα,cτ. For a fixed positive inner cap vector, the previously established oracle minimax rate
+is
+rK(p) = τ
+√p
+(
+(log(ep))3/2,
+K = 3,
+p
+log(ep),
+K ≥4.
+Zero belongs to every such inner class. Its worst-case expected length under outer honesty is therefore
+at least order τ, a diverging factor √p/(log(ep))3/2 or
+p
+p/ log(ep) larger than its known-class oracle
+rate. No algorithm, including an exponential one, can be simultaneously minimax in rate over these
+positive fixed and growing cap classes. This is stronger than excluding only the known-rank-zero oracle.
+It does not conflict with earlier adaptation across fixed outer caps, whose constants were allowed to
+depend on that outer cap.
+Nonzero version.
+Suppose A0 is supported on the first q coordinates in every mode, with
+norm a < M and actual constrained ranks r0,k. Let m = p −q, s = min(m, mink(¯rk −r0,k)) and
+M0 =
+√
+M2 −a2. If s ≥c√m, then
+EA0|C| ≳α,c min{M0
+q
+s/p, τ
+q
+m/p}.
+Proof. Add the G1 alternatives on the disjoint remaining block. Norm squares add; every unfolding
+rank increases by at most s. Translation by A0 preserves Gaussian likelihood overlaps, and normalization
+of the target multiplies the dimension-m lower bound by
+p
+m/p. This gives a positive nonzero-base
+obstruction when weak extra rank fits inside the supplied caps. Arbitrarily oriented versions follow by
+using orthogonal product blocks when the transformed loading is flat on that block.
+H.3
+W1. A dyadic loading bound using the full weight profile
+Return to a prescribed orthogonal product loading Lw = Pm
+i=1 wiUi, with decreasing absolute weights
+and fixed positive caps. The ambient mode dimensions may exceed m. Partition the ordered indices into
+B0 = {1} and Bj = {2j−1 + 1, . . . , min(2j, m)} for j ≥1, stopping when empty. Let aj = maxi∈Bj |wi|,
+dj = |Bj|, and αj = α/2j+1. Define
+HK(w) =
+X
+j
+aj(j + 1)νK,
+ν3 = 3/2,
+νK = 1/2 (K ≥4).
+48
+
+
+[PAGE 49]
+There is a full-data honest interval satisfying the deterministic bound
+|Cw| ≤CK,¯r,α min{M∥w∥∞, τHK(w)}.
+The minimax squared risk is at most a constant times the square of the same expression. This is a
+statistical upper bound using the ideal block residual fits, not a polynomial implementation of those fits.
+Proof. Rotate the known orthogonal factors into coordinates. Restrict the data to each dK
+j block;
+this cannot increase its norm or rank caps. Apply the earlier weighted residual confidence projection at
+error αj. With J2 = J(2¯r), its block diameter is at most
+4JK/2
+2
+aj
+dj
+X
+s=1
+λ(j)
+s s−K/2,
+where
+λ(j)
+s
+= τ
+q
+2{s log(edj/s) + Ks log(1 + 4K) + log(2dj/αj)}.
+For s ≥1, log(edj) and log(1/αj) are bounded by a fixed constant times j + 1.
+Thus λ(j)
+s
+≤
+CK,ατ
+p
+s(j + 1). The remaining sum is harmonic for K = 3, bounded by C(j + 1), and bounded by a
+K-dependent constant for K ≥4. Add the block intervals and use P
+j αj ≤α. Their lengths sum to at
+most CτHK(w). The old structural radius is at most M√min ¯rk∥w∥∞, which is O(M∥w∥∞) for fixed
+caps. Select the smaller deterministic bound before seeing the data.
+For squared error use block residual fits with error budgets βj = 2−j−4 and deterministic optimization
+tolerance τ. The earlier excess-tail proof gives each block error an L2 norm at most Cτaj(j + 1)νK:
+the deterministic diameter term has the bound just derived, and the excess term has L2 norm O(τaj)
+because P
+s s−K/2 < ∞and ET 2
+0,j ≤2βjτ 2. Minkowski’s inequality bounds the L2 norm of their summed
+error by CτHK(w), without requiring independence. Compare with estimator zero and its structural
+risk bound. The finite number of blocks makes measurability and summation immediate.
+H.4
+W2. Sharp rates at every budget for polynomially decreasing loadings
+Suppose for fixed β > 0 and C0 < ∞that the nonzero, decreasing weights satisfy
+|wi| ≤C0|w1|i−β,
+i = 1, . . . , m.
+For fixed positive caps and order, uniformly over all m, M, τ > 0,
+L0(Θ; Lw) ≍Lmax(Θ; Lw) ≍|w1| min(M, τ),
+and minimax squared risk is ≍|w1|2 min(M, τ)2. Constants may depend on β, C0, K, ¯r, α, but not
+on dimension or budget. This includes all signed power-law weights, whether normalized or not. In
+particular, 0 < β < 1/2 permits diffuse unit-Frobenius loadings with |w1| →0; the result is not limited
+to a constant product overlap with a unit-Frobenius loading.
+Proof. For j ≥1, aj ≤C0|w1|2−β(j−1). The series P
+j 2−β(j−1)(j + 1)νK is finite for every fixed
+β > 0. W1 therefore gives the matching length and risk upper bounds. For the lower bounds compare
+zero with tU1, where t = min(M, τ)/2 and its sign agrees with w1. These rank-one means belong to every
+positive cap class, their target difference is t|w1|, and their total variation is at most 2Φ(1/4) −1 < 1/4.
+The common-target interval argument and two-point squared-loss argument give the asserted lower
+orders. No lower power-envelope assumption on the other weights is needed.
+As β ↓0 the constants deteriorate: the dyadic sum is of order at most 1 + β−(νK+1) up to fixed
+constants. Thus this theorem does not cover a dimension-dependent exponent approaching zero uniformly,
+49
+
+
+[PAGE 50]
+and does not contradict the extra logarithmic factors for flat loadings. Completely arbitrary unequal
+weight sequences, including many slowly varying profiles, remain uncharacterized.
+Nonorthogonal perturbations. Suppose L = Lw + R, with the same weight condition and a
+known otherwise arbitrary tensor R satisfying ∥R∥F ≤ϵ|w1| for a fixed 0 ≤ϵ < 1. The same sharp rates
+hold with constants depending also on 1 −ϵ. For the lower bound, |⟨L, U1⟩| ≥(1 −ϵ)|w1|. For large
+budgets add a direct interval for ⟨R, A⟩at a separate error allocation, costing O(τ∥R∥F ). For small
+budgets, ρ(Lw) = |w1| by generalized Hölder and ρ(R) ≤∥R∥F ; the canonical expansion bounds the
+structural radius by
+√
+JM(1 + ϵ)|w1|. The same reasoning applies to squared error, using the direct
+residual estimator and Minkowski. This gives an all-budget result for a class of loadings without an
+exact orthogonal representation, but is not a theorem for every loading.
+H.5
+W3. A restricted computational separation for these newly matched loadings
+The W2 rate does not automatically have an efficient estimator. To make this distinction precise, let
+wi = w1i−β > 0 with fixed 0 < β < 1/K, and set M = τ√p. Choose constants
+1
+K < a < min
+1
+2, 1 −2β
+K −2
+
+,
+0 < b < a −1
+K .
+For s = ⌊pa⌋and d = ⌊pb⌋, every polynomial estimator of total degree at most d in the full observed
+tensor has worst-case squared risk polynomially larger than the unrestricted τ2w2
+1 rate of W2.
+Finite statement and proof. For a uniform size-s support S, put xS = s−1/21S and let dw be the
+diagonal map with entries wp/wi ≤1. Use the rank-one alternatives
+AS = τλ(dwxS) ⊗x⊗(K−1)
+S
+,
+0 < τλ ≤M.
+They have norm at most M and common weighted target ∆= τλwps1−K/2.
+All factors are
+nonnegative, so for two supports 0 ≤⟨AS, AT ⟩/τ 2 ≤λ2|S ∩T|K/sK.
+The full Gaussian Hermite
+expansion therefore bounds the squared norm of the centered likelihood ratio through degree d by
+χ2
+≤d ≤
+d
+X
+d=1
+λ2dEHKd
+d!sKd
+≤µeµBd
+1 −Bd
+= η2
+d,
+µ = s2/p,
+Bd = λ2(Kd)K
+sK
+< 1.
+For completeness, counting maps by their nonempty fibers gives Hq = Pq
+j=1 S(q, j)(H)j, where
+S(q, j) counts partitions of q elements into j nonempty sets. We have S(q, j) ≤jq/j! and E(H)j ≤µj.
+Hence EHq ≤qq(eµ −1) ≤µeµqq. Substitute q = Kd and sum the geometric upper bound to get the
+display. For a degree-d estimator with worst-case squared risk R, orthogonality of Hermite polynomials
+and Cauchy–Schwarz give |EQT −E0T| ≤
+√
+R ηd. The two target means differ by ∆and their estimation
+biases are each at most
+√
+R, so
+R ≥∆2/(2 + ηd)2.
+Set λ = √p. Then µ →0 and Bd = O(p1−Ka+Kb) →0, whereas
+∆
+τw1
+≍p1/2−β−a(K−2)/2 −→∞
+at a polynomial rate by the choice of a. Such an a exists precisely under the stated sufficient condition
+β < 1/K. This proves the restricted separation, using the earlier general low-degree argument with a
+new loading-compatible prior. It includes diffuse power-law loadings with sharp all-budget rates from
+W2.
+This is not a lower bound for all polynomial-time algorithms or all confidence intervals. An interval
+honest on zero and these alternatives would give the test 1{∆∈C(Z)} with total error at most
+50
+
+
+[PAGE 51]
+2α + E0|C|/∆. Excluding such efficient tests requires an additional computational hypothesis; the
+polynomial-estimator result alone does not supply one.
+H.6
+P1. Efficient pointwise optimality at strong saturated Tucker means
+This result concerns Tucker mode caps all equal to r, 1 ≤r ≤p. It does not substitute TT bond
+caps for mode caps. Let
+A0 =
+X
+i∈S
+aiEi,
+|S| = r,
+a = min
+i∈S |ai| > 0,
+∥A0∥F + τ ≤M ≤c0a√r,
+where c0 > 1 is fixed. The support and signed amplitudes are not supplied to the algorithm. These
+means saturate every supplied mode cap. There is a polynomial interval honest on the entire unseparated
+Tucker class such that, in the strong-signal regime specified below,
+EA0|C| ≍K,α,c0 τ
+q
+r/p,
+and this matches the infimum expected length at A0 under that same outer-class honesty requirement.
+Both p and r may grow. This is pointwise optimality in rate, not optimal leading constants.
+Algorithm and noise budgets. Make the valid artificial split Z(1) = Z + τG′, Z(2) = Z −τG′,
+with independent errors of scale v =
+√
+2τ. Set δ = αr/(8p) and
+η = 2v
+q
+2{(p + pK−1) log 9 + log(2K/δ)}.
+Use the preceding cap-valid tangent interval with pilot failure budget δ and total failure budget
+α/2. Its validation quantile is zval = z1−(α/2−δ)/2. Intersect it with the direct interval on Z at error α/2
+and the structural range. All choices are valid on the unseparated class. The total reported length is
+bounded by 2z1−α/4τ, including on pilot failure.
+A sufficient condition for the pointwise rate is
+a ≥4η,
+a ≥η2√p/τ.
+For fixed order/confidence this is satisfied at sufficiently large constant multiple of τpK−1/2. This
+requirement is conservative and much stronger than a claim of optimal computational signal strength.
+Upper proof. On the simultaneous pilot event, the top-r projector Qk satisfies ∥Qk −Pk∥op ≤d =
+4η/a, where Pk projects onto the coordinates in S. The cap-valid certificate has each angle bound at
+most d by Weyl’s inequality and a ≥4η. Write TQ and TP for their first-order product-space projectors.
+The representation
+TQ =
+X
+k
+O
+l̸=k
+Ql −(K −1)
+O
+l
+Ql
+with an identity in the omitted mode, and product telescoping, gives ∥TQ −TP ∥op ≤2K(K −1)d.
+For the diagonal loading, TP L = p−1/2 P
+i∈S Ei, so
+∥TQL∥F ≤
+q
+r/p + 2K(K −1)d.
+The cap-valid bias is bounded by M
+q K
+2
+d2 ≤16c0
+q K
+2
+√r η2/a. The assumed amplitude makes
+this O(τ
+p
+r/p).
+It also gives d ≤4τ/(η√p) = O(
+p
+r/p), because η ≳τ and r ≥1.
+Thus the
+selected/intersected interval has length O(τ
+p
+r/p) on the pilot event. Off that event its length is O(τ),
+with probability at most δ = O(r/p) ≤O(
+p
+r/p). The expected-length upper bound follows. The
+dimension-dependent failure budget is essential to this argument; fixed failure probability would leave
+an unjustified O(τ) term.
+51
+
+
+[PAGE 52]
+Lower proof. Put V = r−1/2 P
+i∈S Ei and compare A0 with A0 + (τ/2)V . Both have mode ranks
+at most r and norms at most M. Their full Gaussian total variation is less than 1/4 and their target
+difference is (τ/2)
+p
+r/p. The common-target interval argument at base A0 proves the lower bound. This
+lower comparison uses the same outer class on which the algorithm is honest.
+Computation. Economy SVDs of the p × pK−1 unfoldings require O(KpK+1) arithmetic and
+O(pK + p2) working storage for fixed K. Tensor projection has polynomial cost of the same order. The
+new code uses economy SVDs; the previous prototype requested full right singular matrices, which could
+allocate p2K−2 entries. Thus the implementation now scales with the explicit tensor rather than that
+avoidable allocation. It still reads the full tensor and does not claim sublinear access cost.
+H.7
+What these results do and do not resolve
+• Efficient high-dimensional minimax computation is resolved here for r ≳√p, where G1 gives the
+sharp all-budget rate. Original fixed-cap diffuse-loading weak signals remain computationally open.
+• All-budget loading rates are resolved for fixed polynomial decay and the specified nonorthogonal
+perturbations. General profiles remain open; the matching W2 statistical construction still uses
+ideal block fits.
+• General growing-cap adaptation is impossible in the G2 comparison, even between positive cap
+classes. P1 gives a positive, efficiently attained pointwise rate on a strong saturated Tucker family.
+It does not characterize pointwise lengths everywhere or optimal SNR thresholds.
+No blanket tensor hardness theorem is inferred from low-degree results for sparse tensor PCA. Those
+results concern a restricted computational model; a testing reduction for arbitrary efficient intervals still
+needs an explicit, justified computational hypothesis.
+H.8
+Methodological references
+• The sparse-functional precursor for G1 is Collier, Comminges and Tsybakov, Minimax estimation
+of linear and quadratic functionals on sparsity classes.
+• For the distinct estimation-adaptation problem, see Collier, Comminges, Tsybakov and Verzélen,
+Optimal adaptive estimation of linear functionals under sparsity.
+• The restricted computational perspective in W3 follows the methodology of Choo and d’Orsi, The
+Complexity of Sparse Tensor PCA.
+• For general tensor-functional tangent inference under signal conditions, see Xu, Chen and Han,
+Statistical Inference for Low-Rank Tensor Models.
+The repository-specific dependency and novelty distinctions are recorded in the accompanying audit
+and literature update.
+I
+R1. Scalar companion and risk proof
+This is a new statement for the revision, with the complete argument below. It does not alter the
+confidence interval or assert pointwise minimax squared risk.
+Let Y = ψ + τg, g ∼N(0, 1), and suppose the supplied structural range is |ψ| ≤h. Let I be
+the intersection of any candidate interval with [Y −d, Y + d] and [−h, h], where d = z1−α/4τ. The
+candidate may depend arbitrarily on the data. The reported confidence interval may retain its existing
+empty-intersection convention {0}.
+Define a separate scalar estimator by bψ = 0 when h ≤τ. Otherwise, use the midpoint of the
+actual nonempty intersection; on an empty intersection use Π[−h,h]Y . Replacing an exactly zero singleton
+by the clipped direct estimate also satisfies the bound. Then, for every admissible mean,
+52
+
+
+[PAGE 53]
+E( bψ −ψ)2 ≤
+
+
+
+h2,
+h ≤τ,
+τ 2{1 + 2z1−α/4
+p
+2/π + z2
+1−α/4},
+h > τ.
+Thus the risk is at most Cα min(h2, τ 2), uniformly over the norm budget and signal magnitude. No
+candidate coverage, separation, rank recovery, or independence from Y is needed for this risk bound.
+Honesty of the reported interval continues to require its original assumptions and calibration.
+Proof. On h ≤τ, zero has squared error at most h2. Otherwise, on a nonempty intersection its
+midpoint m is in [Y −d, Y + d], so |m −ψ| ≤|Y −ψ| + d. On an empty intersection, projection onto an
+interval containing ψ is nonexpansive relative to ψ: |Π[−h,h]Y −ψ| ≤|Y −ψ|. The same argument covers
+a zero-singleton replacement. Consequently the error on every observation is at most τ|g| + d. Taking
+expectations, using Eg2 = 1 and E|g| =
+p
+2/π, proves the second branch. Since Cα ≥1, both branches
+imply the final inequality. No conditioning on a successful pilot or deletion of rare events occurs.
+For A4/P1 and the normalized diagonal loading, h = M
+p
+r/p. The cap-valid intervals already
+intersect the direct interval at error α/2, so d = z1−α/4τ is exactly their existing direct radius. The
+scalar companion therefore removes the M2 loss from the arbitrary zero sentinel without changing any
+coverage event or interval length. For general fixed L, replace τ by τ∥L∥F and use any valid supplied
+structural range. This is a noise-scale risk bound, not a proof of the smaller P1 pointwise squared-risk
+rate or of the ideal full-data minimax risk.
+References
+T. Tony Cai and Mark G. Low. Minimax estimation of linear functionals over nonconvex parameter
+spaces. The Annals of Statistics, 32(2):552–576, 2004. doi: 10.1214/009053604000000094. URL
+https://arxiv.org/abs/math/0406427.
+Davin Choo and Tommaso d’Orsi. The complexity of sparse tensor PCA. In Advances in Neural
+Information Processing Systems, volume 34, 2021. URL https://arxiv.org/abs/2106.06308.
+Olivier Collier, Laëtitia Comminges, and Alexandre B. Tsybakov. Minimax estimation of linear and
+quadratic functionals on sparsity classes.
+The Annals of Statistics, 45(3):923–958, 2017.
+URL
+https://arxiv.org/abs/1502.00665.
+Luc Devroye, Matthieu Lerasle, Gábor Lugosi, and Roberto I. Oliveira. Sub-gaussian mean estimators.
+The Annals of Statistics, 44(6):2695–2725, 2016. doi: 10.1214/16-AOS1440.
+Daniel Fu and Youngtak Sohn. Low-degree estimation thresholds in planted hypergraphs and tensor
+PCA, 2026. URL https://arxiv.org/abs/2605.30113.
+Philip B. Stark. Affine minimax confidence intervals for a bounded normal mean. Statistics & Probability
+Letters, 13(1):39–44, 1992. doi: 10.1016/0167-7152(92)90234-V.
+Ke Xu, Elynn Chen, and Yuefeng Han. Statistical Inference for Low-Rank Tensor Models, 2025. URL
+https://arxiv.org/abs/2501.16223.
+53

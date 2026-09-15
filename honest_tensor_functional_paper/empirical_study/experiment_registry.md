@@ -1,0 +1,18 @@
+# Experiment registry (pre-execution)
+
+| ID | Question | Parameters / metrics | Methods | EXPECTED |
+|---|---|---|---|---|
+| S01 | Does the executable large-cap interval follow the proved branches? | p=64..65536; n=1..1024; structural/noise ratio .25,1,4; zero/boundary; 5000 trials | Growing-cap, direct, structural | In-scope coverage; bounded normalized lengths/risk; n slope -1/2 on noise branch |
+| S02 | What can the fast weak-signal baseline attain? | K=3,4; p=256..65536; support1,8,threshold-boundary; n sweep; 1000 trials | Selected threshold, raw threshold, direct, structural, known-direction oracle | Honest but conservative; a gap from full-data ideal rate can persist |
+| S03 | Is P1 pointwise scaling observable with adequate uncertainty? | p=8,16,32,64; cap1,ceil(sqrt(p)); amplitude8 times P1 sufficient bound; 500/500/300/150 trials | Cap-valid pointwise, direct, XCH known/plugin noise, oracle, split bias ablation | Rate-scale shortening; oracle/regular method may be substantially shorter |
+| S04 | Where does adaptation become useful or fail? | p16; logarithmic amplitudes0..8P1 bound; cap exact/under/over; weak extra components; rotations; 500 trials | S03 plus separated rank selector | Cap-valid honesty without gap; regular/uncorrected methods may under-cover; large cap can prevent shortening |
+| S05 | Which noise assumptions matter? | p256; t3,t5,Rademacher; rho0,.2,.5,.8; mixture shifts/scales; 5000 trials | Direct naive, valid known Gaussian covariance or known sub-Gaussian proxy | Incorrect iid variance/covariance and biased contamination can fail |
+| S06 | Does the robust full-net event hold? | binary K3; n64,256,1024; Gaussian,t3,t5,rare variance,AR1; 500 trials | Full-net directional MoM, Gaussian mean scan | Simultaneous median feasibility under known covariance/iid laws; dependence excluded |
+| S07 | What do loading profiles change, and what remains untested? | p64..65536; beta.25,.75,1.25; flat,spike,log,plateau; M.1,1,sqrt(p),1000 | Small-budget structural/direct MC; ideal dyadic and lower reference calculations | Small-budget exact geometry; no claim of high-p all-budget optimizer attainment |
+| S08 | How expensive are usable global certificates? | binary K3; zero,weak,boundary,strong; flat/arbitrary L; 30 trials; budgets100,600,3000; tolerances.5,.1,.1 | Global outer intervals plus direct/structural; K4 small timing extension | Larger budgets reduce gaps but can leave unresolved certificates |
+| S09 | Are discarded loading/rank contributions consequential? | p4096,K4; residual fraction0.. .5; eta0..4; 1000 trials | Corrected transfer/approximation, omitted correction, direct | Corrected validity; omission can fail; supplied eta costs width |
+| S10 | How do local power and normal diagnostics behave? | p16,rank2; opposite large signed amplitudes; target shifts0,1,2,4,8 times tau sqrt(r/p); 1000 trials | Cap-valid, direct, XCH, oracle | Null calibration; shorter regular intervals can improve local power; exact direct power reference |
+| S11 | What are actual cost and memory trends? | Actual diagonal p1024..1048576; full tensors p8..64; binary K3/4 | Direct/growing, pointwise, XCH, global | Polynomial full-input costs for projection, exponential benchmark limitations |
+| R01 | Can a scientific real-data inference claim be justified? | Sampling units,noise,loading,rank/approximation audit | Dataset-dependent | Pending dataset and justified model; never fabricate coverage without truth |
+
+No configurations may be removed in response to unfavorable results. Amendments and implementation discoveries must be dated in logs/deviations.md. Numerical arrays/configuration IDs are materialized before final execution. Sources and registry hashes are saved in each run manifest.

@@ -1,0 +1,15 @@
+{
+  "date": "2026-09-15",
+  "python": "3.9.6",
+  "numpy": "2.0.2",
+  "scipy": "1.13.1",
+  "platform": "macOS-15.6-arm64-arm-64bit",
+  "seconds": 25.892191583000002,
+  "configurations": 160,
+  "unique_mc_datasets": 320000,
+  "seed_rule": "9152700 + configuration index",
+  "threads": 1,
+  "noise": "iid N(0,1), full observation arrays generated",
+  "saved": "All interval endpoints and scalar losses recoverable; deterministic seeds regenerate observations.",
+  "real_data": "No new application run; scientific_extension EEG results preserved."
+}

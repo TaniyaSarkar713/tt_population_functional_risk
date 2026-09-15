@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "baseline_files": 47,
+  "optimizer_trials": 320,
+  "adaptation_trials": 8000,
+  "optimizer_tolerance_met": 231,
+  "pdf_bytes": {
+    "paper/main.pdf": 84098,
+    "progress_report.pdf": 26652
+  }
+}

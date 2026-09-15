@@ -1,0 +1,37 @@
+\subsection{New robust and adaptive experiments}\label{sec:robust_experiments}
+
+Four separate suites address experiments absent from the preceding report. They use fixed seeds, exact binomial confidence intervals, per-configuration source/result records and timing measurements. There are 106 configurations and 76600 Monte Carlo repetitions. Earlier experiment outputs are unchanged. The new code implements the separated SVD/projection interval, an efficient threshold-based loading correction, directional medians on a complete small product-net scan, and approximate-rank threshold intervals. It does not implement the ideal minimax residual optimizer.
+
+\paragraph{Actual-rank calibration and precision.}
+At $K=3,p=8$, the mean is a sum of zero, one, or two equal diagonal product components. Nonzero singular values are $0.25$, $3$, $100$, or $1000$ times the explicit pilot bound. Two independent observations are generated under Gaussian, Rademacher, or correlated Gaussian errors; the latter have covariance $0.5I+0.5uu^\top$ for a unit flat vector $u$. Loadings are the equal diagonal or its normalized mixture with a known off-diagonal product atom. Each of 54 configurations uses 500 repetitions. Forty-two configurations satisfy the separation condition; twelve deliberately violate it. The algorithm is supplied $M$ and noise scales but no ranks.
+
+Over the valid configurations, minimum observed coverage is $0.944$, with exact 95\% binomial interval $[0.9201,0.9625]$, and all ranks are recovered in all repetitions. These extrema are descriptive and are not simultaneous coverage guarantees. For Gaussian equal loading at strength $1000$, rank-one and rank-two mean length/direct-length ratios are $0.480$ and $0.665$, with coverages $0.992$ and $0.988$. At strengths $3$ and $100$ the bias certificate selects the direct interval. Thus identification occurs well before useful precision improvement under this conservative certificate. All twelve below-gap configurations have zero coverage because thresholded ranks are zero although the target is not. This explicitly rejects transferring the method's coverage to weak signals.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{../figures/adaptive_intervals.pdf}
+\caption{Implemented rank calibration under Gaussian noise and equal loading. Left: expected-length estimates relative to the direct interval. Right: coverage and exact binomial uncertainty. The shaded range violates the theorem's separation assumption. Large multiples of the conservative pilot bound represent extremely strong signals.}\label{fig:adaptive_new}
+\end{figure}
+
+\paragraph{General loading correction.}
+For $K=4$, $p\in\{256,4096\}$, $M=\sqrt p$ and noise scale one, use
+$L=\sqrt{1-\epsilon^2}L_{\rm flat}+\epsilon U_{\rm off}$ with
+$\epsilon\in\{0,0.03,0.3\}$. The off-diagonal unit product atom is orthogonal to the flat diagonal loading. Coordinate, diffuse rank-one and off-diagonal rank-one signals, with Gaussian or independent sign errors, produce 36 configurations with 1000 repetitions each. Only the required diagonal and off-diagonal observations are generated; these have exactly the same joint law as the contractions of the full tensor. The efficient interval combines the earlier threshold center with the measured residual loading term and the required noise radius, using deterministic structural/direct fallbacks.
+Coverage is at least $0.998$ on this grid. At Gaussian $p=4096$, the three remainder sizes yield lengths $0.794$, $0.928$, and $2.102$, compared with direct length $3.920$. Omitting the residual correction gives zero coverage for the off-diagonal signal at the two positive remainder sizes. These comparisons support correct calibration of the implemented upper construction, not minimax optimality for arbitrary loadings.
+
+\paragraph{Finite-variance full scan.}
+At $p=2,K=3$, all support levels are evaluated using the two singleton contractions and $19^3$ product directions on the full block, for 6861 distinct evaluated directions. A circle net with 19 points has the required covering distance. Actual direction counts are used in the block calibration, which is valid in place of a larger cardinality upper bound. There are $n=128$ independent replicates and 400 repetitions under each of Gaussian, independent signs, variance-one Student $t_3$, and variance-one rare-outlier errors. The last law is
+$\sqrt{0.1}g+\sqrt{0.9/\varepsilon}\,B\xi$, with independent $g\sim N(0,1)$, $B\sim\operatorname{Bernoulli}(\varepsilon)$, sign $\xi$, and $\varepsilon=10^{-4}$, independently across entries and replicates.
+
+The simultaneous median envelope covers in 400/400 repetitions for every law; the exact 95\% lower confidence bound is approximately $0.991$. Gaussian calibration of sample means covers in 399/400, 399/400, 390/400, and 349/400, respectively. Median thresholds are conservative. This tests the full implemented noise envelope, which is invariant to adding a mean, and does not simulate confidence-set extrema or an optimized minimax interval. Median runtime is approximately 1.6 milliseconds per repetition in the recorded single-thread environment, excluding noise generation and net construction.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{../figures/robustness_and_loadings.pdf}
+\caption{Left: simultaneous full-net envelope coverage with exact binomial intervals. Gaussian mean calibration is deliberately applied outside its proxy-one assumptions for the two heavy-tailed laws. Right: lengths of the efficient corrected-loading interval under Gaussian noise.}\label{fig:robust_new}
+\end{figure}
+
+\paragraph{Approximate rank and independent checks.}
+At $K=4,p=4096,M=64$, a zero, coordinate or diffuse rank-one base is perturbed by $\eta L_{\rm flat}$, with $\eta\in\{0,0.1,0.5,2\}$. Nonzero perturbations have full diagonal rank and norm $\eta$. The implemented threshold interval uses the previously proved approximation inflation, with deterministic direct/structural selection. Each configuration has 1000 repetitions; minimum observed coverage is $0.944$. At a zero base and $\eta=0.5$, inflated coverage is one and uninflated coverage is zero. At $\eta=2$ the direct interval is selected. This tests a computable valid approximate-rank procedure, not the new sharp residual projection.
+
+Separate finite mathematical checks pass for 200 projector/bias cases, 26595 median-tail comparisons, 112086 growing-rank support pairs and 100 shifted-block constructions. They include projection self-adjointness and idempotence, the pairwise second-order bound, integration of the median excess tail, and full likelihood mixture calculations. These checks supplement proofs rather than replace them. A certified implementation of the ideal robust optimizer, a tighter moderate-signal bias certificate, and a fair implementation comparison under a common regular-signal model remain outstanding.

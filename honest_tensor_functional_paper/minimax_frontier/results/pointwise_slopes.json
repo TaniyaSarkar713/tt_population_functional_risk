@@ -1,0 +1,65 @@
+[
+  {
+    "K": 3,
+    "d": 2,
+    "observed_slope": -1.0089388065449587,
+    "slope_mcse": 0.003001100941754517,
+    "limiting_exponent": -1
+  },
+  {
+    "K": 3,
+    "d": 3,
+    "observed_slope": -2.03664165880344,
+    "slope_mcse": 0.0038681151751490004,
+    "limiting_exponent": -2
+  },
+  {
+    "K": 4,
+    "d": 2,
+    "observed_slope": -1.0149853666238986,
+    "slope_mcse": 0.0031580010159024665,
+    "limiting_exponent": -1
+  },
+  {
+    "K": 4,
+    "d": 3,
+    "observed_slope": -2.024364056006314,
+    "slope_mcse": 0.004014221446770964,
+    "limiting_exponent": -2
+  },
+  {
+    "K": 4,
+    "d": 4,
+    "observed_slope": -3.0503968263774217,
+    "slope_mcse": 0.004650457995354669,
+    "limiting_exponent": -3
+  },
+  {
+    "K": 5,
+    "d": 2,
+    "observed_slope": -1.0149827314780795,
+    "slope_mcse": 0.0030614482066870035,
+    "limiting_exponent": -1
+  },
+  {
+    "K": 5,
+    "d": 3,
+    "observed_slope": -2.0315490818997235,
+    "slope_mcse": 0.004188312510172992,
+    "limiting_exponent": -2
+  },
+  {
+    "K": 5,
+    "d": 4,
+    "observed_slope": -3.046236097570084,
+    "slope_mcse": 0.004609110728752258,
+    "limiting_exponent": -3
+  },
+  {
+    "K": 5,
+    "d": 5,
+    "observed_slope": -4.060235059027993,
+    "slope_mcse": 0.0052424188219191625,
+    "limiting_exponent": -4
+  }
+]

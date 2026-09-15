@@ -1,0 +1,329 @@
+[
+  {
+    "id": "F01",
+    "severity": "P0",
+    "review_concern": "Coverage tolerance counts a genuine miss",
+    "paper_location": "empirical_study/code/common.py:66; analyze_results.py:74",
+    "scientific_type": "REPRODUCIBILITY / SIMULATION",
+    "proposed_action": "Use bounded ULP comparisons; replay every saved interval and regenerate dependent statistics; exact-noise and scaling regression checks.",
+    "status": "RESOLVED",
+    "action_taken": "Replaced target-scaled tolerance by four endpoint ULPs, retained strict counts, reevaluated all saved interval observations and regenerated dependent outputs.",
+    "files_changed": [
+      "empirical/code/numerics.py",
+      "code/recompute_saved.py",
+      "results/saved_corrections.json"
+    ],
+    "new_result": "Exactly two 90% rows for the same S03_007 observation change from 134/150 to 133/150; 606 rescaling checks pass.",
+    "remaining_issue": "This is numerical evaluation rounding, not formal interval arithmetic."
+  },
+  {
+    "id": "F03",
+    "severity": "P0",
+    "review_concern": "No synchronized final submission",
+    "paper_location": "robust_adaptive_extension/paper/main.tex and later supplements",
+    "scientific_type": "NOTATION / STRUCTURE",
+    "proposed_action": "Assemble a canonical main paper and complete proof supplement after scientific results stabilize; replace obsolete rate figure and claims.",
+    "status": "RESOLVED",
+    "action_taken": "Created one current main paper, complete technical supplement, empirical supplement and reading order; integrated final rates and open boundaries.",
+    "files_changed": [
+      "paper/main.tex",
+      "paper/technical_supplement.tex",
+      "empirical_report.md",
+      "README.md"
+    ],
+    "new_result": "All 59 reviewed results plus R1 have an explicit proof-status ledger and complete supplied proofs; the final rate figure replaces the historical gap headline.",
+    "remaining_issue": "Final venue formatting and targeted citation/priority check remain."
+  },
+  {
+    "id": "F02",
+    "severity": "P1",
+    "review_concern": "No-bias ablation changes three components",
+    "paper_location": "empirical_study/code/tensor_methods.py:92\u2013103",
+    "scientific_type": "SIMULATION",
+    "proposed_action": "Run paired isolated bias, fallback and quantile ablations; relabel preserved combined diagnostic.",
+    "status": "RESOLVED",
+    "action_taken": "Executed paired isolated bias, quantile and intersection ablations; derived pure fallback removal exactly from every saved tangent candidate. Relabeled the old multicomponent diagnostic.",
+    "files_changed": [
+      "code/run_revision.py",
+      "code/analyze_revision.py",
+      "tables/revision_summary.csv",
+      "figures/03_controlled_ablations.pdf"
+    ],
+    "new_result": "Bias-only removal changes nothing over the first eight V01 levels because fallback is selected. Pure fallback removal retains intersections; the combined failure cannot identify bias alone.",
+    "remaining_issue": "These cases do not establish that every correction is necessary at every mean."
+  },
+  {
+    "id": "F04",
+    "severity": "P1",
+    "review_concern": "Interval midpoint has catastrophic rare-fallback loss",
+    "paper_location": "high_dimensional_extension/code/methods.py:190\u2013191",
+    "scientific_type": "METHOD / THEORY",
+    "proposed_action": "Add a separately defined scalar companion with a uniform risk proof; retain historical midpoint losses and re-evaluate affected saved draws.",
+    "status": "RESOLVED",
+    "action_taken": "Introduced a separate public scalar output with a complete uniform risk proof; reevaluated all affected original observations and retained old losses.",
+    "files_changed": [
+      "theory/scalar_companion.md",
+      "code/methods.py",
+      "empirical/code/numerics.py",
+      "tables/scalar_risk_saved.csv"
+    ],
+    "new_result": "R1 risk is at most C_alpha min(h\u00b2,tau\u00b2). S03_002 MSE changes from 12,084,661.379 to 0.147776 on the same draws; intervals are unchanged.",
+    "remaining_issue": "P1 pointwise minimax MSE remains unproved; R1 is only a noise-scale bound."
+  },
+  {
+    "id": "F05",
+    "severity": "P1",
+    "review_concern": "Signal sweep changes supplied norm budget",
+    "paper_location": "empirical_study/code/run_study.py:89",
+    "scientific_type": "SIMULATION",
+    "proposed_action": "Run paired fixed-M sweeps; keep and label norm-comparable prior sweep.",
+    "status": "RESOLVED",
+    "action_taken": "Executed a fixed-M sweep with a paired norm-comparable-M branch, holding the observations and pilot fixed between branches.",
+    "files_changed": [
+      "configs/revision_cases.json",
+      "code/run_revision.py",
+      "figures/02_fixed_budget.pdf"
+    ],
+    "new_result": "Ten amplitudes and 10,000 new observations distinguish signal strength from a changing supplied honesty class.",
+    "remaining_issue": "Both branches still assume the supplied norm/cap bounds are valid."
+  },
+  {
+    "id": "F06",
+    "severity": "P1",
+    "review_concern": "Comparator guarantee type is not applicability",
+    "paper_location": "empirical_study/code/run_study.py:138; main.tex:83",
+    "scientific_type": "METHOD / NOVELTY",
+    "proposed_action": "Record case-level rank, signal and unverified initialization/alignment status; map implementation to XCH PCA theorem.",
+    "status": "RESOLVED",
+    "action_taken": "Mapped the XCH implementation to tensor-PCA Sections 4.2\u20134.4 and added case-level applicability separately from guarantee type.",
+    "files_changed": [
+      "novelty_and_baselines.md",
+      "code/recompute_saved.py",
+      "code/analyze_revision.py",
+      "paper/empirical_results.tex"
+    ],
+    "new_result": "Zero/rank mismatch explicitly outside the specified regular model; other initialization, alignment and remainder constants not certified. Smaller strong-signal comparator lengths retained.",
+    "remaining_issue": "This is a local numerical implementation, not certification of every finite-case regularity constant."
+  },
+  {
+    "id": "F07",
+    "severity": "P1",
+    "review_concern": "Ideal high-dimensional fit versus binary computation",
+    "paper_location": "certified C1/C2; high-dimensional W1; S08",
+    "scientific_type": "METHOD / REPRODUCIBILITY",
+    "proposed_action": "Explicit method/guarantee table; fixed-loading fixed-tolerance solver experiment; retain all global gaps and numerical limitations.",
+    "status": "RESOLVED",
+    "action_taken": "Separated ideal residual optimization, executable conservative methods and binary float64 search; fixed loading, direction and tolerance across 600 new solves.",
+    "files_changed": [
+      "paper/main.tex",
+      "code/run_revision.py",
+      "tables/solver_trials.csv",
+      "figures/06_fixed_solver.pdf"
+    ],
+    "new_result": "7/600 endpoint certificates, 593 unresolved; all witness gaps and observations retained. The C1 objective-error contract remains explicit.",
+    "remaining_issue": "General high-dimensional minimax computation remains open under T01."
+  },
+  {
+    "id": "N01",
+    "severity": "P1",
+    "review_concern": "Focus the distinct tensor likelihood contribution",
+    "paper_location": "main Introduction/Related work; novelty matrix",
+    "scientific_type": "NOVELTY",
+    "proposed_action": "Compare experiments and mixture likelihoods mathematically; foreground sharp cubic/all-budget theory and avoid firstness claims.",
+    "status": "RESOLVED",
+    "action_taken": "Rebuilt the contribution around full-likelihood tensor geometry, the cubic harmonic mixture and all-budget ordered-coordinate bound; explicitly credited classical components.",
+    "files_changed": [
+      "novelty_and_baselines.md",
+      "paper/introduction_outline.md",
+      "paper/main.tex"
+    ],
+    "new_result": "Distinguishes changes in observation experiment, honesty class and estimator restriction. No claim of generic new nonlinear inference or firstness.",
+    "remaining_issue": "External priority confirmation is a submission risk; this is a focused mathematical positioning audit."
+  },
+  {
+    "id": "F08",
+    "severity": "P2",
+    "review_concern": "Two calibration refinements lack direct experiments",
+    "paper_location": "robust_adaptive_extension/paper/refinements.tex:139,184",
+    "scientific_type": "SIMULATION",
+    "proposed_action": "Execute bounded whole-replicate corruption and independent chi-square scale calibration with their actual conditions.",
+    "status": "RESOLVED",
+    "action_taken": "Executed the actual row-corruption median and independent Gaussian residual-scale refinements, including assumption violations.",
+    "files_changed": [
+      "code/run_revision.py",
+      "tables/calibration.csv",
+      "figures/05_calibration.pdf"
+    ],
+    "new_result": "19,000 row/noise datasets and 54,000 variance datasets. The severe cap violation fails; independent scale calibration is conservative and naive plug-in fails at small n.",
+    "remaining_issue": "No general contamination-minimax or arbitrary-unknown-noise claim."
+  },
+  {
+    "id": "E01",
+    "severity": "P2",
+    "review_concern": "Pointwise precision and finite-grid interpretation",
+    "paper_location": "S03/S04 and P1",
+    "scientific_type": "SIMULATION",
+    "proposed_action": "Increase independent large-p and transition repetitions; show normalized lengths, cap rounding and raw rare losses.",
+    "status": "RESOLVED",
+    "action_taken": "Added four p=32/64 cases with 1,000 independent trials each and a 1,000-trial transition grid; report normalized lengths and Wilson uncertainty.",
+    "files_changed": [
+      "configs/revision_cases.json",
+      "tables/revision_summary.csv",
+      "figures/04_scalar_and_pointwise.pdf"
+    ],
+    "new_result": "Large-case 95% cap coverage 0.965\u20130.978; rate-normalized length approximately 7.20\u20138.01. All rare losses retained.",
+    "remaining_issue": "Finite grid does not prove a limiting exponent, minimal SNR or general pointwise geometry."
+  },
+  {
+    "id": "D01",
+    "severity": "P2",
+    "review_concern": "No justified real-data/LLM application",
+    "paper_location": "empirical_study/real_data/README.md",
+    "scientific_type": "REAL DATA",
+    "proposed_action": "Retain a theory-led scope unless a defensible repeated-tensor dataset/target is supplied; do not invent an application.",
+    "status": "NOT RESOLVED",
+    "action_taken": "Audited the absence of a justified repeated-tensor dataset and contrast; kept a theory/simulation scope and stated the required independent sampling unit and calibration.",
+    "files_changed": [
+      "empirical/real_data/README.md",
+      "paper/main.tex",
+      "empirical_report.md"
+    ],
+    "new_result": "No unsupported application was added. A text clarification was requested; no dataset/model specification was received during revision.",
+    "remaining_issue": "A defensible real-data analysis is not yet available. It is not needed for the focused theory claim but remains an open broader project request."
+  },
+  {
+    "id": "C01",
+    "severity": "P2",
+    "review_concern": "Runtime and memory access models differ",
+    "paper_location": "S11/runtime tables",
+    "scientific_type": "REPRODUCIBILITY",
+    "proposed_action": "Export full input entries/bytes, measured access, traced allocation and excluded workspace; refresh timing for revised scalar interface.",
+    "status": "RESOLVED",
+    "action_taken": "Measured the revised public interval/scalar API with warmup and ten calls per dimension; separated input, coordinate access and traced allocation.",
+    "files_changed": [
+      "code/check_methods.py",
+      "tables/runtime_revision.json",
+      "empirical_report.md"
+    ],
+    "new_result": "Fresh p=8/16/32/64 timings, explicit p^3 entries and 8p^3 input bytes; coordinate access 8p bytes. Economy-SVD cost stated.",
+    "remaining_issue": "Trace excludes input and possibly native workspace and is not RSS; no sublinear full-tensor computation claim."
+  },
+  {
+    "id": "F09",
+    "severity": "P3",
+    "review_concern": "Scalar losses reused across interval levels without identity",
+    "paper_location": "empirical_study/code/common.py:81\u201396",
+    "scientific_type": "REPRODUCIBILITY",
+    "proposed_action": "Attach estimator_id and estimator_alpha to all interval records and separate legacy midpoint diagnostics.",
+    "status": "RESOLVED",
+    "action_taken": "Added estimator_id and estimator_alpha; distinguish 95% scalar outputs from reused multi-level interval rows and retain midpoint diagnostics separately.",
+    "files_changed": [
+      "empirical/code/common.py",
+      "code/analyze_revision.py",
+      "tables/revision_summary.csv"
+    ],
+    "new_result": "All scalar-producing interval summaries identify the estimator; confidence levels are not counted as independent data.",
+    "remaining_issue": "Event-only records have no scalar estimator and are labeled accordingly in the revision guide."
+  },
+  {
+    "id": "F10",
+    "severity": "P3",
+    "review_concern": "Colliding symbols and historical exposition",
+    "paper_location": "all active theory sources",
+    "scientific_type": "NOTATION / STRUCTURE",
+    "proposed_action": "Global notation dictionary and consistent main/supplement symbols; move preliminary bounds to technical supplement.",
+    "status": "RESOLVED",
+    "action_taken": "Created a notation dictionary, separated ambient dimension, polynomial degree, envelope coefficients and approximation/pilot quantities, and reorganized historical bounds.",
+    "files_changed": [
+      "paper/notation.md",
+      "code/prepare_theory.py",
+      "paper/main.tex"
+    ],
+    "new_result": "A focused main argument and complete proof supplement replace the chronological chain of drafts; active reference labels resolve.",
+    "remaining_issue": "Locally introduced proof aliases are documented; publication style can receive a final copy edit."
+  },
+  {
+    "id": "T01",
+    "severity": "P2",
+    "review_concern": "General fixed-cap weak-signal minimax computation",
+    "paper_location": "requirements.md",
+    "scientific_type": "THEORY / METHOD",
+    "proposed_action": "Assess available contracts and obstacles; keep as a precise open problem if no general proved algorithm is obtained.",
+    "status": "NOT RESOLVED",
+    "action_taken": "Re-examined objective certificates, truncated-scan tradeoffs and restricted computational obstructions; executed fixed-geometry solver diagnostics.",
+    "files_changed": [
+      "theory/revision_audit.md",
+      "paper/main.tex",
+      "tables/solver_summary.csv"
+    ],
+    "new_result": "The numerical and statistical contracts are concrete; no general polynomial minimax algorithm was obtained.",
+    "remaining_issue": "Need a general algorithm with deterministic global error control or a correctly scoped computational lower bound."
+  },
+  {
+    "id": "T02",
+    "severity": "P2",
+    "review_concern": "Intermediate growing-cap minimax matching",
+    "paper_location": "requirements.md; G1/G2",
+    "scientific_type": "THEORY",
+    "proposed_action": "State current lower/upper envelopes with uniform constants and tested gap; do not infer missing rates from simulations.",
+    "status": "NOT RESOLVED",
+    "action_taken": "Compared explicit all-r sparse-mixture lower and structural/direct upper envelopes, retaining rank dependence and the preserved intermediate-cap grid.",
+    "files_changed": [
+      "theory/revision_audit.md",
+      "paper/main.tex",
+      "empirical/figures/10_intermediate_caps.pdf"
+    ],
+    "new_result": "Large-cap matching is preserved; extrapolating fixed-cap constants does not match intermediate caps.",
+    "remaining_issue": "Sharp matching rates for 1 << r << sqrt(p) remain open."
+  },
+  {
+    "id": "T03",
+    "severity": "P2",
+    "review_concern": "Arbitrary loading profiles beyond matched regimes",
+    "paper_location": "requirements.md; L1/W1/W2",
+    "scientific_type": "THEORY",
+    "proposed_action": "Preserve small-budget/every-loading and fixed-decay results; delimit unmatched profiles and computational envelope status.",
+    "status": "NOT RESOLVED",
+    "action_taken": "Re-examined dyadic upper and flat-block/largest-atom lower bounds and the deterioration as decay tends to zero.",
+    "files_changed": [
+      "theory/revision_audit.md",
+      "paper/main.tex"
+    ],
+    "new_result": "Flat, small-budget arbitrary and fixed-decay regimes are precisely separated.",
+    "remaining_issue": "General slowly varying, multiscale and nonorthogonal profiles at larger budgets still lack matching theory/computation."
+  },
+  {
+    "id": "T04",
+    "severity": "P2",
+    "review_concern": "Complete pointwise and TT adaptation theory",
+    "paper_location": "requirements.md; A4/P1",
+    "scientific_type": "THEORY",
+    "proposed_action": "Explain where saturation/signal/norm conditions enter; add scalar-risk companion without asserting general pointwise sharpness.",
+    "status": "NOT RESOLVED",
+    "action_taken": "Checked the role of saturation, norm slack, pilot signal and growing-cap obstructions; added R1 without claiming pointwise minimax risk.",
+    "files_changed": [
+      "theory/revision_audit.md",
+      "theory/scalar_companion.md",
+      "paper/main.tex"
+    ],
+    "new_result": "P1 length and G2 impossibility remain valid within their original scopes; scalar rare-event loss is repaired.",
+    "remaining_issue": "Complete pointwise length/risk, optimal SNR and TT-specific adaptation remain open."
+  },
+  {
+    "id": "T05",
+    "severity": "P2",
+    "review_concern": "Unknown directional scale, dependent replicates and selected loading",
+    "paper_location": "assumption audit R09\u2013R19",
+    "scientific_type": "THEORY / REAL DATA",
+    "proposed_action": "Execute the available independent-scale refinement; preserve explicit counterexamples and identify unsupported general extensions.",
+    "status": "PARTIALLY RESOLVED",
+    "action_taken": "Implemented and tested the available independent Gaussian scale refinement and finite-variance row bound; retained explicit dependence/selection restrictions.",
+    "files_changed": [
+      "theory/revision_audit.md",
+      "tables/calibration.csv",
+      "paper/main.tex"
+    ],
+    "new_result": "Finite-sample calibration directly tested in its real experiment; naive plug-in counterexample retained.",
+    "remaining_issue": "Unknown arbitrary directional scale, dependent replicates, selected loading and estimated allowances need additional theory."
+  }
+]

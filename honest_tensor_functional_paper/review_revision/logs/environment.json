@@ -1,0 +1,10 @@
+{
+  "python": "3.9.6 (default, Dec  2 2025, 07:27:58) \n[Clang 17.0.0 (clang-1700.6.3.2)]",
+  "platform": "macOS-15.6-arm64-arm-64bit",
+  "numpy": "2.0.2",
+  "scipy": "1.13.1",
+  "matplotlib": "3.9.4",
+  "PyMuPDF": "1.26.5",
+  "threadpoolctl": "3.6.0",
+  "run_threads": 1
+}

@@ -1,0 +1,28 @@
+{
+  "status": "COMPLETED",
+  "cases": 18,
+  "datasets": 54000,
+  "seconds": 22.554124542,
+  "seed": 2026091309,
+  "source_hashes": {
+    "code/registry.py": "55579af5b339ed49b1ae98c1938662657c40c7966ae9132ed4d1a10882dd771a",
+    "code/run_revision.py": "2de69df2311ffbae23677f8a140d588ad8170f0dc0e70fa3dce8c22b205be731",
+    "code/recompute_saved.py": "32c3477c7ce5a98315c9a2f91959d71334e27c775a113ee007dafa57faec7544",
+    "empirical/code/analyze_results.py": "4ffb974e403c8ea7f333a25143827f020258467348bcfae1e21ed5640c81bfd7",
+    "empirical/code/run_study.py": "04a06165a428179239df8dc3044dc904bc7600206c0408ae2c478b29e2ecc842",
+    "empirical/code/run_followups.py": "25dd5c98dbb7e979dc7ac0dfc1bea7b0cbc2827a17ace0adf5b46df85eea2326",
+    "empirical/code/build_configs.py": "e2125cdeaaf77f8ea07ed4021796f209396ea22fbad6532b77842f16d46bcf56",
+    "empirical/code/runtime_study.py": "9aaff9021f1b2b5ae585ed409aad3e152f9952a3743eaed71f4eda1e746982cc",
+    "empirical/code/build_report.py": "76d6ea5a11aaa019134ac3d40a833fbd36c9726bfbbc62092150fcf49e7cfd38",
+    "empirical/code/common.py": "62dacbde348e4c862c8ef1f89e4477735a5ad21240395eea79801a2e518e7b82",
+    "empirical/code/plot_utils.py": "9c72b6c57ed1f3c26eab0475bd2a53eca323e0385f2db0f1753aad38486d3d87",
+    "empirical/code/tensor_methods.py": "fc8e8a56aaa18e4caddc5150bd359c417de368d1746baf8dbbe796fff91a9d1f",
+    "empirical/code/validate_artifacts.py": "3cad67070694c63547183a9b4054c693fbc0dbfd72c741f87c713666256c1cc6",
+    "empirical/code/check_implementation.py": "29bf952e29de737fffe92e61e456cef9b374178b5a82127ceeaddbc5b00c7d18",
+    "empirical/code/run_all.py": "df5cf13048d69b0c1780494f77e3804fa0c7d1de8138ea6f56e526d2c73c50c5",
+    "empirical/code/plot_results.py": "fa9998c46913547e539dace6006908f0002aa02c31c10551322e50420b060f37",
+    "empirical/code/numerics.py": "08f58e326ed80a33791cd68bfafd5a3a546fc79da8bce6dbb829a0988317f0d6",
+    "configs/revision_cases.json": "49e3dd4322f0655d14d3618712f94a8e4ab9bb9eb6fcd8e072a84407c3e19cb6"
+  },
+  "threads": 1
+}
